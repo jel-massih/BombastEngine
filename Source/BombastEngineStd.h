@@ -6,6 +6,7 @@
 #include<windowsx.h>
 
 #include <tchar.h>
+#include <direct.h>
 
 #include <crtdbg.h>
 
@@ -13,6 +14,8 @@
 #include <d3dcommon.h>
 #include <d3d11.h>
 #include <DirectXMath.h>
+
+#include "Debugging\Logger.h"
 
 const int SCREEN_WIDTH = 800;
 const int SCREEN_HEIGHT = 600;

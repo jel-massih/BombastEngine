@@ -12,8 +12,6 @@ protected:
 	HINSTANCE m_hInstance; //The Module Instance
 	bool m_bWindowedMode; //True if app is windowed, False if Fullscreen
 	bool m_bIsRunning; //true if everything initialized and game in main loop
-	bool m_bQuitRequested; //True if a quit was requested
-	bool m_bQuitting;
 	int m_iColorDepth;
 
 public:
@@ -27,14 +25,15 @@ public:
 
 	static LRESULT CALLBACK MsgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
-	LRESULT OnClose();
-
-	void AbortGame() {m_bQuitting = true;}
 	bool IsRunning() {return m_bIsRunning;}
-	void SetQuitting(bool bQuitting) {m_bQuitting = bQuitting;}
-
+	
 	void Run();
 	void ShutDown();
+
+	bool IsOnlyInstance(LPCTSTR gameTitle);
+	bool CheckStorage(const DWORDLONG diskSpaceNeeded);
+	bool CheckMemory(const DWORDLONG physicalRAMNeeded, const DWORDLONG virtualRAMNeeded);
+	DWORD ReadCPUSpeed();
 
 private:
 	D3DClass *m_pD3D;

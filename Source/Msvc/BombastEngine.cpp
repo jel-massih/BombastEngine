@@ -25,5 +25,9 @@ int WINAPI WinMain(HINSTANCE hInstance,
 		g_pApp->Run();
 	}
 
+	g_pApp->ShutDown();
+	
+	SAFE_DELETE(g_pApp);
+
 	return 0;
 }
