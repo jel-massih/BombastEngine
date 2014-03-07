@@ -3,12 +3,16 @@
 //========================================================================
 
 #include "BombastApp.h"
+#include "../Constants.h"
+
+#include <cstdio>
 
 BombastApp *g_pApp;
 
 BombastApp::BombastApp()
 {
 	m_hWnd = 0;
+	m_pD3D = 0;
 
 	g_pApp = this;
 
@@ -26,7 +30,7 @@ bool BombastApp::InitInstance(HINSTANCE hInstance, LPSTR lpCmdLine, HWND hWnd, i
 		return FALSE;
 	}
 
-	if(!CheckStorage(10))
+	if(!CheckStorage(DISK_SPACE_NEEDED))
 	{
 		return FALSE;
 	}
@@ -90,8 +94,8 @@ bool BombastApp::IsOnlyInstance(LPCTSTR gameTitle)
 	return true;
 }
 
-//Check to see if there is diskSpaceNeeded Storage available
-bool BombastApp::CheckStorage(const DWORDLONG diskSpaceNeeded)
+//Check to see if there is megaBytesNeeded of Storage available
+bool BombastApp::CheckStorage(const DWORDLONG megaBytesNeeded)
 {
 	//Check for enough free storage on current disk
 	int const drive = _getdrive();
@@ -99,9 +103,10 @@ bool BombastApp::CheckStorage(const DWORDLONG diskSpaceNeeded)
 
 	_getdiskfree(drive, &diskFree);
 
-	unsigned __int64 const neededClusters = diskSpaceNeeded / (diskFree.sectors_per_cluster * diskFree.bytes_per_sector);
+	//Availablespace equals megabytes Free
+	unsigned __int64 const availableSpace = (((diskFree.sectors_per_cluster * diskFree.bytes_per_sector) >> 10) * diskFree.avail_clusters) >> 10;
 	
-	if(diskFree.avail_clusters < neededClusters)
+	if(availableSpace < megaBytesNeeded)
 	{
 		BE_ERROR(L"CheckStorage Failure: Not enough physical storage");
 		return false;
@@ -276,9 +281,12 @@ bool BombastApp::Frame()
 
 void BombastApp::ShutDown()
 {
-	m_pD3D->Shutdown();
+	if(m_pD3D)
+	{
+		m_pD3D->Shutdown();
 
-	SAFE_DELETE(m_pD3D);
+		SAFE_DELETE(m_pD3D);
+	}
 
 	ShutdownWindows();
 }
