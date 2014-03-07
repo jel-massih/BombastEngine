@@ -1,0 +1,282 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		E81988CC18CA13D2002CC100 /* BombastEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E81988CB18CA13D2002CC100 /* BombastEngine.cpp */; };
+		E81988E118CA164D002CC100 /* BombastApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E81988D018CA164D002CC100 /* BombastApp.cpp */; };
+		E81988E218CA164D002CC100 /* D3DClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E81988D718CA164D002CC100 /* D3DClass.cpp */; };
+		E81988E318CA164D002CC100 /* BombastEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E81988DA18CA164D002CC100 /* BombastEngine.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		E819889718CA1192002CC100 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		E81988CB18CA13D2002CC100 /* BombastEngine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BombastEngine.cpp; sourceTree = SOURCE_ROOT; };
+		E81988CD18CA146B002CC100 /* BombastEngine */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = BombastEngine; path = "/Users/developer1/Documents/C++ Projects/BombastEngine/Source/MacOSX/build/Release/BombastEngine"; sourceTree = "<absolute>"; };
+		E81988D018CA164D002CC100 /* BombastApp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BombastApp.cpp; sourceTree = "<group>"; };
+		E81988D118CA164D002CC100 /* BombastApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BombastApp.h; sourceTree = "<group>"; };
+		E81988D218CA164D002CC100 /* BombastEngineStd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BombastEngineStd.h; path = ../BombastEngineStd.h; sourceTree = "<group>"; };
+		E81988D318CA164D002CC100 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Constants.h; path = ../Constants.h; sourceTree = "<group>"; };
+		E81988D518CA164D002CC100 /* Logger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Logger.h; sourceTree = "<group>"; };
+		E81988D718CA164D002CC100 /* D3DClass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = D3DClass.cpp; sourceTree = "<group>"; };
+		E81988D818CA164D002CC100 /* D3DClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = D3DClass.h; sourceTree = "<group>"; };
+		E81988DA18CA164D002CC100 /* BombastEngine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BombastEngine.cpp; sourceTree = "<group>"; };
+		E81988DB18CA164D002CC100 /* BombastEngine.opensdf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BombastEngine.opensdf; sourceTree = "<group>"; };
+		E81988DC18CA164D002CC100 /* BombastEngine.sln */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = BombastEngine.sln; sourceTree = "<group>"; };
+		E81988DD18CA164D002CC100 /* BombastEngine.vcxproj.user */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = BombastEngine.vcxproj.user; sourceTree = "<group>"; };
+		E81988E018CA164D002CC100 /* bombastengine-f870a4d4.ipch */ = {isa = PBXFileReference; lastKnownFileType = file; path = "bombastengine-f870a4d4.ipch"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		E819889618CA1192002CC100 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		E819888E18CA1192002CC100 = {
+			isa = PBXGroup;
+			children = (
+				E81988CF18CA164D002CC100 /* Bombast */,
+				E81988D218CA164D002CC100 /* BombastEngineStd.h */,
+				E81988D318CA164D002CC100 /* Constants.h */,
+				E81988D418CA164D002CC100 /* Debugging */,
+				E81988D618CA164D002CC100 /* Graphics3D */,
+				E81988D918CA164D002CC100 /* Msvc */,
+				E819889C18CA1192002CC100 /* MacOS */,
+			);
+			sourceTree = "<group>";
+		};
+		E819889C18CA1192002CC100 /* MacOS */ = {
+			isa = PBXGroup;
+			children = (
+				E81988CB18CA13D2002CC100 /* BombastEngine.cpp */,
+			);
+			name = MacOS;
+			path = BombastEngine;
+			sourceTree = "<group>";
+		};
+		E81988CF18CA164D002CC100 /* Bombast */ = {
+			isa = PBXGroup;
+			children = (
+				E81988D018CA164D002CC100 /* BombastApp.cpp */,
+				E81988D118CA164D002CC100 /* BombastApp.h */,
+			);
+			name = Bombast;
+			path = ../Bombast;
+			sourceTree = "<group>";
+		};
+		E81988D418CA164D002CC100 /* Debugging */ = {
+			isa = PBXGroup;
+			children = (
+				E81988D518CA164D002CC100 /* Logger.h */,
+			);
+			name = Debugging;
+			path = ../Debugging;
+			sourceTree = "<group>";
+		};
+		E81988D618CA164D002CC100 /* Graphics3D */ = {
+			isa = PBXGroup;
+			children = (
+				E81988D718CA164D002CC100 /* D3DClass.cpp */,
+				E81988D818CA164D002CC100 /* D3DClass.h */,
+			);
+			name = Graphics3D;
+			path = ../Graphics3D;
+			sourceTree = "<group>";
+		};
+		E81988D918CA164D002CC100 /* Msvc */ = {
+			isa = PBXGroup;
+			children = (
+				E81988DA18CA164D002CC100 /* BombastEngine.cpp */,
+				E81988DB18CA164D002CC100 /* BombastEngine.opensdf */,
+				E81988DC18CA164D002CC100 /* BombastEngine.sln */,
+				E81988DD18CA164D002CC100 /* BombastEngine.vcxproj.user */,
+				E81988DE18CA164D002CC100 /* ipch */,
+			);
+			name = Msvc;
+			path = ../Msvc;
+			sourceTree = "<group>";
+		};
+		E81988DE18CA164D002CC100 /* ipch */ = {
+			isa = PBXGroup;
+			children = (
+				E81988DF18CA164D002CC100 /* bombastengine-c16bf1ef */,
+			);
+			path = ipch;
+			sourceTree = "<group>";
+		};
+		E81988DF18CA164D002CC100 /* bombastengine-c16bf1ef */ = {
+			isa = PBXGroup;
+			children = (
+				E81988E018CA164D002CC100 /* bombastengine-f870a4d4.ipch */,
+			);
+			path = "bombastengine-c16bf1ef";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		E819889818CA1192002CC100 /* BombastEngine */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E81988A318CA1192002CC100 /* Build configuration list for PBXNativeTarget "BombastEngine" */;
+			buildPhases = (
+				E819889518CA1192002CC100 /* Sources */,
+				E819889618CA1192002CC100 /* Frameworks */,
+				E819889718CA1192002CC100 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BombastEngine;
+			productName = BombastEngine;
+			productReference = E81988CD18CA146B002CC100 /* BombastEngine */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E819889018CA1192002CC100 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0430;
+			};
+			buildConfigurationList = E819889318CA1192002CC100 /* Build configuration list for PBXProject "BombastEngine" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = E819888E18CA1192002CC100;
+			productRefGroup = E819888E18CA1192002CC100;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E819889818CA1192002CC100 /* BombastEngine */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		E819889518CA1192002CC100 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E81988CC18CA13D2002CC100 /* BombastEngine.cpp in Sources */,
+				E81988E118CA164D002CC100 /* BombastApp.cpp in Sources */,
+				E81988E218CA164D002CC100 /* D3DClass.cpp in Sources */,
+				E81988E318CA164D002CC100 /* BombastEngine.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		E81988A118CA1192002CC100 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		E81988A218CA1192002CC100 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		E81988A418CA1192002CC100 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INSTALL_PATH = /usr/local/bin;
+				PRODUCT_NAME = BombastEngine;
+			};
+			name = Debug;
+		};
+		E81988A518CA1192002CC100 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INSTALL_PATH = /usr/local/bin;
+				PRODUCT_NAME = BombastEngine;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		E819889318CA1192002CC100 /* Build configuration list for PBXProject "BombastEngine" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E81988A118CA1192002CC100 /* Debug */,
+				E81988A218CA1192002CC100 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E81988A318CA1192002CC100 /* Build configuration list for PBXNativeTarget "BombastEngine" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E81988A418CA1192002CC100 /* Debug */,
+				E81988A518CA1192002CC100 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = E819889018CA1192002CC100 /* Project object */;
+}
