@@ -40,7 +40,7 @@ bool BombastApp::InitInstance(HINSTANCE hInstance, LPSTR lpCmdLine, HWND hWnd, i
 		return FALSE;
 	}
 
-	if(ReadCPUSpeed() < 1000)
+	if(ReadCPUSpeed() < CPU_SPEED_NEEDED)
 	{
 		BE_ERROR(L"CPUSpeed Error: You Do Not Have a Fast Enough CPU :(");
 		return FALSE;
