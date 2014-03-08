@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\Bombast\BombastApp.cpp">
+      <Filter>Bombast</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Graphics3D\D3DClass.cpp">
+      <Filter>Graphics3D</Filter>
+    </ClCompile>
+    <ClCompile Include="BombastEngine.cpp">
+      <Filter>Bombast</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Bombast\BombastApp.h">
+      <Filter>Bombast</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Graphics3D\D3DClass.h">
+      <Filter>Graphics3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\BombastEngineStd.h" />
+    <ClInclude Include="..\Constants.h" />
+    <ClInclude Include="..\Debugging\Logger.h">
+      <Filter>Debugging</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Bombast">
+      <UniqueIdentifier>{ea68f329-a787-4d76-b697-566531758468}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Debugging">
+      <UniqueIdentifier>{c862e910-11f1-4c65-b729-89e2d202dcc5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics3D">
+      <UniqueIdentifier>{a23d99ea-a1f5-4fa2-8660-114733607779}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
