@@ -34,8 +34,8 @@ bool BombastApp::InitInstance(HINSTANCE hInstance, LPSTR lpCmdLine, HWND hWnd, i
 	{
 		return FALSE;
 	}
-
-	if(!CheckMemory(5, 5))
+	
+	if(!CheckMemory(PHYS_RAM_NEEDED, VIRT_RAM_NEEDED))
 	{
 		return FALSE;
 	}
@@ -115,32 +115,30 @@ bool BombastApp::CheckStorage(const DWORDLONG megaBytesNeeded)
 	return true;
 }
 
-//Check to see if there is enough physical and virtual ram to run the game
+/**Check to see if there is enough physical and virtual ram to run the game
+* @param physicalRAMNeeded - Physical RAM needed in MB
+* @param physicalRAMNeeded -  Virtual RAM needed in MB
+*/
 bool BombastApp::CheckMemory(const DWORDLONG physicalRAMNeeded, const DWORDLONG virtualRAMNeeded)
 {
 	MEMORYSTATUSEX status;
+
+	status.dwLength = sizeof(status);
+
 	GlobalMemoryStatusEx(&status);
-	if(status.ullTotalPhys < physicalRAMNeeded)
+
+	unsigned __int64 physMemoryMB = status.ullTotalPhys >> 20;
+	unsigned __int64 virtMemoryMB = status.ullAvailVirtual >> 20;
+
+	if(physMemoryMB < physicalRAMNeeded)
 	{
 		BE_ERROR(L"CheckMemory Failure: Not Enough Physical RAM");
 		return false;
 	}
 
-	if(status.ullAvailVirtual < virtualRAMNeeded)
+	if(virtMemoryMB < virtualRAMNeeded)
 	{
 		BE_ERROR(L"CheckMemory Failure: Not Enough Virtual Memory");
-		return false;
-	}
-
-	//Check for contiguous memory
-	char* buff = BE_NEW char[virtualRAMNeeded];
-	if(buff)
-	{
-		delete[] buff;
-	}
-	else
-	{
-		BE_ERROR(L"CheckMemory Failure: Not Enough contiguous Memory");
 		return false;
 	}
 
