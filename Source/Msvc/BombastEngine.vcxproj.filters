@@ -16,6 +16,9 @@
     <ClCompile Include="..\Graphics2D\TextureClass.cpp">
       <Filter>Graphics2D</Filter>
     </ClCompile>
+    <ClCompile Include="GraphicsManager.cpp">
+      <Filter>Bombast</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Bombast\BombastApp.h">
@@ -34,6 +37,9 @@
     </ClInclude>
     <ClInclude Include="..\Graphics2D\TextureClass.h">
       <Filter>Graphics2D</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsManager.h">
+      <Filter>Bombast</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
