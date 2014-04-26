@@ -2,7 +2,7 @@
 
 TextureClass::TextureClass()
 {
-	m_texture = 0;
+	m_texture = NULL;
 }
 
 TextureClass::TextureClass(const TextureClass& other)
@@ -28,11 +28,7 @@ bool TextureClass::Initialize(ID3D11Device* device, ID3D11DeviceContext* context
 
 void TextureClass::Shutdown()
 {
-	if (m_texture)
-	{
-		m_texture->Release();
-		m_texture = 0;
-	}
+	SAFE_RELEASE(m_texture);
 
 	return;
 }

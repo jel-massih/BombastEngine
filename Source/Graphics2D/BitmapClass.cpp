@@ -90,13 +90,13 @@ bool BitmapClass::InitializeBuffers(ID3D11Device* device)
 	m_vertexCount = 6;
 	m_indexCount = m_vertexCount;
 
-	vertices = new VertexType[m_vertexCount];
+	vertices = BE_NEW VertexType[m_vertexCount];
 	if (!vertices)
 	{
 		return false;
 	}
 
-	indices = new unsigned long[m_indexCount];
+	indices = BE_NEWunsigned long[m_indexCount];
 	if (!indices)
 	{
 		return false;
@@ -157,17 +157,8 @@ bool BitmapClass::InitializeBuffers(ID3D11Device* device)
 
 void BitmapClass::ShutdownBuffers()
 {
-	if (m_indexBuffer)
-	{
-		m_indexBuffer->Release();
-		m_indexBuffer = 0;
-	}
-
-	if (m_vertexBuffer)
-	{
-		m_vertexBuffer->Release();
-		m_vertexBuffer = 0;
-	}
+	SAFE_RELEASE(m_indexBuffer);
+	SAFE_RELEASE(m_vertexBuffer);
 }
 
 bool BitmapClass::UpdateBuffers(ID3D11DeviceContext* deviceContext, int positionX, int positionY)
@@ -195,7 +186,7 @@ bool BitmapClass::UpdateBuffers(ID3D11DeviceContext* deviceContext, int position
 	bottom = top - (float)m_bitmapHeight;
 
 	//create vertex array
-	vertices = new VertexType[m_vertexCount];
+	vertices = BE_NEW VertexType[m_vertexCount];
 	if (!vertices) {
 		return false;
 	}
@@ -265,7 +256,7 @@ bool BitmapClass::LoadTexture(ID3D11Device* device, WCHAR* filename)
 	bool result;
 	ID3D11DeviceContext* context;
 
-	m_Texture = new TextureClass;
+	m_Texture = BE_NEW TextureClass;
 	if (!m_Texture)
 	{
 		return false;

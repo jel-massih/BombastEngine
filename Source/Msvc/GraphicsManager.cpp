@@ -20,7 +20,7 @@ bool GraphicsManager::Initialize(HWND hwnd)
 {
 	bool result;
 
-	m_pD3D = BE_NEW(D3DClass);
+	m_pD3D = BE_NEW D3DClass;
 	if (!m_pD3D)
 	{
 		return false;
@@ -32,7 +32,7 @@ bool GraphicsManager::Initialize(HWND hwnd)
 		return FALSE;
 	}
 
-	m_pBitmap = BE_NEW(BitmapClass);
+	m_pBitmap = BE_NEW BitmapClass;
 	if (!m_pBitmap)
 	{
 		return false;
