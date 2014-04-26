@@ -53,15 +53,15 @@ void GraphicsManager::Shutdown()
 	if (m_pBitmap)
 	{
 		m_pBitmap->Shutdown();
-		delete m_pBitmap;
-		m_pBitmap = 0;
+		
+		SAFE_DELETE(m_pBitmap);
 	}
 
 	if (m_pD3D)
 	{
 		m_pD3D->Shutdown();
-		delete m_pD3D;
-		m_pD3D = 0;
+
+		SAFE_DELETE(m_pD3D);
 	}
 
 	return;

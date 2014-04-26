@@ -3,7 +3,6 @@
 // BombastApp.h : Defines the entry point of the application
 //=============================================================
 #include "..\BombastEngineStd.h"
-#include "..\Graphics3D\D3DClass.h"
 
 class BombastApp
 {
@@ -34,9 +33,6 @@ public:
 	bool CheckStorage(const DWORDLONG diskSpaceNeeded);
 	bool CheckMemory(const DWORDLONG physicalRAMNeeded, const DWORDLONG virtualRAMNeeded);
 	DWORD ReadCPUSpeed();
-
-private:
-	D3DClass *m_pD3D;
 
 private:
 	void InitializeWindows();

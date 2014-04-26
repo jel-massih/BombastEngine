@@ -12,7 +12,6 @@ BombastApp *g_pApp;
 BombastApp::BombastApp()
 {
 	m_hWnd = 0;
-	m_pD3D = 0;
 
 	g_pApp = this;
 
@@ -225,17 +224,7 @@ LRESULT CALLBACK BombastApp::MsgProc(HWND hWnd, UINT message, WPARAM wParam, LPA
 
 bool BombastApp::InitializeApp(int screenWidth, int screenHeight)
 {
-	m_pD3D = BE_NEW(D3DClass);
-	if(!m_pD3D)
-	{
-		return FALSE;
-	}
-
-	if(!m_pD3D->Initialize(screenWidth, screenHeight, true, m_hWnd, false, 1000.0f, 0.1f))
-	{
-		BE_ERROR(L"Could not initialize D3D11");
-		return FALSE;
-	}
+	
 
 	return true;
 }
@@ -279,13 +268,6 @@ bool BombastApp::Frame()
 
 void BombastApp::ShutDown()
 {
-	if(m_pD3D)
-	{
-		m_pD3D->Shutdown();
-
-		SAFE_DELETE(m_pD3D);
-	}
-
 	ShutdownWindows();
 }
 

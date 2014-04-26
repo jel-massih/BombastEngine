@@ -15,11 +15,12 @@
 #include <d3d11.h>
 #include <DirectXMath.h>
 
-#include "Bombast\BombastApp.h"
-#include "Debugging\Logger.h"
 
 const int SCREEN_WIDTH = 800;
 const int SCREEN_HEIGHT = 600;
+
+#include "Bombast\BombastApp.h"
+#include "Debugging\Logger.h"
 
 #if defined(_DEBUG)
 	#define BE_NEW new(_NORMAL_BLOCK,__FILE__, __LINE__)
