@@ -10,6 +10,12 @@
     <ClCompile Include="BombastEngine.cpp">
       <Filter>Bombast</Filter>
     </ClCompile>
+    <ClCompile Include="..\Graphics2D\BitmapClass.cpp">
+      <Filter>Graphics2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Graphics2D\TextureClass.cpp">
+      <Filter>Graphics2D</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Bombast\BombastApp.h">
@@ -23,6 +29,12 @@
     <ClInclude Include="..\Debugging\Logger.h">
       <Filter>Debugging</Filter>
     </ClInclude>
+    <ClInclude Include="..\Graphics2D\BitmapClass.h">
+      <Filter>Graphics2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Graphics2D\TextureClass.h">
+      <Filter>Graphics2D</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Bombast">
@@ -33,6 +45,9 @@
     </Filter>
     <Filter Include="Graphics3D">
       <UniqueIdentifier>{a23d99ea-a1f5-4fa2-8660-114733607779}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics2D">
+      <UniqueIdentifier>{f23c61d3-16dc-4bd6-aba5-c596ba86ced4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
