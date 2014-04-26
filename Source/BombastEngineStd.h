@@ -15,6 +15,7 @@
 #include <d3d11.h>
 #include <DirectXMath.h>
 
+#include "Bombast\BombastApp.h"
 #include "Debugging\Logger.h"
 
 const int SCREEN_WIDTH = 800;
