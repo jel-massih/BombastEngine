@@ -41,8 +41,8 @@ bool GraphicsManager::Initialize(HWND hwnd)
 	result = m_pBitmap->Initialize(m_pD3D->GetDevice(), SCREEN_WIDTH, SCREEN_HEIGHT, L"../../Data/test.png", 256, 256);
 	if (!result)
 	{
-		MessageBox(hwnd, L"Could not initialize the Bitmap Object!", L"ERROR!", MB_OK);
-		return false;
+		BE_ERROR(L"Could not initialize the Bitmap Object!")
+		return FALSE;
 	}
 
 	return true;

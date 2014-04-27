@@ -96,7 +96,7 @@ bool BitmapClass::InitializeBuffers(ID3D11Device* device)
 		return false;
 	}
 
-	indices = BE_NEWunsigned long[m_indexCount];
+	indices = BE_NEW unsigned long[m_indexCount];
 	if (!indices)
 	{
 		return false;
@@ -146,12 +146,9 @@ bool BitmapClass::InitializeBuffers(ID3D11Device* device)
 		return false;
 	}
 
-	delete[] vertices;
-	vertices = 0;
-
-	delete[] indices;
-	indices = 0;
-
+	SAFE_DELETE_ARRAY(vertices);
+	SAFE_DELETE_ARRAY(indices);
+	
 	return true;
 }
 
@@ -225,8 +222,7 @@ bool BitmapClass::UpdateBuffers(ID3D11DeviceContext* deviceContext, int position
 	deviceContext->Unmap(m_vertexBuffer, 0);
 
 	//Release Resources
-	delete[] vertices;
-	vertices = 0;
+	SAFE_DELETE_ARRAY(vertices);
 
 	return true;
 }
@@ -278,8 +274,7 @@ void BitmapClass::ReleaseTexture()
 	if (m_Texture)
 	{
 		m_Texture->Shutdown();
-		delete m_Texture;
-		m_Texture = 0;
+		SAFE_DELETE(m_Texture);
 	}
 
 	return;
