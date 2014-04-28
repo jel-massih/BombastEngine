@@ -13,20 +13,20 @@
   <ItemGroup>
     <ClInclude Include="..\BombastEngineStd.h" />
     <ClInclude Include="..\Bombast\BombastApp.h" />
+    <ClInclude Include="..\Bombast\GraphicsManager.h" />
     <ClInclude Include="..\Constants.h" />
     <ClInclude Include="..\Debugging\Logger.h" />
     <ClInclude Include="..\Graphics2D\BitmapClass.h" />
     <ClInclude Include="..\Graphics2D\TextureClass.h" />
     <ClInclude Include="..\Graphics3D\D3DClass.h" />
-    <ClInclude Include="GraphicsManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Bombast\BombastApp.cpp" />
+    <ClCompile Include="..\Bombast\GraphicsManager.cpp" />
     <ClCompile Include="..\Graphics2D\BitmapClass.cpp" />
     <ClCompile Include="..\Graphics2D\TextureClass.cpp" />
     <ClCompile Include="..\Graphics3D\D3DClass.cpp" />
     <ClCompile Include="BombastEngine.cpp" />
-    <ClCompile Include="GraphicsManager.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{B8DE6183-26FF-4787-B7BB-BDB3697E6887}</ProjectGuid>

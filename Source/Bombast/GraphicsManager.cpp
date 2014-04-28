@@ -83,6 +83,26 @@ bool GraphicsManager::Frame()
 
 bool GraphicsManager::Render()
 {
-	//Render Logic
+	bool result;
+
+	DirectX::XMMATRIX worldMatrix, viewMatrix, projectionMatrix, orthoMatrix;
+
+	m_pD3D->BeginScene(0.0f, 0.0f, 0.0f, 1.0f);
+
+	m_pD3D->GetWorldMatrix(worldMatrix);
+	m_pD3D->GetProjectionMatrix(projectionMatrix);
+	m_pD3D->GetOrthoMatrix(orthoMatrix);
+
+	m_pD3D->EnableZBuffer(false);
+
+	result = m_pBitmap->Render(m_pD3D->GetDeviceContext(), 100, 100);
+	if (!result) {
+		return false;
+	}
+
+	m_pD3D->EnableZBuffer(true);
+
+	m_pD3D->EndScene();
+
 	return true;
 }

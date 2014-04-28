@@ -3,6 +3,8 @@
 // BombastApp.h : Defines the entry point of the application
 //=============================================================
 #include "..\BombastEngineStd.h"
+#include "..\Constants.h"
+#include "GraphicsManager.h"
 
 class BombastApp
 {
@@ -12,6 +14,8 @@ protected:
 	bool m_bWindowedMode; //True if app is windowed, False if Fullscreen
 	bool m_bIsRunning; //true if everything initialized and game in main loop
 	int m_iColorDepth;
+
+	GraphicsManager* m_pGraphicsManager;
 
 public:
 	BombastApp();
