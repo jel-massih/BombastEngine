@@ -23,10 +23,12 @@ const int SCREEN_HEIGHT = 600;
 #include "Bombast\BombastApp.h"
 #include "Debugging\Logger.h"
 
+#ifndef BE_NEW
 #if defined(_DEBUG)
 	#define BE_NEW new(_NORMAL_BLOCK,__FILE__, __LINE__)
 #else
 	#define BE_NEW new
+#endif
 #endif
 
 #if !defined(SAFE_DELETE)

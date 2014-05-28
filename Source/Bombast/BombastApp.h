@@ -40,6 +40,13 @@ public:
 	bool CheckMemory(const DWORDLONG physicalRAMNeeded, const DWORDLONG virtualRAMNeeded);
 	DWORD ReadCPUSpeed();
 
+	static BombastApp *GetGameInstance()
+	{
+		if (!s_instance)
+			s_instance = new BombastApp;
+		return s_instance;
+	}
+
 private:
 	void InitializeWindows();
 	bool InitializeApp(int screenWidth, int screenHeight);
@@ -47,8 +54,7 @@ private:
 	bool Frame();
 
 	void ShutdownWindows();
+
+	static BombastApp *s_instance;
 };
-
-extern BombastApp *g_pApp;
-
 #endif
