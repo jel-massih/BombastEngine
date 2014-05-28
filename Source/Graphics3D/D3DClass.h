@@ -1,4 +1,5 @@
-#pragma once
+#ifndef D3D_CLASS_H
+#define D3D_CLASS_H
 
 #include "../BombastEngineStd.h"
 
@@ -52,3 +53,5 @@ private:
 	ID3D11BlendState* m_alphaEnableBlendingState;
 	ID3D11BlendState* m_alphaDisabledBlendingState;
 };
+
+#endif

@@ -1,4 +1,5 @@
-#pragma once
+#ifndef TEXTURE_CLASS_H
+#define TEXTURE_CLASS_H
 
 #include "WICTextureLoader.h"
 #include "../BombastEngineStd.h"
@@ -18,3 +19,5 @@ public:
 private:
 	ID3D11ShaderResourceView* m_texture;
 };
+
+#endif

@@ -1,4 +1,5 @@
-#pragma once
+#ifndef BITMAP_CLASS_H
+#define BITMAP_CLASS_H
 
 #include "../BombastEngineStd.h"
 #include "TextureClass.h"
@@ -49,3 +50,5 @@ private:
 		DirectX::XMFLOAT2 texture;
 	};
 };
+
+#endif

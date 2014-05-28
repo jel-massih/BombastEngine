@@ -1,4 +1,5 @@
-#pragma once
+#ifndef GRAPHICS_MANAGER_H
+#define GRAPHICS_MANAGER_H
 
 #include "../Graphics3D/D3DClass.h"
 #include "../Graphics2D/BitmapClass.h"
@@ -20,3 +21,5 @@ private:
 	D3DClass* m_pD3D;
 	BitmapClass* m_pBitmap;
 };
+
+#endif

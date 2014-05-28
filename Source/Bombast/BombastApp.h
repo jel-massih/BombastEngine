@@ -1,4 +1,6 @@
-#pragma once
+#ifndef BOMBAST_APP_H
+#define BOMBAST_APP_H
+
 //===============================================================
 // BombastApp.h : Defines the entry point of the application
 //=============================================================
@@ -48,3 +50,5 @@ private:
 };
 
 extern BombastApp *g_pApp;
+
+#endif

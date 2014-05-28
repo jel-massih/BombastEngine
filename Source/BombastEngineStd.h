@@ -1,4 +1,5 @@
-#pragma once
+#ifndef BOMBAST_ENGINE_STD_H
+#define BOMBAST_ENGINE_STD_H
 
 #define WIN32_LEAN_AND_MEAN //Exclude Rarely used stuff from Windows Headers
 
@@ -38,4 +39,6 @@ const int SCREEN_HEIGHT = 600;
 
 #if !defined(SAFE_RELEASE)
 	#define SAFE_RELEASE(x) if(x) x->Release(); x=NULL;
+#endif
+
 #endif
