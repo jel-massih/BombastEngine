@@ -18,16 +18,16 @@ int WINAPI WinMain(HINSTANCE hInstance,
 
 	_CrtSetDbgFlag(tmpDbgFlag);
 
-	g_pApp = BE_NEW BombastApp();
+	BombastApp* appInstance = BombastApp::GetGameInstance();
 
-	if(g_pApp->InitInstance(hInstance, lpCmdLine, 0))
+	if(appInstance->InitInstance(hInstance, lpCmdLine, 0))
 	{
-		g_pApp->Run();
+		appInstance->Run();
 	}
 
-	g_pApp->ShutDown();
+	appInstance->ShutDown();
 	
-	SAFE_DELETE(g_pApp);
+	SAFE_DELETE(appInstance);
 
 	return 0;
 }

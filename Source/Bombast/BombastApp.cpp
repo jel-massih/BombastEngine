@@ -6,13 +6,11 @@
 
 #include <cstdio>
 
-BombastApp *g_pApp;
+BombastApp* BombastApp::m_pAppInstance = 0;
 
 BombastApp::BombastApp()
 {
 	m_hWnd = 0;
-
-	g_pApp = this;
 
 	m_iColorDepth = 32;
 
