@@ -5,8 +5,6 @@
 // BombastApp.h : Defines the entry point of the application
 //=============================================================
 #include "..\BombastEngineStd.h"
-#include "..\Constants.h"
-#include "GraphicsManager.h"
 
 class BombastApp
 {
@@ -16,8 +14,6 @@ protected:
 	bool m_bWindowedMode; //True if app is windowed, False if Fullscreen
 	bool m_bIsRunning; //true if everything initialized and game in main loop
 	int m_iColorDepth;
-
-	GraphicsManager* m_pGraphicsManager;
 
 public:
 	BombastApp();
@@ -40,13 +36,6 @@ public:
 	bool CheckMemory(const DWORDLONG physicalRAMNeeded, const DWORDLONG virtualRAMNeeded);
 	DWORD ReadCPUSpeed();
 
-	static BombastApp *GetGameInstance()
-	{
-		if (!s_instance)
-			s_instance = new BombastApp;
-		return s_instance;
-	}
-
 private:
 	void InitializeWindows();
 	bool InitializeApp(int screenWidth, int screenHeight);
@@ -54,7 +43,8 @@ private:
 	bool Frame();
 
 	void ShutdownWindows();
-
-	static BombastApp *s_instance;
 };
+
+extern BombastApp *g_pApp;
+
 #endif

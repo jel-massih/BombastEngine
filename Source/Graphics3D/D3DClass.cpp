@@ -1,5 +1,5 @@
 #include "D3DClass.h"
-/*
+
 D3DClass::D3DClass()
 {
 	m_swapChain = 0;
@@ -463,4 +463,4 @@ void D3DClass::ToggleFillMode()
 
 	m_device->CreateRasterizerState(&rDesc, &rState);
 	m_deviceContext->RSSetState(rState);
-}*/
+}
