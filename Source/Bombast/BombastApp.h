@@ -5,6 +5,7 @@
 // BombastApp.h : Defines the entry point of the application
 //=============================================================
 #include "..\BombastEngineStd.h"
+#include "..\Constants.h"
 
 class BombastApp
 {

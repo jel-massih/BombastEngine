@@ -3,7 +3,6 @@
 //========================================================================
 
 #include "BombastApp.h"
-#include "../Constants.h"
 
 #include <cstdio>
 
