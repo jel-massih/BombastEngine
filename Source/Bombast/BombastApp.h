@@ -17,6 +17,8 @@ protected:
 	bool m_bIsRunning; //true if everything initialized and game in main loop
 	int m_iColorDepth;
 
+	GraphicsManager* m_pGraphicsManager;
+
 public:
 	BombastApp();
 

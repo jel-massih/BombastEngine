@@ -15,6 +15,8 @@ BombastApp::BombastApp()
 	m_iColorDepth = 32;
 
 	m_bIsRunning = false;
+
+	m_pGraphicsManager = 0;
 }
 
 //Win32 Specific Stuff
@@ -220,7 +222,18 @@ LRESULT CALLBACK BombastApp::MsgProc(HWND hWnd, UINT message, WPARAM wParam, LPA
 
 bool BombastApp::InitializeApp(int screenWidth, int screenHeight)
 {
-	
+	bool result;
+
+	m_pGraphicsManager = BE_NEW GraphicsManager();
+	if (!m_pGraphicsManager)
+	{
+		return FALSE;
+	}
+
+	result = m_pGraphicsManager->Initialize(m_hWnd);
+	if (!result) {
+		return FALSE;
+	}
 
 	return true;
 }
@@ -259,11 +272,23 @@ void BombastApp::Run()
 
 bool BombastApp::Frame()
 {
+	bool result;
+	result = m_pGraphicsManager->Frame();
+	if (!result) {
+		return FALSE;
+	}
+
 	return true;
 }
 
 void BombastApp::ShutDown()
 {
+	if (m_pGraphicsManager)
+	{
+		m_pGraphicsManager->Shutdown();
+		SAFE_DELETE(m_pGraphicsManager);
+	}
+
 	ShutdownWindows();
 }
 
