@@ -6,6 +6,7 @@
 //=============================================================
 #include "..\BombastEngineStd.h"
 #include "..\Constants.h"
+#include "GraphicsManager.h"
 
 class BombastApp
 {
@@ -19,16 +20,16 @@ protected:
 public:
 	BombastApp();
 
-	virtual TCHAR *VGetGameTitle() {return _T("Dope Engine");}
+	virtual TCHAR *VGetGameTitle() { return _T("Dope Engine"); }
 
-	HWND GetHwnd() {return m_hWnd;}
-	HINSTANCE GetInstance() {return m_hInstance;}
+	HWND GetHwnd() { return m_hWnd; }
+	HINSTANCE GetInstance() { return m_hInstance; }
 	virtual bool InitInstance(HINSTANCE hInstance, LPSTR lpCmdLine, HWND hWnd = NULL, int screenWidth = SCREEN_WIDTH, int screenHeight = SCREEN_HEIGHT);
 
 	static LRESULT CALLBACK MsgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
-	bool IsRunning() {return m_bIsRunning;}
-	
+	bool IsRunning() { return m_bIsRunning; }
+
 	void Run();
 	void ShutDown();
 
@@ -43,7 +44,7 @@ public:
 			m_pAppInstance = new BombastApp;
 		return m_pAppInstance;
 	}
-	
+
 private:
 	void InitializeWindows();
 	bool InitializeApp(int screenWidth, int screenHeight);

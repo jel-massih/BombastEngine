@@ -20,7 +20,6 @@
 const int SCREEN_WIDTH = 800;
 const int SCREEN_HEIGHT = 600;
 
-#include "Bombast\BombastApp.h"
 #include "Debugging\Logger.h"
 
 #ifndef BE_NEW

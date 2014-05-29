@@ -1,5 +1,7 @@
 #include "GraphicsManager.h"
 
+#include "../Bombast/BombastApp.h"
+
 GraphicsManager::GraphicsManager()
 {
 	m_pD3D = 0;
