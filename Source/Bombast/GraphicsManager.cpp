@@ -97,7 +97,7 @@ bool GraphicsManager::Render()
 
 	m_pD3D->EnableZBuffer(false);
 
-	result = m_pBitmap->Render(m_pD3D->GetDeviceContext(), 100, 100);
+	result = m_pBitmap->Render(m_pD3D->GetDeviceContext(), 0, 0);
 	if (!result) {
 		return false;
 	}

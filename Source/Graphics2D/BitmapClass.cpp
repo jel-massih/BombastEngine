@@ -207,7 +207,7 @@ bool BitmapClass::UpdateBuffers(ID3D11DeviceContext* deviceContext, int position
 	vertices[5].position = DirectX::XMFLOAT3(right, bottom, 0.0f); //Bottom Right
 	vertices[5].texture = DirectX::XMFLOAT2(1.0f, 1.0f);
 
-	//Locak vertex buffer for write
+	//Locate vertex buffer for write
 	result = deviceContext->Map(m_pVertexBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource);
 	if (FAILED(result)) {
 		return false;
