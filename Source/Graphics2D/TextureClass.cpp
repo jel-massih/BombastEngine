@@ -2,7 +2,7 @@
 
 TextureClass::TextureClass()
 {
-	m_texture = NULL;
+	m_pTexture = NULL;
 }
 
 TextureClass::TextureClass(const TextureClass& other)
@@ -17,7 +17,7 @@ bool TextureClass::Initialize(ID3D11Device* device, ID3D11DeviceContext* context
 {
 	HRESULT result;
 
-	result = DirectX::CreateWICTextureFromFile(device, context, textureTitle, NULL, &m_texture, NULL);
+	result = DirectX::CreateWICTextureFromFile(device, context, textureTitle, NULL, &m_pTexture, NULL);
 
 	if (FAILED(result)) {
 		return false;
@@ -28,12 +28,12 @@ bool TextureClass::Initialize(ID3D11Device* device, ID3D11DeviceContext* context
 
 void TextureClass::Shutdown()
 {
-	SAFE_RELEASE(m_texture);
+	SAFE_RELEASE(m_pTexture);
 
 	return;
 }
 
 ID3D11ShaderResourceView* TextureClass::GetTexture()
 {
-	return m_texture;
+	return m_pTexture;
 }

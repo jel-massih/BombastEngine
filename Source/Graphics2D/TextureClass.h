@@ -17,7 +17,7 @@ public:
 	ID3D11ShaderResourceView* GetTexture();
 
 private:
-	ID3D11ShaderResourceView* m_texture;
+	ID3D11ShaderResourceView* m_pTexture;
 };
 
 #endif

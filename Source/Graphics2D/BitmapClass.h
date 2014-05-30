@@ -40,9 +40,9 @@ private:
 	int m_vertexCount; //Number of Vertices in Vertex Array
 	int m_indexCount; //Number of Indices in Index array
 
-	ID3D11Buffer *m_vertexBuffer, *m_indexBuffer;
+	ID3D11Buffer *m_pVertexBuffer, *m_pIndexBuffer;
 	
-	TextureClass* m_Texture;
+	TextureClass *m_pTexture;
 
 	struct VertexType
 	{
