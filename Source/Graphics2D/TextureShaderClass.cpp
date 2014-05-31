@@ -17,11 +17,11 @@ TextureShaderClass::~TextureShaderClass()
 {
 }
 
-bool TextureShaderClass::Initialize(ID3D11Device* device, HWND hWnd)
+bool TextureShaderClass::Initialize(ID3D11Device* device)
 {
 	bool result;
 
-	result = InitializeShader(device, hWnd, L"../../Data/texture.vs", L"../../Data/texture.ps");
+	result = InitializeShader(device, L"../../Data/texture.vs", L"../../Data/texture.ps");
 	if (!result)
 	{
 		return false;
@@ -52,7 +52,7 @@ bool TextureShaderClass::Render(ID3D11DeviceContext* deviceContext, int indexCou
 	return true;
 }
 
-bool TextureShaderClass::InitializeShader(ID3D11Device* device, HWND hWnd, WCHAR* vertexShaderPath, WCHAR* pixelShaderPath)
+bool TextureShaderClass::InitializeShader(ID3D11Device* device, WCHAR* vertexShaderPath, WCHAR* pixelShaderPath)
 {
 	HRESULT result;
 	ID3D10Blob* errorMessage;
