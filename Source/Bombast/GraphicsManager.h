@@ -3,6 +3,7 @@
 
 #include "../Graphics3D/D3DClass.h"
 #include "../Graphics2D/BitmapClass.h"
+#include "../Graphics2D/TextureShaderClass.h"
 
 class GraphicsManager
 {
@@ -20,6 +21,7 @@ private:
 private:
 	D3DClass* m_pD3D;
 	BitmapClass* m_pBitmap;
+	TextureShaderClass* m_pTextureShader;
 };
 
 #endif

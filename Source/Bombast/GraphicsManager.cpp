@@ -6,6 +6,7 @@ GraphicsManager::GraphicsManager()
 {
 	m_pD3D = 0;
 	m_pBitmap = 0;
+	m_pTextureShader = 0;
 }
 
 GraphicsManager::GraphicsManager(const GraphicsManager& other)
@@ -47,6 +48,19 @@ bool GraphicsManager::Initialize(HWND hwnd)
 		return FALSE;
 	}
 
+	m_pTextureShader = new TextureShaderClass;
+	if (!m_pTextureShader)
+	{
+		return false;
+	}
+
+	result = m_pTextureShader->Initialize(m_pD3D->GetDevice());
+	if (!result)
+	{
+		BE_ERROR(L"Could not initialize the TextureShader Object!")
+		return FALSE;
+	}
+
 	return true;
 }
 
@@ -64,6 +78,13 @@ void GraphicsManager::Shutdown()
 		m_pD3D->Shutdown();
 
 		SAFE_DELETE(m_pD3D);
+	}
+
+	if (m_pTextureShader)
+	{
+		m_pTextureShader->Shutdown();
+
+		SAFE_DELETE(m_pTextureShader);
 	}
 
 	return;
@@ -97,8 +118,17 @@ bool GraphicsManager::Render()
 
 	m_pD3D->EnableZBuffer(false);
 
+	//prepare bitmap vertex and index buffers for drawing
 	result = m_pBitmap->Render(m_pD3D->GetDeviceContext(), 0, 0);
-	if (!result) {
+	if (!result) 
+	{
+		return false;
+	}
+
+	//Render Bitmap with texture shader
+	result = m_pTextureShader->Render(m_pD3D->GetDeviceContext(), m_pBitmap->GetIndexCount(), worldMatrix, viewMatrix, projectionMatrix, m_pBitmap->GetTexture());
+	if (!result)
+	{
 		return false;
 	}
 
