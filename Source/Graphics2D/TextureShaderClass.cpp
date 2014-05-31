@@ -22,7 +22,7 @@ bool TextureShaderClass::Initialize(ID3D11Device* device)
 {
 	bool result;
 
-	result = InitializeShader(device, L"../../Data/texture.vs", L"../../Data/texture.ps");
+	result = InitializeShader(device, L"../../Game/Data/texture.vs", L"../../Game/Data/texture.ps");
 	if (!result)
 	{
 		return false;
