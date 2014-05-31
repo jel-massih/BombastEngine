@@ -2,7 +2,6 @@
 #define TEXTURE_SHADER_CLASS_H
 
 #include "../BombastEngineStd.h"
-#include "../Bombast/BombastApp.h"
 
 #include <d3dcompiler.h>
 

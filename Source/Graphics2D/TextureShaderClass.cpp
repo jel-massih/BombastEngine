@@ -1,4 +1,5 @@
 #include "TextureShaderClass.h"
+#include "../Bombast/BombastApp.h"
 
 TextureShaderClass::TextureShaderClass()
 {
