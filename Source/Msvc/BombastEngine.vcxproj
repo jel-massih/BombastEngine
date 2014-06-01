@@ -19,6 +19,7 @@
     <ClInclude Include="..\Graphics2D\BitmapClass.h" />
     <ClInclude Include="..\Graphics2D\TextureClass.h" />
     <ClInclude Include="..\Graphics2D\TextureShaderClass.h" />
+    <ClInclude Include="..\Graphics3D\CameraClass.h" />
     <ClInclude Include="..\Graphics3D\D3DClass.h" />
   </ItemGroup>
   <ItemGroup>
@@ -27,6 +28,7 @@
     <ClCompile Include="..\Graphics2D\BitmapClass.cpp" />
     <ClCompile Include="..\Graphics2D\TextureClass.cpp" />
     <ClCompile Include="..\Graphics2D\TextureShaderClass.cpp" />
+    <ClCompile Include="..\Graphics3D\CameraClass.cpp" />
     <ClCompile Include="..\Graphics3D\D3DClass.cpp" />
     <ClCompile Include="BombastEngine.cpp" />
   </ItemGroup>
