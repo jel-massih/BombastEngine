@@ -1,7 +1,7 @@
 #ifndef TEXTURE_CLASS_H
 #define TEXTURE_CLASS_H
 
-#include "WICTextureLoader.h"
+#include "../Utilities/DDSTextureLoader.h"
 #include "../BombastEngineStd.h"
 
 class TextureClass

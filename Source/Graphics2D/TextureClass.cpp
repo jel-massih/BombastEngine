@@ -17,7 +17,7 @@ bool TextureClass::Initialize(ID3D11Device* device, ID3D11DeviceContext* context
 {
 	HRESULT result;
 
-	result = DirectX::CreateWICTextureFromFile(device, context, textureTitle, NULL, &m_pTexture, NULL);
+	result = CreateDDSTextureFromFile(device, textureTitle, nullptr, &m_pTexture);
 
 	if (FAILED(result)) {
 		return false;
