@@ -33,14 +33,14 @@ void CameraClass::SetRotation(float x, float y, float z)
 	m_rotZ = z;
 }
 
-DirectX::XMFLOAT3 CameraClass::GetPosition()
+DirectX::XMVECTOR CameraClass::GetPosition()
 {
-	return DirectX::XMFLOAT3(m_posX, m_posY, m_posZ);
+	return DirectX::XMVectorSet(m_posX, m_posY, m_posZ, 0.0f);
 }
 
-DirectX::XMFLOAT3 CameraClass::GetRotation()
+DirectX::XMVECTOR CameraClass::GetRotation()
 {
-	return DirectX::XMFLOAT3(m_rotX, m_rotY, m_rotZ);
+	return DirectX::XMVectorSet(m_rotX, m_rotY, m_rotZ, 0.0f);
 }
 
 void CameraClass::Render()
@@ -49,8 +49,8 @@ void CameraClass::Render()
 	float yaw, pitch, roll;
 	DirectX::XMMATRIX rotationMatrix;
 
-	up = DirectX::XMVectorSet(0.0f, 0.0f, 0.0f, 0.0f);
-	pos = DirectX::XMVectorSet(m_posX, m_posX, m_posZ, 0.0f);
+	up = DirectX::XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
+	pos = DirectX::XMVectorSet(m_posX, m_posY, m_posZ, 0.0f);
 	lookAt = DirectX::XMVectorSet(0.0f, 0.0f, 1.0f, 0.0f);
 
 	//Set badd boys to radians

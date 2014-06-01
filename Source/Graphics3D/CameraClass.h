@@ -13,11 +13,11 @@ public:
 	void SetPosition(float x, float y, float z);
 	void SetRotation(float x, float y, float z);
 
-	DirectX::XMFLOAT3 GetPosition();
-	DirectX::XMFLOAT3 GetRotation();
+	DirectX::XMVECTOR GetPosition();
+	DirectX::XMVECTOR GetRotation();
 
 	void Render();
-	void GetViewMatrix(DirectX::XMMATRIX& matrix);
+	void GetViewMatrix(DirectX::XMMATRIX &matrix);
 
 private:
 	float m_posX, m_posY, m_posZ;
