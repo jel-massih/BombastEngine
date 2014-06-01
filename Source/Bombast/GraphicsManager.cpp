@@ -52,7 +52,7 @@ bool GraphicsManager::Initialize(HWND hwnd)
 		return false;
 	}
 
-	result = m_pModel->Initialize(m_pD3D->GetDevice(), L"../../Game/Data/test.png");
+	result = m_pModel->Initialize(m_pD3D->GetDevice(), L"../../Game/Data/dirt01.dds");
 	if (!result)
 	{
 		BE_ERROR(L"Could not initialize the Model Object");
@@ -65,7 +65,7 @@ bool GraphicsManager::Initialize(HWND hwnd)
 		return false;
 	}
 
-	result = m_pBitmap->Initialize(m_pD3D->GetDevice(), SCREEN_WIDTH, SCREEN_HEIGHT, L"../../Game/Data/test.png", 256, 256);
+	result = m_pBitmap->Initialize(m_pD3D->GetDevice(), SCREEN_WIDTH, SCREEN_HEIGHT, L"../../Game/Data/dirt01.dds", 256, 256);
 	if (!result)
 	{
 		BE_ERROR(L"Could not initialize the Bitmap Object!")
@@ -184,7 +184,7 @@ bool GraphicsManager::Render()
 	}*/
 
 	//Render Bitmap with texture shader
-	result = m_pColorShader->Render(m_pD3D->GetDeviceContext(), m_pModel->GetIndexCount(), worldMatrix, viewMatrix, projectionMatrix);
+	result = m_pTextureShader->Render(m_pD3D->GetDeviceContext(), m_pModel->GetIndexCount(), worldMatrix, viewMatrix, projectionMatrix, m_pModel->GetTexture());
 	if (!result)
 	{
 		return false;

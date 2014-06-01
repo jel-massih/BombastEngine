@@ -31,6 +31,9 @@
     <ClCompile Include="..\Graphics2D\ColorShaderClass.cpp">
       <Filter>Graphics2D</Filter>
     </ClCompile>
+    <ClCompile Include="..\Utilities\DDSTextureLoader.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Bombast\BombastApp.h">
@@ -65,6 +68,9 @@
     <ClInclude Include="..\Graphics2D\ColorShaderClass.h">
       <Filter>Graphics2D</Filter>
     </ClInclude>
+    <ClInclude Include="..\Utilities\DDSTextureLoader.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Bombast">
@@ -78,6 +84,9 @@
     </Filter>
     <Filter Include="Graphics2D">
       <UniqueIdentifier>{f23c61d3-16dc-4bd6-aba5-c596ba86ced4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utilities">
+      <UniqueIdentifier>{24bfa62a-a741-47b8-8cb9-4c446a8f817c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
