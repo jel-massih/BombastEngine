@@ -25,6 +25,12 @@
     <ClCompile Include="..\Graphics3D\CameraClass.cpp">
       <Filter>Graphics3D</Filter>
     </ClCompile>
+    <ClCompile Include="..\Graphics3D\ModelClass.cpp">
+      <Filter>Graphics3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Graphics2D\ColorShaderClass.cpp">
+      <Filter>Graphics2D</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Bombast\BombastApp.h">
@@ -52,6 +58,12 @@
     </ClInclude>
     <ClInclude Include="..\Graphics3D\CameraClass.h">
       <Filter>Graphics3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Graphics3D\ModelClass.h">
+      <Filter>Graphics3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Graphics2D\ColorShaderClass.h">
+      <Filter>Graphics2D</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

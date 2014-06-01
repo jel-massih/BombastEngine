@@ -17,19 +17,23 @@
     <ClInclude Include="..\Constants.h" />
     <ClInclude Include="..\Debugging\Logger.h" />
     <ClInclude Include="..\Graphics2D\BitmapClass.h" />
+    <ClInclude Include="..\Graphics2D\ColorShaderClass.h" />
     <ClInclude Include="..\Graphics2D\TextureClass.h" />
     <ClInclude Include="..\Graphics2D\TextureShaderClass.h" />
     <ClInclude Include="..\Graphics3D\CameraClass.h" />
     <ClInclude Include="..\Graphics3D\D3DClass.h" />
+    <ClInclude Include="..\Graphics3D\ModelClass.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Bombast\BombastApp.cpp" />
     <ClCompile Include="..\Bombast\GraphicsManager.cpp" />
     <ClCompile Include="..\Graphics2D\BitmapClass.cpp" />
+    <ClCompile Include="..\Graphics2D\ColorShaderClass.cpp" />
     <ClCompile Include="..\Graphics2D\TextureClass.cpp" />
     <ClCompile Include="..\Graphics2D\TextureShaderClass.cpp" />
     <ClCompile Include="..\Graphics3D\CameraClass.cpp" />
     <ClCompile Include="..\Graphics3D\D3DClass.cpp" />
+    <ClCompile Include="..\Graphics3D\ModelClass.cpp" />
     <ClCompile Include="BombastEngine.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
