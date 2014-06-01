@@ -206,9 +206,9 @@ bool TextureShaderClass::SetShaderParameters(ID3D11DeviceContext* deviceContext,
 	unsigned int bufferNumber;
 
 	//Transpose Matrices to prep for Shader
-	DirectX::XMMatrixTranspose(world);
-	DirectX::XMMatrixTranspose(view);
-	DirectX::XMMatrixTranspose(projection);
+	world = DirectX::XMMatrixTranspose(world);
+	view = DirectX::XMMatrixTranspose(view);
+	projection = DirectX::XMMatrixTranspose(projection);
 
 	//Lock constant buffer so it can be written to
 	result = deviceContext->Map(m_pMatrixBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource);
