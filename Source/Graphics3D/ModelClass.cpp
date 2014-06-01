@@ -4,6 +4,7 @@ ModelClass::ModelClass()
 {
 	m_pVertexBuffer = 0;
 	m_pIndexBuffer = 0;
+	m_pTexture = 0;
 }
 
 ModelClass::ModelClass(const ModelClass& other)
@@ -65,13 +66,13 @@ bool ModelClass::InitializeBuffers(ID3D11Device* device)
 	m_vertexCount = 3;
 	m_indexCount = 3;
 
-	vertices = new VertexType[m_vertexCount];
+	vertices = BE_NEW VertexType[m_vertexCount];
 	if (!vertices)
 	{
 		return false;
 	}
 
-	indices = new unsigned long[m_indexCount];
+	indices = BE_NEW unsigned long[m_indexCount];
 	if (!indices)
 	{
 		return false;
@@ -156,7 +157,7 @@ bool ModelClass::LoadTexture(ID3D11Device* device, WCHAR* textureFilepath)
 	bool result;
 	ID3D11DeviceContext* context;
 
-	m_pTexture = new TextureClass;
+	m_pTexture = BE_NEW TextureClass;
 	if (!m_pTexture)
 	{
 		return false;
