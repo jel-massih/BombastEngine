@@ -5,6 +5,12 @@
 #include "TextureClass.h"
 
 class BitmapClass {
+private:
+	struct VertexType
+	{
+		DirectX::XMVECTOR position;
+		DirectX::XMVECTOR texture;
+	};
 public:
 	BitmapClass();
 	BitmapClass(const BitmapClass& other); //Copy Constructor
@@ -43,12 +49,6 @@ private:
 	ID3D11Buffer *m_pVertexBuffer, *m_pIndexBuffer;
 	
 	TextureClass *m_pTexture;
-
-	struct VertexType
-	{
-		DirectX::XMFLOAT3 position;
-		DirectX::XMFLOAT2 texture;
-	};
 };
 
 #endif
