@@ -184,10 +184,10 @@ void BombastApp::InitializeWindows()
                           L"BombastEngine",    // name of the window class
                           VGetGameTitle(),   // title of the window
                           WS_OVERLAPPEDWINDOW,    // window style
-                          300,    // x-position of the window
-                          300,    // y-position of the window
-                          500,    // width of the window
-                          400,    // height of the window
+                          0,    // x-position of the window
+                          0,    // y-position of the window
+                          SCREEN_WIDTH,    // width of the window
+                          SCREEN_HEIGHT,    // height of the window
                           NULL,    // we have no parent window, NULL
                           NULL,    // we aren't using menus, NULL
                           m_hInstance,    // application handle
