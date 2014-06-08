@@ -13,7 +13,7 @@ TextureClass::~TextureClass()
 {
 }
 
-bool TextureClass::Initialize(ID3D11Device* device, ID3D11DeviceContext* context, wchar_t* textureTitle)
+bool TextureClass::Initialize(ID3D11Device* device, wchar_t* textureTitle)
 {
 	HRESULT result;
 

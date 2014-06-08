@@ -9,8 +9,8 @@ class ModelClass
 private:
 	struct VertexType
 	{
-		DirectX::XMVECTOR position;
-		DirectX::XMVECTOR texture;
+		DirectX::XMFLOAT3 position;
+		DirectX::XMFLOAT2 texture;
 	};
 
 public:

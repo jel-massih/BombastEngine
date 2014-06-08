@@ -193,24 +193,24 @@ bool BitmapClass::UpdateBuffers(ID3D11DeviceContext* deviceContext, int position
 	top = 6.0f;
 	bottom = -6.0f;
 	
-	vertices[0].position = DirectX::XMVectorSet(left, top, 0.0f, 0.0f); //Top Left
-	vertices[0].texture = DirectX::XMVectorSet(0.0f, 0.0f, 0.0f, 0.0f);
+	vertices[0].position = DirectX::XMFLOAT3(left, top, 0.0f);  // Bottom left.
+	vertices[0].texture = DirectX::XMFLOAT2(0.0f, 0.0f);
 
-	vertices[1].position = DirectX::XMVectorSet(right, bottom, 0.0f, 0.0f); //Bottom Right
-	vertices[1].texture = DirectX::XMVectorSet(1.0f, 1.0f, 0.0f, 0.0f);
+	vertices[1].position = DirectX::XMFLOAT3(right, bottom, 0.0f);  // Top middle.
+	vertices[1].texture = DirectX::XMFLOAT2(1.0f, 1.0f);
 
-	vertices[2].position = DirectX::XMVectorSet(left, bottom, 0.0f, 0.0f); //Bottom Left
-	vertices[2].texture = DirectX::XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
-	
-	vertices[3].position = DirectX::XMVectorSet(left, top, 0.0f, 0.0f); //Top Left
-	vertices[3].texture = DirectX::XMVectorSet(0.0f, 0.0f, 0.0f, 0.0f);
+	vertices[2].position = DirectX::XMFLOAT3(left, bottom, 0.0f);  // Bottom right.
+	vertices[2].texture = DirectX::XMFLOAT2(0.0f, 1.0f);
 
-	vertices[4].position = DirectX::XMVectorSet(right, top, 0.0f, 0.0f); //Top Right
-	vertices[4].texture = DirectX::XMVectorSet(1.0f, 0.0f, 0.0f, 0.0f);
+	vertices[3].position = DirectX::XMFLOAT3(left, top, 0.0f);  // Bottom left.
+	vertices[3].texture = DirectX::XMFLOAT2(0.0f, 0.0f);
 
-	vertices[5].position = DirectX::XMVectorSet(right, bottom, 0.0f, 0.0f); //Bottom Right
-	vertices[5].texture = DirectX::XMVectorSet(1.0f, 1.0f, 0.0f, 0.0f);
-	
+	vertices[4].position = DirectX::XMFLOAT3(right, top, 0.0f);  // Top middle.
+	vertices[4].texture = DirectX::XMFLOAT2(1.0f, 0.0f);
+
+	vertices[5].position = DirectX::XMFLOAT3(right, bottom, 0.0f);  // Bottom right.
+	vertices[5].texture = DirectX::XMFLOAT2(1.0f, 1.0f);
+
 	//Locate vertex buffer for write
 	result = deviceContext->Map(m_pVertexBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource);
 	if (FAILED(result)) {
@@ -255,7 +255,6 @@ void BitmapClass::RenderBuffers(ID3D11DeviceContext* deviceContext)
 bool BitmapClass::LoadTexture(ID3D11Device* device, WCHAR* filename)
 {
 	bool result;
-	ID3D11DeviceContext* context;
 
 	m_pTexture = BE_NEW TextureClass;
 	if (!m_pTexture)
@@ -263,9 +262,7 @@ bool BitmapClass::LoadTexture(ID3D11Device* device, WCHAR* filename)
 		return false;
 	}
 
-	device->GetImmediateContext(&context);
-
-	result = m_pTexture->Initialize(device, context, filename);
+	result = m_pTexture->Initialize(device, filename);
 	if (!result)
 	{
 		return false;

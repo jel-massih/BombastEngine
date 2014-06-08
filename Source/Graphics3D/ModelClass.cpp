@@ -78,14 +78,14 @@ bool ModelClass::InitializeBuffers(ID3D11Device* device)
 		return false;
 	}
 
-	vertices[0].position = DirectX::XMVectorSet(-1.0f, -1.0f, 0.0f, 0.0f);
-	vertices[0].texture = DirectX::XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
+	vertices[0].position = DirectX::XMFLOAT3(-1.0f, -1.0f, 0.0f);  // Bottom left.
+	vertices[0].texture = DirectX::XMFLOAT2(0.0f, 1.0f);
 
-	vertices[1].position = DirectX::XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
-	vertices[1].texture = DirectX::XMVectorSet(0.5f, 0.0f, 0.0f, 0.0f);
+	vertices[1].position = DirectX::XMFLOAT3(0.0f, 1.0f, 0.0f);  // Top middle.
+	vertices[1].texture = DirectX::XMFLOAT2(0.5f, 0.0f);
 
-	vertices[2].position = DirectX::XMVectorSet(1.0f, -1.0f, 0.0f, 0.0f);
-	vertices[2].texture = DirectX::XMVectorSet(1.0f, 1.0f, 0.0f, 0.0f);
+	vertices[2].position = DirectX::XMFLOAT3(1.0f, -1.0f, 0.0f);  // Bottom right.
+	vertices[2].texture = DirectX::XMFLOAT2(1.0f, 1.0f);
 
 	indices[0] = 0;
 	indices[1] = 1;
@@ -165,7 +165,7 @@ bool ModelClass::LoadTexture(ID3D11Device* device, WCHAR* textureFilepath)
 
 	device->GetImmediateContext(&context);
 
-	result = m_pTexture->Initialize(device, context, textureFilepath);
+	result = m_pTexture->Initialize(device, textureFilepath);
 	if (!result)
 	{
 		return false;
