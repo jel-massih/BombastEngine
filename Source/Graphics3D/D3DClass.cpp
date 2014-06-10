@@ -8,9 +8,9 @@ D3DClass::D3DClass()
 	m_pRenderTargetView = 0;
 	m_pDepthStencilBuffer = 0;
 	m_pDepthStencilState = 0;
+	m_pDepthDisabledStencilState = 0;
 	m_pDepthStencilView = 0;
 	m_pRasterState = 0;
-	m_pDepthDisabledStencilState = 0;
 	m_pAlphaEnableBlendingState = 0;
 	m_pAlphaDisabledBlendingState = 0;
 }
@@ -340,9 +340,9 @@ void D3DClass::Shutdown()
 
 	SAFE_RELEASE(m_pAlphaEnableBlendingState);
 	SAFE_RELEASE(m_pAlphaDisabledBlendingState);
-	SAFE_RELEASE(m_pDepthDisabledStencilState);
 	SAFE_RELEASE(m_pRasterState);
 	SAFE_RELEASE(m_pDepthStencilView);
+	SAFE_RELEASE(m_pDepthDisabledStencilState);
 	SAFE_RELEASE(m_pDepthStencilState);
 	SAFE_RELEASE(m_pDepthStencilBuffer);
 	SAFE_RELEASE(m_pRenderTargetView);

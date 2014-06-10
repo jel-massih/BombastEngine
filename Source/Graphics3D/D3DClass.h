@@ -41,6 +41,7 @@ private:
 	ID3D11RenderTargetView* m_pRenderTargetView;
 	ID3D11Texture2D* m_pDepthStencilBuffer;
 	ID3D11DepthStencilState* m_pDepthStencilState;
+	ID3D11DepthStencilState* m_pDepthDisabledStencilState;
 	ID3D11DepthStencilView* m_pDepthStencilView;
 	ID3D11RasterizerState* m_pRasterState;
 
@@ -48,7 +49,6 @@ private:
 	_declspec(align(16)) DirectX::XMMATRIX m_worldMatrix;
 	_declspec(align(16)) DirectX::XMMATRIX m_orthoMatrix;
 
-	ID3D11DepthStencilState* m_pDepthDisabledStencilState;
 	
 	ID3D11BlendState* m_pAlphaEnableBlendingState;
 	ID3D11BlendState* m_pAlphaDisabledBlendingState;

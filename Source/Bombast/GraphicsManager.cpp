@@ -182,7 +182,7 @@ bool GraphicsManager::Render()
 	}
 
 	//Render Bitmap with texture shader
-	result = m_pTextureShader->Render(m_pD3D->GetDeviceContext(), m_pBitmap->GetIndexCount(), worldMatrix, viewMatrix, projectionMatrix, m_pBitmap->GetTexture());
+	result = m_pTextureShader->Render(m_pD3D->GetDeviceContext(), m_pBitmap->GetIndexCount(), worldMatrix, viewMatrix, orthoMatrix, m_pBitmap->GetTexture());
 	if (!result)
 	{
 		return false;
@@ -190,16 +190,8 @@ bool GraphicsManager::Render()
 
 	m_pD3D->EnableZBuffer(true);
 
-
-	m_pModel->Render(m_pD3D->GetDeviceContext());
-
-	result = m_pTextureShader->Render(m_pD3D->GetDeviceContext(), m_pModel->GetIndexCount(), worldMatrix, viewMatrix, projectionMatrix, m_pModel->GetTexture());
-	if (!result)
-	{
-		return false;
-	}
-
 	m_pD3D->EndScene();
 
 	return true;
 }
+

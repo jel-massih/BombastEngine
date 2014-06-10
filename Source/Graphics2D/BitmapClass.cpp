@@ -188,11 +188,6 @@ bool BitmapClass::UpdateBuffers(ID3D11DeviceContext* deviceContext, int position
 		return false;
 	}
 
-	left = -6.0f;
-	right = 6.0f;
-	top = 6.0f;
-	bottom = -6.0f;
-	
 	vertices[0].position = DirectX::XMFLOAT3(left, top, 0.0f);  // Bottom left.
 	vertices[0].texture = DirectX::XMFLOAT2(0.0f, 0.0f);
 
