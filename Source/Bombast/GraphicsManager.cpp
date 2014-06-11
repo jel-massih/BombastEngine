@@ -6,8 +6,6 @@ GraphicsManager::GraphicsManager()
 {
 	m_pD3D = 0;
 	m_pCamera = 0;
-	m_pModel = 0;
-	m_pBitmap = 0;
 	m_pColorShader = 0;
 	m_pTextureShader = 0;
 }
@@ -45,32 +43,6 @@ bool GraphicsManager::Initialize(HWND hwnd)
 	}
 
 	m_pCamera->SetPosition(0.0f, 0.0f, -10.0f);
-
-	m_pModel = new ModelClass;
-	if (!m_pModel)
-	{
-		return false;
-	}
-
-	result = m_pModel->Initialize(m_pD3D->GetDevice(), L"../../Game/Data/dirt01.dds");
-	if (!result)
-	{
-		BE_ERROR(L"Could not initialize the Model Object");
-		return false;
-	}
-
-	m_pBitmap = BE_NEW BitmapClass;
-	if (!m_pBitmap)
-	{
-		return false;
-	}
-
-	result = m_pBitmap->Initialize(m_pD3D->GetDevice(), SCREEN_WIDTH, SCREEN_HEIGHT, L"../../Game/Data/dirt01.dds", 256, 256);
-	if (!result)
-	{
-		BE_ERROR(L"Could not initialize the Bitmap Object!")
-		return FALSE;
-	}
 
 	m_pColorShader = new ColorShaderClass;
 	if (!m_pColorShader)
@@ -117,20 +89,6 @@ void GraphicsManager::Shutdown()
 		SAFE_DELETE(m_pColorShader);
 	}
 
-	if (m_pBitmap)
-	{
-		m_pBitmap->Shutdown();
-		
-		SAFE_DELETE(m_pBitmap);
-	}
-
-	if (m_pModel)
-	{
-		m_pModel->Shutdown();
-
-		SAFE_DELETE(m_pModel);
-	}
-
 	SAFE_DELETE(m_pCamera);
 
 	if (m_pD3D)
@@ -174,6 +132,7 @@ bool GraphicsManager::Render()
 	
 	m_pD3D->EnableZBuffer(false);
 	
+	/*
 	//prepare bitmap vertex and index buffers for drawing
 	result = m_pBitmap->Render(m_pD3D->GetDeviceContext(), 0, 0);
 	if (!result) 
@@ -187,11 +146,10 @@ bool GraphicsManager::Render()
 	{
 		return false;
 	}
-
+	*/
 	m_pD3D->EnableZBuffer(true);
 
 	m_pD3D->EndScene();
 
 	return true;
 }
-
