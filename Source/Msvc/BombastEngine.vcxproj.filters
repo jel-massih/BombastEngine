@@ -34,6 +34,9 @@
     <ClCompile Include="..\Utilities\DDSTextureLoader.cpp">
       <Filter>Utilities</Filter>
     </ClCompile>
+    <ClCompile Include="..\Bombast\EntitiesManager.cpp">
+      <Filter>Bombast</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Bombast\BombastApp.h">
@@ -70,6 +73,9 @@
     </ClInclude>
     <ClInclude Include="..\Utilities\DDSTextureLoader.h">
       <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Bombast\EntitiesManager.h">
+      <Filter>Bombast</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
