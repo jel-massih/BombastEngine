@@ -7,6 +7,7 @@
 #include "..\BombastEngineStd.h"
 #include "..\Constants.h"
 #include "GraphicsManager.h"
+#include "EntitiesManager.h"
 
 class BombastApp
 {
@@ -18,6 +19,7 @@ protected:
 	int m_iColorDepth;
 
 	GraphicsManager* m_pGraphicsManager;
+	EntitiesManager* m_pEntitiesManager;
 
 public:
 	BombastApp();
@@ -39,6 +41,8 @@ public:
 	bool CheckStorage(const DWORDLONG diskSpaceNeeded);
 	bool CheckMemory(const DWORDLONG physicalRAMNeeded, const DWORDLONG virtualRAMNeeded);
 	DWORD ReadCPUSpeed();
+
+	EntitiesManager* GetEntitiesManager();
 
 	static BombastApp *GetGameInstance()
 	{

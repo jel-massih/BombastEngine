@@ -17,6 +17,8 @@ BombastApp::BombastApp()
 	m_bIsRunning = false;
 
 	m_pGraphicsManager = 0;
+
+	m_pEntitiesManager = 0;
 }
 
 //Win32 Specific Stuff
@@ -231,7 +233,14 @@ bool BombastApp::InitializeApp(int screenWidth, int screenHeight)
 	}
 
 	result = m_pGraphicsManager->Initialize(m_hWnd);
-	if (!result) {
+	if (!result)
+	{
+		return FALSE;
+	}
+
+	m_pEntitiesManager = BE_NEW EntitiesManager();
+	if (!m_pEntitiesManager)
+	{
 		return FALSE;
 	}
 
@@ -289,6 +298,12 @@ void BombastApp::ShutDown()
 		SAFE_DELETE(m_pGraphicsManager);
 	}
 
+	if (m_pEntitiesManager)
+	{
+		m_pEntitiesManager->Shutdown();
+		SAFE_DELETE(m_pEntitiesManager);
+	}
+
 	ShutdownWindows();
 }
 
@@ -308,4 +323,9 @@ void BombastApp::ShutdownWindows()
 	m_hInstance = NULL;
 
 	return;
+}
+
+EntitiesManager* BombastApp::GetEntitiesManager()
+{
+	return m_pEntitiesManager;
 }

@@ -13,7 +13,6 @@ public:
 	EntitiesManager(const EntitiesManager& other);
 	~EntitiesManager();
 
-	bool Initialize();
 	void Shutdown();
 
 	BitmapClass* GetBitmaps();
