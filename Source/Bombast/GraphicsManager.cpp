@@ -132,21 +132,25 @@ bool GraphicsManager::Render()
 	
 	m_pD3D->EnableZBuffer(false);
 	
-	/*
-	//prepare bitmap vertex and index buffers for drawing
-	result = m_pBitmap->Render(m_pD3D->GetDeviceContext(), 0, 0);
-	if (!result) 
+	//Get Bitmaps Vector and render each one
+	std::vector<BitmapClass*> bitmaps = BombastApp::GetGameInstance()->GetEntitiesManager()->GetBitmaps();
+	for (BitmapClass* bitmap : bitmaps)
 	{
-		return false;
-	}
+		//prepare bitmap vertex and index buffers for drawing
+		result = bitmap->Render(m_pD3D->GetDeviceContext(), 0, 0);
+		if (!result)
+		{
+			return false;
+		}
 
-	//Render Bitmap with texture shader
-	result = m_pTextureShader->Render(m_pD3D->GetDeviceContext(), m_pBitmap->GetIndexCount(), worldMatrix, viewMatrix, orthoMatrix, m_pBitmap->GetTexture());
-	if (!result)
-	{
-		return false;
+		//Render Bitmap with texture shader
+		result = m_pTextureShader->Render(m_pD3D->GetDeviceContext(), bitmap->GetIndexCount(), worldMatrix, viewMatrix, orthoMatrix, bitmap->GetTexture());
+		if (!result)
+		{
+			return false;
+		}
 	}
-	*/
+	
 	m_pD3D->EnableZBuffer(true);
 
 	m_pD3D->EndScene();
