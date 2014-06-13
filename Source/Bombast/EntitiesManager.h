@@ -15,7 +15,7 @@ public:
 
 	void Shutdown();
 
-	BitmapClass* GetBitmaps();
+	const std::vector<BitmapClass*> &GetBitmaps() const;
 	ModelClass* GetModels();
 
 	void RegisterBitmap(BitmapClass* bitmap);

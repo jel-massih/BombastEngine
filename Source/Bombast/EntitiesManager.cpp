@@ -34,3 +34,8 @@ void EntitiesManager::DeRegisterBitmap(BitmapClass* bitmap)
 		continue;
 		//BE_ERROR(L"DERP");
 }
+
+const std::vector<BitmapClass*> &EntitiesManager::GetBitmaps() const
+{
+	return m_bitmaps;
+}
