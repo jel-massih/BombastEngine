@@ -18,6 +18,11 @@ EntitiesManager::~EntitiesManager()
 
 void EntitiesManager::Shutdown()
 {
+	for (BitmapClass* bitmap : m_bitmaps)
+	{
+		SAFE_DELETE(bitmap);
+	}
+
 	m_bitmaps.clear();
 	m_models.clear();
 }
