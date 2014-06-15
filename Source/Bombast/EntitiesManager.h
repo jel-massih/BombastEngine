@@ -16,10 +16,13 @@ public:
 	void Shutdown();
 
 	const std::vector<BitmapClass*> &GetBitmaps() const;
-	ModelClass* GetModels();
+	const std::vector<ModelClass*> &GetModels() const;
 
 	void RegisterBitmap(BitmapClass* bitmap);
 	void DeRegisterBitmap(BitmapClass* bitmap);
+
+	void RegisterModel(ModelClass* bitmap);
+	void DeRegisterModel(ModelClass* bitmap);
 
 private:
 	std::vector<BitmapClass*> m_bitmaps;

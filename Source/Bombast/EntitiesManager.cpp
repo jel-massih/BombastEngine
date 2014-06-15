@@ -40,7 +40,25 @@ void EntitiesManager::DeRegisterBitmap(BitmapClass* bitmap)
 		//BE_ERROR(L"DERP");
 }
 
+void EntitiesManager::RegisterModel(ModelClass* model)
+{
+	m_models.push_back(model);
+}
+
+void EntitiesManager::DeRegisterModel(ModelClass* model)
+{
+	//@TODO: Find best way to Deregister a Bitmap
+	for (ModelClass* arrayModel : m_models)
+		continue;
+	//BE_ERROR(L"DERP");
+}
+
 const std::vector<BitmapClass*> &EntitiesManager::GetBitmaps() const
 {
 	return m_bitmaps;
+}
+
+const std::vector<ModelClass*> &EntitiesManager::GetModels() const
+{
+	return m_models;
 }
