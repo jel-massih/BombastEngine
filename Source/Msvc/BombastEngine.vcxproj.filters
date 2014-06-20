@@ -37,6 +37,9 @@
     <ClCompile Include="..\Bombast\EntitiesManager.cpp">
       <Filter>Bombast</Filter>
     </ClCompile>
+    <ClCompile Include="..\Game\BombastGame.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Bombast\BombastApp.h">
@@ -77,6 +80,9 @@
     <ClInclude Include="..\Bombast\EntitiesManager.h">
       <Filter>Bombast</Filter>
     </ClInclude>
+    <ClInclude Include="..\Game\BombastGame.h">
+      <Filter>Game</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Bombast">
@@ -93,6 +99,9 @@
     </Filter>
     <Filter Include="Utilities">
       <UniqueIdentifier>{24bfa62a-a741-47b8-8cb9-4c446a8f817c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game">
+      <UniqueIdentifier>{e95cea10-f6ae-4fa5-827d-054f6db9a250}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

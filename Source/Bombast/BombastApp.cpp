@@ -19,6 +19,8 @@ BombastApp::BombastApp()
 	m_pGraphicsManager = 0;
 
 	m_pEntitiesManager = 0;
+
+	m_pBombastGame = 0;
 }
 
 //Win32 Specific Stuff
@@ -244,6 +246,18 @@ bool BombastApp::InitializeApp(int screenWidth, int screenHeight)
 		return FALSE;
 	}
 
+	m_pBombastGame = BE_NEW BombastGame();
+	if (!m_pBombastGame)
+	{
+		return FALSE;
+	}
+
+	result = m_pBombastGame->Initialize();
+	if (!result)
+	{
+		return FALSE;
+	}
+
 	return true;
 }
 
@@ -292,16 +306,22 @@ bool BombastApp::Frame()
 
 void BombastApp::ShutDown()
 {
-	if (m_pGraphicsManager)
+	if (m_pBombastGame)
 	{
-		m_pGraphicsManager->Shutdown();
-		SAFE_DELETE(m_pGraphicsManager);
+		m_pBombastGame->Shutdown();
+		SAFE_DELETE(m_pBombastGame);
 	}
 
 	if (m_pEntitiesManager)
 	{
 		m_pEntitiesManager->Shutdown();
 		SAFE_DELETE(m_pEntitiesManager);
+	}
+
+	if (m_pGraphicsManager)
+	{
+		m_pGraphicsManager->Shutdown();
+		SAFE_DELETE(m_pGraphicsManager);
 	}
 
 	ShutdownWindows();

@@ -17,6 +17,7 @@
     <ClInclude Include="..\Bombast\GraphicsManager.h" />
     <ClInclude Include="..\Constants.h" />
     <ClInclude Include="..\Debugging\Logger.h" />
+    <ClInclude Include="..\Game\BombastGame.h" />
     <ClInclude Include="..\Graphics2D\BitmapClass.h" />
     <ClInclude Include="..\Graphics2D\ColorShaderClass.h" />
     <ClInclude Include="..\Graphics2D\TextureClass.h" />
@@ -30,6 +31,7 @@
     <ClCompile Include="..\Bombast\BombastApp.cpp" />
     <ClCompile Include="..\Bombast\EntitiesManager.cpp" />
     <ClCompile Include="..\Bombast\GraphicsManager.cpp" />
+    <ClCompile Include="..\Game\BombastGame.cpp" />
     <ClCompile Include="..\Graphics2D\BitmapClass.cpp" />
     <ClCompile Include="..\Graphics2D\ColorShaderClass.cpp" />
     <ClCompile Include="..\Graphics2D\TextureClass.cpp" />

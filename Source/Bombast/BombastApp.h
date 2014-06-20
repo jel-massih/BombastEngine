@@ -8,6 +8,7 @@
 #include "..\Constants.h"
 #include "GraphicsManager.h"
 #include "EntitiesManager.h"
+#include "../Game/BombastGame.h"
 
 class BombastApp
 {
@@ -20,6 +21,8 @@ protected:
 
 	GraphicsManager* m_pGraphicsManager;
 	EntitiesManager* m_pEntitiesManager;
+
+	BombastGame* m_pBombastGame;
 
 public:
 	BombastApp();
