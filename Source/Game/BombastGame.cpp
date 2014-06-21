@@ -34,7 +34,8 @@ bool BombastGame::Initialize()
 		return FALSE;
 	}
 
-	
+	m_pEntitiesManager->RegisterBitmap(m_pBackgroundBitmap);
+
 	return true;
 }
 
