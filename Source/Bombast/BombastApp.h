@@ -46,6 +46,7 @@ public:
 	DWORD ReadCPUSpeed();
 
 	EntitiesManager* GetEntitiesManager();
+	GraphicsManager* GetGraphicsManager();
 
 	static BombastApp *GetGameInstance()
 	{

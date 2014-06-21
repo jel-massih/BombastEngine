@@ -349,3 +349,8 @@ EntitiesManager* BombastApp::GetEntitiesManager()
 {
 	return m_pEntitiesManager;
 }
+
+GraphicsManager* BombastApp::GetGraphicsManager()
+{
+	return m_pGraphicsManager;
+}

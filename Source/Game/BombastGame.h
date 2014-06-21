@@ -16,6 +16,8 @@ public:
 
 private:
 	EntitiesManager* m_pEntitiesManager;
+
+	BitmapClass* m_pBackgroundBitmap;
 };
 
 #endif

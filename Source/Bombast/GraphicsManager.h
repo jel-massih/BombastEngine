@@ -16,6 +16,9 @@ public:
 	bool Initialize(HWND hwnd);
 	void Shutdown();
 	bool Frame();
+
+	D3DClass* GetD3DClass();
+
 private:
 	bool Render();
 

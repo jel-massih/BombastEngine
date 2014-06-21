@@ -157,3 +157,8 @@ bool GraphicsManager::Render()
 
 	return true;
 }
+
+D3DClass* GraphicsManager::GetD3DClass()
+{
+	return m_pD3D;
+}
