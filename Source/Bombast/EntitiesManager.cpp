@@ -55,10 +55,18 @@ void EntitiesManager::RegisterModel(ModelClass* model)
 
 void EntitiesManager::DeRegisterModel(ModelClass* model)
 {
-	//@TODO: Find best way to Deregister a Bitmap
-	for (ModelClass* arrayModel : m_models)
-		continue;
-	//BE_ERROR(L"DERP");
+	std::vector<ModelClass*>::iterator it;
+
+	for (it = m_models.begin(); it != m_models.end();)
+	{
+		if ((*it) == model) {
+			it = m_models.erase(it);
+		}
+		else
+		{
+			++it;
+		}
+	}
 }
 
 const std::vector<BitmapClass*> &EntitiesManager::GetBitmaps() const
