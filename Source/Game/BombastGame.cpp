@@ -5,6 +5,7 @@
 BombastGame::BombastGame()
 {
 	m_pEntitiesManager = 0;
+	m_pBackgroundBitmap = 0;
 }
 
 BombastGame::~BombastGame()
@@ -41,5 +42,11 @@ bool BombastGame::Initialize()
 
 void BombastGame::Shutdown()
 {
+	if (m_pBackgroundBitmap) {
+		m_pEntitiesManager->DeRegisterBitmap(m_pBackgroundBitmap);
+		m_pBackgroundBitmap->Shutdown();
+		SAFE_DELETE(m_pBackgroundBitmap);
+	}
+
 	m_pEntitiesManager = 0;
 }
