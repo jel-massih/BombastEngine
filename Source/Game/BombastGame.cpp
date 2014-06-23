@@ -67,6 +67,10 @@ bool BombastGame::Initialize()
 
 	m_pEntitiesManager->RegisterBitmap(m_pRightPaddleBitmap);
 
+	m_pBackgroundBitmap->SetPosition(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
+	m_pLeftPaddleBitmap->SetPosition(100, 0);
+	m_pRightPaddleBitmap->SetPosition(SCREEN_WIDTH - 100 + m_pRightPaddleBitmap->GetBitmapWidth()/2, 0);
+
 	return true;
 }
 
