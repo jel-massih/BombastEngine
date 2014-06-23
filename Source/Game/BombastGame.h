@@ -18,6 +18,8 @@ private:
 	EntitiesManager* m_pEntitiesManager;
 
 	BitmapClass* m_pBackgroundBitmap;
+	BitmapClass* m_pLeftPaddleBitmap;
+	BitmapClass* m_pRightPaddleBitmap;
 };
 
 #endif
