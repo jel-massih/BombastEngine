@@ -83,6 +83,16 @@ void BitmapClass::SetPosition(int x, int y)
 	m_posY = y;
 }
 
+int BitmapClass::GetBitmapWidth() 
+{
+	return m_bitmapWidth;
+}
+
+int BitmapClass::GetBitmapHeight() 
+{
+	return m_bitmapHeight;
+}
+
 ID3D11ShaderResourceView* BitmapClass::GetTexture()
 {
 	return m_pTexture->GetTexture();

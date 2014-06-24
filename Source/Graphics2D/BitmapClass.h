@@ -27,6 +27,9 @@ public:
 
 	void SetPosition(int x, int y);
 
+	int GetBitmapWidth();
+	int GetBitmapHeight();
+
 private:
 	bool LoadTexture(ID3D11Device* device, WCHAR* filename);
 	void ReleaseTexture();
