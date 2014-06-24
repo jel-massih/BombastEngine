@@ -5,6 +5,9 @@ BitmapClass::BitmapClass()
 	m_pVertexBuffer = 0;
 	m_pIndexBuffer = 0;
 	m_pTexture = 0;
+
+	m_posX = 0;
+	m_posY = 0;
 }
 
 BitmapClass::BitmapClass(const BitmapClass& other)
@@ -54,11 +57,11 @@ void BitmapClass::Shutdown()
 	return;
 }
 
-bool BitmapClass::Render(ID3D11DeviceContext* deviceContext, int positionX, int positionY)
+bool BitmapClass::Render(ID3D11DeviceContext* deviceContext)
 {
 	bool result;
 	
-	result = UpdateBuffers(deviceContext, positionX, positionY);
+	result = UpdateBuffers(deviceContext, -(SCREEN_WIDTH/2) + m_posX, -(SCREEN_HEIGHT/2) + m_posY);
 	if (!result)
 	{
 		return false;
@@ -72,6 +75,12 @@ bool BitmapClass::Render(ID3D11DeviceContext* deviceContext, int positionX, int 
 int BitmapClass::GetIndexCount()
 {
 	return m_indexCount;
+}
+
+void BitmapClass::SetPosition(int x, int y) 
+{
+	m_posX = x;
+	m_posY = y;
 }
 
 ID3D11ShaderResourceView* BitmapClass::GetTexture()

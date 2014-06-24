@@ -137,7 +137,7 @@ bool GraphicsManager::Render()
 	for (BitmapClass* bitmap : bitmaps)
 	{
 		//prepare bitmap vertex and index buffers for drawing
-		result = bitmap->Render(m_pD3D->GetDeviceContext(), 0, 0);
+		result = bitmap->Render(m_pD3D->GetDeviceContext());
 		if (!result)
 		{
 			return false;

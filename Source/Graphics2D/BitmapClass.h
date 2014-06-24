@@ -19,11 +19,13 @@ public:
 	bool Initialize(ID3D11Device* device, int screenWidth, int screenHeight, WCHAR* textureFilename, int bitmapWidth, int bipmapHeight);
 	void Shutdown();
 	
-	bool Render(ID3D11DeviceContext* deviceContext, int posX, int posY);
+	bool Render(ID3D11DeviceContext* deviceContext);
 	
 	int GetIndexCount();
 
 	ID3D11ShaderResourceView* GetTexture();
+
+	void SetPosition(int x, int y);
 
 private:
 	bool LoadTexture(ID3D11Device* device, WCHAR* filename);
@@ -42,6 +44,9 @@ private:
 
 	int m_previousPosX;
 	int m_previousPosY;
+
+	int m_posX;
+	int m_posY;
 
 	int m_vertexCount; //Number of Vertices in Vertex Array
 	int m_indexCount; //Number of Indices in Index array
