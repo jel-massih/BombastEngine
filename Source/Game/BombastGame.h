@@ -14,6 +14,8 @@ public:
 	bool Initialize();
 	void Shutdown();
 
+	void Frame();
+
 private:
 	EntitiesManager* m_pEntitiesManager;
 

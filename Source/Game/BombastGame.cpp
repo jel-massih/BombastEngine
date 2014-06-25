@@ -96,3 +96,8 @@ void BombastGame::Shutdown()
 
 	m_pEntitiesManager = 0;
 }
+
+void BombastGame::Frame()
+{
+
+}
