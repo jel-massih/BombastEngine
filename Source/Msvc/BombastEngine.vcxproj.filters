@@ -40,6 +40,9 @@
     <ClCompile Include="..\Game\BombastGame.cpp">
       <Filter>Game</Filter>
     </ClCompile>
+    <ClCompile Include="..\InputCore\InputCore.cpp">
+      <Filter>InputCore</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Bombast\BombastApp.h">
@@ -83,6 +86,9 @@
     <ClInclude Include="..\Game\BombastGame.h">
       <Filter>Game</Filter>
     </ClInclude>
+    <ClInclude Include="..\InputCore\InputCore.h">
+      <Filter>InputCore</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Bombast">
@@ -102,6 +108,9 @@
     </Filter>
     <Filter Include="Game">
       <UniqueIdentifier>{e95cea10-f6ae-4fa5-827d-054f6db9a250}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="InputCore">
+      <UniqueIdentifier>{60290247-d752-40dc-9247-1c59c4980e95}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
