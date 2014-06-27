@@ -111,7 +111,21 @@ void BombastGame::Shutdown()
 	}
 }
 
-void BombastGame::Frame()
+bool BombastGame::Frame()
 {
-	m_pInputCore->Frame();
+	bool result;
+
+	result = m_pInputCore->Frame();
+	if (!result)
+	{
+		return false;
+	}
+
+	//If Escape Pressed, Exit Game
+	if (m_pInputCore->IsKeyPressed(DIK_ESCAPE))
+	{
+		return false;
+	}
+
+	return true;
 }

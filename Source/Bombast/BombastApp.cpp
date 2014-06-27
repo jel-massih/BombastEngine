@@ -301,7 +301,11 @@ bool BombastApp::Frame()
 		return FALSE;
 	}
 
-	m_pBombastGame->Frame();
+	result = m_pBombastGame->Frame();
+	if (!result)
+	{
+		return FALSE;
+	}
 
 	return true;
 }

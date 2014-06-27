@@ -15,7 +15,7 @@ public:
 	bool Initialize(HWND hWnd, HINSTANCE hInstance);
 	void Shutdown();
 
-	void Frame();
+	bool Frame();
 
 private:
 	EntitiesManager* m_pEntitiesManager;
