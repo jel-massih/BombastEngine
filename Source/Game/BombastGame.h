@@ -4,6 +4,7 @@
 #include "../BombastEngineStd.h"
 #include "../Graphics2D/BitmapClass.h"
 #include "../Bombast/EntitiesManager.h"
+#include "../InputCore/InputCore.h"
 
 class BombastGame {
 public:
@@ -11,13 +12,15 @@ public:
 	~BombastGame();
 	BombastGame(const BombastGame& other);
 
-	bool Initialize();
+	bool Initialize(HWND hWnd, HINSTANCE hInstance);
 	void Shutdown();
 
 	void Frame();
 
 private:
 	EntitiesManager* m_pEntitiesManager;
+
+	InputCore* m_pInputCore;
 
 	BitmapClass* m_pBackgroundBitmap;
 	BitmapClass* m_pLeftPaddleBitmap;

@@ -4,6 +4,7 @@
 
 BombastGame::BombastGame()
 {
+	m_pInputCore = 0;
 	m_pEntitiesManager = 0;
 	m_pBackgroundBitmap = 0;
 	m_pLeftPaddleBitmap = 0;
@@ -18,9 +19,16 @@ BombastGame::BombastGame(const BombastGame& other)
 {
 }
 
-bool BombastGame::Initialize()
+bool BombastGame::Initialize(HWND hWnd, HINSTANCE hInstance)
 {
 	bool result;
+
+	m_pInputCore = BE_NEW InputCore();
+	result = m_pInputCore->Initialize(hInstance, hWnd);
+	if (!result)
+	{
+		return false;
+	}
 
 	BombastApp* pBombastApp = BombastApp::GetGameInstance();
 	m_pEntitiesManager = pBombastApp->GetEntitiesManager();
@@ -34,7 +42,7 @@ bool BombastGame::Initialize()
 	result = m_pBackgroundBitmap->Initialize(pBombastApp->GetGraphicsManager()->GetD3DClass()->GetDevice(), SCREEN_WIDTH, SCREEN_HEIGHT, L"../../Game/Data/dirt01.dds", SCREEN_WIDTH, SCREEN_HEIGHT);
 	if (!result) 
 	{
-		return FALSE;
+		return false;
 	}
 
 	m_pEntitiesManager->RegisterBitmap(m_pBackgroundBitmap);
@@ -48,7 +56,7 @@ bool BombastGame::Initialize()
 	result = m_pLeftPaddleBitmap->Initialize(pBombastApp->GetGraphicsManager()->GetD3DClass()->GetDevice(), 10, 200, L"../../Game/Data/paddle.dds", 10, 200);
 	if (!result)
 	{
-		return FALSE;
+		return false;
 	}
 
 	m_pEntitiesManager->RegisterBitmap(m_pLeftPaddleBitmap);
@@ -62,7 +70,7 @@ bool BombastGame::Initialize()
 	result = m_pRightPaddleBitmap->Initialize(pBombastApp->GetGraphicsManager()->GetD3DClass()->GetDevice(), 10, 200, L"../../Game/Data/paddle.dds", 10, 200);
 	if (!result)
 	{
-		return FALSE;
+		return false;
 	}
 
 	m_pEntitiesManager->RegisterBitmap(m_pRightPaddleBitmap);
@@ -95,9 +103,15 @@ void BombastGame::Shutdown()
 	}
 
 	m_pEntitiesManager = 0;
+
+	if (m_pInputCore)
+	{
+		m_pInputCore->Shutdown();
+		SAFE_DELETE(m_pInputCore);
+	}
 }
 
 void BombastGame::Frame()
 {
-
+	m_pInputCore->Frame();
 }

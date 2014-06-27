@@ -252,7 +252,7 @@ bool BombastApp::InitializeApp(int screenWidth, int screenHeight)
 		return FALSE;
 	}
 
-	result = m_pBombastGame->Initialize();
+	result = m_pBombastGame->Initialize(m_hWnd, m_hInstance);
 	if (!result)
 	{
 		return FALSE;
