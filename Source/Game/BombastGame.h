@@ -25,6 +25,8 @@ private:
 	BitmapClass* m_pBackgroundBitmap;
 	BitmapClass* m_pLeftPaddleBitmap;
 	BitmapClass* m_pRightPaddleBitmap;
+
+	DWORD m_lastTime;
 };
 
 #endif

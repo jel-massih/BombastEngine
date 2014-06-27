@@ -9,6 +9,7 @@ BombastGame::BombastGame()
 	m_pBackgroundBitmap = 0;
 	m_pLeftPaddleBitmap = 0;
 	m_pRightPaddleBitmap = 0;
+	m_lastTime = GetTickCount();
 }
 
 BombastGame::~BombastGame()
@@ -75,9 +76,9 @@ bool BombastGame::Initialize(HWND hWnd, HINSTANCE hInstance)
 
 	m_pEntitiesManager->RegisterBitmap(m_pRightPaddleBitmap);
 
-	m_pBackgroundBitmap->SetPosition(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
-	m_pLeftPaddleBitmap->SetPosition(100, 0);
-	m_pRightPaddleBitmap->SetPosition(SCREEN_WIDTH - 100 + m_pRightPaddleBitmap->GetBitmapWidth()/2, 0);
+	m_pBackgroundBitmap->SetPosition(SCREEN_WIDTH / 2, SCREEN_HEIGHT/2);
+	m_pLeftPaddleBitmap->SetPosition(100, SCREEN_HEIGHT / 2);
+	m_pRightPaddleBitmap->SetPosition(SCREEN_WIDTH - 100, SCREEN_HEIGHT / 2);
 
 	return true;
 }
@@ -115,6 +116,12 @@ bool BombastGame::Frame()
 {
 	bool result;
 
+	DWORD current_time = GetTickCount();
+	DWORD delta_time = current_time - m_lastTime;
+	m_lastTime = current_time;
+
+	double elapsed_ms = (double)delta_time / 1000;
+
 	result = m_pInputCore->Frame();
 	if (!result)
 	{
@@ -126,6 +133,19 @@ bool BombastGame::Frame()
 	{
 		return false;
 	}
+
+	if (m_pInputCore->IsKeyPressed(DIK_W))
+	{
+		m_pLeftPaddleBitmap->Translate(0, -300 * elapsed_ms);
+	}
+
+	if (m_pInputCore->IsKeyPressed(DIK_S))
+	{
+		m_pLeftPaddleBitmap->Translate(0, 300 * elapsed_ms);
+	}
+
+	//_RPT1(0, "height: %d\n", m_pLeftPaddleBitmap->)
+	
 
 	return true;
 }
