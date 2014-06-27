@@ -26,6 +26,7 @@ public:
 	ID3D11ShaderResourceView* GetTexture();
 
 	void SetPosition(int x, int y);
+	void Translate(int dx, int dy);
 
 	int GetBitmapWidth();
 	int GetBitmapHeight();

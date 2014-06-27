@@ -83,6 +83,12 @@ void BitmapClass::SetPosition(int x, int y)
 	m_posY = y;
 }
 
+void BitmapClass::Translate(int dx, int dy)
+{
+	m_posX += dx;
+	m_posY += dy;
+}
+
 int BitmapClass::GetBitmapWidth() 
 {
 	return m_bitmapWidth;
@@ -198,7 +204,7 @@ bool BitmapClass::UpdateBuffers(ID3D11DeviceContext* deviceContext, int position
 	left = (float)((m_screenWidth / 2) * -1) + (float)positionX;
 	right = left + (float)m_bitmapWidth;
 
-	top = (float)(m_screenHeight / 2);
+	top = (float)((m_screenHeight / 2)) - (float)positionY;
 	bottom = top - (float)m_bitmapHeight;
 
 	//create vertex array
