@@ -144,6 +144,16 @@ bool BombastGame::Frame()
 		m_pLeftPaddleBitmap->Translate(0, 300 * elapsed_ms);
 	}
 
+	if (m_pInputCore->IsKeyPressed(DIK_UP))
+	{
+		m_pRightPaddleBitmap->Translate(0, -300 * elapsed_ms);
+	}
+
+	if (m_pInputCore->IsKeyPressed(DIK_DOWN))
+	{
+		m_pRightPaddleBitmap->Translate(0, 300 * elapsed_ms);
+	}
+
 	//_RPT1(0, "height: %d\n", m_pLeftPaddleBitmap->)
 	
 
