@@ -18,13 +18,9 @@ BitmapClass::~BitmapClass()
 {
 }
 
-bool BitmapClass::Initialize(ID3D11Device* device, int screenWidth, int screenHeight, WCHAR* textureFilename, int bitmapWidth, int bitmapHeight)
+bool BitmapClass::Initialize(ID3D11Device* device, WCHAR* textureFilename, int bitmapWidth, int bitmapHeight)
 {
 	bool result;
-
-	//Store Screen Size
-	m_screenWidth = screenWidth;
-	m_screenHeight = screenHeight;
 
 	//Store size in pixels it should be rendered at
 	m_bitmapWidth = bitmapWidth;
@@ -61,7 +57,7 @@ bool BitmapClass::Render(ID3D11DeviceContext* deviceContext)
 {
 	bool result;
 	
-	result = UpdateBuffers(deviceContext, -(SCREEN_WIDTH/2) + m_posX, -(SCREEN_HEIGHT/2) + m_posY);
+	result = UpdateBuffers(deviceContext, m_posX, m_posY);
 	if (!result)
 	{
 		return false;
@@ -80,6 +76,7 @@ int BitmapClass::GetIndexCount()
 void BitmapClass::SetPosition(int x, int y) 
 {
 	m_posX = x;
+	_RPT1(0, "SetTo: %d\n", m_posX);
 	m_posY = y;
 }
 
@@ -200,11 +197,10 @@ bool BitmapClass::UpdateBuffers(ID3D11DeviceContext* deviceContext, int position
 	m_previousPosX = positionX;
 	m_previousPosY = positionY;
 
-	//calculate screen coords to left side of bitmap
-	left = (float)((m_screenWidth / 2) * -1) + (float)positionX;
+	left = (SCREEN_WIDTH / 2 * -1) + positionX;
 	right = left + (float)m_bitmapWidth;
 
-	top = (float)((m_screenHeight / 2)) - (float)positionY;
+	top = (SCREEN_HEIGHT / 2) - positionY;
 	bottom = top - (float)m_bitmapHeight;
 
 	//create vertex array
@@ -212,6 +208,7 @@ bool BitmapClass::UpdateBuffers(ID3D11DeviceContext* deviceContext, int position
 	if (!vertices) {
 		return false;
 	}
+	//_RPT1(0, "Left: %d\n", positionX);
 
 	vertices[0].position = DirectX::XMFLOAT3(left, top, 0.0f);  // Bottom left.
 	vertices[0].texture = DirectX::XMFLOAT2(0.0f, 0.0f);

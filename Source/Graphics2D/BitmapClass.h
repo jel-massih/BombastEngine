@@ -16,7 +16,7 @@ public:
 	BitmapClass(const BitmapClass& other); //Copy Constructor
 	~BitmapClass();
 
-	bool Initialize(ID3D11Device* device, int screenWidth, int screenHeight, WCHAR* textureFilename, int bitmapWidth, int bipmapHeight);
+	bool Initialize(ID3D11Device* device, WCHAR* textureFilename, int bitmapWidth, int bipmapHeight);
 	void Shutdown();
 	
 	bool Render(ID3D11DeviceContext* deviceContext);
@@ -41,8 +41,6 @@ private:
 	void RenderBuffers(ID3D11DeviceContext* deviceContext);
 
 private:
-	int m_screenWidth;
-	int m_screenHeight;
 	int m_bitmapWidth;
 	int m_bitmapHeight;
 
