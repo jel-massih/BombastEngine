@@ -2,7 +2,6 @@
 #define ENTITY_H
 
 #include "../BombastEngineStd.h"
-#include "../Graphics2D/BitmapClass.h"
 
 class Entity {
 public:
