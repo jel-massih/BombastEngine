@@ -30,7 +30,7 @@ bool GraphicsManager::Initialize(HWND hwnd)
 		return false;
 	}
 
-	if (!m_pD3D->Initialize(SCREEN_WIDTH, SCREEN_HEIGHT, true, hwnd, false, 1000.0f, 0.1f))
+	if (!m_pD3D->Initialize(BombastApp::GetGameInstance()->m_options.m_screenSize.x, BombastApp::GetGameInstance()->m_options.m_screenSize.y, true, hwnd, false, 1000.0f, 0.1f))
 	{
 		BE_ERROR(L"Could not initialize D3D11");
 		return FALSE;

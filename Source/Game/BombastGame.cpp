@@ -40,7 +40,7 @@ bool BombastGame::Initialize(HWND hWnd, HINSTANCE hInstance)
 		return false;
 	}
 
-	result = m_pBackgroundBitmap->Initialize(pBombastApp->GetGraphicsManager()->GetD3DClass()->GetDevice(), L"../../Game/Data/dirt01.dds", SCREEN_WIDTH, SCREEN_HEIGHT);
+	result = m_pBackgroundBitmap->Initialize(pBombastApp->GetGraphicsManager()->GetD3DClass()->GetDevice(), L"../../Game/Data/dirt01.dds", pBombastApp->m_options.m_screenSize.x, pBombastApp->m_options.m_screenSize.y);
 	if (!result) 
 	{
 		return false;
