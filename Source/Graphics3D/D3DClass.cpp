@@ -1,4 +1,5 @@
 #include "D3DClass.h"
+#include "../Bombast/BombastApp.h"
 
 D3DClass::D3DClass()
 {
@@ -79,16 +80,25 @@ bool D3DClass::Initialize(int screenWidth, int screenHeight, bool vsync, HWND hw
 		return false;
 	}
 
+	bool bValidResolution = false;
+	
 	for(i=0; i<numModes; i++)
 	{
 		if(displayModeList[i].Width == (unsigned int) screenWidth)
 		{
 			if(displayModeList[i].Height == (unsigned int) screenHeight)
 			{
+				bValidResolution = true;
 				numerator = displayModeList[i].RefreshRate.Numerator;
 				denominator = displayModeList[i].RefreshRate.Denominator;
 			}
 		}
+	}
+
+	if (!bValidResolution)
+	{
+		BE_ERROR(L"ERROR: Unsupported Resolution!");
+		return false;
 	}
 
 	result = adapter->GetDesc(&adapterDesc);
