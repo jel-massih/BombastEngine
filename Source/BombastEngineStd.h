@@ -21,6 +21,7 @@ const int SCREEN_WIDTH = 800;
 const int SCREEN_HEIGHT = 600;
 
 #include "Debugging\Logger.h"
+#include "Utilities\types.h"
 
 #ifndef BE_NEW
 #if defined(_DEBUG)
