@@ -33,6 +33,7 @@
     <ClInclude Include="..\InputCore\InputCore.h" />
     <ClInclude Include="..\Utilities\DDSTextureLoader.h" />
     <ClInclude Include="..\Utilities\Initialization.h" />
+    <ClInclude Include="..\Utilities\rapidxml.hpp" />
     <ClInclude Include="..\Utilities\types.h" />
   </ItemGroup>
   <ItemGroup>
