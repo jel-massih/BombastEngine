@@ -174,7 +174,7 @@ void InputCore::ProcessInput()
 	{
 		m_mouseY = 0;
 	}
-
+	/*
 	if (m_mouseX > SCREEN_WIDTH) 
 	{
 		m_mouseX = SCREEN_WIDTH;
@@ -183,7 +183,7 @@ void InputCore::ProcessInput()
 	if (m_mouseY > SCREEN_HEIGHT)
 	{
 		m_mouseY = SCREEN_HEIGHT;
-	}
+	}*/
 }
 
 bool InputCore::IsKeyPressed(int key)
