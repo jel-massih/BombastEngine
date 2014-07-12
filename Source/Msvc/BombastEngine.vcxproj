@@ -32,6 +32,7 @@
     <ClInclude Include="..\Graphics3D\ModelClass.h" />
     <ClInclude Include="..\InputCore\InputCore.h" />
     <ClInclude Include="..\Utilities\DDSTextureLoader.h" />
+    <ClInclude Include="..\Utilities\Initialization.h" />
     <ClInclude Include="..\Utilities\types.h" />
   </ItemGroup>
   <ItemGroup>
@@ -51,6 +52,7 @@
     <ClCompile Include="..\Graphics3D\ModelClass.cpp" />
     <ClCompile Include="..\InputCore\InputCore.cpp" />
     <ClCompile Include="..\Utilities\DDSTextureLoader.cpp" />
+    <ClCompile Include="..\Utilities\Initialization.cpp" />
     <ClCompile Include="BombastEngine.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

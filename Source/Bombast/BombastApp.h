@@ -8,6 +8,7 @@
 #include "..\Constants.h"
 #include "GraphicsManager.h"
 #include "EntitiesManager.h"
+#include "../Utilities/Initialization.h"
 #include "../Game/BombastGame.h"
 
 class BombastApp
@@ -40,11 +41,6 @@ public:
 
 	void Run();
 	void ShutDown();
-
-	bool IsOnlyInstance(LPCTSTR gameTitle);
-	bool CheckStorage(const DWORDLONG diskSpaceNeeded);
-	bool CheckMemory(const DWORDLONG physicalRAMNeeded, const DWORDLONG virtualRAMNeeded);
-	DWORD ReadCPUSpeed();
 
 	EntitiesManager* GetEntitiesManager();
 	GraphicsManager* GetGraphicsManager();
