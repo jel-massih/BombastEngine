@@ -11,10 +11,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Actor\Actor.h" />
+    <ClInclude Include="..\Actor\ActorComponent.h" />
     <ClInclude Include="..\BombastEngineStd.h" />
     <ClInclude Include="..\Bombast\BombastApp.h" />
     <ClInclude Include="..\Bombast\EntitiesManager.h" />
     <ClInclude Include="..\Bombast\GraphicsManager.h" />
+    <ClInclude Include="..\Bombast\interfaces.h" />
     <ClInclude Include="..\Constants.h" />
     <ClInclude Include="..\Debugging\Logger.h" />
     <ClInclude Include="..\Entity\BitmapEntity.h" />
@@ -31,6 +34,7 @@
     <ClInclude Include="..\Utilities\DDSTextureLoader.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Actor\Actor.cpp" />
     <ClCompile Include="..\Bombast\BombastApp.cpp" />
     <ClCompile Include="..\Bombast\EntitiesManager.cpp" />
     <ClCompile Include="..\Bombast\GraphicsManager.cpp" />

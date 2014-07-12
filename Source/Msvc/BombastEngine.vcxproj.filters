@@ -49,6 +49,9 @@
     <ClCompile Include="..\Entity\BitmapEntity.cpp">
       <Filter>Entity</Filter>
     </ClCompile>
+    <ClCompile Include="..\Actor\Actor.cpp">
+      <Filter>Actor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Bombast\BombastApp.h">
@@ -101,6 +104,15 @@
     <ClInclude Include="..\Entity\BitmapEntity.h">
       <Filter>Entity</Filter>
     </ClInclude>
+    <ClInclude Include="..\Actor\Actor.h">
+      <Filter>Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Bombast\interfaces.h">
+      <Filter>Bombast</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Actor\ActorComponent.h">
+      <Filter>Actor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Bombast">
@@ -126,6 +138,9 @@
     </Filter>
     <Filter Include="Entity">
       <UniqueIdentifier>{6f15c821-9b83-4d74-bf4c-4f3e0b9bc433}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor">
+      <UniqueIdentifier>{1bdb76db-5655-424a-a622-9e917a388492}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
