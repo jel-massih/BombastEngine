@@ -1,0 +1,3 @@
+<World>
+    <Script preLoad="scripts\LevelInit.lua"/>
+</World>
