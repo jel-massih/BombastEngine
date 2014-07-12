@@ -51,6 +51,8 @@ bool BombastApp::InitInstance(HINSTANCE hInstance, LPSTR lpCmdLine, HWND hWnd, i
 
 	m_hInstance = hInstance;
 
+	m_screenSize = Point(screenWidth, screenheight);
+
 	InitializeWindows();
 
 	if(!GetHwnd())

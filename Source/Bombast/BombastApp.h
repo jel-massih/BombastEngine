@@ -18,6 +18,7 @@ protected:
 	bool m_bWindowedMode; //True if app is windowed, False if Fullscreen
 	bool m_bIsRunning; //true if everything initialized and game in main loop
 	int m_iColorDepth;
+	Point m_screenSize;
 
 	GraphicsManager* m_pGraphicsManager;
 	EntitiesManager* m_pEntitiesManager;
@@ -54,6 +55,8 @@ public:
 			m_pAppInstance = new BombastApp;
 		return m_pAppInstance;
 	}
+
+	const Point &GetScreenSize()  { return m_screenSize; }
 
 private:
 	void InitializeWindows();
