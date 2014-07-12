@@ -19,8 +19,10 @@ int WINAPI WinMain(HINSTANCE hInstance,
 	_CrtSetDbgFlag(tmpDbgFlag);
 
 	BombastApp* appInstance = BombastApp::GetGameInstance();
+		
+	appInstance->m_options.Init("Options.xml", lpCmdLine);
 
-	if(appInstance->InitInstance(hInstance, lpCmdLine, 0))
+	if(appInstance->InitInstance(hInstance, lpCmdLine, 0, appInstance->m_options.m_screenSize.x, appInstance->m_options.m_screenSize.y ))
 	{
 		appInstance->Run();
 	}
