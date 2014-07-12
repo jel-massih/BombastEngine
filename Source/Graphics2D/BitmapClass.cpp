@@ -1,5 +1,7 @@
 #include "BitmapClass.h"
 
+#include "../Bombast/BombastApp.h"
+
 BitmapClass::BitmapClass()
 {
 	m_pVertexBuffer = 0;
@@ -197,10 +199,10 @@ bool BitmapClass::UpdateBuffers(ID3D11DeviceContext* deviceContext, int position
 	m_previousPosX = positionX;
 	m_previousPosY = positionY;
 
-	left = (SCREEN_WIDTH / 2 * -1) + positionX;
+	left = (BombastApp::GetGameInstance()->m_options.m_screenSize.x / 2 * -1) + positionX;
 	right = left + (float)m_bitmapWidth;
 
-	top = (SCREEN_HEIGHT / 2) - positionY;
+	top = (BombastApp::GetGameInstance()->m_options.m_screenSize.y / 2) - positionY;
 	bottom = top - (float)m_bitmapHeight;
 
 	//create vertex array
