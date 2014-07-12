@@ -16,6 +16,8 @@ BombastApp::BombastApp()
 
 	m_bIsRunning = false;
 
+	m_screenSize = Point(0, 0);
+
 	m_pGraphicsManager = 0;
 
 	m_pEntitiesManager = 0;
@@ -97,8 +99,8 @@ void BombastApp::InitializeWindows()
                           WS_OVERLAPPEDWINDOW,    // window style
                           0,    // x-position of the window
                           0,    // y-position of the window
-                          SCREEN_WIDTH,    // width of the window
-                          SCREEN_HEIGHT,    // height of the window
+                          m_options.m_screenSize.x,    // width of the window
+                          m_options.m_screenSize.y,    // height of the window
                           NULL,    // we have no parent window, NULL
                           NULL,    // we aren't using menus, NULL
                           m_hInstance,    // application handle

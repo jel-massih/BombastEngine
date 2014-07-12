@@ -54,6 +54,8 @@ public:
 
 	const Point &GetScreenSize()  { return m_screenSize; }
 
+	struct GameOptions m_options;
+
 private:
 	void InitializeWindows();
 	bool InitializeApp(int screenWidth, int screenHeight);
