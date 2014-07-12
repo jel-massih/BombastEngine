@@ -1,3 +1,7 @@
 <World>
+	<StaticActors>
+      <Actor resource="actors\stage.xml" />
+    </StaticActors>
+
     <Script preLoad="scripts\LevelInit.lua"/>
 </World>

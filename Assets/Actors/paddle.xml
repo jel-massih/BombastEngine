@@ -1,13 +1,14 @@
 <Actor type="Paddle" resource="actors\paddle.xml">
 
-	<RelativeTransformComponent>
-		<Position x="0.1" y="0.5" z="0"/>
+	<TransformComponent>
+		<RelativePosition x="0.1" y="0.5" z="0"/>
 		<YawPitchRoll x="0" y="0" z="0"/>
-	</RelativeTransformComponent>
+	</TransformComponent>
 
 
     <BitmapRenderComponent>
         <Texture>data\paddle.dds</Texture>
+		<Size x="10" y="200" z="0"/>
     </BitmapRenderComponent>
 	
 	<BaseScriptComponent>
