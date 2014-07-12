@@ -77,8 +77,8 @@ bool BombastGame::Initialize(HWND hWnd, HINSTANCE hInstance)
 	m_pEntitiesManager->RegisterBitmap(m_pRightPaddleBitmap);
 
 	m_pBackgroundBitmap->SetPosition(0, 0);
-	m_pLeftPaddleBitmap->SetPosition(100, SCREEN_HEIGHT / 2 - m_pLeftPaddleBitmap->GetBitmapHeight() / 2);
-	m_pRightPaddleBitmap->SetPosition(SCREEN_WIDTH - 100, SCREEN_HEIGHT / 2 - m_pRightPaddleBitmap->GetBitmapHeight()/2);
+	m_pLeftPaddleBitmap->SetPosition(100, pBombastApp->m_options.m_screenSize.y / 2 - m_pLeftPaddleBitmap->GetBitmapHeight() / 2);
+	m_pRightPaddleBitmap->SetPosition(pBombastApp->m_options.m_screenSize.x - 100, pBombastApp->m_options.m_screenSize.y / 2 - m_pRightPaddleBitmap->GetBitmapHeight() / 2);
 
 	return true;
 }
