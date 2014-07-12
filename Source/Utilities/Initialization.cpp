@@ -117,46 +117,45 @@ void GameOptions::Init(const char* xmlFilePath, LPSTR lpCmdLine)
 	buffer << file.rdbuf();
 	file.close();
 	std::string content(buffer.str());
-	m_pDoc->parse<0>(&content[0]);
+	xml_document<> doc;
+	doc.parse<0>(&content[0]);
 
-	if (m_pDoc) {
-		//Get Root node
-		xml_node<> *pRoot = m_pDoc->first_node();
+	//Get Root node
+	xml_node<> *pRoot = doc.first_node("Options");
 
-		if (!pRoot)
+	if (!pRoot)
+	{
+		return;
+	}
+
+	//Fetch each child and load component
+	xml_node<> *pNode = NULL;
+	pNode = pRoot->first_node("Graphics");
+	if (pNode)
+	{
+		std::string attribute;
+		attribute = pNode->first_attribute("renderer")->value();
+		if (attribute != "Direct3D 9" && attribute != "Direct3D 11")
 		{
-			return;
+			BE_ERROR(L"Bad Renderer setting in Graphics options.");
+		}
+		else
+		{
+			m_renderer = attribute;
+		}
+			
+		if (pNode->first_attribute("width"))
+		{
+			attribute = pNode->first_attribute("width")->value();
+			m_screenSize.x = atoi(attribute.c_str());
+			if (m_screenSize.x < 800) { m_screenSize.x = 800; }
 		}
 
-		//Fetch each child and load component
-		xml_node<> *pNode = NULL;
-		pNode = m_pDoc->first_node("Graphics");
-		if (pNode)
+		if (pNode->first_attribute("height"))
 		{
-			std::string attribute;
-			attribute = pNode->first_attribute("renderer")->value();
-			if (attribute != "Direct3D 9" && attribute != "Direct3D 11")
-			{
-				BE_ERROR(L"Bad Renderer setting in Graphics options.");
-			}
-			else
-			{
-				m_renderer = attribute;
-			}
-			
-			if (pNode->first_attribute("width"))
-			{
-				attribute = pNode->first_attribute("width")->value();
-				m_screenSize.x = atoi(attribute.c_str());
-				if (m_screenSize.x < 800) { m_screenSize.x = 800; }
-			}
-
-			if (pNode->first_attribute("height"))
-			{
-				attribute = pNode->first_attribute("height")->value();
-				m_screenSize.y = atoi(attribute.c_str());
-				if (m_screenSize.y < 600) { m_screenSize.y = 600; }
-			}
+			attribute = pNode->first_attribute("height")->value();
+			m_screenSize.y = atoi(attribute.c_str());
+			if (m_screenSize.y < 600) { m_screenSize.y = 600; }
 		}
 	}
 }
