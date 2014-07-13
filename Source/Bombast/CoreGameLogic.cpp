@@ -71,7 +71,19 @@ Actor* CoreGameLogic::VGetActor(const ActorId id)
 
 Actor* CoreGameLogic::VCreateActor(const std::string &actorResource, rapidxml::xml_node<> *overrides)
 {
-	return NULL;
+	BE_ASSERT(m_pActorFactory);
+	Actor* pActor = NULL;
+	//Actor* pActor = m_pActorFactory->CreateActor(actorResource.c_str(), overrides);
+	if (pActor)
+	{
+		m_actors.insert(std::make_pair(pActor->GetId(), pActor));
+		return pActor;
+	}
+	else
+	{
+		BE_ERROR("ERROR: Failed To Create Actor From resource: " + actorResource);
+		return NULL;
+	}
 }
 
 void CoreGameLogic::VDestroyActor(const ActorId actorId)
