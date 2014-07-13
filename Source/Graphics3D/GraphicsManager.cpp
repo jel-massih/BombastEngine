@@ -36,7 +36,7 @@ bool GraphicsManager::Initialize(HWND hwnd)
 		return FALSE;
 	}
 
-	m_pCamera = new CameraClass;
+	m_pCamera = BE_NEW CameraClass;
 	if (!m_pCamera)
 	{
 		return false;
