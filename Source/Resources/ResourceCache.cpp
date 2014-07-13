@@ -57,8 +57,25 @@ void ResourceCache::RegisterLoader(IResourceLoader* loader)
 
 ResourceHandle* ResourceCache::GetHandle(Resource* r)
 {
+	ResourceHandle* handle = Find(r);
+
+	if (handle == NULL)
+	{
+		handle = Load(r);
+		BE_ASSERT(handle);
+	}
+	else
+	{
+		Update(handle);
+	}
+
+	return handle;
+}
+
+ResourceHandle* ResourceCache::Load(Resource* r)
+{
 	//Create new resource and add to lru list and map
-	IResourceLoader* loader;
+	IResourceLoader* loader = NULL;
 	ResourceHandle* handle;
 
 	for (ResourceLoaderList::iterator it = m_resourceLoaders.begin(); it != m_resourceLoaders.end(); it++)
@@ -75,7 +92,7 @@ ResourceHandle* ResourceCache::GetHandle(Resource* r)
 	if (!loader)
 	{
 		BE_ERROR("Default Resource Loader not found");
-		return handle;
+		return NULL;
 	}
 
 	int rawSize = m_pFile->VGetRawResourceSize(*r);
