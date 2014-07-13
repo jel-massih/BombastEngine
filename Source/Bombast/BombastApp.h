@@ -58,7 +58,7 @@ public:
 	struct GameOptions m_options;
 	CoreGameLogic* m_pGame;
 
-	class ResourceCache *m_pResCache;
+	class ResourceCache *m_pResourceCache;
 
 	virtual bool VCreateGame();
 	virtual bool VLoadGame();

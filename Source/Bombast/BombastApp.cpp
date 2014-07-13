@@ -23,7 +23,7 @@ BombastApp::BombastApp()
 
 	m_pEntitiesManager = 0;
 
-	m_pResCache = 0;
+	m_pResourceCache = 0;
 
 	m_pGame = 0;
 }
