@@ -9,7 +9,6 @@
 #include "../Graphics3D/GraphicsManager.h"
 #include "../Entity/EntitiesManager.h"
 #include "../Utilities/Initialization.h"
-#include "../Game/BombastGame.h"
 #include "CoreGameLogic.h"
 
 class BombastApp
