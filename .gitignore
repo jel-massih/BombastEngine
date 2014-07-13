@@ -7,3 +7,4 @@ Game/BombastEngineWin32Debug/BombastEngine.exe
 Source/Msvc/BombastEngine.opensdf
 Source/Libraries/*
 !Source/Libraries/.gitkeep
+Source/Msvc/ipch/
