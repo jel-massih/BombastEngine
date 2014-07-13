@@ -34,14 +34,12 @@ bool BitmapEntity::Render()
 
 bool BitmapEntity::CreateBitmap(WCHAR* file)
 {
-	bool result;
 	m_pBitmap = BE_NEW(BitmapClass);
 	if (!m_pBitmap)
 	{
 		return false;
 	}
 
-	//result = m_pBitmap->Initialize();
 	return true;
 }
 
