@@ -136,22 +136,22 @@ bool BombastGame::Frame()
 
 	if (m_pInputCore->IsKeyPressed(DIK_W))
 	{
-		m_pLeftPaddleBitmap->Translate(0, -300 * elapsed_ms);
+		m_pLeftPaddleBitmap->Translate(0, (int)(-300 * elapsed_ms));
 	}
 
 	if (m_pInputCore->IsKeyPressed(DIK_S))
 	{
-		m_pLeftPaddleBitmap->Translate(0, 300 * elapsed_ms);
+		m_pLeftPaddleBitmap->Translate(0, (int)(300 * elapsed_ms));
 	}
 
 	if (m_pInputCore->IsKeyPressed(DIK_UP))
 	{
-		m_pRightPaddleBitmap->Translate(0, -300 * elapsed_ms);
+		m_pRightPaddleBitmap->Translate(0, (int)(-300 * elapsed_ms));
 	}
 
 	if (m_pInputCore->IsKeyPressed(DIK_DOWN))
 	{
-		m_pRightPaddleBitmap->Translate(0, 300 * elapsed_ms);
+		m_pRightPaddleBitmap->Translate(0, (int)(300 * elapsed_ms));
 	}
 
 	//_RPT1(0, "height: %d\n", m_pLeftPaddleBitmap->)
