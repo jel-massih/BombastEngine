@@ -13,4 +13,15 @@
 		OutputDebugString(s.c_str()); \
 	} \
 
+#define BE_ASSERT(expr) \
+do \
+{ \
+	if (!(expr)) \
+	{ \
+		MessageBox(BombastApp::GetGameInstance()->GetHwnd(), L"Asserion Failed!", L"Assertion", MB_OK); \
+		assert(expr); \
+	} \
+} \
+while (0) \
+
 #endif
