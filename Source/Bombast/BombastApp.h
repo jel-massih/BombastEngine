@@ -10,6 +10,7 @@
 #include "../Entity/EntitiesManager.h"
 #include "../Utilities/Initialization.h"
 #include "../Game/BombastGame.h"
+#include "CoreGameLogic.h"
 
 class BombastApp
 {
@@ -43,6 +44,9 @@ public:
 	EntitiesManager* GetEntitiesManager();
 	GraphicsManager* GetGraphicsManager();
 
+	CoreGameLogic* GetGameLogic() const { return m_pGame; }
+
+
 	static BombastApp *GetGameInstance()
 	{
 		if (!m_pAppInstance)
@@ -53,6 +57,10 @@ public:
 	const Point &GetScreenSize()  { return m_screenSize; }
 
 	struct GameOptions m_options;
+	CoreGameLogic* m_pGame;
+
+	virtual bool VCreateGame();
+	virtual bool VLoadGame();
 
 private:
 	void InitializeWindows();

@@ -22,6 +22,7 @@ BombastApp::BombastApp()
 
 	m_pEntitiesManager = 0;
 
+	m_pGame = 0;
 }
 
 //Win32 Specific Stuff
@@ -60,6 +61,12 @@ bool BombastApp::InitInstance(HINSTANCE hInstance, LPSTR lpCmdLine, HWND hWnd, i
 	{
 		BE_ERROR("Windows Error: Could Not Create The Window");
 		return FALSE;
+	}
+
+	if (!VCreateGame())
+	{
+		BE_ERROR("Game Error: Could Not Create The Game");
+		return false;
 	}
 
 	if(!InitializeApp(screenWidth, screenheight))
@@ -132,6 +139,25 @@ LRESULT CALLBACK BombastApp::MsgProc(HWND hWnd, UINT message, WPARAM wParam, LPA
     return DefWindowProc (hWnd, message, wParam, lParam);
 }
 
+bool BombastApp::VCreateGame()
+{
+	bool result;
+
+	m_pGame = BE_NEW CoreGameLogic();
+	if (!m_pGame)
+	{
+		return false;
+	}
+
+	result = m_pGame->Initialize();
+	if (!result)
+	{
+		return false;
+	}
+
+	return true;
+}
+
 bool BombastApp::InitializeApp(int screenWidth, int screenHeight)
 {
 	bool result;
@@ -139,28 +165,19 @@ bool BombastApp::InitializeApp(int screenWidth, int screenHeight)
 	m_pGraphicsManager = BE_NEW GraphicsManager();
 	if (!m_pGraphicsManager)
 	{
-		return FALSE;
+		return false;
 	}
 
 	result = m_pGraphicsManager->Initialize(m_hWnd);
 	if (!result)
 	{
-		return FALSE;
+		return false;
 	}
 
 	m_pEntitiesManager = BE_NEW EntitiesManager();
 	if (!m_pEntitiesManager)
 	{
-		return FALSE;
-	}
-
-	{
-	}
-
-	result = m_pBombastGame->Initialize(m_hWnd, m_hInstance);
-	if (!result)
-	{
-		return FALSE;
+		return false;
 	}
 
 	return true;
@@ -206,22 +223,12 @@ bool BombastApp::Frame()
 		return FALSE;
 	}
 
-	result = m_pBombastGame->Frame();
-	if (!result)
-	{
-		return FALSE;
-	}
-
 	return true;
 }
 
 void BombastApp::ShutDown()
 {
-	if (m_pBombastGame)
-	{
-		m_pBombastGame->Shutdown();
-		SAFE_DELETE(m_pBombastGame);
-	}
+	SAFE_DELETE(m_pGame);
 
 	if (m_pEntitiesManager)
 	{
@@ -264,4 +271,9 @@ EntitiesManager* BombastApp::GetEntitiesManager()
 GraphicsManager* BombastApp::GetGraphicsManager()
 {
 	return m_pGraphicsManager;
+}
+
+bool BombastApp::VLoadGame()
+{
+	return m_pGame->VLoadGame(m_options.m_level.c_str());
 }
