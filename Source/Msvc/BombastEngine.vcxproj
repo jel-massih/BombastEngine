@@ -35,6 +35,7 @@
     <ClInclude Include="..\Utilities\DDSTextureLoader.h" />
     <ClInclude Include="..\Utilities\Initialization.h" />
     <ClInclude Include="..\Utilities\rapidxml.hpp" />
+    <ClInclude Include="..\Utilities\String.h" />
     <ClInclude Include="..\Utilities\types.h" />
   </ItemGroup>
   <ItemGroup>
@@ -56,6 +57,7 @@
     <ClCompile Include="..\InputCore\InputCore.cpp" />
     <ClCompile Include="..\Utilities\DDSTextureLoader.cpp" />
     <ClCompile Include="..\Utilities\Initialization.cpp" />
+    <ClCompile Include="..\Utilities\String.cpp" />
     <ClCompile Include="BombastEngine.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

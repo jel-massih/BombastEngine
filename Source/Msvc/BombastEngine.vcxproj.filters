@@ -58,6 +58,9 @@
     <ClCompile Include="..\Bombast\CoreGameLogic.cpp">
       <Filter>Bombast</Filter>
     </ClCompile>
+    <ClCompile Include="..\Utilities\String.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Bombast\BombastApp.h">
@@ -130,6 +133,9 @@
     </ClInclude>
     <ClInclude Include="..\Bombast\CoreGameLogic.h">
       <Filter>Bombast</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Utilities\String.h">
+      <Filter>Utilities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
