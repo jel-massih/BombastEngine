@@ -140,7 +140,7 @@ bool CoreGameLogic::VLoadGame(const char* levelResource)
 
 void CoreGameLogic::VChangeState(enum CoreGameState newState)
 {
-
+	m_gameState = newState;
 }
 
 ActorFactory* CoreGameLogic::VCreateActorFactory()
