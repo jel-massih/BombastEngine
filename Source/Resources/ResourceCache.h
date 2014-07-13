@@ -59,7 +59,7 @@ class ResourceCache
 	ResourceHandleMap m_resources;
 	ResourceLoaderList m_resourceLoaders;
 
-	IResourceLoader* m_pFile;
+	IResourceFile* m_pFile;
 
 	unsigned int m_cacheSize;
 	unsigned int m_allocated;
@@ -68,14 +68,13 @@ public:
 	ResourceCache(const unsigned int sizeInMb, IResourceFile* file);
 	virtual ~ResourceCache();
 
-	bool Init();
+	bool Initialize();
 
 	void RegisterLoader(IResourceLoader* Loader);
 
 	ResourceHandle* GetHandle(Resource* r);
 
 	int Preload(const std::string pattern, void(*progressCallback)(int, bool &));
-	std::vector<std::string> Match(const std::string pattern);
 
 	void Flush();
 
