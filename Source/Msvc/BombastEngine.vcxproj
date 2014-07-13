@@ -32,6 +32,7 @@
     <ClInclude Include="..\Graphics3D\GraphicsManager.h" />
     <ClInclude Include="..\Graphics3D\ModelClass.h" />
     <ClInclude Include="..\InputCore\InputCore.h" />
+    <ClInclude Include="..\Resources\ResourceCache.h" />
     <ClInclude Include="..\Utilities\DDSTextureLoader.h" />
     <ClInclude Include="..\Utilities\Initialization.h" />
     <ClInclude Include="..\Utilities\rapidxml.hpp" />

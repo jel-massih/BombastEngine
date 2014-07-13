@@ -143,6 +143,9 @@
     <ClInclude Include="stdafx.h">
       <Filter>Msvc</Filter>
     </ClInclude>
+    <ClInclude Include="..\Resources\ResourceCache.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Bombast">
@@ -174,6 +177,9 @@
     </Filter>
     <Filter Include="Msvc">
       <UniqueIdentifier>{b38645cb-2245-43f5-9758-e4c7058fb821}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources">
+      <UniqueIdentifier>{272b0025-58a5-4835-ad03-459b326eaa4c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
