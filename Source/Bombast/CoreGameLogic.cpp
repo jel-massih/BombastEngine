@@ -2,6 +2,8 @@
 #include "BombastApp.h"
 #include "../Actor/Actor.h"
 #include "../Utilities/String.h"
+#include <fstream>
+#include <sstream>
 
 bool LevelManager::Initialize(std::vector<std::string> &levels)
 {
@@ -79,6 +81,34 @@ void CoreGameLogic::VDestroyActor(const ActorId actorId)
 
 bool CoreGameLogic::VLoadGame(const char* levelResource)
 {
+	std::ifstream file(levelResource);
+	std::stringstream buffer;
+	buffer << file.rdbuf();
+	file.close();
+	std::string content(buffer.str());
+	rapidxml::xml_document<> doc;
+	doc.parse<0>(&content[0]);
+
+	//Get Root node
+	rapidxml::xml_node<> *pRoot = doc.first_node();
+	if (!pRoot)
+	{
+		BE_ERROR("ERROR: Cannot find Level resource file: " + std::string(levelResource));
+		return false;
+	}
+
+	// Load All Initial Actors
+	rapidxml::xml_node<>* pActorsNode = pRoot->first_node("StaticActors");
+	if (pActorsNode)
+	{
+		for (rapidxml::xml_node<>* pNode = pActorsNode->first_node(); pNode; pNode = pNode->next_sibling())
+		{
+			const char* actorResource = pNode->first_attribute("resource")->value();
+
+			Actor* pActor = VCreateActor(actorResource, pNode);
+		}
+	}
+
 	return true;
 }
 
