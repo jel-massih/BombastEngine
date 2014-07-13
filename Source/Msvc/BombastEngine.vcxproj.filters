@@ -64,6 +64,12 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>Msvc</Filter>
     </ClCompile>
+    <ClCompile Include="..\Resources\ResourceCache.cpp">
+      <Filter>Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Resources\ZipFile.cpp">
+      <Filter>Resources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Bombast\BombastApp.h">
@@ -144,6 +150,9 @@
       <Filter>Msvc</Filter>
     </ClInclude>
     <ClInclude Include="..\Resources\ResourceCache.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Resources\ZipFile.h">
       <Filter>Resources</Filter>
     </ClInclude>
   </ItemGroup>

@@ -33,6 +33,7 @@
     <ClInclude Include="..\Graphics3D\ModelClass.h" />
     <ClInclude Include="..\InputCore\InputCore.h" />
     <ClInclude Include="..\Resources\ResourceCache.h" />
+    <ClInclude Include="..\Resources\ZipFile.h" />
     <ClInclude Include="..\Utilities\DDSTextureLoader.h" />
     <ClInclude Include="..\Utilities\Initialization.h" />
     <ClInclude Include="..\Utilities\rapidxml.hpp" />
@@ -57,6 +58,8 @@
     <ClCompile Include="..\Graphics3D\GraphicsManager.cpp" />
     <ClCompile Include="..\Graphics3D\ModelClass.cpp" />
     <ClCompile Include="..\InputCore\InputCore.cpp" />
+    <ClCompile Include="..\Resources\ResourceCache.cpp" />
+    <ClCompile Include="..\Resources\ZipFile.cpp" />
     <ClCompile Include="..\Utilities\DDSTextureLoader.cpp" />
     <ClCompile Include="..\Utilities\Initialization.cpp" />
     <ClCompile Include="..\Utilities\String.cpp" />
@@ -119,13 +122,13 @@
       <SDLCheck>true</SDLCheck>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
       <ForcedIncludeFiles>stdafx.h</ForcedIncludeFiles>
-      <AdditionalIncludeDirectories>D:\Documents\Visual Studio Projects\BombastEngine\Source\Msvc</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Documents\Visual Studio Projects\BombastEngine\Source\Msvc;D:\Documents\Visual Studio Projects\BombastEngine\Source\Libraries\zlib\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>d3d11.lib;dxgi.lib;D3dcompiler.lib;dxguid.lib;dinput8.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)\..\Libraries\DirectXTK\Bin\Desktop_2013\Win32\Debug\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>d3d11.lib;dxgi.lib;D3dcompiler.lib;dxguid.lib;dinput8.lib;%(AdditionalDependencies);zdll.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:\Documents\Visual Studio Projects\BombastEngine\Source\Libraries\zlib\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -137,7 +140,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>D:\Documents\Visual Studio Projects\BombastEngine\Source\Msvc</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Documents\Visual Studio Projects\BombastEngine\Source\Msvc;D:\Documents\Visual Studio Projects\BombastEngine\Source\Libraries\zlib\include</AdditionalIncludeDirectories>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
@@ -145,7 +148,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>d3d11.lib;dxgi.lib;D3dcompiler.lib;dxguid.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>d3d11.lib;dxgi.lib;D3dcompiler.lib;dxguid.lib;%(AdditionalDependencies);zdll.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:\Documents\Visual Studio Projects\BombastEngine\Source\Libraries\zlib\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
