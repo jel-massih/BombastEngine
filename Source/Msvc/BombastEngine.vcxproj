@@ -15,11 +15,11 @@
     <ClInclude Include="..\Actor\ActorComponent.h" />
     <ClInclude Include="..\BombastEngineStd.h" />
     <ClInclude Include="..\Bombast\BombastApp.h" />
-    <ClInclude Include="..\Bombast\EntitiesManager.h" />
     <ClInclude Include="..\Bombast\interfaces.h" />
     <ClInclude Include="..\Constants.h" />
     <ClInclude Include="..\Debugging\Logger.h" />
     <ClInclude Include="..\Entity\BitmapEntity.h" />
+    <ClInclude Include="..\Entity\EntitiesManager.h" />
     <ClInclude Include="..\Entity\Entity.h" />
     <ClInclude Include="..\Game\BombastGame.h" />
     <ClInclude Include="..\Graphics2D\BitmapClass.h" />
@@ -39,8 +39,8 @@
   <ItemGroup>
     <ClCompile Include="..\Actor\Actor.cpp" />
     <ClCompile Include="..\Bombast\BombastApp.cpp" />
-    <ClCompile Include="..\Bombast\EntitiesManager.cpp" />
     <ClCompile Include="..\Entity\BitmapEntity.cpp" />
+    <ClCompile Include="..\Entity\EntitiesManager.cpp" />
     <ClCompile Include="..\Entity\Entity.cpp" />
     <ClCompile Include="..\Game\BombastGame.cpp" />
     <ClCompile Include="..\Graphics2D\BitmapClass.cpp" />

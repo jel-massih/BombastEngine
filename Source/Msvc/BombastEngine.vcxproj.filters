@@ -31,9 +31,6 @@
     <ClCompile Include="..\Utilities\DDSTextureLoader.cpp">
       <Filter>Utilities</Filter>
     </ClCompile>
-    <ClCompile Include="..\Bombast\EntitiesManager.cpp">
-      <Filter>Bombast</Filter>
-    </ClCompile>
     <ClCompile Include="..\Game\BombastGame.cpp">
       <Filter>Game</Filter>
     </ClCompile>
@@ -54,6 +51,9 @@
     </ClCompile>
     <ClCompile Include="..\Graphics3D\GraphicsManager.cpp">
       <Filter>Graphics3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Entity\EntitiesManager.cpp">
+      <Filter>Entity</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -89,9 +89,6 @@
     <ClInclude Include="..\Utilities\DDSTextureLoader.h">
       <Filter>Utilities</Filter>
     </ClInclude>
-    <ClInclude Include="..\Bombast\EntitiesManager.h">
-      <Filter>Bombast</Filter>
-    </ClInclude>
     <ClInclude Include="..\Game\BombastGame.h">
       <Filter>Game</Filter>
     </ClInclude>
@@ -124,6 +121,9 @@
     </ClInclude>
     <ClInclude Include="..\Graphics3D\GraphicsManager.h">
       <Filter>Graphics3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Entity\EntitiesManager.h">
+      <Filter>Entity</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

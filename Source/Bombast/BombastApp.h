@@ -7,7 +7,7 @@
 #include "..\BombastEngineStd.h"
 #include "..\Constants.h"
 #include "../Graphics3D/GraphicsManager.h"
-#include "EntitiesManager.h"
+#include "../Entity/EntitiesManager.h"
 #include "../Utilities/Initialization.h"
 #include "../Game/BombastGame.h"
 

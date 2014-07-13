@@ -3,7 +3,7 @@
 
 #include "../BombastEngineStd.h"
 #include "../Graphics2D/BitmapClass.h"
-#include "../Bombast/EntitiesManager.h"
+#include "../Entity/EntitiesManager.h"
 #include "../InputCore/InputCore.h"
 
 class BombastGame {
