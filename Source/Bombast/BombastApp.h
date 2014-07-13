@@ -6,7 +6,7 @@
 //=============================================================
 #include "..\BombastEngineStd.h"
 #include "..\Constants.h"
-#include "GraphicsManager.h"
+#include "../Graphics3D/GraphicsManager.h"
 #include "EntitiesManager.h"
 #include "../Utilities/Initialization.h"
 #include "../Game/BombastGame.h"

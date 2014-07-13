@@ -16,9 +16,6 @@
     <ClCompile Include="..\Graphics2D\TextureClass.cpp">
       <Filter>Graphics2D</Filter>
     </ClCompile>
-    <ClCompile Include="..\Bombast\GraphicsManager.cpp">
-      <Filter>Bombast</Filter>
-    </ClCompile>
     <ClCompile Include="..\Graphics2D\TextureShaderClass.cpp">
       <Filter>Graphics2D</Filter>
     </ClCompile>
@@ -55,6 +52,9 @@
     <ClCompile Include="..\Utilities\Initialization.cpp">
       <Filter>Utilities</Filter>
     </ClCompile>
+    <ClCompile Include="..\Graphics3D\GraphicsManager.cpp">
+      <Filter>Graphics3D</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Bombast\BombastApp.h">
@@ -73,9 +73,6 @@
     </ClInclude>
     <ClInclude Include="..\Graphics2D\TextureClass.h">
       <Filter>Graphics2D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Bombast\GraphicsManager.h">
-      <Filter>Bombast</Filter>
     </ClInclude>
     <ClInclude Include="..\Graphics2D\TextureShaderClass.h">
       <Filter>Graphics2D</Filter>
@@ -124,6 +121,9 @@
     </ClInclude>
     <ClInclude Include="..\Utilities\rapidxml.hpp">
       <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Graphics3D\GraphicsManager.h">
+      <Filter>Graphics3D</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
