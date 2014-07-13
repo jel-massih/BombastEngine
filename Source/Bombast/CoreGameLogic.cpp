@@ -1,6 +1,7 @@
 #include "CoreGameLogic.h"
 #include "BombastApp.h"
 #include "../Actor/Actor.h"
+#include "../Utilities/String.h"
 
 bool LevelManager::Initialize(std::vector<std::string> &levels)
 {
@@ -37,6 +38,28 @@ CoreGameLogic::~CoreGameLogic()
 		SAFE_DELETE(it->second);
 	}
 	m_actors.clear();
+}
+
+bool CoreGameLogic::Initialize()
+{
+	m_pActorFactory = VCreateActorFactory();
+
+	return true;
+}
+
+std::string CoreGameLogic::GetActorXml(const ActorId actorId)
+{
+	Actor* pActor = VGetActor(actorId);
+	if (pActor)
+	{
+		return pActor->ToXML();
+	}
+	else
+	{
+		BE_ERROR(s2ws("Couldnt find actor: " + actorId));
+	}
+
+	return "";
 }
 
 Actor* CoreGameLogic::VGetActor(const ActorId id)
