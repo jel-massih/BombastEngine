@@ -88,7 +88,14 @@ Actor* CoreGameLogic::VCreateActor(const std::string &actorResource, rapidxml::x
 
 void CoreGameLogic::VDestroyActor(const ActorId actorId)
 {
+	auto target = m_actors.find(actorId);
 
+	if (target != m_actors.end())
+	{
+		target->second->Shutdown();
+		delete target->second;
+		m_actors.erase(target);
+	}
 }
 
 bool CoreGameLogic::VLoadGame(const char* levelResource)
