@@ -66,6 +66,13 @@ std::string CoreGameLogic::GetActorXml(const ActorId actorId)
 
 Actor* CoreGameLogic::VGetActor(const ActorId id)
 {
+	ActorMap::iterator target = m_actors.find(id);
+
+	if (target != m_actors.end())
+	{
+		return target->second;
+	}
+
 	return NULL;
 }
 
