@@ -77,11 +77,11 @@ bool ColorShaderClass::InitializeShader(ID3D11Device* device, WCHAR* vertexShade
 	{
 		if (errorMessage)
 		{
-			BE_ERROR(L"Messed Up Vertex Shader File");
+			BE_ERROR("Messed Up Vertex Shader File");
 		}
 		else
 		{
-			BE_ERROR(L"Missing Vertex Shader File");
+			BE_ERROR("Missing Vertex Shader File");
 		}
 
 		return false;
@@ -92,11 +92,11 @@ bool ColorShaderClass::InitializeShader(ID3D11Device* device, WCHAR* vertexShade
 	{
 		if (errorMessage)
 		{
-			BE_ERROR(L"Messed Up Pixel Shader File");
+			BE_ERROR("Messed Up Pixel Shader File");
 		}
 		else
 		{
-			BE_ERROR(L"Missing Vertex Shader File");
+			BE_ERROR("Missing Vertex Shader File");
 		}
 
 		return false;

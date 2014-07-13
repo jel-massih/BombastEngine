@@ -74,11 +74,11 @@ bool TextureShaderClass::InitializeShader(ID3D11Device* device, WCHAR* vertexSha
 	{
 		if (errorMessage)
 		{
-			BE_ERROR((LPCWSTR)(errorMessage->GetBufferPointer()));
+			BE_ERROR((char*)errorMessage->GetBufferPointer());
 		}
 		else
 		{
-			BE_ERROR(L"Missing Vertex Shader File");
+			BE_ERROR("Missing Vertex Shader File");
 		}
 
 		return false;
@@ -90,11 +90,11 @@ bool TextureShaderClass::InitializeShader(ID3D11Device* device, WCHAR* vertexSha
 	{
 		if (errorMessage)
 		{
-			BE_ERROR((LPCWSTR)(errorMessage->GetBufferPointer()));
+			BE_ERROR((char*)errorMessage->GetBufferPointer());
 		}
 		else
 		{
-			BE_ERROR(L"Missing Pixel Shader File");
+			BE_ERROR("Missing Pixel Shader File");
 		}
 
 		return false;

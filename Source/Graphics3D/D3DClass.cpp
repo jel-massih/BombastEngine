@@ -97,7 +97,7 @@ bool D3DClass::Initialize(int screenWidth, int screenHeight, bool vsync, HWND hw
 
 	if (!bValidResolution)
 	{
-		BE_ERROR(L"ERROR: Unsupported Resolution!");
+		BE_ERROR("ERROR: Unsupported Resolution!");
 		return false;
 	}
 

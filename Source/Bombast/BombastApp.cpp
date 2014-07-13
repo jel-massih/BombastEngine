@@ -45,7 +45,7 @@ bool BombastApp::InitInstance(HINSTANCE hInstance, LPSTR lpCmdLine, HWND hWnd, i
 
 	if(ReadCPUSpeed() < CPU_SPEED_NEEDED)
 	{
-		BE_ERROR(L"CPUSpeed Error: You Do Not Have a Fast Enough CPU :(");
+		BE_ERROR("CPUSpeed Error: You Do Not Have a Fast Enough CPU :(");
 		return FALSE;
 	}
 
@@ -59,13 +59,13 @@ bool BombastApp::InitInstance(HINSTANCE hInstance, LPSTR lpCmdLine, HWND hWnd, i
 
 	if(!GetHwnd())
 	{
-		BE_ERROR(L"Windows Error: Could Not Create The Window");
+		BE_ERROR("Windows Error: Could Not Create The Window");
 		return FALSE;
 	}
 
 	if(!InitializeApp(screenWidth, screenheight))
 	{
-		BE_ERROR(L"App Error: Could Not Initialize Application layer");
+		BE_ERROR("App Error: Could Not Initialize Application layer");
 		return FALSE;
 	}
 

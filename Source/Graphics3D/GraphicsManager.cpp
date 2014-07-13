@@ -32,7 +32,7 @@ bool GraphicsManager::Initialize(HWND hwnd)
 
 	if (!m_pD3D->Initialize(BombastApp::GetGameInstance()->m_options.m_screenSize.x, BombastApp::GetGameInstance()->m_options.m_screenSize.y, true, hwnd, false, 1000.0f, 0.1f))
 	{
-		BE_ERROR(L"Could not initialize D3D11");
+		BE_ERROR("Could not initialize D3D11");
 		return FALSE;
 	}
 
@@ -53,7 +53,7 @@ bool GraphicsManager::Initialize(HWND hwnd)
 	result = m_pColorShader->Initialize(m_pD3D->GetDevice());
 	if (!result)
 	{
-		BE_ERROR(L"Could not initialize the ColorShader Object!")
+		BE_ERROR("Could not initialize the ColorShader Object!")
 		return FALSE;
 	}
 
@@ -66,7 +66,7 @@ bool GraphicsManager::Initialize(HWND hwnd)
 	result = m_pTextureShader->Initialize(m_pD3D->GetDevice());
 	if (!result)
 	{
-		BE_ERROR(L"Could not initialize the TextureShader Object!")
+		BE_ERROR("Could not initialize the TextureShader Object!")
 			return FALSE;
 	}
 

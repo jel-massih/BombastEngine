@@ -18,7 +18,7 @@ bool IsOnlyInstance(LPCTSTR gameTitle)
 		HWND hWnd = FindWindow(gameTitle, NULL);
 		if (hWnd)
 		{
-			BE_ERROR(L"Instance Exists");
+			BE_ERROR("Instance Exists");
 			//An instance of game is already running
 			ShowWindow(hWnd, SW_SHOWNORMAL);
 			SetFocus(hWnd);
@@ -45,7 +45,7 @@ bool CheckStorage(const DWORDLONG megaBytesNeeded)
 
 	if (availableSpace < megaBytesNeeded)
 	{
-		BE_ERROR(L"CheckStorage Failure: Not enough physical storage");
+		BE_ERROR("CheckStorage Failure: Not enough physical storage");
 		return false;
 	}
 
@@ -69,13 +69,13 @@ bool CheckMemory(const DWORDLONG physicalRAMNeeded, const DWORDLONG virtualRAMNe
 
 	if (physMemoryMB < physicalRAMNeeded)
 	{
-		BE_ERROR(L"CheckMemory Failure: Not Enough Physical RAM");
+		BE_ERROR("CheckMemory Failure: Not Enough Physical RAM");
 		return false;
 	}
 
 	if (virtMemoryMB < virtualRAMNeeded)
 	{
-		BE_ERROR(L"CheckMemory Failure: Not Enough Virtual Memory");
+		BE_ERROR("CheckMemory Failure: Not Enough Virtual Memory");
 		return false;
 	}
 
@@ -137,7 +137,7 @@ void GameOptions::Init(const char* xmlFilePath, LPSTR lpCmdLine)
 		attribute = pNode->first_attribute("renderer")->value();
 		if (attribute != "Direct3D 9" && attribute != "Direct3D 11")
 		{
-			BE_ERROR(L"Bad Renderer setting in Graphics options.");
+			BE_ERROR("Bad Renderer setting in Graphics options.");
 		}
 		else
 		{
