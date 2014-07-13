@@ -2,6 +2,7 @@
 #define INTERFACES_H
 
 #include "..\Utilities\rapidxml.hpp"
+#include <string>
 
 class Actor;
 
