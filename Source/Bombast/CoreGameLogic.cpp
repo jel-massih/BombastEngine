@@ -58,7 +58,7 @@ std::string CoreGameLogic::GetActorXml(const ActorId actorId)
 	}
 	else
 	{
-		BE_ERROR(s2ws("Couldnt find actor: " + actorId));
+		BE_ERROR("Couldnt find actor: " + actorId);
 	}
 
 	return "";
