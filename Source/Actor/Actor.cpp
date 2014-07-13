@@ -11,3 +11,7 @@ Actor::~Actor()
 
 }
 
+void Actor::Shutdown()
+{
+
+}
