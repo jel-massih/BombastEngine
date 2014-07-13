@@ -3,6 +3,7 @@
 //========================================================================
 
 #include "BombastApp.h"
+#include "../Resources/ResourceCache.h"
 
 #include <cstdio>
 
@@ -21,6 +22,8 @@ BombastApp::BombastApp()
 	m_pGraphicsManager = 0;
 
 	m_pEntitiesManager = 0;
+
+	m_pResCache = 0;
 
 	m_pGame = 0;
 }
@@ -54,6 +57,8 @@ bool BombastApp::InitInstance(HINSTANCE hInstance, LPSTR lpCmdLine, HWND hWnd, i
 	m_hInstance = hInstance;
 
 	m_screenSize = Point(screenWidth, screenheight);
+
+	//m_pResCache = BE_NEW ResourceCache(50, zipFile);
 
 	InitializeWindows();
 
