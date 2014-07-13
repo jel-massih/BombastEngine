@@ -18,7 +18,6 @@ do \
 { \
 	if (!(expr)) \
 	{ \
-		MessageBox(BombastApp::GetGameInstance()->GetHwnd(), L"Asserion Failed!", L"Assertion", MB_OK); \
 		assert(expr); \
 	} \
 } \
