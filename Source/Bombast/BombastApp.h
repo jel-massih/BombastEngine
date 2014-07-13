@@ -41,8 +41,8 @@ public:
 	void Run();
 	void ShutDown();
 
-	EntitiesManager* GetEntitiesManager();
-	GraphicsManager* GetGraphicsManager();
+	EntitiesManager*  GetEntitiesManager() const;
+	GraphicsManager*  GetGraphicsManager() const;
 
 	CoreGameLogic* GetGameLogic() const { return m_pGame; }
 

@@ -263,12 +263,12 @@ void BombastApp::ShutdownWindows()
 	return;
 }
 
-EntitiesManager* BombastApp::GetEntitiesManager()
+EntitiesManager* BombastApp::GetEntitiesManager() const
 {
 	return m_pEntitiesManager;
 }
 
-GraphicsManager* BombastApp::GetGraphicsManager()
+GraphicsManager* BombastApp::GetGraphicsManager() const
 {
 	return m_pGraphicsManager;
 }
