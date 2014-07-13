@@ -61,6 +61,9 @@
     <ClCompile Include="..\Utilities\String.cpp">
       <Filter>Utilities</Filter>
     </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Msvc</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Bombast\BombastApp.h">
@@ -137,6 +140,9 @@
     <ClInclude Include="..\Utilities\String.h">
       <Filter>Utilities</Filter>
     </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Msvc</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Bombast">
@@ -165,6 +171,9 @@
     </Filter>
     <Filter Include="Actor">
       <UniqueIdentifier>{1bdb76db-5655-424a-a622-9e917a388492}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Msvc">
+      <UniqueIdentifier>{b38645cb-2245-43f5-9758-e4c7058fb821}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
