@@ -23,6 +23,8 @@ public:
 	ActorId GetId() const { return m_id; }
 	std::string GetType() const { return m_type; }
 
+	std::string ToXML();
+
 	template<class ComponentType>
 	ComponentType* GetComponent(ComponentId id) 
 	{

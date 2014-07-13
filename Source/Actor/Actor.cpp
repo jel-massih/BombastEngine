@@ -15,3 +15,8 @@ void Actor::Shutdown()
 {
 
 }
+
+std::string Actor::ToXML()
+{
+	return "";
+}
