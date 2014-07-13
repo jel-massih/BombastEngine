@@ -58,7 +58,15 @@ bool BombastApp::InitInstance(HINSTANCE hInstance, LPSTR lpCmdLine, HWND hWnd, i
 
 	m_screenSize = Point(screenWidth, screenheight);
 
-	//m_pResCache = BE_NEW ResourceCache(50, zipFile);
+	IResourceFile* zipFile = BE_NEW ResourceZipFile(s2ws(ROOT_GAME_PATH + "Assets.zip"));
+
+	m_pResourceCache = BE_NEW ResourceCache(50, zipFile);
+
+	if (!m_pResourceCache->Initialize())
+	{
+		BE_ERROR("Resource Error: Failed to initialize Resource Cashe");
+		return false;
+	}
 
 	InitializeWindows();
 
@@ -246,6 +254,8 @@ void BombastApp::ShutDown()
 		m_pGraphicsManager->Shutdown();
 		SAFE_DELETE(m_pGraphicsManager);
 	}
+
+	SAFE_DELETE(m_pResourceCache);
 
 	ShutdownWindows();
 }
