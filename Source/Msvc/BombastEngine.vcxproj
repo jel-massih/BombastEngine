@@ -15,6 +15,7 @@
     <ClInclude Include="..\Actor\ActorComponent.h" />
     <ClInclude Include="..\BombastEngineStd.h" />
     <ClInclude Include="..\Bombast\BombastApp.h" />
+    <ClInclude Include="..\Bombast\CoreGameLogic.h" />
     <ClInclude Include="..\Bombast\interfaces.h" />
     <ClInclude Include="..\Constants.h" />
     <ClInclude Include="..\Debugging\Logger.h" />
@@ -39,6 +40,7 @@
   <ItemGroup>
     <ClCompile Include="..\Actor\Actor.cpp" />
     <ClCompile Include="..\Bombast\BombastApp.cpp" />
+    <ClCompile Include="..\Bombast\CoreGameLogic.cpp" />
     <ClCompile Include="..\Entity\BitmapEntity.cpp" />
     <ClCompile Include="..\Entity\EntitiesManager.cpp" />
     <ClCompile Include="..\Entity\Entity.cpp" />

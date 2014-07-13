@@ -55,6 +55,9 @@
     <ClCompile Include="..\Entity\EntitiesManager.cpp">
       <Filter>Entity</Filter>
     </ClCompile>
+    <ClCompile Include="..\Bombast\CoreGameLogic.cpp">
+      <Filter>Bombast</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Bombast\BombastApp.h">
@@ -124,6 +127,9 @@
     </ClInclude>
     <ClInclude Include="..\Entity\EntitiesManager.h">
       <Filter>Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Bombast\CoreGameLogic.h">
+      <Filter>Bombast</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
