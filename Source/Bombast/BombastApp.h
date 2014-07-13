@@ -24,8 +24,6 @@ protected:
 	GraphicsManager* m_pGraphicsManager;
 	EntitiesManager* m_pEntitiesManager;
 
-	BombastGame* m_pBombastGame;
-
 public:
 	BombastApp();
 

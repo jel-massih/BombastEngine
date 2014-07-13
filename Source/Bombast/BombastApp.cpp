@@ -22,7 +22,6 @@ BombastApp::BombastApp()
 
 	m_pEntitiesManager = 0;
 
-	m_pBombastGame = 0;
 }
 
 //Win32 Specific Stuff
@@ -155,10 +154,7 @@ bool BombastApp::InitializeApp(int screenWidth, int screenHeight)
 		return FALSE;
 	}
 
-	m_pBombastGame = BE_NEW BombastGame();
-	if (!m_pBombastGame)
 	{
-		return FALSE;
 	}
 
 	result = m_pBombastGame->Initialize(m_hWnd, m_hInstance);
