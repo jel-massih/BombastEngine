@@ -68,6 +68,10 @@ bool BombastApp::InitInstance(HINSTANCE hInstance, LPSTR lpCmdLine, HWND hWnd, i
 		return false;
 	}
 
+	extern IResourceLoader* CreateXmlResourceLoader();
+
+	m_pResourceCache->RegisterLoader(CreateXmlResourceLoader());
+
 	InitializeWindows();
 
 	if(!GetHwnd())
