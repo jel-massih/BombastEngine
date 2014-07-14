@@ -10,6 +10,12 @@
 class ResourceCache;
 class ResourceHandle;
 
+class IResourceExtraData
+{
+public:
+	virtual std::string VToString()=0;
+};
+
 class Resource
 {
 public:
@@ -49,11 +55,15 @@ public:
 	char* Buffer() const { return m_buffer; }
 	char* WritableBuffer() { return m_buffer; }
 
+	IResourceExtraData* GetExtra() { return m_pExtra; }
+	void SetExtra(IResourceExtraData* extra) { m_pExtra = extra; }
+
 protected:
 	Resource m_resource;
 	char* m_buffer;
 	unsigned int m_size;
 	ResourceCache* m_pResourceCache;
+	IResourceExtraData* m_pExtra;
 };
 
 class DefaultResourceLoader : public IResourceLoader

@@ -69,6 +69,7 @@ ResourceHandle::ResourceHandle(Resource& resource, char* buffer, unsigned int si
 	m_buffer = buffer;
 	m_size = size;
 	m_pResourceCache = pResCache;
+	m_pExtra = NULL;
 }
 
 ResourceHandle::~ResourceHandle()
