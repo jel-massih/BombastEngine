@@ -2,6 +2,7 @@
 #include "BombastApp.h"
 #include "../Actor/Actor.h"
 #include "../Utilities/String.h"
+#include "../Resources/ResourceCache.h"
 #include <fstream>
 #include <sstream>
 
@@ -26,7 +27,7 @@ CoreGameLogic::CoreGameLogic()
 
 	m_pLevelManager = BE_NEW LevelManager;
 	
-	//m_pLevelManager->Initialize(BombastApp::GetGameInstance()->m_ResCache->Match("world\\*.xml"));
+	m_pLevelManager->Initialize(BombastApp::GetGameInstance()->m_pResourceCache->Match("world\\*.xml"));
 }
 
 CoreGameLogic::~CoreGameLogic()
@@ -145,5 +146,6 @@ void CoreGameLogic::VChangeState(enum CoreGameState newState)
 
 ActorFactory* CoreGameLogic::VCreateActorFactory()
 {
+	//return BE_NEW ActorFactory;
 	return NULL;
 }
