@@ -31,13 +31,13 @@ public:
 		ActorComponents::iterator findItem = m_components.find(id);
 		if (findItem != m_components.end())
 		{
-			ActorComponent* pBase(findItem->second);
-			ComponentType* pSub(static_cast<ComponentType>(pBase)); //Cast to Subclass version of pointer
+			ActorComponent* pBase = findItem->second;
+			ComponentType* pSub = static_cast<ComponentType*>(pBase); //Cast to Subclass version of pointer
 			return pSub;
 		}
 		else
 		{
-			return ComponentType*();
+			return NULL;
 		}
 	}
 
