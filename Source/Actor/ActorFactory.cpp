@@ -53,12 +53,48 @@ Actor* ActorFactory::CreateActor(const char* actorResource, rapidxml::xml_node<>
 	return pActor;
 }
 
-ActorComponent* ActorFactory::VCreateComponent(rapidxml::xml_node<>* overrides)
+ActorComponent* ActorFactory::VCreateComponent(rapidxml::xml_node<>* pData)
 {
-	return NULL;
+	const char* name = pData->value();
+	ActorComponent* pComponent = m_componentFactory.Create(ActorComponent::GetIdFromName(name));
+
+	//initialize compnent if found
+	if (pComponent)
+	{
+		if (!pComponent->VInitialize(pData))
+		{
+			BE_ERROR("ERROR: Component Failed to initialize: " + std::string(name));
+			return NULL;
+		}
+	}
+	else
+	{
+		BE_ERROR("ERROR: Couldnt find ActorComponent with name: " + std::string(name));
+		return NULL;
+	}
+
+	return pComponent;
 }
 
 void ActorFactory::ModifyActor(Actor* pActor, rapidxml::xml_node<>* overrides)
 {
-
+	//Loop theough each child and load component
+	for (rapidxml::xml_node<>* pNode = overrides->first_node(); pNode; pNode = pNode->next_sibling())
+	{
+		ComponentId componentId = ActorComponent::GetIdFromName(pNode->value());
+		ActorComponent* pComponent = pActor->GetComponent<ActorComponent>(componentId);
+		if (pComponent)
+		{
+			pComponent->VInitialize(pNode);
+		}
+		else
+		{
+			pComponent = VCreateComponent(pNode);
+			if (pComponent)
+			{
+				pActor->AddComponent(pComponent);
+				pComponent->SetOwner(pActor);
+			}
+		}
+	}
 }
