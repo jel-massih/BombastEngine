@@ -161,6 +161,9 @@
     <ClInclude Include="..\Actor\ActorFactory.h">
       <Filter>Actor</Filter>
     </ClInclude>
+    <ClInclude Include="..\Utilities\templates.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Bombast">
