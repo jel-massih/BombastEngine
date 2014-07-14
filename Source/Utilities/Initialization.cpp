@@ -118,6 +118,7 @@ void GameOptions::Init(const char* xmlFilePath, LPSTR lpCmdLine)
 	file.close();
 	std::string content(buffer.str());
 	xml_document<> doc;
+	
 	doc.parse<0>(&content[0]);
 
 	//Get Root node
@@ -157,5 +158,13 @@ void GameOptions::Init(const char* xmlFilePath, LPSTR lpCmdLine)
 			m_screenSize.y = atoi(attribute.c_str());
 			if (m_screenSize.y < 600) { m_screenSize.y = 600; }
 		}
+	}
+
+	pNode = pRoot->first_node("World");
+	if (pNode)
+	{
+		std::string attribute;
+		attribute = pNode->first_attribute("level")->value();
+		m_level = attribute;
 	}
 }
