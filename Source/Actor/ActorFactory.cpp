@@ -24,7 +24,7 @@ Actor* ActorFactory::CreateActor(const char* actorResource, rapidxml::xml_node<>
 	//Create Actor Instance
 	ActorId nextActorId = GetNextActorId();
 	Actor* pActor = BE_NEW Actor(nextActorId);
-	if (!pActor->Initialize())
+	if (!pActor->Initialize(pRoot))
 	{
 		BE_ERROR("ERROR: Failed to initialize Actor: " + std::string(actorResource));
 		return NULL;

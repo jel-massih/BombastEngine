@@ -12,6 +12,7 @@ Actor::~Actor()
 }
 
 bool Actor::Initialize()
+bool Actor::Initialize(rapidxml::xml_node<>* pData)
 {
 	return false;
 }

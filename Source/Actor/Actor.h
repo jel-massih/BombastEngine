@@ -15,7 +15,7 @@ public:
 	Actor(ActorId id);
 	~Actor();
 
-	bool Initialize();
+	bool Initialize(rapidxml::xml_node<>* pData);
 	void Shutdown();
 
 	void Update(int deltaTime);
