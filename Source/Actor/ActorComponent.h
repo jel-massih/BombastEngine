@@ -2,6 +2,8 @@
 #define ACTOR_COMPONENT_H
 
 class ActorComponent{
+	friend class ActorFactory;
+
 public:
 	~ActorComponent() { m_pOwner = 0; };
 
