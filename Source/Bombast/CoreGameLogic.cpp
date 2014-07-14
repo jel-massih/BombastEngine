@@ -1,6 +1,7 @@
 #include "CoreGameLogic.h"
 #include "BombastApp.h"
 #include "../Actor/Actor.h"
+#include "../Actor/ActorFactory.h"
 #include "../Utilities/String.h"
 #include "../Resources/ResourceCache.h"
 #include <fstream>
@@ -146,6 +147,5 @@ void CoreGameLogic::VChangeState(enum CoreGameState newState)
 
 ActorFactory* CoreGameLogic::VCreateActorFactory()
 {
-	//return BE_NEW ActorFactory;
-	return NULL;
+	return BE_NEW ActorFactory();
 }
