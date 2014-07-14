@@ -338,3 +338,23 @@ int ResourceCache::Preload(const std::string pattern, void(*progressCallback)(in
 
 	return loaded;
 }
+
+//Search Resources Cache assets for files matching given pattern
+std::vector<std::string> ResourceCache::Match(const std::string pattern)
+{
+	std::vector<std::string> matchingNames;
+	if (m_pFile == NULL)
+		return matchingNames;
+
+	int numFiles = m_pFile->VGetNumResources();
+	for (int i = 0; i<numFiles; ++i)
+	{
+		std::string name = m_pFile->VGetResourceName(i);
+		std::transform(name.begin(), name.end(), name.begin(), (int(*)(int)) std::tolower);
+		if (WildcardMatch(pattern.c_str(), name.c_str()))
+		{
+			matchingNames.push_back(name);
+		}
+	}
+	return matchingNames;
+}

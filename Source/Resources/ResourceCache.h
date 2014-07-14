@@ -97,6 +97,8 @@ public:
 
 	void Flush();
 
+	std::vector<std::string> Match(const std::string pattern);
+
 protected:
 	bool MakeRoom(unsigned int size);
 	char* Allocate(unsigned int size);
