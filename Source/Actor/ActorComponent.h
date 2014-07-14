@@ -8,7 +8,7 @@ public:
 	~ActorComponent() { m_pOwner = 0; };
 
 	//Meant to be overwriten by implementation classes
-	virtual bool VInitialize() = 0;
+	virtual bool VInitialize(rapidxml::xml_node<>* pData) = 0;
 	virtual void VUpdate(int deltaTime){}
 
 	//Overewritten by interface class
