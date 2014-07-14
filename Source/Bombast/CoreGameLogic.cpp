@@ -4,6 +4,7 @@
 #include "../Actor/ActorFactory.h"
 #include "../Utilities/String.h"
 #include "../Resources/ResourceCache.h"
+#include "../Resources/XmlResource.h"
 #include <fstream>
 #include <sstream>
 
@@ -47,6 +48,10 @@ CoreGameLogic::~CoreGameLogic()
 bool CoreGameLogic::Initialize()
 {
 	m_pActorFactory = VCreateActorFactory();
+	if (!BombastApp::GetGameInstance()->m_options.m_level.empty())
+	{
+		VChangeState(CGS_LoadingGameEnvironment);
+	}
 
 	return true;
 }
@@ -109,16 +114,8 @@ void CoreGameLogic::VDestroyActor(const ActorId actorId)
 
 bool CoreGameLogic::VLoadGame(const char* levelResource)
 {
-	std::ifstream file(levelResource);
-	std::stringstream buffer;
-	buffer << file.rdbuf();
-	file.close();
-	std::string content(buffer.str());
-	rapidxml::xml_document<> doc;
-	doc.parse<0>(&content[0]);
-
 	//Get Root node
-	rapidxml::xml_node<> *pRoot = doc.first_node();
+	rapidxml::xml_node<> *pRoot = XmlResourceLoader::LoadAndReturnRootXmlElement(levelResource);
 	if (!pRoot)
 	{
 		BE_ERROR("ERROR: Cannot find Level resource file: " + std::string(levelResource));
@@ -142,6 +139,19 @@ bool CoreGameLogic::VLoadGame(const char* levelResource)
 
 void CoreGameLogic::VChangeState(enum CoreGameState newState)
 {
+	if (newState == CGS_LoadingGameEnvironment)
+	{
+		m_gameState = newState;
+		if (!BombastApp::GetGameInstance()->VLoadGame())
+		{
+			BE_ERROR("ERROR: Game failed to load!");
+		}
+		else
+		{
+			VChangeState(CGS_SpawningPlayersActors);
+			return;
+		}
+	}
 	m_gameState = newState;
 }
 
