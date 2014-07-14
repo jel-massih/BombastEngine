@@ -11,6 +11,8 @@ public:
 	virtual bool VInitialize(rapidxml::xml_node<>* pData) = 0;
 	virtual void VUpdate(int deltaTime){}
 
+	virtual rapidxml::xml_node<>* VGenerateXml(void) = 0;
+
 	//Overewritten by interface class
 	virtual ComponentId VGetId() const { return GetIdFromName(VGetName()); }
 	virtual const char* VGetName() const = 0;
