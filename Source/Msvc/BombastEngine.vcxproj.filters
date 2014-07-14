@@ -73,6 +73,9 @@
     <ClCompile Include="..\Actor\ActorFactory.cpp">
       <Filter>Actor</Filter>
     </ClCompile>
+    <ClCompile Include="..\Resources\XmlResource.cpp">
+      <Filter>Resources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Bombast\BombastApp.h">
@@ -163,6 +166,9 @@
     </ClInclude>
     <ClInclude Include="..\Utilities\templates.h">
       <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Resources\XmlResource.h">
+      <Filter>Resources</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

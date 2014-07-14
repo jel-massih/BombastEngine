@@ -34,6 +34,7 @@
     <ClInclude Include="..\Graphics3D\ModelClass.h" />
     <ClInclude Include="..\InputCore\InputCore.h" />
     <ClInclude Include="..\Resources\ResourceCache.h" />
+    <ClInclude Include="..\Resources\XmlResource.h" />
     <ClInclude Include="..\Resources\ZipFile.h" />
     <ClInclude Include="..\Utilities\DDSTextureLoader.h" />
     <ClInclude Include="..\Utilities\Initialization.h" />
@@ -62,6 +63,7 @@
     <ClCompile Include="..\Graphics3D\ModelClass.cpp" />
     <ClCompile Include="..\InputCore\InputCore.cpp" />
     <ClCompile Include="..\Resources\ResourceCache.cpp" />
+    <ClCompile Include="..\Resources\XmlResource.cpp" />
     <ClCompile Include="..\Resources\ZipFile.cpp" />
     <ClCompile Include="..\Utilities\DDSTextureLoader.cpp" />
     <ClCompile Include="..\Utilities\Initialization.cpp" />
