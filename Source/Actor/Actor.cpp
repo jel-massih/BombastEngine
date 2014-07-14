@@ -21,7 +21,7 @@ void Actor::Shutdown()
 
 }
 
-void Actor::AddComponent(ActorComponent* pComponent)
+void Actor::Update(int deltaTime)
 {
 
 }
@@ -29,4 +29,9 @@ void Actor::AddComponent(ActorComponent* pComponent)
 std::string Actor::ToXML()
 {
 	return "";
+}
+
+void Actor::AddComponent(ActorComponent* pComponent)
+{
+
 }
