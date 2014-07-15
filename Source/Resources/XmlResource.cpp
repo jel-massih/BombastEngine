@@ -1,12 +1,22 @@
 #include "XmlResource.h"
 #include "../Bombast/BombastApp.h"
 
-void XmlResourceExtraData::ParseXml(char* pRawBuffer)
+void XmlResourceExtraData::Shutdown()
 {
-	std::string str = pRawBuffer;
-	m_xmlDocument.parse<0>(&str[0]);
+	SAFE_DELETE_ARRAY(m_pRawBuffer);
+	m_xmlDocument.clear();
 }
 
+void XmlResourceExtraData::ParseXml(char* pRawBuffer)
+{
+	m_xmlDocument.parse<0>(pRawBuffer);
+	m_pRawBuffer = pRawBuffer;
+}
+
+rapidxml::xml_node<>* XmlResourceExtraData::GetRoot() 
+{ 
+	return m_xmlDocument.first_node(); 
+}
 
 bool XmlResourceLoader::VLoadResource(char *rawBuffer, unsigned int rawSize, ResourceHandle* handle)
 {
@@ -33,7 +43,8 @@ rapidxml::xml_node<>* XmlResourceLoader::LoadAndReturnRootXmlElement(const char*
 	Resource resource(resourceString);
 	ResourceHandle* pResourceHandle = BombastApp::GetGameInstance()->m_pResourceCache->GetHandle(&resource);  // load xml file from zip
 	XmlResourceExtraData* pExtraData = (XmlResourceExtraData*)(pResourceHandle->GetExtra());
-	return pExtraData->GetRoot();
+	rapidxml::xml_node<>* node = pExtraData->GetRoot();
+	return node;
 }
 
 

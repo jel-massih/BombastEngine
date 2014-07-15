@@ -13,6 +13,7 @@ class ResourceHandle;
 class IResourceExtraData
 {
 public:
+	virtual void Shutdown(){};
 	virtual std::string VToString()=0;
 };
 
