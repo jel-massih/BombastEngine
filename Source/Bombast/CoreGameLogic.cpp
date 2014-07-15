@@ -106,7 +106,7 @@ void CoreGameLogic::VDestroyActor(const ActorId actorId)
 	if (target != m_actors.end())
 	{
 		target->second->Shutdown();
-		delete target->second;
+		SAFE_DELETE(target->second);
 		m_actors.erase(target);
 	}
 }
