@@ -3,7 +3,8 @@
 
 void XmlResourceExtraData::ParseXml(char* pRawBuffer)
 {
-	m_xmlDocument.parse<0>(pRawBuffer);
+	std::string str = pRawBuffer;
+	m_xmlDocument.parse<0>(&str[0]);
 }
 
 
