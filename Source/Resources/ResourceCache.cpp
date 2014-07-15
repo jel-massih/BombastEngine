@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <cctype>
 #include <string.h>
+#include <fstream>
 
 Resource::Resource(const std::string& name)
 {
@@ -116,12 +117,17 @@ int DevelopmentResourceZipFile::VGetRawResource(const Resource &r, char* buffer)
 	{
 		return -1;
 	}
+
+	int bytes = -1;
 	
-	FILE* f;
 	std::string fullFileSpec = ws2s(m_assetsDir) + r.m_name.c_str();
-	fopen_s(&f, fullFileSpec.c_str(), "rb");
-	size_t bytes = fread(buffer, 1, m_assetsFileInfo[num].nFileSizeLow, f);
-	fclose(f);
+	std::ifstream file(fullFileSpec);
+	if (file.is_open())
+	{
+		file.read(buffer, m_assetsFileInfo[num].nFileSizeLow);
+		bytes = file.gcount();
+		file.close();
+	}
 	return bytes;
 }
 
