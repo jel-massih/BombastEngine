@@ -16,7 +16,7 @@ bool Actor::Initialize(rapidxml::xml_node<>* pData)
 {
 	m_type = pData->first_attribute("type")->value();
 	m_resource = pData->first_attribute("resource")->value();
-	return false;
+	return true;
 }
 
 void Actor::Shutdown()

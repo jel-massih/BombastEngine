@@ -55,7 +55,7 @@ Actor* ActorFactory::CreateActor(const char* actorResource, rapidxml::xml_node<>
 
 ActorComponent* ActorFactory::VCreateComponent(rapidxml::xml_node<>* pData)
 {
-	const char* name = pData->value();
+	const char* name = pData->name();
 	ActorComponent* pComponent = m_componentFactory.Create(ActorComponent::GetIdFromName(name));
 
 	//initialize compnent if found
