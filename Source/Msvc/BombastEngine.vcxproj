@@ -49,6 +49,7 @@
   <ItemGroup>
     <ClCompile Include="..\Actor\Actor.cpp" />
     <ClCompile Include="..\Actor\ActorFactory.cpp" />
+    <ClCompile Include="..\Actor\TransformComponent.cpp" />
     <ClCompile Include="..\Bombast\BombastApp.cpp" />
     <ClCompile Include="..\Bombast\CoreGameLogic.cpp" />
     <ClCompile Include="..\Entity\BitmapEntity.cpp" />
