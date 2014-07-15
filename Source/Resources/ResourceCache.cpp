@@ -194,6 +194,7 @@ ResourceHandle::ResourceHandle(Resource& resource, char* buffer, unsigned int si
 
 ResourceHandle::~ResourceHandle()
 {
+	SAFE_DELETE(m_pExtra);
 	SAFE_DELETE_ARRAY(m_buffer);
 	m_pResourceCache->MemoryHasBeenFreed(m_size);
 }
