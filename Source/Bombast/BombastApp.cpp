@@ -58,7 +58,7 @@ bool BombastApp::InitInstance(HINSTANCE hInstance, LPSTR lpCmdLine, HWND hWnd, i
 
 	m_screenSize = Point(screenWidth, screenheight);
 
-	IResourceFile* zipFile = BE_NEW ResourceZipFile(s2ws(ROOT_GAME_PATH + "Assets.zip"));
+	IResourceFile* zipFile = BE_NEW DevelopmentResourceZipFile(s2ws(ROOT_GAME_PATH + "Assets"));
 
 	m_pResourceCache = BE_NEW ResourceCache(50, zipFile);
 
