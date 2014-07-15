@@ -2,6 +2,7 @@
 #include "../Bombast/BombastApp.h"
 #include <algorithm>
 #include <cctype>
+#include <string.h>
 
 Resource::Resource(const std::string& name)
 {
@@ -62,6 +63,119 @@ std::string ResourceZipFile::VGetResourceName(int num) const
 	}
 
 	return resName;
+}
+
+DevelopmentResourceZipFile::DevelopmentResourceZipFile(const std::wstring resFilename)
+	: ResourceZipFile(resFilename)
+{
+	TCHAR dir[MAX_PATH];
+	GetCurrentDirectory(MAX_PATH, dir);
+
+	m_assetsDir = dir;
+	int lastSlash = m_assetsDir.find_last_of(L"\\");
+	m_assetsDir = m_assetsDir.substr(0, lastSlash);
+	m_assetsDir += L"\\..\\Assets\\";
+}
+
+int DevelopmentResourceZipFile::Find(const std::string &name)
+{
+	std::string lowerCase = name;
+	std::transform(lowerCase.begin(), lowerCase.end(), lowerCase.begin(), (int(*)(int))std::tolower);
+	ZipContentsMap::const_iterator i = m_directoryContentsMap.find(lowerCase);
+	if (i == m_directoryContentsMap.end())
+	{
+		return -1;
+	}
+
+	return i->second;
+}
+
+bool DevelopmentResourceZipFile::VOpen()
+{
+	//Open assets and read non-hidden stuff
+	ReadAssetsDirectory(L"*");
+
+	return true;
+}
+
+int DevelopmentResourceZipFile::VGetRawResourceSize(const Resource &r)
+{
+	int num = Find(r.m_name.c_str());
+	if (num == -1)
+	{
+		return -1;
+	}
+
+	return m_assetsFileInfo[num].nFileSizeLow;
+}
+
+int DevelopmentResourceZipFile::VGetRawResource(const Resource &r, char* buffer)
+{
+	int num = Find(r.m_name.c_str());
+	if (num == -1)
+	{
+		return -1;
+	}
+	
+	FILE* f;
+	std::string fullFileSpec = ws2s(m_assetsDir) + r.m_name.c_str();
+	fopen_s(&f, fullFileSpec.c_str(), "rb");
+	size_t bytes = fread(buffer, 1, m_assetsFileInfo[num].nFileSizeLow, f);
+	fclose(f);
+	return bytes;
+}
+
+int DevelopmentResourceZipFile::VGetNumResources() const
+{
+	return m_assetsFileInfo.size();
+}
+
+std::string	DevelopmentResourceZipFile::VGetResourceName(int num) const
+{
+	std::wstring wideName = m_assetsFileInfo[num].cFileName;
+	return ws2s(wideName);
+}
+
+void DevelopmentResourceZipFile::ReadAssetsDirectory(std::wstring fileSpec)
+{
+	HANDLE fileHandle;
+	WIN32_FIND_DATA findData;
+
+	//Get first file
+	std::wstring pathSpec = m_assetsDir + fileSpec;
+	fileHandle = FindFirstFile(pathSpec.c_str(), &findData);
+	if (fileHandle != INVALID_HANDLE_VALUE)
+	{
+		//Loop on all remaining entries
+		while (FindNextFile(fileHandle, &findData))
+		{
+			if (findData.dwFileAttributes & FILE_ATTRIBUTE_HIDDEN)
+			{
+				continue;
+			}
+
+			std::wstring fileName = findData.cFileName;
+			if (findData.dwFileAttributes &FILE_ATTRIBUTE_DIRECTORY)
+			{
+				if (fileName != L".." && fileName != L".")
+				{
+					fileName = fileSpec.substr(0, fileSpec.length() - 1) + fileName + L"\\*";
+					ReadAssetsDirectory(fileName);
+				}
+			}
+			else
+			{
+				fileName = fileSpec.substr(0, fileSpec.length() - 1) + fileName;
+				std::wstring lower = fileName;
+				std::transform(lower.begin(), lower.end(), lower.begin(), (int(*)(int))std::tolower);
+				wcscpy_s(&findData.cFileName[0], MAX_PATH, lower.c_str());
+				m_directoryContentsMap[ws2s(lower)] = m_assetsFileInfo.size();
+				m_assetsFileInfo.push_back(findData);
+			}
+		}
+	}
+
+	FindClose(fileHandle);
 }
 
 ResourceHandle::ResourceHandle(Resource& resource, char* buffer, unsigned int size, ResourceCache* pResCache) : m_resource(resource)

@@ -40,6 +40,28 @@ public:
 	virtual bool VIsUsingDevelopmentDirectories(void) const { return false; }
 };
 
+//Fakes zip file from normal directory for easier development
+class DevelopmentResourceZipFile : public ResourceZipFile
+{
+public:
+	std::wstring m_assetsDir;
+	std::vector<WIN32_FIND_DATA> m_assetsFileInfo;
+	ZipContentsMap m_directoryContentsMap;
+
+	DevelopmentResourceZipFile(const std::wstring resFileName);
+
+	virtual bool VOpen();
+	virtual int VGetRawResourceSize(const Resource &r);
+	virtual int VGetRawResource(const Resource &r, char *buffer);
+	virtual int VGetNumResources() const;
+	virtual std::string VGetResourceName(int num) const;
+	virtual bool VIsUsingDevelopmentDirectories(void) const { return true; }
+
+	int Find(const std::string &path);
+
+protected:
+	void ReadAssetsDirectory(std::wstring fileSpec);
+};
 
 class ResourceHandle
 {
