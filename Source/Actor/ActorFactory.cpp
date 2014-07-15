@@ -27,6 +27,7 @@ Actor* ActorFactory::CreateActor(const char* actorResource, rapidxml::xml_node<>
 	if (!pActor->Initialize(pRoot))
 	{
 		BE_ERROR("ERROR: Failed to initialize Actor: " + std::string(actorResource));
+		SAFE_DELETE(pActor);
 		return NULL;
 	}
 
@@ -41,6 +42,7 @@ Actor* ActorFactory::CreateActor(const char* actorResource, rapidxml::xml_node<>
 		}
 		else
 		{
+			SAFE_DELETE(pActor);
 			return NULL;
 		}
 	}
