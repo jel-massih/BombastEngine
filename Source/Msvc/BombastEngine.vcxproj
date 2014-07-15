@@ -14,6 +14,7 @@
     <ClInclude Include="..\Actor\Actor.h" />
     <ClInclude Include="..\Actor\ActorComponent.h" />
     <ClInclude Include="..\Actor\ActorFactory.h" />
+    <ClInclude Include="..\Actor\TransformComponent.h" />
     <ClInclude Include="..\BombastEngineStd.h" />
     <ClInclude Include="..\Bombast\BombastApp.h" />
     <ClInclude Include="..\Bombast\CoreGameLogic.h" />
@@ -30,6 +31,7 @@
     <ClInclude Include="..\Graphics2D\TextureShaderClass.h" />
     <ClInclude Include="..\Graphics3D\CameraClass.h" />
     <ClInclude Include="..\Graphics3D\D3DClass.h" />
+    <ClInclude Include="..\Graphics3D\Geometry.h" />
     <ClInclude Include="..\Graphics3D\GraphicsManager.h" />
     <ClInclude Include="..\Graphics3D\ModelClass.h" />
     <ClInclude Include="..\InputCore\InputCore.h" />
@@ -59,6 +61,7 @@
     <ClCompile Include="..\Graphics2D\TextureShaderClass.cpp" />
     <ClCompile Include="..\Graphics3D\CameraClass.cpp" />
     <ClCompile Include="..\Graphics3D\D3DClass.cpp" />
+    <ClCompile Include="..\Graphics3D\Geometry.cpp" />
     <ClCompile Include="..\Graphics3D\GraphicsManager.cpp" />
     <ClCompile Include="..\Graphics3D\ModelClass.cpp" />
     <ClCompile Include="..\InputCore\InputCore.cpp" />

@@ -76,6 +76,9 @@
     <ClCompile Include="..\Resources\XmlResource.cpp">
       <Filter>Resources</Filter>
     </ClCompile>
+    <ClCompile Include="..\Graphics3D\Geometry.cpp">
+      <Filter>Graphics3D</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Bombast\BombastApp.h">
@@ -169,6 +172,12 @@
     </ClInclude>
     <ClInclude Include="..\Resources\XmlResource.h">
       <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Actor\TransformComponent.h">
+      <Filter>Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Graphics3D\Geometry.h">
+      <Filter>Graphics3D</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
