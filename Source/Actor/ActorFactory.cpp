@@ -24,7 +24,7 @@ Actor* ActorFactory::CreateActor(const char* actorResource, rapidxml::xml_node<>
 		BE_ERROR("ERROR: Failed to create actor from resource: " + std::string(actorResource));
 		return NULL;
 	}
-
+	
 	//Create Actor Instance
 	ActorId nextActorId = GetNextActorId();
 	Actor* pActor = BE_NEW Actor(nextActorId);
@@ -46,7 +46,11 @@ Actor* ActorFactory::CreateActor(const char* actorResource, rapidxml::xml_node<>
 		}
 		else
 		{
-			SAFE_DELETE(pActor);
+			if (pActor)
+			{
+				pActor->Shutdown();
+				SAFE_DELETE(pActor);
+			}
 			return NULL;
 		}
 	}
