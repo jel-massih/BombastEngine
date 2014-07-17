@@ -47,6 +47,10 @@ public:
 	inline void BuildRotationY(const float radians) { XMStoreFloat4x4(this, XMMatrixRotationY(radians)); }
 	inline void BuildRotationZ(const float radians) { XMStoreFloat4x4(this, XMMatrixRotationZ(radians)); }
 	inline void BuildScale(const float x, const float y, const float z);
+	inline void BuildYawPitchRoll(const float yawRadians, const float pitchRadians, const float rollRadians)
+	{
+		XMStoreFloat4x4(this, XMMatrixRotationRollPitchYaw(yawRadians, pitchRadians, rollRadians));
+	}
 };
 
 inline void Mat4x4::SetPosition(Vec3 const &pos)
