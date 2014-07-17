@@ -46,4 +46,14 @@ const std::string ROOT_GAME_PATH = "../../Game/";
 	#define SAFE_RELEASE(x) if(x) x->Release(); x=NULL;
 #endif
 
+typedef D3DCOLORVALUE Color;
+
+extern Color g_White;
+extern Color g_Black;
+
+extern const float fOPAQUE;
+extern const int iOPAQUE;
+extern const float fTRANSPARENT;
+extern const int iTRANSPARENT;
+
 #endif
