@@ -18,7 +18,7 @@ public:
 	virtual const char* VGetName() const = 0;
 	static ComponentId GetIdFromName(const char* componentStr)
 	{
-		return reinterpret_cast<ComponentId>(componentStr);
+		return static_cast<ComponentId>(HashString(componentStr));
 	}
 
 
