@@ -82,6 +82,13 @@
     <ClCompile Include="..\Actor\TransformComponent.cpp">
       <Filter>Actor</Filter>
     </ClCompile>
+    <ClCompile Include="..\Graphics3D\SceneNode.cpp">
+      <Filter>Graphics3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Graphics3D\Material.cpp">
+      <Filter>Graphics3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\BombastEngineStd.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Bombast\BombastApp.h">
@@ -180,6 +187,18 @@
       <Filter>Actor</Filter>
     </ClInclude>
     <ClInclude Include="..\Graphics3D\Geometry.h">
+      <Filter>Graphics3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Actor\RenderComponent.h">
+      <Filter>Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Actor\RenderComponentInterface.h">
+      <Filter>Bombast</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Graphics3D\SceneNode.h">
+      <Filter>Graphics3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Graphics3D\Material.h">
       <Filter>Graphics3D</Filter>
     </ClInclude>
   </ItemGroup>
