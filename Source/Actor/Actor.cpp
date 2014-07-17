@@ -21,6 +21,10 @@ bool Actor::Initialize(rapidxml::xml_node<>* pData)
 
 void Actor::Shutdown()
 {
+	for (auto it = m_components.begin(); it != m_components.end(); ++it)
+	{
+		SAFE_DELETE(it->second);
+	}
 	m_components.clear();
 }
 
