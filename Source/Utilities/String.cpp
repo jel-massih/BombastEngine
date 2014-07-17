@@ -99,3 +99,15 @@ std::wstring s2ws(const std::string &s)
 	std::copy(s.begin(), s.end(), temp.begin());
 	return temp;
 }
+
+uint32_t HashString(const char * s)
+{
+	uint32_t hash = FNV_OFFSET_32, i;
+	for (i = 0; i < strlen(s); i++)
+	{
+		hash = hash ^ (s[i]); //xor next byte to bottom of hash
+		hash = hash * FNV_PRIME_32; //Multiply by prime number
+	}
+
+	return hash;
+}
