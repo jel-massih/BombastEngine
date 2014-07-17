@@ -4,7 +4,7 @@
 //Template Gathered from GameCode Complete
 
 template <class BaseType, class SubType>
-BaseType* GenericObjectCreationFunction(void) { return new SubType; }
+BaseType* GenericObjectCreationFunction(void) { return BE_NEW SubType; }
 
 template <class BaseClass, class IdType>
 class GenericObjectFactory
