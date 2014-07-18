@@ -31,7 +31,7 @@ public:
 
 	const char* GetName() const { return m_name.c_str(); }
 
-	bool HasAlpha() const { return m_name.c_str(); }
+	bool HasAlpha() const { return m_material.HasAlpha(); }
 	float GetAlpha() const { return m_material.GetAlpha(); }
 	AlphaType GetAlphaType() const { return m_alphaType; }
 
