@@ -95,7 +95,90 @@ HRESULT SceneNode::VPreRender(Scene* pScene)
 		}
 	}
 
-//	pScene->PushAndSetMatrix
+	//@TODO: 
+//	pScene->PushAndSetMatrix(m_properties.m_toWorld);
 
 	return S_OK;
+}
+
+HRESULT SceneNode::VPostRender(Scene* pScene)
+{
+	//@TODO:
+	//pScene->PopMatrix();
+	return S_OK;
+}
+
+bool SceneNode::VIsVisible(Scene* pScene) const
+{
+	Mat4x4 toWorld, fromWorld;
+
+	//@TODO:
+	//pScene->GetCamera()->VGet()->Transform(&toWorld, &fromWorld);
+
+	Vec3 pos = GetWorldPosition();
+	Vec3 fromWorldPos = fromWorld.Xform(pos);
+
+	//@TODO:
+	//Frustum const &frustum = pScene->GetCamera()->GetFrustum();
+
+	//bool isVisibile = frustum.Inside(fromWorldPos, VGet()->GetRadius());
+
+	//return isVisibile;
+	return true;
+}
+
+const Vec3 SceneNode::GetWorldPosition() const
+{
+	Vec3 pos = GetPosition();
+	if (m_pParent)
+	{
+		//@TODO:
+		//pos += m_pParent->GetWorldPosition();
+	}
+
+	return pos;
+}
+
+HRESULT SceneNode::VOnUpdate(Scene* pScene, DWORD const elapsedMs)
+{
+	SceneNodeList::iterator i = m_children.begin();
+	SceneNodeList::iterator end = m_children.end();
+
+	while (i != end)
+	{
+		(*i)->VOnUpdate(pScene, elapsedMs);
+		i++;
+	}
+
+	return S_OK;
+}
+
+HRESULT SceneNode::VRenderChildren(Scene* pScene)
+{
+	return S_OK;
+}
+
+bool SceneNode::VAddChild(ISceneNode* kid)
+{
+	return true;
+}
+
+bool SceneNode::VRemoveChild(ActorId actorId)
+{
+	return false;
+}
+
+HRESULT SceneNode::VPick(Scene* pScene, RayCast* raycast)
+{
+	return S_OK;
+}
+
+void SceneNode::SetAlpha(float alpha)
+{
+	m_properties.SetAlpha(alpha);
+	for (SceneNodeList::const_iterator i = m_children.begin(); i != m_children.end(); i++)
+	{
+		SceneNode* sceneNode = static_cast<SceneNode*>(*i);
+		sceneNode->SetAlpha(alpha);
+	}
 }
