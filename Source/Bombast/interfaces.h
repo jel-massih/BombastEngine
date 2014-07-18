@@ -82,9 +82,9 @@ public:
 	virtual bool VAddChild(ISceneNode* kid) = 0;
 	virtual bool VRemoveChild(ActorId id) = 0;
 	virtual HRESULT VOnLostDevice(Scene* pScene) = 0;
-	virtual HRESULT VPick(Scene* pScene, RayCast* pRayCast);
+	virtual HRESULT VPick(Scene* pScene, RayCast* pRayCast)=0;
 
-	virtual ~ISceneNode();
+	virtual ~ISceneNode() {};
 };
 
 #endif
