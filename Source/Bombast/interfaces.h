@@ -2,6 +2,7 @@
 #define INTERFACES_H
 
 #include "..\Utilities\rapidxml.hpp"
+#include "../Graphics3D/Geometry.h"
 #include <string>
 
 class Actor;
@@ -48,6 +49,10 @@ public:
 	virtual ~IResourceFile() { }
 };
 
+class Scene;
+class SceneNodeProperties;
+class RayCast;
+
 enum RenderPass
 {
 	RenderPass_0,
@@ -56,6 +61,30 @@ enum RenderPass
 	RenderPass_Sky,
 	RenderPass_NotRendered,
 	RenderPass_Last
+};
+
+class ISceneNode
+{
+public:
+	virtual const SceneNodeProperties* const VGet() const = 0;
+
+	virtual void VSetTransform(const Mat4x4* toWorld, const Mat4x4* fromWorld = NULL) = 0;
+
+	virtual HRESULT VOnUpdate(Scene* pScene, DWORD const elapsedMs) = 0;
+	virtual HRESULT VOnRestore(Scene* pScene) = 0;
+
+	virtual HRESULT VPreRender(Scene* pScene) = 0;
+	virtual bool bIsVisible(Scene* pScene) const = 0;
+	virtual HRESULT VRender(Scene* pScene) = 0;
+	virtual HRESULT VRenderChildren(Scene* pScene) = 0;
+	virtual HRESULT VPostRender(Scene* pScene) = 0;
+
+	virtual bool VAddChild(ISceneNode* kid) = 0;
+	virtual bool VRemoveChild(ActorId id) = 0;
+	virtual HRESULT VOnLostDevice(Scene* pScene) = 0;
+	virtual HRESULT VPick(Scene* pScene, RayCast* pRayCast);
+
+	virtual ~ISceneNode();
 };
 
 #endif
