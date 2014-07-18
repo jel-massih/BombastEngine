@@ -35,17 +35,23 @@ public:
 			ComponentType* pSub = static_cast<ComponentType*>(pBase); //Cast to Subclass version of pointer
 			return pSub;
 		}
-		else
-		{
-			return NULL;
-		}
+		
+		return NULL;
 	}
 
 	template<class ComponentType>
 	ComponentType* GetComponent(const char* name)
 	{
 		ComponentId id = ActorComponent::GetIdFromName(name);
-		return GetComponent(id);
+		ActorComponents::iterator findItem = m_components.find(id);
+		if (findItem != m_components.end())
+		{
+			ActorComponent* pBase = findItem->second;
+			ComponentType* pSub = static_cast<ComponentType*>(pBase);
+			return pSub;
+		}
+
+		return NULL;
 	}
 
 	const ActorComponents* GetComponents() { return &m_components; }
