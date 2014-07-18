@@ -89,6 +89,12 @@
       <Filter>Graphics3D</Filter>
     </ClCompile>
     <ClCompile Include="..\BombastEngineStd.cpp" />
+    <ClCompile Include="..\Actor\RenderComponent.cpp">
+      <Filter>Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Graphics3D\Scene.cpp">
+      <Filter>Graphics3D</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Bombast\BombastApp.h">
@@ -200,6 +206,9 @@
     </ClInclude>
     <ClInclude Include="..\Actor\RenderComponentInterface.h">
       <Filter>Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Graphics3D\Scene.h">
+      <Filter>Graphics3D</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
