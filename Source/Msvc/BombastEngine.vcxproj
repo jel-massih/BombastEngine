@@ -53,6 +53,7 @@
   <ItemGroup>
     <ClCompile Include="..\Actor\Actor.cpp" />
     <ClCompile Include="..\Actor\ActorFactory.cpp" />
+    <ClCompile Include="..\Actor\RenderComponent.cpp" />
     <ClCompile Include="..\Actor\TransformComponent.cpp" />
     <ClCompile Include="..\BombastEngineStd.cpp" />
     <ClCompile Include="..\Bombast\BombastApp.cpp" />
