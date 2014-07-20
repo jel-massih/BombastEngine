@@ -14,9 +14,14 @@ public:
 	const Color GetColor() const { return m_color; }
 
 protected:
-	virtual bool VDelegateInit(rapidxml::xml_node<>* pData) { return true; }
+	virtual bool VDelegateInitialize(rapidxml::xml_node<>* pData) { return true; }
 	virtual SceneNode* VCreateSceneNode() = 0;
 	Color LoadColor(rapidxml::xml_node<>* pData);
+
+	virtual rapidxml::xml_node<>* VCreateBaseElement(rapidxml::xml_document<>* outDoc) {
+		return outDoc->allocate_node(rapidxml::node_element, VGetName());
+	}
+	virtual void VCreateInheritedXmlElements(rapidxml::xml_node<>* pBaseElement) = 0;
 
 private:
 	virtual SceneNode* VGetSceneNode() override;
