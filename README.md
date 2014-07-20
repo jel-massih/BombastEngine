@@ -5,4 +5,5 @@ C++ Game Engine (DirectX) (WIP)
 
 Dependencies:
 
-zlib
+zlibzlib
+rapidxml
