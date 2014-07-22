@@ -1,4 +1,7 @@
 #include "RenderComponent.h"
+#include "../Bombast/BombastApp.h"
+
+const char* BitmapRenderComponent::g_Name = "BitmapRenderComponent";
 
 bool BaseRenderComponent::VInitialize(rapidxml::xml_node<>* pData)
 {
@@ -13,6 +16,7 @@ bool BaseRenderComponent::VInitialize(rapidxml::xml_node<>* pData)
 
 void BaseRenderComponent::VPostInit()
 {
+	
 	SceneNode* pSceneNode = VGetSceneNode();
 	//@TODO:
 	//Added event trigger stuff
@@ -71,4 +75,14 @@ Color BaseRenderComponent::LoadColor(rapidxml::xml_node<>* pData)
 	color.a = (float)a;
 
 	return color;
+}
+
+SceneNode* BitmapRenderComponent::VCreateSceneNode()
+{
+	return NULL;
+}
+
+void BitmapRenderComponent::VCreateInheritedXmlElements(rapidxml::xml_node<>* pBaseElement)
+{
+	BE_ERROR("ERROR: Not Implemented Yet");
 }
