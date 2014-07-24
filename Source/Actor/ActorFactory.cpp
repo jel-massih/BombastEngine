@@ -14,7 +14,7 @@ ActorFactory::ActorFactory()
 	m_lastActorId = INVALID_ACTOR_ID;
 
 	m_componentFactory.Register<TransformComponent>(ActorComponent::GetIdFromName(TransformComponent::g_Name));
-	m_componentFactory.Register<TransformComponent>(ActorComponent::GetIdFromName(BitmapRenderComponent::g_Name));
+	m_componentFactory.Register<BitmapRenderComponent>(ActorComponent::GetIdFromName(BitmapRenderComponent::g_Name));
 }
 
 Actor* ActorFactory::CreateActor(const char* actorResource, rapidxml::xml_node<>* overrides)
