@@ -33,11 +33,15 @@ protected:
 
 class BitmapRenderComponent : public BaseRenderComponent
 {
+	std::string m_textureResource;
+	DirectX::XMFLOAT2 m_relativeSize;
+
 public:
 	static const char* g_Name;
 	virtual const char* VGetName() const override{ return g_Name; }
 
 protected:
+	virtual bool VDelegateInitialize(rapidxml::xml_node<>* pData) override;
 	virtual SceneNode* VCreateSceneNode() override;
 	virtual void VCreateInheritedXmlElements(rapidxml::xml_node<>* pBaseElement) override;
 };
