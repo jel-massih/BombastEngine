@@ -6,7 +6,7 @@
 
 
     <BitmapRenderComponent>
-        <Texture>data\dirt01.dds</Texture>
-		<RelativeSize x="100" y="100" z="0"/>
+        <Texture path="data\dirt01.dds" />
+		<RelativeSize x="100" y="100"/>
     </BitmapRenderComponent>
 </Actor>
