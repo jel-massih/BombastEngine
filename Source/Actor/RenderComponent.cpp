@@ -77,6 +77,24 @@ Color BaseRenderComponent::LoadColor(rapidxml::xml_node<>* pData)
 	return color;
 }
 
+bool BitmapRenderComponent::VDelegateInitialize(rapidxml::xml_node<>* pData)
+{
+	rapidxml::xml_node<>* pTexture = pData->first_node("Texture");
+	if (pTexture)
+	{
+		m_textureResource = pTexture->first_attribute("path")->value();
+	}
+
+	rapidxml::xml_node<>* pRelativeSize = pData->first_node("RelativeSize");
+	if (pRelativeSize)
+	{
+		m_relativeSize.x = (float)atof(pRelativeSize->first_attribute("x")->value());
+		m_relativeSize.y = (float)atof(pRelativeSize->first_attribute("y")->value());
+	}
+
+	return true;
+}
+
 SceneNode* BitmapRenderComponent::VCreateSceneNode()
 {
 	return NULL;
