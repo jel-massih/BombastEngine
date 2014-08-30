@@ -31,6 +31,7 @@
     <ClInclude Include="..\Graphics2D\ColorShaderClass.h" />
     <ClInclude Include="..\Graphics2D\TextureClass.h" />
     <ClInclude Include="..\Graphics2D\TextureShaderClass.h" />
+    <ClInclude Include="..\Graphics3D\BitmapNode.h" />
     <ClInclude Include="..\Graphics3D\CameraClass.h" />
     <ClInclude Include="..\Graphics3D\D3DClass.h" />
     <ClInclude Include="..\Graphics3D\Geometry.h" />
@@ -67,6 +68,7 @@
     <ClCompile Include="..\Graphics2D\ColorShaderClass.cpp" />
     <ClCompile Include="..\Graphics2D\TextureClass.cpp" />
     <ClCompile Include="..\Graphics2D\TextureShaderClass.cpp" />
+    <ClCompile Include="..\Graphics3D\BitmapNode.cpp" />
     <ClCompile Include="..\Graphics3D\CameraClass.cpp" />
     <ClCompile Include="..\Graphics3D\D3DClass.cpp" />
     <ClCompile Include="..\Graphics3D\Geometry.cpp" />
