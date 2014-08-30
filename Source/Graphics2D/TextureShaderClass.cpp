@@ -22,7 +22,7 @@ bool TextureShaderClass::Initialize(ID3D11Device* device)
 {
 	bool result;
 
-	result = InitializeShader(device, L"../../Game/Data/texture.vs", L"../../Game/Data/texture.ps");
+	result = InitializeShader(device, "../../Game/Data/texture.vs", "../../Game/Data/texture.ps");
 	if (!result)
 	{
 		return false;
@@ -53,7 +53,7 @@ bool TextureShaderClass::Render(ID3D11DeviceContext* deviceContext, int indexCou
 	return true;
 }
 
-bool TextureShaderClass::InitializeShader(ID3D11Device* device, WCHAR* vertexShaderPath, WCHAR* pixelShaderPath)
+bool TextureShaderClass::InitializeShader(ID3D11Device* device, std::string vertexShaderPath, std::string pixelShaderPath)
 {
 	HRESULT result;
 	ID3D10Blob* errorMessage;
@@ -69,7 +69,7 @@ bool TextureShaderClass::InitializeShader(ID3D11Device* device, WCHAR* vertexSha
 	pixelShaderBuffer = 0;
 
 	//Compile Vertex Shader
-	result = D3DCompileFromFile(vertexShaderPath, NULL, NULL, "TextureVertexShader", "vs_5_0", D3D10_SHADER_ENABLE_STRICTNESS, 0, &vertexShaderBuffer, &errorMessage);
+	result = D3DCompileFromFile(s2ws(vertexShaderPath).c_str(), NULL, NULL, "TextureVertexShader", "vs_5_0", D3D10_SHADER_ENABLE_STRICTNESS, 0, &vertexShaderBuffer, &errorMessage);
 	if (FAILED(result))
 	{
 		if (errorMessage)
@@ -85,7 +85,7 @@ bool TextureShaderClass::InitializeShader(ID3D11Device* device, WCHAR* vertexSha
 	}
 
 	//Compile Pixel Shader
-	result = D3DCompileFromFile(pixelShaderPath, NULL, NULL, "TexturePixelShader", "ps_5_0", D3D10_SHADER_ENABLE_STRICTNESS, 0, &pixelShaderBuffer, &errorMessage);
+	result = D3DCompileFromFile(s2ws(pixelShaderPath).c_str(), NULL, NULL, "TexturePixelShader", "ps_5_0", D3D10_SHADER_ENABLE_STRICTNESS, 0, &pixelShaderBuffer, &errorMessage);
 	if (FAILED(result))
 	{
 		if (errorMessage)

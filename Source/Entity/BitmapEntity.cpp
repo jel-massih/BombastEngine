@@ -32,7 +32,7 @@ bool BitmapEntity::Render()
 	return true;
 }
 
-bool BitmapEntity::CreateBitmap(WCHAR* file)
+bool BitmapEntity::CreateBitmap(std::string file)
 {
 	m_pBitmap = BE_NEW(BitmapClass);
 	if (!m_pBitmap)

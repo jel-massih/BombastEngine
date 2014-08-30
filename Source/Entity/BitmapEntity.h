@@ -17,7 +17,7 @@ public:
 	bool Frame();
 	bool Render();
 
-	bool CreateBitmap(WCHAR* file);
+	bool CreateBitmap(std::string file);
 	void SetBitmap(BitmapClass* bitmap);
 	BitmapClass* GetBitmap();
 

@@ -25,7 +25,7 @@ bool ColorShaderClass::Initialize(ID3D11Device* device)
 {
 	bool result;
 
-	result = InitializeShader(device, L"../../Game/Data/color.vs", L"../../Game/Data/color.ps");
+	result = InitializeShader(device, "../../Game/Data/color.vs", "../../Game/Data/color.ps");
 	if (!result)
 	{
 		return false;
@@ -57,7 +57,7 @@ bool ColorShaderClass::Render(ID3D11DeviceContext* deviceContext, int indexCount
 }
 
 
-bool ColorShaderClass::InitializeShader(ID3D11Device* device, WCHAR* vertexShaderPath, WCHAR* pixelShaderPath)
+bool ColorShaderClass::InitializeShader(ID3D11Device* device, std::string vertexShaderPath, std::string pixelShaderPath)
 {
 	HRESULT result;
 	ID3D10Blob* errorMessage;
@@ -72,7 +72,7 @@ bool ColorShaderClass::InitializeShader(ID3D11Device* device, WCHAR* vertexShade
 	vertexShaderBuffer = 0;
 	pixelShaderBuffer = 0;
 
-	result = D3DCompileFromFile(vertexShaderPath, NULL, NULL, "ColorVertexShader", "vs_5_0", D3D10_SHADER_ENABLE_STRICTNESS, 0, &vertexShaderBuffer, &errorMessage);
+	result = D3DCompileFromFile(s2ws(vertexShaderPath).c_str(), NULL, NULL, "ColorVertexShader", "vs_5_0", D3D10_SHADER_ENABLE_STRICTNESS, 0, &vertexShaderBuffer, &errorMessage);
 	if (FAILED(result))
 	{
 		if (errorMessage)
@@ -87,7 +87,7 @@ bool ColorShaderClass::InitializeShader(ID3D11Device* device, WCHAR* vertexShade
 		return false;
 	}
 
-	result = D3DCompileFromFile(pixelShaderPath, NULL, NULL, "ColorPixelShader", "ps_5_0", D3D10_SHADER_ENABLE_STRICTNESS, 0, &pixelShaderBuffer, &errorMessage);
+	result = D3DCompileFromFile(s2ws(pixelShaderPath).c_str(), NULL, NULL, "ColorPixelShader", "ps_5_0", D3D10_SHADER_ENABLE_STRICTNESS, 0, &pixelShaderBuffer, &errorMessage);
 	if (FAILED(result))
 	{
 		if (errorMessage)

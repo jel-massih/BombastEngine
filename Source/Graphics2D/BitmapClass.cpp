@@ -20,7 +20,7 @@ BitmapClass::~BitmapClass()
 {
 }
 
-bool BitmapClass::Initialize(ID3D11Device* device, WCHAR* textureFilename, int bitmapWidth, int bitmapHeight)
+bool BitmapClass::Initialize(ID3D11Device* device, std::string textureFilename, int bitmapWidth, int bitmapHeight)
 {
 	bool result;
 
@@ -271,7 +271,7 @@ void BitmapClass::RenderBuffers(ID3D11DeviceContext* deviceContext)
 	return;
 }
 
-bool BitmapClass::LoadTexture(ID3D11Device* device, WCHAR* filename)
+bool BitmapClass::LoadTexture(ID3D11Device* device, std::string filename)
 {
 	bool result;
 

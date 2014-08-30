@@ -18,7 +18,7 @@ public:
 	ModelClass(const ModelClass& other);
 	~ModelClass();
 
-	bool Initialize(ID3D11Device* device, WCHAR* textureFilepath);
+	bool Initialize(ID3D11Device* device, std::string textureFilepath);
 	void Shutdown();
 	void Render(ID3D11DeviceContext* context);
 
@@ -31,7 +31,7 @@ private:
 	void ShutdownBuffers();
 	void RenderBuffers(ID3D11DeviceContext* context);
 
-	bool LoadTexture(ID3D11Device* device, WCHAR* textureFilepath);
+	bool LoadTexture(ID3D11Device* device, std::string textureFilepath);
 	void ReleaseTexture();
 
 private:

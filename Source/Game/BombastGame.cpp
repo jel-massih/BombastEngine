@@ -40,7 +40,7 @@ bool BombastGame::Initialize(HWND hWnd, HINSTANCE hInstance)
 		return false;
 	}
 
-	result = m_pBackgroundBitmap->Initialize(pBombastApp->GetGraphicsManager()->GetD3DClass()->GetDevice(), L"../../Game/Data/dirt01.dds", pBombastApp->m_options.m_screenSize.x, pBombastApp->m_options.m_screenSize.y);
+//	result = m_pBackgroundBitmap->Initialize(pBombastApp->GetGraphicsManager()->GetD3DClass()->GetDevice(), L"../../Game/Data/dirt01.dds", pBombastApp->m_options.m_screenSize.x, pBombastApp->m_options.m_screenSize.y);
 	if (!result) 
 	{
 		return false;
@@ -54,7 +54,7 @@ bool BombastGame::Initialize(HWND hWnd, HINSTANCE hInstance)
 		return false;
 	}
 
-	result = m_pLeftPaddleBitmap->Initialize(pBombastApp->GetGraphicsManager()->GetD3DClass()->GetDevice(), L"../../Game/Data/paddle.dds", 10, 200);
+	//result = m_pLeftPaddleBitmap->Initialize(pBombastApp->GetGraphicsManager()->GetD3DClass()->GetDevice(), L"../../Game/Data/paddle.dds", 10, 200);
 	if (!result)
 	{
 		return false;
@@ -68,7 +68,7 @@ bool BombastGame::Initialize(HWND hWnd, HINSTANCE hInstance)
 		return false;
 	}
 
-	result = m_pRightPaddleBitmap->Initialize(pBombastApp->GetGraphicsManager()->GetD3DClass()->GetDevice(), L"../../Game/Data/paddle.dds", 10, 200);
+	//result = m_pRightPaddleBitmap->Initialize(pBombastApp->GetGraphicsManager()->GetD3DClass()->GetDevice(), L"../../Game/Data/paddle.dds", 10, 200);
 	if (!result)
 	{
 		return false;

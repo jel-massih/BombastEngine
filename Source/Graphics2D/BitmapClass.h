@@ -16,7 +16,7 @@ public:
 	BitmapClass(const BitmapClass& other); //Copy Constructor
 	~BitmapClass();
 
-	bool Initialize(ID3D11Device* device, WCHAR* textureFilename, int bitmapWidth, int bipmapHeight);
+	bool Initialize(ID3D11Device* device, std::string textureFilename, int bitmapWidth, int bipmapHeight);
 	void Shutdown();
 	
 	bool Render(ID3D11DeviceContext* deviceContext);
@@ -32,7 +32,7 @@ public:
 	int GetBitmapHeight();
 
 private:
-	bool LoadTexture(ID3D11Device* device, WCHAR* filename);
+	bool LoadTexture(ID3D11Device* device, std::string filename);
 	void ReleaseTexture();
 
 	bool InitializeBuffers(ID3D11Device* device);

@@ -13,11 +13,11 @@ TextureClass::~TextureClass()
 {
 }
 
-bool TextureClass::Initialize(ID3D11Device* device, wchar_t* textureTitle)
+bool TextureClass::Initialize(ID3D11Device* device, std::string textureTitle)
 {
 	HRESULT result;
 
-	result = CreateDDSTextureFromFile(device, textureTitle, nullptr, &m_pTexture);
+	result = CreateDDSTextureFromFile(device, s2ws(textureTitle).c_str(), nullptr, &m_pTexture);
 
 	if (FAILED(result)) {
 		return false;
