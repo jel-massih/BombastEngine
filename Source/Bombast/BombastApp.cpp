@@ -80,16 +80,16 @@ bool BombastApp::InitInstance(HINSTANCE hInstance, LPSTR lpCmdLine, HWND hWnd, i
 		return FALSE;
 	}
 
-	if (!VCreateGame())
-	{
-		BE_ERROR("Game Error: Could Not Create The Game");
-		return false;
-	}
-
 	if(!InitializeApp(screenWidth, screenheight))
 	{
 		BE_ERROR("App Error: Could Not Initialize Application layer");
 		return FALSE;
+	}
+
+	if (!VCreateGame())
+	{
+		BE_ERROR("Game Error: Could Not Create The Game");
+		return false;
 	}
 
 	m_bIsRunning = true;
