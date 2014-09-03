@@ -42,6 +42,7 @@
     <ClInclude Include="..\Graphics3D\SceneNode.h" />
     <ClInclude Include="..\InputCore\InputCore.h" />
     <ClInclude Include="..\Resources\ResourceCache.h" />
+    <ClInclude Include="..\Resources\TextureResource.h" />
     <ClInclude Include="..\Resources\XmlResource.h" />
     <ClInclude Include="..\Resources\ZipFile.h" />
     <ClInclude Include="..\Utilities\DDSTextureLoader.h" />
@@ -79,6 +80,7 @@
     <ClCompile Include="..\Graphics3D\SceneNode.cpp" />
     <ClCompile Include="..\InputCore\InputCore.cpp" />
     <ClCompile Include="..\Resources\ResourceCache.cpp" />
+    <ClCompile Include="..\Resources\TextureResource.cpp" />
     <ClCompile Include="..\Resources\XmlResource.cpp" />
     <ClCompile Include="..\Resources\ZipFile.cpp" />
     <ClCompile Include="..\Utilities\DDSTextureLoader.cpp" />
