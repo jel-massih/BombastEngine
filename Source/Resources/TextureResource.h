@@ -1,5 +1,5 @@
-#ifndef XML_RESOURCE_H
-#define XML_RESOURCE_H
+#ifndef TEXTURE_RESOURCE_H
+#define TEXTURE_RESOURCE_H
 
 #include "ResourceCache.h"
 
@@ -12,7 +12,7 @@ public:
 
 	virtual std::string VToString() { return "TextureResourceExtraData"; }
 	
-	bool LoadTexture(char* pRawBuffer);
+	bool LoadTexture(char* pRawBuffer, unsigned int rawSize);
 
 	ID3D11ShaderResourceView* GetTexture();
 };
