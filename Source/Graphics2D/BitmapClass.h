@@ -2,7 +2,7 @@
 #define BITMAP_CLASS_H
 
 #include "../BombastEngineStd.h"
-#include "TextureClass.h"
+#include "../Resources/TextureResource.h"
 
 class BitmapClass {
 private:
@@ -32,7 +32,7 @@ public:
 	int GetBitmapHeight();
 
 private:
-	bool LoadTexture(ID3D11Device* device, std::string filename);
+	bool LoadTexture(std::string filename);
 	void ReleaseTexture();
 
 	bool InitializeBuffers(ID3D11Device* device);
@@ -55,7 +55,7 @@ private:
 
 	ID3D11Buffer *m_pVertexBuffer, *m_pIndexBuffer;
 	
-	TextureClass *m_pTexture;
+	ID3D11ShaderResourceView *m_pTexture;
 };
 
 #endif

@@ -39,7 +39,7 @@ bool BitmapClass::Initialize(ID3D11Device* device, std::string textureFilename, 
 	}
 
 	//Load Texture for Bitmap
-	result = LoadTexture(device, textureFilename);
+	result = LoadTexture(textureFilename);
 	if (!result) {
 		return false;
 	}
@@ -100,7 +100,7 @@ int BitmapClass::GetBitmapHeight()
 
 ID3D11ShaderResourceView* BitmapClass::GetTexture()
 {
-	return m_pTexture->GetTexture();
+	return m_pTexture;
 }
 
 bool BitmapClass::InitializeBuffers(ID3D11Device* device)
@@ -271,19 +271,10 @@ void BitmapClass::RenderBuffers(ID3D11DeviceContext* deviceContext)
 	return;
 }
 
-bool BitmapClass::LoadTexture(ID3D11Device* device, std::string filename)
+bool BitmapClass::LoadTexture(std::string filename)
 {
-	bool result;
-
-	m_pTexture = BE_NEW TextureClass;
-	if (!m_pTexture)
-	{
-		return false;
-	}
-
-	result = m_pTexture->Initialize(device, filename);
-	if (!result)
-	{
+	m_pTexture = TextureResourceLoader::LoadAndReturnTextureResource(filename.c_str());
+	if (!m_pTexture) {
 		return false;
 	}
 
@@ -292,11 +283,5 @@ bool BitmapClass::LoadTexture(ID3D11Device* device, std::string filename)
 
 void BitmapClass::ReleaseTexture()
 {
-	if (m_pTexture)
-	{
-		m_pTexture->Shutdown();
-		SAFE_DELETE(m_pTexture);
-	}
-
 	return;
 }
