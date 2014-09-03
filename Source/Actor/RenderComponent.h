@@ -3,6 +3,7 @@
 
 #include "RenderComponentInterface.h"
 #include "../Utilities/rapidxml.hpp"
+#include "../Graphics2D/BitmapClass.h"
 
 class BaseRenderComponent : public RenderComponentInterface
 {
@@ -35,6 +36,8 @@ class BitmapRenderComponent : public BaseRenderComponent
 {
 	std::string m_textureResource;
 	DirectX::XMFLOAT2 m_relativeSize;
+
+	BitmapClass* m_pBitmap;
 
 public:
 	static const char* g_Name;

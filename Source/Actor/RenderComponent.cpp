@@ -79,6 +79,8 @@ Color BaseRenderComponent::LoadColor(rapidxml::xml_node<>* pData)
 
 bool BitmapRenderComponent::VDelegateInitialize(rapidxml::xml_node<>* pData)
 {
+	bool result = false;
+
 	rapidxml::xml_node<>* pTexture = pData->first_node("Texture");
 	if (pTexture)
 	{
@@ -91,6 +93,20 @@ bool BitmapRenderComponent::VDelegateInitialize(rapidxml::xml_node<>* pData)
 		m_relativeSize.x = (float)atof(pRelativeSize->first_attribute("x")->value());
 		m_relativeSize.y = (float)atof(pRelativeSize->first_attribute("y")->value());
 	}
+
+	m_pBitmap = BE_NEW BitmapClass();
+	if (!m_pBitmap)
+	{
+		return false;
+	}
+	
+	result = m_pBitmap->Initialize(BombastApp::GetGameInstance()->GetGraphicsManager()->GetD3DClass()->GetDevice(), m_textureResource, (int)(BombastApp::GetGameInstance()->m_options.m_screenSize.x * m_relativeSize.x), (int)(BombastApp::GetGameInstance()->m_options.m_screenSize.y * m_relativeSize.y));
+	if (!result)
+	{
+		return false;
+	}
+
+	BombastApp::GetGameInstance()->GetEntitiesManager()->RegisterBitmap(m_pBitmap);
 
 	return true;
 }
