@@ -1,5 +1,6 @@
 #include "TextureResource.h"
 #include "../Bombast/BombastApp.h"
+#include <fstream>
 
 void TextureResourceExtraData::Shutdown()
 {
@@ -15,7 +16,7 @@ bool TextureResourceExtraData::LoadTexture(char* pRawBuffer, unsigned int rawSiz
 {
 	HRESULT result;
 	
-	result = CreateDDSTextureFromMemory(BombastApp::GetGameInstance()->GetGraphicsManager()->GetD3DClass()->GetDevice(), const_cast<const uint8_t*>((uint8_t*)pRawBuffer), rawSize, nullptr, &m_pTexture);
+	result = CreateDDSTextureFromMemory(BombastApp::GetGameInstance()->GetGraphicsManager()->GetD3DClass()->GetDevice(), reinterpret_cast<uint8_t*>(pRawBuffer), rawSize, nullptr, &m_pTexture);
 
 	if (FAILED(result)) {
 		return false;

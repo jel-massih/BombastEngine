@@ -45,6 +45,7 @@ int ResourceZipFile::VGetRawResource(const Resource& r, char* buffer)
 	{
 		size = m_pZipFile->GetFileLen(resourceNum);
 		m_pZipFile->ReadFile(resourceNum, buffer);
+		buffer[size] = '\0';
 	}
 
 	return size;
@@ -121,7 +122,7 @@ int DevelopmentResourceZipFile::VGetRawResource(const Resource &r, char* buffer)
 	int bytes = -1;
 	
 	std::string fullFileSpec = ws2s(m_assetsDir) + r.m_name.c_str();
-	std::ifstream file(fullFileSpec);
+	std::ifstream file(fullFileSpec, std::ios::binary);
 	if (file.is_open())
 	{
 		file.read(buffer, m_assetsFileInfo[num].nFileSizeLow);
@@ -292,7 +293,7 @@ ResourceHandle* ResourceCache::Load(Resource* r)
 
 	int allocSize = rawSize + ((loader->VAddNullZero()) ? 1 : 0);
 	char* rawBuffer = loader->VUseRawFile() ? Allocate(allocSize) : BE_NEW char[allocSize];
-	memset(rawBuffer, 0, allocSize);
+	memset(rawBuffer, 0, allocSize+1);
 
 	if (rawBuffer == NULL || m_pFile->VGetRawResource(*r, rawBuffer) == 0)
 	{
