@@ -46,5 +46,3 @@ rapidxml::xml_node<>* XmlResourceLoader::LoadAndReturnRootXmlElement(const char*
 	rapidxml::xml_node<>* node = pExtraData->GetRoot();
 	return node;
 }
-
-

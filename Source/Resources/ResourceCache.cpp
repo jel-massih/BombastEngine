@@ -45,7 +45,6 @@ int ResourceZipFile::VGetRawResource(const Resource& r, char* buffer)
 	{
 		size = m_pZipFile->GetFileLen(resourceNum);
 		m_pZipFile->ReadFile(resourceNum, buffer);
-		buffer[size] = '\0';
 	}
 
 	return size;
@@ -293,12 +292,17 @@ ResourceHandle* ResourceCache::Load(Resource* r)
 
 	int allocSize = rawSize + ((loader->VAddNullZero()) ? 1 : 0);
 	char* rawBuffer = loader->VUseRawFile() ? Allocate(allocSize) : BE_NEW char[allocSize];
-	memset(rawBuffer, 0, allocSize+1);
+	memset(rawBuffer, 0, allocSize);
 
 	if (rawBuffer == NULL || m_pFile->VGetRawResource(*r, rawBuffer) == 0)
 	{
 		//Resource Cache Out of memory
 		return NULL;
+	}
+
+	//Add null 0 if Loader  requires it
+	if (loader->VAddNullZero()) {
+		rawBuffer[allocSize - 1] = '\0';
 	}
 
 	char* buffer = NULL;

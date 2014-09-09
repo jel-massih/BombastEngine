@@ -27,6 +27,7 @@ public:
 	virtual unsigned int VGetLoadedResourceSize(char *rawBuffer, unsigned int rawSize) { return rawSize; }
 	virtual bool VLoadResource(char *rawBuffer, unsigned int rawSize, ResourceHandle* handle);
 	virtual std::string VGetPattern() { return "*.xml"; }
+	virtual bool VAddNullZero() { return true; }
 
 	static rapidxml::xml_node<>* LoadAndReturnRootXmlElement(const char* resourceString);
 	
