@@ -36,6 +36,10 @@ bool TextureResourceLoader::VLoadResource(char* rawBuffer, unsigned int rawSize,
 
 	TextureResourceExtraData* pExtraData = BE_NEW TextureResourceExtraData();
 	result = pExtraData->LoadTexture(rawBuffer, rawSize);
+
+	//Delete buffer since no longer needed after loading texture
+	SAFE_DELETE_ARRAY(rawBuffer); 
+	
 	if (!result) {
 		return false;
 	}
