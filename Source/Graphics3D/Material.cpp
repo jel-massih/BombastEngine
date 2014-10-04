@@ -2,9 +2,10 @@
 
 Material::Material()
 {
+	D3DCOLORVALUE ambientMat = { 0.10f, 0.10f, 0.10f, 1.0f };
 	ZeroMemory(&m_D3DMat, sizeof(D3DMATERIAL9));
 	m_D3DMat.Diffuse = g_White;
-	m_D3DMat.Ambient = { 0.10f, 0.10f, 0.10f, 1.0f };
+	m_D3DMat.Ambient = ambientMat;
 	m_D3DMat.Specular = g_White;
 	m_D3DMat.Emissive = g_Black;
 }
