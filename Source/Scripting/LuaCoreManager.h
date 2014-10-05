@@ -1,7 +1,9 @@
 #ifndef LUA_CORE_MANAGER_H
 #define LUA_CORE_MANAGER_H
 
-#include <lua.hpp>
+#include <map>
+
+#include "LuaScript.h"
 
 class LuaCoreManager {
 public:
@@ -12,10 +14,10 @@ public:
 	bool Initialize();
 	void Shutdown();
 
-	void RunScript(const char* fileName);
-
+	bool LoadScript(std::string fileName);
+	bool RunScript(std::string fileName);
 private:
-	lua_State* m_pLuaState;
+	std::map<std::string, LuaScript*> m_scripts;
 };
 
 #endif

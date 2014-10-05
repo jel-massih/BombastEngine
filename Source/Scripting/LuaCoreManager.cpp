@@ -1,8 +1,9 @@
 #include "LuaCoreManager.h"
 
+#include "../Resources/LuaResource.h"
+
 LuaCoreManager::LuaCoreManager()
 {
-	m_pLuaState = 0;
 }
 
 LuaCoreManager::LuaCoreManager(const LuaCoreManager& other)
@@ -15,31 +16,35 @@ LuaCoreManager::~LuaCoreManager()
 
 bool LuaCoreManager::Initialize()
 {
-	m_pLuaState = luaL_newstate();
-
-	static const luaL_Reg lualibs[] =
-	{
-		{"base", luaopen_base},
-		{NULL, NULL}
-	};
-
-	const luaL_Reg* lib = lualibs;
-
-	for(; lib->func != NULL; lib++)
-    {
-        lib->func(m_pLuaState);
-        lua_settop(m_pLuaState, 0);
-    }
-
 	return true;
 }
 
 void LuaCoreManager::Shutdown()
 {
-	lua_close(m_pLuaState);
+	m_scripts.clear();
 }
 
-void LuaCoreManager::RunScript(const char* fileName)
+bool LuaCoreManager::LoadScript(std::string filename)
 {
-	luaL_dofile(m_pLuaState, fileName);
+	LuaScript* script = LuaResourceLoader::LoadAndReturnLuaScript(filename.c_str());
+	if(script)
+	{
+		m_scripts.insert(std::make_pair(filename, script));
+		return true;
+	}
+
+	return false;
+}
+
+bool LuaCoreManager::RunScript(std::string filename)
+{
+	for (auto it = m_scripts.begin(); it != m_scripts.end(); ++it)
+	{
+		if(it->first == filename)
+		{
+			return it->second->RunScript();
+		}
+	}
+
+	return false;
 }

@@ -129,6 +129,7 @@ bool CoreGameLogic::VLoadGame(const char* levelResource)
 		{
 			const char* scriptResource = pNode->first_attribute("resource")->value();
 			
+			BombastApp::GetGameInstance()->GetLuaCoreManager()->LoadScript(scriptResource);
 			BombastApp::GetGameInstance()->GetLuaCoreManager()->RunScript(scriptResource);
 		}
 	}
@@ -154,7 +155,7 @@ bool CoreGameLogic::VLoadGame(const char* levelResource)
 		{
 			const char* scriptResource = pNode->first_attribute("resource")->value();
 			
-			BombastApp::GetGameInstance()->GetLuaCoreManager()->RunScript(scriptResource);
+			BombastApp::GetGameInstance()->GetLuaCoreManager()->LoadScript(scriptResource);
 		}
 	}
 

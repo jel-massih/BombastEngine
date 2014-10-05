@@ -30,8 +30,6 @@ public:
 	virtual bool VAddNullZero() { return true; }
 
 	static rapidxml::xml_node<>* LoadAndReturnRootXmlElement(const char* resourceString);
-	
-
 };
 
 #endif
