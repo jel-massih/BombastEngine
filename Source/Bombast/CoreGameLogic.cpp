@@ -146,7 +146,17 @@ bool CoreGameLogic::VLoadGame(const char* levelResource)
 		}
 	}
 
-
+	//Run all Post Init Scripts
+	rapidxml::xml_node<>* pPostLoadNode = pRoot->first_node("PostLoadScripts");
+	if (pPostLoadNode)
+	{
+		for (rapidxml::xml_node<>* pNode = pPostLoadNode->first_node(); pNode; pNode = pNode->next_sibling())
+		{
+			const char* scriptResource = pNode->first_attribute("resource")->value();
+			
+			BombastApp::GetGameInstance()->GetLuaCoreManager()->RunScript(scriptResource);
+		}
+	}
 
 	return true;
 }
