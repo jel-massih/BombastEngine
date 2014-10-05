@@ -52,7 +52,7 @@ public:
 	static BombastApp *GetGameInstance()
 	{
 		if (!m_pAppInstance)
-			m_pAppInstance = new BombastApp;
+			m_pAppInstance = BE_NEW BombastApp;
 		return m_pAppInstance;
 	}
 

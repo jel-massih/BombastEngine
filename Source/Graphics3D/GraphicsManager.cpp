@@ -44,7 +44,7 @@ bool GraphicsManager::Initialize(HWND hwnd)
 
 	m_pCamera->SetPosition(0.0f, 0.0f, -10.0f);
 
-	m_pColorShader = new ColorShaderClass;
+	m_pColorShader = BE_NEW ColorShaderClass;
 	if (!m_pColorShader)
 	{
 		return false;
@@ -57,7 +57,7 @@ bool GraphicsManager::Initialize(HWND hwnd)
 		return FALSE;
 	}
 
-	m_pTextureShader = new TextureShaderClass;
+	m_pTextureShader = BE_NEW TextureShaderClass;
 	if (!m_pTextureShader)
 	{
 		return false;
