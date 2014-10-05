@@ -34,7 +34,7 @@ protected:
 
 class BitmapRenderComponent : public BaseRenderComponent
 {
-	std::string m_textureResource;
+	char* m_textureResource;
 	DirectX::XMFLOAT2 m_relativeSize;
 
 	BitmapClass* m_pBitmap;
