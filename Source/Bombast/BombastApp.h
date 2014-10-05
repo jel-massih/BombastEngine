@@ -8,6 +8,7 @@
 #include "..\Constants.h"
 #include "../Graphics3D/GraphicsManager.h"
 #include "../Entity/EntitiesManager.h"
+#include "../Scripting/LuaCoreManager.h"
 #include "../Utilities/Initialization.h"
 #include "CoreGameLogic.h"
 
@@ -23,6 +24,7 @@ protected:
 
 	GraphicsManager* m_pGraphicsManager;
 	EntitiesManager* m_pEntitiesManager;
+	LuaCoreManager* m_pLuaCoreManager;
 
 public:
 	BombastApp();
@@ -42,6 +44,7 @@ public:
 
 	EntitiesManager*  GetEntitiesManager() const;
 	GraphicsManager*  GetGraphicsManager() const;
+	LuaCoreManager*  GetLuaCoreManager() const;
 
 	CoreGameLogic* GetGameLogic() const { return m_pGame; }
 

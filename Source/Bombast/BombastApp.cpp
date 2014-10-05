@@ -19,6 +19,8 @@ BombastApp::BombastApp()
 
 	m_screenSize = Point(0, 0);
 
+	m_pLuaCoreManager = 0;
+
 	m_pGraphicsManager = 0;
 
 	m_pEntitiesManager = 0;
@@ -199,6 +201,18 @@ bool BombastApp::InitializeApp(int screenWidth, int screenHeight)
 		return false;
 	}
 
+	m_pLuaCoreManager = BE_NEW LuaCoreManager();
+	if(!m_pLuaCoreManager)
+	{
+		return false;
+	}
+
+	result = m_pLuaCoreManager->Initialize();
+	if(!result)
+	{
+		return false;
+	}
+
 	return true;
 }
 
@@ -249,6 +263,12 @@ void BombastApp::ShutDown()
 {
 	SAFE_DELETE(m_pGame);
 
+	if (m_pLuaCoreManager)
+	{
+		m_pLuaCoreManager->Shutdown();
+		SAFE_DELETE(m_pLuaCoreManager);
+	}
+
 	if (m_pEntitiesManager)
 	{
 		m_pEntitiesManager->Shutdown();
@@ -292,6 +312,11 @@ EntitiesManager* BombastApp::GetEntitiesManager() const
 GraphicsManager* BombastApp::GetGraphicsManager() const
 {
 	return m_pGraphicsManager;
+}
+
+LuaCoreManager* BombastApp::GetLuaCoreManager() const
+{
+	return m_pLuaCoreManager;
 }
 
 bool BombastApp::VLoadGame()

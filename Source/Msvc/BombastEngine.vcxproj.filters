@@ -101,6 +101,9 @@
     <ClCompile Include="..\Resources\TextureResource.cpp">
       <Filter>Resources</Filter>
     </ClCompile>
+    <ClCompile Include="..\Scripting\LuaCoreManager.cpp">
+      <Filter>Scripting</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Bombast\BombastApp.h">
@@ -222,6 +225,9 @@
     <ClInclude Include="..\Resources\TextureResource.h">
       <Filter>Resources</Filter>
     </ClInclude>
+    <ClInclude Include="..\Scripting\LuaCoreManager.h">
+      <Filter>Scripting</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Bombast">
@@ -256,6 +262,9 @@
     </Filter>
     <Filter Include="Resources">
       <UniqueIdentifier>{272b0025-58a5-4835-ad03-459b326eaa4c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripting">
+      <UniqueIdentifier>{35f1d86d-a168-4c6a-a6a6-0ec14ed7de3b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

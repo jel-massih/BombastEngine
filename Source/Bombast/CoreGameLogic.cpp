@@ -121,6 +121,19 @@ bool CoreGameLogic::VLoadGame(const char* levelResource)
 		return false;
 	}
 
+	//Run all Pre Init Scripts
+	rapidxml::xml_node<>* pPreLoadNode = pRoot->first_node("PreLoadScripts");
+	if (pPreLoadNode)
+	{
+		for (rapidxml::xml_node<>* pNode = pPreLoadNode->first_node(); pNode; pNode = pNode->next_sibling())
+		{
+			const char* scriptResource = pNode->first_attribute("resource")->value();
+			
+			BombastApp::GetGameInstance()->GetLuaCoreManager()->RunScript(scriptResource);
+		}
+	}
+
+
 	// Load All Initial Actors
 	rapidxml::xml_node<>* pActorsNode = pRoot->first_node("StaticActors");
 	if (pActorsNode)
@@ -132,6 +145,8 @@ bool CoreGameLogic::VLoadGame(const char* levelResource)
 			Actor* pActor = VCreateActor(actorResource, pNode);
 		}
 	}
+
+
 
 	return true;
 }
