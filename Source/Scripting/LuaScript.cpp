@@ -1,40 +1,51 @@
 #include "LuaScript.h"
 #include "../Bombast/BombastApp.h"
 
-LuaScript::LuaScript(const std::string& filename)
+int lua_loader(lua_State* L)
 {
-	m_filename = filename;
-	L = luaL_newstate();
-	if(luaL_loadfile(L, filename.c_str()) || lua_pcall(L, 0, 0, 0)) 
+	const char* file = lua_tostring(L, 1);
 	{
-		std::wstring s(s2ws("Script Failed To Load: " + filename));
-		OutputDebugString(s.c_str());
+		Resource resource(file);
+		ResourceHandle* resHandle = BombastApp::GetGameInstance()->m_pResourceCache->GetHandle(&resource);
 	}
+
+	return 1;
 }
 
 LuaScript::LuaScript()
 {
 	L = luaL_newstate();
 
-    static const luaL_Reg lualibs[] =
-    {
-        {"base", luaopen_base},
-        {NULL, NULL}
-    };
+	//Load ALL THE LIBS!!!!!!!!!
+	luaL_openlibs(L);
 
-    const luaL_Reg* lib = lualibs;
+	if(!RegisterLoader())
+	{
+		BE_ERROR("Failed to Register Custom Require Looader");
+	}
+}
 
-    for(; lib->func != NULL; lib++)
-    {
-        lib->func(L);
-        lua_settop(L, 0);
-    }	
+bool LuaScript::RegisterLoader()
+{
+	/**Register New package.loader**/
+	if(lua_gettostack("package.searchers"))
+	{
+		lua_remove(L, -2);
+
+		//Replace first loader with custom loader
+		lua_pushinteger(L, 1);
+		lua_pushcfunction(L, lua_loader);
+		lua_rawset(L, -3);
+		lua_pop(L, 1);
+		return true;
+	}
+	
+	return false;
 }
 
 bool LuaScript::Initialize(const char* rawBuffer, unsigned int rawSize, std::string filename)
 {
 	m_filename = filename;
-
 
 	int error = luaL_loadbuffer(L, rawBuffer, rawSize, filename.c_str());
 	if(error) 

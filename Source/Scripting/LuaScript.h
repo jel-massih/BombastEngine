@@ -4,8 +4,11 @@
 #include <lua.hpp>
 
 class LuaScript {
+
+private:
+	bool RegisterLoader();
+
 public:
-	LuaScript(const std::string& fileName);
 	LuaScript();
 	~LuaScript();
 	bool Initialize(const char* rawBuffer, unsigned int rawSize, std::string filename);

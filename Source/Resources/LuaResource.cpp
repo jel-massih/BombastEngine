@@ -41,14 +41,7 @@ bool LuaResourceLoader::VLoadResource(char* rawBuffer, unsigned int rawSize, Res
 	}
 
 	LuaResourceExtraData* pExtraData = BE_NEW LuaResourceExtraData();
-	result = pExtraData->LoadScript(rawBuffer, rawSize, handle->GetName());
-
-	//Delete buffer since no longer needed after loading texture
-	SAFE_DELETE_ARRAY(rawBuffer); 
-	
-	if (!result) {
-		return false;
-	}
+	pExtraData->LoadScript(rawBuffer, rawSize, handle->GetName());
 
 	handle->SetExtra(pExtraData);
 
@@ -65,7 +58,12 @@ LuaScript* LuaResourceLoader::LoadAndReturnLuaScript(const char* resourceString)
 	Resource resource(resourceString);
 	ResourceHandle* pResourceHandle = BombastApp::GetGameInstance()->m_pResourceCache->GetHandle(&resource);
 	LuaResourceExtraData* pExtraData = (LuaResourceExtraData*)(pResourceHandle->GetExtra());
-
-	LuaScript* script = pExtraData->GetScript();
-	return script;
+	
+	//Try to load and return script
+	if(pExtraData->LoadScript(pResourceHandle->Buffer(), pResourceHandle->Size(), resourceString))
+	{
+		LuaScript* script = pExtraData->GetScript();
+		return script;
+	}
+	return NULL;
 }
