@@ -26,6 +26,7 @@
     <ClInclude Include="..\Entity\BitmapEntity.h" />
     <ClInclude Include="..\Entity\EntitiesManager.h" />
     <ClInclude Include="..\Entity\Entity.h" />
+    <ClInclude Include="..\Events\EventManager.h" />
     <ClInclude Include="..\Game\BombastGame.h" />
     <ClInclude Include="..\Graphics2D\BitmapClass.h" />
     <ClInclude Include="..\Graphics2D\ColorShaderClass.h" />
@@ -48,6 +49,8 @@
     <ClInclude Include="..\Resources\XmlResource.h" />
     <ClInclude Include="..\Resources\ZipFile.h" />
     <ClInclude Include="..\Scripting\LuaCoreManager.h" />
+    <ClInclude Include="..\Scripting\LuaEvent.h" />
+    <ClInclude Include="..\Scripting\LuaExports.h" />
     <ClInclude Include="..\Scripting\LuaScript.h" />
     <ClInclude Include="..\Utilities\DDSTextureLoader.h" />
     <ClInclude Include="..\Utilities\FastDelegate\FastDelegate.h" />
@@ -90,6 +93,7 @@
     <ClCompile Include="..\Resources\XmlResource.cpp" />
     <ClCompile Include="..\Resources\ZipFile.cpp" />
     <ClCompile Include="..\Scripting\LuaCoreManager.cpp" />
+    <ClCompile Include="..\Scripting\LuaExports.cpp" />
     <ClCompile Include="..\Scripting\LuaScript.cpp" />
     <ClCompile Include="..\Utilities\DDSTextureLoader.cpp" />
     <ClCompile Include="..\Utilities\Initialization.cpp" />
@@ -114,7 +118,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v110</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">

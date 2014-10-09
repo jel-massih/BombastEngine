@@ -110,6 +110,9 @@
     <ClCompile Include="..\Scripting\LuaScript.cpp">
       <Filter>Scripting</Filter>
     </ClCompile>
+    <ClCompile Include="..\Scripting\LuaExports.cpp">
+      <Filter>Scripting</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Bombast\BombastApp.h">
@@ -240,6 +243,21 @@
     <ClInclude Include="..\Scripting\LuaScript.h">
       <Filter>Scripting</Filter>
     </ClInclude>
+    <ClInclude Include="..\Scripting\LuaExports.h">
+      <Filter>Scripting</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Scripting\LuaEvent.h">
+      <Filter>Scripting</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Events\EventManager.h">
+      <Filter>Events</Filter>
+    </ClInclude>
+    <ClInclude Include="..\MultiThreading\MultiThreadUtilities.h">
+      <Filter>MultiThreading</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Utilities\FastDelegate\FastDelegate.h">
+      <Filter>Utilities\FastDelegate</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Bombast">
@@ -277,6 +295,9 @@
     </Filter>
     <Filter Include="Scripting">
       <UniqueIdentifier>{35f1d86d-a168-4c6a-a6a6-0ec14ed7de3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Events">
+      <UniqueIdentifier>{6c83c07c-72fa-46e0-9e22-b7480faef8d6}</UniqueIdentifier>
     </Filter>
     <Filter Include="MultiThreading">
       <UniqueIdentifier>{e62ecc44-a11f-42e6-9f5c-2b2e714592d3}</UniqueIdentifier>
