@@ -1,9 +1,9 @@
-local ActorManager = 
+local ActorManager = class(nil,
 {
 	_actors = {},
 };
 
-function ActorManager.AddActor(scriptObject)
+function ActorManager:AddActor(scriptObject)
 	print("Adding Actor");
 	
 	-- add actor to list of actors
@@ -14,13 +14,11 @@ function ActorManager.AddActor(scriptObject)
 	self._actors[actorId] = scriptObject;
 end
 
-function ActorManager.RemoveActor(scriptObject)
+function ActorManager:RemoveActor(scriptObject)
 	local actorId = scriptObject:GetActorId();
 	self._actors[actorId] = nil;
 end
 
-function ActorManager.GetActor(actorId)
+function ActorManager:GetActor(actorId)
 	return self._actors[actorId];
 end
-
-return ActorManager
