@@ -2,6 +2,11 @@
 #include "../Bombast/BombastApp.h"
 #include <fstream>
 
+LuaResourceExtraData::LuaResourceExtraData()
+{
+	m_pLuaScript = 0;
+}
+
 void LuaResourceExtraData::Shutdown()
 {
 	SAFE_DELETE(m_pLuaScript);
@@ -42,6 +47,8 @@ bool LuaResourceLoader::VLoadResource(char* rawBuffer, unsigned int rawSize, Res
 
 	LuaResourceExtraData* pExtraData = BE_NEW LuaResourceExtraData();
 	pExtraData->LoadScript(rawBuffer, rawSize, handle->GetName());
+	
+	SAFE_DELETE_ARRAY(rawBuffer);
 
 	handle->SetExtra(pExtraData);
 
@@ -59,11 +66,5 @@ LuaScript* LuaResourceLoader::LoadAndReturnLuaScript(const char* resourceString)
 	ResourceHandle* pResourceHandle = BombastApp::GetGameInstance()->m_pResourceCache->GetHandle(&resource);
 	LuaResourceExtraData* pExtraData = (LuaResourceExtraData*)(pResourceHandle->GetExtra());
 	
-	//Try to load and return script
-	if(pExtraData->LoadScript(pResourceHandle->Buffer(), pResourceHandle->Size(), resourceString))
-	{
-		LuaScript* script = pExtraData->GetScript();
-		return script;
-	}
-	return NULL;
+	return pExtraData->GetScript();
 }

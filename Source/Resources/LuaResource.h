@@ -9,6 +9,8 @@ class LuaResourceExtraData : public IResourceExtraData
 	LuaScript* m_pLuaScript;
 
 public:
+	LuaResourceExtraData();
+
 	virtual void Shutdown();
 
 	virtual std::string VToString() { return "LuaResourceExtraData"; }
