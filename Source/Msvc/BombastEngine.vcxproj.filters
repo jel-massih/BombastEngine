@@ -278,5 +278,8 @@
     <Filter Include="Scripting">
       <UniqueIdentifier>{35f1d86d-a168-4c6a-a6a6-0ec14ed7de3b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Utilities\FastDelegate">
+      <UniqueIdentifier>{e3cdbd39-d93e-4480-a782-1ff4db08fb3c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>
