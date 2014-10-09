@@ -1,10 +1,20 @@
 #ifndef LUA_EXPORTS_H
 #define LUA_EXPORTS_H
 
-namespace LuaExports
+#include <lua.hpp>
+
+namespace InternalLuaExports
 {
-	void Register(void);
-	void UnRegister(void);
+	int lua_loader(lua_State* L)
+	{
+		const char* file = lua_tostring(L, 1);
+		{
+			Resource resource(file);
+			ResourceHandle* resHandle = BombastApp::GetGameInstance()->m_pResourceCache->GetHandle(&resource);
+		}
+
+		return 1;
+	}
 }
 
 #endif

@@ -51,7 +51,6 @@
     <ClInclude Include="..\Scripting\LuaCoreManager.h" />
     <ClInclude Include="..\Scripting\LuaEvent.h" />
     <ClInclude Include="..\Scripting\LuaExports.h" />
-    <ClInclude Include="..\Scripting\LuaScript.h" />
     <ClInclude Include="..\Utilities\DDSTextureLoader.h" />
     <ClInclude Include="..\Utilities\FastDelegate\FastDelegate.h" />
     <ClInclude Include="..\Utilities\Initialization.h" />
@@ -93,8 +92,6 @@
     <ClCompile Include="..\Resources\XmlResource.cpp" />
     <ClCompile Include="..\Resources\ZipFile.cpp" />
     <ClCompile Include="..\Scripting\LuaCoreManager.cpp" />
-    <ClCompile Include="..\Scripting\LuaExports.cpp" />
-    <ClCompile Include="..\Scripting\LuaScript.cpp" />
     <ClCompile Include="..\Utilities\DDSTextureLoader.cpp" />
     <ClCompile Include="..\Utilities\Initialization.cpp" />
     <ClCompile Include="..\Utilities\String.cpp" />

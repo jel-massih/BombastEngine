@@ -125,7 +125,7 @@ int DevelopmentResourceZipFile::VGetRawResource(const Resource &r, char* buffer)
 	if (file.is_open())
 	{
 		file.read(buffer, m_assetsFileInfo[num].nFileSizeLow);
-		bytes = file.gcount();
+		bytes = (int)file.gcount();
 		file.close();
 	}
 	return bytes;

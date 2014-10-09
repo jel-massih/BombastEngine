@@ -5,6 +5,7 @@
 #include "../Utilities/String.h"
 #include "../Resources/ResourceCache.h"
 #include "../Resources/XmlResource.h"
+#include "../Resources/LuaResource.h"
 #include <fstream>
 #include <sstream>
 
@@ -129,8 +130,7 @@ bool CoreGameLogic::VLoadGame(const char* levelResource)
 		{
 			const char* scriptResource = pNode->first_attribute("resource")->value();
 			
-			BombastApp::GetGameInstance()->GetLuaCoreManager()->LoadScript(scriptResource);
-			BombastApp::GetGameInstance()->GetLuaCoreManager()->RunScript(scriptResource);
+			LuaResourceLoader::LoadLuaScript(scriptResource);
 		}
 	}
 

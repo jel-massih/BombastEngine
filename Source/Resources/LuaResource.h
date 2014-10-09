@@ -2,22 +2,13 @@
 #define LUA_RESOURCE_H
 
 #include "ResourceCache.h"
-#include "../Scripting/LuaScript.h"
 
 class LuaResourceExtraData : public IResourceExtraData
 {
-	LuaScript* m_pLuaScript;
-
 public:
-	LuaResourceExtraData();
-
-	virtual void Shutdown();
-
 	virtual std::string VToString() { return "LuaResourceExtraData"; }
 
 	bool LoadScript(char* pRawBuffer, unsigned int rawSize, std::string filename);
-
-	LuaScript* GetScript();
 };
 
 
@@ -33,6 +24,6 @@ public:
 	virtual std::string VGetPattern() { return "*.lua"; }
 	virtual bool VAddNullZero() { return true; }
 
-	static LuaScript* LoadAndReturnLuaScript(const char* resourceString);
+	static void LoadLuaScript(const char* resourceString);
 };
 #endif

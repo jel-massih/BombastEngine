@@ -107,12 +107,6 @@
     <ClCompile Include="..\Resources\LuaResource.cpp">
       <Filter>Resources</Filter>
     </ClCompile>
-    <ClCompile Include="..\Scripting\LuaScript.cpp">
-      <Filter>Scripting</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Scripting\LuaExports.cpp">
-      <Filter>Scripting</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Bombast\BombastApp.h">
@@ -239,9 +233,6 @@
     </ClInclude>
     <ClInclude Include="..\Resources\LuaResource.h">
       <Filter>Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Scripting\LuaScript.h">
-      <Filter>Scripting</Filter>
     </ClInclude>
     <ClInclude Include="..\Scripting\LuaExports.h">
       <Filter>Scripting</Filter>

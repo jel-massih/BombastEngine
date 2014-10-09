@@ -2,38 +2,9 @@
 #include "../Bombast/BombastApp.h"
 #include <fstream>
 
-LuaResourceExtraData::LuaResourceExtraData()
-{
-	m_pLuaScript = 0;
-}
-
-void LuaResourceExtraData::Shutdown()
-{
-	SAFE_DELETE(m_pLuaScript);
-}
-
-LuaScript* LuaResourceExtraData::GetScript()
-{
-	return m_pLuaScript;
-}
-
 bool LuaResourceExtraData::LoadScript(char* pRawBuffer, unsigned int rawSize, std::string filename)
 {
-	bool result;
-
-	m_pLuaScript = BE_NEW LuaScript();
-	if(!m_pLuaScript)
-	{
-		return false;
-	}
-
-	result = m_pLuaScript->Initialize(pRawBuffer, rawSize, filename);
-	if(!result)
-	{
-		return false;
-	}
-
-	return true;
+	return BombastApp::GetGameInstance()->GetLuaCoreManager()->LoadScriptFromBuffer(pRawBuffer, rawSize, filename);
 }
 
 bool LuaResourceLoader::VLoadResource(char* rawBuffer, unsigned int rawSize, ResourceHandle* handle)
@@ -46,9 +17,13 @@ bool LuaResourceLoader::VLoadResource(char* rawBuffer, unsigned int rawSize, Res
 	}
 
 	LuaResourceExtraData* pExtraData = BE_NEW LuaResourceExtraData();
-	pExtraData->LoadScript(rawBuffer, rawSize, handle->GetName());
-	
+	result = pExtraData->LoadScript(rawBuffer, rawSize, handle->GetName());
+
 	SAFE_DELETE_ARRAY(rawBuffer);
+
+	if (!result) {
+		return false;
+	}
 
 	handle->SetExtra(pExtraData);
 
@@ -60,11 +35,9 @@ IResourceLoader* CreateLuaResourceLoader()
 	return BE_NEW LuaResourceLoader();
 }
 
-LuaScript* LuaResourceLoader::LoadAndReturnLuaScript(const char* resourceString)
+void LuaResourceLoader::LoadLuaScript(const char* resourceString)
 {
+	//Just loading resourcehandle loads the scro[t
 	Resource resource(resourceString);
 	ResourceHandle* pResourceHandle = BombastApp::GetGameInstance()->m_pResourceCache->GetHandle(&resource);
-	LuaResourceExtraData* pExtraData = (LuaResourceExtraData*)(pResourceHandle->GetExtra());
-	
-	return pExtraData->GetScript();
 }
