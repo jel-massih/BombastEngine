@@ -9,6 +9,8 @@
 
 BombastApp* BombastApp::m_pAppInstance = 0;
 
+const char* LUA_PRE_INIT_FILE = "Scripts\\PreInit.lua";
+
 BombastApp::BombastApp()
 {
 	m_hWnd = 0;
@@ -213,6 +215,12 @@ bool BombastApp::InitializeApp(int screenWidth, int screenHeight)
 	if(!result)
 	{
 		return false;
+	}
+
+	//Load PreInit Lua File
+	{
+		Resource resource(LUA_PRE_INIT_FILE);
+		ResourceHandle* pResourceHandle = BombastApp::GetGameInstance()->m_pResourceCache->GetHandle(&resource);
 	}
 
 	return true;
