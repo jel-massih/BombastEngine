@@ -59,7 +59,8 @@ bool LuaCoreManager::LoadScriptFromBuffer(char* rawBuffer, int rawSize, std::str
 	error = lua_pcall(L, 0, 0, 0);
 	if (error)
 	{
-		BE_ERROR("Script Failed To Run: [" + filename + "] ErrorCode: " + std::to_string(error));
+		std::string errorMessage = lua_tostring(L, -1);
+		BE_ERROR("Script Failed To Run: [" + filename + "] ErrorCode: " + std::to_string(error) + " ErrorMessage" + errorMessage);
 		//Load Was successful so still return true
 	}
 
