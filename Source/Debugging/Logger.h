@@ -23,4 +23,14 @@ do \
 } \
 while (0) \
 
+#define BE_ASSERT_MESSAGE(expr, message) \
+do \
+{ \
+	if (!(expr)) \
+		{ \
+		assert(expr && message); \
+		} \
+} \
+while (0) \
+
 #endif
