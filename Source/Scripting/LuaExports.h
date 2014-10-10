@@ -11,8 +11,13 @@ namespace InternalLuaExports
 		{
 			Resource resource(file);
 			ResourceHandle* resHandle = BombastApp::GetGameInstance()->m_pResourceCache->GetHandle(&resource);
+
+			if (resHandle) {
+				return 2;
+			}
 		}
 
+		lua_pushstring(L, "Resource Failed to Loaded");
 		return 1;
 	}
 }
