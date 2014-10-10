@@ -19,9 +19,8 @@ bool LuaResourceLoader::VLoadResource(char* rawBuffer, unsigned int rawSize, Res
 	LuaResourceExtraData* pExtraData = BE_NEW LuaResourceExtraData();
 	result = pExtraData->LoadScript(rawBuffer, rawSize, handle->GetName());
 
-	SAFE_DELETE_ARRAY(rawBuffer);
-
 	if (!result) {
+		SAFE_DELETE(pExtraData);
 		return false;
 	}
 

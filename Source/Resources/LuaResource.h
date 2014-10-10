@@ -18,7 +18,7 @@ class LuaResourceLoader : public IResourceLoader
 public:
 
 	virtual bool VUseRawFile() { return false; }
-	virtual bool VDiscardRawBufferAfterLoad() { return false; }
+	virtual bool VDiscardRawBufferAfterLoad() { return true; }
 	virtual unsigned int VGetLoadedResourceSize(char *rawBuffer, unsigned int rawSize) { return rawSize; }
 	virtual bool VLoadResource(char *rawBuffer, unsigned int rawSize, ResourceHandle* handle);
 	virtual std::string VGetPattern() { return "*.lua"; }
