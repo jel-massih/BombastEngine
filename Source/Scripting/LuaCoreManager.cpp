@@ -60,7 +60,7 @@ bool LuaCoreManager::LoadScriptFromBuffer(char* rawBuffer, int rawSize, std::str
 	if (error)
 	{
 		BE_ERROR("Script Failed To Run: [" + filename + "] ErrorCode: " + std::to_string(error));
-		return false;
+		//Load Was successful so still return true
 	}
 
 	return true;
