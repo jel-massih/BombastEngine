@@ -1,7 +1,7 @@
-local ActorManager = class(nil,
+ActorManager = class(nil,
 {
 	_actors = {},
-};
+});
 
 function ActorManager:AddActor(scriptObject)
 	print("Adding Actor");
