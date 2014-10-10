@@ -1,26 +1,3 @@
--- Redefinition of require and print
-do
-	local resourceIdMap = {};  -- Map of Loaded Resources
-	
-	require = function(script)
-		if (not resourceIdMap[script]) then
-			if (LoadAndRunScriptResource(script)) then
-				resourceIdMap[script] = true;
-			end
-		end
-	end
-end
-
-do
-    print = function(text)
-		if (text ~= nil) then
-			Log(text);
-		else
-			Log("<nil>");
-		end
-	end
-end
-
 function class(baseClass, body)
 	local ret = body or {};
 
