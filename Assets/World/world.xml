@@ -1,6 +1,6 @@
 <World>
     <PreLoadScripts>
-    	<Script resource="scripts\LevelInit.lua"/>
+    	<Script resource="scripts\PreLevelInit.lua"/>
     </PreLoadScripts>
 
     <StaticActors>
@@ -8,5 +8,6 @@
     </StaticActors>
 
     <PostLoadScripts>
+    	<Script resource="scripts\LevelInit.lua"/>
     </PostLoadScripts>
 </World>
