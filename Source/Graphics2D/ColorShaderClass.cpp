@@ -75,7 +75,6 @@ bool ColorShaderClass::InitializeShader(ID3D11Device* device, std::string vertex
 	ResourceHandle* pVertexResHandle = BombastApp::GetGameInstance()->m_pResourceCache->GetHandle(&vertexResource);
 
 	result = D3DCompile(pVertexResHandle->Buffer(), pVertexResHandle->Size(), vertexShaderPath.c_str(), NULL, NULL, "ColorVertexShader", "vs_5_0", D3D10_SHADER_ENABLE_STRICTNESS, 0, &vertexShaderBuffer, &errorMessage);
-	SAFE_DELETE(pVertexResHandle);
 	if (FAILED(result))
 	{
 		if (errorMessage)
@@ -94,7 +93,6 @@ bool ColorShaderClass::InitializeShader(ID3D11Device* device, std::string vertex
 	ResourceHandle* pPixelResHandle = BombastApp::GetGameInstance()->m_pResourceCache->GetHandle(&pixelResource);
 
 	result = D3DCompile(pPixelResHandle->Buffer(), pPixelResHandle->Size(), pixelShaderPath.c_str(), NULL, NULL, "ColorPixelShader", "ps_5_0", D3D10_SHADER_ENABLE_STRICTNESS, 0, &pixelShaderBuffer, &errorMessage);
-	SAFE_DELETE(pPixelResHandle);
 	if (FAILED(result))
 	{
 		if (errorMessage)
