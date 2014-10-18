@@ -1,5 +1,5 @@
 #include "Msvc\PongSampleStd.h"
-
+#include "../Bombast/CoreGameLogic.h"
 #include "../Bombast/BombastApp.h"
 
 #include "Msvc\PongSample.h"
