@@ -96,7 +96,8 @@ bool BombastApp::InitInstance(HINSTANCE hInstance, LPWSTR lpCmdLine, HWND hWnd, 
 		return FALSE;
 	}
 
-	if (!VCreateGame())
+	m_pGame = VCreateGameAndView();
+	if (!m_pGame)
 	{
 		BE_ERROR("Game Error: Could Not Create The Game");
 		return false;
@@ -164,25 +165,6 @@ LRESULT CALLBACK BombastApp::MsgProc(HWND hWnd, UINT message, WPARAM wParam, LPA
     }
 
     return DefWindowProc (hWnd, message, wParam, lParam);
-}
-
-bool BombastApp::VCreateGame()
-{
-	bool result;
-
-	m_pGame = BE_NEW CoreGameLogic();
-	if (!m_pGame)
-	{
-		return false;
-	}
-
-	result = m_pGame->Initialize();
-	if (!result)
-	{
-		return false;
-	}
-
-	return true;
 }
 
 bool BombastApp::InitializeApp(int screenWidth, int screenHeight)

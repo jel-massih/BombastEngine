@@ -55,7 +55,7 @@ public:
 
 	class ResourceCache *m_pResourceCache;
 
-	virtual bool VCreateGame();
+	virtual CoreGameLogic* VCreateGameAndView() = 0;
 	virtual bool VLoadGame();
 
 private:

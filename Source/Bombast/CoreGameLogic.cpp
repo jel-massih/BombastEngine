@@ -147,6 +147,12 @@ bool CoreGameLogic::VLoadGame(const char* levelResource)
 		}
 	}
 
+	//call delegate load
+	if (!VLoadGameDelegate(pRoot)) 
+	{
+		return false;
+	}
+
 	//Run all Post Init Scripts
 	rapidxml::xml_node<>* pPostLoadNode = pRoot->first_node("PostLoadScripts");
 	if (pPostLoadNode)
