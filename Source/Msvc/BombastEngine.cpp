@@ -18,18 +18,14 @@ int WINAPI BombastEngine(HINSTANCE hInstance,
 
 	_CrtSetDbgFlag(tmpDbgFlag);
 
-	BombastApp* appInstance = g_pApp;
+	g_pApp->m_options.Init((ROOT_GAME_PATH + "Options.xml").c_str(), lpCmdLine);
 
-	appInstance->m_options.Init((ROOT_GAME_PATH + "Options.xml").c_str(), lpCmdLine);
-
-	if(appInstance->InitInstance(hInstance, lpCmdLine, 0, appInstance->m_options.m_screenSize.x, appInstance->m_options.m_screenSize.y ))
+	if (g_pApp->InitInstance(hInstance, lpCmdLine, 0, g_pApp->m_options.m_screenSize.x, g_pApp->m_options.m_screenSize.y))
 	{
-		appInstance->Run();
+		g_pApp->Run();
 	}
 
-	appInstance->ShutDown();
+	g_pApp->ShutDown();
 	
-	SAFE_DELETE(appInstance);
-
 	return 0;
 }
