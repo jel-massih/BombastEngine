@@ -22,7 +22,7 @@ bool TextureShaderClass::Initialize(ID3D11Device* device)
 {
 	bool result;
 
-	result = InitializeShader(device, "../../Game/Data/texture.vs", "../../Game/Data/texture.ps");
+	result = InitializeShader(device, "Data\\texture.vs", "Data\\texture.ps");
 	if (!result)
 	{
 		return false;
@@ -69,7 +69,11 @@ bool TextureShaderClass::InitializeShader(ID3D11Device* device, std::string vert
 	pixelShaderBuffer = 0;
 
 	//Compile Vertex Shader
-	result = D3DCompileFromFile(s2ws(vertexShaderPath).c_str(), NULL, NULL, "TextureVertexShader", "vs_5_0", D3D10_SHADER_ENABLE_STRICTNESS, 0, &vertexShaderBuffer, &errorMessage);
+	Resource vertexShaderResource(vertexShaderPath.c_str());
+	ResourceHandle* pVertexResHandle = BombastApp::GetGameInstance()->m_pResourceCache->GetHandle(&vertexShaderResource);
+
+	result = D3DCompile(pVertexResHandle->Buffer(), pVertexResHandle->Size(), vertexShaderPath.c_str(), NULL, NULL, "TextureVertexShader", "vs_5_0", D3D10_SHADER_ENABLE_STRICTNESS, 0, &vertexShaderBuffer, &errorMessage);
+	SAFE_DELETE(pVertexResHandle);
 	if (FAILED(result))
 	{
 		if (errorMessage)
@@ -85,7 +89,11 @@ bool TextureShaderClass::InitializeShader(ID3D11Device* device, std::string vert
 	}
 
 	//Compile Pixel Shader
-	result = D3DCompileFromFile(s2ws(pixelShaderPath).c_str(), NULL, NULL, "TexturePixelShader", "ps_5_0", D3D10_SHADER_ENABLE_STRICTNESS, 0, &pixelShaderBuffer, &errorMessage);
+	Resource pixelShaderResource(pixelShaderPath.c_str());
+	ResourceHandle* pPixelResHandle = BombastApp::GetGameInstance()->m_pResourceCache->GetHandle(&pixelShaderResource);
+
+	result = D3DCompile(pPixelResHandle->Buffer(), pPixelResHandle->Size(), pixelShaderPath.c_str(), NULL, NULL, "TexturePixelShader", "ps_5_0", D3D10_SHADER_ENABLE_STRICTNESS, 0, &pixelShaderBuffer, &errorMessage);
+	SAFE_DELETE(pPixelResHandle);
 	if (FAILED(result))
 	{
 		if (errorMessage)

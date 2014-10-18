@@ -25,7 +25,7 @@ bool ColorShaderClass::Initialize(ID3D11Device* device)
 {
 	bool result;
 
-	result = InitializeShader(device, "../../Game/Data/color.vs", "../../Game/Data/color.ps");
+	result = InitializeShader(device, "Data\\color.vs", "Data\\color.ps");
 	if (!result)
 	{
 		return false;
@@ -67,12 +67,15 @@ bool ColorShaderClass::InitializeShader(ID3D11Device* device, std::string vertex
 	unsigned int numElements;
 	D3D11_BUFFER_DESC matrixBufferDesc;
 
-
 	errorMessage = 0;
 	vertexShaderBuffer = 0;
 	pixelShaderBuffer = 0;
 
-	result = D3DCompileFromFile(s2ws(vertexShaderPath).c_str(), NULL, NULL, "ColorVertexShader", "vs_5_0", D3D10_SHADER_ENABLE_STRICTNESS, 0, &vertexShaderBuffer, &errorMessage);
+	Resource vertexResource(vertexShaderPath.c_str());
+	ResourceHandle* pVertexResHandle = BombastApp::GetGameInstance()->m_pResourceCache->GetHandle(&vertexResource);
+
+	result = D3DCompile(pVertexResHandle->Buffer(), pVertexResHandle->Size(), vertexShaderPath.c_str(), NULL, NULL, "ColorVertexShader", "vs_5_0", D3D10_SHADER_ENABLE_STRICTNESS, 0, &vertexShaderBuffer, &errorMessage);
+	SAFE_DELETE(pVertexResHandle);
 	if (FAILED(result))
 	{
 		if (errorMessage)
@@ -87,7 +90,11 @@ bool ColorShaderClass::InitializeShader(ID3D11Device* device, std::string vertex
 		return false;
 	}
 
-	result = D3DCompileFromFile(s2ws(pixelShaderPath).c_str(), NULL, NULL, "ColorPixelShader", "ps_5_0", D3D10_SHADER_ENABLE_STRICTNESS, 0, &pixelShaderBuffer, &errorMessage);
+	Resource pixelResource(pixelShaderPath.c_str());
+	ResourceHandle* pPixelResHandle = BombastApp::GetGameInstance()->m_pResourceCache->GetHandle(&pixelResource);
+
+	result = D3DCompile(pPixelResHandle->Buffer(), pPixelResHandle->Size(), pixelShaderPath.c_str(), NULL, NULL, "ColorPixelShader", "ps_5_0", D3D10_SHADER_ENABLE_STRICTNESS, 0, &pixelShaderBuffer, &errorMessage);
+	SAFE_DELETE(pPixelResHandle);
 	if (FAILED(result))
 	{
 		if (errorMessage)
@@ -96,7 +103,7 @@ bool ColorShaderClass::InitializeShader(ID3D11Device* device, std::string vertex
 		}
 		else
 		{
-			BE_ERROR("Missing Vertex Shader File");
+			BE_ERROR("Missing Pixel Shader File");
 		}
 
 		return false;
