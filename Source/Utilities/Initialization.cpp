@@ -110,7 +110,7 @@ GameOptions::GameOptions()
 	m_pDoc = NULL;
 }
 
-void GameOptions::Init(const char* xmlFilePath, LPSTR lpCmdLine)
+void GameOptions::Init(const char* xmlFilePath, LPWSTR lpCmdLine)
 {
 	std::ifstream file(xmlFilePath);
 	std::stringstream buffer;

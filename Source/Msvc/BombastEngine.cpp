@@ -5,9 +5,9 @@ LRESULT CALLBACK WindowProc(HWND hWnd,
                          WPARAM wParam,
                          LPARAM lParam);
 
-int WINAPI WinMain(HINSTANCE hInstance,
+int WINAPI BombastEngine(HINSTANCE hInstance,
                    HINSTANCE hPrevInstance,
-                   LPSTR lpCmdLine,
+                   LPWSTR lpCmdLine,
                    int nCmdShow)
 {
 	//Setup Checks for memory leaks

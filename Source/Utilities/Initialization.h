@@ -22,7 +22,7 @@ struct GameOptions
 	GameOptions();
 	~GameOptions() { SAFE_DELETE(m_pDoc); }
 
-	void Init(const char* xmlFilePath, LPSTR lpCmdLine);
+	void Init(const char* xmlFilePath, LPWSTR lpCmdLine);
 };
 
 #endif

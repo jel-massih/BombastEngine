@@ -33,7 +33,7 @@ BombastApp::BombastApp()
 }
 
 //Win32 Specific Stuff
-bool BombastApp::InitInstance(HINSTANCE hInstance, LPSTR lpCmdLine, HWND hWnd, int screenWidth, int screenheight)
+bool BombastApp::InitInstance(HINSTANCE hInstance, LPWSTR lpCmdLine, HWND hWnd, int screenWidth, int screenheight)
 {
 	if(!IsOnlyInstance(VGetGameTitle()))
 	{

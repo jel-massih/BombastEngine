@@ -1,5 +1,4 @@
-#ifndef LUA_CORE_MANAGER_H
-#define LUA_CORE_MANAGER_H
+#pragma once
 
 #include <map>
 #include <lua.hpp>
@@ -153,5 +152,3 @@ template<>
 inline std::string LuaCoreManager::lua_getdefault<std::string>() {
 	return "null";
 }
-
-#endif
