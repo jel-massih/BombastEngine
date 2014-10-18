@@ -31,7 +31,7 @@ bool BombastGame::Initialize(HWND hWnd, HINSTANCE hInstance)
 		return false;
 	}
 
-	BombastApp* pBombastApp = BombastApp::GetGameInstance();
+	BombastApp* pBombastApp = g_pApp;
 	m_pEntitiesManager = pBombastApp->GetEntitiesManager();
 
 	m_pBackgroundBitmap = BE_NEW BitmapClass();

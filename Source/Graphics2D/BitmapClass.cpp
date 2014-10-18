@@ -199,10 +199,10 @@ bool BitmapClass::UpdateBuffers(ID3D11DeviceContext* deviceContext, int position
 	m_previousPosX = positionX;
 	m_previousPosY = positionY;
 
-	left = (float)(BombastApp::GetGameInstance()->m_options.m_screenSize.x / 2 * -1) + positionX;
+	left = (float)(g_pApp->m_options.m_screenSize.x / 2 * -1) + positionX;
 	right = left + (float)m_bitmapWidth;
 
-	top = (float)(BombastApp::GetGameInstance()->m_options.m_screenSize.y / 2) - positionY;
+	top = (float)(g_pApp->m_options.m_screenSize.y / 2) - positionY;
 	bottom = top - (float)m_bitmapHeight;
 
 	//create vertex array

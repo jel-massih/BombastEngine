@@ -7,8 +7,8 @@
 //		Example -> BE_ERROR("Something Blew Up!");
 #define BE_ERROR(str) \
 	std::wstring s(s2ws(str)); \
-	if(BombastApp::GetGameInstance()->GetHwnd() != NULL) { \
-		MessageBox(BombastApp::GetGameInstance()->GetHwnd(), s.c_str(), L"Error", MB_OK); \
+	if(g_pApp->GetHwnd() != NULL) { \
+		MessageBox(g_pApp->GetHwnd(), s.c_str(), L"Error", MB_OK); \
 	} else { \
 		OutputDebugString(s.c_str()); \
 	} \

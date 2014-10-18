@@ -458,7 +458,7 @@ int ResourceCache::Preload(const std::string pattern, void(*progressCallback)(in
 
 		if (WildcardMatch(pattern.c_str(), resource.m_name.c_str()))
 		{
-			ResourceHandle* handle = BombastApp::GetGameInstance()->m_pResourceCache->GetHandle(&resource);
+			ResourceHandle* handle = g_pApp->m_pResourceCache->GetHandle(&resource);
 			loaded++;
 		}
 

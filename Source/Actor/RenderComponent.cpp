@@ -100,13 +100,13 @@ bool BitmapRenderComponent::VDelegateInitialize(rapidxml::xml_node<>* pData)
 		return false;
 	}
 	
-	result = m_pBitmap->Initialize(BombastApp::GetGameInstance()->GetGraphicsManager()->GetD3DClass()->GetDevice(), m_textureResource, (int)(BombastApp::GetGameInstance()->m_options.m_screenSize.x * m_relativeSize.x), (int)(BombastApp::GetGameInstance()->m_options.m_screenSize.y * m_relativeSize.y));
+	result = m_pBitmap->Initialize(g_pApp->GetGraphicsManager()->GetD3DClass()->GetDevice(), m_textureResource, (int)(g_pApp->m_options.m_screenSize.x * m_relativeSize.x), (int)(g_pApp->m_options.m_screenSize.y * m_relativeSize.y));
 	if (!result)
 	{
 		return false;
 	}
 
-	BombastApp::GetGameInstance()->GetEntitiesManager()->RegisterBitmap(m_pBitmap);
+	g_pApp->GetEntitiesManager()->RegisterBitmap(m_pBitmap);
 
 	return true;
 }

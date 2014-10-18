@@ -18,7 +18,7 @@ int WINAPI BombastEngine(HINSTANCE hInstance,
 
 	_CrtSetDbgFlag(tmpDbgFlag);
 
-	BombastApp* appInstance = BombastApp::GetGameInstance();
+	BombastApp* appInstance = g_pApp;
 
 	appInstance->m_options.Init((ROOT_GAME_PATH + "Options.xml").c_str(), lpCmdLine);
 

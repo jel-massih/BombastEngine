@@ -30,7 +30,7 @@ CoreGameLogic::CoreGameLogic()
 
 	m_pLevelManager = BE_NEW LevelManager;
 	
-	m_pLevelManager->Initialize(BombastApp::GetGameInstance()->m_pResourceCache->Match("world\\*.xml"));
+	m_pLevelManager->Initialize(g_pApp->m_pResourceCache->Match("world\\*.xml"));
 }
 
 CoreGameLogic::~CoreGameLogic()
@@ -49,7 +49,7 @@ CoreGameLogic::~CoreGameLogic()
 bool CoreGameLogic::Initialize()
 {
 	m_pActorFactory = VCreateActorFactory();
-	if (!BombastApp::GetGameInstance()->m_options.m_level.empty())
+	if (!g_pApp->m_options.m_level.empty())
 	{
 		VChangeState(CGS_LoadingGameEnvironment);
 	}
@@ -155,7 +155,7 @@ bool CoreGameLogic::VLoadGame(const char* levelResource)
 		{
 			const char* scriptResource = pNode->first_attribute("resource")->value();
 			
-			BombastApp::GetGameInstance()->GetLuaCoreManager()->LoadScript(scriptResource);
+			g_pApp->GetLuaCoreManager()->LoadScript(scriptResource);
 		}
 	}
 
@@ -167,7 +167,7 @@ void CoreGameLogic::VChangeState(enum CoreGameState newState)
 	if (newState == CGS_LoadingGameEnvironment)
 	{
 		m_gameState = newState;
-		if (!BombastApp::GetGameInstance()->VLoadGame())
+		if (!g_pApp->VLoadGame())
 		{
 			BE_ERROR("ERROR: Game failed to load!");
 		}

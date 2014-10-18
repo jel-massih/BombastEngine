@@ -7,12 +7,14 @@
 
 #include <cstdio>
 
-BombastApp* BombastApp::m_pAppInstance = 0;
+BombastApp *g_pApp = NULL;
 
 const char* LUA_PRE_INIT_FILE = "Scripts\\PreInit.lua";
 
 BombastApp::BombastApp()
 {
+	g_pApp = this;
+
 	m_hWnd = 0;
 
 	m_iColorDepth = 32;
@@ -220,7 +222,7 @@ bool BombastApp::InitializeApp(int screenWidth, int screenHeight)
 	//Load PreInit Lua File
 	{
 		Resource resource(LUA_PRE_INIT_FILE);
-		ResourceHandle* pResourceHandle = BombastApp::GetGameInstance()->m_pResourceCache->GetHandle(&resource);
+		ResourceHandle* pResourceHandle = g_pApp->m_pResourceCache->GetHandle(&resource);
 	}
 
 	return true;

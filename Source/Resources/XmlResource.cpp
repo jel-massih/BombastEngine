@@ -41,7 +41,7 @@ IResourceLoader* CreateXmlResourceLoader()
 rapidxml::xml_node<>* XmlResourceLoader::LoadAndReturnRootXmlElement(const char* resourceString)
 {
 	Resource resource(resourceString);
-	ResourceHandle* pResourceHandle = BombastApp::GetGameInstance()->m_pResourceCache->GetHandle(&resource);  // load xml file from zip
+	ResourceHandle* pResourceHandle = g_pApp->m_pResourceCache->GetHandle(&resource);  // load xml file from zip
 	XmlResourceExtraData* pExtraData = (XmlResourceExtraData*)(pResourceHandle->GetExtra());
 	rapidxml::xml_node<>* node = pExtraData->GetRoot();
 	return node;

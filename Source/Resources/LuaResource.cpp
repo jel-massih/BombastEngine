@@ -4,7 +4,7 @@
 
 bool LuaResourceExtraData::LoadScript(char* pRawBuffer, unsigned int rawSize, std::string filename)
 {
-	return BombastApp::GetGameInstance()->GetLuaCoreManager()->LoadScriptFromBuffer(pRawBuffer, rawSize, filename);
+	return g_pApp->GetLuaCoreManager()->LoadScriptFromBuffer(pRawBuffer, rawSize, filename);
 }
 
 bool LuaResourceLoader::VLoadResource(char* rawBuffer, unsigned int rawSize, ResourceHandle* handle)
@@ -38,5 +38,5 @@ void LuaResourceLoader::LoadLuaScript(const char* resourceString)
 {
 	//Just loading resourcehandle loads the scro[t
 	Resource resource(resourceString);
-	ResourceHandle* pResourceHandle = BombastApp::GetGameInstance()->m_pResourceCache->GetHandle(&resource);
+	ResourceHandle* pResourceHandle = g_pApp->m_pResourceCache->GetHandle(&resource);
 }

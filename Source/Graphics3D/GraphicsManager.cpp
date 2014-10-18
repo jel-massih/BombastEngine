@@ -30,7 +30,7 @@ bool GraphicsManager::Initialize(HWND hwnd)
 		return false;
 	}
 
-	if (!m_pD3D->Initialize(BombastApp::GetGameInstance()->m_options.m_screenSize.x, BombastApp::GetGameInstance()->m_options.m_screenSize.y, true, hwnd, false, 1000.0f, 0.1f))
+	if (!m_pD3D->Initialize(g_pApp->m_options.m_screenSize.x, g_pApp->m_options.m_screenSize.y, true, hwnd, false, 1000.0f, 0.1f))
 	{
 		BE_ERROR("Could not initialize D3D11");
 		return FALSE;
@@ -133,7 +133,7 @@ bool GraphicsManager::Render()
 	m_pD3D->EnableZBuffer(false);
 	
 	//Get Bitmaps Vector and render each one
-	std::vector<BitmapClass*> bitmaps = BombastApp::GetGameInstance()->GetEntitiesManager()->GetBitmaps();
+	std::vector<BitmapClass*> bitmaps = g_pApp->GetEntitiesManager()->GetBitmaps();
 	for (BitmapClass* bitmap : bitmaps)
 	{
 		//prepare bitmap vertex and index buffers for drawing

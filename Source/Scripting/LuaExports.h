@@ -10,7 +10,7 @@ namespace InternalLuaExports
 		const char* file = lua_tostring(L, 1);
 		{
 			Resource resource(file);
-			ResourceHandle* resHandle = BombastApp::GetGameInstance()->m_pResourceCache->GetHandle(&resource);
+			ResourceHandle* resHandle = g_pApp->m_pResourceCache->GetHandle(&resource);
 
 			if (resHandle) {
 				return 2;

@@ -20,7 +20,6 @@ ColorShaderClass::~ColorShaderClass()
 {
 }
 
-
 bool ColorShaderClass::Initialize(ID3D11Device* device)
 {
 	bool result;
@@ -34,12 +33,10 @@ bool ColorShaderClass::Initialize(ID3D11Device* device)
 	return true;
 }
 
-
 void ColorShaderClass::Shutdown()
 {
 	ShutdownShader();
 }
-
 
 bool ColorShaderClass::Render(ID3D11DeviceContext* deviceContext, int indexCount, DirectX::XMMATRIX& world, DirectX::XMMATRIX& view, DirectX::XMMATRIX &proj)
 {
@@ -56,7 +53,6 @@ bool ColorShaderClass::Render(ID3D11DeviceContext* deviceContext, int indexCount
 	return true;
 }
 
-
 bool ColorShaderClass::InitializeShader(ID3D11Device* device, std::string vertexShaderPath, std::string pixelShaderPath)
 {
 	HRESULT result;
@@ -72,7 +68,7 @@ bool ColorShaderClass::InitializeShader(ID3D11Device* device, std::string vertex
 	pixelShaderBuffer = 0;
 
 	Resource vertexResource(vertexShaderPath.c_str());
-	ResourceHandle* pVertexResHandle = BombastApp::GetGameInstance()->m_pResourceCache->GetHandle(&vertexResource);
+	ResourceHandle* pVertexResHandle = g_pApp->m_pResourceCache->GetHandle(&vertexResource);
 
 	result = D3DCompile(pVertexResHandle->Buffer(), pVertexResHandle->Size(), vertexShaderPath.c_str(), NULL, NULL, "ColorVertexShader", "vs_5_0", D3D10_SHADER_ENABLE_STRICTNESS, 0, &vertexShaderBuffer, &errorMessage);
 	if (FAILED(result))
@@ -90,7 +86,7 @@ bool ColorShaderClass::InitializeShader(ID3D11Device* device, std::string vertex
 	}
 
 	Resource pixelResource(pixelShaderPath.c_str());
-	ResourceHandle* pPixelResHandle = BombastApp::GetGameInstance()->m_pResourceCache->GetHandle(&pixelResource);
+	ResourceHandle* pPixelResHandle = g_pApp->m_pResourceCache->GetHandle(&pixelResource);
 
 	result = D3DCompile(pPixelResHandle->Buffer(), pPixelResHandle->Size(), pixelShaderPath.c_str(), NULL, NULL, "ColorPixelShader", "ps_5_0", D3D10_SHADER_ENABLE_STRICTNESS, 0, &pixelShaderBuffer, &errorMessage);
 	if (FAILED(result))
@@ -166,7 +162,6 @@ bool ColorShaderClass::InitializeShader(ID3D11Device* device, std::string vertex
 	return true;
 }
 
-
 void ColorShaderClass::ShutdownShader()
 {
 	SAFE_RELEASE(m_pMatrixBuffer);
@@ -174,7 +169,6 @@ void ColorShaderClass::ShutdownShader()
 	SAFE_RELEASE(m_pPixelShader);
 	SAFE_RELEASE(m_pVertexShader);
 }
-
 
 bool ColorShaderClass::SetShaderParameters(ID3D11DeviceContext* context, DirectX::XMMATRIX &world, DirectX::XMMATRIX &view, DirectX::XMMATRIX &proj)
 {
@@ -208,7 +202,6 @@ bool ColorShaderClass::SetShaderParameters(ID3D11DeviceContext* context, DirectX
 
 	return true;
 }
-
 
 void ColorShaderClass::RenderShader(ID3D11DeviceContext* deviceContext, int indexCount)
 {

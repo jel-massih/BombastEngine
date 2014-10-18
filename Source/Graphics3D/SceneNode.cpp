@@ -85,7 +85,7 @@ void SceneNode::VSetTransform(const Mat4x4* toWorld, const Mat4x4* fromWorld)
 
 HRESULT SceneNode::VPreRender(Scene* pScene)
 {
-	Actor* pActor = BombastApp::GetGameInstance()->GetGameLogic()->VGetActor(m_properties.GetActorId());
+	Actor* pActor = g_pApp->GetGameLogic()->VGetActor(m_properties.GetActorId());
 	if (pActor)
 	{
 		TransformComponent* pTransform = pActor->GetComponent<TransformComponent>(TransformComponent::g_Name);

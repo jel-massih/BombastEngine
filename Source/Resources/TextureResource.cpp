@@ -16,7 +16,7 @@ bool TextureResourceExtraData::LoadTexture(char* pRawBuffer, unsigned int rawSiz
 {
 	HRESULT result;
 	
-	result = CreateDDSTextureFromMemory(BombastApp::GetGameInstance()->GetGraphicsManager()->GetD3DClass()->GetDevice(), reinterpret_cast<uint8_t*>(pRawBuffer), rawSize, nullptr, &m_pTexture);
+	result = CreateDDSTextureFromMemory(g_pApp->GetGraphicsManager()->GetD3DClass()->GetDevice(), reinterpret_cast<uint8_t*>(pRawBuffer), rawSize, nullptr, &m_pTexture);
 
 	if (FAILED(result)) {
 		return false;
@@ -57,7 +57,7 @@ IResourceLoader* CreateTextureResourceLoader()
 ID3D11ShaderResourceView* TextureResourceLoader::LoadAndReturnTextureResource(const char* resourceString)
 {
 	Resource resource(resourceString);
-	ResourceHandle* pResourceHandle = BombastApp::GetGameInstance()->m_pResourceCache->GetHandle(&resource);
+	ResourceHandle* pResourceHandle = g_pApp->m_pResourceCache->GetHandle(&resource);
 	TextureResourceExtraData* pExtraData = (TextureResourceExtraData*)(pResourceHandle->GetExtra());
 
 	ID3D11ShaderResourceView* texture = pExtraData->GetTexture();

@@ -48,14 +48,6 @@ public:
 
 	CoreGameLogic* GetGameLogic() const { return m_pGame; }
 
-
-	static BombastApp *GetGameInstance()
-	{
-		if (!m_pAppInstance)
-			m_pAppInstance = BE_NEW BombastApp;
-		return m_pAppInstance;
-	}
-
 	const Point &GetScreenSize()  { return m_screenSize; }
 
 	struct GameOptions m_options;
@@ -76,5 +68,7 @@ private:
 
 	static BombastApp *m_pAppInstance;
 };
+
+extern BombastApp* g_pApp;
 
 #endif
