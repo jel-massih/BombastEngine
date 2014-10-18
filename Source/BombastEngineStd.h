@@ -56,4 +56,9 @@ extern const int iOPAQUE;
 extern const float fTRANSPARENT;
 extern const int iTRANSPARENT;
 
+extern INT WINAPI BombastEngine(HINSTANCE hInstance,
+	HINSTANCE hPrevInstance,
+	LPWSTR    lpCmdLine,
+	int       nCmdShow);
+
 #endif

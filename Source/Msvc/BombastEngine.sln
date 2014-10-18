@@ -1,9 +1,14 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2013 for Windows Desktop
-VisualStudioVersion = 12.0.21005.1
+VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BombastEngine", "BombastEngine.vcxproj", "{B8DE6183-26FF-4787-B7BB-BDB3697E6887}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PongSample", "..\PongSample\Msvc\PongSample.vcxproj", "{FCC5A23D-02B5-4049-9257-F4E58F9474FA}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B8DE6183-26FF-4787-B7BB-BDB3697E6887} = {B8DE6183-26FF-4787-B7BB-BDB3697E6887}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,6 +24,12 @@ Global
 		{B8DE6183-26FF-4787-B7BB-BDB3697E6887}.Release|Win32.ActiveCfg = Release|Win32
 		{B8DE6183-26FF-4787-B7BB-BDB3697E6887}.Release|Win32.Build.0 = Release|Win32
 		{B8DE6183-26FF-4787-B7BB-BDB3697E6887}.Release|x64.ActiveCfg = Release|Win32
+		{FCC5A23D-02B5-4049-9257-F4E58F9474FA}.Debug|Win32.ActiveCfg = Debug|Win32
+		{FCC5A23D-02B5-4049-9257-F4E58F9474FA}.Debug|Win32.Build.0 = Debug|Win32
+		{FCC5A23D-02B5-4049-9257-F4E58F9474FA}.Debug|x64.ActiveCfg = Debug|Win32
+		{FCC5A23D-02B5-4049-9257-F4E58F9474FA}.Release|Win32.ActiveCfg = Release|Win32
+		{FCC5A23D-02B5-4049-9257-F4E58F9474FA}.Release|Win32.Build.0 = Release|Win32
+		{FCC5A23D-02B5-4049-9257-F4E58F9474FA}.Release|x64.ActiveCfg = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
