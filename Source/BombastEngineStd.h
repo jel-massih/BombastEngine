@@ -21,7 +21,7 @@
 const int SCREEN_WIDTH = 800;
 const int SCREEN_HEIGHT = 600;
 
-const std::string ROOT_GAME_PATH = "../../Game/";
+const std::string ROOT_GAME_PATH = "../../../Game/";
 
 #include "Debugging\Logger.h"
 #include "Utilities\types.h"
