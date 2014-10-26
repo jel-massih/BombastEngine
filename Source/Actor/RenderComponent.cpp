@@ -84,7 +84,15 @@ bool BitmapRenderComponent::VDelegateInitialize(rapidxml::xml_node<>* pData)
 	rapidxml::xml_node<>* pTexture = pData->first_node("Texture");
 	if (pTexture)
 	{
-		m_textureResource = pTexture->first_attribute("path")->value();
+		rapidxml::xml_attribute<char>* test = pTexture->first_attribute("path");
+		if (pTexture->first_attribute("path") != NULL) {
+			m_textureResource = pTexture->first_attribute("path")->value();
+		}
+		else
+		{
+			BE_ERROR("Texture Path Exception: Make sure path attribute is set for Texture Element");
+			return false;
+		}
 	}
 
 	rapidxml::xml_node<>* pRelativeSize = pData->first_node("RelativeSize");
