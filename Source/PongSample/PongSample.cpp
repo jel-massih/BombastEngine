@@ -16,6 +16,8 @@ INT WINAPI wWinMain(HINSTANCE hInstance,
 
 CoreGameLogic *PongSampleApp::VCreateGameAndView()
 {
+	g_pApp->m_options.m_level = "World\\World.xml";
+	
 	m_pGame = BE_NEW PongSampleLogic();
 	m_pGame->Initialize();
 
@@ -38,7 +40,7 @@ void PongSampleLogic::VChangeState(CoreGameState newState)
 	{
 		case CGS_SpawningPlayersActors:
 		{
-			Actor* pActor = VCreateActor("actors\\player_teapot.xml", NULL);
+			Actor* pActor = VCreateActor("Actors\\paddle.xml", NULL);
 
 			break;
 		}

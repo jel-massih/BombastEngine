@@ -8,6 +8,6 @@
     </StaticActors>
 
     <PostLoadScripts>
-    	<Script resource="scripts\LevelInit.lua"/>
+    	<Script resource="scripts\PostLevelInit.lua"/>
     </PostLoadScripts>
 </World>

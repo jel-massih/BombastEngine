@@ -7,12 +7,7 @@
 
 
     <BitmapRenderComponent>
-        <Texture>data\paddle.dds</Texture>
+        <Texture path="data\paddle.dds"></Texture>
 		<Size x="10" y="200" z="0"/>
     </BitmapRenderComponent>
-	
-	<BaseScriptComponent>
-        <ScriptObject constructor="AddActor" destructor="RemoveActor" />
-        <ScriptData actorType="Paddle" />
-    </BaseScriptComponent>
 </Actor>
