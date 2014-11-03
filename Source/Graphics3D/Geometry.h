@@ -3,6 +3,9 @@
 
 using namespace DirectX;
 
+const float  BE_PI = 3.14159265358979f;
+const float  BE_2PI = 2 * BE_PI;
+
 class Vec3 : public XMFLOAT3
 {
 public:

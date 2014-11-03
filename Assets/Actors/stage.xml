@@ -1,6 +1,6 @@
 <Actor type="Stage" resource="actors\stage.xml">
 	<TransformComponent>
-		<Position x="0" y="0" z="0"/>
+		<Position x="200" y="200" z="0"/>
 		<YawPitchRoll x="0" y="0" z="0"/>
 	</TransformComponent>
 

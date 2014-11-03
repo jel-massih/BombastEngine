@@ -74,7 +74,7 @@ public:
 	virtual HRESULT VOnRestore(Scene* pScene) = 0;
 
 	virtual HRESULT VPreRender(Scene* pScene) = 0;
-	virtual bool bIsVisible(Scene* pScene) const = 0;
+	virtual bool VIsVisible(Scene* pScene) const = 0;
 	virtual HRESULT VRender(Scene* pScene) = 0;
 	virtual HRESULT VRenderChildren(Scene* pScene) = 0;
 	virtual HRESULT VPostRender(Scene* pScene) = 0;
