@@ -130,7 +130,7 @@ SceneNode* BitmapRenderComponent::VCreateSceneNode()
 		Mat4x4 rot90;
 		rot90.BuildRotationY(-BE_PI / 2.0f);
 		SceneNode* parent = BE_NEW SceneNode(m_pOwner->GetId(), (BaseRenderComponent*)this, RenderPass_Actor, &pTransformCompnent->GetTransform());
-		SceneNode* bitmap = BE_NEW D3DBitmapNode11(INVALID_ACTOR_ID, (BaseRenderComponent*)this, RenderPass_Actor, &rot90);
+		SceneNode* bitmap = BE_NEW D3DBitmapNode11(INVALID_ACTOR_ID, (BaseRenderComponent*)this, m_textureResource, RenderPass_Actor, &rot90);
 		parent->VAddChild(bitmap);
 		return parent;
 	}
