@@ -107,6 +107,12 @@
     <ClCompile Include="..\Resources\LuaResource.cpp">
       <Filter>Resources</Filter>
     </ClCompile>
+    <ClCompile Include="..\Graphics3D\Shaders.cpp">
+      <Filter>Graphics3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Utilities\Math.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Bombast\BombastApp.h">
@@ -248,6 +254,12 @@
     </ClInclude>
     <ClInclude Include="..\Utilities\FastDelegate\FastDelegate.h">
       <Filter>Utilities\FastDelegate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Graphics3D\Shaders.h">
+      <Filter>Graphics3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Utilities\Math.h">
+      <Filter>Utilities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
