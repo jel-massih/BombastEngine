@@ -49,10 +49,6 @@ public:
 	virtual ~IResourceFile() { }
 };
 
-class Scene;
-class SceneNodeProperties;
-class RayCast;
-
 enum RenderPass
 {
 	RenderPass_0,
@@ -61,6 +57,32 @@ enum RenderPass
 	RenderPass_Sky,
 	RenderPass_NotRendered,
 	RenderPass_Last
+};
+
+class Scene;
+class SceneNodeProperties;
+class RayCast;
+
+class IRenderState
+{
+public:
+	virtual std::string VToString() = 0;
+};
+
+class IRenderer
+{
+public:
+	virtual void VSetBackgroundColor(BYTE a, BYTE r, BYTE g, BYTE b) = 0;
+	virtual HRESULT VOnRestore() = 0;
+	virtual void VShutdown() = 0;
+	virtual bool VPreRender() = 0;
+	virtual bool VPostRender() = 0;
+	virtual void VSetWorldTransform(const Mat4x4* m) = 0;
+	virtual void VSetViewTransform(const Mat4x4* m) = 0;
+	virtual void VSetProjectionTransform(const Mat4x4* m) = 0;
+	virtual IRenderState* VPrepareAlphaPass() = 0;
+	virtual IRenderState* VPrepareSkyBoxPass() = 0;
+	virtual void VDrawLine(const Vec3& from, const Vec3& to, const Color& color) = 0;
 };
 
 class ISceneNode
