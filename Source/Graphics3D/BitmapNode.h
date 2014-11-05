@@ -14,9 +14,9 @@ public:
 		RenderPass renderPass,
 		const Mat4x4 *t);
 
-	virtual HRESULT VOnRestore(Scene* pScene);
+	virtual HRESULT VOnRestore(Scene* pScene) = 0;
 	virtual HRESULT VOnLostDevice(Scene* pScene) { return S_OK; }
-	virtual HRESULT VRender(Scene* pScene);
+	virtual HRESULT VRender(Scene* pScene) = 0;
 
 protected:
 	std::string m_textureName;
@@ -27,8 +27,7 @@ protected:
 class D3DBitmapNode11 : public BitmapNode
 {
 public:
-	D3DBitmapNode11(const ActorId actorId, BaseRenderComponent* renderComponent, RenderPass renderPass, const Mat4x4* t);
-	virtual ~D3DBitmapNode11();
+	D3DBitmapNode11(const ActorId actorId, BaseRenderComponent* renderComponent, std::string textureFileName, RenderPass renderPass, const Mat4x4* t);
 	HRESULT VOnRestore(Scene* pScene);
 	HRESULT VRender(Scene* pScene);
 

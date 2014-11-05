@@ -10,7 +10,14 @@ BitmapNode::BitmapNode(const ActorId actorId,
 	m_textureName = textureFileName;
 }
 
-HRESULT BitmapNode::VOnRestore(Scene* pScene)
+D3DBitmapNode11::D3DBitmapNode11(const ActorId actorId,
+	BaseRenderComponent* renderComponent,
+	std::string textureFileName,
+	RenderPass renderPass,
+	const Mat4x4* t) : BitmapNode(actorId, renderComponent, textureFileName, renderPass, t)
+{}
+
+HRESULT D3DBitmapNode11::VOnRestore(Scene* pScene)
 {
 	HRESULT hr;
 	BE_HRETURN(SceneNode::VOnRestore(pScene), "Failed to OnRestore Parent");
@@ -24,7 +31,7 @@ HRESULT BitmapNode::VOnRestore(Scene* pScene)
 	return S_OK;
 }
 
-HRESULT BitmapNode::VRender(Scene* pScene)
+HRESULT D3DBitmapNode11::VRender(Scene* pScene)
 {
 	HRESULT hr;
 
@@ -37,4 +44,3 @@ HRESULT BitmapNode::VRender(Scene* pScene)
 
 	return S_OK;
 }
-
