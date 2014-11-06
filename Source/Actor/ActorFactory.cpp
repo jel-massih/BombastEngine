@@ -62,6 +62,8 @@ Actor* ActorFactory::CreateActor(const char* actorResource, rapidxml::xml_node<>
 		ModifyActor(pActor, overrides);
 	}
 
+	pActor->PostInitialize();
+
 	return pActor;
 }
 

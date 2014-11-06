@@ -9,6 +9,8 @@
 class BaseRenderComponent : public RenderComponentInterface
 {
 public:
+	BaseRenderComponent();
+
 	virtual bool VInitialize(rapidxml::xml_node<>* pData) override;
 	virtual void VPostInit() override;
 	virtual void VOnChanged() override;
@@ -37,8 +39,6 @@ class BitmapRenderComponent : public BaseRenderComponent
 {
 	char* m_textureResource;
 	DirectX::XMFLOAT2 m_relativeSize;
-
-	BitmapClass* m_pBitmap;
 
 public:
 	static const char* g_Name;
