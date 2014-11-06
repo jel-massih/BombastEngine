@@ -4,6 +4,7 @@
 #include "RenderComponentInterface.h"
 #include "../Utilities/rapidxml.hpp"
 #include "../Graphics2D/BitmapClass.h"
+#include "../Graphics3D/BitmapNode.h"
 
 class BaseRenderComponent : public RenderComponentInterface
 {

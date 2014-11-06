@@ -101,4 +101,57 @@ protected:
 	BaseRenderComponent* m_pRenderComponent;
 };
 
+class RootNode : public SceneNode
+{
+public:
+	RootNode();
+	virtual bool VAddChild(ISceneNode* child);
+	virtual HRESULT VRenderChildren(Scene* pScene);
+	virtual bool VRemoveChild(ActorId id);
+	virtual bool VIsVisible(Scene* pScene) const { return true; }
+};
+
+
+class CameraNode : public SceneNode
+{
+public :
+	CameraNode(Mat4x4 const* t, Frustum const& frustum)
+		:SceneNode(INVALID_ACTOR_ID, nullptr, RenderPass_0, t),
+		m_frustum(frustum),
+		m_bActive(true),
+		m_bDebugCamera(false),
+		m_pTarget(nullptr),
+		m_camOffsetVector(0.0f, 1.0f, -10.0f, 0.0f)
+	{
+	}
+
+	virtual HRESULT VRender(Scene* pScene);
+	virtual HRESULT VOnRestore(Scene* pScene);
+	virtual bool VIsVisible(Scene* pScene) const { return m_bActive; }
+
+	const Frustum& GetFrustum() const { return m_frustum; }
+	void SetTarget(SceneNode* pTarget) { m_pTarget = pTarget; }
+	void ClearTarget() { m_pTarget = nullptr; }
+	SceneNode* GetTarget() { return m_pTarget; }
+
+	Mat4x4 GetWorldViewProjection(Scene* pScene);
+	HRESULT SetViewTransform(Scene* pScene);
+
+	Mat4x4 GetProjection() { return m_projection; }
+	Mat4x4 GetView() { return m_view; }
+
+	void SetCameraOffset(const Vec4& cameraOffset)
+	{
+		m_camOffsetVector = cameraOffset;
+	}
+
+protected:
+	Frustum m_frustum;
+	Mat4x4 m_projection;
+	Mat4x4 m_view;
+	bool m_bActive;
+	bool m_bDebugCamera;
+	SceneNode* m_pTarget;
+	Vec4 m_camOffsetVector;
+};
 #endif

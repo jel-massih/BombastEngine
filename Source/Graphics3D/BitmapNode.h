@@ -3,25 +3,31 @@
 
 #include "Material.h"
 #include "SceneNode.h"
+#include "../Graphics2D/TextureShaderClass.h"
 
 class BitmapNode : public SceneNode
 {
 public:
-	BitmapNode(const char* textureFile);
-	virtual ~BitmapNode();
-	HRESULT VPreRender(Scene* pScene);
+	BitmapNode(const ActorId actorId,
+		BaseRenderComponent* renderComponent,
+		std::string textureFileName,
+		RenderPass renderPass,
+		const Mat4x4 *t);
+
+	virtual HRESULT VOnRestore(Scene* pScene) = 0;
+	virtual HRESULT VOnLostDevice(Scene* pScene) { return S_OK; }
+	virtual HRESULT VRender(Scene* pScene) = 0;
 
 protected:
-	const char* m_textureName;
+	std::string m_textureName;
 
-	std::string GetTextureName(const int side);
+	TextureShaderClass m_shader;
 };
 
 class D3DBitmapNode11 : public BitmapNode
 {
 public:
-	D3DBitmapNode11(const char* pTextureBaseNode);
-	virtual ~D3DBitmapNode11();
+	D3DBitmapNode11(const ActorId actorId, BaseRenderComponent* renderComponent, std::string textureFileName, RenderPass renderPass, const Mat4x4* t);
 	HRESULT VOnRestore(Scene* pScene);
 	HRESULT VRender(Scene* pScene);
 

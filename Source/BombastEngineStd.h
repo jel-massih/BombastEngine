@@ -25,6 +25,8 @@ const std::string ROOT_GAME_PATH = "../../../Game/";
 
 #include "Debugging\Logger.h"
 #include "Utilities\types.h"
+#include "Utilities\Math.h"
+#include "Graphics3D\Geometry.h"
 
 #ifndef BE_NEW
 #if defined(_DEBUG)

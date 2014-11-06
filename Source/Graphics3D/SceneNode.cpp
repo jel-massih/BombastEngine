@@ -3,6 +3,7 @@
 #include "../Actor/RenderComponent.h"
 #include "../Actor/TransformComponent.h"
 #include "../Bombast/BombastApp.h"
+#include "Scene.h"
 
 SceneNodeProperties::SceneNodeProperties()
 {
@@ -95,16 +96,14 @@ HRESULT SceneNode::VPreRender(Scene* pScene)
 		}
 	}
 
-	//@TODO: 
-//	pScene->PushAndSetMatrix(m_properties.m_toWorld);
+	pScene->PushAndSetMatrix(m_properties.m_toWorld);
 
 	return S_OK;
 }
 
 HRESULT SceneNode::VPostRender(Scene* pScene)
 {
-	//@TODO:
-	//pScene->PopMatrix();
+	pScene->PopMatrix();
 	return S_OK;
 }
 
@@ -112,19 +111,16 @@ bool SceneNode::VIsVisible(Scene* pScene) const
 {
 	Mat4x4 toWorld, fromWorld;
 
-	//@TODO:
-	//pScene->GetCamera()->VGet()->Transform(&toWorld, &fromWorld);
+	pScene->GetCamera()->VGet()->Transform(&toWorld, &fromWorld);
 
 	Vec3 pos = GetWorldPosition();
 	Vec3 fromWorldPos = fromWorld.Xform(pos);
 
-	//@TODO:
-	//Frustum const &frustum = pScene->GetCamera()->GetFrustum();
+	Frustum const &frustum = pScene->GetCamera()->GetFrustum();
 
-	//bool isVisibile = frustum.Inside(fromWorldPos, VGet()->GetRadius());
+	bool isVisibile = frustum.Inside(fromWorldPos, VGet()->GetRadius());
 
-	//return isVisibile;
-	return true;
+	return isVisibile;
 }
 
 const Vec3 SceneNode::GetWorldPosition() const
@@ -132,8 +128,7 @@ const Vec3 SceneNode::GetWorldPosition() const
 	Vec3 pos = GetPosition();
 	if (m_pParent)
 	{
-		//@TODO:
-		//pos += m_pParent->GetWorldPosition();
+//		pos += m_pParent->GetWorldPosition();
 	}
 
 	return pos;
@@ -181,4 +176,116 @@ void SceneNode::SetAlpha(float alpha)
 		SceneNode* sceneNode = static_cast<SceneNode*>(*i);
 		sceneNode->SetAlpha(alpha);
 	}
+}
+
+RootNode::RootNode() : SceneNode(INVALID_ACTOR_ID, nullptr, RenderPass_0, &Mat4x4::g_Identity)
+{
+	m_children.reserve(RenderPass_Last);
+
+	SceneNode* staticGroup = BE_NEW SceneNode(INVALID_ACTOR_ID, nullptr, RenderPass_Static, &Mat4x4::g_Identity);
+	m_children.push_back(staticGroup);
+
+	SceneNode* actorGroup = BE_NEW SceneNode(INVALID_ACTOR_ID, nullptr, RenderPass_Actor, &Mat4x4::g_Identity);
+	m_children.push_back(actorGroup);
+
+	SceneNode* skyGroup = BE_NEW SceneNode(INVALID_ACTOR_ID, nullptr, RenderPass_Sky, &Mat4x4::g_Identity);
+	m_children.push_back(skyGroup);
+
+	SceneNode* invisibleGroup = BE_NEW SceneNode(INVALID_ACTOR_ID, nullptr, RenderPass_NotRendered, &Mat4x4::g_Identity);
+	m_children.push_back(invisibleGroup);
+}
+
+bool RootNode::VAddChild(ISceneNode* child)
+{
+	RenderPass pass = child->VGet()->GetRenderPass();
+	if (static_cast<unsigned>(pass) >= m_children.size() || !m_children[pass])
+	{
+		BE_ASSERT(0 && _T("There is no such render pass"));
+		return false;
+	}
+
+	return m_children[pass]->VAddChild(child);
+}
+
+bool RootNode::VRemoveChild(ActorId id)
+{
+	bool bRemoved = false;
+	for (int i = RenderPass_0; i < RenderPass_Last; i++)
+	{
+		if (m_children[i]->VRemoveChild(id))
+		{
+			bRemoved = true;
+		}
+	}
+
+	return bRemoved;
+}
+
+HRESULT RootNode::VRenderChildren(Scene* pScene)
+{
+	for (int pass = RenderPass_0; pass < RenderPass_Last; pass++)
+	{
+		switch (pass)
+		{
+		case RenderPass_Static:
+		case RenderPass_Actor:
+			m_children[pass]->VRenderChildren(pScene);
+			break;
+		case RenderPass_Sky:
+			IRenderState* skyPass = pScene->GetRenderer()->VPrepareSkyBoxPass();
+			m_children[pass]->VRenderChildren(pScene);
+			break;
+		}
+	}
+
+	return S_OK;
+}
+
+HRESULT CameraNode::VRender(Scene* pScene)
+{
+	if (m_bDebugCamera)
+	{
+		pScene->PopMatrix();
+		m_frustum.Render();
+
+		pScene->PushAndSetMatrix(m_properties.ToWorld());
+	}
+
+	return S_OK;
+}
+
+HRESULT CameraNode::VOnRestore(Scene* pScene)
+{
+	Point screenSize = g_pApp->GetScreenSize();
+	m_frustum.SetAspect(screenSize.GetX() / (FLOAT)screenSize.GetY());
+	XMStoreFloat4x4(&m_projection, XMMatrixPerspectiveFovLH(m_frustum.m_fov, m_frustum.m_aspect, m_frustum.m_near, m_frustum.m_far));
+	pScene->GetRenderer()->VSetProjectionTransform(&m_projection);
+	return S_OK;
+}
+
+HRESULT CameraNode::SetViewTransform(Scene* pScene)
+{
+	if (m_pTarget)
+	{
+		Mat4x4 mat = m_pTarget->VGet()->ToWorld();
+		Vec4 at = m_camOffsetVector;
+		Vec4 atWorld = mat.Xform(at);
+		Vec3 pos = mat.GetPosition();// +Vec3(atWorld);
+		mat.SetPosition(pos);
+		VSetTransform(&mat);
+	}
+
+	m_view = VGet()->FromWorld();
+
+	pScene->GetRenderer()->VSetViewTransform(&m_view);
+
+	return S_OK;
+}
+
+Mat4x4 CameraNode::GetWorldViewProjection(Scene* pScene)
+{
+	Mat4x4 world = pScene->GetTopMatrix();
+	Mat4x4 view = VGet()->FromWorld();
+	Mat4x4 worldView = world * view;
+	return worldView * m_projection;
 }

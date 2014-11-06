@@ -24,7 +24,6 @@ public:
 		return static_cast<ComponentId>(HashString(componentStr));
 	}
 
-
 protected:
 	Actor* m_pOwner;
 

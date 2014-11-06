@@ -41,6 +41,7 @@
     <ClInclude Include="..\Graphics3D\ModelClass.h" />
     <ClInclude Include="..\Graphics3D\Scene.h" />
     <ClInclude Include="..\Graphics3D\SceneNode.h" />
+    <ClInclude Include="..\Graphics3D\Shaders.h" />
     <ClInclude Include="..\InputCore\InputCore.h" />
     <ClInclude Include="..\MultiThreading\MultiThreadUtilities.h" />
     <ClInclude Include="..\Resources\LuaResource.h" />
@@ -54,6 +55,7 @@
     <ClInclude Include="..\Utilities\DDSTextureLoader.h" />
     <ClInclude Include="..\Utilities\FastDelegate\FastDelegate.h" />
     <ClInclude Include="..\Utilities\Initialization.h" />
+    <ClInclude Include="..\Utilities\Math.h" />
     <ClInclude Include="..\Utilities\rapidxml.hpp" />
     <ClInclude Include="..\Utilities\String.h" />
     <ClInclude Include="..\Utilities\templates.h" />
@@ -85,6 +87,7 @@
     <ClCompile Include="..\Graphics3D\ModelClass.cpp" />
     <ClCompile Include="..\Graphics3D\Scene.cpp" />
     <ClCompile Include="..\Graphics3D\SceneNode.cpp" />
+    <ClCompile Include="..\Graphics3D\Shaders.cpp" />
     <ClCompile Include="..\InputCore\InputCore.cpp" />
     <ClCompile Include="..\Resources\LuaResource.cpp" />
     <ClCompile Include="..\Resources\ResourceCache.cpp" />
@@ -94,6 +97,7 @@
     <ClCompile Include="..\Scripting\LuaCoreManager.cpp" />
     <ClCompile Include="..\Utilities\DDSTextureLoader.cpp" />
     <ClCompile Include="..\Utilities\Initialization.cpp" />
+    <ClCompile Include="..\Utilities\Math.cpp" />
     <ClCompile Include="..\Utilities\String.cpp" />
     <ClCompile Include="BombastEngine.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
