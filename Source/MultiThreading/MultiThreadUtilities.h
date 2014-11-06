@@ -3,6 +3,7 @@
 
 #include <mutex>
 #include <queue>
+#include <condition_variable>
 
 template <typename T>
 class concurrent_queue
@@ -25,7 +26,7 @@ public:
 	bool try_pop(T& popped_val)
 	{
 		std::unique_lock<std::mutex> mlock(m_mutex);
-		if(m_queue.empty) {
+		if(m_queue.empty()) {
 			return false;
 		}
 
