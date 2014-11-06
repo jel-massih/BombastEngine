@@ -5,6 +5,7 @@
 
 #include "Geometry.h"
 #include "SceneNode.h"
+#include "../Events/EventManager.h"
 
 //STL map allowing lookup of scenenode by actorid
 typedef std::map<ActorId, ISceneNode*> SceneActorMap;
@@ -38,6 +39,8 @@ public:
 	ISceneNode* FindActor(ActorId id);
 	bool AddChild(ActorId id, ISceneNode* kid);
 	bool RemoveChild(ActorId id);
+
+	void NewRenderComponentDelegate(IEventDataPtr pEventData);
 
 	void SetCamera(CameraNode* camera) { m_pCamera = camera; }
 	const CameraNode* GetCamera() const { return m_pCamera; }

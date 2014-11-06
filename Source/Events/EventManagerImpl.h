@@ -8,9 +8,9 @@ const unsigned int EVENTMANAGER_NUM_QUEUES = 2;
 
 class EventManager : public IEventManager
 {
-	typedef std::list<const EventListenerDelegate> EventListenerList;
+	typedef std::list<EventListenerDelegate> EventListenerList;
 	typedef std::map<EventType, EventListenerList> EventListenerMap;
-	typedef std::list<const IEventData*> EventQueue;
+	typedef std::list<IEventDataPtr> EventQueue;
 
 	EventListenerMap m_eventListeners;
 	EventQueue m_queues[EVENTMANAGER_NUM_QUEUES];
@@ -25,9 +25,9 @@ public:
 	virtual bool VAddListener(const EventListenerDelegate& eventDelegate, const EventType& type);
 	virtual bool VRemoveListener(const EventListenerDelegate& eventDelegate, const EventType& type);
 	
-	virtual bool VTriggerEvent(const IEventData* pEvent) const;
-	virtual bool VQueueEvent(const IEventData* pEvent);
-	virtual bool VThreadSafeQueueEvent(const IEventData* pEvent);
+	virtual bool VTriggerEvent(const IEventDataPtr& pEvent) const;
+	virtual bool VQueueEvent(const IEventDataPtr& pEvent);
+	virtual bool VThreadSafeQueueEvent(const IEventDataPtr& pEvent);
 	virtual bool VAbortEvent(const EventType& type, bool allOfType = false);
 
 	virtual bool VUpdate(unsigned long maxMs = kINFINITE);

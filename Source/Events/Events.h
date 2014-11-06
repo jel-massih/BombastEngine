@@ -37,9 +37,9 @@ public:
 		return sk_EventType;
 	}
 
-	virtual IEventData* VCopy() const
+	virtual IEventDataPtr VCopy() const
 	{
-		return BE_NEW EvtData_New_Render_Component(m_actorId, m_pSceneNode);
+		return IEventDataPtr(BE_NEW EvtData_New_Render_Component(m_actorId, m_pSceneNode));
 	}
 
 	virtual const char* GetName() const

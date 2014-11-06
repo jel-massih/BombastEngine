@@ -50,7 +50,7 @@ bool EventManager::VRemoveListener(const EventListenerDelegate& eventDelegate, c
 	return success;
 }
 
-bool EventManager::VTriggerEvent(const IEventData* pEvent) const
+bool EventManager::VTriggerEvent(const IEventDataPtr& pEvent) const
 {
 	bool processed = false;
 
@@ -69,7 +69,7 @@ bool EventManager::VTriggerEvent(const IEventData* pEvent) const
 	return processed;
 }
 
-bool EventManager::VQueueEvent(const IEventData* pEvent)
+bool EventManager::VQueueEvent(const IEventDataPtr& pEvent)
 {
 	BE_ASSERT(m_activeQueue >= 0);
 	BE_ASSERT(m_activeQueue < EVENTMANAGER_NUM_QUEUES);
@@ -92,7 +92,7 @@ bool EventManager::VQueueEvent(const IEventData* pEvent)
 	}
 }
 
-bool EventManager::VThreadSafeQueueEvent(const IEventData* pEvent)
+bool EventManager::VThreadSafeQueueEvent(const IEventDataPtr& pEvent)
 {
 	m_realtimeEventQueue.push(pEvent);
 	return true;
@@ -133,7 +133,7 @@ bool EventManager::VUpdate(unsigned long maxMs)
 	unsigned long curMs = GetTickCount();
 	unsigned long computedMaxMs = (maxMs == IEventManager::kINFINITE ? IEventManager::kINFINITE : curMs + maxMs);
 
-	const IEventData* pRealtimeEvent;
+	IEventDataPtr pRealtimeEvent;
 	while (m_realtimeEventQueue.try_pop(pRealtimeEvent))
 	{
 		VQueueEvent(pRealtimeEvent);
@@ -153,7 +153,7 @@ bool EventManager::VUpdate(unsigned long maxMs)
 
 	while (!m_queues[queueToProcess].empty())
 	{
-		const IEventData* pEvent = m_queues[queueToProcess].front();
+		IEventDataPtr pEvent = m_queues[queueToProcess].front();
 		m_queues[queueToProcess].pop_front();
 
 		const EventType& eventType = pEvent->VGetEventType();
@@ -184,7 +184,7 @@ bool EventManager::VUpdate(unsigned long maxMs)
 	{
 		while (!m_queues[queueToProcess].empty())
 		{
-			const IEventData* pEvent = m_queues[queueToProcess].back();
+			IEventDataPtr pEvent = m_queues[queueToProcess].back();
 			m_queues[queueToProcess].pop_back();
 			m_queues[m_activeQueue].push_front(pEvent);
 		}

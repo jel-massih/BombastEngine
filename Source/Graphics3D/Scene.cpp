@@ -2,6 +2,7 @@
 #include "../BombastEngineStd.h"
 #include "../Actor/Actor.h"
 #include "../Bombast/BombastApp.h"
+#include "../Events/Events.h"
 #include <timeapi.h>
 
 Scene::Scene(IRenderer* renderer)
@@ -10,6 +11,9 @@ Scene::Scene(IRenderer* renderer)
 	m_pRenderer = renderer;
 
 	m_pMatrixStack = BE_NEW BMMatrixStack();
+
+	IEventManager* pEventManager = IEventManager::Get();
+	pEventManager->VAddListener(fastdelegate::MakeDelegate(this, &Scene::NewRenderComponentDelegate), EvtData_New_Render_Component::sk_EventType);
 }
 
 Scene::~Scene()
