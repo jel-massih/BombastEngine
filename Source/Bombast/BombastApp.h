@@ -11,6 +11,7 @@
 #include "../Scripting/LuaCoreManager.h"
 #include "../Utilities/Initialization.h"
 #include "CoreGameLogic.h"
+#include "../Graphics3D/SceneNode.h"
 
 class BombastApp
 {

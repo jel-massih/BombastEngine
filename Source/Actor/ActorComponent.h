@@ -5,7 +5,7 @@ class ActorComponent{
 	friend class ActorFactory;
 
 public:
-	~ActorComponent() { m_pOwner = 0; };
+	virtual ~ActorComponent() { m_pOwner = 0; };
 
 	//Meant to be overwriten by implementation classes
 	virtual bool VInitialize(rapidxml::xml_node<>* pData) = 0;
