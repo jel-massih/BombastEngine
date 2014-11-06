@@ -8,8 +8,8 @@
 class IEventData;
 
 typedef unsigned long EventType;
-typedef fastdelegate::FastDelegate1<IEventData*> EventListenerDelegate;
-typedef concurrent_queue<IEventData*> ThreadSafeEventQueue;
+typedef fastdelegate::FastDelegate1<const IEventData*> EventListenerDelegate;
+typedef concurrent_queue<const IEventData*> ThreadSafeEventQueue;
 
 class IEventData
 {
@@ -18,7 +18,7 @@ public:
 	virtual const EventType& VGetEventType() const = 0;
 	virtual float GetTimeStamp() const = 0;
 	virtual void VSerialize(std::ostrstream& out) const = 0;
-	virtual void VDeserialize(std::istrstream& in) const = 0;
+	virtual void VDeserialize(std::istrstream& in) = 0;
 	virtual IEventData* VCopy() const = 0;
 	virtual const char* GetName() const = 0;
 };
