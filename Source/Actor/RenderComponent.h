@@ -10,6 +10,7 @@ class BaseRenderComponent : public RenderComponentInterface
 {
 public:
 	BaseRenderComponent();
+	~BaseRenderComponent();
 
 	virtual bool VInitialize(rapidxml::xml_node<>* pData) override;
 	virtual void VPostInit() override;

@@ -10,6 +10,11 @@ BaseRenderComponent::BaseRenderComponent()
 	m_pSceneNode = 0;
 }
 
+BaseRenderComponent::~BaseRenderComponent()
+{
+	SAFE_DELETE(m_pSceneNode);
+}
+
 bool BaseRenderComponent::VInitialize(rapidxml::xml_node<>* pData)
 {
 	rapidxml::xml_node<>* pColorNode = pData->first_node("Color");
@@ -121,7 +126,7 @@ SceneNode* BitmapRenderComponent::VCreateSceneNode()
 		Mat4x4 rot90;
 		rot90.BuildRotationY(-BE_PI / 2.0f);
 		SceneNode* parent = BE_NEW SceneNode(m_pOwner->GetId(), (BaseRenderComponent*)this, RenderPass_Actor, &pTransformCompnent->GetTransform());
-		SceneNode* bitmap = BE_NEW D3DBitmapNode11(INVALID_ACTOR_ID, (BaseRenderComponent*)this, m_textureResource, RenderPass_Actor, &rot90);
+		SceneNode* bitmap = BE_NEW D3DBitmapNode11(INVALID_ACTOR_ID, (BaseRenderComponent*)this, m_textureResource, m_relativeSize, RenderPass_Actor, &rot90);
 		parent->VAddChild(bitmap);
 		return parent;
 	}
