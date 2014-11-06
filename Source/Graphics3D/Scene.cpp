@@ -18,6 +18,9 @@ Scene::Scene(IRenderer* renderer)
 
 Scene::~Scene()
 {
+	IEventManager* pEventManager = IEventManager::Get();
+	pEventManager->VRemoveListener(fastdelegate::MakeDelegate(this, &Scene::NewRenderComponentDelegate), EvtData_New_Render_Component::sk_EventType);
+
 	SAFE_DELETE(m_pMatrixStack);
 }
 
