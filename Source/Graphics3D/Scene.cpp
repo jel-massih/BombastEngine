@@ -81,7 +81,22 @@ bool Scene::RemoveChild(ActorId id)
 	return m_pRoot->VRemoveChild(id);
 }
 
-//@TODO: Add Delegates
+void Scene::NewRenderComponentDelegate(IEventDataPtr pEventData)
+{
+	std::shared_ptr<EvtData_New_Render_Component> pCastedEventData = std::static_pointer_cast<EvtData_New_Render_Component>(pEventData);
+
+	ActorId actorId = pCastedEventData->GetActorId();
+	SceneNode* pSceneNode = pCastedEventData->GetSceneNode();
+
+	if (FAILED(pSceneNode->VOnRestore(this)))
+	{
+		BE_ERROR("Failed To Restore scene node to scene for actorid: " + ToStr(actorId));
+		return;
+	}
+
+	AddChild(actorId, pSceneNode);
+}
+
 
 HRESULT Scene::OnUpdate(const int deltaMS)
 {
