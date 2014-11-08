@@ -12,7 +12,6 @@ BaseRenderComponent::BaseRenderComponent()
 
 BaseRenderComponent::~BaseRenderComponent()
 {
-	SAFE_DELETE(m_pSceneNode);
 }
 
 bool BaseRenderComponent::VInitialize(rapidxml::xml_node<>* pData)

@@ -22,6 +22,8 @@ Scene::~Scene()
 	pEventManager->VRemoveListener(fastdelegate::MakeDelegate(this, &Scene::NewRenderComponentDelegate), EvtData_New_Render_Component::sk_EventType);
 
 	SAFE_DELETE(m_pMatrixStack);
+	
+	SAFE_DELETE(m_pRoot);
 }
 
 HRESULT Scene::OnRender()
