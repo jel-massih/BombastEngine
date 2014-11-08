@@ -97,7 +97,6 @@ void Scene::NewRenderComponentDelegate(IEventDataPtr pEventData)
 	AddChild(actorId, pSceneNode);
 }
 
-
 HRESULT Scene::OnUpdate(const int deltaMS)
 {
 	if (!m_pRoot)
@@ -126,7 +125,7 @@ ISceneNode* Scene::FindActor(ActorId id)
 
 void Scene::RenderAlphaPass()
 {
-	IRenderState* alphaPass = m_pRenderer->VPrepareAlphaPass();
+//	IRenderState* alphaPass = m_pRenderer->VPrepareAlphaPass();
 	
 	//@TODO: Alpha Pass Stuff
 }

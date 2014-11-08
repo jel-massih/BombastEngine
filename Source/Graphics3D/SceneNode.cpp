@@ -264,7 +264,7 @@ HRESULT RootNode::VRenderChildren(Scene* pScene)
 			m_children[pass]->VRenderChildren(pScene);
 			break;
 		case RenderPass_Sky:
-			IRenderState* skyPass = pScene->GetRenderer()->VPrepareSkyBoxPass();
+//			IRenderState* skyPass = pScene->GetRenderer()->VPrepareSkyBoxPass();
 			m_children[pass]->VRenderChildren(pScene);
 			break;
 		}

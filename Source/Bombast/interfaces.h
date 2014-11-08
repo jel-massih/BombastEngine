@@ -72,17 +72,33 @@ public:
 class IRenderer
 {
 public:
-	virtual void VSetBackgroundColor(BYTE a, BYTE r, BYTE g, BYTE b) = 0;
-	virtual HRESULT VOnRestore() = 0;
+	virtual bool VInitialize(int screenWidth, int screenHeight, bool vsync, HWND hwnd, bool bFullscreen, float screenDepth, float screenNear) = 0;
 	virtual void VShutdown() = 0;
-	virtual bool VPreRender() = 0;
-	virtual bool VPostRender() = 0;
+	virtual void VSetBackgroundColor(BYTE a, BYTE r, BYTE g, BYTE b) = 0;
+	virtual void VBeginScene() = 0;
+	virtual void VEndScene() = 0;
+
+	virtual HRESULT VOnRestore() = 0;
+
 	virtual void VSetWorldTransform(const Mat4x4* m) = 0;
-	virtual void VSetViewTransform(const Mat4x4* m) = 0;
+	virtual void VSetOrthoTransform(const Mat4x4* m) = 0;
 	virtual void VSetProjectionTransform(const Mat4x4* m) = 0;
-	virtual IRenderState* VPrepareAlphaPass() = 0;
-	virtual IRenderState* VPrepareSkyBoxPass() = 0;
-	virtual void VDrawLine(const Vec3& from, const Vec3& to, const Color& color) = 0;
+	virtual void VSetViewTransform(const Mat4x4* m) = 0;
+
+	virtual void VGetWorldMatrix(Mat4x4& m) = 0;
+	virtual void VGetOrthoMatrix(Mat4x4& m) = 0;
+	virtual void VGetProjectionMatrix(Mat4x4& m) = 0;
+	virtual void VGetViewMatrix(Mat4x4& m) = 0;
+
+	virtual void VGetVideoCardInfo(char* cardName, int& memory) = 0;
+	virtual void VEnableZBuffer(bool bEnable) = 0;
+	virtual void VEnableAlphaBlending(bool bEnable) = 0;
+	virtual void VToggleFillMode() = 0;
+
+
+	//@TODO: Remove D3D Specific Method
+	virtual ID3D11Device* GetDevice() = 0;
+	virtual ID3D11DeviceContext* GetDeviceContext() = 0;
 };
 
 class ISceneNode

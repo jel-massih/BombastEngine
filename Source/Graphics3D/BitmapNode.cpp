@@ -68,7 +68,7 @@ HRESULT D3DBitmapNode11::VOnRestore(Scene* pScene)
 
 HRESULT D3DBitmapNode11::InitializeBuffers()
 {
-	ID3D11Device* device = g_pApp->GetGraphicsManager()->GetD3DClass()->GetDevice();
+	ID3D11Device* device = g_pApp->GetGraphicsManager()->GetRenderer()->GetDevice();
 
 	VertexType* vertices;
 	unsigned long* indices;
