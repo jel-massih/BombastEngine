@@ -207,6 +207,15 @@ bool BombastApp::InitializeApp(int screenWidth, int screenHeight)
 		ResourceHandle* pResourceHandle = g_pApp->m_pResourceCache->GetHandle(&resource);
 	}
 
+	m_pEventManager = BE_NEW EventManager("BombastApp Event Manager", true);
+	if (!m_pEventManager)
+	{
+		BE_ERROR("FAiled to create Event Manager");
+		return false;
+	}
+
+	m_pScene = BE_NEW Scene(m_pGraphicsManager->GetRenderer());
+
 	return true;
 }
 
