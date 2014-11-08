@@ -1,7 +1,7 @@
 #include "RenderComponent.h"
 #include "../Bombast/BombastApp.h"
-
 #include "TransformComponent.h"
+#include "..\Events\Events.h"
 
 const char* BitmapRenderComponent::g_Name = "BitmapRenderComponent";
 
@@ -28,10 +28,9 @@ bool BaseRenderComponent::VInitialize(rapidxml::xml_node<>* pData)
 
 void BaseRenderComponent::VPostInit()
 {
-	
 	SceneNode* pSceneNode = VGetSceneNode();
-	//@TODO:
-	//Added event trigger stuff
+	std::shared_ptr<EvtData_New_Render_Component> pEvent(BE_NEW EvtData_New_Render_Component(m_pOwner->GetId(), pSceneNode));
+	IEventManager::Get()->VTriggerEvent(pEvent);
 }
 
 void BaseRenderComponent::VOnChanged()
