@@ -8,8 +8,9 @@
 class IEventData;
 
 typedef unsigned long EventType;
-typedef fastdelegate::FastDelegate1<IEventData*> EventListenerDelegate;
-typedef concurrent_queue<IEventData*> ThreadSafeEventQueue;
+typedef std::shared_ptr<IEventData> IEventDataPtr;
+typedef fastdelegate::FastDelegate1<IEventDataPtr> EventListenerDelegate;
+typedef concurrent_queue<IEventDataPtr> ThreadSafeEventQueue;
 
 class IEventData
 {
@@ -18,8 +19,8 @@ public:
 	virtual const EventType& VGetEventType() const = 0;
 	virtual float GetTimeStamp() const = 0;
 	virtual void VSerialize(std::ostrstream& out) const = 0;
-	virtual void VDeserialize(std::istrstream& in) const = 0;
-	virtual IEventData* VCopy() const = 0;
+	virtual void VDeserialize(std::istrstream& in) = 0;
+	virtual IEventDataPtr VCopy() const = 0;
 	virtual const char* GetName() const = 0;
 };
 
@@ -52,10 +53,10 @@ public:
 
 	virtual bool VRemoveListener(const EventListenerDelegate& eventDelegate, const EventType& type) = 0;
 
-	virtual bool VTriggerEvent(const IEventData* pEvent) const = 0;
+	virtual bool VTriggerEvent(const IEventDataPtr& pEvent) const = 0;
 
-	virtual bool VQueueEvent(const IEventData* pEvent) = 0;
-	virtual bool VThreadSafeQueueEvent(const IEventData* pEvent) = 0;
+	virtual bool VQueueEvent(const IEventDataPtr& pEvent) = 0;
+	virtual bool VThreadSafeQueueEvent(const IEventDataPtr& pEvent) = 0;
 
 	virtual bool VAbortEvent(const EventType& type, bool allOfType = false) = 0;
 

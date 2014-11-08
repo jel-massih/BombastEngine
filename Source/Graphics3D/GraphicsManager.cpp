@@ -4,8 +4,7 @@
 
 GraphicsManager::GraphicsManager()
 {
-	m_pD3D = 0;
-	m_pCamera = 0;
+	m_pRenderer = 0;
 	m_pColorShader = 0;
 	m_pTextureShader = 0;
 }
@@ -23,26 +22,24 @@ GraphicsManager::~GraphicsManager()
 bool GraphicsManager::Initialize(HWND hwnd)
 {
 	bool result;
-
-	m_pD3D = BE_NEW D3DClass;
-	if (!m_pD3D)
+	
+	Renderer renderImpl = GetRendererImpl();
+	if (renderImpl == Renderer_D3D11)
 	{
+		m_pRenderer = BE_NEW D3DClass11;
+	}
+	
+	if (!m_pRenderer)
+	{
+		BE_ERROR("Failed to create Renderer")
 		return false;
 	}
 
-	if (!m_pD3D->Initialize(g_pApp->m_options.m_screenSize.x, g_pApp->m_options.m_screenSize.y, true, hwnd, false, 1000.0f, 0.1f))
+	if (!m_pRenderer->VInitialize(g_pApp->m_options.m_screenSize.x, g_pApp->m_options.m_screenSize.y, true, hwnd, false, 1000.0f, 0.1f))
 	{
-		BE_ERROR("Could not initialize D3D11");
+		BE_ERROR("Could not initialize Renderer");
 		return FALSE;
 	}
-
-	m_pCamera = BE_NEW CameraClass;
-	if (!m_pCamera)
-	{
-		return false;
-	}
-
-	m_pCamera->SetPosition(0.0f, 0.0f, -10.0f);
 
 	m_pColorShader = BE_NEW ColorShaderClass;
 	if (!m_pColorShader)
@@ -50,7 +47,7 @@ bool GraphicsManager::Initialize(HWND hwnd)
 		return false;
 	}
 
-	result = m_pColorShader->Initialize(m_pD3D->GetDevice());
+	result = m_pColorShader->Initialize(m_pRenderer->GetDevice());
 	if (!result)
 	{
 		BE_ERROR("Could not initialize the ColorShader Object!")
@@ -63,7 +60,7 @@ bool GraphicsManager::Initialize(HWND hwnd)
 		return false;
 	}
 
-	result = m_pTextureShader->Initialize(m_pD3D->GetDevice());
+	result = m_pTextureShader->Initialize(m_pRenderer->GetDevice());
 	if (!result)
 	{
 		BE_ERROR("Could not initialize the TextureShader Object!")
@@ -89,13 +86,11 @@ void GraphicsManager::Shutdown()
 		SAFE_DELETE(m_pColorShader);
 	}
 
-	SAFE_DELETE(m_pCamera);
-
-	if (m_pD3D)
+	if (m_pRenderer)
 	{
-		m_pD3D->Shutdown();
+		m_pRenderer->VShutdown();
 
-		SAFE_DELETE(m_pD3D);
+		SAFE_DELETE(m_pRenderer);
 	}
 
 	return;
@@ -119,46 +114,49 @@ bool GraphicsManager::Render()
 {
 	bool result;
 
-	DirectX::XMMATRIX worldMatrix, viewMatrix, projectionMatrix, orthoMatrix;
+	Mat4x4 worldMatrix, viewMatrix, projectionMatrix, orthoMatrix;
 
-	m_pD3D->BeginScene(0.2f, 0.2f, 0.5f, 1.0f);
+	m_pRenderer->VSetBackgroundColor(0.2f, 0.2f, 0.5f, 1.0f);
+	m_pRenderer->VBeginScene();
 
-	m_pCamera->Render();
-
-	m_pCamera->GetViewMatrix(viewMatrix);
-	m_pD3D->GetWorldMatrix(worldMatrix);
-	m_pD3D->GetProjectionMatrix(projectionMatrix);
-	m_pD3D->GetOrthoMatrix(orthoMatrix);
+	m_pRenderer->VGetViewMatrix(viewMatrix);
+	m_pRenderer->VGetWorldMatrix(worldMatrix);
+	m_pRenderer->VGetProjectionMatrix(projectionMatrix);
+	m_pRenderer->VGetOrthoMatrix(orthoMatrix);
 	
-	m_pD3D->EnableZBuffer(false);
+	m_pRenderer->VEnableZBuffer(false);
 	
 	//Get Bitmaps Vector and render each one
 	std::vector<BitmapClass*> bitmaps = g_pApp->GetEntitiesManager()->GetBitmaps();
 	for (BitmapClass* bitmap : bitmaps)
 	{
 		//prepare bitmap vertex and index buffers for drawing
-		result = bitmap->Render(m_pD3D->GetDeviceContext());
+		result = bitmap->Render(m_pRenderer->GetDeviceContext());
 		if (!result)
 		{
 			return false;
 		}
 
 		//Render Bitmap with texture shader
-		result = m_pTextureShader->Render(m_pD3D->GetDeviceContext(), bitmap->GetIndexCount(), worldMatrix, viewMatrix, orthoMatrix, bitmap->GetTexture());
+		result = m_pTextureShader->Render(m_pRenderer->GetDeviceContext(), bitmap->GetIndexCount(), DirectX::XMLoadFloat4x4(&worldMatrix), DirectX::XMLoadFloat4x4(&viewMatrix), DirectX::XMLoadFloat4x4(&orthoMatrix), bitmap->GetTexture());
 		if (!result)
 		{
 			return false;
 		}
 	}
 	
-	m_pD3D->EnableZBuffer(true);
-
-	m_pD3D->EndScene();
+	m_pRenderer->VEnableZBuffer(true);
+	m_pRenderer->VEndScene();
 
 	return true;
 }
 
-D3DClass* GraphicsManager::GetD3DClass()
+IRenderer* GraphicsManager::GetRenderer()
 {
-	return m_pD3D;
+	return m_pRenderer;
+}
+
+GraphicsManager::Renderer GraphicsManager::GetRendererImpl()
+{
+	return Renderer_D3D11;
 }

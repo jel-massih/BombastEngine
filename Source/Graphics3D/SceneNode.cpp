@@ -40,6 +40,15 @@ SceneNode::SceneNode(ActorId actorId, BaseRenderComponent* renderComponent, Rend
 
 SceneNode::~SceneNode()
 {
+	if (!m_children.empty())
+	{
+		for (auto &it : m_children)
+		{
+			SAFE_DELETE(it);
+		}
+
+		m_children.clear();
+	}
 }
 
 HRESULT SceneNode::VOnRestore(Scene* pScene)
@@ -153,13 +162,36 @@ HRESULT SceneNode::VRenderChildren(Scene* pScene)
 	return S_OK;
 }
 
-bool SceneNode::VAddChild(ISceneNode* kid)
+bool SceneNode::VAddChild(ISceneNode* ichild)
 {
+	m_children.push_back(ichild);
+
+	SceneNode* child = static_cast<SceneNode*>(ichild);
+
+	child->m_pParent = this;
+
+	Vec3 childPos = child->VGet()->ToWorld().GetPosition();
+
+	float newRadius = childPos.Length() + child->VGet()->GetRadius();
+
+	if (newRadius > m_properties.m_radius)
+	{
+		m_properties.m_radius = newRadius;
+	}
+
 	return true;
 }
 
 bool SceneNode::VRemoveChild(ActorId actorId)
 {
+	for (SceneNodeList::iterator it = m_children.begin(); it != m_children.end(); it++)
+	{
+		const SceneNodeProperties* pProps = (*it)->VGet();
+		if (pProps->GetActorId() != INVALID_ACTOR_ID && actorId == pProps->GetActorId())
+		{
+			it = m_children.erase(it);
+		}
+	}
 	return false;
 }
 
@@ -232,7 +264,7 @@ HRESULT RootNode::VRenderChildren(Scene* pScene)
 			m_children[pass]->VRenderChildren(pScene);
 			break;
 		case RenderPass_Sky:
-			IRenderState* skyPass = pScene->GetRenderer()->VPrepareSkyBoxPass();
+//			IRenderState* skyPass = pScene->GetRenderer()->VPrepareSkyBoxPass();
 			m_children[pass]->VRenderChildren(pScene);
 			break;
 		}

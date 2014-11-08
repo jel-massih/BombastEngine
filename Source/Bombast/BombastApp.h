@@ -6,11 +6,14 @@
 //=============================================================
 #include "..\BombastEngineStd.h"
 #include "..\Constants.h"
-#include "../Graphics3D/GraphicsManager.h"
-#include "../Entity/EntitiesManager.h"
-#include "../Scripting/LuaCoreManager.h"
-#include "../Utilities/Initialization.h"
+#include "..\Graphics3D\GraphicsManager.h"
+#include "..\Entity/EntitiesManager.h"
+#include "..\Scripting\LuaCoreManager.h"
+#include "..\Utilities\Initialization.h"
 #include "CoreGameLogic.h"
+#include "..\Graphics3D\SceneNode.h"
+#include "..\Graphics3D\Scene.h"
+#include "..\Events\EventManagerImpl.h"
 
 class BombastApp
 {
@@ -25,6 +28,8 @@ protected:
 	GraphicsManager* m_pGraphicsManager;
 	EntitiesManager* m_pEntitiesManager;
 	LuaCoreManager* m_pLuaCoreManager;
+
+	Scene* m_pScene;
 
 public:
 	BombastApp();
@@ -57,6 +62,8 @@ public:
 
 	virtual CoreGameLogic* VCreateGameAndView() = 0;
 	virtual bool VLoadGame();
+
+	EventManager* m_pEventManager;
 
 private:
 	void InitializeWindows();

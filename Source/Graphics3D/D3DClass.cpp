@@ -1,7 +1,7 @@
 #include "D3DClass.h"
 #include "../Bombast/BombastApp.h"
 
-D3DClass::D3DClass()
+D3DClass11::D3DClass11()
 {
 	m_pSwapChain = 0;
 	m_pDevice = 0;
@@ -16,11 +16,11 @@ D3DClass::D3DClass()
 	m_pAlphaDisabledBlendingState = 0;
 }
 
-D3DClass::~D3DClass()
+D3DClass11::~D3DClass11()
 {
 }
 
-bool D3DClass::Initialize(int screenWidth, int screenHeight, bool vsync, HWND hwnd, bool fullscreen, float screenDepth, float screenNear)
+bool D3DClass11::VInitialize(int screenWidth, int screenHeight, bool vsync, HWND hwnd, bool fullscreen, float screenDepth, float screenNear)
 {
 	HRESULT result;
 	IDXGIFactory* factory;
@@ -281,11 +281,11 @@ bool D3DClass::Initialize(int screenWidth, int screenHeight, bool vsync, HWND hw
 	fieldOfView = (float)DirectX::XM_PI / 4.0f;
 	screenAspect = (float)screenWidth / (float)screenHeight;
 
-	m_projectionMatrix = DirectX::XMMatrixPerspectiveFovLH(fieldOfView, screenAspect, screenNear, screenDepth);
+	DirectX::XMStoreFloat4x4(&m_projectionMatrix, DirectX::XMMatrixPerspectiveFovLH(fieldOfView, screenAspect, screenNear, screenDepth));
 
-	m_worldMatrix = DirectX::XMMatrixIdentity();
+	DirectX::XMStoreFloat4x4(&m_worldMatrix, DirectX::XMMatrixIdentity());
 
-	m_orthoMatrix = DirectX::XMMatrixOrthographicLH((float)screenWidth, (float)screenHeight, screenNear, screenDepth);
+	DirectX::XMStoreFloat4x4(&m_orthoMatrix, DirectX::XMMatrixOrthographicLH((float)screenWidth, (float)screenHeight, screenNear, screenDepth));
 
 	ZeroMemory(&depthDisabledStencilDesc, sizeof(depthDisabledStencilDesc));
 
@@ -341,7 +341,7 @@ bool D3DClass::Initialize(int screenWidth, int screenHeight, bool vsync, HWND hw
 	return true;
 }
 
-void D3DClass::Shutdown()
+void D3DClass11::VShutdown()
 {
 	if(m_pSwapChain)
 	{
@@ -363,23 +363,24 @@ void D3DClass::Shutdown()
 	return;
 }
 
-void D3DClass::BeginScene(float red, float green, float blue, float alpha)
+void D3DClass11::VSetBackgroundColor(BYTE a, BYTE r, BYTE g, BYTE b)
 {
-	float color[4];
+	m_backgroundColor[0] = r;
+	m_backgroundColor[1] = g;
+	m_backgroundColor[2] = b;
+	m_backgroundColor[3] = a;
+}
 
-	color[0] = red;
-	color[1] = green;
-	color[2] = blue;
-	color[3] = alpha;
-
-	m_pDeviceContext->ClearRenderTargetView(m_pRenderTargetView, color);
+void D3DClass11::VBeginScene()
+{
+	m_pDeviceContext->ClearRenderTargetView(m_pRenderTargetView, m_backgroundColor);
 
 	m_pDeviceContext->ClearDepthStencilView(m_pDepthStencilView, D3D11_CLEAR_DEPTH, 1.0f, 0);
 
 	return;
 }
 
-void D3DClass::EndScene()
+void D3DClass11::VEndScene()
 {
 	if(m_vsyncEnabled)
 	{
@@ -393,42 +394,73 @@ void D3DClass::EndScene()
 	return;
 }
 
-ID3D11Device* D3DClass::GetDevice()
+HRESULT D3DClass11::VOnRestore()
 {
-	return m_pDevice;
+	return S_OK;
 }
 
-ID3D11DeviceContext* D3DClass::GetDeviceContext()
+void D3DClass11::VSetWorldTransform(const Mat4x4* m)
 {
-	return m_pDeviceContext;
+	m_worldMatrix = *const_cast<Mat4x4*>(m);
 }
 
-void D3DClass::GetProjectionMatrix(DirectX::XMMATRIX& projMatrix)
+void D3DClass11::VSetOrthoTransform(const Mat4x4* m)
+{
+	m_orthoMatrix = *const_cast<Mat4x4*>(m);
+}
+
+void D3DClass11::VSetProjectionTransform(const Mat4x4* m)
+{
+	m_projectionMatrix = *const_cast<Mat4x4*>(m);
+}
+
+void D3DClass11::VSetViewTransform(const Mat4x4* m)
+{
+	m_viewMatrix = *const_cast<Mat4x4*>(m);
+}
+
+void D3DClass11::VGetProjectionMatrix(Mat4x4& projMatrix)
 {
 	projMatrix = m_projectionMatrix;
 	return;
 }
 
-void D3DClass::GetWorldMatrix(DirectX::XMMATRIX& worldMatrix)
+void D3DClass11::VGetWorldMatrix(Mat4x4& worldMatrix)
 {
 	worldMatrix = m_worldMatrix;
 	return;
 }
 
-void D3DClass::GetOrthoMatrix(DirectX::XMMATRIX& orthoMatrix)
+void D3DClass11::VGetOrthoMatrix(Mat4x4& orthoMatrix)
 {
 	orthoMatrix = m_orthoMatrix;
 	return;
 }
 
-void D3DClass::GetVideoCardInfo(char* cardName, int& memory)
+void D3DClass11::VGetViewMatrix(Mat4x4& viewMatrix)
+{
+	viewMatrix = m_viewMatrix;
+	return;
+}
+
+ID3D11Device* D3DClass11::GetDevice()
+{
+	return m_pDevice;
+}
+
+ID3D11DeviceContext* D3DClass11::GetDeviceContext()
+{
+	return m_pDeviceContext;
+}
+
+void D3DClass11::VGetVideoCardInfo(char* cardName, int& memory)
 {
 	strcpy_s(cardName, 128, m_videoCardDescription);
 	memory = m_videoCardMemory;
 	return;
 }
 
-void D3DClass::EnableZBuffer(bool bEnable)
+void D3DClass11::VEnableZBuffer(bool bEnable)
 {
 	if(bEnable)
 	{
@@ -442,7 +474,7 @@ void D3DClass::EnableZBuffer(bool bEnable)
 	return;
 }
 
-void D3DClass::EnableAlphaBlending(bool bEnable)
+void D3DClass11::VEnableAlphaBlending(bool bEnable)
 {
 	float blendFactor[4];
 
@@ -461,7 +493,7 @@ void D3DClass::EnableAlphaBlending(bool bEnable)
 	}
 }
 
-void D3DClass::ToggleFillMode()
+void D3DClass11::VToggleFillMode()
 {
 	ID3D11RasterizerState * rState;
 	D3D11_RASTERIZER_DESC rDesc;

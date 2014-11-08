@@ -19,6 +19,14 @@ bool Actor::Initialize(rapidxml::xml_node<>* pData)
 	return true;
 }
 
+void Actor::PostInitialize()
+{
+	for (ActorComponents::iterator it = m_components.begin(); it != m_components.end(); it++)
+	{
+		it->second->VPostInit();
+	}
+}
+
 void Actor::Shutdown()
 {
 	for (auto it = m_components.begin(); it != m_components.end(); ++it)

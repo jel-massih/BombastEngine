@@ -1,40 +1,50 @@
-#ifndef D3D_CLASS_H
-#define D3D_CLASS_H
+#pragma once
 
 #include "../BombastEngineStd.h"
+#include "../Bombast/interfaces.h"
 
-class D3DClass
+class D3DClass11 : public IRenderer
 {
 public:
-	D3DClass();
-	~D3DClass();
+	D3DClass11();
+	~D3DClass11();
 
-	bool Initialize(int screenWidth, int screenHeight, bool vsync, HWND hwnd, bool bFullscreen, float screenDepth, float screenNear);
-	void Shutdown();
+	bool VInitialize(int screenWidth, int screenHeight, bool vsync, HWND hwnd, bool bFullscreen, float screenDepth, float screenNear);
+	void VShutdown();
+	
+	void VSetBackgroundColor(BYTE a, BYTE r, BYTE g, BYTE b);
 
-	void BeginScene(float red, float green, float blue, float alpha);
-	void EndScene();
+	void VBeginScene();
+	void VEndScene();
+
+	HRESULT VOnRestore();
+
+	void VSetWorldTransform(const Mat4x4* m);
+	void VSetOrthoTransform(const Mat4x4* m);
+	void VSetProjectionTransform(const Mat4x4* m);
+	void VSetViewTransform(const Mat4x4* m);
+
+	void VGetProjectionMatrix(Mat4x4& projMatrix);
+	void VGetWorldMatrix(Mat4x4& worldMatrix);
+	void VGetOrthoMatrix(Mat4x4& orthoMatrix);
+	void VGetViewMatrix(Mat4x4& viewMatrix);
 
 	ID3D11Device* GetDevice();
 	ID3D11DeviceContext* GetDeviceContext();
 
-	void GetProjectionMatrix(DirectX::XMMATRIX& projMatrix);
-	void GetWorldMatrix(DirectX::XMMATRIX& worldMatrix);
-	void GetOrthoMatrix(DirectX::XMMATRIX& orthoMatrix);
+	void VGetVideoCardInfo(char* cardName, int& memory);
 
-	void GetVideoCardInfo(char* cardName, int& memory);
-
-	void EnableZBuffer(bool bEnable);
-
-	void EnableAlphaBlending(bool bEnable);
-
-	void ToggleFillMode();
+	void VEnableZBuffer(bool bEnable);
+	void VEnableAlphaBlending(bool bEnable);
+	void VToggleFillMode();
 
 private:
 	bool m_vsyncEnabled;
 
 	int m_videoCardMemory;
 	char m_videoCardDescription[128];
+	float m_backgroundColor[4];
+
 	IDXGISwapChain* m_pSwapChain;
 	ID3D11Device* m_pDevice;
 	ID3D11DeviceContext* m_pDeviceContext;
@@ -45,13 +55,12 @@ private:
 	ID3D11DepthStencilView* m_pDepthStencilView;
 	ID3D11RasterizerState* m_pRasterState;
 
-	_declspec(align(16)) DirectX::XMMATRIX m_projectionMatrix;
-	_declspec(align(16)) DirectX::XMMATRIX m_worldMatrix;
-	_declspec(align(16)) DirectX::XMMATRIX m_orthoMatrix;
+	Mat4x4 m_projectionMatrix;
+	Mat4x4 m_worldMatrix;
+	Mat4x4 m_orthoMatrix;
+	Mat4x4 m_viewMatrix;
 
 	
 	ID3D11BlendState* m_pAlphaEnableBlendingState;
 	ID3D11BlendState* m_pAlphaDisabledBlendingState;
 };
-
-#endif

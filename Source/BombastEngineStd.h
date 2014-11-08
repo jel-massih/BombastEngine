@@ -17,6 +17,7 @@
 #include <DirectXMath.h>
 
 #include <string>
+#include <memory>
 
 const int SCREEN_WIDTH = 800;
 const int SCREEN_HEIGHT = 600;
@@ -27,6 +28,7 @@ const std::string ROOT_GAME_PATH = "../../../Game/";
 #include "Utilities\types.h"
 #include "Utilities\Math.h"
 #include "Graphics3D\Geometry.h"
+#include "Utilities\FastDelegate\FastDelegate.h"
 
 #ifndef BE_NEW
 #if defined(_DEBUG)

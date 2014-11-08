@@ -17,14 +17,22 @@ public:
 	void Shutdown();
 	bool Frame();
 
-	D3DClass* GetD3DClass();
+	IRenderer* GetRenderer();
+
+	enum Renderer
+	{
+		Renderer_Unknown,
+		Renderer_D3D9,
+		Renderer_D3D11
+	};
+
+	static Renderer GetRendererImpl();
 
 private:
 	bool Render();
 
 private:
-	D3DClass* m_pD3D;
-	CameraClass* m_pCamera;
+	IRenderer* m_pRenderer;
 	ColorShaderClass* m_pColorShader;
 	TextureShaderClass* m_pTextureShader;
 };

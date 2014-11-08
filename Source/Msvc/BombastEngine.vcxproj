@@ -27,6 +27,8 @@
     <ClInclude Include="..\Entity\EntitiesManager.h" />
     <ClInclude Include="..\Entity\Entity.h" />
     <ClInclude Include="..\Events\EventManager.h" />
+    <ClInclude Include="..\Events\EventManagerImpl.h" />
+    <ClInclude Include="..\Events\Events.h" />
     <ClInclude Include="..\Game\BombastGame.h" />
     <ClInclude Include="..\Graphics2D\BitmapClass.h" />
     <ClInclude Include="..\Graphics2D\ColorShaderClass.h" />
@@ -73,6 +75,9 @@
     <ClCompile Include="..\Entity\BitmapEntity.cpp" />
     <ClCompile Include="..\Entity\EntitiesManager.cpp" />
     <ClCompile Include="..\Entity\Entity.cpp" />
+    <ClCompile Include="..\Events\EventManager.cpp" />
+    <ClCompile Include="..\Events\EventManagerImpl.cpp" />
+    <ClCompile Include="..\Events\Events.cpp" />
     <ClCompile Include="..\Game\BombastGame.cpp" />
     <ClCompile Include="..\Graphics2D\BitmapClass.cpp" />
     <ClCompile Include="..\Graphics2D\ColorShaderClass.cpp" />

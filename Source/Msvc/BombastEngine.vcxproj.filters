@@ -113,6 +113,15 @@
     <ClCompile Include="..\Utilities\Math.cpp">
       <Filter>Utilities</Filter>
     </ClCompile>
+    <ClCompile Include="..\Events\EventManager.cpp">
+      <Filter>Events</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Events\EventManagerImpl.cpp">
+      <Filter>Events</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Events\Events.cpp">
+      <Filter>Events</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Bombast\BombastApp.h">
@@ -260,6 +269,12 @@
     </ClInclude>
     <ClInclude Include="..\Utilities\Math.h">
       <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Events\EventManagerImpl.h">
+      <Filter>Events</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Events\Events.h">
+      <Filter>Events</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

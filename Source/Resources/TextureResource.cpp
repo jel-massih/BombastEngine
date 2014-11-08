@@ -16,7 +16,7 @@ bool TextureResourceExtraData::LoadTexture(char* pRawBuffer, unsigned int rawSiz
 {
 	HRESULT result;
 	
-	result = CreateDDSTextureFromMemory(g_pApp->GetGraphicsManager()->GetD3DClass()->GetDevice(), reinterpret_cast<uint8_t*>(pRawBuffer), rawSize, nullptr, &m_pTexture);
+	result = CreateDDSTextureFromMemory(g_pApp->GetGraphicsManager()->GetRenderer()->GetDevice(), reinterpret_cast<uint8_t*>(pRawBuffer), rawSize, nullptr, &m_pTexture);
 
 	if (FAILED(result)) {
 		return false;

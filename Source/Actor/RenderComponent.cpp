@@ -1,9 +1,18 @@
 #include "RenderComponent.h"
 #include "../Bombast/BombastApp.h"
-
 #include "TransformComponent.h"
+#include "..\Events\Events.h"
 
 const char* BitmapRenderComponent::g_Name = "BitmapRenderComponent";
+
+BaseRenderComponent::BaseRenderComponent()
+{
+	m_pSceneNode = 0;
+}
+
+BaseRenderComponent::~BaseRenderComponent()
+{
+}
 
 bool BaseRenderComponent::VInitialize(rapidxml::xml_node<>* pData)
 {
@@ -18,10 +27,9 @@ bool BaseRenderComponent::VInitialize(rapidxml::xml_node<>* pData)
 
 void BaseRenderComponent::VPostInit()
 {
-	
 	SceneNode* pSceneNode = VGetSceneNode();
-	//@TODO:
-	//Added event trigger stuff
+	std::shared_ptr<EvtData_New_Render_Component> pEvent(BE_NEW EvtData_New_Render_Component(m_pOwner->GetId(), pSceneNode));
+	IEventManager::Get()->VTriggerEvent(pEvent);
 }
 
 void BaseRenderComponent::VOnChanged()
@@ -104,20 +112,6 @@ bool BitmapRenderComponent::VDelegateInitialize(rapidxml::xml_node<>* pData)
 		m_relativeSize.y = (float)atof(pRelativeSize->first_attribute("y")->value());
 	}
 
-	m_pBitmap = BE_NEW BitmapClass();
-	if (!m_pBitmap)
-	{
-		return false;
-	}
-	
-	result = m_pBitmap->Initialize(g_pApp->GetGraphicsManager()->GetD3DClass()->GetDevice(), m_textureResource, (int)(g_pApp->m_options.m_screenSize.x * m_relativeSize.x), (int)(g_pApp->m_options.m_screenSize.y * m_relativeSize.y));
-	if (!result)
-	{
-		return false;
-	}
-
-	g_pApp->GetEntitiesManager()->RegisterBitmap(m_pBitmap);
-
 	return true;
 }
 
@@ -130,7 +124,7 @@ SceneNode* BitmapRenderComponent::VCreateSceneNode()
 		Mat4x4 rot90;
 		rot90.BuildRotationY(-BE_PI / 2.0f);
 		SceneNode* parent = BE_NEW SceneNode(m_pOwner->GetId(), (BaseRenderComponent*)this, RenderPass_Actor, &pTransformCompnent->GetTransform());
-		SceneNode* bitmap = BE_NEW D3DBitmapNode11(INVALID_ACTOR_ID, (BaseRenderComponent*)this, m_textureResource, RenderPass_Actor, &rot90);
+		SceneNode* bitmap = BE_NEW D3DBitmapNode11(INVALID_ACTOR_ID, (BaseRenderComponent*)this, m_textureResource, m_relativeSize, RenderPass_Actor, &rot90);
 		parent->VAddChild(bitmap);
 		return parent;
 	}
