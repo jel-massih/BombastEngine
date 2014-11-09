@@ -25,6 +25,11 @@ public:
 protected:
 	virtual HRESULT InitializeBuffers() = 0;
 	virtual HRESULT LoadTexture(std::string filename) = 0;
+	bool VIsVisible(Scene* pScene) const;
+
+	int GetIndexCount() {
+		return m_indexCount;
+	}
 
 	struct VertexType
 	{

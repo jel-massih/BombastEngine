@@ -24,6 +24,11 @@ BitmapNode::~BitmapNode()
 	}
 }
 
+bool BitmapNode::VIsVisible(Scene* pScene) const
+{
+	return true;
+}
+
 D3DBitmapNode11::D3DBitmapNode11(const ActorId actorId,
 	BaseRenderComponent* renderComponent,
 	std::string textureFileName,
@@ -180,7 +185,8 @@ void D3DBitmapNode11::RenderBuffers()
 	stride = sizeof(VertexType);
 	offset = 0;
 
-	ID3D11DeviceContext* context = g_pApp->GetGraphicsManager()->GetRenderer()->GetDeviceContext();
+	IRenderer* pRenderer = g_pApp->GetGraphicsManager()->GetRenderer();
+	ID3D11DeviceContext* context = pRenderer->GetDeviceContext();
 
 	//Set vertex buffer to actiev in input assembled
 	context->IASetVertexBuffers(0, 1, &m_pVertexBuffer, &stride, &offset);
@@ -190,6 +196,13 @@ void D3DBitmapNode11::RenderBuffers()
 
 	//Set topology method
 	context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+
+	Mat4x4 worldMatrix, viewMatrix, orthoMatrix;
+	pRenderer->VGetViewMatrix(viewMatrix);
+	pRenderer->VGetWorldMatrix(worldMatrix);
+	pRenderer->VGetOrthoMatrix(orthoMatrix);
+
+	m_pTextureShader->Render(context, GetIndexCount(), DirectX::XMLoadFloat4x4(&worldMatrix), DirectX::XMLoadFloat4x4(&viewMatrix), DirectX::XMLoadFloat4x4(&orthoMatrix), m_pTexture);
 
 	return;
 }
