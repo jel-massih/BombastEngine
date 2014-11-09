@@ -177,9 +177,8 @@ HRESULT SceneNode::VRenderChildren(Scene* pScene)
 				{
 					//@TODO: Render Transparent Crap
 				}
-
-				(*i)->VRenderChildren(pScene);
 			}
+			(*i)->VRenderChildren(pScene);
 		}
 		(*i)->VPostRender(pScene);
 		i++;
