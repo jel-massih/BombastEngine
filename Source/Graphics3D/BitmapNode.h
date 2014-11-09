@@ -4,6 +4,7 @@
 #include "Material.h"
 #include "SceneNode.h"
 #include "../Graphics2D/TextureShaderClass.h"
+#include "../Graphics2D/BitmapClass.h"
 
 class BitmapNode : public SceneNode
 {
@@ -22,7 +23,12 @@ public:
 
 protected:
 	virtual HRESULT InitializeBuffers() = 0;
-	HRESULT LoadTexture(std::string filename);
+	virtual HRESULT LoadTexture(std::string filename) = 0;
+	bool VIsVisible(Scene* pScene) const;
+
+	int GetIndexCount() {
+		return m_indexCount;
+	}
 
 	struct VertexType
 	{
@@ -33,8 +39,6 @@ protected:
 protected:
 	std::string m_textureName;
 
-	TextureShaderClass m_shader;
-
 	int m_bitmapWidth;
 	int m_bitmapHeight;
 
@@ -42,10 +46,6 @@ protected:
 
 	int m_vertexCount; //Number of Vertices in Vertex Array
 	int m_indexCount; //Number of Indices in Index array
-
-	ID3D11Buffer *m_pVertexBuffer, *m_pIndexBuffer;
-
-	ID3D11ShaderResourceView* m_pTexture;
 };
 
 class D3DBitmapNode11 : public BitmapNode
@@ -57,10 +57,15 @@ public:
 
 private:
 	HRESULT InitializeBuffers();
+	HRESULT LoadTexture(std::string filename);
+	HRESULT UpdateBuffers(ID3D11DeviceContext* deviceContext);
+	void RenderBuffers(ID3D11DeviceContext* deviceContext);
 
-protected:
-	ID3D11Buffer* m_pIndexBuffer;
-	ID3D11Buffer* m_pVertexBuffer;
+private:
+	ID3D11Buffer *m_pVertexBuffer, *m_pIndexBuffer;
+	ID3D11ShaderResourceView* m_pTexture;
+	Vec3 m_lastPosition;
+	
 };
 
 #endif

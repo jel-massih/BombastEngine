@@ -26,7 +26,6 @@ protected:
 	Point m_screenSize;
 
 	GraphicsManager* m_pGraphicsManager;
-	EntitiesManager* m_pEntitiesManager;
 	LuaCoreManager* m_pLuaCoreManager;
 
 	Scene* m_pScene;
@@ -47,7 +46,6 @@ public:
 	void Run();
 	void ShutDown();
 
-	EntitiesManager*  GetEntitiesManager() const;
 	GraphicsManager*  GetGraphicsManager() const;
 	LuaCoreManager*  GetLuaCoreManager() const;
 

@@ -159,6 +159,31 @@ HRESULT SceneNode::VOnUpdate(Scene* pScene, DWORD const elapsedMs)
 
 HRESULT SceneNode::VRenderChildren(Scene* pScene)
 {
+	SceneNodeList::iterator i = m_children.begin();
+	SceneNodeList::iterator end = m_children.end();
+
+	while (i != end)
+	{
+		if ((*i)->VPreRender(pScene) == S_OK)
+		{
+			if ((*i)->VIsVisible(pScene))
+			{
+				float alpha = (*i)->VGet()->m_material.GetAlpha();
+				if (alpha == fOPAQUE)
+				{
+					(*i)->VRender(pScene);
+				}
+				else if (alpha != fTRANSPARENT)
+				{
+					//@TODO: Render Transparent Crap
+				}
+			}
+			(*i)->VRenderChildren(pScene);
+		}
+		(*i)->VPostRender(pScene);
+		i++;
+	}
+
 	return S_OK;
 }
 
@@ -302,8 +327,14 @@ HRESULT CameraNode::SetViewTransform(Scene* pScene)
 		Mat4x4 mat = m_pTarget->VGet()->ToWorld();
 		Vec4 at = m_camOffsetVector;
 		Vec4 atWorld = mat.Xform(at);
-		Vec3 pos = mat.GetPosition();// +Vec3(atWorld);
+		Vec3 pos = mat.GetPosition() + Vec3(atWorld);
 		mat.SetPosition(pos);
+		VSetTransform(&mat);
+	}
+	else
+	{
+		Mat4x4 mat = VGet()->ToWorld();
+		mat.SetPosition(Vec3(0.0f, 0.0f, -10.0f));
 		VSetTransform(&mat);
 	}
 

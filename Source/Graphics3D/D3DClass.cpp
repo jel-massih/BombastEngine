@@ -401,7 +401,8 @@ HRESULT D3DClass11::VOnRestore()
 
 void D3DClass11::VSetWorldTransform(const Mat4x4* m)
 {
-	m_worldMatrix = *const_cast<Mat4x4*>(m);
+	//@TODO: figure out wtf is wrong with this
+	//m_worldMatrix = *const_cast<Mat4x4*>(m);
 }
 
 void D3DClass11::VSetOrthoTransform(const Mat4x4* m)

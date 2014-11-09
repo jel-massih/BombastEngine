@@ -21,6 +21,10 @@ bool BaseRenderComponent::VInitialize(rapidxml::xml_node<>* pData)
 	{
 		m_color = LoadColor(pColorNode);
 	}
+	else
+	{
+		m_color = g_White;
+	}
 
 	return VDelegateInitialize(pData);
 }

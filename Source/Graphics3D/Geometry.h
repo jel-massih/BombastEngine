@@ -47,10 +47,13 @@ public:
 	Vec3(const double _x, const double _y, const double _z) { x = (float)_x; y = (float)_y; z = (float)_z; }
 	inline Vec3(const class Vec4& v4);
 
+	static const Vec3 g_InvalidVec3;
+
 	Vec3 operator*(float f) const;
 	Vec3 operator-(Vec3 v) const;
 	Vec3 operator+(Vec3 v) const;
 	Vec3& operator+=(const Vec3 v);
+	bool operator==(const Vec3 v);
 };
 
 inline Vec3::Vec3(const Vec4& v4) { x = v4.x; y = v4.y; z = v4.z; }
