@@ -8,24 +8,9 @@ BitmapNode::BitmapNode(const ActorId actorId,
 	RenderPass renderPass,
 	const Mat4x4 *t) : SceneNode(actorId, renderComponent, renderPass, t)
 {
-	m_pVertexBuffer = 0;
-	m_pIndexBuffer = 0;
-	m_pTexture = 0;
-
 	m_relativeSize = relativeSize;
 
 	m_textureName = textureFileName;
-}
-
-HRESULT BitmapNode::LoadTexture(std::string filename)
-{
-	m_pTexture = TextureResourceLoader::LoadAndReturnTextureResource(filename.c_str());
-	if (!m_pTexture)
-	{
-		return S_FALSE;
-	}
-
-	return S_OK;
 }
 
 D3DBitmapNode11::D3DBitmapNode11(const ActorId actorId,
@@ -34,7 +19,11 @@ D3DBitmapNode11::D3DBitmapNode11(const ActorId actorId,
 	DirectX::XMFLOAT2 relativeSize,
 	RenderPass renderPass,
 	const Mat4x4* t) : BitmapNode(actorId, renderComponent, textureFileName, relativeSize, renderPass, t)
-{}
+{
+	m_pVertexBuffer = 0;
+	m_pIndexBuffer = 0;
+	m_pTexture = 0;
+}
 
 HRESULT D3DBitmapNode11::VOnRestore(Scene* pScene)
 {
@@ -61,6 +50,17 @@ HRESULT D3DBitmapNode11::VOnRestore(Scene* pScene)
 	if (FAILED(hr))
 	{
 		return hr;
+	}
+
+	return S_OK;
+}
+
+HRESULT D3DBitmapNode11::LoadTexture(std::string filename)
+{
+	m_pTexture = TextureResourceLoader::LoadAndReturnTextureResource(filename.c_str());
+	if (!m_pTexture)
+	{
+		return S_FALSE;
 	}
 
 	return S_OK;
@@ -150,7 +150,28 @@ HRESULT D3DBitmapNode11::VRender(Scene* pScene)
 	ResourceHandle* pResourceHandle = g_pApp->m_pResourceCache->GetHandle(&resource);
 	TextureResourceExtraData* extra = static_cast<TextureResourceExtraData*>(pResourceHandle->GetExtra());
 
-	//Render
+	RenderBuffers();
 
 	return S_OK;
+}
+
+void D3DBitmapNode11::RenderBuffers()
+{
+	unsigned int stride, offset;
+
+	stride = sizeof(VertexType);
+	offset = 0;
+
+	ID3D11DeviceContext* context = g_pApp->GetGraphicsManager()->GetRenderer()->GetDeviceContext();
+
+	//Set vertex buffer to actiev in input assembled
+	context->IASetVertexBuffers(0, 1, &m_pVertexBuffer, &stride, &offset);
+
+	//Set index buffer to active
+	context->IASetIndexBuffer(m_pIndexBuffer, DXGI_FORMAT_R32_UINT, 0);
+
+	//Set topology method
+	context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+
+	return;
 }

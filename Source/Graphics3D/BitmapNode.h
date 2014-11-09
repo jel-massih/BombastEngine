@@ -22,7 +22,7 @@ public:
 
 protected:
 	virtual HRESULT InitializeBuffers() = 0;
-	HRESULT LoadTexture(std::string filename);
+	virtual HRESULT LoadTexture(std::string filename) = 0;
 
 	struct VertexType
 	{
@@ -33,8 +33,6 @@ protected:
 protected:
 	std::string m_textureName;
 
-	TextureShaderClass m_shader;
-
 	int m_bitmapWidth;
 	int m_bitmapHeight;
 
@@ -43,9 +41,7 @@ protected:
 	int m_vertexCount; //Number of Vertices in Vertex Array
 	int m_indexCount; //Number of Indices in Index array
 
-	ID3D11Buffer *m_pVertexBuffer, *m_pIndexBuffer;
 
-	ID3D11ShaderResourceView* m_pTexture;
 };
 
 class D3DBitmapNode11 : public BitmapNode
@@ -57,10 +53,12 @@ public:
 
 private:
 	HRESULT InitializeBuffers();
+	HRESULT LoadTexture(std::string filename);
+	void RenderBuffers();
 
 protected:
-	ID3D11Buffer* m_pIndexBuffer;
-	ID3D11Buffer* m_pVertexBuffer;
+	ID3D11Buffer *m_pVertexBuffer, *m_pIndexBuffer;
+	ID3D11ShaderResourceView* m_pTexture;
 };
 
 #endif
