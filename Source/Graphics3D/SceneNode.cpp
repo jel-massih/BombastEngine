@@ -159,6 +159,32 @@ HRESULT SceneNode::VOnUpdate(Scene* pScene, DWORD const elapsedMs)
 
 HRESULT SceneNode::VRenderChildren(Scene* pScene)
 {
+	SceneNodeList::iterator i = m_children.begin();
+	SceneNodeList::iterator end = m_children.end();
+
+	while (i != end)
+	{
+		if ((*i)->VPreRender(pScene) == S_OK)
+		{
+			if ((*i)->VIsVisible(pScene))
+			{
+				float alpha = (*i)->VGet()->m_material.GetAlpha();
+				if (alpha == fOPAQUE)
+				{
+					(*i)->VRender(pScene);
+				}
+				else if (alpha != fTRANSPARENT)
+				{
+					//@TODO: Render Transparent Crap
+				}
+
+				(*i)->VRenderChildren(pScene);
+			}
+		}
+		(*i)->VPostRender(pScene);
+		i++;
+	}
+
 	return S_OK;
 }
 
