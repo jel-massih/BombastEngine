@@ -46,8 +46,6 @@ protected:
 
 	int m_vertexCount; //Number of Vertices in Vertex Array
 	int m_indexCount; //Number of Indices in Index array
-
-	BitmapClass* m_pBitmap;
 };
 
 class D3DBitmapNode11 : public BitmapNode
@@ -60,11 +58,14 @@ public:
 private:
 	HRESULT InitializeBuffers();
 	HRESULT LoadTexture(std::string filename);
-	void RenderBuffers();
+	HRESULT UpdateBuffers(ID3D11DeviceContext* deviceContext);
+	void RenderBuffers(ID3D11DeviceContext* deviceContext);
 
-protected:
+private:
 	ID3D11Buffer *m_pVertexBuffer, *m_pIndexBuffer;
 	ID3D11ShaderResourceView* m_pTexture;
+	Vec3 m_lastPosition;
+	
 };
 
 #endif
