@@ -96,61 +96,6 @@ void GraphicsManager::Shutdown()
 	return;
 }
 
-bool GraphicsManager::Frame()
-{
-	bool result;
-	
-	//render graphics scene
-	result = Render();
-	if (!result)
-	{
-		return false;
-	}
-
-	return true;
-}
-
-bool GraphicsManager::Render()
-{
-	bool result;
-
-	Mat4x4 worldMatrix, viewMatrix, projectionMatrix, orthoMatrix;
-
-	m_pRenderer->VSetBackgroundColor(0.2f, 0.2f, 0.5f, 1.0f);
-	m_pRenderer->VBeginScene();
-
-	m_pRenderer->VGetViewMatrix(viewMatrix);
-	m_pRenderer->VGetWorldMatrix(worldMatrix);
-	m_pRenderer->VGetProjectionMatrix(projectionMatrix);
-	m_pRenderer->VGetOrthoMatrix(orthoMatrix);
-	
-	m_pRenderer->VEnableZBuffer(false);
-	
-	//Get Bitmaps Vector and render each one
-	std::vector<BitmapClass*> bitmaps = g_pApp->GetEntitiesManager()->GetBitmaps();
-	for (BitmapClass* bitmap : bitmaps)
-	{
-		//prepare bitmap vertex and index buffers for drawing
-		result = bitmap->Render(m_pRenderer->GetDeviceContext());
-		if (!result)
-		{
-			return false;
-		}
-
-		//Render Bitmap with texture shader
-		result = m_pTextureShader->Render(m_pRenderer->GetDeviceContext(), bitmap->GetIndexCount(), DirectX::XMLoadFloat4x4(&worldMatrix), DirectX::XMLoadFloat4x4(&viewMatrix), DirectX::XMLoadFloat4x4(&orthoMatrix), bitmap->GetTexture());
-		if (!result)
-		{
-			return false;
-		}
-	}
-	
-	m_pRenderer->VEnableZBuffer(true);
-	m_pRenderer->VEndScene();
-
-	return true;
-}
-
 IRenderer* GraphicsManager::GetRenderer()
 {
 	return m_pRenderer;

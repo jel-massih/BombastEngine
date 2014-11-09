@@ -15,8 +15,6 @@ public:
 
 	bool Initialize(HWND hwnd);
 	void Shutdown();
-	bool Frame();
-
 	IRenderer* GetRenderer();
 
 	enum Renderer
@@ -28,8 +26,9 @@ public:
 
 	static Renderer GetRendererImpl();
 
-private:
-	bool Render();
+	TextureShaderClass* GetTextureShader() const {
+		return m_pTextureShader;
+	}
 
 private:
 	IRenderer* m_pRenderer;
