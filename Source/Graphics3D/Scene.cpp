@@ -14,6 +14,11 @@ Scene::Scene(IRenderer* renderer)
 
 	IEventManager* pEventManager = IEventManager::Get();
 	pEventManager->VAddListener(fastdelegate::MakeDelegate(this, &Scene::NewRenderComponentDelegate), EvtData_New_Render_Component::sk_EventType);
+
+	Frustum frustum;
+	frustum.Init(BE_PI / 4.0f, 1.0f, 1.0f, 100.0f);
+	m_pCamera = BE_NEW CameraNode(&Mat4x4::g_Identity, frustum);
+	AddChild(INVALID_ACTOR_ID, m_pCamera);
 }
 
 Scene::~Scene()
