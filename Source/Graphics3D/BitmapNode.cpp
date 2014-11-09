@@ -9,19 +9,8 @@ BitmapNode::BitmapNode(const ActorId actorId,
 	const Mat4x4 *t) : SceneNode(actorId, renderComponent, renderPass, t)
 {
 	m_relativeSize = relativeSize;
-
 	m_textureName = textureFileName;
-
-	m_pTextureShader = BE_NEW TextureShaderClass();
-}
-
-BitmapNode::~BitmapNode()
-{
-	if (m_pTextureShader)
-	{
-		m_pTextureShader->Shutdown();
-		SAFE_DELETE(m_pTextureShader);
-	}
+	m_pBitmap = 0;
 }
 
 bool BitmapNode::VIsVisible(Scene* pScene) const
@@ -46,28 +35,17 @@ HRESULT D3DBitmapNode11::VOnRestore(Scene* pScene)
 	HRESULT hr;
 	BE_HRETURN(SceneNode::VOnRestore(pScene), "Failed to OnRestore Parent");
 
-	//Reload the Texture
-	{
-		Resource resource(m_textureName);
-		ResourceHandle* pResHandle = g_pApp->m_pResourceCache->GetHandle(&resource);
-		TextureResourceExtraData* extra = static_cast<TextureResourceExtraData*>(pResHandle->GetExtra());
-	}
-
 	m_bitmapWidth = (int)(g_pApp->m_options.m_screenSize.x * m_relativeSize.x);
-	m_bitmapWidth = (int)(g_pApp->m_options.m_screenSize.y * m_relativeSize.y);
+	m_bitmapHeight = (int)(g_pApp->m_options.m_screenSize.y * m_relativeSize.y);
 
-	hr = InitializeBuffers();
-	if (FAILED(hr))
+	m_pBitmap = BE_NEW BitmapClass();
+	if (!m_pBitmap)
 	{
-		return hr;
+		return false;
 	}
 
-	hr = LoadTexture(m_textureName);
-	if (FAILED(hr))
-	{
-		return hr;
-	}
-
+	m_pBitmap->Initialize(g_pApp->GetGraphicsManager()->GetRenderer()->GetDevice(), m_textureName, m_bitmapWidth, m_bitmapHeight);
+	
 	return S_OK;
 }
 
@@ -85,12 +63,6 @@ HRESULT D3DBitmapNode11::LoadTexture(std::string filename)
 HRESULT D3DBitmapNode11::InitializeBuffers()
 {
 	ID3D11Device* device = g_pApp->GetGraphicsManager()->GetRenderer()->GetDevice();
-
-	bool res = m_pTextureShader->Initialize(device);
-	if (!res)
-	{
-		return S_FALSE;
-	}
 
 	VertexType* vertices;
 	unsigned long* indices;
@@ -166,14 +138,33 @@ HRESULT D3DBitmapNode11::InitializeBuffers()
 HRESULT D3DBitmapNode11::VRender(Scene* pScene)
 {
 	HRESULT hr;
+	bool result;
 
-	//Get Texture
-	Resource resource(m_textureName);
-	ResourceHandle* pResourceHandle = g_pApp->m_pResourceCache->GetHandle(&resource);
-	TextureResourceExtraData* extra = static_cast<TextureResourceExtraData*>(pResourceHandle->GetExtra());
+	IRenderer* pRenderer = g_pApp->GetGraphicsManager()->GetRenderer();
+	ID3D11DeviceContext* context = pRenderer->GetDeviceContext();
+	pRenderer->VEnableZBuffer(false);
 
-	RenderBuffers();
+	Mat4x4 worldMatrix, viewMatrix, orthoMatrix;
+	pRenderer->VGetViewMatrix(viewMatrix);
+	pRenderer->VGetWorldMatrix(worldMatrix);
+	pRenderer->VGetOrthoMatrix(orthoMatrix);
 
+	//prepare bitmap vertex and index buffers for drawing
+	result = m_pBitmap->Render(context);
+	if (!result)
+	{
+		return S_FALSE;
+	}
+
+	//Render Bitmap with texture shader
+	result = g_pApp->GetGraphicsManager()->GetTextureShader()->Render(context, m_pBitmap->GetIndexCount(),
+		DirectX::XMLoadFloat4x4(&worldMatrix), DirectX::XMLoadFloat4x4(&viewMatrix), DirectX::XMLoadFloat4x4(&orthoMatrix),
+		m_pBitmap->GetTexture());
+	if (!result)
+	{
+		return S_FALSE;
+	}
+	pRenderer->VEnableZBuffer(true);
 
 	return S_OK;
 }
@@ -202,9 +193,7 @@ void D3DBitmapNode11::RenderBuffers()
 	pRenderer->VGetWorldMatrix(worldMatrix);
 	pRenderer->VGetOrthoMatrix(orthoMatrix);
 
-	pRenderer->VEnableZBuffer(false);
-	m_pTextureShader->Render(context, GetIndexCount(), DirectX::XMLoadFloat4x4(&worldMatrix), DirectX::XMLoadFloat4x4(&viewMatrix), DirectX::XMLoadFloat4x4(&orthoMatrix), m_pTexture);
-	pRenderer->VEnableZBuffer(true);
+	g_pApp->GetGraphicsManager()->GetTextureShader()->Render(context, GetIndexCount(), DirectX::XMLoadFloat4x4(&worldMatrix), DirectX::XMLoadFloat4x4(&viewMatrix), DirectX::XMLoadFloat4x4(&orthoMatrix), m_pTexture);
 
 	return;
 }

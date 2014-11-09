@@ -4,6 +4,7 @@
 #include "Material.h"
 #include "SceneNode.h"
 #include "../Graphics2D/TextureShaderClass.h"
+#include "../Graphics2D/BitmapClass.h"
 
 class BitmapNode : public SceneNode
 {
@@ -15,8 +16,6 @@ public:
 		DirectX::XMFLOAT2 relativeSize,
 		RenderPass renderPass,
 		const Mat4x4 *t);
-
-	~BitmapNode();
 
 	virtual HRESULT VOnRestore(Scene* pScene) = 0;
 	virtual HRESULT VOnLostDevice(Scene* pScene) { return S_OK; }
@@ -48,7 +47,7 @@ protected:
 	int m_vertexCount; //Number of Vertices in Vertex Array
 	int m_indexCount; //Number of Indices in Index array
 
-	TextureShaderClass* m_pTextureShader;
+	BitmapClass* m_pBitmap;
 };
 
 class D3DBitmapNode11 : public BitmapNode
