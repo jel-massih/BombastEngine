@@ -3,10 +3,10 @@ Bombast Engine
 
 C++ Game Engine (DirectX) (WIP)
 
-Dependencies:
-
-zlib
-rapidxml
+Dependencies:<br>
+*  zlib
+* rapidxml
+* lua-5.2.3
 
 
 Note:
