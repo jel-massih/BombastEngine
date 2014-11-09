@@ -30,56 +30,6 @@ bool BombastGame::Initialize(HWND hWnd, HINSTANCE hInstance)
 	{
 		return false;
 	}
-
-	BombastApp* pBombastApp = g_pApp;
-	m_pEntitiesManager = pBombastApp->GetEntitiesManager();
-
-	m_pBackgroundBitmap = BE_NEW BitmapClass();
-	if (!m_pBackgroundBitmap) 
-	{
-		return false;
-	}
-
-//	result = m_pBackgroundBitmap->Initialize(pBombastApp->GetGraphicsManager()->GetD3DClass()->GetDevice(), L"../../Game/Data/dirt01.dds", pBombastApp->m_options.m_screenSize.x, pBombastApp->m_options.m_screenSize.y);
-	if (!result) 
-	{
-		return false;
-	}
-
-	m_pEntitiesManager->RegisterBitmap(m_pBackgroundBitmap);
-
-	m_pLeftPaddleBitmap = BE_NEW BitmapClass();
-	if (!m_pLeftPaddleBitmap)
-	{
-		return false;
-	}
-
-	//result = m_pLeftPaddleBitmap->Initialize(pBombastApp->GetGraphicsManager()->GetD3DClass()->GetDevice(), L"../../Game/Data/paddle.dds", 10, 200);
-	if (!result)
-	{
-		return false;
-	}
-
-	m_pEntitiesManager->RegisterBitmap(m_pLeftPaddleBitmap);
-
-	m_pRightPaddleBitmap = BE_NEW BitmapClass();
-	if (!m_pRightPaddleBitmap)
-	{
-		return false;
-	}
-
-	//result = m_pRightPaddleBitmap->Initialize(pBombastApp->GetGraphicsManager()->GetD3DClass()->GetDevice(), L"../../Game/Data/paddle.dds", 10, 200);
-	if (!result)
-	{
-		return false;
-	}
-
-	m_pEntitiesManager->RegisterBitmap(m_pRightPaddleBitmap);
-
-	m_pBackgroundBitmap->SetPosition(0, 0);
-	m_pLeftPaddleBitmap->SetPosition(100, pBombastApp->m_options.m_screenSize.y / 2 - m_pLeftPaddleBitmap->GetBitmapHeight() / 2);
-	m_pRightPaddleBitmap->SetPosition(pBombastApp->m_options.m_screenSize.x - 100, pBombastApp->m_options.m_screenSize.y / 2 - m_pRightPaddleBitmap->GetBitmapHeight() / 2);
-
 	return true;
 }
 
