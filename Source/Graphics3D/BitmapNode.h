@@ -16,6 +16,8 @@ public:
 		RenderPass renderPass,
 		const Mat4x4 *t);
 
+	~BitmapNode();
+
 	virtual HRESULT VOnRestore(Scene* pScene) = 0;
 	virtual HRESULT VOnLostDevice(Scene* pScene) { return S_OK; }
 	virtual HRESULT VRender(Scene* pScene) = 0;
@@ -41,7 +43,7 @@ protected:
 	int m_vertexCount; //Number of Vertices in Vertex Array
 	int m_indexCount; //Number of Indices in Index array
 
-
+	TextureShaderClass* m_pTextureShader;
 };
 
 class D3DBitmapNode11 : public BitmapNode

@@ -11,6 +11,17 @@ BitmapNode::BitmapNode(const ActorId actorId,
 	m_relativeSize = relativeSize;
 
 	m_textureName = textureFileName;
+
+	m_pTextureShader = BE_NEW TextureShaderClass();
+}
+
+BitmapNode::~BitmapNode()
+{
+	if (m_pTextureShader)
+	{
+		m_pTextureShader->Shutdown();
+		SAFE_DELETE(m_pTextureShader);
+	}
 }
 
 D3DBitmapNode11::D3DBitmapNode11(const ActorId actorId,
@@ -69,6 +80,12 @@ HRESULT D3DBitmapNode11::LoadTexture(std::string filename)
 HRESULT D3DBitmapNode11::InitializeBuffers()
 {
 	ID3D11Device* device = g_pApp->GetGraphicsManager()->GetRenderer()->GetDevice();
+
+	bool res = m_pTextureShader->Initialize(device);
+	if (!res)
+	{
+		return S_FALSE;
+	}
 
 	VertexType* vertices;
 	unsigned long* indices;
@@ -151,6 +168,7 @@ HRESULT D3DBitmapNode11::VRender(Scene* pScene)
 	TextureResourceExtraData* extra = static_cast<TextureResourceExtraData*>(pResourceHandle->GetExtra());
 
 	RenderBuffers();
+
 
 	return S_OK;
 }
