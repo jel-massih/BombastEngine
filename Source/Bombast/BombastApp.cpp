@@ -254,9 +254,17 @@ void BombastApp::Run()
 bool BombastApp::Frame()
 {
 	bool result;
+	HRESULT hr;
+
 	result = m_pGraphicsManager->Frame();
 	if (!result) {
-		return FALSE;
+		return false;
+	}
+
+	hr = m_pScene->OnRender();
+	if (FAILED(hr))
+	{
+		return false;
 	}
 
 	return true;
