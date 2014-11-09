@@ -5,10 +5,6 @@
 BombastGame::BombastGame()
 {
 	m_pInputCore = 0;
-	m_pEntitiesManager = 0;
-	m_pBackgroundBitmap = 0;
-	m_pLeftPaddleBitmap = 0;
-	m_pRightPaddleBitmap = 0;
 	m_lastTime = GetTickCount();
 }
 
@@ -35,26 +31,6 @@ bool BombastGame::Initialize(HWND hWnd, HINSTANCE hInstance)
 
 void BombastGame::Shutdown()
 {
-	if (m_pRightPaddleBitmap) {
-		m_pEntitiesManager->DeRegisterBitmap(m_pRightPaddleBitmap);
-		m_pRightPaddleBitmap->Shutdown();
-		SAFE_DELETE(m_pRightPaddleBitmap);
-	}
-	
-	if (m_pLeftPaddleBitmap) {
-		m_pEntitiesManager->DeRegisterBitmap(m_pLeftPaddleBitmap);
-		m_pLeftPaddleBitmap->Shutdown();
-		SAFE_DELETE(m_pLeftPaddleBitmap);
-	}
-
-	if (m_pBackgroundBitmap) {
-		m_pEntitiesManager->DeRegisterBitmap(m_pBackgroundBitmap);
-		m_pBackgroundBitmap->Shutdown();
-		SAFE_DELETE(m_pBackgroundBitmap);
-	}
-
-	m_pEntitiesManager = 0;
-
 	if (m_pInputCore)
 	{
 		m_pInputCore->Shutdown();
@@ -83,29 +59,6 @@ bool BombastGame::Frame()
 	{
 		return false;
 	}
-
-	if (m_pInputCore->IsKeyPressed(DIK_W))
-	{
-		m_pLeftPaddleBitmap->Translate(0, (int)(-300 * elapsed_ms));
-	}
-
-	if (m_pInputCore->IsKeyPressed(DIK_S))
-	{
-		m_pLeftPaddleBitmap->Translate(0, (int)(300 * elapsed_ms));
-	}
-
-	if (m_pInputCore->IsKeyPressed(DIK_UP))
-	{
-		m_pRightPaddleBitmap->Translate(0, (int)(-300 * elapsed_ms));
-	}
-
-	if (m_pInputCore->IsKeyPressed(DIK_DOWN))
-	{
-		m_pRightPaddleBitmap->Translate(0, (int)(300 * elapsed_ms));
-	}
-
-	//_RPT1(0, "height: %d\n", m_pLeftPaddleBitmap->)
-	
 
 	return true;
 }

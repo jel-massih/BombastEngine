@@ -18,13 +18,7 @@ public:
 	bool Frame();
 
 private:
-	EntitiesManager* m_pEntitiesManager;
-
 	InputCore* m_pInputCore;
-
-	BitmapClass* m_pBackgroundBitmap;
-	BitmapClass* m_pLeftPaddleBitmap;
-	BitmapClass* m_pRightPaddleBitmap;
 
 	DWORD m_lastTime;
 };
