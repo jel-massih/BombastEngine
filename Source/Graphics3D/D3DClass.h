@@ -12,7 +12,7 @@ public:
 	bool VInitialize(int screenWidth, int screenHeight, bool vsync, HWND hwnd, bool bFullscreen, float screenDepth, float screenNear);
 	void VShutdown();
 	
-	void VSetBackgroundColor(BYTE a, BYTE r, BYTE g, BYTE b);
+	void VSetBackgroundColor(float a, float r, float g, float b);
 
 	void VBeginScene();
 	void VEndScene();

@@ -363,7 +363,7 @@ void D3DClass11::VShutdown()
 	return;
 }
 
-void D3DClass11::VSetBackgroundColor(BYTE a, BYTE r, BYTE g, BYTE b)
+void D3DClass11::VSetBackgroundColor(float a, float r, float g, float b)
 {
 	m_backgroundColor[0] = r;
 	m_backgroundColor[1] = g;

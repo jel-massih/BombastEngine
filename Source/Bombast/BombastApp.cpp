@@ -245,7 +245,6 @@ void BombastApp::Run()
 
 bool BombastApp::Frame()
 {
-	bool result;
 	HRESULT hr;
 
 	hr = m_pScene->Render();

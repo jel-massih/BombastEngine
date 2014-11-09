@@ -155,10 +155,10 @@ HRESULT D3DBitmapNode11::VRender(Scene* pScene)
 	pRenderer->VGetOrthoMatrix(orthoMatrix);
 
 	//prepare bitmap vertex and index buffers for drawing
-	result = UpdateBuffers(context);
-	if (!result)
+	hr = UpdateBuffers(context);
+	if(FAILED(hr))
 	{
-		return S_FALSE;
+		return hr;
 	}
 
 	RenderBuffers(context);
