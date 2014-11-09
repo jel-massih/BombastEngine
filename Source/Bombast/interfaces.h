@@ -55,6 +55,7 @@ enum RenderPass
 	RenderPass_Static = RenderPass_0,
 	RenderPass_Actor,
 	RenderPass_Sky,
+	RenderPass_GUI,
 	RenderPass_NotRendered,
 	RenderPass_Last
 };

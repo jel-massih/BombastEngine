@@ -245,6 +245,9 @@ RootNode::RootNode() : SceneNode(INVALID_ACTOR_ID, nullptr, RenderPass_0, &Mat4x
 	SceneNode* actorGroup = BE_NEW SceneNode(INVALID_ACTOR_ID, nullptr, RenderPass_Actor, &Mat4x4::g_Identity);
 	m_children.push_back(actorGroup);
 
+	SceneNode* guiGroup = BE_NEW SceneNode(INVALID_ACTOR_ID, nullptr, RenderPass_GUI, &Mat4x4::g_Identity);
+	m_children.push_back(guiGroup);
+
 	SceneNode* skyGroup = BE_NEW SceneNode(INVALID_ACTOR_ID, nullptr, RenderPass_Sky, &Mat4x4::g_Identity);
 	m_children.push_back(skyGroup);
 
@@ -287,6 +290,11 @@ HRESULT RootNode::VRenderChildren(Scene* pScene)
 		case RenderPass_Static:
 		case RenderPass_Actor:
 			m_children[pass]->VRenderChildren(pScene);
+			break;
+		case RenderPass_GUI:
+			pScene->GetRenderer()->VEnableZBuffer(false);
+			m_children[pass]->VRenderChildren(pScene);
+			pScene->GetRenderer()->VEnableZBuffer(true);
 			break;
 		case RenderPass_Sky:
 //			IRenderState* skyPass = pScene->GetRenderer()->VPrepareSkyBoxPass();

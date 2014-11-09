@@ -147,7 +147,6 @@ HRESULT D3DBitmapNode11::VRender(Scene* pScene)
 
 	IRenderer* pRenderer = g_pApp->GetGraphicsManager()->GetRenderer();
 	ID3D11DeviceContext* context = pRenderer->GetDeviceContext();
-	pRenderer->VEnableZBuffer(false);
 
 	Mat4x4 worldMatrix, viewMatrix, orthoMatrix;
 	pRenderer->VGetViewMatrix(viewMatrix);
@@ -171,7 +170,6 @@ HRESULT D3DBitmapNode11::VRender(Scene* pScene)
 	{
 		return S_FALSE;
 	}
-	pRenderer->VEnableZBuffer(true);
 
 	return S_OK;
 }
