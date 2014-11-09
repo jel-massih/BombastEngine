@@ -32,6 +32,12 @@ Vec3& Vec3::operator+=(const Vec3 v)
 	return *this;
 }
 
+bool Vec3::operator==(const Vec3 v)
+{
+	return (v.x == x && v.y == y && v.z == z);
+}
+
+
 Vec3 operator* (float f, const Vec3& vec)
 {
 	return vec * f;

@@ -51,6 +51,7 @@ public:
 	Vec3 operator-(Vec3 v) const;
 	Vec3 operator+(Vec3 v) const;
 	Vec3& operator+=(const Vec3 v);
+	bool operator==(const Vec3 v);
 };
 
 inline Vec3::Vec3(const Vec4& v4) { x = v4.x; y = v4.y; z = v4.z; }
