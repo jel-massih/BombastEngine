@@ -3,6 +3,8 @@
 
 const Mat4x4 Mat4x4::g_Identity(XMFLOAT4X4(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1));
 
+const Vec3 Vec3::g_InvalidVec3(-DBL_MAX, -DBL_MAX, -DBL_MAX);
+
 Vec3 Vec3::operator*(float f) const
 {
 	Vec3 v = Vec3(x*f, y*f, z*f);
