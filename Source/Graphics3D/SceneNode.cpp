@@ -327,7 +327,16 @@ HRESULT CameraNode::SetViewTransform(Scene* pScene)
 		Mat4x4 mat = m_pTarget->VGet()->ToWorld();
 		Vec4 at = m_camOffsetVector;
 		Vec4 atWorld = mat.Xform(at);
-		Vec3 pos = mat.GetPosition();// +Vec3(atWorld);
+		Vec3 pos = mat.GetPosition() + Vec3(atWorld);
+		mat.SetPosition(pos);
+		VSetTransform(&mat);
+	}
+	else
+	{
+		Mat4x4 mat = VGet()->ToWorld();
+		Vec4 at = m_camOffsetVector;
+		Vec4 atWorld = mat.Xform(at);
+		Vec3 pos = mat.GetPosition() + Vec3(atWorld);
 		mat.SetPosition(pos);
 		VSetTransform(&mat);
 	}

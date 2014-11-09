@@ -202,7 +202,9 @@ void D3DBitmapNode11::RenderBuffers()
 	pRenderer->VGetWorldMatrix(worldMatrix);
 	pRenderer->VGetOrthoMatrix(orthoMatrix);
 
+	pRenderer->VEnableZBuffer(false);
 	m_pTextureShader->Render(context, GetIndexCount(), DirectX::XMLoadFloat4x4(&worldMatrix), DirectX::XMLoadFloat4x4(&viewMatrix), DirectX::XMLoadFloat4x4(&orthoMatrix), m_pTexture);
+	pRenderer->VEnableZBuffer(true);
 
 	return;
 }

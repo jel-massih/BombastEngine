@@ -121,7 +121,7 @@ public :
 		m_bActive(true),
 		m_bDebugCamera(false),
 		m_pTarget(nullptr),
-		m_camOffsetVector(0.0f, 1.0f, -10.0f, 0.0f)
+		m_camOffsetVector(0.0f, 0.0f, -10.0f, 0.0f)
 	{
 	}
 
