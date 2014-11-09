@@ -2,7 +2,6 @@
 #define GRAPHICS_MANAGER_H
 
 #include "../Graphics3D/D3DClass.h"
-#include "../Graphics3D/CameraClass.h"
 #include "../Graphics2D/ColorShaderClass.h"
 #include "../Graphics2D/TextureShaderClass.h"
 

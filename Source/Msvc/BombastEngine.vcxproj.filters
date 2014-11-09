@@ -10,17 +10,11 @@
     <ClCompile Include="BombastEngine.cpp">
       <Filter>Bombast</Filter>
     </ClCompile>
-    <ClCompile Include="..\Graphics2D\BitmapClass.cpp">
-      <Filter>Graphics2D</Filter>
-    </ClCompile>
     <ClCompile Include="..\Graphics2D\TextureClass.cpp">
       <Filter>Graphics2D</Filter>
     </ClCompile>
     <ClCompile Include="..\Graphics2D\TextureShaderClass.cpp">
       <Filter>Graphics2D</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Graphics3D\CameraClass.cpp">
-      <Filter>Graphics3D</Filter>
     </ClCompile>
     <ClCompile Include="..\Graphics3D\ModelClass.cpp">
       <Filter>Graphics3D</Filter>
@@ -37,12 +31,6 @@
     <ClCompile Include="..\InputCore\InputCore.cpp">
       <Filter>InputCore</Filter>
     </ClCompile>
-    <ClCompile Include="..\Entity\Entity.cpp">
-      <Filter>Entity</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Entity\BitmapEntity.cpp">
-      <Filter>Entity</Filter>
-    </ClCompile>
     <ClCompile Include="..\Actor\Actor.cpp">
       <Filter>Actor</Filter>
     </ClCompile>
@@ -51,9 +39,6 @@
     </ClCompile>
     <ClCompile Include="..\Graphics3D\GraphicsManager.cpp">
       <Filter>Graphics3D</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Entity\EntitiesManager.cpp">
-      <Filter>Entity</Filter>
     </ClCompile>
     <ClCompile Include="..\Bombast\CoreGameLogic.cpp">
       <Filter>Bombast</Filter>
@@ -107,9 +92,6 @@
     <ClCompile Include="..\Resources\LuaResource.cpp">
       <Filter>Resources</Filter>
     </ClCompile>
-    <ClCompile Include="..\Graphics3D\Shaders.cpp">
-      <Filter>Graphics3D</Filter>
-    </ClCompile>
     <ClCompile Include="..\Utilities\Math.cpp">
       <Filter>Utilities</Filter>
     </ClCompile>
@@ -135,17 +117,11 @@
     <ClInclude Include="..\Debugging\Logger.h">
       <Filter>Debugging</Filter>
     </ClInclude>
-    <ClInclude Include="..\Graphics2D\BitmapClass.h">
-      <Filter>Graphics2D</Filter>
-    </ClInclude>
     <ClInclude Include="..\Graphics2D\TextureClass.h">
       <Filter>Graphics2D</Filter>
     </ClInclude>
     <ClInclude Include="..\Graphics2D\TextureShaderClass.h">
       <Filter>Graphics2D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Graphics3D\CameraClass.h">
-      <Filter>Graphics3D</Filter>
     </ClInclude>
     <ClInclude Include="..\Graphics3D\ModelClass.h">
       <Filter>Graphics3D</Filter>
@@ -161,12 +137,6 @@
     </ClInclude>
     <ClInclude Include="..\InputCore\InputCore.h">
       <Filter>InputCore</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Entity\Entity.h">
-      <Filter>Entity</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Entity\BitmapEntity.h">
-      <Filter>Entity</Filter>
     </ClInclude>
     <ClInclude Include="..\Actor\Actor.h">
       <Filter>Actor</Filter>
@@ -188,9 +158,6 @@
     </ClInclude>
     <ClInclude Include="..\Graphics3D\GraphicsManager.h">
       <Filter>Graphics3D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Entity\EntitiesManager.h">
-      <Filter>Entity</Filter>
     </ClInclude>
     <ClInclude Include="..\Bombast\CoreGameLogic.h">
       <Filter>Bombast</Filter>
@@ -264,9 +231,6 @@
     <ClInclude Include="..\Utilities\FastDelegate\FastDelegate.h">
       <Filter>Utilities\FastDelegate</Filter>
     </ClInclude>
-    <ClInclude Include="..\Graphics3D\Shaders.h">
-      <Filter>Graphics3D</Filter>
-    </ClInclude>
     <ClInclude Include="..\Utilities\Math.h">
       <Filter>Utilities</Filter>
     </ClInclude>
@@ -298,9 +262,6 @@
     </Filter>
     <Filter Include="InputCore">
       <UniqueIdentifier>{60290247-d752-40dc-9247-1c59c4980e95}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Entity">
-      <UniqueIdentifier>{6f15c821-9b83-4d74-bf4c-4f3e0b9bc433}</UniqueIdentifier>
     </Filter>
     <Filter Include="Actor">
       <UniqueIdentifier>{1bdb76db-5655-424a-a622-9e917a388492}</UniqueIdentifier>

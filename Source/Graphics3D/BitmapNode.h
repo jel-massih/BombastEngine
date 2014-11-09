@@ -3,8 +3,8 @@
 
 #include "Material.h"
 #include "SceneNode.h"
+#include "../Resources/TextureResource.h"
 #include "../Graphics2D/TextureShaderClass.h"
-#include "../Graphics2D/BitmapClass.h"
 
 class BitmapNode : public SceneNode
 {

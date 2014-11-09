@@ -7,7 +7,6 @@
 #include "..\BombastEngineStd.h"
 #include "..\Constants.h"
 #include "..\Graphics3D\GraphicsManager.h"
-#include "..\Entity/EntitiesManager.h"
 #include "..\Scripting\LuaCoreManager.h"
 #include "..\Utilities\Initialization.h"
 #include "CoreGameLogic.h"

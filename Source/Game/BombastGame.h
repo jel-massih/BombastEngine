@@ -2,8 +2,6 @@
 #define GAME_H
 
 #include "../BombastEngineStd.h"
-#include "../Graphics2D/BitmapClass.h"
-#include "../Entity/EntitiesManager.h"
 #include "../InputCore/InputCore.h"
 
 class BombastGame {
