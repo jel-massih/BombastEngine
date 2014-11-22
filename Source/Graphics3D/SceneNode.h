@@ -158,8 +158,8 @@ protected:
 class D3D11GridNode : public SceneNode
 {
 protected:
-	DWORD m_vertCount, m_indexCount;
-	DWORD m_gridWidth, m_gridHeight;
+	int m_vertCount, m_indexCount;
+	int m_gridWidth, m_gridHeight;
 
 	ID3D11Buffer* m_pIndexBuffer;
 	ID3D11Buffer* m_pVertexBuffer;
