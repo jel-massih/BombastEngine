@@ -93,6 +93,10 @@ public:
 	{
 		XMStoreFloat4x4(this, XMMatrixRotationRollPitchYaw(yawRadians, pitchRadians, rollRadians));
 	}
+	inline void BuildYawPitchRoll(const Vec3 rotationRadians)
+	{
+		XMStoreFloat4x4(this, XMMatrixRotationRollPitchYaw(rotationRadians.x, rotationRadians.y, rotationRadians.z));
+	}
 };
 
 inline void Mat4x4::SetPosition(Vec3 const &pos)
