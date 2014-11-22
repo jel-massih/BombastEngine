@@ -11,6 +11,9 @@ SceneNodeProperties::SceneNodeProperties()
 	m_radius = 0;
 	m_renderPass = RenderPass_0;
 	m_alphaType = AlphaOpaque;
+
+	m_toWorld = Mat4x4::g_Identity;
+	m_fromWorld = Mat4x4::g_Identity.Inverse();
 }
 
 void SceneNodeProperties::Transform(Mat4x4* toWorld, Mat4x4* fromWorld) const
