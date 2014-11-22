@@ -363,3 +363,170 @@ Mat4x4 CameraNode::GetWorldViewProjection(Scene* pScene)
 	Mat4x4 worldView = world * view;
 	return worldView * m_projection;
 }
+
+D3D11GridNode::D3D11GridNode(ActorId actorId, BaseRenderComponent* renderComponent, const Mat4x4* pMatrix)
+	: SceneNode(actorId, renderComponent, RenderPass_0, pMatrix)
+{
+	m_vertCount = m_indexCount = 0;
+	m_pVertexBuffer = NULL;
+	m_pIndexBuffer = NULL;
+
+	m_gridWidth = 100;
+	m_gridHeight = 100;
+}
+
+D3D11GridNode::~D3D11GridNode()
+{
+	SAFE_RELEASE(m_pVertexBuffer);
+	SAFE_RELEASE(m_pIndexBuffer);
+}
+
+HRESULT D3D11GridNode::VOnRestore(Scene* pScene)
+{
+	HRESULT hr;
+
+	BE_HRETURN(SceneNode::VOnRestore(pScene), "Failed to restore Scenenode for Grid");
+
+	SAFE_RELEASE(m_pVertexBuffer);
+	SAFE_RELEASE(m_pIndexBuffer);
+
+	if (!InitializeBuffers(g_pApp->GetGraphicsManager()->GetRenderer()->GetDevice()))
+	{
+		return S_FALSE;
+	}
+
+	return S_OK;
+}
+
+HRESULT D3D11GridNode::InitializeBuffers(ID3D11Device* device)
+{
+	VertexType* vertices;
+	unsigned long* indices;
+	int index, i, j;
+	float posX, posZ;
+	D3D11_BUFFER_DESC vertexBufferDesc, indexBufferDesc;
+	D3D11_SUBRESOURCE_DATA vertexData, indexData;
+	HRESULT result;
+
+	m_vertCount = (m_gridWidth - 1) * (m_gridHeight - 1) * 8;
+	m_indexCount = m_vertCount;
+
+	vertices = new VertexType[m_vertCount];
+	if (!vertices)
+	{
+		return S_FALSE;
+	}
+
+	indices = new unsigned long[m_indexCount];
+	if (!indices)
+	{
+		return S_FALSE;
+	}
+
+	index = 0;
+	for (i = 0; i < m_gridHeight; i++)
+	{
+		for (j = 0; j < m_gridWidth; j++)
+		{
+			//Line 1
+			posX = (float)j;
+			posZ = (float)(i+1);
+
+			vertices[index].position = Vec3(posX, 0.0f, posZ);
+			vertices[index].color = Vec4(1.0f, 1.0f, 1.0f, 1.0f);
+			indices[index] = index;
+			index++;
+
+			posX = (float)(j + 1);
+			posZ = (float)(i + 1);
+			vertices[index].position = Vec3(posX, 0.0f, posZ);
+			vertices[index].color = Vec4(1.0f, 1.0f, 1.0f, 1.0f);
+			indices[index] = index;
+			index++;
+			
+			//Line 2
+			posX = (float)(j + 1);
+			posZ = (float)(i + 1);
+			vertices[index].position = Vec3(posX, 0.0f, posZ);
+			vertices[index].color = Vec4(1.0f, 1.0f, 1.0f, 1.0f);
+			indices[index] = index;
+			index++;
+
+			posX = (float)(j + 1);
+			posZ = (float)i;
+			vertices[index].position = Vec3(posX, 0.0f, posZ);
+			vertices[index].color = Vec4(1.0f, 1.0f, 1.0f, 1.0f);
+			indices[index] = index;
+			index++;
+
+			//Line 3
+			posX = (float)(j + 1);
+			posZ = (float)i;
+			vertices[index].position = Vec3(posX, 0.0f, posZ);
+			vertices[index].color = Vec4(1.0f, 1.0f, 1.0f, 1.0f);
+			indices[index] = index;
+			index++;
+
+			posX = (float)j;
+			posZ = (float)i;
+			vertices[index].position = Vec3(posX, 0.0f, posZ);
+			vertices[index].color = Vec4(1.0f, 1.0f, 1.0f, 1.0f);
+			indices[index] = index;
+			index++;
+
+			//Line 4
+			posX = (float)j;
+			posZ = (float)i;
+			vertices[index].position = Vec3(posX, 0.0f, posZ);
+			vertices[index].color = Vec4(1.0f, 1.0f, 1.0f, 1.0f);
+			indices[index] = index;
+			index++;
+
+			posX = (float)j;
+			posZ = (float)(i + 1);
+			vertices[index].position = Vec3(posX, 0.0f, posZ);
+			vertices[index].color = Vec4(1.0f, 1.0f, 1.0f, 1.0f);
+			indices[index] = index;
+			index++;
+		}
+	}
+
+	vertexBufferDesc.Usage = D3D11_USAGE_DEFAULT;
+	vertexBufferDesc.ByteWidth = sizeof(VertexType) * m_vertCount;
+	vertexBufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
+	vertexBufferDesc.CPUAccessFlags = 0;
+	vertexBufferDesc.MiscFlags = 0;
+	vertexBufferDesc.StructureByteStride = 0;
+
+	indexData.pSysMem = indices;
+	indexData.SysMemPitch = 0;
+	indexData.SysMemSlicePitch = 0;
+
+	result = device->CreateBuffer(&indexBufferDesc, &indexData, &m_pIndexBuffer);
+	if (FAILED(result))
+	{
+		return result;
+	}
+
+	SAFE_DELETE_ARRAY(vertices);
+	SAFE_DELETE_ARRAY(indices);
+
+	return S_OK;
+}
+
+HRESULT D3D11GridNode::VRender(Scene* pScene)
+{
+	unsigned int stride;
+	unsigned int offset;
+
+	ID3D11DeviceContext* context = g_pApp->GetGraphicsManager()->GetRenderer()->GetDeviceContext();
+
+	stride = sizeof(VertexType);
+	offset = 0;
+
+	context->IASetVertexBuffers(0, 1, &m_pVertexBuffer, &stride, &offset);
+	context->IASetIndexBuffer(m_pVertexBuffer, DXGI_FORMAT_R32_UINT, 0);
+	context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_LINELIST);
+
+	return S_OK;
+}
