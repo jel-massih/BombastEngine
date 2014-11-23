@@ -408,7 +408,7 @@ HRESULT D3D11GridNode::InitializeBuffers(ID3D11Device* device)
 	D3D11_SUBRESOURCE_DATA vertexData, indexData;
 	HRESULT result;
 
-	m_vertCount = (m_gridWidth - 1) * (m_gridHeight - 1) * 8;
+	m_vertCount = (m_gridWidth) * (m_gridHeight) * 8;
 	m_indexCount = m_vertCount;
 
 	vertices = new VertexType[m_vertCount];
