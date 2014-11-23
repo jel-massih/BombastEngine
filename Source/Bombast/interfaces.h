@@ -23,6 +23,32 @@ public:
 	virtual void VChangeState(enum CoreGameState newState) = 0;
 };
 
+enum GameViewType
+{
+	GameView_Human,
+	GameView_Remote,
+	GameView_AI,
+	GameView_Other
+};
+
+typedef unsigned int GameViewId;
+extern const GameViewId be_InvalidGameViewId;
+
+class IGameView
+{
+public:
+	virtual HRESULT VOnRestore() = 0;
+	virtual void VOnRender(double fTime, float fElapsedTime) = 0;
+	virtual HRESULT VOnLostDevice() = 0;
+	virtual GameViewType VGetType() = 0;
+	virtual GameViewId VGetId() const = 0;
+	virtual void VOnAttach(GameViewId vid, ActorId aid) = 0;
+
+	virtual LRESULT CALLBACK VOnMsgProc(AppMsg msg) = 0;
+	virtual void VOnUpdate(unsigned long deltaMs) = 0;
+
+	virtual ~IGameView(){};
+};
 
 class ResourceHandle;
 class Resource;

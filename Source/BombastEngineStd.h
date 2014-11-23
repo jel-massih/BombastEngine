@@ -65,4 +65,12 @@ extern INT WINAPI BombastEngine(HINSTANCE hInstance,
 	LPWSTR    lpCmdLine,
 	int       nCmdShow);
 
+struct AppMsg
+{
+	HWND m_hWnd;
+	UINT m_uMsg;
+	WPARAM m_wParam;
+	LPARAM m_lParam;
+};
+
 #endif
