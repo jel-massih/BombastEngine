@@ -364,6 +364,11 @@ Mat4x4 CameraNode::GetWorldViewProjection(Scene* pScene)
 	return worldView * m_projection;
 }
 
+HRESULT CameraNode::VOnUpdate(Scene* pScene, DWORD const elapsedMs)
+{
+	return S_OK;
+}
+
 D3D11GridNode::D3D11GridNode(ActorId actorId, BaseRenderComponent* renderComponent, const Mat4x4* pMatrix)
 	: SceneNode(actorId, renderComponent, RenderPass_0, pMatrix)
 {

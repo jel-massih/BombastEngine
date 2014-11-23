@@ -127,6 +127,7 @@ public :
 
 	virtual HRESULT VRender(Scene* pScene);
 	virtual HRESULT VOnRestore(Scene* pScene);
+	virtual HRESULT VOnUpdate(Scene* pScene, DWORD const elapsedMs);
 	virtual bool VIsVisible(Scene* pScene) const { return m_bActive; }
 
 	const Frustum& GetFrustum() const { return m_frustum; }
