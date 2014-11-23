@@ -21,6 +21,7 @@ class Scene
 protected:
 	SceneNode* m_pRoot;
 	CameraNode* m_pCamera;
+	D3D11GridNode* m_pGrid;
 	IRenderer* m_pRenderer;
 
 	BMMatrixStack* m_pMatrixStack;
