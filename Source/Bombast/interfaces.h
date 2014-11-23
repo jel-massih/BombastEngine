@@ -4,6 +4,7 @@
 #include "..\Utilities\rapidxml.hpp"
 #include "../Graphics3D/Geometry.h"
 #include <string>
+#include <list>
 
 class Actor;
 
@@ -49,6 +50,8 @@ public:
 
 	virtual ~IGameView(){};
 };
+
+typedef std::list<IGameView*> GameViewList;
 
 class ResourceHandle;
 class Resource;
