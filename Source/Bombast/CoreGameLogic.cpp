@@ -177,11 +177,6 @@ void CoreGameLogic::VChangeState(enum CoreGameState newState)
 		{
 			BE_ERROR("ERROR: Game failed to load!");
 		}
-		else
-		{
-			VChangeState(CGS_SpawningPlayersActors);
-			return;
-		}
 	}
 	m_gameState = newState;
 }

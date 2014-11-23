@@ -47,7 +47,7 @@ void PongSampleLogic::VChangeState(CoreGameState newState)
 
 		case CGS_LoadingGameEnvironment:
 		{
-			g_pApp->GetScene()->OnRestore();
+			VChangeState(CGS_SpawningPlayersActors);
 		}
 	}
 }
