@@ -300,6 +300,8 @@ void BombastApp::ShutDown()
 
 	SAFE_DELETE(m_pResourceCache);
 
+	SAFE_DELETE(m_pTimer);
+
 	ShutdownWindows();
 }
 
