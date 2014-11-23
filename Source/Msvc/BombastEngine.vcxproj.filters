@@ -104,6 +104,9 @@
     <ClCompile Include="..\Events\Events.cpp">
       <Filter>Events</Filter>
     </ClCompile>
+    <ClCompile Include="..\Utilities\Timer.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Bombast\BombastApp.h">
@@ -239,6 +242,9 @@
     </ClInclude>
     <ClInclude Include="..\Events\Events.h">
       <Filter>Events</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Utilities\Timer.h">
+      <Filter>Utilities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

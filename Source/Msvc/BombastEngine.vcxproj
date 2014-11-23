@@ -55,6 +55,7 @@
     <ClInclude Include="..\Utilities\rapidxml.hpp" />
     <ClInclude Include="..\Utilities\String.h" />
     <ClInclude Include="..\Utilities\templates.h" />
+    <ClInclude Include="..\Utilities\Timer.h" />
     <ClInclude Include="..\Utilities\types.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
@@ -92,6 +93,7 @@
     <ClCompile Include="..\Utilities\Initialization.cpp" />
     <ClCompile Include="..\Utilities\Math.cpp" />
     <ClCompile Include="..\Utilities\String.cpp" />
+    <ClCompile Include="..\Utilities\Timer.cpp" />
     <ClCompile Include="BombastEngine.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">stdafx.h</PrecompiledHeaderFile>
