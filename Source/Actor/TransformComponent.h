@@ -22,6 +22,10 @@ public:
 	void SetRotation(const Vec3& rot) { m_rotation = rot; UpdateTransform(); }
 	Vec3 GetLookAt() const { return m_transform.GetDirection(); }
 
+	void MoveForward(float magnitude);
+	void MoveUp(float magnitude);
+	void RotateRight(float magnitude);
+	void RotateUp(float magnitude);
 private:
 	void UpdateTransform();
 

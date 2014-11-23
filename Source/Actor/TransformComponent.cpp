@@ -82,3 +82,53 @@ void TransformComponent::UpdateTransform()
 
 	m_transform = rotation * translation;
 }
+
+void TransformComponent::MoveForward(float magnitude)
+{
+	float radians;
+
+	radians = XMConvertToRadians(m_rotation.y);
+
+	m_position.x += sinf(radians) * magnitude;
+	m_position.y += cosf(radians) * magnitude;
+
+	UpdateTransform();
+}
+
+void TransformComponent::MoveUp(float magnitude)
+{
+	m_position.y += magnitude;
+	UpdateTransform();
+}
+
+void TransformComponent::RotateRight(float magnitude)
+{
+	m_rotation.y += magnitude;
+
+	if (m_rotation.y > 360.0f)
+	{
+		m_rotation.y -= 360.0f;
+	}
+	else if (m_rotation.y < 0.0f)
+	{
+		m_rotation.y += 360.0f;
+	}
+
+	UpdateTransform();
+}
+
+void TransformComponent::RotateUp(float magnitude)
+{
+	m_rotation.x += magnitude;
+
+	if (m_rotation.x > 90.0f)
+	{
+		m_rotation.x = 90.0f;
+	}
+	else if (m_rotation.x < -90.0f)
+	{
+		m_rotation.x = -90.0f;
+	}
+
+	UpdateTransform();
+}
