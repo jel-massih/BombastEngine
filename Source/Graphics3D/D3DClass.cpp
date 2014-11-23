@@ -278,7 +278,7 @@ bool D3DClass11::VInitialize(int screenWidth, int screenHeight, bool vsync, HWND
 
 	m_pDeviceContext->RSSetViewports(1, &viewport);
 
-	fieldOfView = (float)DirectX::XM_PI / 4.0f;
+	fieldOfView = (float)BE_PI / 4.0f;
 	screenAspect = (float)screenWidth / (float)screenHeight;
 
 	DirectX::XMStoreFloat4x4(&m_projectionMatrix, DirectX::XMMatrixPerspectiveFovLH(fieldOfView, screenAspect, screenNear, screenDepth));
