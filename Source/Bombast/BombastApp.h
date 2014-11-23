@@ -13,6 +13,7 @@
 #include "..\Graphics3D\SceneNode.h"
 #include "..\Graphics3D\Scene.h"
 #include "..\Events\EventManagerImpl.h"
+#include "..\Utilities\Timer.h"
 
 class BombastApp
 {
@@ -28,6 +29,8 @@ protected:
 	LuaCoreManager* m_pLuaCoreManager;
 
 	Scene* m_pScene;
+
+	Timer* m_pTimer;
 
 public:
 	BombastApp();

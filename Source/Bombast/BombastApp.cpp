@@ -30,6 +30,8 @@ BombastApp::BombastApp()
 	m_pResourceCache = 0;
 
 	m_pGame = 0;
+
+	m_pTimer = 0;
 }
 
 //Win32 Specific Stuff
@@ -169,6 +171,18 @@ bool BombastApp::InitializeApp(int screenWidth, int screenHeight)
 {
 	bool result;
 
+	m_pTimer = BE_NEW Timer();
+	if (!m_pTimer)
+	{
+		return false;
+	}
+
+	result = m_pTimer->Initialize();
+	if (!result)
+	{
+		return false;
+	}
+
 	m_pGraphicsManager = BE_NEW GraphicsManager();
 	if (!m_pGraphicsManager)
 	{
@@ -246,6 +260,14 @@ void BombastApp::Run()
 bool BombastApp::Frame()
 {
 	HRESULT hr;
+
+	m_pTimer->Frame();
+
+	hr = m_pScene->OnUpdate(m_pTimer->GetTime());
+	if (FAILED(hr))
+	{
+		return false;
+	}
 
 	hr = m_pScene->Render();
 	if (FAILED(hr))
