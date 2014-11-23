@@ -62,6 +62,8 @@ public:
 
 	EventManager* m_pEventManager;
 
+	Scene* const GetScene() const { return m_pScene; }
+
 private:
 	void InitializeWindows();
 	bool InitializeApp(int screenWidth, int screenHeight);
