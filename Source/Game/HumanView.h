@@ -17,6 +17,9 @@ protected:
 	CoreGameState m_coreGameState;
 
 public:
+	HumanView(IRenderer* renderer);
+	virtual ~HumanView();
+
 	bool LoadGame(rapidxml::xml_node<>* pLevelData);
 
 	virtual HRESULT VOnRestore();
@@ -32,6 +35,11 @@ public:
 	}
 	virtual LRESULT CALLBACK VOnMsgProc(AppMsg msg);
 	virtual void VOnUpdate(const int deltaMs);
+
+	virtual void VPushElement(IScreenElement* pElement);
+	virtual void VRemoveElement(IScreenElement* pElement);
+
+	void TogglePause(bool active);
 
 protected:
 	virtual bool VLoadGameDelegate(rapidxml::xml_node<>* pLevelData) {}

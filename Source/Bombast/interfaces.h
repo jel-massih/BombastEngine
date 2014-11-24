@@ -14,6 +14,25 @@ typedef unsigned int ComponentId;
 const ActorId INVALID_ACTOR_ID = 0;
 const ComponentId INVALID_COMPONENT_ID = 0;
 
+class IScreenElement
+{
+public:
+	virtual HRESULT VOnRestore() = 0;
+	virtual HRESULT VOnLostDevice() = 0;
+	virtual HRESULT VOnRender(float fTime, float fElapsedTime) = 0;
+	virtual void VOnUpdate(int deltaMs) = 0;
+
+	virtual int VGetZOrder() const = 0;
+	virtual void VSetZOrder(int const zOrder) = 0;
+	virtual bool VIsVisible() const = 0;
+	virtual bool VSetVisible(bool bVisible) = 0;
+
+	virtual LRESULT CALLBACK VOnMsgProc(AppMsg msg) = 0;
+	
+	virtual ~IScreenElement() {};
+	virtual bool const operator<(IScreenElement const& other) { return VGetZOrder() < other.VGetZOrder(); }
+};
+
 class IGameLogic
 {
 public:
@@ -52,6 +71,7 @@ public:
 };
 
 typedef std::list<IGameView*> GameViewList;
+typedef std::list<IScreenElement*> ScreenElementList;
 
 class ResourceHandle;
 class Resource;
