@@ -185,3 +185,16 @@ ActorFactory* CoreGameLogic::VCreateActorFactory()
 {
 	return BE_NEW ActorFactory();
 }
+
+void CoreGameLogic::VAddView(IGameView* pView, ActorId actorId = INVALID_ACTOR_ID)
+{
+	int viewId = static_cast<int>(m_gameViews.size());
+	m_gameViews.push_back(pView);
+	pView->VOnAttach(viewId, actorId);
+	pView->VOnRestore();
+}
+
+void CoreGameLogic::VRemoveView(IGameView* pView)
+{
+	m_gameViews.remove(pView);
+}
