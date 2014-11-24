@@ -107,6 +107,9 @@
     <ClCompile Include="..\Utilities\Timer.cpp">
       <Filter>Utilities</Filter>
     </ClCompile>
+    <ClCompile Include="..\Game\HumanView.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Bombast\BombastApp.h">
@@ -245,6 +248,9 @@
     </ClInclude>
     <ClInclude Include="..\Utilities\Timer.h">
       <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Game\HumanView.h">
+      <Filter>Game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
