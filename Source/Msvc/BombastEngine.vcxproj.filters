@@ -252,6 +252,9 @@
     <ClInclude Include="..\Game\HumanView.h">
       <Filter>Game</Filter>
     </ClInclude>
+    <ClInclude Include="..\UI\UserInterface.h">
+      <Filter>UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Bombast">
@@ -295,6 +298,9 @@
     </Filter>
     <Filter Include="Utilities\FastDelegate">
       <UniqueIdentifier>{e3cdbd39-d93e-4480-a782-1ff4db08fb3c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{73cc8763-1316-4b27-b5b6-cd202ac7cfca}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

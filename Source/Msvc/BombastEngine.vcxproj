@@ -49,6 +49,7 @@
     <ClInclude Include="..\Scripting\LuaCoreManager.h" />
     <ClInclude Include="..\Scripting\LuaEvent.h" />
     <ClInclude Include="..\Scripting\LuaExports.h" />
+    <ClInclude Include="..\UI\UserInterface.h" />
     <ClInclude Include="..\Utilities\DDSTextureLoader.h" />
     <ClInclude Include="..\Utilities\FastDelegate\FastDelegate.h" />
     <ClInclude Include="..\Utilities\Initialization.h" />
