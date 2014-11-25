@@ -73,6 +73,21 @@ public:
 typedef std::list<IGameView*> GameViewList;
 typedef std::list<IScreenElement*> ScreenElementList;
 
+class IKeyboardHandler
+{
+public:
+	virtual bool VOnKeyDown(const BYTE c) = 0;
+	virtual bool VOnKeyUp(const BYTE c) = 0;
+};
+
+class IMouseHandler
+{
+public:
+	virtual bool VOnMouseMove(const Point& pos, const int radius) = 0;
+	virtual bool VOnMouseDown(const Point& pos, const int radius, const std::string& buttonName) = 0;
+	virtual bool VOnMouseUp(const Point& pos, const int radius, const std::string& buttonName) = 0;
+};
+
 class ResourceHandle;
 class Resource;
 
