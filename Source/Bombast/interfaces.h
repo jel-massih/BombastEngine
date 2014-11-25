@@ -25,7 +25,7 @@ public:
 	virtual int VGetZOrder() const = 0;
 	virtual void VSetZOrder(int const zOrder) = 0;
 	virtual bool VIsVisible() const = 0;
-	virtual bool VSetVisible(bool bVisible) = 0;
+	virtual void VSetVisible(bool bVisible) = 0;
 
 	virtual LRESULT CALLBACK VOnMsgProc(AppMsg msg) = 0;
 	
