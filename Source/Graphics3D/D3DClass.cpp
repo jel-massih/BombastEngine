@@ -371,16 +371,16 @@ void D3DClass11::VSetBackgroundColor(float a, float r, float g, float b)
 	m_backgroundColor[3] = a;
 }
 
-void D3DClass11::VBeginScene()
+bool D3DClass11::VBeginScene()
 {
 	m_pDeviceContext->ClearRenderTargetView(m_pRenderTargetView, m_backgroundColor);
 
 	m_pDeviceContext->ClearDepthStencilView(m_pDepthStencilView, D3D11_CLEAR_DEPTH, 1.0f, 0);
 
-	return;
+	return true;
 }
 
-void D3DClass11::VEndScene()
+bool D3DClass11::VEndScene()
 {
 	if(m_vsyncEnabled)
 	{
@@ -391,7 +391,7 @@ void D3DClass11::VEndScene()
 		m_pSwapChain->Present(0, 0);
 	}
 
-	return;
+	return true;
 }
 
 HRESULT D3DClass11::VOnRestore()
