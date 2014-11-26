@@ -14,6 +14,15 @@ typedef unsigned int ComponentId;
 const ActorId INVALID_ACTOR_ID = 0;
 const ComponentId INVALID_COMPONENT_ID = 0;
 
+template <class T>
+struct SortBy_Ptr_Content
+{
+	bool operator()(const T* lhs, const T* rhs) const
+	{
+		return lhs < rhs;
+	}
+};
+
 class IScreenElement
 {
 public:
