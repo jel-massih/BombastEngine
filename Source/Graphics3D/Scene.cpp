@@ -36,9 +36,6 @@ Scene::~Scene()
 
 HRESULT Scene::Render()
 {
-	m_pRenderer->VSetBackgroundColor(0.2f, 0.2f, 0.5f, 1.0f);
-	m_pRenderer->VBeginScene();
-
 	if (m_pRoot && m_pCamera)
 	{
 		m_pCamera->SetViewTransform(this);
@@ -52,7 +49,6 @@ HRESULT Scene::Render()
 
 		RenderAlphaPass();
 	}
-	m_pRenderer->VEndScene();
 
 	return S_OK;
 }
