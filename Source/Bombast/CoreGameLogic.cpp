@@ -186,7 +186,7 @@ ActorFactory* CoreGameLogic::VCreateActorFactory()
 	return BE_NEW ActorFactory();
 }
 
-void CoreGameLogic::VAddView(IGameView* pView, ActorId actorId = INVALID_ACTOR_ID)
+void CoreGameLogic::VAddView(IGameView* pView, ActorId actorId)
 {
 	int viewId = static_cast<int>(m_gameViews.size());
 	m_gameViews.push_back(pView);
