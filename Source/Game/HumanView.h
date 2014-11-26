@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../Bombast/BombastApp.h"
+#include "../UI/UserInterface.h"
 
 class HumanView : IGameView
 {
@@ -33,15 +34,13 @@ public:
 
 	virtual void VSetCameraOffset(const Vec4& offset);
 
-	void HandleGameState(CoreGameState newState);
 
 	virtual void VSetControlledActor(ActorId actorId) { m_actorId = actorId; }
 
 	void PlaySoundDelegate(IEventDataPtr pEventData);
-	void GameStateDelegate(IEventDataPtr pEventData);
 
 protected:
-	virtual bool VLoadGameDelegate(rapidxml::xml_node<>* pLevelData) {}
+	virtual bool VLoadGameDelegate(rapidxml::xml_node<>* pLevelData) { VPushElement(m_pScene); return true; }
 
 private:
 	void RegisterAllDelegates();
