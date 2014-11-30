@@ -220,8 +220,6 @@ bool BombastApp::InitializeApp(int screenWidth, int screenHeight)
 		return false;
 	}
 
-	m_pScene = BE_NEW Scene(m_pGraphicsManager->GetRenderer());
-
 	return true;
 }
 
@@ -263,26 +261,12 @@ bool BombastApp::Frame()
 
 	m_pTimer->Frame();
 
-	hr = m_pScene->OnUpdate(m_pTimer->GetTime());
-	if (FAILED(hr))
-	{
-		return false;
-	}
-
-	hr = m_pScene->Render();
-	if (FAILED(hr))
-	{
-		return false;
-	}
-
 	return true;
 }
 
 void BombastApp::ShutDown()
 {
 	SAFE_DELETE(m_pGame);
-
-	SAFE_DELETE(m_pScene);
 
 	SAFE_DELETE(m_pEventManager);
 

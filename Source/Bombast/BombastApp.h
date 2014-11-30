@@ -11,7 +11,6 @@
 #include "..\Utilities\Initialization.h"
 #include "CoreGameLogic.h"
 #include "..\Graphics3D\SceneNode.h"
-#include "..\Graphics3D\Scene.h"
 #include "..\Events\EventManagerImpl.h"
 #include "..\Utilities\Timer.h"
 
@@ -27,8 +26,6 @@ protected:
 
 	GraphicsManager* m_pGraphicsManager;
 	LuaCoreManager* m_pLuaCoreManager;
-
-	Scene* m_pScene;
 
 	Timer* m_pTimer;
 
@@ -64,8 +61,6 @@ public:
 	virtual bool VLoadGame();
 
 	EventManager* m_pEventManager;
-
-	Scene* const GetScene() const { return m_pScene; }
 
 private:
 	void InitializeWindows();
