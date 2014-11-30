@@ -34,9 +34,9 @@ Scene::~Scene()
 	SAFE_DELETE(m_pRoot);
 }
 
-HRESULT Scene::Render()
+HRESULT Scene::OnRender()
 {
-	if (m_pRoot && m_pCamera)
+	/*if (m_pRoot && m_pCamera)
 	{
 		m_pCamera->SetViewTransform(this);
 
@@ -48,7 +48,7 @@ HRESULT Scene::Render()
 		}
 
 		RenderAlphaPass();
-	}
+	}*/
 
 	return S_OK;
 }

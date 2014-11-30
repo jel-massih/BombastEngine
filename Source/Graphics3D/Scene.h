@@ -33,7 +33,7 @@ public:
 	Scene(IRenderer* renderer);
 	virtual ~Scene();
 
-	HRESULT Render();
+	HRESULT OnRender();
 	HRESULT OnRestore();
 	HRESULT OnLostDevice();
 	HRESULT OnUpdate(const int deltaMS);
