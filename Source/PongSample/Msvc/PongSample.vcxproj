@@ -86,6 +86,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\PongSampleEvents.h" />
     <ClInclude Include="PongSample.h" />
     <ClInclude Include="PongSampleStd.h" />
   </ItemGroup>
