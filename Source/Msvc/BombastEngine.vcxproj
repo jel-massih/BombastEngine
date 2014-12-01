@@ -29,6 +29,7 @@
     <ClInclude Include="..\Game\BombastGame.h" />
     <ClInclude Include="..\Game\HumanView.h" />
     <ClInclude Include="..\Game\Process.h" />
+    <ClInclude Include="..\Game\ProcessManager.h" />
     <ClInclude Include="..\Graphics2D\ColorShaderClass.h" />
     <ClInclude Include="..\Graphics2D\TextureClass.h" />
     <ClInclude Include="..\Graphics2D\TextureShaderClass.h" />
@@ -77,6 +78,7 @@
     <ClCompile Include="..\Game\BombastGame.cpp" />
     <ClCompile Include="..\Game\HumanView.cpp" />
     <ClCompile Include="..\Game\Process.cpp" />
+    <ClCompile Include="..\Game\ProcessManager.cpp" />
     <ClCompile Include="..\Graphics2D\ColorShaderClass.cpp" />
     <ClCompile Include="..\Graphics2D\TextureClass.cpp" />
     <ClCompile Include="..\Graphics2D\TextureShaderClass.cpp" />
