@@ -113,6 +113,9 @@
     <ClCompile Include="..\Graphics3D\Raycast.cpp">
       <Filter>Graphics3D</Filter>
     </ClCompile>
+    <ClCompile Include="..\Game\Process.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Bombast\BombastApp.h">
@@ -260,6 +263,9 @@
     </ClInclude>
     <ClInclude Include="..\Graphics3D\Raycast.h">
       <Filter>Graphics3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Game\Process.h">
+      <Filter>Game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
