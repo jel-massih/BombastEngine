@@ -7,6 +7,8 @@ const GameViewId be_InvalidGameViewId = 0xffffffff;
 
 HumanView::HumanView(IRenderer* renderer)
 {
+	m_pProcessManager = BE_NEW ProcessManager;
+
 	m_mouseRadius = 1;
 	m_viewId = be_InvalidGameViewId;
 
@@ -30,10 +32,12 @@ HumanView::HumanView(IRenderer* renderer)
 HumanView::~HumanView()
 {
 	RemoveAllDelegates();
-	if (!m_screenElements.empty())
+	while (!m_screenElements.empty())
 	{
 		m_screenElements.pop_front();
 	}
+
+	SAFE_DELETE(m_pProcessManager);
 }
 
 bool HumanView::LoadGame(rapidxml::xml_node<>* pLevelData)
@@ -171,6 +175,8 @@ LRESULT CALLBACK HumanView::VOnMsgProc(AppMsg msg)
 
 void HumanView::VOnUpdate(const int deltaMs)
 {
+	m_pProcessManager->UpdateProcesses(deltaMs);
+
 	for (ScreenElementList::iterator it = m_screenElements.begin(); it != m_screenElements.end(); it++)
 	{
 		(*it)->VOnUpdate(deltaMs);
