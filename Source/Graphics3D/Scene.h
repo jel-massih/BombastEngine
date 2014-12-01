@@ -67,6 +67,8 @@ public:
 	}
 
 	IRenderer* GetRenderer() { return m_pRenderer; }
+
+	HRESULT Pick(RayCast *pRayCast) { return m_pRoot->VPick(this, pRayCast); }
 };
 
 #endif
