@@ -225,6 +225,15 @@ bool SceneNode::VRemoveChild(ActorId actorId)
 
 HRESULT SceneNode::VPick(Scene* pScene, RayCast* raycast)
 {
+	for (SceneNodeList::iterator it = m_children.begin(); it != m_children.end(); it++)
+	{
+		HRESULT hr = (*it)->VPick(pScene, raycast);
+
+		if (hr == E_FAIL)
+		{
+			return E_FAIL;
+		}
+	}
 	return S_OK;
 }
 
