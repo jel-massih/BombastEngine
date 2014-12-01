@@ -110,6 +110,9 @@
     <ClCompile Include="..\Game\HumanView.cpp">
       <Filter>Game</Filter>
     </ClCompile>
+    <ClCompile Include="..\Graphics3D\Raycast.cpp">
+      <Filter>Graphics3D</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Bombast\BombastApp.h">
@@ -254,6 +257,9 @@
     </ClInclude>
     <ClInclude Include="..\UI\UserInterface.h">
       <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Graphics3D\Raycast.h">
+      <Filter>Graphics3D</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
