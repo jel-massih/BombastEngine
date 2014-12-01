@@ -21,6 +21,7 @@ class Scene
 protected:
 	SceneNode* m_pRoot;
 	CameraNode* m_pCamera;
+	D3D11GridNode* m_pGrid;
 	IRenderer* m_pRenderer;
 
 	BMMatrixStack* m_pMatrixStack;
@@ -32,7 +33,7 @@ public:
 	Scene(IRenderer* renderer);
 	virtual ~Scene();
 
-	HRESULT Render();
+	HRESULT OnRender();
 	HRESULT OnRestore();
 	HRESULT OnLostDevice();
 	HRESULT OnUpdate(const int deltaMS);
@@ -66,6 +67,8 @@ public:
 	}
 
 	IRenderer* GetRenderer() { return m_pRenderer; }
+
+	HRESULT Pick(RayCast *pRayCast) { return m_pRoot->VPick(this, pRayCast); }
 };
 
 #endif

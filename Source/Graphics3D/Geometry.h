@@ -93,6 +93,10 @@ public:
 	{
 		XMStoreFloat4x4(this, XMMatrixRotationRollPitchYaw(yawRadians, pitchRadians, rollRadians));
 	}
+	inline void BuildYawPitchRoll(const Vec3 rotationRadians)
+	{
+		XMStoreFloat4x4(this, XMMatrixRotationRollPitchYaw(rotationRadians.x, rotationRadians.y, rotationRadians.z));
+	}
 };
 
 inline void Mat4x4::SetPosition(Vec3 const &pos)
@@ -272,7 +276,7 @@ public:
 	void SetAspect(float aspect) { m_aspect = aspect; Init(m_fov, m_aspect, m_near, m_far); }
 	void SetNear(float nearClip) { m_near = nearClip; Init(m_fov, m_aspect, m_near, m_far); }
 	void SetFar(float farClip) { m_far = farClip; Init(m_fov, m_aspect, m_near, m_far); }
-	void Init(const float fov, const float aspect, const float near, const float far);
+	void Init(const float fov, const float aspect, const float nearClip, const float farClip);
 
 	void Render();
 };

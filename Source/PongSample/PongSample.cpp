@@ -44,6 +44,11 @@ void PongSampleLogic::VChangeState(CoreGameState newState)
 
 			break;
 		}
+
+		case CGS_LoadingGameEnvironment:
+		{
+			VChangeState(CGS_SpawningPlayersActors);
+		}
 	}
 }
 

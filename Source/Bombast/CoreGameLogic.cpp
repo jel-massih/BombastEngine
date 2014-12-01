@@ -177,11 +177,6 @@ void CoreGameLogic::VChangeState(enum CoreGameState newState)
 		{
 			BE_ERROR("ERROR: Game failed to load!");
 		}
-		else
-		{
-			VChangeState(CGS_SpawningPlayersActors);
-			return;
-		}
 	}
 	m_gameState = newState;
 }
@@ -189,4 +184,25 @@ void CoreGameLogic::VChangeState(enum CoreGameState newState)
 ActorFactory* CoreGameLogic::VCreateActorFactory()
 {
 	return BE_NEW ActorFactory();
+}
+
+void CoreGameLogic::VAddView(IGameView* pView, ActorId actorId)
+{
+	int viewId = static_cast<int>(m_gameViews.size());
+	m_gameViews.push_back(pView);
+	pView->VOnAttach(viewId, actorId);
+	pView->VOnRestore();
+}
+
+void CoreGameLogic::VRemoveView(IGameView* pView)
+{
+	m_gameViews.remove(pView);
+}
+
+void CoreGameLogic::VRenderDiagnostics()
+{
+	if (m_bRenderDiagnostics)
+	{
+		//Render Stuff
+	}
 }

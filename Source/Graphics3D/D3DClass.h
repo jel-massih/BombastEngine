@@ -14,8 +14,8 @@ public:
 	
 	void VSetBackgroundColor(float a, float r, float g, float b);
 
-	void VBeginScene();
-	void VEndScene();
+	bool VBeginScene();
+	bool VEndScene();
 
 	HRESULT VOnRestore();
 

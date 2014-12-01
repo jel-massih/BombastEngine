@@ -4,6 +4,7 @@
 #include "..\Utilities\rapidxml.hpp"
 #include "../Graphics3D/Geometry.h"
 #include <string>
+#include <list>
 
 class Actor;
 
@@ -12,6 +13,34 @@ typedef unsigned int ComponentId;
 
 const ActorId INVALID_ACTOR_ID = 0;
 const ComponentId INVALID_COMPONENT_ID = 0;
+
+template <class T>
+struct SortBy_Ptr_Content
+{
+	bool operator()(const T* lhs, const T* rhs) const
+	{
+		return lhs < rhs;
+	}
+};
+
+class IScreenElement
+{
+public:
+	virtual HRESULT VOnRestore() = 0;
+	virtual HRESULT VOnLostDevice() = 0;
+	virtual HRESULT VOnRender(float fTime, float fElapsedTime) = 0;
+	virtual void VOnUpdate(int deltaMs) = 0;
+
+	virtual int VGetZOrder() const = 0;
+	virtual void VSetZOrder(int const zOrder) = 0;
+	virtual bool VIsVisible() const = 0;
+	virtual void VSetVisible(bool bVisible) = 0;
+
+	virtual LRESULT CALLBACK VOnMsgProc(AppMsg msg) = 0;
+	
+	virtual ~IScreenElement() {};
+	virtual bool const operator<(IScreenElement const& other) { return VGetZOrder() < other.VGetZOrder(); }
+};
 
 class IGameLogic
 {
@@ -23,6 +52,50 @@ public:
 	virtual void VChangeState(enum CoreGameState newState) = 0;
 };
 
+enum GameViewType
+{
+	GameView_Human,
+	GameView_Remote,
+	GameView_AI,
+	GameView_Other
+};
+
+typedef unsigned int GameViewId;
+extern const GameViewId be_InvalidGameViewId;
+
+class IGameView
+{
+public:
+	virtual HRESULT VOnRestore() = 0;
+	virtual void VOnRender(double fTime, float fElapsedTime) = 0;
+	virtual HRESULT VOnLostDevice() = 0;
+	virtual GameViewType VGetType() = 0;
+	virtual GameViewId VGetId() const = 0;
+	virtual void VOnAttach(GameViewId vid, ActorId aid) = 0;
+
+	virtual LRESULT CALLBACK VOnMsgProc(AppMsg msg) = 0;
+	virtual void VOnUpdate(unsigned long deltaMs) = 0;
+
+	virtual ~IGameView(){};
+};
+
+typedef std::list<IGameView*> GameViewList;
+typedef std::list<IScreenElement*> ScreenElementList;
+
+class IKeyboardHandler
+{
+public:
+	virtual bool VOnKeyDown(const BYTE c) = 0;
+	virtual bool VOnKeyUp(const BYTE c) = 0;
+};
+
+class IMouseHandler
+{
+public:
+	virtual bool VOnMouseMove(const Point& pos, const int radius) = 0;
+	virtual bool VOnMouseDown(const Point& pos, const int radius, const std::string& buttonName) = 0;
+	virtual bool VOnMouseUp(const Point& pos, const int radius, const std::string& buttonName) = 0;
+};
 
 class ResourceHandle;
 class Resource;
@@ -76,8 +149,8 @@ public:
 	virtual bool VInitialize(int screenWidth, int screenHeight, bool vsync, HWND hwnd, bool bFullscreen, float screenDepth, float screenNear) = 0;
 	virtual void VShutdown() = 0;
 	virtual void VSetBackgroundColor(float a, float r, float g, float b) = 0;
-	virtual void VBeginScene() = 0;
-	virtual void VEndScene() = 0;
+	virtual bool VBeginScene() = 0;
+	virtual bool VEndScene() = 0;
 
 	virtual HRESULT VOnRestore() = 0;
 

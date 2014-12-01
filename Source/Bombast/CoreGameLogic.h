@@ -59,6 +59,16 @@ public:
 	virtual void VChangeState(CoreGameState newState);
 	const CoreGameState GetState() const { return m_gameState; }
 	
+	virtual void VAddView(IGameView* pView, ActorId actorId = INVALID_ACTOR_ID);
+	virtual void VRemoveView(IGameView* pView);
+
+	void ToggleRenderDiagnostice() { m_bRenderDiagnostics = !m_bRenderDiagnostics; }
+	virtual void VRenderDiagnostics();
+
+protected:
+	virtual ActorFactory* VCreateActorFactory();
+
+	virtual bool VLoadGameDelegate(rapidxml::xml_node<>* pLevelData) { return true; }
 
 protected:
 	float m_lifetime; //How long game has been active
@@ -70,9 +80,9 @@ protected:
 
 	LevelManager* m_pLevelManager;
 
-	virtual ActorFactory* VCreateActorFactory();
+	GameViewList m_gameViews; 
 
-	virtual bool VLoadGameDelegate(rapidxml::xml_node<>* pLevelData) { return true; }
+	bool m_bRenderDiagnostics;
 };
 
 #endif

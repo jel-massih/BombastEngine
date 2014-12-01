@@ -15,12 +15,27 @@
     <ClInclude Include="PongSample.h">
       <Filter>Application</Filter>
     </ClInclude>
+    <ClInclude Include="..\PongSampleView.h">
+      <Filter>PongSample</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PongSampleController.h">
+      <Filter>PongSample</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PongSampleEvents.h">
+      <Filter>PongSample</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PongSampleStd.cpp">
       <Filter>Application</Filter>
     </ClCompile>
     <ClCompile Include="..\PongSample.cpp">
+      <Filter>PongSample</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PongSampleController.cpp">
+      <Filter>PongSample</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PongSampleView.cpp">
       <Filter>PongSample</Filter>
     </ClCompile>
   </ItemGroup>

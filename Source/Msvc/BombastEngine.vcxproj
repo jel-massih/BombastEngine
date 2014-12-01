@@ -27,6 +27,9 @@
     <ClInclude Include="..\Events\EventManagerImpl.h" />
     <ClInclude Include="..\Events\Events.h" />
     <ClInclude Include="..\Game\BombastGame.h" />
+    <ClInclude Include="..\Game\HumanView.h" />
+    <ClInclude Include="..\Game\Process.h" />
+    <ClInclude Include="..\Game\ProcessManager.h" />
     <ClInclude Include="..\Graphics2D\ColorShaderClass.h" />
     <ClInclude Include="..\Graphics2D\TextureClass.h" />
     <ClInclude Include="..\Graphics2D\TextureShaderClass.h" />
@@ -36,6 +39,7 @@
     <ClInclude Include="..\Graphics3D\GraphicsManager.h" />
     <ClInclude Include="..\Graphics3D\Material.h" />
     <ClInclude Include="..\Graphics3D\ModelClass.h" />
+    <ClInclude Include="..\Graphics3D\Raycast.h" />
     <ClInclude Include="..\Graphics3D\Scene.h" />
     <ClInclude Include="..\Graphics3D\SceneNode.h" />
     <ClInclude Include="..\InputCore\InputCore.h" />
@@ -48,6 +52,7 @@
     <ClInclude Include="..\Scripting\LuaCoreManager.h" />
     <ClInclude Include="..\Scripting\LuaEvent.h" />
     <ClInclude Include="..\Scripting\LuaExports.h" />
+    <ClInclude Include="..\UI\UserInterface.h" />
     <ClInclude Include="..\Utilities\DDSTextureLoader.h" />
     <ClInclude Include="..\Utilities\FastDelegate\FastDelegate.h" />
     <ClInclude Include="..\Utilities\Initialization.h" />
@@ -55,6 +60,7 @@
     <ClInclude Include="..\Utilities\rapidxml.hpp" />
     <ClInclude Include="..\Utilities\String.h" />
     <ClInclude Include="..\Utilities\templates.h" />
+    <ClInclude Include="..\Utilities\Timer.h" />
     <ClInclude Include="..\Utilities\types.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
@@ -70,6 +76,9 @@
     <ClCompile Include="..\Events\EventManagerImpl.cpp" />
     <ClCompile Include="..\Events\Events.cpp" />
     <ClCompile Include="..\Game\BombastGame.cpp" />
+    <ClCompile Include="..\Game\HumanView.cpp" />
+    <ClCompile Include="..\Game\Process.cpp" />
+    <ClCompile Include="..\Game\ProcessManager.cpp" />
     <ClCompile Include="..\Graphics2D\ColorShaderClass.cpp" />
     <ClCompile Include="..\Graphics2D\TextureClass.cpp" />
     <ClCompile Include="..\Graphics2D\TextureShaderClass.cpp" />
@@ -81,6 +90,7 @@
     <ClCompile Include="..\Graphics3D\ModelClass.cpp" />
     <ClCompile Include="..\Graphics3D\Scene.cpp" />
     <ClCompile Include="..\Graphics3D\SceneNode.cpp" />
+    <ClCompile Include="..\Graphics3D\Raycast.cpp" />
     <ClCompile Include="..\InputCore\InputCore.cpp" />
     <ClCompile Include="..\Resources\LuaResource.cpp" />
     <ClCompile Include="..\Resources\ResourceCache.cpp" />
@@ -92,6 +102,7 @@
     <ClCompile Include="..\Utilities\Initialization.cpp" />
     <ClCompile Include="..\Utilities\Math.cpp" />
     <ClCompile Include="..\Utilities\String.cpp" />
+    <ClCompile Include="..\Utilities\Timer.cpp" />
     <ClCompile Include="BombastEngine.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">stdafx.h</PrecompiledHeaderFile>

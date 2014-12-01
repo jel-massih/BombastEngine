@@ -278,7 +278,7 @@ bool D3DClass11::VInitialize(int screenWidth, int screenHeight, bool vsync, HWND
 
 	m_pDeviceContext->RSSetViewports(1, &viewport);
 
-	fieldOfView = (float)DirectX::XM_PI / 4.0f;
+	fieldOfView = (float)BE_PI / 4.0f;
 	screenAspect = (float)screenWidth / (float)screenHeight;
 
 	DirectX::XMStoreFloat4x4(&m_projectionMatrix, DirectX::XMMatrixPerspectiveFovLH(fieldOfView, screenAspect, screenNear, screenDepth));
@@ -371,16 +371,16 @@ void D3DClass11::VSetBackgroundColor(float a, float r, float g, float b)
 	m_backgroundColor[3] = a;
 }
 
-void D3DClass11::VBeginScene()
+bool D3DClass11::VBeginScene()
 {
 	m_pDeviceContext->ClearRenderTargetView(m_pRenderTargetView, m_backgroundColor);
 
 	m_pDeviceContext->ClearDepthStencilView(m_pDepthStencilView, D3D11_CLEAR_DEPTH, 1.0f, 0);
 
-	return;
+	return true;
 }
 
-void D3DClass11::VEndScene()
+bool D3DClass11::VEndScene()
 {
 	if(m_vsyncEnabled)
 	{
@@ -391,7 +391,7 @@ void D3DClass11::VEndScene()
 		m_pSwapChain->Present(0, 0);
 	}
 
-	return;
+	return true;
 }
 
 HRESULT D3DClass11::VOnRestore()
@@ -401,8 +401,7 @@ HRESULT D3DClass11::VOnRestore()
 
 void D3DClass11::VSetWorldTransform(const Mat4x4* m)
 {
-	//@TODO: figure out wtf is wrong with this
-	//m_worldMatrix = *const_cast<Mat4x4*>(m);
+	m_worldMatrix = *const_cast<Mat4x4*>(m);
 }
 
 void D3DClass11::VSetOrthoTransform(const Mat4x4* m)

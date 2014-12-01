@@ -127,6 +127,7 @@ public :
 
 	virtual HRESULT VRender(Scene* pScene);
 	virtual HRESULT VOnRestore(Scene* pScene);
+	virtual HRESULT VOnUpdate(Scene* pScene, DWORD const elapsedMs);
 	virtual bool VIsVisible(Scene* pScene) const { return m_bActive; }
 
 	const Frustum& GetFrustum() const { return m_frustum; }
@@ -153,5 +154,32 @@ protected:
 	bool m_bDebugCamera;
 	SceneNode* m_pTarget;
 	Vec4 m_camOffsetVector;
+};
+
+class D3D11GridNode : public SceneNode
+{
+protected:
+	int m_vertCount, m_indexCount;
+	int m_gridWidth, m_gridHeight;
+
+	ID3D11Buffer* m_pIndexBuffer;
+	ID3D11Buffer* m_pVertexBuffer;
+
+public:
+	D3D11GridNode(ActorId actorId, BaseRenderComponent* renderComponent, const Mat4x4* pMatrix);
+	~D3D11GridNode();
+
+	HRESULT VOnRestore(Scene* pScene);
+	HRESULT VRender(Scene* pScene);
+
+private:
+	HRESULT InitializeBuffers(ID3D11Device* device);
+	void RenderBuffers(ID3D11DeviceContext* deviceContext);
+
+	struct VertexType
+	{
+		Vec3 position;
+		Vec4 color;
+	};
 };
 #endif

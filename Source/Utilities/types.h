@@ -13,6 +13,7 @@ public:
 	Point(const long newX, const long newY) { x = newX; y = newY; }
 	Point(const Point& newPoint) { x = newPoint.x; y = newPoint.y; }
 	Point(const Point* pNewPoint) { x = pNewPoint->x; y = pNewPoint->y; }
+	Point(const POINT& newPoint) { x = newPoint.x; y = newPoint.y; }
 
 	// assignment
 	Point& operator=(const Point& newPoint) { x = newPoint.x; y = newPoint.y; return (*this); }
