@@ -86,12 +86,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\PongSampleController.h" />
     <ClInclude Include="..\PongSampleEvents.h" />
     <ClInclude Include="PongSample.h" />
     <ClInclude Include="PongSampleStd.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\PongSample.cpp" />
+    <ClCompile Include="..\PongSampleController.cpp" />
     <ClCompile Include="PongSampleStd.cpp" />
   </ItemGroup>
   <ItemGroup>
