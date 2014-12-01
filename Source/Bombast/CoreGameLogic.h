@@ -62,6 +62,9 @@ public:
 	virtual void VAddView(IGameView* pView, ActorId actorId = INVALID_ACTOR_ID);
 	virtual void VRemoveView(IGameView* pView);
 
+	void ToggleRenderDiagnostice() { m_bRenderDiagnostics = !m_bRenderDiagnostics; }
+	virtual void VRenderDiagnostics();
+
 protected:
 	virtual ActorFactory* VCreateActorFactory();
 
@@ -78,6 +81,8 @@ protected:
 	LevelManager* m_pLevelManager;
 
 	GameViewList m_gameViews; 
+
+	bool m_bRenderDiagnostics;
 };
 
 #endif

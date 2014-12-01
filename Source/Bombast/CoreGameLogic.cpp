@@ -198,3 +198,11 @@ void CoreGameLogic::VRemoveView(IGameView* pView)
 {
 	m_gameViews.remove(pView);
 }
+
+void CoreGameLogic::VRenderDiagnostics()
+{
+	if (m_bRenderDiagnostics)
+	{
+		//Render Stuff
+	}
+}
