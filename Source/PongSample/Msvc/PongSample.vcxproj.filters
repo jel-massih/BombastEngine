@@ -15,6 +15,9 @@
     <ClInclude Include="PongSample.h">
       <Filter>Application</Filter>
     </ClInclude>
+    <ClInclude Include="..\PongSampleView.h">
+      <Filter>PongSample</Filter>
+    </ClInclude>
     <ClInclude Include="..\PongSampleController.h">
       <Filter>PongSample</Filter>
     </ClInclude>
@@ -30,6 +33,9 @@
       <Filter>PongSample</Filter>
     </ClCompile>
     <ClCompile Include="..\PongSampleController.cpp">
+      <Filter>PongSample</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PongSampleView.cpp">
       <Filter>PongSample</Filter>
     </ClCompile>
   </ItemGroup>
