@@ -1,3 +1,5 @@
+#pragma once
+
 #include "../BombastEngineStd.h"
 #include "../Bombast/interfaces.h"
 
