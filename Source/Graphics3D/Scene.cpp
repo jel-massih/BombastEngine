@@ -53,6 +53,15 @@ HRESULT Scene::OnRender()
 	return S_OK;
 }
 
+HRESULT Scene::OnLostDevice()
+{
+	if (m_pRoot)
+	{
+		m_pRoot->VOnLostDevice(this);
+	}
+	return S_OK;
+}
+
 HRESULT Scene::OnRestore()
 {
 	if (!m_pRoot)
