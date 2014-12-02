@@ -23,7 +23,7 @@ protected:
 	std::wstring m_gameplayText;
 
 	PongSampleController* m_pPongController;
-	SceneNode* m_pTeapot;
+	SceneNode* m_pPaddle;
 
 private:
 	void RegisterAllDelegates();
