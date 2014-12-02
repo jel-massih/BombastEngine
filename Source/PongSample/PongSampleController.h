@@ -15,8 +15,8 @@ protected:
 
 public:
 	virtual bool VOnMouseMove(const Point& mousePos, const int radius) { return true; }
-	virtual bool VOnMouseButtonDown(const Point& mousePos, const int radius, const std::string& buttonName);
-	virtual bool VOnMouseButtonUp(const Point& mousePos, const int radius, const std::string& buttonName) { return (buttonName == "MouseLeft"); }
+	virtual bool VOnMouseDown(const Point& mousePos, const int radius, const std::string& buttonName);
+	virtual bool VOnMouseUp(const Point& mousePos, const int radius, const std::string& buttonName) { return (buttonName == "MouseLeft"); }
 
 	bool VOnKeyDown(const BYTE c);
 	bool VOnKeyUp(const BYTE c);
