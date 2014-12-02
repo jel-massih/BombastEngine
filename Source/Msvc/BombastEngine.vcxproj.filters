@@ -273,6 +273,9 @@
     <ClInclude Include="..\Game\ProcessManager.h">
       <Filter>Game</Filter>
     </ClInclude>
+    <ClInclude Include="..\MultiThreading\CriticalSection.h">
+      <Filter>MultiThreading</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Bombast">

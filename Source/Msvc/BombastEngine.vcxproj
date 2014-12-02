@@ -43,6 +43,7 @@
     <ClInclude Include="..\Graphics3D\Scene.h" />
     <ClInclude Include="..\Graphics3D\SceneNode.h" />
     <ClInclude Include="..\InputCore\InputCore.h" />
+    <ClInclude Include="..\MultiThreading\CriticalSection.h" />
     <ClInclude Include="..\MultiThreading\MultiThreadUtilities.h" />
     <ClInclude Include="..\Resources\LuaResource.h" />
     <ClInclude Include="..\Resources\ResourceCache.h" />
