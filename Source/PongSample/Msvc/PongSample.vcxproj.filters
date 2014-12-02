@@ -38,5 +38,8 @@
     <ClCompile Include="..\PongSampleView.cpp">
       <Filter>PongSample</Filter>
     </ClCompile>
+    <ClCompile Include="..\PongSampleEvents.cpp">
+      <Filter>PongSample</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

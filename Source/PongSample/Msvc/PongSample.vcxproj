@@ -93,6 +93,7 @@
     <ClInclude Include="PongSampleStd.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\PongSampleEvents.cpp" />
     <ClCompile Include="..\PongSampleView.cpp" />
     <ClCompile Include="..\PongSample.cpp" />
     <ClCompile Include="..\PongSampleController.cpp" />
