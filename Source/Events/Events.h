@@ -3,6 +3,65 @@
 #include "EventManager.h"
 #include "../Bombast/BombastApp.h"
 
+class EvtData_New_Actor : public BaseEventData
+{
+	ActorId m_actorId;
+	GameViewId m_viewId;
+
+public:
+	static const EventType sk_EventType;
+
+	EvtData_New_Actor()
+		:m_actorId(INVALID_ACTOR_ID),
+		m_viewId(be_InvalidGameViewId)
+	{
+	}
+
+	explicit EvtData_New_Actor(ActorId actorId, GameViewId viewId = be_InvalidGameViewId)
+		:m_actorId(actorId),
+		m_viewId(viewId)
+	{
+	}
+
+	virtual void VSerialize(std::ostrstream& out)
+	{
+		out << m_actorId << " ";
+		out << m_viewId << " ";
+	}
+
+	virtual void VDeserialize(std::istrstream& in)
+	{
+		in >> m_actorId;
+		in >> m_viewId;
+	}
+
+	virtual const EventType& VGetEventType() const
+	{
+		return sk_EventType;
+	}
+
+	virtual IEventDataPtr VCopy() const
+	{
+		return IEventDataPtr(BE_NEW EvtData_New_Actor(m_actorId, m_viewId));
+	}
+
+	virtual const char* GetName() const
+	{
+		return "EvtData_New_Actor";
+	}
+
+	const ActorId GetActorId() const
+	{
+		return m_actorId;
+	}
+
+	GameViewId GetViewId() const
+	{
+		return m_viewId;
+	}
+		
+};
+
 class EvtData_New_Render_Component : public BaseEventData
 {
 	ActorId m_actorId;
