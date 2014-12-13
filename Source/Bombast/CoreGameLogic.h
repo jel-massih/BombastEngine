@@ -16,6 +16,7 @@ enum CoreGameState
 	CGS_MainMenu,
 	CGS_LoadingGameEnvironment,
 	CGS_SpawningPlayersActors,
+	CGS_WaitingForPlayers,
 	CGS_Running
 };
 
