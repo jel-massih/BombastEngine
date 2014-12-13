@@ -28,7 +28,7 @@ class IScreenElement
 public:
 	virtual HRESULT VOnRestore() = 0;
 	virtual HRESULT VOnLostDevice() = 0;
-	virtual HRESULT VOnRender(float fTime, float fElapsedTime) = 0;
+	virtual HRESULT VOnRender(double fTime, float fElapsedTime) = 0;
 	virtual void VOnUpdate(int deltaMs) = 0;
 
 	virtual int VGetZOrder() const = 0;

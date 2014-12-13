@@ -257,8 +257,6 @@ void BombastApp::Run()
 
 bool BombastApp::Frame()
 {
-	HRESULT hr;
-
 	m_pTimer->Frame();
 
 	return true;
