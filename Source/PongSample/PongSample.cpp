@@ -1,8 +1,10 @@
 #include "Msvc\PongSampleStd.h"
 #include "../Bombast/CoreGameLogic.h"
 #include "../Bombast/BombastApp.h"
+#include "../Events/Events.h"
 
 #include "Msvc\PongSample.h"
+#include "PongSampleView.h"
 
 PongSampleApp g_PongSampleApp;
 
@@ -38,8 +40,25 @@ void PongSampleLogic::VChangeState(CoreGameState newState)
 
 	switch (newState)
 	{
+		case CGS_WaitingForPlayers:
+		{
+			BE_ASSERT(m_expectedPlayers == 1);
+
+			for (int i = 0; i < m_expectedPlayers; i++)
+			{
+				IGameView* playerView = BE_NEW PongSampleHumanView(g_pApp->GetGraphicsManager()->GetRenderer());
+				VAddView(playerView);
+			}
+			
+			break;
+		}
+
 		case CGS_SpawningPlayersActors:
 		{
+			for (auto it = m_gameViews.begin(); it != m_gameViews.end(); it++)
+			{
+
+			}
 			Actor* pActor = VCreateActor("Actors\\paddle.xml", NULL);
 
 			break;
