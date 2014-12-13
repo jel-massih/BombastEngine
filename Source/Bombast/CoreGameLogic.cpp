@@ -25,6 +25,9 @@ CoreGameLogic::CoreGameLogic()
 {
 	m_lastActorId = 0;
 	m_lifetime = 0;
+	m_humanPlayersAttached = 0;
+	m_expectedPlayers = 0;
+	
 	m_gameState = CGS_Initializing;
 	m_pActorFactory = NULL;
 
@@ -204,5 +207,47 @@ void CoreGameLogic::VRenderDiagnostics()
 	if (m_bRenderDiagnostics)
 	{
 		//Render Stuff
+	}
+}
+
+void CoreGameLogic::VOnUpdate(double time, float deltaTime)
+{
+	int deltaMs = int(deltaTime * 1000.0f);
+	m_lifetime += deltaMs;
+
+	switch (m_gameState)
+	{
+	case CGS_Initializing:
+		break;
+	case CGS_MainMenu:
+		break;
+	case CGS_LoadingGameEnvironment:
+		break;
+	case CGS_SpawningPlayersActors:
+		VChangeState(CGS_Running);
+		break;
+	case CGS_WaitingForPlayers:
+		if (m_expectedPlayers == m_humanPlayersAttached)
+		{
+			if (!g_pApp->m_options.m_level.empty())
+			{
+				VChangeState(CGS_LoadingGameEnvironment);
+			}
+		}
+		break;
+	case CGS_Running:
+		break;
+	default:
+		BE_ERROR("Unrecognized State: " + m_gameState);
+	}
+
+	for (GameViewList::iterator it = m_gameViews.begin(); it != m_gameViews.end(); it++)
+	{
+		(*it)->VOnUpdate(deltaMs);
+	}
+
+	for (ActorMap::const_iterator it = m_actors.begin(); it != m_actors.end(); it++)
+	{
+		it->second->Update(deltaMs);
 	}
 }

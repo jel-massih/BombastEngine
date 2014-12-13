@@ -57,6 +57,8 @@ public:
 	const LevelManager* GetLevelManager() { return m_pLevelManager; }
 	virtual bool VLoadGame(const char* levelResource) override;
 
+	virtual void VOnUpdate(double time, float deltaTime);
+
 	virtual void VChangeState(CoreGameState newState);
 	const CoreGameState GetState() const { return m_gameState; }
 	
@@ -84,6 +86,9 @@ protected:
 	GameViewList m_gameViews; 
 
 	bool m_bRenderDiagnostics;
+
+	int m_expectedPlayers;
+	int m_humanPlayersAttached;
 };
 
 #endif
