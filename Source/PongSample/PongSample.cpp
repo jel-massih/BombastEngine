@@ -80,3 +80,8 @@ void PongSampleLogic::VMoveActor(const ActorId id, Mat4x4 const &mat)
 {
 	//CoreGameLogic::VMoveActor(id, mat);
 }
+
+void PongSampleLogic::RequestStartGameDelegate(IEventDataPtr pEventPtr)
+{
+	VChangeState(CGS_WaitingForPlayers);
+}
