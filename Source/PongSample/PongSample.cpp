@@ -76,6 +76,18 @@ bool PongSampleLogic::VLoadGameDelegate(rapidxml::xml_node<>* pLevelData)
 	return true;
 }
 
+void PongSampleLogic::RegisterAllDelegates()
+{
+	IEventManager* pEventManager = IEventManager::Get();
+	pEventManager->VAddListener(fastdelegate::MakeDelegate(this, &PongSampleLogic::RequestStartGameDelegate), EvtData_Request_Start_Game::sk_EventType);
+}
+
+void PongSampleLogic::RemoveAllDelegates()
+{
+	IEventManager* pEventManager = IEventManager::Get();
+	pEventManager->VRemoveListener(fastdelegate::MakeDelegate(this, &PongSampleLogic::RequestStartGameDelegate), EvtData_Request_Start_Game::sk_EventType);
+}
+
 void PongSampleLogic::VMoveActor(const ActorId id, Mat4x4 const &mat)
 {
 	//CoreGameLogic::VMoveActor(id, mat);

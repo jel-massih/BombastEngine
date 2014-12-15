@@ -29,4 +29,8 @@ public:
 
 protected:
 	virtual bool VLoadGameDelegate(rapidxml::xml_node<>* pLevelData);
+
+private:
+	void RegisterAllDelegates();
+	void RemoveAllDelegates();
 };
