@@ -116,3 +116,26 @@ public:
 		return m_pSceneNode;
 	}
 };
+
+class EvtData_Request_Start_Game : public BaseEventData
+{
+public:
+	static const EventType sk_EventType;
+
+	EvtData_Request_Start_Game() {}
+
+	virtual const EventType& VGetEventType() const
+	{
+		return sk_EventType;
+	}
+
+	virtual IEventDataPtr VCopy() const
+	{
+		return IEventDataPtr(BE_NEW EvtData_Request_Start_Game());
+	}
+
+	virtual const char* GetName() const
+	{
+		return "EvtData_Request_Start_Game";
+	}
+};
