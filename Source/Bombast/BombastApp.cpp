@@ -306,6 +306,11 @@ void BombastApp::Run()
 				bDone = true;
 			}
 
+			if (!Render())
+			{
+				bDone = true;
+			}
+
 			UpdateGame(m_pTimer->GetTime(), m_pTimer->GetFrameTime());
 		}
 	}
