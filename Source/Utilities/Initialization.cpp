@@ -105,7 +105,8 @@ GameOptions::GameOptions()
 {
 	m_level = "";
 	m_renderer = "Direct3D 11";
-	m_screenSize = Point(1024, 768);
+	m_screenSize = Point(SCREEN_WIDTH, SCREEN_HEIGHT);
+	m_screenPosition = Point(SCREEN_X, SCREEN_Y);
 
 	m_pDoc = NULL;
 }
@@ -149,14 +150,24 @@ void GameOptions::Init(const char* xmlFilePath, LPWSTR lpCmdLine)
 		{
 			attribute = pNode->first_attribute("width")->value();
 			m_screenSize.x = atoi(attribute.c_str());
-			if (m_screenSize.x < 800) { m_screenSize.x = 800; }
 		}
 
 		if (pNode->first_attribute("height"))
 		{
 			attribute = pNode->first_attribute("height")->value();
 			m_screenSize.y = atoi(attribute.c_str());
-			if (m_screenSize.y < 600) { m_screenSize.y = 600; }
+		}
+
+		if (pNode->first_attribute("x"))
+		{
+			attribute = pNode->first_attribute("x")->value();
+			m_screenPosition.x = atoi(attribute.c_str());
+		}
+
+		if (pNode->first_attribute("y"))
+		{
+			attribute = pNode->first_attribute("y")->value();
+			m_screenPosition.y = atoi(attribute.c_str());
 		}
 	}
 

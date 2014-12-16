@@ -19,8 +19,10 @@
 #include <string>
 #include <memory>
 
-const int SCREEN_WIDTH = 800;
-const int SCREEN_HEIGHT = 600;
+const int SCREEN_WIDTH = 640;
+const int SCREEN_HEIGHT = 480;
+const int SCREEN_X = 0;
+const int SCREEN_Y = 0;
 
 const std::string ROOT_GAME_PATH = "../../../Game/";
 

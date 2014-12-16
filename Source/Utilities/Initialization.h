@@ -16,6 +16,7 @@ struct GameOptions
 
 	std::string m_renderer;
 	Point m_screenSize;
+	Point m_screenPosition;
 
 	rapidxml::xml_document<> *m_pDoc;
 
