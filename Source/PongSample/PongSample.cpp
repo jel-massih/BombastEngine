@@ -2,6 +2,7 @@
 #include "../Bombast/CoreGameLogic.h"
 #include "../Bombast/BombastApp.h"
 #include "../Events/Events.h"
+#include "PongSampleEvents.h"
 
 #include "Msvc\PongSample.h"
 #include "PongSampleView.h"
@@ -69,6 +70,9 @@ void PongSampleLogic::VChangeState(CoreGameState newState)
 					{
 						std::shared_ptr<EvtData_New_Actor> pNewActorEvent(BE_NEW EvtData_New_Actor(pActor->GetId(), pView->VGetId()));
 						IEventManager::Get()->VTriggerEvent(pNewActorEvent);
+					
+						std::shared_ptr<EvtData_Set_Controlled_Actor> pSetControlledActorEvent(BE_NEW EvtData_Set_Controlled_Actor(pActor->GetId()));
+						IEventManager::Get()->VTriggerEvent(pSetControlledActorEvent);
 					}
 				}
 			}
