@@ -52,10 +52,8 @@ CoreGameLogic::~CoreGameLogic()
 bool CoreGameLogic::Initialize()
 {
 	m_pActorFactory = VCreateActorFactory();
-	if (!g_pApp->m_options.m_level.empty())
-	{
-		VChangeState(CGS_LoadingGameEnvironment);
-	}
+
+	VChangeState(CGS_Initializing);
 
 	return true;
 }
@@ -173,7 +171,11 @@ bool CoreGameLogic::VLoadGame(const char* levelResource)
 
 void CoreGameLogic::VChangeState(enum CoreGameState newState)
 {
-	if (newState == CGS_LoadingGameEnvironment)
+	if (newState == CGS_WaitingForPlayers)
+	{
+		m_expectedPlayers = 1;
+	}
+	else if (newState == CGS_LoadingGameEnvironment)
 	{
 		m_gameState = newState;
 		if (!g_pApp->VLoadGame())
