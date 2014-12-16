@@ -214,11 +214,11 @@ LRESULT BombastApp::OnClose()
 {
 	SAFE_DELETE(m_pGame);
 
-	DestroyWindow(GetHwnd());
-
 	SAFE_DELETE(m_pEventManager);
 
 	SAFE_DELETE(m_pResourceCache);
+
+	PostQuitMessage(0);
 
 	return 0;
 }
