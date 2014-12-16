@@ -26,6 +26,8 @@ HumanView::HumanView(IRenderer* renderer)
 
 		m_pScene->VAddChild(INVALID_ACTOR_ID, m_pCamera);
 		m_pScene->SetCamera(m_pCamera);
+
+		VPushElement(m_pScene);
 	}
 }
 
@@ -69,7 +71,7 @@ HRESULT HumanView::VOnLostDevice()
 	return S_OK;
 }
 
-void HumanView::VOnRender(double fTime, float fElapsedTime)
+void HumanView::VOnRender(double dTime, float fElapsedTime)
 {
 	m_currTick = timeGetTime();
 	if (m_currTick == m_lastDraw)
@@ -87,7 +89,7 @@ void HumanView::VOnRender(double fTime, float fElapsedTime)
 			{
 				if ((*it)->VIsVisible())
 				{
-					(*it)->VOnRender(fTime, fElapsedTime);
+					(*it)->VOnRender(dTime, fElapsedTime);
 				}
 			}
 

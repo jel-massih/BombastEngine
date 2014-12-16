@@ -62,7 +62,7 @@ public:
 
 	class ResourceCache* m_pResourceCache;
 
-	static void UpdateGame(double fTime, float fElapsedTime);
+	void UpdateGame(double dTime, float fElapsedTime);
 
 	virtual CoreGameLogic* VCreateGameAndView() = 0;
 	virtual bool VLoadGame();
@@ -77,6 +77,7 @@ private:
 	void SetQuitting(bool quitting) { m_bQuitting = quitting; }
 
 	bool Frame();
+	bool Render();
 
 	void ShutdownWindows();
 

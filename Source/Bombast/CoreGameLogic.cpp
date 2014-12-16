@@ -260,3 +260,11 @@ void CoreGameLogic::VOnUpdate(double time, float deltaTime)
 		it->second->Update(deltaMs);
 	}
 }
+
+void CoreGameLogic::VOnRender(double dTime, float fElapsedTime)
+{
+	for (auto it = m_gameViews.begin(); it != m_gameViews.end(); it++)
+	{
+		(*it)->VOnRender(dTime, fElapsedTime);
+	}
+}

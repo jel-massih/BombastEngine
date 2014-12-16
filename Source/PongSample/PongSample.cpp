@@ -50,6 +50,7 @@ void PongSampleLogic::VChangeState(CoreGameState newState)
 			{
 				IGameView* playerView = BE_NEW PongSampleHumanView(g_pApp->GetGraphicsManager()->GetRenderer());
 				VAddView(playerView);
+				m_humanPlayersAttached++;
 			}
 			
 			break;

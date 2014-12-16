@@ -36,7 +36,7 @@ Scene::~Scene()
 
 HRESULT Scene::OnRender()
 {
-	/*if (m_pRoot && m_pCamera)
+	if (m_pRoot && m_pCamera)
 	{
 		m_pCamera->SetViewTransform(this);
 
@@ -48,7 +48,7 @@ HRESULT Scene::OnRender()
 		}
 
 		RenderAlphaPass();
-	}*/
+	}
 
 	return S_OK;
 }
