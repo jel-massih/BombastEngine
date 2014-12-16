@@ -28,10 +28,12 @@ CoreGameLogic *PongSampleApp::VCreateGameAndView()
 
 PongSampleLogic::PongSampleLogic()
 {
+	RegisterAllDelegates();
 }
 
 PongSampleLogic::~PongSampleLogic()
 {
+	RemoveAllDelegates();
 }
 
 void PongSampleLogic::VChangeState(CoreGameState newState)
