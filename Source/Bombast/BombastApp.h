@@ -62,7 +62,7 @@ public:
 
 	class ResourceCache* m_pResourceCache;
 
-	static void UpdateGame(double fTime, float fElapsedTime);
+	void UpdateGame(double dTime, float fElapsedTime);
 
 	virtual CoreGameLogic* VCreateGameAndView() = 0;
 	virtual bool VLoadGame();

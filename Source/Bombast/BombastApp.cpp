@@ -378,7 +378,7 @@ bool BombastApp::VLoadGame()
 	return m_pGame->VLoadGame(m_options.m_level.c_str());
 }
 
-void BombastApp::UpdateGame(double fTime, float fElapsedTime)
+void BombastApp::UpdateGame(double dTime, float fElapsedTime)
 {
 	if (g_pApp->m_bQuitting)
 	{
@@ -389,6 +389,6 @@ void BombastApp::UpdateGame(double fTime, float fElapsedTime)
 	{
 		IEventManager::Get()->VUpdate(20);
 
-		g_pApp->m_pGame->VOnUpdate(fTime, fElapsedTime);
+		g_pApp->m_pGame->VOnUpdate(dTime, fElapsedTime);
 	}
 }
