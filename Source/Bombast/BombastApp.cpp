@@ -305,6 +305,8 @@ void BombastApp::Run()
 			{
 				bDone = true;
 			}
+
+			UpdateGame(m_pTimer->GetTime(), m_pTimer->GetFrameTime());
 		}
 	}
 
@@ -376,7 +378,7 @@ bool BombastApp::VLoadGame()
 	return m_pGame->VLoadGame(m_options.m_level.c_str());
 }
 
-void CALLBACK BombastApp::OnUpdateGame(double fTime, float fElapsedTime, void* pUserContext)
+void BombastApp::UpdateGame(double fTime, float fElapsedTime)
 {
 	if (g_pApp->m_bQuitting)
 	{
