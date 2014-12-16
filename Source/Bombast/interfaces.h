@@ -169,6 +169,7 @@ public:
 	virtual void VEnableAlphaBlending(bool bEnable) = 0;
 	virtual void VToggleFillMode() = 0;
 
+	virtual void VToggleFullscreen() = 0;
 
 	//@TODO: Remove D3D Specific Method
 	virtual ID3D11Device* GetDevice() = 0;
