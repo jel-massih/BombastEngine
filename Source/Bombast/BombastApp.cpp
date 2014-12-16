@@ -21,6 +21,8 @@ BombastApp::BombastApp()
 
 	m_bIsRunning = false;
 
+	m_bQuitting = false;
+
 	m_screenSize = Point(0, 0);
 
 	m_pLuaCoreManager = 0;
@@ -145,26 +147,80 @@ void BombastApp::InitializeWindows()
 	SetFocus(m_hWnd);
 }
 
+LRESULT BombastApp::OnAltEnter()
+{
+	m_pGraphicsManager->GetRenderer()->VToggleFullscreen();
+	return 0;
+}
+
 LRESULT CALLBACK BombastApp::MsgProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
+	LRESULT result = 0;
     switch(message)
     {
-        // this message is read when the window is closed
-        case WM_DESTROY:
-        {
-            // close the application entirely
-            PostQuitMessage(0);
-            return 0;
-        }
-
 		case WM_CLOSE:
 		{
-			PostQuitMessage(0);
-			return 0;
+			if (g_pApp->m_bQuitting)
+			{
+				result = g_pApp->OnClose();
+			}
+			break;
+		}
+
+		case WM_SYSCOMMAND:
+		{
+			result = g_pApp->OnSysCommand(wParam, lParam);
+			break;
+		}
+
+		case WM_KEYDOWN:
+		{
+			if (wParam == VK_RETURN)
+			{
+				return g_pApp->OnAltEnter();
+			}
+			return DefWindowProc(hWnd, message, wParam, lParam);
 		}
     }
 
-    return DefWindowProc (hWnd, message, wParam, lParam);
+	return DefWindowProc(hWnd, message, wParam, lParam);
+}
+
+LRESULT BombastApp::OnSysCommand(WPARAM wParam, LPARAM lParam)
+{
+	switch (wParam)
+	{
+		case SC_MAXIMIZE:
+		{
+			if (m_bWindowedMode && IsRunning())
+			{
+				OnAltEnter();
+			}
+			return 0;
+		}
+		case SC_CLOSE:
+		{
+			m_bQuitting = true;
+			return 0;
+		}
+		default:
+			return DefWindowProc(GetHwnd(), WM_SYSCOMMAND, wParam, lParam);
+	}
+
+	return 0;
+}
+
+LRESULT BombastApp::OnClose()
+{
+	SAFE_DELETE(m_pGame);
+
+	DestroyWindow(GetHwnd());
+
+	SAFE_DELETE(m_pEventManager);
+
+	SAFE_DELETE(m_pResourceCache);
+
+	return 0;
 }
 
 bool BombastApp::InitializeApp(int screenWidth, int screenHeight)
@@ -318,4 +374,19 @@ LuaCoreManager* BombastApp::GetLuaCoreManager() const
 bool BombastApp::VLoadGame()
 {
 	return m_pGame->VLoadGame(m_options.m_level.c_str());
+}
+
+void CALLBACK BombastApp::OnUpdateGame(double fTime, float fElapsedTime, void* pUserContext)
+{
+	if (g_pApp->m_bQuitting)
+	{
+		PostMessage(g_pApp->GetHwnd(), WM_CLOSE, 0, 0);
+	}
+
+	if (g_pApp->m_pGame)
+	{
+		IEventManager::Get()->VUpdate(20);
+
+		g_pApp->m_pGame->VOnUpdate(fTime, fElapsedTime);
+	}
 }
