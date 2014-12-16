@@ -41,11 +41,18 @@ CoreGameLogic::~CoreGameLogic()
 	SAFE_DELETE(m_pLevelManager);
 	SAFE_DELETE(m_pActorFactory);
 
-	for (auto it = m_actors.begin(); it != m_actors.end(); ++it)
+	for (auto it = m_actors.begin(); it != m_actors.end(); it++)
 	{
 		it->second->Shutdown();
 		SAFE_DELETE(it->second);
 	}
+
+	for (auto it = m_gameViews.begin(); it != m_gameViews.end(); it++)
+	{
+		SAFE_DELETE(*it);
+	}
+
+	m_gameViews.clear();
 	m_actors.clear();
 }
 
