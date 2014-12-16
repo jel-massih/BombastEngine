@@ -43,6 +43,7 @@ bool D3DClass11::VInitialize(int screenWidth, int screenHeight, bool vsync, HWND
 	D3D11_BLEND_DESC blendStateDesc;
 
 	m_vsyncEnabled = true;
+	m_bFullscreen = fullscreen;
 
 	result = CreateDXGIFactory(__uuidof(IDXGIFactory), (void**)&factory);
 	if(FAILED(result))
@@ -158,6 +159,8 @@ bool D3DClass11::VInitialize(int screenWidth, int screenHeight, bool vsync, HWND
 	{
 		swapChainDesc.Windowed = true;
 	}
+
+	swapChainDesc.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH;
 
 	swapChainDesc.BufferDesc.ScanlineOrdering = DXGI_MODE_SCANLINE_ORDER_UNSPECIFIED;
 	swapChainDesc.BufferDesc.Scaling = DXGI_MODE_SCALING_UNSPECIFIED;
@@ -505,4 +508,13 @@ void D3DClass11::VToggleFillMode()
 
 	m_pDevice->CreateRasterizerState(&rDesc, &rState);
 	m_pDeviceContext->RSSetState(rState);
+}
+
+void D3DClass11::VToggleFullscreen()
+{
+	if (m_pSwapChain)
+	{
+		m_bFullscreen = !m_bFullscreen;
+		m_pSwapChain->SetFullscreenState(m_bFullscreen, NULL);
+	}
 }

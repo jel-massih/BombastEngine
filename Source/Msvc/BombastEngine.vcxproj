@@ -43,7 +43,9 @@
     <ClInclude Include="..\Graphics3D\Scene.h" />
     <ClInclude Include="..\Graphics3D\SceneNode.h" />
     <ClInclude Include="..\InputCore\InputCore.h" />
+    <ClInclude Include="..\MultiThreading\CriticalSection.h" />
     <ClInclude Include="..\MultiThreading\MultiThreadUtilities.h" />
+    <ClInclude Include="..\MultiThreading\RealtimeProcess.h" />
     <ClInclude Include="..\Resources\LuaResource.h" />
     <ClInclude Include="..\Resources\ResourceCache.h" />
     <ClInclude Include="..\Resources\TextureResource.h" />
@@ -92,6 +94,7 @@
     <ClCompile Include="..\Graphics3D\SceneNode.cpp" />
     <ClCompile Include="..\Graphics3D\Raycast.cpp" />
     <ClCompile Include="..\InputCore\InputCore.cpp" />
+    <ClCompile Include="..\MultiThreading\RealtimeProcess.cpp" />
     <ClCompile Include="..\Resources\LuaResource.cpp" />
     <ClCompile Include="..\Resources\ResourceCache.cpp" />
     <ClCompile Include="..\Resources\TextureResource.cpp" />

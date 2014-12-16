@@ -25,6 +25,12 @@ public:
 
 	virtual void VChangeState(CoreGameState newState);
 
+	void RequestStartGameDelegate(IEventDataPtr pEventData);
+
 protected:
 	virtual bool VLoadGameDelegate(rapidxml::xml_node<>* pLevelData);
+
+private:
+	void RegisterAllDelegates();
+	void RemoveAllDelegates();
 };

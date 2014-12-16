@@ -25,6 +25,9 @@ CoreGameLogic::CoreGameLogic()
 {
 	m_lastActorId = 0;
 	m_lifetime = 0;
+	m_humanPlayersAttached = 0;
+	m_expectedPlayers = 0;
+	
 	m_gameState = CGS_Initializing;
 	m_pActorFactory = NULL;
 
@@ -38,21 +41,26 @@ CoreGameLogic::~CoreGameLogic()
 	SAFE_DELETE(m_pLevelManager);
 	SAFE_DELETE(m_pActorFactory);
 
-	for (auto it = m_actors.begin(); it != m_actors.end(); ++it)
+	for (auto it = m_actors.begin(); it != m_actors.end(); it++)
 	{
 		it->second->Shutdown();
 		SAFE_DELETE(it->second);
 	}
+
+	for (auto it = m_gameViews.begin(); it != m_gameViews.end(); it++)
+	{
+		SAFE_DELETE(*it);
+	}
+
+	m_gameViews.clear();
 	m_actors.clear();
 }
 
 bool CoreGameLogic::Initialize()
 {
 	m_pActorFactory = VCreateActorFactory();
-	if (!g_pApp->m_options.m_level.empty())
-	{
-		VChangeState(CGS_LoadingGameEnvironment);
-	}
+
+	VChangeState(CGS_Initializing);
 
 	return true;
 }
@@ -170,7 +178,11 @@ bool CoreGameLogic::VLoadGame(const char* levelResource)
 
 void CoreGameLogic::VChangeState(enum CoreGameState newState)
 {
-	if (newState == CGS_LoadingGameEnvironment)
+	if (newState == CGS_WaitingForPlayers)
+	{
+		m_expectedPlayers = 1;
+	}
+	else if (newState == CGS_LoadingGameEnvironment)
 	{
 		m_gameState = newState;
 		if (!g_pApp->VLoadGame())
@@ -204,5 +216,47 @@ void CoreGameLogic::VRenderDiagnostics()
 	if (m_bRenderDiagnostics)
 	{
 		//Render Stuff
+	}
+}
+
+void CoreGameLogic::VOnUpdate(double time, float deltaTime)
+{
+	int deltaMs = int(deltaTime * 1000.0f);
+	m_lifetime += deltaMs;
+
+	switch (m_gameState)
+	{
+	case CGS_Initializing:
+		break;
+	case CGS_MainMenu:
+		break;
+	case CGS_LoadingGameEnvironment:
+		break;
+	case CGS_SpawningPlayersActors:
+		VChangeState(CGS_Running);
+		break;
+	case CGS_WaitingForPlayers:
+		if (m_expectedPlayers == m_humanPlayersAttached)
+		{
+			if (!g_pApp->m_options.m_level.empty())
+			{
+				VChangeState(CGS_LoadingGameEnvironment);
+			}
+		}
+		break;
+	case CGS_Running:
+		break;
+	default:
+		BE_ERROR("Unrecognized State: " + m_gameState);
+	}
+
+	for (GameViewList::iterator it = m_gameViews.begin(); it != m_gameViews.end(); it++)
+	{
+		(*it)->VOnUpdate(deltaMs);
+	}
+
+	for (ActorMap::const_iterator it = m_actors.begin(); it != m_actors.end(); it++)
+	{
+		it->second->Update(deltaMs);
 	}
 }

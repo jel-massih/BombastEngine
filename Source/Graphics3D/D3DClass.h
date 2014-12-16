@@ -38,8 +38,11 @@ public:
 	void VEnableAlphaBlending(bool bEnable);
 	void VToggleFillMode();
 
+	void VToggleFullscreen();
+
 private:
 	bool m_vsyncEnabled;
+	bool m_bFullscreen;
 
 	int m_videoCardMemory;
 	char m_videoCardDescription[128];

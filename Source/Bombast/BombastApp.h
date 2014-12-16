@@ -21,6 +21,7 @@ protected:
 	HINSTANCE m_hInstance; //The Module Instance
 	bool m_bWindowedMode; //True if app is windowed, False if Fullscreen
 	bool m_bIsRunning; //true if everything initialized and game in main loop
+	bool m_bQuitting;
 	int m_iColorDepth;
 	Point m_screenSize;
 
@@ -40,6 +41,10 @@ public:
 
 	static LRESULT CALLBACK MsgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
+	LRESULT OnAltEnter();
+	LRESULT OnSysCommand(WPARAM wParam, LPARAM lParam);
+	LRESULT OnClose();
+
 	bool IsRunning() { return m_bIsRunning; }
 
 	void Run();
@@ -55,7 +60,9 @@ public:
 	struct GameOptions m_options;
 	CoreGameLogic* m_pGame;
 
-	class ResourceCache *m_pResourceCache;
+	class ResourceCache* m_pResourceCache;
+
+	static void UpdateGame(double fTime, float fElapsedTime);
 
 	virtual CoreGameLogic* VCreateGameAndView() = 0;
 	virtual bool VLoadGame();
@@ -65,6 +72,9 @@ public:
 private:
 	void InitializeWindows();
 	bool InitializeApp(int screenWidth, int screenHeight);
+
+	void AbortGame() { m_bQuitting = true; }
+	void SetQuitting(bool quitting) { m_bQuitting = quitting; }
 
 	bool Frame();
 

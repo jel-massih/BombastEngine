@@ -28,7 +28,7 @@ class IScreenElement
 public:
 	virtual HRESULT VOnRestore() = 0;
 	virtual HRESULT VOnLostDevice() = 0;
-	virtual HRESULT VOnRender(float fTime, float fElapsedTime) = 0;
+	virtual HRESULT VOnRender(double fTime, float fElapsedTime) = 0;
 	virtual void VOnUpdate(int deltaMs) = 0;
 
 	virtual int VGetZOrder() const = 0;
@@ -169,6 +169,7 @@ public:
 	virtual void VEnableAlphaBlending(bool bEnable) = 0;
 	virtual void VToggleFillMode() = 0;
 
+	virtual void VToggleFullscreen() = 0;
 
 	//@TODO: Remove D3D Specific Method
 	virtual ID3D11Device* GetDevice() = 0;

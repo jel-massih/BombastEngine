@@ -4,7 +4,7 @@
 #include "../UI/UserInterface.h"
 #include "ProcessManager.h"
 
-class HumanView : IGameView
+class HumanView : public IGameView
 {
 	friend class BombastApp;
 

@@ -1,8 +1,9 @@
+#pragma once
+
 #include <memory>
 
 #include "../Events/EventManager.h"
 #include "../Events/Events.h"
-
 
 class EvtData_Fire_Weapon : public BaseEventData
 {
@@ -162,5 +163,49 @@ public:
 	void Set(ActorId id)
 	{
 		m_id = id;
+	}
+};
+
+class EvtData_Set_Controlled_Actor : public BaseEventData
+{
+	ActorId m_id;
+
+public:
+	static const EventType sk_EventType;
+
+	EvtData_Set_Controlled_Actor(void) { }
+	EvtData_Set_Controlled_Actor(ActorId actorId)
+		: m_id(actorId)
+	{
+	}
+
+	virtual const EventType& VGetEventType(void) const
+	{
+		return sk_EventType;
+	}
+
+	virtual IEventDataPtr VCopy() const
+	{
+		return IEventDataPtr(BE_NEW EvtData_Set_Controlled_Actor(m_id));
+	}
+
+	virtual void VSerialize(std::ostrstream& out) const
+	{
+		out << m_id;
+	}
+
+	virtual void VDeserialize(std::istrstream& in)
+	{
+		in >> m_id;
+	}
+
+	const ActorId& GetActorId(void) const
+	{
+		return m_id;
+	}
+
+	virtual const char* GetName(void) const
+	{
+		return "EvtData_Set_Controlled_Actor";
 	}
 };

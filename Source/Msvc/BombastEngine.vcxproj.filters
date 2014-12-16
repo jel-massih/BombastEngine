@@ -119,6 +119,9 @@
     <ClCompile Include="..\Game\ProcessManager.cpp">
       <Filter>Game</Filter>
     </ClCompile>
+    <ClCompile Include="..\MultiThreading\RealtimeProcess.cpp">
+      <Filter>MultiThreading</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Bombast\BombastApp.h">
@@ -272,6 +275,12 @@
     </ClInclude>
     <ClInclude Include="..\Game\ProcessManager.h">
       <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\MultiThreading\RealtimeProcess.h">
+      <Filter>MultiThreading</Filter>
+    </ClInclude>
+    <ClInclude Include="..\MultiThreading\CriticalSection.h">
+      <Filter>MultiThreading</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

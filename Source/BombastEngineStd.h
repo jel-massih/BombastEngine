@@ -50,6 +50,15 @@ const std::string ROOT_GAME_PATH = "../../../Game/";
 	#define SAFE_RELEASE(x) if(x) x->Release(); x=NULL;
 #endif
 
+class BE_NonCopyable
+{
+private:
+	BE_NonCopyable(const BE_NonCopyable& x);
+	BE_NonCopyable&	operator=(const BE_NonCopyable& x);
+public:
+	BE_NonCopyable() {};
+};
+
 typedef D3DCOLORVALUE Color;
 
 extern Color g_White;

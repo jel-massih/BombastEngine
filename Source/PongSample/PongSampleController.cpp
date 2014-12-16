@@ -11,7 +11,7 @@ PongSampleController::PongSampleController(SceneNode* object)
 	memset(m_bKey, 0x00, sizeof(m_bKey));
 }
 
-bool PongSampleController::VOnMouseButtonDown(const Point& mousePos, const int radius, const std::string& buttonName)
+bool PongSampleController::VOnMouseDown(const Point& mousePos, const int radius, const std::string& buttonName)
 {
 	if (buttonName != "MouseLeft")
 	{
