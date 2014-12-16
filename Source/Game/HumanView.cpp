@@ -26,6 +26,8 @@ HumanView::HumanView(IRenderer* renderer)
 
 		m_pScene->VAddChild(INVALID_ACTOR_ID, m_pCamera);
 		m_pScene->SetCamera(m_pCamera);
+
+		VPushElement(m_pScene);
 	}
 }
 
