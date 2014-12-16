@@ -38,6 +38,7 @@ HumanView::~HumanView()
 	}
 
 	SAFE_DELETE(m_pProcessManager);
+	SAFE_DELETE(m_pScene);
 }
 
 bool HumanView::LoadGame(rapidxml::xml_node<>* pLevelData)
