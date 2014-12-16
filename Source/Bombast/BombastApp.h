@@ -77,6 +77,7 @@ private:
 	void SetQuitting(bool quitting) { m_bQuitting = quitting; }
 
 	bool Frame();
+	bool Render();
 
 	void ShutdownWindows();
 

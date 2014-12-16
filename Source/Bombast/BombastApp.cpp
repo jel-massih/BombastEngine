@@ -320,6 +320,16 @@ bool BombastApp::Frame()
 	return true;
 }
 
+bool BombastApp::Render()
+{
+	if (m_pGame)
+	{
+		m_pGame->VOnRender(m_pTimer->GetTime(), m_pTimer->GetFrameTime());
+	}
+
+	return true;
+}
+
 void BombastApp::ShutDown()
 {
 	SAFE_DELETE(m_pGame);
