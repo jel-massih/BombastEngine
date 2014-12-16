@@ -6,7 +6,8 @@ public:
 	bool Initialize();
 	void Frame();
 
-	float GetTime();
+	float GetFrameTime();
+	double GetTime();
 
 private:
 	INT64 m_frequency;
