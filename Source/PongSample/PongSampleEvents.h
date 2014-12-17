@@ -43,7 +43,7 @@ public:
 
 	virtual const char* GetName() const
 	{
-		return "EvtData_FIre_Weapons";
+		return "EvtData_Fire_Weapon";
 	}
 
 	ActorId GetActorId() const
@@ -52,7 +52,7 @@ public:
 	}
 };
 
-class EvtData_StartThrust : public BaseEventData
+class EvtData_StartUp : public BaseEventData
 {
 	ActorId m_id;
 	float m_acceleration;
@@ -64,13 +64,13 @@ public:
 		return sk_EventType;
 	}
 
-	EvtData_StartThrust() :
+	EvtData_StartUp() :
 		m_id(INVALID_ACTOR_ID),
 		m_acceleration(0)
 	{
 	}
 
-	EvtData_StartThrust(ActorId actorId, float acceleration) :
+	EvtData_StartUp(ActorId actorId, float acceleration) :
 		m_id(actorId),
 		m_acceleration(acceleration)
 	{
@@ -78,7 +78,7 @@ public:
 
 	virtual IEventDataPtr VCopy() const
 	{
-		return IEventDataPtr(BE_NEW EvtData_StartThrust(m_id, m_acceleration));
+		return IEventDataPtr(BE_NEW EvtData_StartUp(m_id, m_acceleration));
 	}
 
 	virtual void VSerialize(std::ostrstream& out) const
@@ -95,7 +95,7 @@ public:
 
 	virtual const char* GetName() const
 	{
-		return "EvtData_ThrustStart";
+		return "EvtData_StartUp";
 	}
 
 	ActorId GetActorId() const
@@ -114,7 +114,7 @@ public:
 	}
 };
 
-class EvtData_EndThrust : public BaseEventData
+class EvtData_EndUp : public BaseEventData
 {
 	ActorId m_id;
 
@@ -125,19 +125,19 @@ public:
 		return sk_EventType;
 	}
 
-	EvtData_EndThrust(void) :
+	EvtData_EndUp(void) :
 		m_id(INVALID_ACTOR_ID)
 	{
 	}
 
-	EvtData_EndThrust(ActorId id) :
+	EvtData_EndUp(ActorId id) :
 		m_id(id)
 	{
 	}
 
 	virtual IEventDataPtr VCopy() const
 	{
-		return IEventDataPtr(BE_NEW EvtData_EndThrust(m_id));
+		return IEventDataPtr(BE_NEW EvtData_EndUp(m_id));
 	}
 
 	virtual void VSerialize(std::ostrstream & out) const
@@ -152,7 +152,7 @@ public:
 
 	virtual const char* GetName(void) const
 	{
-		return "EvtData_EndThrust";
+		return "EvtData_EndUp";
 	}
 
 	ActorId GetActorId(void) const

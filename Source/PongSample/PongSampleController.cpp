@@ -37,7 +37,7 @@ bool PongSampleController::VOnKeyDown(const BYTE c)
 	if (c == 'W' || c == 'S')
 	{
 		const ActorId actorId = m_pObject->VGet()->GetActorId();
-		std::shared_ptr<EvtData_StartThrust> pEvent(BE_NEW EvtData_StartThrust(actorId, (c == 'W' ? ACTOR_ACCELERATION : (-ACTOR_ACCELERATION))));
+		std::shared_ptr<EvtData_StartUp> pEvent(BE_NEW EvtData_StartUp(actorId, (c == 'W' ? ACTOR_ACCELERATION : (-ACTOR_ACCELERATION))));
 		IEventManager::Get()->VQueueEvent(pEvent);
 	}
 
@@ -51,7 +51,7 @@ bool PongSampleController::VOnKeyUp(const BYTE c)
 	if (c == 'W' || c == 'S')
 	{
 		const ActorId actorId = m_pObject->VGet()->GetActorId();
-		std::shared_ptr<EvtData_EndThrust> pEvent(BE_NEW EvtData_EndThrust(actorId));
+		std::shared_ptr<EvtData_EndUp> pEvent(BE_NEW EvtData_EndUp(actorId));
 		IEventManager::Get()->VQueueEvent(pEvent);
 	}
 
