@@ -189,10 +189,10 @@ HRESULT D3DBitmapNode11::UpdateBuffers(ID3D11DeviceContext* deviceContext)
 	}
 	m_lastPosition = VGet()->ToWorld().GetPosition();
 
-	left = (float)(g_pApp->m_options.m_screenSize.x / 2 * -1) + m_lastPosition.x;
+	left = -m_lastPosition.x;
 	right = left + (float)m_bitmapWidth;
 
-	top = (float)(g_pApp->m_options.m_screenSize.y / 2) - m_lastPosition.y;
+	top = -m_lastPosition.y;
 	bottom = top - (float)m_bitmapHeight;
 
 	//create vertex array
