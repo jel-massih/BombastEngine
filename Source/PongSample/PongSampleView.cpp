@@ -11,6 +11,7 @@
 PongSampleHumanView::PongSampleHumanView(IRenderer* renderer) :
 HumanView(renderer)
 {
+	m_pPongController = 0;
 	m_bShowUI = true;
 	RegisterAllDelegates();
 }
@@ -18,6 +19,8 @@ HumanView(renderer)
 PongSampleHumanView::~PongSampleHumanView()
 {
 	RemoveAllDelegates();
+
+	SAFE_DELETE(m_pPongController);
 }
 
 LRESULT CALLBACK PongSampleHumanView::VOnMsgProc(AppMsg msg)
