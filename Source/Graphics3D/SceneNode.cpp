@@ -354,7 +354,7 @@ HRESULT CameraNode::SetViewTransform(Scene* pScene)
 	else
 	{
 		Mat4x4 mat = VGet()->ToWorld();
-		mat.SetPosition(Vec3(g_pApp->GetScreenSize().GetX() / 2, 0, -50.0l));
+		mat.SetPosition(Vec3(g_pApp->GetScreenSize().GetX() / 2, -(g_pApp->GetScreenSize().GetY() / 2), -50.0l));
 		VSetTransform(&mat);
 	}
 
