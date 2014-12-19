@@ -1,5 +1,4 @@
-#ifndef RENDER_COMPONENT_H
-#define RENDER_COMPONENT_H
+#pragma once
 
 #include "RenderComponentInterface.h"
 #include "../Utilities/rapidxml.hpp"
@@ -50,4 +49,17 @@ protected:
 	virtual void VCreateInheritedXmlElements(rapidxml::xml_node<>* pBaseElement) override;
 };
 
-#endif
+class BlockRenderComponent : public BaseRenderComponent
+{
+	char* m_textureResource;
+	Vec3 m_size;
+
+public:
+	static const char* g_Name;
+	virtual const char* VGetName() const override{ return g_Name; }
+
+protected:
+	virtual bool VDelegateInitialize(rapidxml::xml_node<>* pData) override;
+	virtual SceneNode* VCreateSceneNode() override;
+	virtual void VCreateInheritedXmlElements(rapidxml::xml_node<>* pBaseElement) override;
+};
