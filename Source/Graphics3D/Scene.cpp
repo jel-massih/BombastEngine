@@ -107,6 +107,12 @@ void Scene::NewRenderComponentDelegate(IEventDataPtr pEventData)
 	ActorId actorId = pCastedEventData->GetActorId();
 	SceneNode* pSceneNode = pCastedEventData->GetSceneNode();
 
+	if (!pSceneNode)
+	{
+		BE_ERROR("Failed To get scene node for actorid: " + ToStr(actorId));
+		return;
+	}
+
 	if (FAILED(pSceneNode->VOnRestore(this)))
 	{
 		BE_ERROR("Failed To Restore scene node to scene for actorid: " + ToStr(actorId));
