@@ -1,4 +1,4 @@
 <Options>
-  <Graphics renderer="Direct3D 11" x="1280" y="780" />
+  <Graphics renderer="Direct3D 11" x="0" y="0" width="1280" height="720" />
   <World level="World\world.xml" />
 </Options>
