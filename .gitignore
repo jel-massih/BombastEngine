@@ -8,3 +8,10 @@ Source/Msvc/BombastEngine.opensdf
 Source/Libraries/*
 !Source/Libraries/.gitkeep
 Source/Msvc/ipch/
+
+*.dll
+*.exe
+*.ilk
+*.pdb
+*.lib
+*.suo
