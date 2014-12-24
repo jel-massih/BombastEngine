@@ -561,3 +561,245 @@ HRESULT D3D11GridNode::VRender(Scene* pScene)
 
 	return S_OK;
 }
+
+PrimitiveNode::PrimitiveNode(const ActorId actorId, BaseRenderComponent* renderComponent, std::string textureFilename, RenderPass renderPass, PrimitiveType type, Vec3 size, const Mat4x4* t)
+	: SceneNode(actorId, renderComponent, renderPass, t)
+{
+	m_vertCount = m_indexCount = 0;
+	m_size = size;
+	m_textureFilename = textureFilename;
+	m_primitiveType = type;
+}
+
+bool PrimitiveNode::VIsVisible(Scene* pScene) const
+{
+	return true;
+}
+
+D3D11PrimitiveNode::D3D11PrimitiveNode(const ActorId actorId, BaseRenderComponent* renderComponent, std::string textureFilename, RenderPass renderPass, PrimitiveType type, Vec3 size, const Mat4x4* t)
+	:PrimitiveNode(actorId, renderComponent, textureFilename, renderPass, type, size, t)
+{
+	m_pVertexBuffer = NULL;
+	m_pIndexBuffer = NULL;
+	m_pTexture = NULL;
+
+	m_lastPos = Vec3::g_InvalidVec3;
+}
+
+D3D11PrimitiveNode::~D3D11PrimitiveNode()
+{
+	SAFE_RELEASE(m_pVertexBuffer);
+	SAFE_RELEASE(m_pIndexBuffer);
+	SAFE_RELEASE(m_pTexture);
+}
+
+HRESULT D3D11PrimitiveNode::VOnRestore(Scene* pScene)
+{
+	HRESULT hr;
+
+	BE_HRETURN(SceneNode::VOnRestore(pScene), "Failed to restore scenenode for primitiveNode");
+
+	SAFE_RELEASE(m_pVertexBuffer);
+	SAFE_RELEASE(m_pIndexBuffer);
+
+	hr = InitializeBuffers();
+	if (FAILED(hr))
+	{
+		return hr;
+	}
+
+	hr = LoadTexture(m_textureFilename);
+	if (FAILED(hr))
+	{
+		return hr;
+	}
+
+	return S_OK;
+}
+
+HRESULT D3D11PrimitiveNode::LoadTexture(std::string textureFilename)
+{
+	m_pTexture = TextureResourceLoader::LoadAndReturnTextureResource(textureFilename.c_str());
+	if (!m_pTexture)
+	{
+		return S_FALSE;
+	}
+
+	return S_OK;
+}
+
+HRESULT D3D11PrimitiveNode::InitializeBuffers()
+{
+	ID3D11Device* device = g_pApp->GetGraphicsManager()->GetRenderer()->GetDevice();
+
+	VertexType* vertices;
+	unsigned long* indices;
+	D3D11_BUFFER_DESC vertexBufferDesc, indexBufferDesc;
+	D3D11_SUBRESOURCE_DATA vertexData, indexData;
+	HRESULT result;
+	int i;
+
+	if (m_primitiveType == PrimitiveType::PT_Box)
+	{
+		m_vertCount = 8;
+		m_indexCount = m_vertCount;
+
+		vertices = BE_NEW VertexType[m_vertCount];
+		if (!vertices)
+		{
+			return S_FALSE;
+		}
+
+		indices = BE_NEW unsigned long[m_indexCount];
+		if (!indices)
+		{
+			return S_FALSE;
+		}
+		
+		memset(vertices, 0, sizeof(VertexType) * m_vertCount);
+
+		for (i = 0; i < m_indexCount; i++)
+		{
+			indices[i] = i;
+		}
+
+		vertexBufferDesc.Usage = D3D11_USAGE_DYNAMIC;
+		vertexBufferDesc.ByteWidth = sizeof(VertexType) * m_vertCount;
+		vertexBufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
+		vertexBufferDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+		vertexBufferDesc.MiscFlags = 0;
+		vertexBufferDesc.StructureByteStride = 0;
+
+		vertexData.pSysMem = vertices;
+		vertexData.SysMemPitch = 0;
+		vertexData.SysMemSlicePitch = 0;
+
+		result = device->CreateBuffer(&vertexBufferDesc, &vertexData, &m_pVertexBuffer);
+		if (FAILED(result))
+		{
+			return result;
+		}
+
+		indexBufferDesc.Usage = D3D11_USAGE_DEFAULT;
+		indexBufferDesc.ByteWidth = sizeof(unsigned long) * m_indexCount;
+		indexBufferDesc.BindFlags = D3D11_BIND_INDEX_BUFFER;
+		indexBufferDesc.CPUAccessFlags = 0;
+		indexBufferDesc.MiscFlags = 0;
+		indexBufferDesc.StructureByteStride = 0;
+
+		indexData.pSysMem = indices;
+		indexData.SysMemPitch = 0;
+		indexData.SysMemSlicePitch = 0;
+
+		result = device->CreateBuffer(&indexBufferDesc, &indexData, &m_pIndexBuffer);
+		if (FAILED(result))
+		{
+			return result;
+		}
+
+		SAFE_DELETE_ARRAY(vertices);
+		SAFE_DELETE_ARRAY(indices);
+	}
+
+	return S_OK;
+}
+
+HRESULT D3D11PrimitiveNode::VRender(Scene* pScene)
+{
+	HRESULT hr;
+	bool result;
+
+	IRenderer* pRenderer = g_pApp->GetGraphicsManager()->GetRenderer();
+	ID3D11DeviceContext* context = pRenderer->GetDeviceContext();
+
+	Mat4x4 worldMatrix, viewMatrix, orthoMatrix;
+	pRenderer->VGetViewMatrix(viewMatrix);
+	pRenderer->VGetWorldMatrix(worldMatrix);
+	pRenderer->VGetOrthoMatrix(orthoMatrix);
+
+	hr = UpdateBuffers(context);
+	if (FAILED(hr))
+	{
+		return hr;
+	}
+
+	RenderBuffers(context);
+
+	result = g_pApp->GetGraphicsManager()->GetTextureShader()->Render(context, m_indexCount, DirectX::XMLoadFloat4x4(&worldMatrix),
+		XMLoadFloat4x4(&viewMatrix), XMLoadFloat4x4(&orthoMatrix), m_pTexture);
+	if (!result)
+	{
+		return S_FALSE;
+	}
+
+	return S_OK;
+}
+
+HRESULT D3D11PrimitiveNode::UpdateBuffers(ID3D11DeviceContext* deviceContext)
+{
+	float radius = 10.0f;
+	VertexType* vertices;
+	D3D11_MAPPED_SUBRESOURCE mappedResource;
+	VertexType* vertexPtr;
+	HRESULT result;
+
+	if (VGet()->ToWorld().GetPosition() == m_lastPos)
+	{
+		return S_OK;
+	}
+	m_lastPos = VGet()->ToWorld().GetPosition();
+
+	vertices = BE_NEW VertexType[m_vertCount];
+	if (!vertices)
+	{
+		return false;
+	}
+
+	vertices[0].position = DirectX::XMFLOAT3(-radius, radius, -radius);
+	
+	vertices[1].position = XMFLOAT3(radius, radius, -radius);
+
+	vertices[2].position = XMFLOAT3(-radius, -radius, -radius);
+
+	vertices[3].position = XMFLOAT3(radius, -radius, -radius);
+
+	vertices[4].position = XMFLOAT3(-radius, radius, radius);
+
+	vertices[5].position = XMFLOAT3(radius, radius, radius);
+	
+	vertices[6].position = XMFLOAT3(-radius, -radius, radius);
+
+	vertices[7].position = XMFLOAT3(radius, -radius, radius);
+
+	result = deviceContext->Map(m_pVertexBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource);
+	if (FAILED(result))
+	{
+		return result;
+	}
+
+	vertexPtr = (VertexType*)mappedResource.pData;
+
+	memcpy(vertexPtr, (void*)vertices, sizeof(VertexType) * m_vertCount);
+
+	deviceContext->Unmap(m_pVertexBuffer, 0);
+	
+	SAFE_DELETE_ARRAY(vertices);
+	
+	return S_OK;
+}
+
+void D3D11PrimitiveNode::RenderBuffers(ID3D11DeviceContext* deviceContext)
+{
+	unsigned int stride, offset;
+
+	stride = sizeof(VertexType);
+	offset = 0;
+
+	IRenderer* pRenderer = g_pApp->GetGraphicsManager()->GetRenderer();
+
+	deviceContext->IASetVertexBuffers(0, 1, &m_pVertexBuffer, &stride, &offset);
+
+	deviceContext->IASetIndexBuffer(m_pIndexBuffer, DXGI_FORMAT_R32_UINT, 0);
+
+	deviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+}
