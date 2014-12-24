@@ -175,8 +175,8 @@ SceneNode* BlockRenderComponent::VCreateSceneNode()
 
 	if (pTransformComponent)
 	{
-		//@TODO: Add Primitive node
-		//SceneNode* blockNode = BE_NEW D3DPrimitiveNode11()
+		SceneNode* blockNode = BE_NEW D3D11PrimitiveNode(m_pOwner->GetId(), (BaseRenderComponent*)this, m_textureResource, RenderPass_Static, D3D11PrimitiveNode::PrimitiveType::PT_Box, m_size, &pTransformComponent->GetTransform());
+		return blockNode;
 	}
 
 	return NULL;
