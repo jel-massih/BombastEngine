@@ -1,0 +1,12 @@
+<Actor type="Brick" resource="actors\brick.xml">
+	<TransformComponent>
+		<Position x="0" y="0" z="0"/>
+		<YawPitchRoll x="0" y="0" z="0"/>
+	</TransformComponent>
+
+
+    <BitmapRenderComponent>
+        <Texture path="data\paddle.dds"></Texture>
+		<Size x="50" y="50" z="50"/>
+    </BitmapRenderComponent>
+</Actor>
