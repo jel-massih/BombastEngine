@@ -21,18 +21,6 @@ bool TransformComponent::VInitialize(rapidxml::xml_node<>* pData)
 		m_position = Vec3(x, y, z);
 	}
 
-	rapidxml::xml_node<>* pRelativePositionElement = pData->first_node("RelativePosition");
-	if (pRelativePositionElement)
-	{
-		double x = 0;
-		double y = 0;
-		double z = 0;
-		x = atof(pRelativePositionElement->first_attribute("x")->value()) * g_pApp->m_options.m_screenSize.x;
-		y = atof(pRelativePositionElement->first_attribute("y")->value()) * g_pApp->m_options.m_screenSize.y;
-		z = atof(pRelativePositionElement->first_attribute("z")->value());
-		m_position = Vec3(x, y, z);
-	}
-
 	rapidxml::xml_node<>* pOrientationElement = pData->first_node("YawPitchRoll");
 	if (pOrientationElement)
 	{
