@@ -5,8 +5,8 @@
 	</TransformComponent>
 
 
-    <BitmapRenderComponent>
+    <BlockRenderComponent>
         <Texture path="data\paddle.dds"></Texture>
 		<Size x="50" y="50" z="50"/>
-    </BitmapRenderComponent>
+    </BlockRenderComponent>
 </Actor>
