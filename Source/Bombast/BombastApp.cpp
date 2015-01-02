@@ -25,9 +25,11 @@ BombastApp::BombastApp()
 
 	m_screenSize = Point(0, 0);
 
-	m_pLuaCoreManager = 0;
-
 	m_pGraphicsManager = 0;
+
+	m_pDebugManager = 0;
+
+	m_pLuaCoreManager = 0;
 
 	m_pResourceCache = 0;
 
@@ -252,6 +254,21 @@ bool BombastApp::InitializeApp(int screenWidth, int screenHeight)
 		return false;
 	}
 
+	m_pDebugManager = BE_NEW DebugManager();
+	if (!m_pDebugManager)
+	{
+		return false;
+	}
+
+	result = m_pDebugManager->Initialize();
+	if (!result)
+	{
+		return false;
+	}
+
+	m_pDebugManager->GetDebugText()->AddString("TEST");
+	m_pDebugManager->GetDebugText()->UpdateString("TEST", "WOOOHOOOO");
+
 	m_pLuaCoreManager = BE_NEW LuaCoreManager();
 	if(!m_pLuaCoreManager)
 	{
@@ -332,6 +349,11 @@ bool BombastApp::Render()
 	{
 		m_pGame->VOnRender(m_pTimer->GetTime(), m_pTimer->GetFrameTime());
 	}
+	
+	if (m_pDebugManager)
+	{
+		m_pDebugManager->Render();
+	}
 
 	return true;
 }
@@ -346,6 +368,12 @@ void BombastApp::ShutDown()
 	{
 		m_pLuaCoreManager->Shutdown();
 		SAFE_DELETE(m_pLuaCoreManager);
+	}
+
+	if (m_pDebugManager)
+	{
+		m_pDebugManager->Shutdown();
+		SAFE_DELETE(m_pDebugManager);
 	}
 
 	if (m_pGraphicsManager)
