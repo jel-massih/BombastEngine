@@ -1,0 +1,44 @@
+#pragma once
+
+#include "../Resources/ResourceCache.h"
+
+#include <d3dcompiler.h>
+
+class FontShaderClass
+{
+public:
+	FontShaderClass();
+
+	bool Initialize(ID3D11Device* device);
+	void Shutdown();
+	bool Render(ID3D11DeviceContext* deviceContext, int indexCount, XMMATRIX& worldMatrix, XMMATRIX& viewMatrix, XMMATRIX& projMatrix, ID3D11ShaderResourceView* texture, XMFLOAT4 pixelColor);
+
+private:
+	struct ConstantBufferType
+	{
+		XMMATRIX world;
+		XMMATRIX view;
+		XMMATRIX projection;
+	};
+
+	struct PixelBufferType
+	{
+		XMFLOAT4 color;
+	};
+
+private:
+	bool InitializeShader(ID3D11Device* device, std::string vertexShaderPath, std::string pixelShaderPath);
+	void ShutdownShader();
+	
+	bool SetShaderParameters(ID3D11DeviceContext* deviceContext, XMMATRIX& worldMatrix, XMMATRIX& viewMatrix, XMMATRIX& projectionMatrix,
+		ID3D11ShaderResourceView* texture, XMFLOAT4 pixelColor);
+	void RenderShaders(ID3D11DeviceContext* deviceContext, int indexCount);
+
+private:
+	ID3D11VertexShader* m_pVertexShader;
+	ID3D11PixelShader* m_pPixelShader;
+	ID3D11InputLayout* m_pLayout;
+	ID3D11Buffer* m_pConstantBuffer;
+	ID3D11SamplerState* m_pSampleState;
+	ID3D11Buffer* m_pPixelBuffer;
+};
