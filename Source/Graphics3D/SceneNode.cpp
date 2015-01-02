@@ -431,7 +431,7 @@ HRESULT D3D11GridNode::InitializeBuffers(ID3D11Device* device)
 		return S_FALSE;
 	}
 
-	indices = new unsigned long[m_indexCount];
+	indices = BE_NEW unsigned long[m_indexCount];
 	if (!indices)
 	{
 		return S_FALSE;
