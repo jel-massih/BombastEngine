@@ -34,7 +34,7 @@ bool DebugText::Initialize()
 		return false;
 	}
 	
-	result = m_pFont->Initialize(device, "Data/fontdata.txt", "Data/font.dds");
+	result = m_pFont->Initialize(device, "Data\\fontdata.txt", "Data\\dirt01.dds");
 	if (!result)
 	{
 		BE_ERROR("Could not initialize the font object");
