@@ -1,7 +1,5 @@
 #pragma once
 
-#include <fstream>
-
 #include "TextureClass.h"
 
 class FontClass
@@ -37,6 +35,6 @@ private:
 	void ReleaseTexture();
 
 private:
-	FontType* m_font;
-	TextureClass* m_texture;
+	FontType* m_pFont;
+	TextureClass* m_pTexture;
 };
