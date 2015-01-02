@@ -1,4 +1,7 @@
 #include "FontClass.h"
+#include "../Bombast/BombastApp.h"
+#include <sstream>
+#include <vector>
 
 FontClass::FontClass()
 {
@@ -30,8 +33,7 @@ void FontClass::Shutdown()
 
 bool FontClass::LoadFontData(const char* filename)
 {
-	std::ifstream fin;
-	int i;
+	int i = 0;
 	char temp;
 
 	m_pFont = BE_NEW FontType[95];
@@ -40,31 +42,31 @@ bool FontClass::LoadFontData(const char* filename)
 		return false;
 	}
 
-	fin.open(filename);
-	if (fin.fail())
-	{
-		return false;
-	}
+	//Compile Pixel Shader
+	Resource fontRes(filename);
+	ResourceHandle* pFontResHandle = g_pApp->m_pResourceCache->GetHandle(&fontRes);
 
-	for (i = 0; i < 95; i++)
+	std::stringstream ss(pFontResHandle->Buffer());
+	std::string row;
+	while (std::getline(ss, row))
 	{
-		fin.get(temp);
+		std::stringstream subss(row);
+		subss.get(temp);
 		while (temp != ' ')
 		{
-			fin.get(temp);
+			subss.get(temp);
 		}
-		fin.get(temp);
+		subss.get(temp);
 		while (temp != ' ')
 		{
-			fin.get(temp);
+			subss.get(temp);
 		}
 
-		fin >> m_pFont[i].left;
-		fin >> m_pFont[i].right;
-		fin >> m_pFont[i].size;
+		subss >> m_pFont[i].left;
+		subss >> m_pFont[i].right;
+		subss >> m_pFont[i].size;
+		i++;
 	}
-
-	fin.close();
 
 	return true;
 }
