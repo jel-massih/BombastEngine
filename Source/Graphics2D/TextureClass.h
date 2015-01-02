@@ -1,7 +1,7 @@
 #ifndef TEXTURE_CLASS_H
 #define TEXTURE_CLASS_H
 
-#include "../Utilities/DDSTextureLoader.h"
+#include "../Resources/TextureResource.h"
 #include "../BombastEngineStd.h"
 
 class TextureClass
