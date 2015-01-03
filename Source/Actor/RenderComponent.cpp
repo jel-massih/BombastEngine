@@ -3,6 +3,7 @@
 #include "TransformComponent.h"
 #include "..\Events\Events.h"
 
+const char* InvisibleRenderComponent::g_Name = "InvisibleRenderComponent";
 const char* BitmapRenderComponent::g_Name = "BitmapRenderComponent";
 const char* BlockRenderComponent::g_Name = "BlockRenderComponent";
 
@@ -90,6 +91,24 @@ Color BaseRenderComponent::LoadColor(rapidxml::xml_node<>* pData)
 	color.a = (float)a;
 
 	return color;
+}
+
+SceneNode* InvisibleRenderComponent::VCreateSceneNode()
+{
+	TransformComponent* pTransformComponent = m_pOwner->GetComponent<TransformComponent>(TransformComponent::g_Name);
+
+	if (pTransformComponent)
+	{
+		SceneNode* blankNode = BE_NEW SceneNode(m_pOwner->GetId(), (BaseRenderComponent*) this, RenderPass_Actor, &pTransformComponent->GetTransform());
+		return blankNode;
+	}
+
+	return NULL;
+}
+
+void InvisibleRenderComponent::VCreateInheritedXmlElements(rapidxml::xml_node<>* pBaseElement)
+{
+	BE_ERROR("ERROR: Not Implemented Yet");
 }
 
 bool BitmapRenderComponent::VDelegateInitialize(rapidxml::xml_node<>* pData)

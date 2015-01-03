@@ -34,6 +34,17 @@ protected:
 	SceneNode* m_pSceneNode;
 };
 
+class InvisibleRenderComponent : public BaseRenderComponent
+{
+public:
+	static const char* g_Name;
+	virtual const char* VGetName() const override{ return g_Name; }
+
+protected:
+	virtual SceneNode* VCreateSceneNode() override;
+	virtual void VCreateInheritedXmlElements(rapidxml::xml_node<>* pBaseElement) override;
+};
+
 class BitmapRenderComponent : public BaseRenderComponent
 {
 	char* m_textureResource;

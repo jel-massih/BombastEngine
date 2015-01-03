@@ -14,6 +14,7 @@ ActorFactory::ActorFactory()
 	m_lastActorId = INVALID_ACTOR_ID;
 
 	m_componentFactory.Register<TransformComponent>(ActorComponent::GetIdFromName(TransformComponent::g_Name));
+	m_componentFactory.Register<InvisibleRenderComponent>(ActorComponent::GetIdFromName(InvisibleRenderComponent::g_Name));
 	m_componentFactory.Register<BitmapRenderComponent>(ActorComponent::GetIdFromName(BitmapRenderComponent::g_Name));
 	m_componentFactory.Register<BlockRenderComponent>(ActorComponent::GetIdFromName(BlockRenderComponent::g_Name));
 }
