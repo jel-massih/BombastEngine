@@ -13,7 +13,6 @@
 #include "..\Graphics3D\SceneNode.h"
 #include "..\Events\EventManagerImpl.h"
 #include "..\Utilities\Timer.h"
-#include "..\Debugging\DebugManager.h"
 
 class BombastApp
 {
@@ -29,7 +28,6 @@ protected:
 
 	GraphicsManager* m_pGraphicsManager;
 	LuaCoreManager* m_pLuaCoreManager;
-	DebugManager* m_pDebugManager;
 
 	Timer* m_pTimer;
 
@@ -55,7 +53,6 @@ public:
 
 	GraphicsManager*  GetGraphicsManager() const;
 	LuaCoreManager*  GetLuaCoreManager() const;
-	DebugManager*  GetDebugManager() const { return m_pDebugManager; }
 
 	CoreGameLogic* GetGameLogic() const { return m_pGame; }
 

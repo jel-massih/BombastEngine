@@ -8,6 +8,7 @@ const GameViewId be_InvalidGameViewId = 0xffffffff;
 HumanView::HumanView(IRenderer* renderer)
 {
 	m_pProcessManager = BE_NEW ProcessManager;
+	m_pDebugManager = BE_NEW DebugManager;
 
 	m_mouseRadius = 1;
 	m_viewId = be_InvalidGameViewId;
@@ -29,6 +30,16 @@ HumanView::HumanView(IRenderer* renderer)
 
 		VPushElement(m_pScene);
 	}
+
+	bool result;
+	result = m_pDebugManager->Initialize();
+	if (!result)
+	{
+		BE_ERROR("Failed to Initialze DebugManager");
+	}
+
+	m_pDebugManager->GetDebugText()->AddString("TEST");
+	m_pDebugManager->GetDebugText()->UpdateString("TEST", "Debug Text is Working");
 }
 
 HumanView::~HumanView()
@@ -37,6 +48,12 @@ HumanView::~HumanView()
 	while (!m_screenElements.empty())
 	{
 		m_screenElements.pop_front();
+	}
+
+	if (m_pDebugManager)
+	{
+		m_pDebugManager->Shutdown();
+		SAFE_DELETE(m_pDebugManager);
 	}
 
 	SAFE_DELETE(m_pProcessManager);
@@ -94,6 +111,17 @@ void HumanView::VOnRender(double dTime, float fElapsedTime)
 			}
 
 			m_lastDraw = m_currTick;
+
+			g_pApp->GetGraphicsManager()->GetRenderer()->VEnableZBuffer(false);
+			g_pApp->GetGraphicsManager()->GetRenderer()->VEnableAlphaBlending(true);
+
+			if (m_pDebugManager)
+			{
+				m_pDebugManager->Render();
+			}
+
+			g_pApp->GetGraphicsManager()->GetRenderer()->VEnableAlphaBlending(false);
+			g_pApp->GetGraphicsManager()->GetRenderer()->VEnableZBuffer(true);
 		}
 
 		g_pApp->GetGraphicsManager()->GetRenderer()->VEndScene();
