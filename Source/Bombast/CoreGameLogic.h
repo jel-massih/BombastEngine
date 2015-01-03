@@ -37,6 +37,8 @@ protected:
 
 class CoreGameLogic : public IGameLogic
 {
+	friend class BombastApp;
+
 public:
 	CoreGameLogic();
 	virtual ~CoreGameLogic();
