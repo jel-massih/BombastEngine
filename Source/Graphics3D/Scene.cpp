@@ -19,6 +19,7 @@ Scene::Scene(IRenderer* renderer)
 	frustum.Init(BE_PI / 4.0f, 1.0f, 1.0f, 100.0f);
 	m_pCamera = BE_NEW CameraNode(&Mat4x4::g_Identity, frustum);
 	AddChild(INVALID_ACTOR_ID, m_pCamera);
+	m_pCamera->SetViewTransform(this);
 
 	m_pGrid = BE_NEW D3D11GridNode(INVALID_ACTOR_ID, nullptr, &Mat4x4::g_Identity);
 	AddChild(INVALID_ACTOR_ID, m_pGrid);
@@ -106,6 +107,12 @@ void Scene::NewRenderComponentDelegate(IEventDataPtr pEventData)
 
 	ActorId actorId = pCastedEventData->GetActorId();
 	SceneNode* pSceneNode = pCastedEventData->GetSceneNode();
+
+	if (!pSceneNode)
+	{
+		BE_ERROR("Failed To get scene node for actorid: " + ToStr(actorId));
+		return;
+	}
 
 	if (FAILED(pSceneNode->VOnRestore(this)))
 	{

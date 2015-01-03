@@ -3,6 +3,7 @@
 #include "../Bombast/BombastApp.h"
 #include "../UI/UserInterface.h"
 #include "ProcessManager.h"
+#include "..\Debugging\DebugManager.h"
 
 class HumanView : public IGameView
 {
@@ -35,7 +36,8 @@ public:
 
 	virtual void VSetCameraOffset(const Vec4& offset);
 
-	ProcessManager* GetProcessManager() { return m_pProcessManager; }
+	ProcessManager* GetProcessManager() const { return m_pProcessManager; }
+	DebugManager*  GetDebugManager() const { return m_pDebugManager; }
 
 	virtual void VSetControlledActor(ActorId actorId) { m_actorId = actorId; }
 
@@ -63,6 +65,7 @@ protected:
 	ActorId m_actorId;
 
 	ProcessManager* m_pProcessManager;
+	DebugManager* m_pDebugManager;
 
 	DWORD m_currTick;
 	DWORD m_lastDraw;

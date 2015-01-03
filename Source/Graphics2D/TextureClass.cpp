@@ -17,9 +17,8 @@ bool TextureClass::Initialize(ID3D11Device* device, std::string textureTitle)
 {
 	HRESULT result;
 
-	result = CreateDDSTextureFromFile(device, s2ws(textureTitle).c_str(), nullptr, &m_pTexture);
-
-	if (FAILED(result)) {
+	m_pTexture = TextureResourceLoader::LoadAndReturnTextureResource(textureTitle.c_str());
+	if (!m_pTexture) {
 		return false;
 	}
 

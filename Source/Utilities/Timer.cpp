@@ -38,5 +38,5 @@ float Timer::GetFrameTime()
 
 double Timer::GetTime()
 {
-	return m_startTime;
+	return (double)m_startTime;
 }

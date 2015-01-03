@@ -11,6 +11,7 @@
 PongSampleHumanView::PongSampleHumanView(IRenderer* renderer) :
 HumanView(renderer)
 {
+	m_pPongController = 0;
 	m_bShowUI = true;
 	RegisterAllDelegates();
 }
@@ -18,6 +19,8 @@ HumanView(renderer)
 PongSampleHumanView::~PongSampleHumanView()
 {
 	RemoveAllDelegates();
+
+	SAFE_DELETE(m_pPongController);
 }
 
 LRESULT CALLBACK PongSampleHumanView::VOnMsgProc(AppMsg msg)
@@ -140,8 +143,6 @@ void PongSampleHumanView::VSetControlledActor(ActorId actorId)
 	m_pPongController = BE_NEW PongSampleController(m_pPaddle);
 	m_pKeyboardHandler = m_pPongController;
 	m_pMouseHandler = m_pPongController;
-	m_pCamera->SetTarget(m_pPaddle);
-	m_pPaddle->SetAlpha(0.8f);
 }
 
 void PongSampleHumanView::SetControlledActorDelegate(IEventDataPtr pEventData)

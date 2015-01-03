@@ -22,6 +22,8 @@
     <ClInclude Include="..\Bombast\CoreGameLogic.h" />
     <ClInclude Include="..\Bombast\interfaces.h" />
     <ClInclude Include="..\Constants.h" />
+    <ClInclude Include="..\Debugging\DebugManager.h" />
+    <ClInclude Include="..\Debugging\DebugText.h" />
     <ClInclude Include="..\Debugging\Logger.h" />
     <ClInclude Include="..\Events\EventManager.h" />
     <ClInclude Include="..\Events\EventManagerImpl.h" />
@@ -31,6 +33,8 @@
     <ClInclude Include="..\Game\Process.h" />
     <ClInclude Include="..\Game\ProcessManager.h" />
     <ClInclude Include="..\Graphics2D\ColorShaderClass.h" />
+    <ClInclude Include="..\Graphics2D\FontClass.h" />
+    <ClInclude Include="..\Graphics2D\FontShaderClass.h" />
     <ClInclude Include="..\Graphics2D\TextureClass.h" />
     <ClInclude Include="..\Graphics2D\TextureShaderClass.h" />
     <ClInclude Include="..\Graphics3D\BitmapNode.h" />
@@ -74,6 +78,8 @@
     <ClCompile Include="..\BombastEngineStd.cpp" />
     <ClCompile Include="..\Bombast\BombastApp.cpp" />
     <ClCompile Include="..\Bombast\CoreGameLogic.cpp" />
+    <ClCompile Include="..\Debugging\DebugManager.cpp" />
+    <ClCompile Include="..\Debugging\DebugText.cpp" />
     <ClCompile Include="..\Events\EventManager.cpp" />
     <ClCompile Include="..\Events\EventManagerImpl.cpp" />
     <ClCompile Include="..\Events\Events.cpp" />
@@ -82,6 +88,8 @@
     <ClCompile Include="..\Game\Process.cpp" />
     <ClCompile Include="..\Game\ProcessManager.cpp" />
     <ClCompile Include="..\Graphics2D\ColorShaderClass.cpp" />
+    <ClCompile Include="..\Graphics2D\FontClass.cpp" />
+    <ClCompile Include="..\Graphics2D\FontShaderClass.cpp" />
     <ClCompile Include="..\Graphics2D\TextureClass.cpp" />
     <ClCompile Include="..\Graphics2D\TextureShaderClass.cpp" />
     <ClCompile Include="..\Graphics3D\BitmapNode.cpp" />

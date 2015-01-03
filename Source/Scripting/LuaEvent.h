@@ -17,7 +17,7 @@ typedef std::map<std::string, std::string> LuaObject;
 	public: \
 	static LuaEvent* CreateEventForScript(void) \
 	{ \
-		return new eventClass; \
+		return BE_NEW eventClass; \
 	}
 
 class LuaEvent : public BaseEventData

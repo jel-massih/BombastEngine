@@ -182,4 +182,63 @@ private:
 		Vec4 color;
 	};
 };
+
+class PrimitiveNode : public SceneNode
+{
+public:
+	enum PrimitiveType
+	{
+		PT_MIN = 0,
+		PT_Box,
+		PT_Sphere,
+		PT_Cylinder,
+		PT_MAX
+	};
+
+protected:
+	int m_vertCount, m_indexCount;
+	Vec3 m_size;
+
+	PrimitiveType m_primitiveType;
+	std::string m_textureFilename;
+
+public:
+	PrimitiveNode(const ActorId actorId, BaseRenderComponent* renderComponent, std::string textureFilename, RenderPass renderPass, PrimitiveType type, Vec3 size, const Mat4x4* t);
+
+	virtual HRESULT VOnRestore(Scene* pScene) = 0;
+	virtual HRESULT VRender(Scene* pScene) = 0;
+
+protected:
+	virtual HRESULT InitializeBuffers() = 0;
+	virtual HRESULT LoadTexture(std::string filename) = 0;
+	bool VIsVisible(Scene* pScene) const;
+
+	struct VertexType
+	{
+		Vec3 position;
+		XMFLOAT2 texture;
+	};
+};
+
+class D3D11PrimitiveNode : public PrimitiveNode
+{
+public:
+	D3D11PrimitiveNode(const ActorId actorId, BaseRenderComponent* renderComponent, std::string textureFilename, RenderPass renderPass, PrimitiveType type, Vec3 size, const Mat4x4* t);
+	~D3D11PrimitiveNode();
+
+	HRESULT VOnRestore(Scene* pScene);
+	HRESULT VRender(Scene* pScene);	
+
+private:
+	HRESULT InitializeBuffers();
+	HRESULT LoadTexture(std::string textureFilename);
+	HRESULT UpdateBuffers(ID3D11DeviceContext* deviceContext);
+	void RenderBuffers(ID3D11DeviceContext* deviceContext);
+
+private:
+	ID3D11Buffer* m_pVertexBuffer, *m_pIndexBuffer;
+	ID3D11ShaderResourceView* m_pTexture;
+
+	Vec3 m_lastPos;
+};
 #endif

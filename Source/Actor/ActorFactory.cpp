@@ -15,6 +15,7 @@ ActorFactory::ActorFactory()
 
 	m_componentFactory.Register<TransformComponent>(ActorComponent::GetIdFromName(TransformComponent::g_Name));
 	m_componentFactory.Register<BitmapRenderComponent>(ActorComponent::GetIdFromName(BitmapRenderComponent::g_Name));
+	m_componentFactory.Register<BlockRenderComponent>(ActorComponent::GetIdFromName(BlockRenderComponent::g_Name));
 }
 
 Actor* ActorFactory::CreateActor(const char* actorResource, rapidxml::xml_node<>* overrides)

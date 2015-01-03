@@ -4,6 +4,7 @@
 #include "..\Events\Events.h"
 
 const char* BitmapRenderComponent::g_Name = "BitmapRenderComponent";
+const char* BlockRenderComponent::g_Name = "BlockRenderComponent";
 
 BaseRenderComponent::BaseRenderComponent()
 {
@@ -133,6 +134,55 @@ SceneNode* BitmapRenderComponent::VCreateSceneNode()
 }
 
 void BitmapRenderComponent::VCreateInheritedXmlElements(rapidxml::xml_node<>* pBaseElement)
+{
+	BE_ERROR("ERROR: Not Implemented Yet");
+}
+
+bool BlockRenderComponent::VDelegateInitialize(rapidxml::xml_node<>* pData)
+{
+	bool result = false;
+
+	//@TODO: Refactor code duplication for textures (Separate Component?)
+	rapidxml::xml_node<>* pTexture = pData->first_node("Texture");
+	if (pTexture)
+	{
+		rapidxml::xml_attribute<char>* test = pTexture->first_attribute("path");
+		if (pTexture->first_attribute("path") != NULL)
+		{
+			m_textureResource = pTexture->first_attribute("path")->value();
+		}
+		else
+		{
+			BE_ERROR("Texture path Exception: Make sure path attribute is set for Texture Element");
+			return false;
+		}
+	}
+
+	rapidxml::xml_node<>* pSize = pData->first_node("Size");
+	if (pSize)
+	{
+		m_size.x = (float)atof(pSize->first_attribute("x")->value());
+		m_size.y = (float)atof(pSize->first_attribute("y")->value());
+		m_size.z = (float)atof(pSize->first_attribute("z")->value());
+	}
+
+	return true;
+}
+
+SceneNode* BlockRenderComponent::VCreateSceneNode()
+{
+	TransformComponent* pTransformComponent = m_pOwner->GetComponent<TransformComponent>(TransformComponent::g_Name);
+
+	if (pTransformComponent)
+	{
+		SceneNode* blockNode = BE_NEW D3D11PrimitiveNode(m_pOwner->GetId(), (BaseRenderComponent*)this, m_textureResource, RenderPass_Static, D3D11PrimitiveNode::PrimitiveType::PT_Box, m_size, &pTransformComponent->GetTransform());
+		return blockNode;
+	}
+
+	return NULL;
+}
+
+void BlockRenderComponent::VCreateInheritedXmlElements(rapidxml::xml_node<>* pBaseElement)
 {
 	BE_ERROR("ERROR: Not Implemented Yet");
 }

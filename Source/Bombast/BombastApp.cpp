@@ -25,9 +25,9 @@ BombastApp::BombastApp()
 
 	m_screenSize = Point(0, 0);
 
-	m_pLuaCoreManager = 0;
-
 	m_pGraphicsManager = 0;
+
+	m_pLuaCoreManager = 0;
 
 	m_pResourceCache = 0;
 
@@ -37,7 +37,7 @@ BombastApp::BombastApp()
 }
 
 //Win32 Specific Stuff
-bool BombastApp::InitInstance(HINSTANCE hInstance, LPWSTR lpCmdLine, HWND hWnd, int screenWidth, int screenheight)
+bool BombastApp::InitInstance(HINSTANCE hInstance, LPWSTR lpCmdLine, HWND hWnd, int screenWidth, int screenheight, int screenX, int screenY)
 {
 	if(!IsOnlyInstance(VGetGameTitle()))
 	{
@@ -65,6 +65,7 @@ bool BombastApp::InitInstance(HINSTANCE hInstance, LPWSTR lpCmdLine, HWND hWnd, 
 	m_hInstance = hInstance;
 
 	m_screenSize = Point(screenWidth, screenheight);
+	m_screenPosition = Point(screenX, screenY);
 
 	IResourceFile* zipFile = BE_NEW DevelopmentResourceZipFile(s2ws(ROOT_GAME_PATH + "Assets"));
 
@@ -133,10 +134,10 @@ void BombastApp::InitializeWindows()
                           L"BombastEngine",    // name of the window class
                           VGetGameTitle(),   // title of the window
                           WS_OVERLAPPEDWINDOW,    // window style
-                          0,    // x-position of the window
-                          0,    // y-position of the window
-                          m_options.m_screenSize.x,    // width of the window
-                          m_options.m_screenSize.y,    // height of the window
+                          m_screenPosition.x,    // x-position of the window
+                          m_screenPosition.y,    // y-position of the window
+                          m_screenSize.x,    // width of the window
+                          m_screenSize.y,    // height of the window
                           NULL,    // we have no parent window, NULL
                           NULL,    // we aren't using menus, NULL
                           m_hInstance,    // application handle
