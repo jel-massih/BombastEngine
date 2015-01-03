@@ -2,7 +2,7 @@
 #include "PongSampleEvents.h"
 #include "../Graphics3D/SceneNode.h"
 
-const float ACTOR_ACCELERATION = 6.5f * 8.0f;
+const float ACTOR_ACCELERATION = 1.0f;
 const float ACTOR_ANGULAR_ACCELERATION = 22.0f;
 
 PongSampleController::PongSampleController(SceneNode* object)
@@ -37,7 +37,21 @@ bool PongSampleController::VOnKeyDown(const BYTE c)
 	if (c == 'W' || c == 'S')
 	{
 		const ActorId actorId = m_pObject->VGet()->GetActorId();
-		std::shared_ptr<EvtData_StartUp> pEvent(BE_NEW EvtData_StartUp(actorId, (c == 'W' ? ACTOR_ACCELERATION : (-ACTOR_ACCELERATION))));
+		std::shared_ptr<EvtData_StartForward> pEvent(BE_NEW EvtData_StartForward(actorId, (c == 'W' ? ACTOR_ACCELERATION : (-ACTOR_ACCELERATION))));
+		IEventManager::Get()->VQueueEvent(pEvent);
+	}
+
+	if (c == 'A' || c == 'D')
+	{
+		const ActorId actorId = m_pObject->VGet()->GetActorId();
+		std::shared_ptr<EvtData_StartLeft> pEvent(BE_NEW EvtData_StartLeft(actorId, (c == 'A' ? ACTOR_ACCELERATION : (-ACTOR_ACCELERATION))));
+		IEventManager::Get()->VQueueEvent(pEvent);
+	}
+
+	if (c == 'Z' || c == 'X')
+	{
+		const ActorId actorId = m_pObject->VGet()->GetActorId();
+		std::shared_ptr<EvtData_StartUp> pEvent(BE_NEW EvtData_StartUp(actorId, (c == 'Z' ? ACTOR_ACCELERATION : (-ACTOR_ACCELERATION))));
 		IEventManager::Get()->VQueueEvent(pEvent);
 	}
 
@@ -49,6 +63,20 @@ bool PongSampleController::VOnKeyUp(const BYTE c)
 	m_bKey[c] = false;
 
 	if (c == 'W' || c == 'S')
+	{
+		const ActorId actorId = m_pObject->VGet()->GetActorId();
+		std::shared_ptr<EvtData_EndForward> pEvent(BE_NEW EvtData_EndForward(actorId));
+		IEventManager::Get()->VQueueEvent(pEvent);
+	}
+
+	if (c == 'A' || c == 'D')
+	{
+		const ActorId actorId = m_pObject->VGet()->GetActorId();
+		std::shared_ptr<EvtData_EndLeft> pEvent(BE_NEW EvtData_EndLeft(actorId));
+		IEventManager::Get()->VQueueEvent(pEvent);
+	}
+
+	if (c == 'Z' || c == 'X')
 	{
 		const ActorId actorId = m_pObject->VGet()->GetActorId();
 		std::shared_ptr<EvtData_EndUp> pEvent(BE_NEW EvtData_EndUp(actorId));
