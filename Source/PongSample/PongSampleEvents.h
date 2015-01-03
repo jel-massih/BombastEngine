@@ -52,33 +52,23 @@ public:
 	}
 };
 
-class EvtData_StartUp : public BaseEventData
+class BaseMovementStartEvent : public BaseEventData
 {
+protected:
 	ActorId m_id;
 	float m_acceleration;
 
 public:
-	static const EventType sk_EventType;
-	virtual const EventType& VGetEventType() const
-	{
-		return sk_EventType;
-	}
-
-	EvtData_StartUp() :
+	BaseMovementStartEvent() :
 		m_id(INVALID_ACTOR_ID),
 		m_acceleration(0)
 	{
 	}
 
-	EvtData_StartUp(ActorId actorId, float acceleration) :
+	BaseMovementStartEvent(ActorId actorId, float acceleration) :
 		m_id(actorId),
 		m_acceleration(acceleration)
 	{
-	}
-
-	virtual IEventDataPtr VCopy() const
-	{
-		return IEventDataPtr(BE_NEW EvtData_StartUp(m_id, m_acceleration));
 	}
 
 	virtual void VSerialize(std::ostrstream& out) const
@@ -91,11 +81,6 @@ public:
 	{
 		in >> m_id;
 		in >> m_acceleration;
-	}
-
-	virtual const char* GetName() const
-	{
-		return "EvtData_StartUp";
 	}
 
 	ActorId GetActorId() const
@@ -114,31 +99,23 @@ public:
 	}
 };
 
-class EvtData_EndUp : public BaseEventData
+class BaseMovementEndEvent : public BaseEventData
 {
+protected:
 	ActorId m_id;
 
 public:
-	static const EventType sk_EventType;
-	virtual const EventType & VGetEventType(void) const
-	{
-		return sk_EventType;
-	}
-
-	EvtData_EndUp(void) :
+	BaseMovementEndEvent(void) :
 		m_id(INVALID_ACTOR_ID)
 	{
 	}
 
-	EvtData_EndUp(ActorId id) :
+	BaseMovementEndEvent(ActorId id) :
 		m_id(id)
 	{
 	}
 
-	virtual IEventDataPtr VCopy() const
-	{
-		return IEventDataPtr(BE_NEW EvtData_EndUp(m_id));
-	}
+
 
 	virtual void VSerialize(std::ostrstream & out) const
 	{
@@ -150,11 +127,6 @@ public:
 		in >> m_id;
 	}
 
-	virtual const char* GetName(void) const
-	{
-		return "EvtData_EndUp";
-	}
-
 	ActorId GetActorId(void) const
 	{
 		return m_id;
@@ -163,6 +135,153 @@ public:
 	void Set(ActorId id)
 	{
 		m_id = id;
+	}
+};
+
+class EvtData_StartUp : public BaseMovementStartEvent
+{
+public:
+	static const EventType sk_EventType;
+	virtual const EventType & VGetEventType(void) const
+	{
+		return sk_EventType;
+	}
+
+	EvtData_StartUp(ActorId actorId, float acceleration) :
+		BaseMovementStartEvent(actorId, acceleration)
+	{
+	}
+
+	virtual IEventDataPtr VCopy() const
+	{
+		return IEventDataPtr(BE_NEW EvtData_StartUp(m_id, m_acceleration));
+	}
+
+	virtual const char* GetName() const
+	{
+		return "EvtData_StartUp";
+	}
+};
+
+class EvtData_EndUp : public BaseMovementEndEvent
+{
+public:
+	static const EventType sk_EventType;
+	virtual const EventType & VGetEventType(void) const
+	{
+		return sk_EventType;
+	}
+
+	EvtData_EndUp(ActorId actorId) :
+		BaseMovementEndEvent(actorId)
+	{
+	}
+
+	virtual IEventDataPtr VCopy() const
+	{
+		return IEventDataPtr(BE_NEW EvtData_EndUp(m_id));
+	}
+	virtual const char* GetName(void) const
+	{
+		return "EvtData_EndUp";
+	}
+};
+
+class EvtData_StartLeft : public BaseMovementStartEvent
+{
+public:
+	static const EventType sk_EventType;
+	virtual const EventType & VGetEventType(void) const
+	{
+		return sk_EventType;
+	}
+
+	EvtData_StartLeft(ActorId actorId, float acceleration) :
+		BaseMovementStartEvent(actorId, acceleration)
+	{
+	}
+
+	virtual IEventDataPtr VCopy() const
+	{
+		return IEventDataPtr(BE_NEW EvtData_StartLeft(m_id, m_acceleration));
+	}
+
+	virtual const char* GetName() const
+	{
+		return "EvtData_StartLeft";
+	}
+};
+
+class EvtData_EndLeft : public BaseMovementEndEvent
+{
+public:
+	static const EventType sk_EventType;
+	virtual const EventType & VGetEventType(void) const
+	{
+		return sk_EventType;
+	}
+
+	EvtData_EndLeft(ActorId actorId) :
+		BaseMovementEndEvent(actorId)
+	{
+	}
+
+	virtual IEventDataPtr VCopy() const
+	{
+		return IEventDataPtr(BE_NEW EvtData_EndLeft(m_id));
+	}
+	virtual const char* GetName(void) const
+	{
+		return "EvtData_EndLeft";
+	}
+};
+
+class EvtData_StartForward : public BaseMovementStartEvent
+{
+public:
+	static const EventType sk_EventType;
+	virtual const EventType & VGetEventType(void) const
+	{
+		return sk_EventType;
+	}
+
+	EvtData_StartForward(ActorId actorId, float acceleration) :
+		BaseMovementStartEvent(actorId, acceleration)
+	{
+	}
+
+	virtual IEventDataPtr VCopy() const
+	{
+		return IEventDataPtr(BE_NEW EvtData_StartForward(m_id, m_acceleration));
+	}
+
+	virtual const char* GetName() const
+	{
+		return "EvtData_StartForward";
+	}
+};
+
+class EvtData_EndForward : public BaseMovementEndEvent
+{
+public:
+	static const EventType sk_EventType;
+	virtual const EventType & VGetEventType(void) const
+	{
+		return sk_EventType;
+	}
+
+	EvtData_EndForward(ActorId actorId) :
+		BaseMovementEndEvent(actorId)
+	{
+	}
+
+	virtual IEventDataPtr VCopy() const
+	{
+		return IEventDataPtr(BE_NEW EvtData_EndForward(m_id));
+	}
+	virtual const char* GetName(void) const
+	{
+		return "EvtData_EndForward";
 	}
 };
 
