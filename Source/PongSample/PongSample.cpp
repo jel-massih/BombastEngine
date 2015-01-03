@@ -60,13 +60,13 @@ void PongSampleLogic::VChangeState(CoreGameState newState)
 
 		case CGS_SpawningPlayersActors:
 		{
-			/*for (auto it = m_gameViews.begin(); it != m_gameViews.end(); it++)
+			for (auto it = m_gameViews.begin(); it != m_gameViews.end(); it++)
 			{
 				IGameView* pView = *it;
 
 				if (pView->VGetType() == GameView_Human)
 				{
-					Actor* pActor = VCreateActor("Actors\\paddle.xml", NULL);
+					Actor* pActor = VCreateActor("Actors\\freeCamera.xml", NULL);
 					if (pActor)
 					{
 						std::shared_ptr<EvtData_New_Actor> pNewActorEvent(BE_NEW EvtData_New_Actor(pActor->GetId(), pView->VGetId()));
@@ -76,7 +76,7 @@ void PongSampleLogic::VChangeState(CoreGameState newState)
 						IEventManager::Get()->VTriggerEvent(pSetControlledActorEvent);
 					}
 				}
-			}*/
+			}
 
 			break;
 		}
