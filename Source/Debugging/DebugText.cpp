@@ -187,7 +187,7 @@ bool DebugText::InitializeSentence(SentenceType** sentence, const char* stringId
 	return true;
 }
 
-bool DebugText::UpdateSentence(SentenceType* sentence, char* text, int posX, int posY, float r, float g, float b, ID3D11DeviceContext* deviceContext)
+bool DebugText::UpdateSentence(SentenceType* sentence, const char* text, int posX, int posY, float r, float g, float b, ID3D11DeviceContext* deviceContext)
 {
 	int numLetters;
 	VertexType* vertices;
@@ -311,7 +311,7 @@ bool DebugText::AddString(char* stringId, char* text, int posX, int posY, float 
 	return false;
 }
 
-bool DebugText::UpdateString(const char* stringId, char* text)
+bool DebugText::UpdateString(const char* stringId, const char* text)
 {
 	bool result;
 	int index;

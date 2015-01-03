@@ -16,7 +16,7 @@ public:
 	bool AddString(char* stringId, char* text, int posX, int posY);
 	bool AddString(char* stringId, char* text, int posX, int posY, float r, float g, float b);
 
-	bool UpdateString(const char* stringId, char* text);
+	bool UpdateString(const char* stringId, const char* text);
 
 private:
 	struct SentenceType
@@ -35,7 +35,7 @@ private:
 
 private:
 	bool InitializeSentence(SentenceType** sentence, const char* stringId, int maxLength, ID3D11Device* device);
-	bool UpdateSentence(SentenceType* sentence, char* text, int posX, int posY, float r, float g, float b, ID3D11DeviceContext* deviceContext);
+	bool UpdateSentence(SentenceType* sentence,  const char* text, int posX, int posY, float r, float g, float b, ID3D11DeviceContext* deviceContext);
 	void ReleaseSentence(SentenceType** sentence);
 	bool RenderSentence(ID3D11DeviceContext* deviceContext, SentenceType* sentence, Mat4x4& worldMatrix, Mat4x4& orthoMatrix);
 
