@@ -634,7 +634,6 @@ HRESULT D3D11PrimitiveNode::InitializeBuffers()
 	D3D11_BUFFER_DESC vertexBufferDesc, indexBufferDesc;
 	D3D11_SUBRESOURCE_DATA vertexData, indexData;
 	HRESULT result;
-	int i;
 
 	if (m_primitiveType == PrimitiveType::PT_Box)
 	{
@@ -713,7 +712,6 @@ HRESULT D3D11PrimitiveNode::InitializeBuffers()
 
 HRESULT D3D11PrimitiveNode::VRender(Scene* pScene)
 {
-	HRESULT hr;
 	bool result;
 
 	IRenderer* pRenderer = g_pApp->GetGraphicsManager()->GetRenderer();
