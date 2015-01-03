@@ -24,6 +24,7 @@ public:
 
 	void MoveForward(float magnitude);
 	void MoveUp(float magnitude);
+	void MoveLeft(float magnitude);
 	void RotateRight(float magnitude);
 	void RotateUp(float magnitude);
 private:

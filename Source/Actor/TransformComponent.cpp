@@ -89,6 +89,18 @@ void TransformComponent::MoveUp(float magnitude)
 	UpdateTransform();
 }
 
+void TransformComponent::MoveLeft(float magnitude)
+{
+	float radians;
+
+	radians = XMConvertToRadians(m_rotation.x);
+
+	m_position.x += cosf(radians) * -magnitude;
+	m_position.y += sinf(radians) * -magnitude;
+
+	UpdateTransform();
+}
+
 void TransformComponent::RotateRight(float magnitude)
 {
 	m_rotation.y += magnitude;
