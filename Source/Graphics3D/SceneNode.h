@@ -216,7 +216,7 @@ protected:
 	struct VertexType
 	{
 		Vec3 position;
-		XMFLOAT2 texture;
+		XMFLOAT4 color;
 	};
 };
 
@@ -232,7 +232,6 @@ public:
 private:
 	HRESULT InitializeBuffers();
 	HRESULT LoadTexture(std::string textureFilename);
-	HRESULT UpdateBuffers(ID3D11DeviceContext* deviceContext);
 	void RenderBuffers(ID3D11DeviceContext* deviceContext);
 
 private:

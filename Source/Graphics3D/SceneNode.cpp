@@ -631,8 +631,6 @@ HRESULT D3D11PrimitiveNode::InitializeBuffers()
 {
 	ID3D11Device* device = g_pApp->GetGraphicsManager()->GetRenderer()->GetDevice();
 
-	VertexType* vertices;
-	unsigned long* indices;
 	D3D11_BUFFER_DESC vertexBufferDesc, indexBufferDesc;
 	D3D11_SUBRESOURCE_DATA vertexData, indexData;
 	HRESULT result;
@@ -641,37 +639,31 @@ HRESULT D3D11PrimitiveNode::InitializeBuffers()
 	if (m_primitiveType == PrimitiveType::PT_Box)
 	{
 		m_vertCount = 8;
-		m_indexCount = m_vertCount;
+		m_indexCount = 36;
 
-		vertices = BE_NEW VertexType[m_vertCount];
-		if (!vertices)
-		{
-			return S_FALSE;
-		}
+		float radius = 250.0f;
 
-		indices = BE_NEW unsigned long[m_indexCount];
-		if (!indices)
+		// Create vertex buffer
+		VertexType vertices[] =
 		{
-			return S_FALSE;
-		}
+			{ XMFLOAT3(-radius, radius, -radius), XMFLOAT4(0.0f, 0.0f, radius, radius) },
+			{ XMFLOAT3(radius, radius, -radius), XMFLOAT4(0.0f, radius, 0.0f, radius) },
+			{ XMFLOAT3(radius, radius, radius), XMFLOAT4(0.0f, radius, radius, radius) },
+			{ XMFLOAT3(-radius, radius, radius), XMFLOAT4(radius, 0.0f, 0.0f, radius) },
+			{ XMFLOAT3(-radius, -radius, -radius), XMFLOAT4(radius, 0.0f, radius, radius) },
+			{ XMFLOAT3(radius, -radius, -radius), XMFLOAT4(radius, radius, 0.0f, radius) },
+			{ XMFLOAT3(radius, -radius, radius), XMFLOAT4(radius, radius, radius, radius) },
+			{ XMFLOAT3(-radius, -radius, radius), XMFLOAT4(0.0f, 0.0f, 0.0f, radius) },
+		};
 		
-		memset(vertices, 0, sizeof(VertexType) * m_vertCount);
-
-		for (i = 0; i < m_indexCount; i++)
-		{
-			indices[i] = i;
-		}
-
-		vertexBufferDesc.Usage = D3D11_USAGE_DYNAMIC;
+		ZeroMemory(&vertexBufferDesc, sizeof(vertexBufferDesc));
+		vertexBufferDesc.Usage = D3D11_USAGE_DEFAULT;
 		vertexBufferDesc.ByteWidth = sizeof(VertexType) * m_vertCount;
 		vertexBufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
-		vertexBufferDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
-		vertexBufferDesc.MiscFlags = 0;
-		vertexBufferDesc.StructureByteStride = 0;
+		vertexBufferDesc.CPUAccessFlags = 0;
 
+		ZeroMemory(&vertexData, sizeof(vertexData));
 		vertexData.pSysMem = vertices;
-		vertexData.SysMemPitch = 0;
-		vertexData.SysMemSlicePitch = 0;
 
 		result = device->CreateBuffer(&vertexBufferDesc, &vertexData, &m_pVertexBuffer);
 		if (FAILED(result))
@@ -679,25 +671,41 @@ HRESULT D3D11PrimitiveNode::InitializeBuffers()
 			return result;
 		}
 
+		WORD indices[] =
+		{
+			3, 1, 0,
+			2, 1, 3,
+
+			0, 5, 4,
+			1, 5, 0,
+
+			3, 4, 7,
+			0, 4, 3,
+
+			1, 6, 5,
+			2, 6, 1,
+
+			2, 7, 6,
+			3, 7, 2,
+
+			6, 4, 5,
+			7, 4, 6,
+		};
+
+		ZeroMemory(&indexBufferDesc, sizeof(indexBufferDesc));
 		indexBufferDesc.Usage = D3D11_USAGE_DEFAULT;
-		indexBufferDesc.ByteWidth = sizeof(unsigned long) * m_indexCount;
+		indexBufferDesc.ByteWidth = sizeof(WORD) * m_indexCount;
 		indexBufferDesc.BindFlags = D3D11_BIND_INDEX_BUFFER;
 		indexBufferDesc.CPUAccessFlags = 0;
-		indexBufferDesc.MiscFlags = 0;
-		indexBufferDesc.StructureByteStride = 0;
 
+		ZeroMemory(&indexData, sizeof(indexData));
 		indexData.pSysMem = indices;
-		indexData.SysMemPitch = 0;
-		indexData.SysMemSlicePitch = 0;
 
 		result = device->CreateBuffer(&indexBufferDesc, &indexData, &m_pIndexBuffer);
 		if (FAILED(result))
 		{
 			return result;
 		}
-
-		SAFE_DELETE_ARRAY(vertices);
-		SAFE_DELETE_ARRAY(indices);
 	}
 
 	return S_OK;
@@ -716,12 +724,6 @@ HRESULT D3D11PrimitiveNode::VRender(Scene* pScene)
 	pRenderer->VGetWorldMatrix(worldMatrix);
 	pRenderer->VGetOrthoMatrix(orthoMatrix);
 
-	hr = UpdateBuffers(context);
-	if (FAILED(hr))
-	{
-		return hr;
-	}
-
 	RenderBuffers(context);
 
 	result = g_pApp->GetGraphicsManager()->GetTextureShader()->Render(context, m_indexCount, DirectX::XMLoadFloat4x4(&worldMatrix),
@@ -731,59 +733,6 @@ HRESULT D3D11PrimitiveNode::VRender(Scene* pScene)
 		return S_FALSE;
 	}
 
-	return S_OK;
-}
-
-HRESULT D3D11PrimitiveNode::UpdateBuffers(ID3D11DeviceContext* deviceContext)
-{
-	float radius = 10.0f;
-	VertexType* vertices;
-	D3D11_MAPPED_SUBRESOURCE mappedResource;
-	VertexType* vertexPtr;
-	HRESULT result;
-
-	if (VGet()->ToWorld().GetPosition() == m_lastPos)
-	{
-		return S_OK;
-	}
-	m_lastPos = VGet()->ToWorld().GetPosition();
-
-	vertices = BE_NEW VertexType[m_vertCount];
-	if (!vertices)
-	{
-		return false;
-	}
-
-	vertices[0].position = DirectX::XMFLOAT3(-radius, radius, -radius);
-	
-	vertices[1].position = XMFLOAT3(radius, radius, -radius);
-
-	vertices[2].position = XMFLOAT3(-radius, -radius, -radius);
-
-	vertices[3].position = XMFLOAT3(radius, -radius, -radius);
-
-	vertices[4].position = XMFLOAT3(-radius, radius, radius);
-
-	vertices[5].position = XMFLOAT3(radius, radius, radius);
-	
-	vertices[6].position = XMFLOAT3(-radius, -radius, radius);
-
-	vertices[7].position = XMFLOAT3(radius, -radius, radius);
-
-	result = deviceContext->Map(m_pVertexBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource);
-	if (FAILED(result))
-	{
-		return result;
-	}
-
-	vertexPtr = (VertexType*)mappedResource.pData;
-
-	memcpy(vertexPtr, (void*)vertices, sizeof(VertexType) * m_vertCount);
-
-	deviceContext->Unmap(m_pVertexBuffer, 0);
-	
-	SAFE_DELETE_ARRAY(vertices);
-	
 	return S_OK;
 }
 
@@ -798,7 +747,7 @@ void D3D11PrimitiveNode::RenderBuffers(ID3D11DeviceContext* deviceContext)
 
 	deviceContext->IASetVertexBuffers(0, 1, &m_pVertexBuffer, &stride, &offset);
 
-	deviceContext->IASetIndexBuffer(m_pIndexBuffer, DXGI_FORMAT_R32_UINT, 0);
+	deviceContext->IASetIndexBuffer(m_pIndexBuffer, DXGI_FORMAT_R16_UINT, 0);
 
 	deviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 }
