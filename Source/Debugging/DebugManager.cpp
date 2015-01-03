@@ -1,4 +1,5 @@
 #include "DebugManager.h"
+#include "../Bombast/BombastApp.h"
 
 DebugManager::DebugManager()
 {
@@ -21,6 +22,8 @@ bool DebugManager::Initialize()
 		return false;
 	}
 
+	m_pDebugText->AddString("CameraPos");
+
 	return true;
 }
 
@@ -35,6 +38,13 @@ void DebugManager::Shutdown()
 
 bool DebugManager::Update(const int deltaMs)
 {
+	Mat4x4 viewMat;
+	g_pApp->GetGraphicsManager()->GetRenderer()->VGetViewMatrix(viewMat);
+	Vec3 viewPos = viewMat.GetPosition();
+	char buffer[100];
+	_snprintf_s(buffer, 100, "Pos: (X: %d, Y: %d, Z: %d)", (int)viewPos.x, (int)viewPos.y, viewPos.z);
+	m_pDebugText->UpdateString("CameraPos", buffer);
+
 	return true;
 }
 
