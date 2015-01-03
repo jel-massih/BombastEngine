@@ -60,7 +60,7 @@ void PongSampleLogic::VChangeState(CoreGameState newState)
 
 		case CGS_SpawningPlayersActors:
 		{
-			for (auto it = m_gameViews.begin(); it != m_gameViews.end(); it++)
+			/*for (auto it = m_gameViews.begin(); it != m_gameViews.end(); it++)
 			{
 				IGameView* pView = *it;
 
@@ -76,7 +76,7 @@ void PongSampleLogic::VChangeState(CoreGameState newState)
 						IEventManager::Get()->VTriggerEvent(pSetControlledActorEvent);
 					}
 				}
-			}
+			}*/
 
 			break;
 		}
