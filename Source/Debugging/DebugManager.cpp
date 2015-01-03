@@ -42,7 +42,7 @@ bool DebugManager::Update(const int deltaMs)
 	g_pApp->GetGraphicsManager()->GetRenderer()->VGetViewMatrix(viewMat);
 	Vec3 viewPos = viewMat.GetPosition();
 	char buffer[100];
-	_snprintf_s(buffer, 100, "Pos: (X: %d, Y: %d, Z: %d)", (int)viewPos.x, (int)viewPos.y, viewPos.z);
+	_snprintf_s(buffer, 100, "Pos: (X: %d, Y: %d, Z: %d)", (int)viewPos.x, (int)viewPos.y, (int)viewPos.z);
 	m_pDebugText->UpdateString("CameraPos", buffer);
 
 	return true;
