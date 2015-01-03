@@ -38,4 +38,6 @@ private:
 private:
 	FontType* m_pFont;
 	TextureClass* m_pTexture;
+
+	static const float FontKerning;
 };

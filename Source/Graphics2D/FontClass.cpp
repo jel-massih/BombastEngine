@@ -3,6 +3,8 @@
 #include <sstream>
 #include <vector>
 
+const float FontClass::FontKerning = 3.0f;
+
 FontClass::FontClass()
 {
 	m_pFont = 0;
@@ -154,7 +156,7 @@ void FontClass::BuildVertexArray(void* vertices, const char* text, float drawX, 
 			vertexPtr[index].texture = XMFLOAT2(m_pFont[letter].right, 1.0f);
 			index++;
 
-			drawX = drawX + m_pFont[letter].size + 1.0f;
+			drawX = drawX + m_pFont[letter].size + FontClass::FontKerning;
 		}
 	}
 }
