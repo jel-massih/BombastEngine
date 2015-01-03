@@ -15,8 +15,6 @@ TextureClass::~TextureClass()
 
 bool TextureClass::Initialize(ID3D11Device* device, std::string textureTitle)
 {
-	HRESULT result;
-
 	m_pTexture = TextureResourceLoader::LoadAndReturnTextureResource(textureTitle.c_str());
 	if (!m_pTexture) {
 		return false;
