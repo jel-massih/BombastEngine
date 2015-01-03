@@ -717,15 +717,15 @@ HRESULT D3D11PrimitiveNode::VRender(Scene* pScene)
 	IRenderer* pRenderer = g_pApp->GetGraphicsManager()->GetRenderer();
 	ID3D11DeviceContext* context = pRenderer->GetDeviceContext();
 
-	Mat4x4 worldMatrix, viewMatrix, orthoMatrix;
+	Mat4x4 worldMatrix, viewMatrix, projectionMatrix;
 	pRenderer->VGetViewMatrix(viewMatrix);
 	pRenderer->VGetWorldMatrix(worldMatrix);
-	pRenderer->VGetOrthoMatrix(orthoMatrix);
+	pRenderer->VGetProjectionMatrix(projectionMatrix);
 
 	RenderBuffers(context);
 
 	result = g_pApp->GetGraphicsManager()->GetTextureShader()->Render(context, m_indexCount, DirectX::XMLoadFloat4x4(&worldMatrix),
-		XMLoadFloat4x4(&viewMatrix), XMLoadFloat4x4(&orthoMatrix), m_pTexture);
+		XMLoadFloat4x4(&viewMatrix), XMLoadFloat4x4(&projectionMatrix), m_pTexture);
 	if (!result)
 	{
 		return S_FALSE;
