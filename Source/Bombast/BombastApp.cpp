@@ -156,31 +156,54 @@ LRESULT BombastApp::OnAltEnter()
 
 LRESULT CALLBACK BombastApp::MsgProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
-	LRESULT result = 0;
     switch(message)
     {
 		case WM_CLOSE:
 		{
 			if (g_pApp->m_bQuitting)
 			{
-				result = g_pApp->OnClose();
+				g_pApp->OnClose();
 			}
 			break;
 		}
 
 		case WM_SYSCOMMAND:
 		{
-			result = g_pApp->OnSysCommand(wParam, lParam);
+			g_pApp->OnSysCommand(wParam, lParam);
 			break;
 		}
 
-		case WM_KEYDOWN:
+		case WM_SYSKEYDOWN:
 		{
 			if (wParam == VK_RETURN)
 			{
 				return g_pApp->OnAltEnter();
 			}
-			return DefWindowProc(hWnd, message, wParam, lParam);
+
+			break;
+		}
+
+		case WM_KEYDOWN:
+		{
+			if (g_pApp->m_pGame)
+			{
+				CoreGameLogic* pGame = g_pApp->m_pGame;
+
+				AppMsg msg;
+				msg.m_hWnd = hWnd;
+				msg.m_uMsg = message;
+				msg.m_wParam = wParam;
+				msg.m_lParam = lParam;
+				for (GameViewList::reverse_iterator it = pGame->m_gameViews.rbegin(); it != pGame->m_gameViews.rend(); it++)
+				{
+					if ((*it)->VOnMsgProc(msg))
+					{
+						return true;
+					}
+				}
+			}
+
+			break;
 		}
     }
 
