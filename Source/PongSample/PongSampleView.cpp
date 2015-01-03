@@ -143,6 +143,8 @@ void PongSampleHumanView::VSetControlledActor(ActorId actorId)
 	m_pPongController = BE_NEW PongSampleController(m_pPaddle);
 	m_pKeyboardHandler = m_pPongController;
 	m_pMouseHandler = m_pPongController;
+
+	m_pCamera->SetTarget(m_pPaddle);
 }
 
 void PongSampleHumanView::SetControlledActorDelegate(IEventDataPtr pEventData)
