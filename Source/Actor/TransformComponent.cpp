@@ -77,8 +77,8 @@ void TransformComponent::MoveForward(float magnitude)
 
 	radians = XMConvertToRadians(m_rotation.y);
 
-	m_position.x += sinf(radians) * magnitude;
-	m_position.y += cosf(radians) * magnitude;
+	m_position.z += cosf(radians) * magnitude;
+	m_position.y += sinf(radians) * magnitude;
 
 	UpdateTransform();
 }
