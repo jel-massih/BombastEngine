@@ -10,7 +10,7 @@ public:
 	bool Initialize();
 	void Shutdown();
 
-	bool Update();
+	bool Update(const int deltaMs);
 	void Render();
 
 	DebugText* GetDebugText() const { return m_pDebugText; }

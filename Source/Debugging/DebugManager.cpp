@@ -33,7 +33,7 @@ void DebugManager::Shutdown()
 	}
 }
 
-bool DebugManager::Update()
+bool DebugManager::Update(const int deltaMs)
 {
 	return true;
 }
