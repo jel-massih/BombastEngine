@@ -107,13 +107,17 @@ void PongSampleLogic::RegisterAllDelegates()
 	pEventManager->VAddListener(fastdelegate::MakeDelegate(this, &PongSampleLogic::RequestStartGameDelegate), EvtData_Request_Start_Game::sk_EventType);
 	pEventManager->VAddListener(fastdelegate::MakeDelegate(this, &PongSampleLogic::StartMoveUpDelegate), EvtData_StartUp::sk_EventType);
 	pEventManager->VAddListener(fastdelegate::MakeDelegate(this, &PongSampleLogic::EndMoveUpDelegate), EvtData_EndUp::sk_EventType);
+	pEventManager->VAddListener(fastdelegate::MakeDelegate(this, &PongSampleLogic::StartMoveLeftDelegate), EvtData_StartLeft::sk_EventType);
+	pEventManager->VAddListener(fastdelegate::MakeDelegate(this, &PongSampleLogic::EndMoveLeftDelegate), EvtData_EndLeft::sk_EventType);
+	pEventManager->VAddListener(fastdelegate::MakeDelegate(this, &PongSampleLogic::StartMoveForwardDelegate), EvtData_StartForward::sk_EventType);
+	pEventManager->VAddListener(fastdelegate::MakeDelegate(this, &PongSampleLogic::EndMoveForwardDelegate), EvtData_EndForward::sk_EventType);
 }
 
 void PongSampleLogic::RemoveAllDelegates()
 {
 	IEventManager* pEventManager = IEventManager::Get();
 	pEventManager->VRemoveListener(fastdelegate::MakeDelegate(this, &PongSampleLogic::RequestStartGameDelegate), EvtData_Request_Start_Game::sk_EventType);
-}
+} 
 
 void PongSampleLogic::VMoveActor(const ActorId id, Mat4x4 const &mat)
 {
@@ -132,7 +136,7 @@ void PongSampleLogic::StartMoveUpDelegate(IEventDataPtr pEventData)
 	if (pTarget)
 	{
 		TransformComponent* pTransformComponent = pTarget->GetComponent<TransformComponent>(TransformComponent::g_Name);
-		pTransformComponent->SetPosition(Vec3(20.0f, 20.0f, 0.0f));
+		pTransformComponent->MoveUp(pStartUpData->GetAcceleration());
 	}
 }
 
@@ -142,12 +146,34 @@ void PongSampleLogic::EndMoveUpDelegate(IEventDataPtr pEventData)
 
 }
 
-void PongSampleLogic::StartMoveDownDelegate(IEventDataPtr pEventData)
+void PongSampleLogic::StartMoveLeftDelegate(IEventDataPtr pEventData)
 {
-
+	std::shared_ptr<EvtData_StartLeft> pStartLeftData = std::static_pointer_cast<EvtData_StartLeft>(pEventData);
+	Actor* pTarget = VGetActor(pStartLeftData->GetActorId());
+	if (pTarget)
+	{
+		TransformComponent* pTransformComponent = pTarget->GetComponent<TransformComponent>(TransformComponent::g_Name);
+		pTransformComponent->MoveLeft(pStartLeftData->GetAcceleration());
+	}
 }
 
-void PongSampleLogic::EndMoveDownDelegate(IEventDataPtr pEventData)
+void PongSampleLogic::EndMoveLeftDelegate(IEventDataPtr pEventData)
 {
+	std::shared_ptr<EvtData_EndLeft> pEndLeftData = std::static_pointer_cast<EvtData_EndLeft>(pEventData);
+}
 
+void PongSampleLogic::StartMoveForwardDelegate(IEventDataPtr pEventData)
+{
+	std::shared_ptr<EvtData_StartForward> pStartForwardData = std::static_pointer_cast<EvtData_StartForward>(pEventData);
+	Actor* pTarget = VGetActor(pStartForwardData->GetActorId());
+	if (pTarget)
+	{
+		TransformComponent* pTransformComponent = pTarget->GetComponent<TransformComponent>(TransformComponent::g_Name);
+		pTransformComponent->MoveForward(pStartForwardData->GetAcceleration());
+	}
+}
+
+void PongSampleLogic::EndMoveForwardDelegate(IEventDataPtr pEventData)
+{
+	std::shared_ptr<EvtData_EndForward> pEndForwardData = std::static_pointer_cast<EvtData_EndForward>(pEventData);
 }

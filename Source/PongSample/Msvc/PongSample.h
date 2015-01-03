@@ -28,8 +28,10 @@ public:
 	void RequestStartGameDelegate(IEventDataPtr pEventData);
 	void StartMoveUpDelegate(IEventDataPtr pEventData);
 	void EndMoveUpDelegate(IEventDataPtr pEventData);
-	void StartMoveDownDelegate(IEventDataPtr pEventData);
-	void EndMoveDownDelegate(IEventDataPtr pEventData);
+	void StartMoveLeftDelegate(IEventDataPtr pEventData);
+	void EndMoveLeftDelegate(IEventDataPtr pEventData);
+	void StartMoveForwardDelegate(IEventDataPtr pEventData);
+	void EndMoveForwardDelegate(IEventDataPtr pEventData);
 
 protected:
 	virtual bool VLoadGameDelegate(rapidxml::xml_node<>* pLevelData);
