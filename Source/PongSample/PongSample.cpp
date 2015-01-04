@@ -4,6 +4,7 @@
 #include "../Events/Events.h"
 #include "PongSampleEvents.h"
 #include "../Actor/TransformComponent.h"
+#include "../Actor/PhysicsComponent.h"
 #include "../Physics/Physics.h"
 
 #include "Msvc\PongSample.h"
@@ -174,14 +175,26 @@ void PongSampleLogic::StartMoveForwardDelegate(IEventDataPtr pEventData)
 	Actor* pTarget = VGetActor(pStartForwardData->GetActorId());
 	if (pTarget)
 	{
-		TransformComponent* pTransformComponent = pTarget->GetComponent<TransformComponent>(TransformComponent::g_Name);
-		pTransformComponent->MoveForward(pStartForwardData->GetAcceleration());
+		PhysicsComponent* pPhysicsComponent = pTarget->GetComponent<PhysicsComponent>(PhysicsComponent::g_Name);
+		if (pPhysicsComponent)
+		{
+			pPhysicsComponent->ApplyAcceleration(pStartForwardData->GetAcceleration());
+		}
 	}
 }
 
 void PongSampleLogic::EndMoveForwardDelegate(IEventDataPtr pEventData)
 {
 	std::shared_ptr<EvtData_EndForward> pEndForwardData = std::static_pointer_cast<EvtData_EndForward>(pEventData);
+	Actor* pTarget = VGetActor(pEndForwardData->GetActorId());
+	if (pTarget)
+	{
+		PhysicsComponent* pPhysicsComponent = pTarget->GetComponent<PhysicsComponent>(PhysicsComponent::g_Name);
+		if (pPhysicsComponent)
+		{
+			pPhysicsComponent->RemoveAcceleration();
+		}
+	}
 }
 
 void PongSampleLogic::StartTurnUpDelegate(IEventDataPtr pEventData)
@@ -206,12 +219,24 @@ void PongSampleLogic::StartTurnRightDelegate(IEventDataPtr pEventData)
 	Actor* pTarget = VGetActor(pStartRightData->GetActorId());
 	if (pTarget)
 	{
-		TransformComponent* pTransformComponent = pTarget->GetComponent<TransformComponent>(TransformComponent::g_Name);
-		pTransformComponent->RotateRight(pStartRightData->GetAcceleration());
+		PhysicsComponent* pPhysicsComponent = pTarget->GetComponent<PhysicsComponent>(PhysicsComponent::g_Name);
+		if (pPhysicsComponent)
+		{
+			pPhysicsComponent->ApplyAngularAcceleration(pStartRightData->GetAcceleration());
+		}
 	}
 }
 
 void PongSampleLogic::EndTurnRightDelegate(IEventDataPtr pEventData)
 {
 	std::shared_ptr<EvtData_EndTurnRight> pEndRightData = std::static_pointer_cast<EvtData_EndTurnRight>(pEventData);
+	Actor* pTarget = VGetActor(pEndRightData->GetActorId());
+	if (pTarget)
+	{
+		PhysicsComponent* pPhysicsComponent = pTarget->GetComponent<PhysicsComponent>(PhysicsComponent::g_Name);
+		if (pPhysicsComponent)
+		{
+			pPhysicsComponent->RemoveAngularAcceleration();
+		}
+	}
 }
