@@ -1,5 +1,4 @@
-#ifndef RENDER_COMPONENT_INTERFACE
-#define RENDER_COMPONENT_INTERFACE
+#pragma once
 
 #include "Actor.h"
 #include "ActorComponent.h"
@@ -11,5 +10,3 @@ class RenderComponentInterface : public ActorComponent
 public:
 	virtual SceneNode* VGetSceneNode() = 0;
 };
-
-#endif

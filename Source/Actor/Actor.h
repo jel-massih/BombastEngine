@@ -1,5 +1,4 @@
-#ifndef ACTOR_H
-#define ACTOR_H
+#pragma once
 
 #include "../Bombast/interfaces.h"
 #include "ActorComponent.h"
@@ -66,5 +65,3 @@ private:
 	std::string m_type;
 	std::string m_resource; // XML file from which this actor was initialized (considered the "Archetype" file)
 };
-
-#endif

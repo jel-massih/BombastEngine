@@ -1,5 +1,4 @@
-#ifndef SCENE_H
-#define SCENE_H
+#pragma once
 
 //Scene.h - Container class for 3d graphics scenes
 
@@ -70,5 +69,3 @@ public:
 
 	HRESULT Pick(RayCast *pRayCast) { return m_pRoot->VPick(this, pRayCast); }
 };
-
-#endif

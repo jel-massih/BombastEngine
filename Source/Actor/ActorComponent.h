@@ -1,5 +1,4 @@
-#ifndef ACTOR_COMPONENT_H
-#define ACTOR_COMPONENT_H
+#pragma once
 
 class ActorComponent{
 	friend class ActorFactory;
@@ -30,5 +29,3 @@ protected:
 private:
 	void SetOwner(Actor* pOwner) { m_pOwner = pOwner; }
 };
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef LUA_EXPORTS_H
-#define LUA_EXPORTS_H
+#pragma once
 
 #include <lua.hpp>
 
@@ -21,5 +20,3 @@ namespace InternalLuaExports
 		return 1;
 	}
 }
-
-#endif

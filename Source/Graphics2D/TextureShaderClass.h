@@ -1,5 +1,4 @@
-#ifndef TEXTURE_SHADER_CLASS_H
-#define TEXTURE_SHADER_CLASS_H
+#pragma once
 
 #include "../BombastEngineStd.h"
 #include "../Resources/ResourceCache.h"
@@ -39,5 +38,3 @@ private:
 	ID3D11Buffer* m_pMatrixBuffer;
 	ID3D11SamplerState* m_pSampleState;
 };
-
-#endif

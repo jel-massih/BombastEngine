@@ -1,5 +1,4 @@
-#ifndef LUA_RESOURCE_H
-#define LUA_RESOURCE_H
+#pragma once
 
 #include "ResourceCache.h"
 
@@ -26,4 +25,3 @@ public:
 
 	static void LoadLuaScript(const char* resourceString);
 };
-#endif

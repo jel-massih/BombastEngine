@@ -1,5 +1,4 @@
-#ifndef GAME_H
-#define GAME_H
+#pragma once
 
 #include "../BombastEngineStd.h"
 #include "../InputCore/InputCore.h"
@@ -20,5 +19,3 @@ private:
 
 	DWORD m_lastTime;
 };
-
-#endif

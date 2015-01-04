@@ -1,5 +1,4 @@
-#ifndef INTERFACES_H
-#define INTERFACES_H
+#pragma once
 
 #include "..\Utilities\rapidxml.hpp"
 #include "../Graphics3D/Geometry.h"
@@ -199,5 +198,3 @@ public:
 
 	virtual ~ISceneNode() {};
 };
-
-#endif

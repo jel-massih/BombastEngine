@@ -1,5 +1,4 @@
-#ifndef XML_RESOURCE_H
-#define XML_RESOURCE_H
+#pragma once
 
 #include "ResourceCache.h"
 
@@ -31,5 +30,3 @@ public:
 
 	static rapidxml::xml_node<>* LoadAndReturnRootXmlElement(const char* resourceString);
 };
-
-#endif

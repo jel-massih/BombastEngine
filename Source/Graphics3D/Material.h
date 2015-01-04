@@ -1,5 +1,4 @@
-#ifndef MATERIAL_H
-#define MATERIAL_H
+#pragma once
 
 #include <d3d9types.h>
 
@@ -25,5 +24,3 @@ public:
 	bool HasAlpha() const { return GetAlpha() != fOPAQUE; }
 	float GetAlpha() const { return m_D3DMat.Diffuse.a; }
 };
-
-#endif

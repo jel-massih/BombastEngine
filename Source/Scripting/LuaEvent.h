@@ -1,5 +1,4 @@
-#ifndef LUA_EVENT_H
-#define LUA_EVENT_H
+#pragma once
 
 #include "../Events/EventManager.h"
 #include <map>
@@ -44,5 +43,3 @@ private:
 
 	bool m_eventDataIsValid;
 };
-
-#endif

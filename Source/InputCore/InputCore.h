@@ -1,5 +1,4 @@
-#ifndef INPUT_CORE_H
-#define INPUT_CORE_H
+#pragma once
 
 #define DIRECTINPUT_VERSION 0x0800
 
@@ -36,5 +35,3 @@ private:
 
 	int m_mouseX, m_mouseY;
 };
-
-#endif

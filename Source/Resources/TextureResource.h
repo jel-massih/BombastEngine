@@ -1,5 +1,4 @@
-#ifndef TEXTURE_RESOURCE_H
-#define TEXTURE_RESOURCE_H
+#pragma once
 
 #include "ResourceCache.h"
 
@@ -28,5 +27,3 @@ public:
 
 	static ID3D11ShaderResourceView* LoadAndReturnTextureResource(const char* resourceString);
 };
-
-#endif

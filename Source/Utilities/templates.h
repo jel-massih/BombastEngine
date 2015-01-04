@@ -1,5 +1,4 @@
-#ifndef TEMPLATES_H
-#define TEMPLATES_H
+#pragma once
 
 //Template Gathered from GameCode Complete
 
@@ -38,5 +37,3 @@ public:
 		return NULL;
 	}
 };
-
-#endif

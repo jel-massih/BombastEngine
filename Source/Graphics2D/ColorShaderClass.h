@@ -1,5 +1,4 @@
-#ifndef COLOR_SHADER_CLASS_H
-#define COLOR_SHADER_CLASS_H
+#pragma once
 
 #include "../BombastEngineStd.h"
 #include <d3dcompiler.h>
@@ -36,6 +35,4 @@ private:
 	ID3D11PixelShader* m_pPixelShader;
 	ID3D11InputLayout* m_pLayout;
 	ID3D11Buffer* m_pMatrixBuffer;
-};
-
-#endif
+}; 

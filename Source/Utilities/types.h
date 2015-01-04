@@ -1,5 +1,4 @@
-#ifndef TYPES_H
-#define TYPES_H
+#pragma once
 
 #include <math.h>
 
@@ -43,5 +42,3 @@ public:
 };
 
 inline Point operator-(const Point& left, const Point& right) { Point temp(left); temp -= right; return temp; }
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef LOGGER_H
-#define LOGGER_H
+#pragma once
 
 #include "../Utilities/String.h"
 
@@ -32,7 +31,5 @@ do \
 		} \
 } \
 while (0) \
-
-#endif
 
 #define BE_HRETURN(x, str)    { hr = (x); if( FAILED(hr) ) { BE_ERROR( str ); return hr; } }

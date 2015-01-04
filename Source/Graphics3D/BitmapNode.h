@@ -1,5 +1,4 @@
-#ifndef BITMAP_NODE_H
-#define BITMAP_NODE_H
+#pragma once
 
 #include "Material.h"
 #include "SceneNode.h"
@@ -67,5 +66,3 @@ private:
 	Vec3 m_lastPosition;
 	
 };
-
-#endif

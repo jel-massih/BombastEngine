@@ -1,5 +1,4 @@
-#ifndef MULTI_THREAD_UTILITIES
-#define MULTI_THREAD_UTILITIES
+#pragma once
 
 #include <mutex>
 #include <queue>
@@ -51,5 +50,3 @@ private:
 	std::queue<T> m_queue;
 	std::condition_variable m_cond;
 };
-
-#endif

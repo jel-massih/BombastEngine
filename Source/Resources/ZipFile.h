@@ -1,5 +1,4 @@
-#ifndef ZIP_FILE_H
-#define ZIP_FILE_H
+#pragma once
 
 // --------------------------------------------------------------------------
 // File:        ZipFile.h
@@ -47,6 +46,3 @@ private:
 	// Pointers to the dir entries in pDirData.
 	const TZipDirFileHeader **m_papDir;
 };
-
-
-#endif

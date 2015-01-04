@@ -1,5 +1,4 @@
-#ifndef BOMBAST_ENGINE_STD_H
-#define BOMBAST_ENGINE_STD_H
+#pragma once
 
 #define WIN32_LEAN_AND_MEAN //Exclude Rarely used stuff from Windows Headers
 
@@ -32,12 +31,10 @@ const std::string ROOT_GAME_PATH = "../../../Game/";
 #include "Graphics3D\Geometry.h"
 #include "Utilities\FastDelegate\FastDelegate.h"
 
-#ifndef BE_NEW
 #if defined(_DEBUG)
 	#define BE_NEW new(_NORMAL_BLOCK,__FILE__, __LINE__)
 #else
 	#define BE_NEW new
-#endif
 #endif
 
 #if !defined(SAFE_DELETE)
@@ -83,5 +80,3 @@ struct AppMsg
 	WPARAM m_wParam;
 	LPARAM m_lParam;
 };
-
-#endif

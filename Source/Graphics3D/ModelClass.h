@@ -1,5 +1,4 @@
-#ifndef MODEL_CLASS_H
-#define MODEL_CLASS_H
+#pragma once
 
 #include "../BombastEngineStd.h"
 #include "../Graphics2D/TextureClass.h"
@@ -39,5 +38,3 @@ private:
 	int m_vertexCount, m_indexCount;
 	TextureClass* m_pTexture;
 };
-
-#endif

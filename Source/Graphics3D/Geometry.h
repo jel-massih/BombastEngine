@@ -1,5 +1,4 @@
-#ifndef GEOMETRY_H
-#define GEOMETRY_H
+#pragma once
 
 using namespace DirectX;
 
@@ -281,5 +280,3 @@ public:
 
 	void Render();
 };
-
-#endif

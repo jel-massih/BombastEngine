@@ -1,5 +1,4 @@
-#ifndef EVENT_MANAGER_H
-#define EVENT_MANAGER_H
+#pragma once
 
 #include <strstream>
 #include "../MultiThreading/MultiThreadUtilities.h"
@@ -64,5 +63,3 @@ public:
 
 	static IEventManager* Get();
 };
-
-#endif

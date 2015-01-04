@@ -1,5 +1,4 @@
-#ifndef SCENE_NODE_H
-#define SCENE_NODE_H
+#pragma once
 
 #include "../Actor/Actor.h"
 #include "Geometry.h"
@@ -240,4 +239,3 @@ private:
 
 	Vec3 m_lastPos;
 };
-#endif

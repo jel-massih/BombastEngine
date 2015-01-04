@@ -1,5 +1,4 @@
-#ifndef TEXTURE_CLASS_H
-#define TEXTURE_CLASS_H
+#pragma once
 
 #include "../Resources/TextureResource.h"
 #include "../BombastEngineStd.h"
@@ -19,5 +18,3 @@ public:
 private:
 	ID3D11ShaderResourceView* m_pTexture;
 };
-
-#endif

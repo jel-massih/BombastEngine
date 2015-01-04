@@ -1,5 +1,4 @@
-#ifndef INITIALIZATION_H
-#define INITIALIZATION_H
+#pragma once
 
 #include "../BombastEngineStd.h"
 #include "rapidxml.hpp"
@@ -25,5 +24,3 @@ struct GameOptions
 
 	void Init(const char* xmlFilePath, LPWSTR lpCmdLine);
 };
-
-#endif

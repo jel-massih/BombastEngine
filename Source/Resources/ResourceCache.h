@@ -1,5 +1,4 @@
-#ifndef RESOURCE_CACHE_H
-#define RESOURCE_CACHE_H
+#pragma once
 
 #include "../Bombast/interfaces.h"
 #include "ZipFile.h"
@@ -144,5 +143,3 @@ protected:
 	void FreeOneResource();
 	void MemoryHasBeenFreed(unsigned int size);
 };
-
-#endif

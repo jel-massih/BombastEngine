@@ -1,5 +1,4 @@
-#ifndef CORE_GAME_LOGIC_H
-#define CORE_GAME_LOGIC_H
+#pragma once
 
 #include "../BombastEngineStd.h"
 #include "interfaces.h"
@@ -93,5 +92,3 @@ protected:
 	int m_expectedPlayers;
 	int m_humanPlayersAttached;
 };
-
-#endif

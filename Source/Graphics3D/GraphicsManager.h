@@ -1,5 +1,4 @@
-#ifndef GRAPHICS_MANAGER_H
-#define GRAPHICS_MANAGER_H
+#pragma once
 
 #include "../Graphics3D/D3DClass.h"
 #include "../Graphics2D/ColorShaderClass.h"
@@ -34,5 +33,3 @@ private:
 	ColorShaderClass* m_pColorShader;
 	TextureShaderClass* m_pTextureShader;
 };
-
-#endif

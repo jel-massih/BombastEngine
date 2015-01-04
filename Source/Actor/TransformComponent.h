@@ -1,5 +1,4 @@
-#ifndef TRANSFORM_COMPONENT_H
-#define TRANSFORM_COMPONENT_H
+#pragma once
 
 #include "../Graphics3D/Geometry.h"
 
@@ -36,5 +35,3 @@ private:
 
 	Mat4x4 m_transform;
 };
-
-#endif

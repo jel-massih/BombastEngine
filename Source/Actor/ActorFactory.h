@@ -1,5 +1,4 @@
-#ifndef ACTOR_FACTORY_H
-#define ACTOR_FACTORY_H
+#pragma once
 
 #include "../Utilities/templates.h"
 
@@ -21,5 +20,3 @@ protected:
 private:
 	ActorId GetNextActorId() { m_lastActorId++; return m_lastActorId; }
 };
-
-#endif
