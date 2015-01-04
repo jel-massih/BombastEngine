@@ -5,10 +5,22 @@
 
 using namespace physx;
 
+class BombastPhysXErrorCallback : public PxErrorCallback
+{
+public:
+	virtual void reportError(PxErrorCode::Enum code, const char* message, const char* file, int line)
+	{
+		BE_ERROR(message);
+	}
+};
+
 class PhysXPhysics : public IGamePhysics, BE_NonCopyable
 {
 	typedef std::map<std::string, float> DensityTable;
 	typedef std::map<std::string, PhysicsMaterialData> MaterialTable;
+	
+	typedef std::map<ActorId, PxRigidBody*> ActorIdToPysXRigidBodyTable;
+	typedef std::map<PxRigidBody const *, ActorId> PysXRigidBodyToActorIdTable;
 
 public:
 	PhysXPhysics();
@@ -40,12 +52,23 @@ public:
 	virtual Mat4x4 VGetTransform(const ActorId id);
 
 private:
+	void AddShape(Actor* pActor, PxGeometry* geometry, float density, const std::string& physicsMaterial);
+	void RemovePhysicsObject(PxRigidBody* body);
+
+	PhysicsMaterialData LookupMaterialData(const std::string& materialString);
+	float LookupDensity(const std::string& densityString);
+	
+	PxRigidBody* FindRigidBody(ActorId actorId);
+	ActorId FindActorId(PxRigidBody const * const body);
+
 	void ConnectPVD();
+
+	void XMtoPxMatrix(const Mat4x4& input, PxMat44* output);
 
 private:
 	PxPhysics* m_pPhysicsSdk;
 	PxFoundation* m_pFoundation;
-	PxDefaultErrorCallback m_errorCallback;
+	BombastPhysXErrorCallback m_errorCallback;
 	PxDefaultAllocator m_allocatorCallback;
 	PxDefaultCpuDispatcher* m_pDispatcher;
 	PxVisualDebuggerConnection* m_pConnection;
@@ -55,4 +78,6 @@ private:
 
 	DensityTable m_densityTable;
 	MaterialTable m_materialTable;
+	ActorIdToPysXRigidBodyTable m_actorRigidBodyMap;
+	PysXRigidBodyToActorIdTable m_rigidBodyActorMap;
 };
