@@ -139,3 +139,39 @@ public:
 		return "EvtData_Request_Start_Game";
 	}
 };
+
+class EvtData_Move_Actor : public BaseEventData
+{
+	ActorId m_id;
+	Mat4x4 m_matrix;
+
+public:
+	static const EventType sk_EventType;
+
+	EvtData_Move_Actor() 
+		: m_id(INVALID_ACTOR_ID)
+	{}
+
+	EvtData_Move_Actor(ActorId id, const Mat4x4& matrix)
+		: m_id(id), m_matrix(matrix)
+	{
+	}
+
+	virtual const EventType& VGetEventType() const
+	{
+		return sk_EventType;
+	}
+
+	virtual IEventDataPtr VCopy() const
+	{
+		return IEventDataPtr(BE_NEW EvtData_Move_Actor());
+	}
+
+	virtual const char* GetName() const
+	{
+		return "EvtData_Move_Actor";
+	}
+
+	ActorId GetId() const { return m_id; }
+	const Mat4x4& GetMatrix() const { return m_matrix; }
+};
