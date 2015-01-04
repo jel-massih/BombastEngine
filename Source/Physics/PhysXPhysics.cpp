@@ -181,6 +181,29 @@ void PhysXPhysics::XMtoPxMatrix(const Mat4x4& input, PxMat44* output)
 	output->column3.w = input._44;
 }
 
+void PhysXPhysics::PxMatrixToMat4x4(const PxMat44& input, Mat4x4* output)
+{
+	output->_11 = input.column0.x;
+	output->_12 = input.column0.y;
+	output->_13 = input.column0.z;
+	output->_14 = input.column0.w;
+
+	output->_21 = input.column1.x;
+	output->_22 = input.column1.y;
+	output->_23 = input.column1.z;
+	output->_24 = input.column1.w;
+
+	output->_31 = input.column2.x;
+	output->_32 = input.column2.y;
+	output->_33 = input.column2.z;
+	output->_34 = input.column2.w;
+
+	output->_41 = input.column3.x;
+	output->_42 = input.column3.y;
+	output->_43 = input.column3.z;
+	output->_44 = input.column3.w;
+}
+
 void PhysXPhysics::PxVecToVec3(const PxVec3& input, Vec3* output)
 {
 	output->x = input.x;

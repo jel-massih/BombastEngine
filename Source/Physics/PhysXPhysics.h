@@ -64,6 +64,7 @@ private:
 	void ConnectPVD();
 
 	void XMtoPxMatrix(const Mat4x4& input, PxMat44* output);
+	void PxMatrixToMat4x4(const PxMat44& input, Mat4x4* output);
 	void PxVecToVec3(const PxVec3& input, Vec3* output);
 
 private:
