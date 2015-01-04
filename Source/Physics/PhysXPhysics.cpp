@@ -75,7 +75,7 @@ void PhysXPhysics::ConnectPVD()
 	m_pConnection = PxVisualDebuggerExt::createConnection(m_pPhysicsSdk->getPvdConnectionManager(), pvd_host_ip, port, timeout, connectionFlags);
 }
 
-void PhysXPhysics::AddShape(Actor* pActor, PxGeometry* geometry, float density, const std::string& physicsMaterial, bool gravityEnabled)
+void PhysXPhysics::AddShape(Actor* pActor, PxGeometry* geometry, float density, const std::string& physicsMaterial, bool gravityEnabled, float linearDamping, float angularDamping)
 {
 	BE_ASSERT(pActor);
 	ActorId actorId = pActor->GetId();
@@ -104,6 +104,8 @@ void PhysXPhysics::AddShape(Actor* pActor, PxGeometry* geometry, float density, 
 	PxRigidDynamic* body = PxCreateDynamic(*m_pPhysicsSdk, t, *geometry, *mat, density);
 	body->setActorFlag(PxActorFlag::eDISABLE_GRAVITY, !gravityEnabled);
 	PxRigidBodyExt::updateMassAndInertia(*body, density);
+	body->setLinearDamping(linearDamping);
+	body->setAngularDamping(angularDamping);
 	m_pScene->addActor(*body);
 
 	m_actorRigidBodyMap[actorId] = body;
@@ -273,16 +275,11 @@ void PhysXPhysics::VSyncVisibleScene()
 	}
 }
 
-void PhysXPhysics::VAddSphere(float radius, Actor* gameActor, const std::string& densityStr, const std::string& physicsMaterial, bool gravityEnabled)
+void PhysXPhysics::VAddSphere(float radius, Actor* gameActor, const std::string& densityStr, const std::string& physicsMaterial, bool gravityEnabled, float linearDamping, float angularDamping)
 {
 	float density = LookupDensity(densityStr);
 
-	AddShape(gameActor, &PxSphereGeometry(radius), density, physicsMaterial, gravityEnabled);
-}
-
-void PhysXPhysics::VAddBox(const Vec3& dimensions, Actor* gameActor, const std::string& densityStr, const std::string& physicsMaterial, bool gravityEnabled)
-{
-	throw "Function not yet implemented.";
+	AddShape(gameActor, &PxSphereGeometry(radius), density, physicsMaterial, gravityEnabled, linearDamping, angularDamping);
 }
 
 void PhysXPhysics::VRemoveActor(ActorId id)

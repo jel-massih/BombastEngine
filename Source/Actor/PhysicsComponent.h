@@ -39,6 +39,7 @@ protected:
 
 	float m_acceleration, m_angularAcceleration;
 	float m_maxVelocity, m_maxAngularVelocity;
+	float m_linearDamping, m_angularDamping;
 
 	std::string m_shape;
 	std::string m_density;

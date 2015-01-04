@@ -14,6 +14,8 @@ PhysicsComponent::PhysicsComponent()
 
 	m_acceleration = 0;
 	m_angularAcceleration = 0;
+	m_linearDamping = 0;
+	m_angularDamping = 0;
 	m_maxVelocity = DEFAULT_MAX_VELOCITY;
 	m_maxAngularVelocity = DEFAULT_MAX_ANGULAR_VELOCITY;
 	
@@ -66,7 +68,18 @@ bool PhysicsComponent::VInitialize(rapidxml::xml_node<>* pData)
 		std::string val = pGravityEnabled->value();
 		std::transform(val.begin(), val.end(), val.begin(), ::tolower); //Convert to lower for equality check
 		m_bGravityEnabled = val != "false";
+	}
 
+	rapidxml::xml_node<>* pLinearDamping = pData->first_node("LinearDamping");
+	if (pLinearDamping)
+	{
+		m_linearDamping = atof(pLinearDamping->value());
+	}
+
+	rapidxml::xml_node<>* pAngularDamping = pData->first_node("AngularDamping");
+	if (pAngularDamping)
+	{
+		m_angularDamping = atof(pAngularDamping->value());
 	}
 
 	return true;
@@ -78,7 +91,7 @@ void PhysicsComponent::VPostInit()
 	{
 		if (m_shape == "Sphere")
 		{
-			m_pGamePhysics->VAddSphere((float)m_scale.x, m_pOwner, m_density, m_material, m_bGravityEnabled);
+			m_pGamePhysics->VAddSphere((float)m_scale.x, m_pOwner, m_density, m_material, m_bGravityEnabled, m_linearDamping, m_angularDamping);
 		} 
 		else 
 		{
@@ -107,7 +120,7 @@ void PhysicsComponent::VUpdate(int deltaMs)
 		float magnitude = velocity.Length();
 
 		Vec3 direction(transform.GetDirection());
-		m_pGamePhysics->VApplyForce(direction, magnitude, m_pOwner->GetId());
+		m_pGamePhysics->VApplyForce(direction, frameAcceleration, m_pOwner->GetId());
 	}
 
 	if (m_angularAcceleration != 0)

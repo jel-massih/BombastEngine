@@ -207,8 +207,7 @@ public:
 	virtual void VSyncVisibleScene() = 0;
 	virtual void VOnUpdate(float deltaSeconds) = 0;
 
-	virtual void VAddSphere(float radius, Actor* gameActor, const std::string& densityStr, const std::string& physicsMaterial, bool gravityEnabled) = 0;
-	virtual void VAddBox(const Vec3& dimensions, Actor* gameActor, const std::string& densityStr, const std::string& physicsMaterial, bool gravityEnabled) = 0;
+	virtual void VAddSphere(float radius, Actor* gameActor, const std::string& densityStr, const std::string& physicsMaterial, bool gravityEnabled, float linearDamping, float angularDamping) = 0;
 	virtual void VRemoveActor(ActorId actor) = 0;
 
 	virtual void VRenderDiagnostics() = 0;
