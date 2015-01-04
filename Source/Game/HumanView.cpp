@@ -10,6 +10,8 @@ HumanView::HumanView(IRenderer* renderer)
 	m_pProcessManager = BE_NEW ProcessManager;
 	m_pDebugManager = BE_NEW DebugManager;
 
+	m_pMouseHandler = nullptr;
+
 	m_mouseRadius = 1;
 	m_viewId = be_InvalidGameViewId;
 
