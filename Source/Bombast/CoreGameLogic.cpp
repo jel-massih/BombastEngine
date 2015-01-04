@@ -54,6 +54,8 @@ CoreGameLogic::~CoreGameLogic()
 
 	m_gameViews.clear();
 	m_actors.clear();
+
+	SAFE_DELETE(m_pGamePhysics);
 }
 
 bool CoreGameLogic::Initialize()

@@ -38,7 +38,6 @@ PongSampleLogic::PongSampleLogic()
 PongSampleLogic::~PongSampleLogic()
 {
 	RemoveAllDelegates();
-	SAFE_DELETE(m_pGamePhysics);
 }
 
 void PongSampleLogic::VChangeState(CoreGameState newState)
