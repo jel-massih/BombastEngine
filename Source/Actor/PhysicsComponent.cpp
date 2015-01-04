@@ -20,7 +20,10 @@ PhysicsComponent::PhysicsComponent()
 
 PhysicsComponent::~PhysicsComponent()
 {
-	m_pGamePhysics->VRemoveActor(m_pOwner->GetId());
+	if (m_pGamePhysics)
+	{
+		m_pGamePhysics->VRemoveActor(m_pOwner->GetId());
+	}
 }
 
 bool PhysicsComponent::VInitialize(rapidxml::xml_node<>* pData)
@@ -31,6 +34,30 @@ bool PhysicsComponent::VInitialize(rapidxml::xml_node<>* pData)
 		return false;
 	}
 
+	rapidxml::xml_node<>* pShape = pData->first_node("Shape");
+	if (pShape)
+	{
+		m_shape = pShape->value();
+	}
+
+	rapidxml::xml_node<>* pDensity = pData->first_node("Density");
+	if (pDensity)
+	{
+		m_density = pDensity->value();
+	}
+
+	rapidxml::xml_node<>* pMaterial = pData->first_node("PhysicsMaterial");
+	if (pMaterial)
+	{
+		m_material = pMaterial->value();
+	}
+
+	rapidxml::xml_node<>* pRigidBodyTransform = pData->first_node("RigidBodyTransform");
+	if (pRigidBodyTransform)
+	{
+		BuildTransform(pRigidBodyTransform);
+	}
+
 	return true;
 }
 
@@ -38,7 +65,14 @@ void PhysicsComponent::VPostInit()
 {
 	if (m_pOwner)
 	{
-		BE_ERROR("Shape not supported" + m_shape);
+		if (m_shape == "Sphere")
+		{
+			m_pGamePhysics->VAddSphere((float)m_scale.x, m_pOwner, m_density, m_material);
+		} 
+		else 
+		{
+			BE_ERROR("Shape not supported: " + m_shape);
+		}
 	}
 }
 
