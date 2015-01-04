@@ -1,6 +1,8 @@
 #include "PhysXPhysics.h"
 #include "../Actor/TransformComponent.h"
 
+#include "../Events/Events.h"
+
 #define ENABLE_PHYSX_PVD true
 
 const PxReal PhysXPhysics::Timestep = 1.00f / 60.0f;
@@ -219,8 +221,30 @@ void PhysXPhysics::VOnUpdate(float const deltaSeconds)
 
 void PhysXPhysics::VSyncVisibleScene()
 {
-	//@TODO: Sync Graphics to Physics?
-	//throw "Function not yet implemented.";
+	for (ActorIdToPysXRigidBodyTable::const_iterator it = m_actorRigidBodyMap.begin(); it != m_actorRigidBodyMap.end(); it++)
+	{
+		ActorId const id = it->first;
+
+		PxTransform pxLoc = it->second->getGlobalPose();
+		Mat4x4 loc;
+		PxMatrixToMat4x4(PxMat44(pxLoc), &loc);
+		
+		Actor* pActor = g_pApp->m_pGame->VGetActor(id);
+		if (pActor)
+		{
+			TransformComponent* pTransformComponent = pActor->GetComponent<TransformComponent>(TransformComponent::g_Name);
+
+			if (pTransformComponent)
+			{
+				if (pTransformComponent->GetTransform() != loc)
+				{
+					pTransformComponent->SetTransform(loc);
+					IEventDataPtr pEvent(BE_NEW EvtData_Move_Actor(id, loc));
+					IEventManager::Get()->VQueueEvent(pEvent);
+				}
+			}
+		}
+	}
 }
 
 void PhysXPhysics::VAddSphere(float radius, Actor* gameActor, const std::string& densityStr, const std::string& physicsMaterial)
