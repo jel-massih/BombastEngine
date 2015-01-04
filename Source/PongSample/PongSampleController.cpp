@@ -55,6 +55,20 @@ bool PongSampleController::VOnKeyDown(const BYTE c)
 		IEventManager::Get()->VQueueEvent(pEvent);
 	}
 
+	if (c == VK_LEFT || c == VK_RIGHT)
+	{
+		const ActorId actorId = m_pObject->VGet()->GetActorId();
+		std::shared_ptr<EvtData_StartTurnLeft> pEvent(BE_NEW EvtData_StartTurnLeft(actorId, (c == VK_LEFT ? ACTOR_ACCELERATION : (-ACTOR_ACCELERATION))));
+		IEventManager::Get()->VQueueEvent(pEvent);
+	}
+
+	if (c == VK_UP || c == VK_DOWN)
+	{
+		const ActorId actorId = m_pObject->VGet()->GetActorId();
+		std::shared_ptr<EvtData_StartTurnUp> pEvent(BE_NEW EvtData_StartTurnUp(actorId, (c == VK_UP ? ACTOR_ACCELERATION : (-ACTOR_ACCELERATION))));
+		IEventManager::Get()->VQueueEvent(pEvent);
+	}
+
 	return true;
 }
 
