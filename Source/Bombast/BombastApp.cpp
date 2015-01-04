@@ -184,6 +184,12 @@ LRESULT CALLBACK BombastApp::MsgProc(HWND hWnd, UINT message, WPARAM wParam, LPA
 		}
 
 		case WM_KEYDOWN:
+		case WM_KEYUP:
+		case WM_MOUSEMOVE:
+		case WM_LBUTTONDOWN:
+		case WM_LBUTTONUP:
+		case WM_RBUTTONDOWN:
+		case WM_RBUTTONUP:
 		{
 			if (g_pApp->m_pGame)
 			{
