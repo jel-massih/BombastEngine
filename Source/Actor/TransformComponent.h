@@ -8,7 +8,7 @@ class TransformComponent : public ActorComponent
 {
 public:
 	static const char* g_Name;
-	virtual const char* VGetName() const { return g_Name; }
+	virtual const char* VGetName() const { return TransformComponent::g_Name; }
 
 	TransformComponent() {}
 	virtual bool VInitialize(rapidxml::xml_node<>* pData) override;

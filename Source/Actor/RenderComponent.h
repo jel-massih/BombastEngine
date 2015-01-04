@@ -38,7 +38,7 @@ class InvisibleRenderComponent : public BaseRenderComponent
 {
 public:
 	static const char* g_Name;
-	virtual const char* VGetName() const override{ return g_Name; }
+	virtual const char* VGetName() const override{ return InvisibleRenderComponent::g_Name; }
 
 protected:
 	virtual SceneNode* VCreateSceneNode() override;
@@ -52,7 +52,7 @@ class BitmapRenderComponent : public BaseRenderComponent
 
 public:
 	static const char* g_Name;
-	virtual const char* VGetName() const override{ return g_Name; }
+	virtual const char* VGetName() const override{ return BitmapRenderComponent::g_Name; }
 
 protected:
 	virtual bool VDelegateInitialize(rapidxml::xml_node<>* pData) override;
@@ -67,7 +67,7 @@ class BlockRenderComponent : public BaseRenderComponent
 
 public:
 	static const char* g_Name;
-	virtual const char* VGetName() const override{ return g_Name; }
+	virtual const char* VGetName() const override{ return BlockRenderComponent::g_Name; }
 
 protected:
 	virtual bool VDelegateInitialize(rapidxml::xml_node<>* pData) override;
