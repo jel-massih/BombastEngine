@@ -215,7 +215,7 @@ public:
 
 	virtual void VApplyForce(const Vec3& dir, float newtons, ActorId actor) = 0;
 	virtual void VApplyTorque(const Vec3& dir, float newtons, ActorId actor) = 0;
-	virtual void VMove(const Mat4x4& mat, ActorId actor) = 0;
+	virtual bool VMove(const Mat4x4& mat, ActorId actor) = 0;
 
 	virtual void VStopActor(ActorId actorId) = 0;
 	virtual Vec3 VGetVelocity(ActorId actorId) = 0;
@@ -225,7 +225,7 @@ public:
 	virtual void VTranslate(ActorId actorId, const Vec3& vec) = 0;
 
 	virtual void VSetTransform(const ActorId actorId, const Mat4x4& mat) = 0;
-	virtual Mat4x4 VSetTransform(const ActorId actorId) = 0;
+	virtual Mat4x4 VGetTransform(const ActorId actorId) = 0;
 
 	virtual ~IGamePhysics() {};
 };
