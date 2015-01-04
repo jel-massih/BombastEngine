@@ -285,6 +285,105 @@ public:
 	}
 };
 
+class EvtData_StartTurnLeft : public BaseMovementStartEvent
+{
+public:
+	static const EventType sk_EventType;
+	virtual const EventType & VGetEventType(void) const
+	{
+		return sk_EventType;
+	}
+
+	EvtData_StartTurnLeft(ActorId actorId, float acceleration) :
+		BaseMovementStartEvent(actorId, acceleration)
+	{
+	}
+
+	virtual IEventDataPtr VCopy() const
+	{
+		return IEventDataPtr(BE_NEW EvtData_StartTurnLeft(m_id, m_acceleration));
+	}
+
+	virtual const char* GetName() const
+	{
+		return "EvtData_StartTurnLeft";
+	}
+};
+
+class EvtData_EndTurnLeft : public BaseMovementEndEvent
+{
+public:
+	static const EventType sk_EventType;
+	virtual const EventType & VGetEventType(void) const
+	{
+		return sk_EventType;
+	}
+
+	EvtData_EndTurnLeft(ActorId actorId) :
+		BaseMovementEndEvent(actorId)
+	{
+	}
+
+	virtual IEventDataPtr VCopy() const
+	{
+		return IEventDataPtr(BE_NEW EvtData_EndTurnLeft(m_id));
+	}
+	virtual const char* GetName(void) const
+	{
+		return "EvtData_EndTurnLeft";
+	}
+};
+
+class EvtData_StartTurnUp : public BaseMovementStartEvent
+{
+public:
+	static const EventType sk_EventType;
+	virtual const EventType & VGetEventType(void) const
+	{
+		return sk_EventType;
+	}
+
+	EvtData_StartTurnUp(ActorId actorId, float acceleration) :
+		BaseMovementStartEvent(actorId, acceleration)
+	{
+	}
+
+	virtual IEventDataPtr VCopy() const
+	{
+		return IEventDataPtr(BE_NEW EvtData_StartTurnUp(m_id, m_acceleration));
+	}
+
+	virtual const char* GetName() const
+	{
+		return "EvtData_StartTurnUp";
+	}
+};
+
+class EvtData_EndTurnUp : public BaseMovementEndEvent
+{
+public:
+	static const EventType sk_EventType;
+	virtual const EventType & VGetEventType(void) const
+	{
+		return sk_EventType;
+	}
+
+	EvtData_EndTurnUp(ActorId actorId) :
+		BaseMovementEndEvent(actorId)
+	{
+	}
+
+	virtual IEventDataPtr VCopy() const
+	{
+		return IEventDataPtr(BE_NEW EvtData_EndTurnUp(m_id));
+	}
+	virtual const char* GetName(void) const
+	{
+		return "EvtData_EndTurnLeft";
+	}
+};
+
+
 class EvtData_Set_Controlled_Actor : public BaseEventData
 {
 	ActorId m_id;

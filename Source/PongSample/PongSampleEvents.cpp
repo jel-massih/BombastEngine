@@ -8,3 +8,8 @@ const EventType EvtData_StartLeft::sk_EventType(0xb055d1e2);
 const EventType EvtData_EndLeft::sk_EventType(0xc9bc0141);
 const EventType EvtData_StartForward::sk_EventType(0xf693);
 const EventType EvtData_EndForward::sk_EventType(0x436e);
+
+const EventType EvtData_StartTurnUp::sk_EventType(0x6a61031d);
+const EventType EvtData_EndTurnUp::sk_EventType(0x44e9);
+const EventType EvtData_StartTurnLeft::sk_EventType(0x4f7d);
+const EventType EvtData_EndTurnLeft::sk_EventType(0xfa39a179);
