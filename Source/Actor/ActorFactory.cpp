@@ -8,6 +8,7 @@
 
 #include "TransformComponent.h"
 #include "RenderComponent.h"
+#include "PhysicsComponent.h"
 
 ActorFactory::ActorFactory()
 {
@@ -17,6 +18,7 @@ ActorFactory::ActorFactory()
 	m_componentFactory.Register<InvisibleRenderComponent>(ActorComponent::GetIdFromName(InvisibleRenderComponent::g_Name));
 	m_componentFactory.Register<BitmapRenderComponent>(ActorComponent::GetIdFromName(BitmapRenderComponent::g_Name));
 	m_componentFactory.Register<BlockRenderComponent>(ActorComponent::GetIdFromName(BlockRenderComponent::g_Name));
+	m_componentFactory.Register<PhysicsComponent>(ActorComponent::GetIdFromName(PhysicsComponent::g_Name));
 }
 
 Actor* ActorFactory::CreateActor(const char* actorResource, rapidxml::xml_node<>* overrides)
