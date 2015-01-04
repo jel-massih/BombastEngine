@@ -69,6 +69,7 @@ public:
 
 	void ToggleRenderDiagnostice() { m_bRenderDiagnostics = !m_bRenderDiagnostics; }
 	virtual void VRenderDiagnostics();
+	virtual IGamePhysics* VGetGamePhysics() const { return m_pGamePhysics; }
 
 protected:
 	virtual ActorFactory* VCreateActorFactory();
@@ -88,6 +89,7 @@ protected:
 	GameViewList m_gameViews; 
 
 	bool m_bRenderDiagnostics;
+	IGamePhysics* m_pGamePhysics;
 
 	int m_expectedPlayers;
 	int m_humanPlayersAttached;

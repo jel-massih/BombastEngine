@@ -215,7 +215,7 @@ void CoreGameLogic::VRenderDiagnostics()
 {
 	if (m_bRenderDiagnostics)
 	{
-		//Render Stuff
+		m_pGamePhysics->VRenderDiagnostics();
 	}
 }
 
@@ -245,6 +245,11 @@ void CoreGameLogic::VOnUpdate(double time, float deltaTime)
 		}
 		break;
 	case CGS_Running:
+		if (m_pGamePhysics)
+		{
+			m_pGamePhysics->VOnUpdate(deltaTime);
+			m_pGamePhysics->VSyncVisibleScene();
+		}
 		break;
 	default:
 		BE_ERROR("Unrecognized State: " + m_gameState);
