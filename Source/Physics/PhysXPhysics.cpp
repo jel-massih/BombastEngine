@@ -1,6 +1,6 @@
 #include "PhysXPhysics.h"
 #include "../Actor/TransformComponent.h"
-
+#include "../Resources/XmlResource.h"
 #include "../Events/Events.h"
 
 #define ENABLE_PHYSX_PVD true
@@ -30,6 +30,8 @@ PhysXPhysics::~PhysXPhysics()
 
 bool PhysXPhysics::VInitialize()
 {
+	VLoadPhysicsConfigXml();
+
 	m_pFoundation = PxCreateFoundation(PX_PHYSICS_VERSION, m_allocatorCallback, m_errorCallback);
 	m_pPhysicsSdk = PxCreatePhysics(PX_PHYSICS_VERSION, *m_pFoundation, PxTolerancesScale(), true);
 
@@ -79,8 +81,6 @@ void PhysXPhysics::AddShape(Actor* pActor, PxGeometry* geometry, float density, 
 	ActorId actorId = pActor->GetId();
 	BE_ASSERT_MESSAGE(m_actorRigidBodyMap.find(actorId) == m_actorRigidBodyMap.end(), "Actor with more than one rigidbody");
 
-	PxVec3 localInertia(0.0f, 0.0f, 0.0f);
-	
 	Mat4x4 transform = Mat4x4::g_Identity;
 	
 	TransformComponent* pTransformComponent = pActor->GetComponent<TransformComponent>(TransformComponent::g_Name);
@@ -103,6 +103,7 @@ void PhysXPhysics::AddShape(Actor* pActor, PxGeometry* geometry, float density, 
 	PxTransform t(pxMat);
 	PxRigidDynamic* body = PxCreateDynamic(*m_pPhysicsSdk, t, *geometry, *mat, density);
 	body->setActorFlag(PxActorFlag::eDISABLE_GRAVITY, !gravityEnabled);
+	PxRigidBodyExt::updateMassAndInertia(*body, density);
 	m_pScene->addActor(*body);
 
 	m_actorRigidBodyMap[actorId] = body;
@@ -212,6 +213,30 @@ void PhysXPhysics::PxVecToVec3(const PxVec3& input, Vec3* output)
 	output->x = input.x;
 	output->y = input.y;
 	output->z = input.z;
+}
+
+void PhysXPhysics::VLoadPhysicsConfigXml()
+{
+	rapidxml::xml_node<>* pRoot = XmlResourceLoader::LoadAndReturnRootXmlElement("Config\\physicsConfig.xml");
+	BE_ASSERT(pRoot);
+
+	rapidxml::xml_node<>* pMatNode = pRoot->first_node("PhysicsMaterials");
+	BE_ASSERT(pMatNode);
+	for (rapidxml::xml_node<>* pNode = pMatNode->first_node(); pNode; pNode = pNode->next_sibling())
+	{
+		double restitution = 0;
+		double friction = 0;
+		restitution = atof(pNode->first_attribute("restitution")->value());
+		friction = atof(pNode->first_attribute("friction")->value());
+		m_materialTable.insert(std::make_pair(pNode->name(), PhysicsMaterialData((float)restitution, (float)friction)));
+	}
+
+	rapidxml::xml_node<>* pDensityNode = pRoot->first_node("DensityTable");
+	BE_ASSERT(pDensityNode);
+	for (rapidxml::xml_node<>* pNode = pDensityNode->first_node(); pNode; pNode = pNode->next_sibling())
+	{
+		m_densityTable.insert(std::make_pair(pNode->name(),(float)atof(pNode->value())));
+	}
 }
 
 void PhysXPhysics::VOnUpdate(float const deltaSeconds)

@@ -55,6 +55,8 @@ private:
 	void AddShape(Actor* pActor, PxGeometry* geometry, float density, const std::string& physicsMaterial, bool gravityEnabled);
 	void RemovePhysicsObject(PxRigidBody* body);
 
+	void VLoadPhysicsConfigXml();
+
 	PhysicsMaterialData LookupMaterialData(const std::string& materialString);
 	float LookupDensity(const std::string& densityString);
 	
