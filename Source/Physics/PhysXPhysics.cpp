@@ -99,7 +99,7 @@ void PhysXPhysics::AddShape(Actor* pActor, PxGeometry* geometry, float density, 
 	PxMaterial* mat = m_pPhysicsSdk->createMaterial(material.m_friction, material.m_friction, material.m_restitution);
 
 	PxMat44 pxMat;
-	XMtoPxMatrix(transform, &pxMat);
+	Mat4x4ToPxMatrix(transform, &pxMat);
 	PxTransform t(pxMat);
 	PxRigidDynamic* body = PxCreateDynamic(*m_pPhysicsSdk, t, *geometry, *mat, density);
 	m_pScene->addActor(*body);
@@ -160,7 +160,7 @@ ActorId PhysXPhysics::FindActorId(PxRigidBody const * const body)
 	return ActorId();
 }
 
-void PhysXPhysics::XMtoPxMatrix(const Mat4x4& input, PxMat44* output)
+void PhysXPhysics::Mat4x4ToPxMatrix(const Mat4x4& input, PxMat44* output)
 {
 	output->column0.x = input._11;
 	output->column0.y = input._12;
