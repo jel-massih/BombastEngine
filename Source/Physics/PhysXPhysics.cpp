@@ -309,7 +309,11 @@ void PhysXPhysics::VApplyForce(const Vec3 &dir, float newtons, ActorId actorId)
 
 void PhysXPhysics::VApplyTorque(const Vec3 &dir, float newtons, ActorId actorId)
 {
-	throw "Function not yet implemented.";
+	if (PxRigidBody* const body = FindRigidBody(actorId))
+	{
+		PxVec3 const force(dir.x * newtons, dir.y * newtons, dir.z * newtons);
+		body->addTorque(force);
+	}
 }
 
 bool PhysXPhysics::VMove(const Mat4x4 &mat, ActorId actorId)
