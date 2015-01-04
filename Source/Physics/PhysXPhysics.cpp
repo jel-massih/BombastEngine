@@ -251,8 +251,18 @@ void PhysXPhysics::VStopActor(ActorId actorId)
 
 Vec3 PhysXPhysics::VGetVelocity(ActorId actorId)
 {
-	throw "Function not yet implemented.";
-	return Vec3::g_InvalidVec3;
+	PxRigidBody* pBody = FindRigidBody(actorId);
+	BE_ASSERT(pBody);
+	if (!pBody)
+	{
+		return Vec3::g_InvalidVec3;
+	}
+	PxVec3 pxVec = pBody->getLinearVelocity();
+
+	Vec3 velocity;
+	PxVecToVec3(pxVec, &velocity);
+
+	return velocity;
 }
 
 void PhysXPhysics::VSetVelocity(ActorId actorId, const Vec3& vel)
