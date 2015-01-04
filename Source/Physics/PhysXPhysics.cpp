@@ -6,11 +6,21 @@ const PxReal PhysXPhysics::Timestep = 1.00f / 60.0f;
 
 PhysXPhysics::PhysXPhysics()
 {
-
+	m_pFoundation = nullptr;
+	m_pPhysicsSdk = nullptr;
+	m_pDispatcher = nullptr;
+	m_pScene = nullptr;
+	m_pConnection = nullptr;
 }
 
 PhysXPhysics::~PhysXPhysics()
 {
+	m_pScene->release();
+	m_pDispatcher->release();
+	if (m_pConnection != nullptr)
+	{
+		m_pConnection->release();
+	}
 	m_pPhysicsSdk->release();
 	m_pFoundation->release();
 }
@@ -29,15 +39,16 @@ bool PhysXPhysics::VInitialize()
 	PxSceneDesc sceneDesc(m_pPhysicsSdk->getTolerancesScale());
 
 	sceneDesc.gravity = PxVec3(0.0f, -9.8f, 0.0f); //Set Gravity
-	sceneDesc.cpuDispatcher = PxDefaultCpuDispatcherCreate(1);
+	m_pDispatcher = PxDefaultCpuDispatcherCreate(2);
+	sceneDesc.cpuDispatcher = m_pDispatcher;
 	sceneDesc.filterShader = PxDefaultSimulationFilterShader;
 
 	m_pScene = m_pPhysicsSdk->createScene(sceneDesc);
 
 #ifdef ENABLE_PHYSX_PVD
-	ConnectPVD();
+	//ConnectPVD();
 #endif
-
+	
 	return true;
 }
 
@@ -56,13 +67,13 @@ void PhysXPhysics::ConnectPVD()
 	PxVisualDebuggerConnectionFlags connectionFlags = PxVisualDebuggerExt::getAllConnectionFlags();
 
 	//Try to establish connection
-	debugger::comm::PvdConnection* pvdConnection = PxVisualDebuggerExt::createConnection(m_pPhysicsSdk->getPvdConnectionManager(), pvd_host_ip, port, timeout, connectionFlags);
+	m_pConnection = PxVisualDebuggerExt::createConnection(m_pPhysicsSdk->getPvdConnectionManager(), pvd_host_ip, port, timeout, connectionFlags);
 }
 
 void PhysXPhysics::VOnUpdate(float const deltaSeconds)
 {
-	m_pScene->simulate(PhysXPhysics::Timestep);
-	m_pScene->fetchResults(true);
+	//m_pScene->simulate(PhysXPhysics::Timestep);
+	//m_pScene->fetchResults(true);
 }
 
 void PhysXPhysics::VSyncVisibleScene()

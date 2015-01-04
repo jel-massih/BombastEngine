@@ -47,6 +47,8 @@ private:
 	PxFoundation* m_pFoundation;
 	PxDefaultErrorCallback m_errorCallback;
 	PxDefaultAllocator m_allocatorCallback;
+	PxDefaultCpuDispatcher* m_pDispatcher;
+	PxVisualDebuggerConnection* m_pConnection;
 
 	PxScene* m_pScene;
 	static const PxReal Timestep; //Timestep value
