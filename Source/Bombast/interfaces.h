@@ -198,3 +198,34 @@ public:
 
 	virtual ~ISceneNode() {};
 };
+
+//Generic Physics Interface
+class IGamePhysics
+{
+public:
+	virtual bool VInitialize() = 0;
+	virtual void VSyncVisibleScene() = 0;
+	virtual void VOnUpdate(float deltaSeconds) = 0;
+
+	virtual void VAddSphere(float radius, Actor* gameActor, const std::string& densityStr, const std::string& physicsMaterial) = 0;
+	virtual void VAddBox(const Vec3& dimensions, Actor* gameActor, const std::string& densityStr, const std::string& physicsMaterial) = 0;
+	virtual void VRemoveActor(ActorId actor) = 0;
+
+	virtual void VRenderDiagnostics() = 0;
+
+	virtual void VApplyForce(const Vec3& dir, float newtons, ActorId actor) = 0;
+	virtual void VApplyTorque(const Vec3& dir, float newtons, ActorId actor) = 0;
+	virtual void VMove(const Mat4x4& mat, ActorId actor) = 0;
+
+	virtual void VStopActor(ActorId actorId) = 0;
+	virtual Vec3 VGetVelocity(ActorId actorId) = 0;
+	virtual void VSetVelocity(ActorId actorId, const Vec3& vel) = 0;
+	virtual Vec3 VGetAngularVelocity(ActorId actorId) = 0;
+	virtual void VSetAngularVelocity(ActorId actorId, const Vec3& vel) = 0;
+	virtual void VTranslate(ActorId actorId, const Vec3& vec) = 0;
+
+	virtual void VSetTransform(const ActorId actorId, const Mat4x4& mat) = 0;
+	virtual Mat4x4 VSetTransform(const ActorId actorId) = 0;
+
+	virtual ~IGamePhysics() {};
+};
