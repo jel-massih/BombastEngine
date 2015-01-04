@@ -46,7 +46,7 @@ Vec3 operator* (float f, const Vec3& vec)
 
 bool Mat4x4::operator!=(const Mat4x4 rhs)
 {
-	return (
+	return !(
 		_11 == rhs._11 &&
 		_12 == rhs._12 &&
 		_13 == rhs._13 &&
