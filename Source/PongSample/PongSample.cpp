@@ -111,6 +111,10 @@ void PongSampleLogic::RegisterAllDelegates()
 	pEventManager->VAddListener(fastdelegate::MakeDelegate(this, &PongSampleLogic::EndMoveLeftDelegate), EvtData_EndLeft::sk_EventType);
 	pEventManager->VAddListener(fastdelegate::MakeDelegate(this, &PongSampleLogic::StartMoveForwardDelegate), EvtData_StartForward::sk_EventType);
 	pEventManager->VAddListener(fastdelegate::MakeDelegate(this, &PongSampleLogic::EndMoveForwardDelegate), EvtData_EndForward::sk_EventType);
+	pEventManager->VAddListener(fastdelegate::MakeDelegate(this, &PongSampleLogic::StartTurnUpDelegate), EvtData_StartTurnUp::sk_EventType);
+	pEventManager->VAddListener(fastdelegate::MakeDelegate(this, &PongSampleLogic::EndTurnUpDelegate), EvtData_EndTurnUp::sk_EventType);
+	pEventManager->VAddListener(fastdelegate::MakeDelegate(this, &PongSampleLogic::StartTurnLeftDelegate), EvtData_StartTurnLeft::sk_EventType);
+	pEventManager->VAddListener(fastdelegate::MakeDelegate(this, &PongSampleLogic::EndTurnLeftDelegate), EvtData_EndTurnLeft::sk_EventType);
 }
 
 void PongSampleLogic::RemoveAllDelegates()
