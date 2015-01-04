@@ -47,7 +47,7 @@ bool PhysXPhysics::VInitialize()
 	m_pScene = m_pPhysicsSdk->createScene(sceneDesc);
 
 #ifdef ENABLE_PHYSX_PVD
-	//ConnectPVD();
+	ConnectPVD();
 #endif
 	
 	return true;
