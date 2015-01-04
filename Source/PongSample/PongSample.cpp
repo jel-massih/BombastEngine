@@ -177,3 +177,35 @@ void PongSampleLogic::EndMoveForwardDelegate(IEventDataPtr pEventData)
 {
 	std::shared_ptr<EvtData_EndForward> pEndForwardData = std::static_pointer_cast<EvtData_EndForward>(pEventData);
 }
+
+void PongSampleLogic::StartTurnUpDelegate(IEventDataPtr pEventData)
+{
+	std::shared_ptr<EvtData_StartTurnUp> pStartUpData = std::static_pointer_cast<EvtData_StartTurnUp>(pEventData);
+	Actor* pTarget = VGetActor(pStartUpData->GetActorId());
+	if (pTarget)
+	{
+		TransformComponent* pTransformComponent = pTarget->GetComponent<TransformComponent>(TransformComponent::g_Name);
+		pTransformComponent->RotateUp(pStartUpData->GetAcceleration());
+	}
+}
+
+void PongSampleLogic::EndTurnUpDelegate(IEventDataPtr pEventData)
+{
+	std::shared_ptr<EvtData_EndTurnUp> pEndUpData = std::static_pointer_cast<EvtData_EndTurnUp>(pEventData);
+}
+
+void PongSampleLogic::StartTurnLeftDelegate(IEventDataPtr pEventData)
+{
+	std::shared_ptr<EvtData_StartTurnLeft> pStartLeftData = std::static_pointer_cast<EvtData_StartTurnLeft>(pEventData);
+	Actor* pTarget = VGetActor(pStartLeftData->GetActorId());
+	if (pTarget)
+	{
+		TransformComponent* pTransformComponent = pTarget->GetComponent<TransformComponent>(TransformComponent::g_Name);
+		pTransformComponent->RotateRight(pStartLeftData->GetAcceleration());
+	}
+}
+
+void PongSampleLogic::EndTurnLeftDelegate(IEventDataPtr pEventData)
+{
+	std::shared_ptr<EvtData_EndTurnLeft> pEndLeftData = std::static_pointer_cast<EvtData_EndTurnLeft>(pEventData);
+}

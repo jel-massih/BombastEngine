@@ -33,6 +33,11 @@ public:
 	void StartMoveForwardDelegate(IEventDataPtr pEventData);
 	void EndMoveForwardDelegate(IEventDataPtr pEventData);
 
+	void StartTurnLeftDelegate(IEventDataPtr pEventData);
+	void EndTurnLeftDelegate(IEventDataPtr pEventData);
+	void StartTurnUpDelegate(IEventDataPtr pEventData);
+	void EndTurnUpDelegate(IEventDataPtr pEventData);
+
 protected:
 	virtual bool VLoadGameDelegate(rapidxml::xml_node<>* pLevelData);
 
