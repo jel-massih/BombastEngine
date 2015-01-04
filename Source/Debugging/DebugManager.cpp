@@ -23,6 +23,7 @@ bool DebugManager::Initialize()
 	}
 
 	m_pDebugText->AddString("CameraPos");
+	m_pDebugText->AddString("CameraRot");
 
 	return true;
 }
@@ -40,10 +41,16 @@ bool DebugManager::Update(const int deltaMs)
 {
 	Mat4x4 viewMat;
 	g_pApp->GetGraphicsManager()->GetRenderer()->VGetViewMatrix(viewMat);
+
 	Vec3 viewPos = viewMat.GetPosition();
+	Vec3 viewRot = viewMat.GetYawPitchRoll();
+
 	char buffer[100];
 	_snprintf_s(buffer, 100, "Pos: (X: %d, Y: %d, Z: %d)", (int)viewPos.x, (int)viewPos.y, (int)viewPos.z);
 	m_pDebugText->UpdateString("CameraPos", buffer);
+
+	_snprintf_s(buffer, 100, "Rot: (X: %d, Y: %d, Z: %d)", (int)viewRot.x, (int)viewRot.y, (int)viewRot.z);
+	m_pDebugText->UpdateString("CameraRot", buffer);
 
 	return true;
 }
