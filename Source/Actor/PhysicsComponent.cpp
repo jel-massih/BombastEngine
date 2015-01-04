@@ -16,6 +16,8 @@ PhysicsComponent::PhysicsComponent()
 	m_angularAcceleration = 0;
 	m_maxVelocity = DEFAULT_MAX_VELOCITY;
 	m_maxAngularVelocity = DEFAULT_MAX_ANGULAR_VELOCITY;
+	
+	m_bGravityEnabled = true;
 }
 
 PhysicsComponent::~PhysicsComponent()
@@ -58,6 +60,15 @@ bool PhysicsComponent::VInitialize(rapidxml::xml_node<>* pData)
 		BuildTransform(pRigidBodyTransform);
 	}
 
+	rapidxml::xml_node<>* pGravityEnabled = pData->first_node("GravityEnabled");
+	if (pGravityEnabled)
+	{
+		std::string val = pGravityEnabled->value();
+		std::transform(val.begin(), val.end(), val.begin(), ::tolower); //Convert to lower for equality check
+		m_bGravityEnabled = val != "false";
+
+	}
+
 	return true;
 }
 
@@ -67,7 +78,7 @@ void PhysicsComponent::VPostInit()
 	{
 		if (m_shape == "Sphere")
 		{
-			m_pGamePhysics->VAddSphere((float)m_scale.x, m_pOwner, m_density, m_material);
+			m_pGamePhysics->VAddSphere((float)m_scale.x, m_pOwner, m_density, m_material, m_bGravityEnabled);
 		} 
 		else 
 		{

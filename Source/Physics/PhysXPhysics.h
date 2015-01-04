@@ -30,8 +30,8 @@ public:
 	virtual void VSyncVisibleScene() override;
 	virtual void VOnUpdate(float deltaSeconds) override;
 	
-	virtual void VAddSphere(float radius, Actor* gameActor, const std::string& densityStr, const std::string& physicsMaterial) override;
-	virtual void VAddBox(const Vec3& dimensions, Actor* gameActor, const std::string& densityStr, const std::string& physicsMaterial) override;
+	virtual void VAddSphere(float radius, Actor* gameActor, const std::string& densityStr, const std::string& physicsMaterial, bool gravityEnabled) override;
+	virtual void VAddBox(const Vec3& dimensions, Actor* gameActor, const std::string& densityStr, const std::string& physicsMaterial, bool gravityEnabled) override;
 	virtual void VRemoveActor(ActorId id) override;
 
 	virtual void VRenderDiagnostics() override;
@@ -52,7 +52,7 @@ public:
 	virtual Mat4x4 VGetTransform(const ActorId id);
 
 private:
-	void AddShape(Actor* pActor, PxGeometry* geometry, float density, const std::string& physicsMaterial);
+	void AddShape(Actor* pActor, PxGeometry* geometry, float density, const std::string& physicsMaterial, bool gravityEnabled);
 	void RemovePhysicsObject(PxRigidBody* body);
 
 	PhysicsMaterialData LookupMaterialData(const std::string& materialString);

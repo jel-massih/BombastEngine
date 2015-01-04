@@ -44,6 +44,8 @@ protected:
 	std::string m_density;
 	std::string m_material;
 
+	bool m_bGravityEnabled;
+	
 	Vec3 m_location; //offset from actor
 	Vec3 m_orientation; //Offset from actor
 	Vec3 m_scale; //Offset from actor
