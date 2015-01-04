@@ -51,6 +51,8 @@
     <ClInclude Include="..\MultiThreading\CriticalSection.h" />
     <ClInclude Include="..\MultiThreading\MultiThreadUtilities.h" />
     <ClInclude Include="..\MultiThreading\RealtimeProcess.h" />
+    <ClInclude Include="..\Physics\Physics.h" />
+    <ClInclude Include="..\Physics\PhysXPhysics.h" />
     <ClInclude Include="..\Resources\LuaResource.h" />
     <ClInclude Include="..\Resources\ResourceCache.h" />
     <ClInclude Include="..\Resources\TextureResource.h" />
@@ -74,6 +76,7 @@
   <ItemGroup>
     <ClCompile Include="..\Actor\Actor.cpp" />
     <ClCompile Include="..\Actor\ActorFactory.cpp" />
+    <ClCompile Include="..\Actor\PhysicsComponent.cpp" />
     <ClCompile Include="..\Actor\RenderComponent.cpp" />
     <ClCompile Include="..\Actor\TransformComponent.cpp" />
     <ClCompile Include="..\BombastEngineStd.cpp" />
@@ -104,6 +107,8 @@
     <ClCompile Include="..\Graphics3D\Raycast.cpp" />
     <ClCompile Include="..\InputCore\InputCore.cpp" />
     <ClCompile Include="..\MultiThreading\RealtimeProcess.cpp" />
+    <ClCompile Include="..\Physics\Physics.cpp" />
+    <ClCompile Include="..\Physics\PhysXPhysics.cpp" />
     <ClCompile Include="..\Resources\LuaResource.cpp" />
     <ClCompile Include="..\Resources\ResourceCache.cpp" />
     <ClCompile Include="..\Resources\TextureResource.cpp" />
@@ -135,13 +140,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v110</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v110</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -176,7 +181,8 @@
       <SDLCheck>true</SDLCheck>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
       <ForcedIncludeFiles>stdafx.h</ForcedIncludeFiles>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)..\Libraries\zlib128\include;$(ProjectDir)..\Libraries\lua-5.2.3\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)..\Libraries\zlib128\include;$(ProjectDir)..\Libraries\lua-5.2.3\include;$(ProjectDir)..\Libraries\PhysX-3.3.2\include</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -194,8 +200,9 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;_WIN32_WINNT=0x0601;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)..\Libraries\zlib128\include;$(ProjectDir)..\Libraries\lua-5.2.3\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)..\Libraries\zlib128\include;$(ProjectDir)..\Libraries\lua-5.2.3\include;$(ProjectDir)..\Libraries\PhysX-3.3.2\include</AdditionalIncludeDirectories>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

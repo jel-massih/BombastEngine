@@ -137,6 +137,12 @@
     <ClCompile Include="..\Actor\PhysicsComponent.cpp">
       <Filter>Actor</Filter>
     </ClCompile>
+    <ClCompile Include="..\Physics\Physics.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Physics\PhysXPhysics.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Bombast\BombastApp.h">
@@ -312,6 +318,12 @@
     <ClInclude Include="..\Actor\PhysicsComponent.h">
       <Filter>Actor</Filter>
     </ClInclude>
+    <ClInclude Include="..\Physics\Physics.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Physics\PhysXPhysics.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Bombast">
@@ -358,6 +370,9 @@
     </Filter>
     <Filter Include="UI">
       <UniqueIdentifier>{73cc8763-1316-4b27-b5b6-cd202ac7cfca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Physics">
+      <UniqueIdentifier>{84d99599-6e85-48f2-8342-f8a6f588ea21}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
