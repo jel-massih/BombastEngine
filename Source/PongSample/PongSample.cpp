@@ -4,6 +4,7 @@
 #include "../Events/Events.h"
 #include "PongSampleEvents.h"
 #include "../Actor/TransformComponent.h"
+#include "../Physics/Physics.h"
 
 #include "Msvc\PongSample.h"
 #include "PongSampleView.h"
@@ -30,12 +31,14 @@ CoreGameLogic *PongSampleApp::VCreateGameAndView()
 
 PongSampleLogic::PongSampleLogic()
 {
+	m_pGamePhysics = CreateGamePhysics();
 	RegisterAllDelegates();
 }
 
 PongSampleLogic::~PongSampleLogic()
 {
 	RemoveAllDelegates();
+	SAFE_DELETE(m_pGamePhysics);
 }
 
 void PongSampleLogic::VChangeState(CoreGameState newState)
