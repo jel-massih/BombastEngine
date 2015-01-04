@@ -39,10 +39,31 @@ bool Vec3::operator==(const Vec3 v)
 	return (v.x == x && v.y == y && v.z == z);
 }
 
-
 Vec3 operator* (float f, const Vec3& vec)
 {
 	return vec * f;
+}
+
+bool Mat4x4::operator!=(const Mat4x4 rhs)
+{
+	return (
+		_11 == rhs._11 &&
+		_12 == rhs._12 &&
+		_13 == rhs._13 &&
+		_14 == rhs._14 &&
+		_21 == rhs._21 &&
+		_22 == rhs._22 &&
+		_23 == rhs._23 &&
+		_24 == rhs._24 &&
+		_31 == rhs._31 &&
+		_32 == rhs._32 &&
+		_33 == rhs._33 &&
+		_34 == rhs._34 &&
+		_41 == rhs._41 &&
+		_42 == rhs._42 &&
+		_43 == rhs._43 &&
+		_44 == rhs._44
+		);
 }
 
 bool Plane::Inside(const Vec3& point) const

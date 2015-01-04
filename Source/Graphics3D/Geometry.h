@@ -97,6 +97,8 @@ public:
 	{
 		XMStoreFloat4x4(this, XMMatrixRotationRollPitchYaw(rotationRadians.x, rotationRadians.y, rotationRadians.z));
 	}
+
+	bool operator!=(const Mat4x4 rhs);
 };
 
 inline void Mat4x4::SetPosition(Vec3 const &pos)
