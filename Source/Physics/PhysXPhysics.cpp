@@ -181,6 +181,13 @@ void PhysXPhysics::XMtoPxMatrix(const Mat4x4& input, PxMat44* output)
 	output->column3.w = input._44;
 }
 
+void PhysXPhysics::PxVecToVec3(const PxVec3& input, Vec3* output)
+{
+	output->x = input.x;
+	output->y = input.y;
+	output->z = input.z;
+}
+
 void PhysXPhysics::VOnUpdate(float const deltaSeconds)
 {
 	m_pScene->simulate(PhysXPhysics::Timestep);
