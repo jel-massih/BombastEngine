@@ -107,14 +107,14 @@ void PongSampleLogic::RegisterAllDelegates()
 	pEventManager->VAddListener(fastdelegate::MakeDelegate(this, &PongSampleLogic::RequestStartGameDelegate), EvtData_Request_Start_Game::sk_EventType);
 	pEventManager->VAddListener(fastdelegate::MakeDelegate(this, &PongSampleLogic::StartMoveUpDelegate), EvtData_StartUp::sk_EventType);
 	pEventManager->VAddListener(fastdelegate::MakeDelegate(this, &PongSampleLogic::EndMoveUpDelegate), EvtData_EndUp::sk_EventType);
-	pEventManager->VAddListener(fastdelegate::MakeDelegate(this, &PongSampleLogic::StartMoveLeftDelegate), EvtData_StartLeft::sk_EventType);
-	pEventManager->VAddListener(fastdelegate::MakeDelegate(this, &PongSampleLogic::EndMoveLeftDelegate), EvtData_EndLeft::sk_EventType);
+	pEventManager->VAddListener(fastdelegate::MakeDelegate(this, &PongSampleLogic::StartMoveRightDelegate), EvtData_StartRight::sk_EventType);
+	pEventManager->VAddListener(fastdelegate::MakeDelegate(this, &PongSampleLogic::EndMoveRightDelegate), EvtData_EndRight::sk_EventType);
 	pEventManager->VAddListener(fastdelegate::MakeDelegate(this, &PongSampleLogic::StartMoveForwardDelegate), EvtData_StartForward::sk_EventType);
 	pEventManager->VAddListener(fastdelegate::MakeDelegate(this, &PongSampleLogic::EndMoveForwardDelegate), EvtData_EndForward::sk_EventType);
 	pEventManager->VAddListener(fastdelegate::MakeDelegate(this, &PongSampleLogic::StartTurnUpDelegate), EvtData_StartTurnUp::sk_EventType);
 	pEventManager->VAddListener(fastdelegate::MakeDelegate(this, &PongSampleLogic::EndTurnUpDelegate), EvtData_EndTurnUp::sk_EventType);
-	pEventManager->VAddListener(fastdelegate::MakeDelegate(this, &PongSampleLogic::StartTurnLeftDelegate), EvtData_StartTurnLeft::sk_EventType);
-	pEventManager->VAddListener(fastdelegate::MakeDelegate(this, &PongSampleLogic::EndTurnLeftDelegate), EvtData_EndTurnLeft::sk_EventType);
+	pEventManager->VAddListener(fastdelegate::MakeDelegate(this, &PongSampleLogic::StartTurnRightDelegate), EvtData_StartTurnRight::sk_EventType);
+	pEventManager->VAddListener(fastdelegate::MakeDelegate(this, &PongSampleLogic::EndTurnRightDelegate), EvtData_EndTurnRight::sk_EventType);
 }
 
 void PongSampleLogic::RemoveAllDelegates()
@@ -150,20 +150,20 @@ void PongSampleLogic::EndMoveUpDelegate(IEventDataPtr pEventData)
 
 }
 
-void PongSampleLogic::StartMoveLeftDelegate(IEventDataPtr pEventData)
+void PongSampleLogic::StartMoveRightDelegate(IEventDataPtr pEventData)
 {
-	std::shared_ptr<EvtData_StartLeft> pStartLeftData = std::static_pointer_cast<EvtData_StartLeft>(pEventData);
-	Actor* pTarget = VGetActor(pStartLeftData->GetActorId());
+	std::shared_ptr<EvtData_StartRight> pStartRightData = std::static_pointer_cast<EvtData_StartRight>(pEventData);
+	Actor* pTarget = VGetActor(pStartRightData->GetActorId());
 	if (pTarget)
 	{
 		TransformComponent* pTransformComponent = pTarget->GetComponent<TransformComponent>(TransformComponent::g_Name);
-		pTransformComponent->MoveLeft(pStartLeftData->GetAcceleration());
+		pTransformComponent->MoveLeft(pStartRightData->GetAcceleration());
 	}
 }
 
-void PongSampleLogic::EndMoveLeftDelegate(IEventDataPtr pEventData)
+void PongSampleLogic::EndMoveRightDelegate(IEventDataPtr pEventData)
 {
-	std::shared_ptr<EvtData_EndLeft> pEndLeftData = std::static_pointer_cast<EvtData_EndLeft>(pEventData);
+	std::shared_ptr<EvtData_EndRight> pEndRightData = std::static_pointer_cast<EvtData_EndRight>(pEventData);
 }
 
 void PongSampleLogic::StartMoveForwardDelegate(IEventDataPtr pEventData)
@@ -198,18 +198,18 @@ void PongSampleLogic::EndTurnUpDelegate(IEventDataPtr pEventData)
 	std::shared_ptr<EvtData_EndTurnUp> pEndUpData = std::static_pointer_cast<EvtData_EndTurnUp>(pEventData);
 }
 
-void PongSampleLogic::StartTurnLeftDelegate(IEventDataPtr pEventData)
+void PongSampleLogic::StartTurnRightDelegate(IEventDataPtr pEventData)
 {
-	std::shared_ptr<EvtData_StartTurnLeft> pStartLeftData = std::static_pointer_cast<EvtData_StartTurnLeft>(pEventData);
-	Actor* pTarget = VGetActor(pStartLeftData->GetActorId());
+	std::shared_ptr<EvtData_StartTurnRight> pStartRightData = std::static_pointer_cast<EvtData_StartTurnRight>(pEventData);
+	Actor* pTarget = VGetActor(pStartRightData->GetActorId());
 	if (pTarget)
 	{
 		TransformComponent* pTransformComponent = pTarget->GetComponent<TransformComponent>(TransformComponent::g_Name);
-		pTransformComponent->RotateRight(pStartLeftData->GetAcceleration());
+		pTransformComponent->RotateRight(pStartRightData->GetAcceleration());
 	}
 }
 
-void PongSampleLogic::EndTurnLeftDelegate(IEventDataPtr pEventData)
+void PongSampleLogic::EndTurnRightDelegate(IEventDataPtr pEventData)
 {
-	std::shared_ptr<EvtData_EndTurnLeft> pEndLeftData = std::static_pointer_cast<EvtData_EndTurnLeft>(pEventData);
+	std::shared_ptr<EvtData_EndTurnRight> pEndRightData = std::static_pointer_cast<EvtData_EndTurnRight>(pEventData);
 }

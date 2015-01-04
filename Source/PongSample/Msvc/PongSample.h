@@ -28,13 +28,13 @@ public:
 	void RequestStartGameDelegate(IEventDataPtr pEventData);
 	void StartMoveUpDelegate(IEventDataPtr pEventData);
 	void EndMoveUpDelegate(IEventDataPtr pEventData);
-	void StartMoveLeftDelegate(IEventDataPtr pEventData);
-	void EndMoveLeftDelegate(IEventDataPtr pEventData);
+	void StartMoveRightDelegate(IEventDataPtr pEventData);
+	void EndMoveRightDelegate(IEventDataPtr pEventData);
 	void StartMoveForwardDelegate(IEventDataPtr pEventData);
 	void EndMoveForwardDelegate(IEventDataPtr pEventData);
 
-	void StartTurnLeftDelegate(IEventDataPtr pEventData);
-	void EndTurnLeftDelegate(IEventDataPtr pEventData);
+	void StartTurnRightDelegate(IEventDataPtr pEventData);
+	void EndTurnRightDelegate(IEventDataPtr pEventData);
 	void StartTurnUpDelegate(IEventDataPtr pEventData);
 	void EndTurnUpDelegate(IEventDataPtr pEventData);
 

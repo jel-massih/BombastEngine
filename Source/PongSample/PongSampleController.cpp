@@ -44,7 +44,7 @@ bool PongSampleController::VOnKeyDown(const BYTE c)
 	if (c == 'A' || c == 'D')
 	{
 		const ActorId actorId = m_pObject->VGet()->GetActorId();
-		std::shared_ptr<EvtData_StartLeft> pEvent(BE_NEW EvtData_StartLeft(actorId, (c == 'A' ? ACTOR_ACCELERATION : (-ACTOR_ACCELERATION))));
+		std::shared_ptr<EvtData_StartRight> pEvent(BE_NEW EvtData_StartRight(actorId, (c == 'A' ? ACTOR_ACCELERATION : (-ACTOR_ACCELERATION))));
 		IEventManager::Get()->VQueueEvent(pEvent);
 	}
 
@@ -58,14 +58,14 @@ bool PongSampleController::VOnKeyDown(const BYTE c)
 	if (c == VK_LEFT || c == VK_RIGHT)
 	{
 		const ActorId actorId = m_pObject->VGet()->GetActorId();
-		std::shared_ptr<EvtData_StartTurnLeft> pEvent(BE_NEW EvtData_StartTurnLeft(actorId, (c == VK_LEFT ? ACTOR_ACCELERATION : (-ACTOR_ACCELERATION))));
+		std::shared_ptr<EvtData_StartTurnRight> pEvent(BE_NEW EvtData_StartTurnRight(actorId, (c == VK_LEFT ? ACTOR_ACCELERATION * 3 : (-ACTOR_ACCELERATION * 3))));
 		IEventManager::Get()->VQueueEvent(pEvent);
 	}
 
 	if (c == VK_UP || c == VK_DOWN)
 	{
 		const ActorId actorId = m_pObject->VGet()->GetActorId();
-		std::shared_ptr<EvtData_StartTurnUp> pEvent(BE_NEW EvtData_StartTurnUp(actorId, (c == VK_UP ? ACTOR_ACCELERATION : (-ACTOR_ACCELERATION))));
+		std::shared_ptr<EvtData_StartTurnUp> pEvent(BE_NEW EvtData_StartTurnUp(actorId, (c == VK_UP ? ACTOR_ACCELERATION * 3 : (-ACTOR_ACCELERATION * 3))));
 		IEventManager::Get()->VQueueEvent(pEvent);
 	}
 
@@ -86,7 +86,7 @@ bool PongSampleController::VOnKeyUp(const BYTE c)
 	if (c == 'A' || c == 'D')
 	{
 		const ActorId actorId = m_pObject->VGet()->GetActorId();
-		std::shared_ptr<EvtData_EndLeft> pEvent(BE_NEW EvtData_EndLeft(actorId));
+		std::shared_ptr<EvtData_EndRight> pEvent(BE_NEW EvtData_EndRight(actorId));
 		IEventManager::Get()->VQueueEvent(pEvent);
 	}
 

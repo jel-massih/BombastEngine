@@ -187,7 +187,7 @@ public:
 	}
 };
 
-class EvtData_StartLeft : public BaseMovementStartEvent
+class EvtData_StartRight : public BaseMovementStartEvent
 {
 public:
 	static const EventType sk_EventType;
@@ -196,23 +196,23 @@ public:
 		return sk_EventType;
 	}
 
-	EvtData_StartLeft(ActorId actorId, float acceleration) :
+	EvtData_StartRight(ActorId actorId, float acceleration) :
 		BaseMovementStartEvent(actorId, acceleration)
 	{
 	}
 
 	virtual IEventDataPtr VCopy() const
 	{
-		return IEventDataPtr(BE_NEW EvtData_StartLeft(m_id, m_acceleration));
+		return IEventDataPtr(BE_NEW EvtData_StartRight(m_id, m_acceleration));
 	}
 
 	virtual const char* GetName() const
 	{
-		return "EvtData_StartLeft";
+		return "EvtData_StartRight";
 	}
 };
 
-class EvtData_EndLeft : public BaseMovementEndEvent
+class EvtData_EndRight : public BaseMovementEndEvent
 {
 public:
 	static const EventType sk_EventType;
@@ -221,18 +221,18 @@ public:
 		return sk_EventType;
 	}
 
-	EvtData_EndLeft(ActorId actorId) :
+	EvtData_EndRight(ActorId actorId) :
 		BaseMovementEndEvent(actorId)
 	{
 	}
 
 	virtual IEventDataPtr VCopy() const
 	{
-		return IEventDataPtr(BE_NEW EvtData_EndLeft(m_id));
+		return IEventDataPtr(BE_NEW EvtData_EndRight(m_id));
 	}
 	virtual const char* GetName(void) const
 	{
-		return "EvtData_EndLeft";
+		return "EvtData_EndRight";
 	}
 };
 
@@ -285,7 +285,7 @@ public:
 	}
 };
 
-class EvtData_StartTurnLeft : public BaseMovementStartEvent
+class EvtData_StartTurnRight : public BaseMovementStartEvent
 {
 public:
 	static const EventType sk_EventType;
@@ -294,23 +294,23 @@ public:
 		return sk_EventType;
 	}
 
-	EvtData_StartTurnLeft(ActorId actorId, float acceleration) :
+	EvtData_StartTurnRight(ActorId actorId, float acceleration) :
 		BaseMovementStartEvent(actorId, acceleration)
 	{
 	}
 
 	virtual IEventDataPtr VCopy() const
 	{
-		return IEventDataPtr(BE_NEW EvtData_StartTurnLeft(m_id, m_acceleration));
+		return IEventDataPtr(BE_NEW EvtData_StartTurnRight(m_id, m_acceleration));
 	}
 
 	virtual const char* GetName() const
 	{
-		return "EvtData_StartTurnLeft";
+		return "EvtData_StartTurnRight";
 	}
 };
 
-class EvtData_EndTurnLeft : public BaseMovementEndEvent
+class EvtData_EndTurnRight : public BaseMovementEndEvent
 {
 public:
 	static const EventType sk_EventType;
@@ -319,18 +319,18 @@ public:
 		return sk_EventType;
 	}
 
-	EvtData_EndTurnLeft(ActorId actorId) :
+	EvtData_EndTurnRight(ActorId actorId) :
 		BaseMovementEndEvent(actorId)
 	{
 	}
 
 	virtual IEventDataPtr VCopy() const
 	{
-		return IEventDataPtr(BE_NEW EvtData_EndTurnLeft(m_id));
+		return IEventDataPtr(BE_NEW EvtData_EndTurnRight(m_id));
 	}
 	virtual const char* GetName(void) const
 	{
-		return "EvtData_EndTurnLeft";
+		return "EvtData_EndTurnRight";
 	}
 };
 
