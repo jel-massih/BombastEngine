@@ -8,11 +8,14 @@
 
     <PhysicsComponent>
     	<Shape>Sphere</Shape>
+    	<Density>clay</Density>
+    	<PhysicsMaterial>Normal</PhysicsMaterial>
     	<RigidBodyTransform>
     		<Position x="0" y="0" z="0" />
     		<Orientation x="0" y="0" z="0" />
     		<Scale x="1" y="1" z="1" />
     	</RigidBodyTransform>
     	<GravityEnabled>FALSE</GravityEnabled>
+    	<LinearDamping>1.0</LinearDamping>
     </PhysicsComponent>
 </Actor>
