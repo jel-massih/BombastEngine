@@ -228,17 +228,21 @@ void PhysXPhysics::VRenderDiagnostics()
 	throw "Function not yet implemented.";
 }
 
-void PhysXPhysics::VApplyForce(const Vec3 &dir, float newtons, ActorId actor)
+void PhysXPhysics::VApplyForce(const Vec3 &dir, float newtons, ActorId actorId)
+{
+	if (PxRigidBody* const body = FindRigidBody(actorId))
+	{
+		PxVec3 const force(dir.x * newtons, dir.y * newtons, dir.z * newtons);
+		body->addForce(force);
+	}
+}
+
+void PhysXPhysics::VApplyTorque(const Vec3 &dir, float newtons, ActorId actorId)
 {
 	throw "Function not yet implemented.";
 }
 
-void PhysXPhysics::VApplyTorque(const Vec3 &dir, float newtons, ActorId actor)
-{
-	throw "Function not yet implemented.";
-}
-
-bool PhysXPhysics::VMove(const Mat4x4 &mat, ActorId aid)
+bool PhysXPhysics::VMove(const Mat4x4 &mat, ActorId actorId)
 {
 	throw "Function not yet implemented.";
 	return true;
