@@ -134,6 +134,9 @@
     <ClCompile Include="..\Debugging\DebugManager.cpp">
       <Filter>Debugging</Filter>
     </ClCompile>
+    <ClCompile Include="..\Actor\PhysicsComponent.cpp">
+      <Filter>Actor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Bombast\BombastApp.h">
@@ -305,6 +308,9 @@
     </ClInclude>
     <ClInclude Include="..\Debugging\DebugManager.h">
       <Filter>Debugging</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Actor\PhysicsComponent.h">
+      <Filter>Actor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

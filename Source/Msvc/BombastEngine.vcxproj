@@ -14,6 +14,7 @@
     <ClInclude Include="..\Actor\Actor.h" />
     <ClInclude Include="..\Actor\ActorComponent.h" />
     <ClInclude Include="..\Actor\ActorFactory.h" />
+    <ClInclude Include="..\Actor\PhysicsComponent.h" />
     <ClInclude Include="..\Actor\RenderComponent.h" />
     <ClInclude Include="..\Actor\RenderComponentInterface.h" />
     <ClInclude Include="..\Actor\TransformComponent.h" />
