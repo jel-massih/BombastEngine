@@ -48,7 +48,7 @@ bool PongSampleController::VOnKeyDown(const BYTE c)
 		IEventManager::Get()->VQueueEvent(pEvent);
 	}
 
-	if (c == 'Z' || c == 'X')
+	if (c == VK_CONTROL || c == VK_MENU)
 	{
 		const ActorId actorId = m_pObject->VGet()->GetActorId();
 		std::shared_ptr<EvtData_StartUp> pEvent(BE_NEW EvtData_StartUp(actorId, (c == 'Z' ? ACTOR_ACCELERATION : (-ACTOR_ACCELERATION))));
