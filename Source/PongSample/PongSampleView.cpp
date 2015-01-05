@@ -76,8 +76,7 @@ LRESULT CALLBACK PongSampleHumanView::VOnMsgProc(AppMsg msg)
 		{
 			m_pKeyboardHandler = m_pPongController;
 			m_pMouseHandler = m_pPongController;
-			m_pCamera->SetTarget(m_pPaddle);
-			m_pPaddle->SetAlpha(0.8f);
+			m_pCamera->SetTarget(m_pControlledActor);
 			ReleaseCapture();
 			return 1;
 		}
@@ -129,10 +128,10 @@ bool PongSampleHumanView::VLoadGameDelegate(rapidxml::xml_node<>* pLevelData)
 
 void PongSampleHumanView::VSetControlledActor(ActorId actorId)
 {
-	m_pPaddle = static_cast<SceneNode*>(m_pScene->FindActor(actorId));
-	if (!m_pPaddle)
+	m_pControlledActor = static_cast<SceneNode*>(m_pScene->FindActor(actorId));
+	if (!m_pControlledActor)
 	{
-		BE_ERROR("Invalid Paddle");
+		BE_ERROR("Invalid Desired Controlled Actor");
 		return;
 	}
 
@@ -140,11 +139,11 @@ void PongSampleHumanView::VSetControlledActor(ActorId actorId)
 
 	SAFE_DELETE(m_pPongController);
 
-	m_pPongController = BE_NEW PongSampleController(m_pPaddle);
+	m_pPongController = BE_NEW PongSampleController(m_pControlledActor);
 	m_pKeyboardHandler = m_pPongController;
 	m_pMouseHandler = m_pPongController;
 
-	m_pCamera->SetTarget(m_pPaddle);
+	m_pCamera->SetTarget(m_pControlledActor);
 }
 
 void PongSampleHumanView::SetControlledActorDelegate(IEventDataPtr pEventData)
