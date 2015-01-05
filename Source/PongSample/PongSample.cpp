@@ -124,6 +124,16 @@ void PongSampleLogic::RemoveAllDelegates()
 {
 	IEventManager* pEventManager = IEventManager::Get();
 	pEventManager->VRemoveListener(fastdelegate::MakeDelegate(this, &PongSampleLogic::RequestStartGameDelegate), EvtData_Request_Start_Game::sk_EventType);
+	pEventManager->VRemoveListener(fastdelegate::MakeDelegate(this, &PongSampleLogic::StartMoveUpDelegate), EvtData_StartUp::sk_EventType);
+	pEventManager->VRemoveListener(fastdelegate::MakeDelegate(this, &PongSampleLogic::EndMoveUpDelegate), EvtData_EndUp::sk_EventType);
+	pEventManager->VRemoveListener(fastdelegate::MakeDelegate(this, &PongSampleLogic::StartMoveRightDelegate), EvtData_StartRight::sk_EventType);
+	pEventManager->VRemoveListener(fastdelegate::MakeDelegate(this, &PongSampleLogic::EndMoveRightDelegate), EvtData_EndRight::sk_EventType);
+	pEventManager->VRemoveListener(fastdelegate::MakeDelegate(this, &PongSampleLogic::StartMoveForwardDelegate), EvtData_StartForward::sk_EventType);
+	pEventManager->VRemoveListener(fastdelegate::MakeDelegate(this, &PongSampleLogic::EndMoveForwardDelegate), EvtData_EndForward::sk_EventType);
+	pEventManager->VRemoveListener(fastdelegate::MakeDelegate(this, &PongSampleLogic::StartTurnUpDelegate), EvtData_StartTurnUp::sk_EventType);
+	pEventManager->VRemoveListener(fastdelegate::MakeDelegate(this, &PongSampleLogic::EndTurnUpDelegate), EvtData_EndTurnUp::sk_EventType);
+	pEventManager->VRemoveListener(fastdelegate::MakeDelegate(this, &PongSampleLogic::StartTurnRightDelegate), EvtData_StartTurnRight::sk_EventType);
+	pEventManager->VRemoveListener(fastdelegate::MakeDelegate(this, &PongSampleLogic::EndTurnRightDelegate), EvtData_EndTurnRight::sk_EventType);
 } 
 
 void PongSampleLogic::VMoveActor(const ActorId id, Mat4x4 const &mat)
