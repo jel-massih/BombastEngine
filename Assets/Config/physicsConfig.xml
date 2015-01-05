@@ -6,32 +6,21 @@
         <Slippery restitution = "0.25" friction = "0.0"/>
     </PhysicsMaterials>
 
-<!--
-    // Physics Densities were grabbed from various resources, including:
-    // http://www.engineeringtoolbox.com/24_293.html
-    // http://www.simetric.co.uk/si_wood.htm
-    // http://www.phy.cmich.edu/people/andy/Physics110/Book/Chapters/Chapter8.htm
--->
     <DensityTable>
-        <!--  specific gravity (these numbers are easier to find) -->
         <air>0.0013</air>
         <water>1.000</water>
 
-        <!--  Synthetics -->
         <styrofoam>0.0100</styrofoam>
 
-        <!--  Woods -->
         <balsa>0.0170</balsa>
         <bamboo>0.3500</bamboo>
         <pine>0.5000</pine>
         <oak>0.8300</oak>
         <ebony>1.100</ebony>
 
-        <!--  Biologic -->
         <blood>1.060</blood>
         <bone>1.800</bone>
 
-        <!--  Metals and Stone -->
         <silicon>2.400</silicon>
         <aluminum>2.650</aluminum>
         <asbestos>2.450</asbestos>
