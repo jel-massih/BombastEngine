@@ -73,13 +73,13 @@ bool PhysicsComponent::VInitialize(rapidxml::xml_node<>* pData)
 	rapidxml::xml_node<>* pLinearDamping = pData->first_node("LinearDamping");
 	if (pLinearDamping)
 	{
-		m_linearDamping = atof(pLinearDamping->value());
+		m_linearDamping = (float)atof(pLinearDamping->value());
 	}
 
 	rapidxml::xml_node<>* pAngularDamping = pData->first_node("AngularDamping");
 	if (pAngularDamping)
 	{
-		m_angularDamping = atof(pAngularDamping->value());
+		m_angularDamping = (float)atof(pAngularDamping->value());
 	}
 
 	return true;
