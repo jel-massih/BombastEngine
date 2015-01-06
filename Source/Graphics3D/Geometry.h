@@ -15,6 +15,7 @@ public:
 	inline Vec3 Normalize() { Vec3 dest;  XMStoreFloat3(&dest, XMVector3Normalize(XMLoadFloat3(this))); return dest; }
 	inline float Dot(const Vec3 &b) { float f = 0.0; XMStoreFloat(&f, XMVector3Dot(XMLoadFloat3(this), XMLoadFloat3(&b))); return f; }
 	inline Vec3 Cross(const Vec3 &b) const { Vec3 out; XMStoreFloat3(&out, XMVector3Cross(XMLoadFloat3(this), XMLoadFloat3(&b))); return out;}
+	inline void Vec3::TransformCoord(const Mat4x4& M);
 	inline const XMVECTOR Vect() const { return XMLoadFloat3(this); }
 
 	Vec3(XMFLOAT3 &v3) { x = v3.x; y = v3.y; z = v3.z; }
@@ -113,6 +114,12 @@ public:
 
 	bool operator!=(const Mat4x4 rhs);
 };
+
+inline void Vec3::TransformCoord(const Mat4x4& M)
+{
+	XMStoreFloat3(this, XMVector3TransformCoord(XMLoadFloat3(this), XMLoadFloat4x4(&M)));
+}
+
 
 inline void Mat4x4::SetPosition(Vec3 const &pos)
 {
