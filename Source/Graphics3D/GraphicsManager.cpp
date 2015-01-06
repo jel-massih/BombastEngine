@@ -31,7 +31,7 @@ bool GraphicsManager::Initialize(HWND hwnd)
 	
 	if (!m_pRenderer)
 	{
-		BE_ERROR("Failed to create Renderer")
+		BE_ERROR("Failed to create Renderer");
 		return false;
 	}
 
@@ -50,7 +50,7 @@ bool GraphicsManager::Initialize(HWND hwnd)
 	result = m_pColorShader->Initialize(m_pRenderer->GetDevice());
 	if (!result)
 	{
-		BE_ERROR("Could not initialize the ColorShader Object!")
+		BE_ERROR("Could not initialize the ColorShader Object!");
 		return FALSE;
 	}
 
@@ -63,8 +63,8 @@ bool GraphicsManager::Initialize(HWND hwnd)
 	result = m_pTextureShader->Initialize(m_pRenderer->GetDevice());
 	if (!result)
 	{
-		BE_ERROR("Could not initialize the TextureShader Object!")
-			return FALSE;
+		BE_ERROR("Could not initialize the TextureShader Object!");
+		return FALSE;
 	}
 
 	return true;

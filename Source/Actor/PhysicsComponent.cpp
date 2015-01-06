@@ -218,7 +218,7 @@ void PhysicsComponent::SetPosition(float x, float y, float z)
 	}
 	else
 	{
-		BE_ERROR("Calling SetPosition on PhysicsComponent on an actor without TransformComponent on")
+		BE_ERROR("Calling SetPosition on PhysicsComponent on an actor without TransformComponent on");
 	}
 }
 
