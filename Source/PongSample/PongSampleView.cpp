@@ -1,17 +1,21 @@
 #include "PongSampleView.h"
 #include "../Bombast/interfaces.h"
 #include "../Graphics3D/Raycast.h"
+#include "../Graphics3D/MovementController.h"
 #include "../Game/ProcessManager.h"
 #include "Msvc/PongSample.h"
 #include "PongSampleEvents.h"
+#include "PongSampleController.h"
 
 #include "../Utilities/FastDelegate/FastDelegate.h"
 #include "../MultiThreading/RealtimeProcess.h"
+
 
 PongSampleHumanView::PongSampleHumanView(IRenderer* renderer) :
 HumanView(renderer)
 {
 	m_pPongController = 0;
+	m_pFreeCameraController = 0;
 	m_bShowUI = true;
 	RegisterAllDelegates();
 }
@@ -20,6 +24,7 @@ PongSampleHumanView::~PongSampleHumanView()
 {
 	RemoveAllDelegates();
 
+	SAFE_DELETE(m_pFreeCameraController);
 	SAFE_DELETE(m_pPongController);
 }
 
@@ -32,7 +37,7 @@ LRESULT CALLBACK PongSampleHumanView::VOnMsgProc(AppMsg msg)
 
 	if (msg.m_uMsg == WM_KEYDOWN)
 	{
-		if (msg.m_wParam)
+		if (msg.m_wParam == VK_F1)
 		{
 			m_bShowUI = !m_bShowUI;
 			return 1;
@@ -80,9 +85,13 @@ LRESULT CALLBACK PongSampleHumanView::VOnMsgProc(AppMsg msg)
 			ReleaseCapture();
 			return 1;
 		}
-		else if (msg.m_wParam == VK_F10)
+		else if (msg.m_wParam == VK_F11)
 		{
-			//Free Cam
+			m_pKeyboardHandler = m_pFreeCameraController;
+			m_pMouseHandler = m_pFreeCameraController;
+			m_pCamera->ClearTarget();
+			SetCapture(g_pApp->GetHwnd());
+			return 1;
 		}
 		else if (msg.m_wParam == VK_F12 || msg.m_wParam == VK_ESCAPE)
 		{
@@ -101,6 +110,11 @@ LRESULT CALLBACK PongSampleHumanView::VOnMsgProc(AppMsg msg)
 void PongSampleHumanView::VOnUpdate(unsigned long deltaMs)
 {
 	HumanView::VOnUpdate(deltaMs);
+
+	if (m_pFreeCameraController)
+	{
+		m_pFreeCameraController->OnUpdate(deltaMs);
+	}
 
 	if (m_pPongController)
 	{
@@ -121,6 +135,8 @@ bool PongSampleHumanView::VLoadGameDelegate(rapidxml::xml_node<>* pLevelData)
 	{
 		return false;
 	}
+
+	m_pFreeCameraController = BE_NEW MovementController(m_pCamera, 0.0f, 0.0f, true);
 
 	m_pScene->VOnRestore();
 	return true;

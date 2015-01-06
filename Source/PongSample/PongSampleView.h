@@ -1,7 +1,9 @@
 #pragma once
 
 #include "../Game/HumanView.h"
-#include "PongSampleController.h"
+
+class MovementController;
+class PongSampleController;
 
 class PongSampleHumanView : public HumanView
 {
@@ -23,6 +25,7 @@ protected:
 	std::wstring m_gameplayText;
 
 	PongSampleController* m_pPongController;
+	MovementController* m_pFreeCameraController;
 	SceneNode* m_pControlledActor;
 
 private:
