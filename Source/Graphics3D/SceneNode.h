@@ -84,7 +84,7 @@ public:
 	float GetAlpha() const { return m_properties.GetAlpha(); }
 
 	Vec3 GetPosition() const { return m_properties.m_toWorld.GetPosition(); }
-	void SetPosition(const Vec3& pos) { m_properties.m_toWorld.SetPosition(pos); }
+	void SetPosition(const Vec3& pos) { m_properties.m_toWorld.SetPosition(pos); m_properties.m_fromWorld = m_properties.m_toWorld.Inverse(); }
 
 	const Vec3 GetWorldPosition() const;
 
