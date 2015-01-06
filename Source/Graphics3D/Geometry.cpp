@@ -11,6 +11,24 @@ Vec3 Vec3::operator*(float f) const
 	return v;
 }
 
+Vec3& Vec3::operator*=(const Vec3& rhs)
+{
+	x *= rhs.x;
+	y *= rhs.y;
+	z *= rhs.z;
+
+	return *this;
+}
+
+Vec3& Vec3::operator*=(const float& rhs)
+{
+	x *= rhs;
+	y *= rhs;
+	z *= rhs;
+
+	return *this;
+}
+
 Vec3 Vec3::operator-(Vec3 v) const
 {
 	Vec3 v2 = Vec3(x - v.x, y - v.y, z - v.z);
@@ -42,6 +60,23 @@ bool Vec3::operator==(const Vec3 v)
 Vec3 operator* (float f, const Vec3& vec)
 {
 	return vec * f;
+}
+
+Vec4 Vec4::operator+(Vec4& rhs) const
+{
+	Vec4 v2 = Vec4(x + rhs.x, y + rhs.y, z + rhs.z, w + rhs.w);
+
+	return v2;
+}
+
+Vec4& Vec4::operator*=(const float rhs)
+{
+	x *= rhs;
+	y *= rhs;
+	z *= rhs;
+	w *= rhs;
+
+	return *this;
 }
 
 bool Mat4x4::operator!=(const Mat4x4 rhs)

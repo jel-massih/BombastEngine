@@ -29,6 +29,9 @@ public:
 	Vec4() : XMFLOAT4() {}
 	Vec4(const float _x, const float _y, const float _z, const float _w) { x = _x; y = _y; z = _z; w = _w; }
 	//Vec4(const Vec3& v3) { x = v3.x; y = v3.y; z = v3.z; w = 1.0f; }
+
+	Vec4 operator+(Vec4& rhs) const;
+	Vec4& operator*=(const float rhs);
 };
 
 extern Vec4 g_Up4;
@@ -54,6 +57,8 @@ public:
 	static const Vec3 g_InvalidVec3;
 
 	Vec3 operator*(float f) const;
+	Vec3& operator*=(const Vec3& rhs);
+	Vec3& operator*=(const float& rhs);
 	Vec3 operator-(Vec3 v) const;
 	Vec3 operator+(Vec3 v) const;
 	Vec3& operator+=(const Vec3 v);
