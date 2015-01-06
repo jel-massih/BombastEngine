@@ -31,6 +31,10 @@ public:
 	//Vec4(const Vec3& v3) { x = v3.x; y = v3.y; z = v3.z; w = 1.0f; }
 };
 
+extern Vec4 g_Up4;
+extern Vec4 g_Right4;
+extern Vec4 g_Forward4;
+
 class Vec3 : public XMFLOAT3
 {
 public:
