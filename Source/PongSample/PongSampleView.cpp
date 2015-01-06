@@ -135,8 +135,14 @@ bool PongSampleHumanView::VLoadGameDelegate(rapidxml::xml_node<>* pLevelData)
 	{
 		return false;
 	}
+	m_pCamera->SetPosition(Vec3(0, 0, -10));
 
 	m_pFreeCameraController = BE_NEW MovementController(m_pCamera, 0.0f, 0.0f, true);
+
+	m_pKeyboardHandler = m_pFreeCameraController;
+	m_pMouseHandler = m_pFreeCameraController;
+	m_pCamera->ClearTarget();
+	SetCapture(g_pApp->GetHwnd());
 
 	m_pScene->VOnRestore();
 	return true;
