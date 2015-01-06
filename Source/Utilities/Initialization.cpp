@@ -108,6 +108,9 @@ GameOptions::GameOptions()
 	m_screenSize = Point(SCREEN_WIDTH, SCREEN_HEIGHT);
 	m_screenPosition = Point(SCREEN_X, SCREEN_Y);
 
+	m_bDebugConsoleEnabled = false;
+	m_debugConsolePosition = Point(0, 0);	
+
 	m_pDoc = NULL;
 }
 
@@ -177,5 +180,31 @@ void GameOptions::Init(const char* xmlFilePath, LPWSTR lpCmdLine)
 		std::string attribute;
 		attribute = pNode->first_attribute("level")->value();
 		m_level = attribute;
+	}
+
+	pNode = pRoot->first_node("DebugConsole");
+	if (pNode)
+	{
+		if (pNode->first_attribute("enabled"))
+		{
+			std::string val = pNode->first_attribute("enabled")->value();
+			std::transform(val.begin(), val.end(), val.begin(), ::tolower); //Convert to lower for equality check
+			m_bDebugConsoleEnabled = val != "false";
+		} else {
+			m_bDebugConsoleEnabled = true;
+		}
+
+		std::string attribute;
+		if (pNode->first_attribute("x"))
+		{
+			attribute = pNode->first_attribute("x")->value();
+			m_screenPosition.x = atoi(attribute.c_str());
+		}
+
+		if (pNode->first_attribute("y"))
+		{
+			attribute = pNode->first_attribute("y")->value();
+			m_screenPosition.y = atoi(attribute.c_str());
+		}
 	}
 }

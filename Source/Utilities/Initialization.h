@@ -19,6 +19,9 @@ struct GameOptions
 
 	rapidxml::xml_document<> *m_pDoc;
 
+	bool m_bDebugConsoleEnabled;
+	Point m_debugConsolePosition;
+
 	GameOptions();
 	~GameOptions() { SAFE_DELETE(m_pDoc); }
 
