@@ -101,7 +101,7 @@ void MovementController::OnUpdate(DWORD const deltaMs)
 
 		dir *= m_currentSpeed;
 
-		Vec3 pos = m_matPosition.GetDirection() + dir;
+		Vec3 pos = m_matPosition.GetPosition() + dir;
 		m_matPosition.SetPosition(pos);
 		m_matToWorld.SetPosition(pos);
 
