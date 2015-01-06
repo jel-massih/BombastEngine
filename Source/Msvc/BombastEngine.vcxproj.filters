@@ -143,6 +143,9 @@
     <ClCompile Include="..\Physics\PhysXPhysics.cpp">
       <Filter>Physics</Filter>
     </ClCompile>
+    <ClCompile Include="..\Graphics3D\MovementController.cpp">
+      <Filter>Graphics3D</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Bombast\BombastApp.h">
@@ -323,6 +326,9 @@
     </ClInclude>
     <ClInclude Include="..\Physics\PhysXPhysics.h">
       <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Graphics3D\MovementController.h">
+      <Filter>Graphics3D</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -44,6 +44,7 @@
     <ClInclude Include="..\Graphics3D\GraphicsManager.h" />
     <ClInclude Include="..\Graphics3D\Material.h" />
     <ClInclude Include="..\Graphics3D\ModelClass.h" />
+    <ClInclude Include="..\Graphics3D\MovementController.h" />
     <ClInclude Include="..\Graphics3D\Raycast.h" />
     <ClInclude Include="..\Graphics3D\Scene.h" />
     <ClInclude Include="..\Graphics3D\SceneNode.h" />
@@ -102,6 +103,7 @@
     <ClCompile Include="..\Graphics3D\GraphicsManager.cpp" />
     <ClCompile Include="..\Graphics3D\Material.cpp" />
     <ClCompile Include="..\Graphics3D\ModelClass.cpp" />
+    <ClCompile Include="..\Graphics3D\MovementController.cpp" />
     <ClCompile Include="..\Graphics3D\Scene.cpp" />
     <ClCompile Include="..\Graphics3D\SceneNode.cpp" />
     <ClCompile Include="..\Graphics3D\Raycast.cpp" />
