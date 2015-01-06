@@ -2,8 +2,15 @@
 
 #include "../Utilities/String.h"
 
-// Call the BE_ERROR() macro to send out an error message
-//		Example -> BE_ERROR("Something Blew Up!");
+namespace BELogger
+{
+	void Init(bool bDebugConsoleEnabled);
+	void Destroy();
+
+	void Log(const std::string& tag, const std::string& message, const char* func, const char* file, unsigned int lineNum);
+	void SetDisplayFlags(const std::string& tag, unsigned char flags);
+}
+
 #define BE_ERROR(str) \
 	do { \
 		std::wstring s(s2ws(str)); \

@@ -85,6 +85,7 @@
     <ClCompile Include="..\Bombast\CoreGameLogic.cpp" />
     <ClCompile Include="..\Debugging\DebugManager.cpp" />
     <ClCompile Include="..\Debugging\DebugText.cpp" />
+    <ClCompile Include="..\Debugging\Logger.cpp" />
     <ClCompile Include="..\Events\EventManager.cpp" />
     <ClCompile Include="..\Events\EventManagerImpl.cpp" />
     <ClCompile Include="..\Events\Events.cpp" />
