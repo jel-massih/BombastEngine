@@ -5,6 +5,37 @@ using namespace DirectX;
 const float  BE_PI = 3.14159265358979f;
 const float  BE_2PI = 2 * BE_PI;
 
+class Vec4;
+class Mat4x4;
+
+class Vec3 : public XMFLOAT3
+{
+public:
+	inline float Length() { float f = 0.0	;  XMStoreFloat(&f, XMVector3Length(XMLoadFloat3(this))); return f; }
+	inline Vec3 Normalize() { Vec3 dest;  XMStoreFloat3(&dest, XMVector3Normalize(XMLoadFloat3(this))); return dest; }
+	inline float Dot(const Vec3 &b) { float f = 0.0; XMStoreFloat(&f, XMVector3Dot(XMLoadFloat3(this), XMLoadFloat3(&b))); return f; }
+	inline Vec3 Cross(const Vec3 &b) const { Vec3 out; XMStoreFloat3(&out, XMVector3Cross(XMLoadFloat3(this), XMLoadFloat3(&b))); return out;}
+	inline const XMVECTOR Vect() const { return XMLoadFloat3(this); }
+
+	Vec3(XMFLOAT3 &v3) { x = v3.x; y = v3.y; z = v3.z; }
+	Vec3() : XMFLOAT3() { x = 0; y = 0; z = 0; }
+	Vec3(const float _x, const float _y, const float _z) { x = _x; y = _y; z = _z; }
+	Vec3(const double _x, const double _y, const double _z) { x = (float)_x; y = (float)_y; z = (float)_z; }
+	Vec3(const int _x, const int _y, const int _z) { x = (float)_x; y = (float)_y; z = (float)_z; }
+	inline Vec3(const class Vec4& v4);
+
+	static const Vec3 g_InvalidVec3;
+	static const Vec3 g_IdentityVec3;
+
+	Vec3 operator*(float f) const;
+	Vec3& operator*=(const Vec3& rhs);
+	Vec3& operator*=(const float& rhs);
+	Vec3 operator-(Vec3 v) const;
+	Vec3 operator+(Vec3 v) const;
+	Vec3& operator+=(const Vec3 v);
+	bool operator==(const Vec3 v);
+};
+
 class Vec4 : public XMFLOAT4
 {
 public:
@@ -37,34 +68,6 @@ public:
 extern Vec4 g_Up4;
 extern Vec4 g_Right4;
 extern Vec4 g_Forward4;
-
-class Vec3 : public XMFLOAT3
-{
-public:
-	inline float Length() { float f = 0.0	;  XMStoreFloat(&f, XMVector3Length(XMLoadFloat3(this))); return f; }
-	inline Vec3 Normalize() { Vec3 dest;  XMStoreFloat3(&dest, XMVector3Normalize(XMLoadFloat3(this))); return dest; }
-	inline float Dot(const Vec3 &b) { float f = 0.0; XMStoreFloat(&f, XMVector3Dot(XMLoadFloat3(this), XMLoadFloat3(&b))); return f; }
-	inline Vec3 Cross(const Vec3 &b) const { Vec3 out; XMStoreFloat3(&out, XMVector3Cross(XMLoadFloat3(this), XMLoadFloat3(&b))); return out;}
-	inline const XMVECTOR Vect() const { return XMLoadFloat3(this); }
-
-	Vec3(XMFLOAT3 &v3) { x = v3.x; y = v3.y; z = v3.z; }
-	Vec3() : XMFLOAT3() { x = 0; y = 0; z = 0; }
-	Vec3(const float _x, const float _y, const float _z) { x = _x; y = _y; z = _z; }
-	Vec3(const double _x, const double _y, const double _z) { x = (float)_x; y = (float)_y; z = (float)_z; }
-	Vec3(const int _x, const int _y, const int _z) { x = (float)_x; y = (float)_y; z = (float)_z; }
-	inline Vec3(const class Vec4& v4);
-
-	static const Vec3 g_InvalidVec3;
-	static const Vec3 g_IdentityVec3;
-
-	Vec3 operator*(float f) const;
-	Vec3& operator*=(const Vec3& rhs);
-	Vec3& operator*=(const float& rhs);
-	Vec3 operator-(Vec3 v) const;
-	Vec3 operator+(Vec3 v) const;
-	Vec3& operator+=(const Vec3 v);
-	bool operator==(const Vec3 v);
-};
 
 inline Vec3::Vec3(const Vec4& v4) { x = v4.x; y = v4.y; z = v4.z; }
 
