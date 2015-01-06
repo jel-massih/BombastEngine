@@ -6,6 +6,7 @@
 #include "../Resources/ResourceCache.h"
 #include "../Resources/XmlResource.h"
 #include "../Resources/LuaResource.h"
+#include "../Game/HumanView.h"
 #include <fstream>
 #include <sstream>
 
@@ -154,6 +155,14 @@ bool CoreGameLogic::VLoadGame(const char* levelResource)
 			const char* actorResource = pNode->first_attribute("resource")->value();
 
 			Actor* pActor = VCreateActor(actorResource, pNode);
+		}
+	}
+
+	for (auto it = m_gameViews.begin(); it != m_gameViews.end(); it++)
+	{
+		if ((*it)->VGetType() == GameView_Human)
+		{
+			static_cast<HumanView*>(*it)->LoadGame(pRoot);
 		}
 	}
 
