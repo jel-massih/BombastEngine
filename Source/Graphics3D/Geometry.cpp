@@ -4,6 +4,7 @@
 const Mat4x4 Mat4x4::g_Identity(XMFLOAT4X4(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1));
 
 const Vec3 Vec3::g_InvalidVec3(-DBL_MAX, -DBL_MAX, -DBL_MAX);
+const Vec3 Vec3::g_IdentityVec3(1, 1, 1);
 
 Vec3 Vec3::operator*(float f) const
 {

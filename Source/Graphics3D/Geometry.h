@@ -55,6 +55,7 @@ public:
 	inline Vec3(const class Vec4& v4);
 
 	static const Vec3 g_InvalidVec3;
+	static const Vec3 g_IdentityVec3;
 
 	Vec3 operator*(float f) const;
 	Vec3& operator*=(const Vec3& rhs);
