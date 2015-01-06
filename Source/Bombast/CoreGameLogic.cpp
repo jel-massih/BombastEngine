@@ -232,7 +232,7 @@ void CoreGameLogic::VRenderDiagnostics()
 
 void CoreGameLogic::VOnUpdate(double time, float deltaTime)
 {
-	int deltaMs = int(deltaTime * 1000.0f);
+	int deltaMs = int(deltaTime);
 	m_lifetime += deltaMs;
 
 	switch (m_gameState)
