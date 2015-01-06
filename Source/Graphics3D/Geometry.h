@@ -58,6 +58,7 @@ public:
 	}
 
 	Vec4(XMFLOAT4& v4) { x = v4.x; y = v4.y; z = v4.z; w = v4.w; }
+	Vec4(Vec3& v3, float otherW) { x = v3.x; y = v3.y; z = v3.z; w = otherW; }
 	Vec4() : XMFLOAT4() {}
 	Vec4(const float _x, const float _y, const float _z, const float _w) { x = _x; y = _y; z = _z; w = _w; }
 	//Vec4(const Vec3& v3) { x = v3.x; y = v3.y; z = v3.z; w = 1.0f; }
