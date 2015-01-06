@@ -10,6 +10,7 @@ HumanView::HumanView(IRenderer* renderer)
 	m_pProcessManager = BE_NEW ProcessManager;
 	m_pDebugManager = BE_NEW DebugManager;
 
+	m_pKeyboardHandler = nullptr;
 	m_pMouseHandler = nullptr;
 
 	m_mouseRadius = 1;
