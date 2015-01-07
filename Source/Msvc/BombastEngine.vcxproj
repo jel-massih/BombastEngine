@@ -55,6 +55,7 @@
     <ClInclude Include="..\Physics\Physics.h" />
     <ClInclude Include="..\Physics\PhysXPhysics.h" />
     <ClInclude Include="..\Resources\LuaResource.h" />
+    <ClInclude Include="..\Resources\ModelResource.h" />
     <ClInclude Include="..\Resources\ResourceCache.h" />
     <ClInclude Include="..\Resources\TextureResource.h" />
     <ClInclude Include="..\Resources\XmlResource.h" />
@@ -67,6 +68,7 @@
     <ClInclude Include="..\Utilities\FastDelegate\FastDelegate.h" />
     <ClInclude Include="..\Utilities\Initialization.h" />
     <ClInclude Include="..\Utilities\Math.h" />
+    <ClInclude Include="..\Utilities\OBJMeshLoader.h" />
     <ClInclude Include="..\Utilities\rapidxml.hpp" />
     <ClInclude Include="..\Utilities\String.h" />
     <ClInclude Include="..\Utilities\templates.h" />
@@ -113,6 +115,7 @@
     <ClCompile Include="..\Physics\Physics.cpp" />
     <ClCompile Include="..\Physics\PhysXPhysics.cpp" />
     <ClCompile Include="..\Resources\LuaResource.cpp" />
+    <ClCompile Include="..\Resources\ModelResource.cpp" />
     <ClCompile Include="..\Resources\ResourceCache.cpp" />
     <ClCompile Include="..\Resources\TextureResource.cpp" />
     <ClCompile Include="..\Resources\XmlResource.cpp" />
@@ -121,6 +124,7 @@
     <ClCompile Include="..\Utilities\DDSTextureLoader.cpp" />
     <ClCompile Include="..\Utilities\Initialization.cpp" />
     <ClCompile Include="..\Utilities\Math.cpp" />
+    <ClCompile Include="..\Utilities\OBJMeshLoader.cpp" />
     <ClCompile Include="..\Utilities\String.cpp" />
     <ClCompile Include="..\Utilities\Timer.cpp" />
     <ClCompile Include="BombastEngine.cpp">
