@@ -79,6 +79,14 @@ string ToStr(double num)
 	return (string(str));
 }
 
+string ToStr(const Vec3& val)
+{
+	char str[100];
+	memset(str, 0, 100);
+	_snprintf_s(str, 100, "(%.3f, %.3f, %.3f)", val.x, val.y, val.z);
+	return (string(str));
+}
+
 string ToStr(bool val)
 {
 	return (string((val == true ? "true" : "false")));
