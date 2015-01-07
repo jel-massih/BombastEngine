@@ -4,6 +4,7 @@
 #include "../Actor/TransformComponent.h"
 #include "../Bombast/BombastApp.h"
 #include "Scene.h"
+#include "../Resources/ModelResource.h"
 
 SceneNodeProperties::SceneNodeProperties()
 {
@@ -661,6 +662,9 @@ HRESULT D3D11PrimitiveNode::InitializeBuffers()
 		m_indexCount = 36;
 
 		float radius = 1.0f;
+
+		ModelClass* model = ModelResourceLoader::LoadAndReturnModelResource("Data\\cube.obj");
+
 
 		// Create vertex buffer
 		VertexType vertices[] =
