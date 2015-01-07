@@ -156,6 +156,17 @@ namespace OBJMeshLoader
 					ss >> faces[faceIndex].vIndex3 >> input2 >> faces[faceIndex].tIndex3 >> input2 >> faces[faceIndex].nIndex3;
 					ss >> faces[faceIndex].vIndex2 >> input2 >> faces[faceIndex].tIndex2 >> input2 >> faces[faceIndex].nIndex2;
 					ss >> faces[faceIndex].vIndex1 >> input2 >> faces[faceIndex].tIndex1 >> input2 >> faces[faceIndex].nIndex1;
+
+					faces[faceIndex].vIndex1 -= 1;
+					faces[faceIndex].vIndex2 -= 1;
+					faces[faceIndex].vIndex3 -= 1;
+					faces[faceIndex].tIndex1 -= 1;
+					faces[faceIndex].tIndex2 -= 1;
+					faces[faceIndex].tIndex3 -= 1;
+					faces[faceIndex].nIndex1 -= 1;
+					faces[faceIndex].nIndex2 -= 1;
+					faces[faceIndex].nIndex3 -= 1;
+
 					faceIndex++;
 				}
 			}
