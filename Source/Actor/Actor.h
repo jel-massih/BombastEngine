@@ -2,7 +2,6 @@
 
 #include "../Bombast/interfaces.h"
 #include "ActorComponent.h"
-#include <string>
 #include <map>
 
 class Actor
