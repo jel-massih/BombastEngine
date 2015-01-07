@@ -149,6 +149,9 @@
     <ClCompile Include="..\Debugging\Logger.cpp">
       <Filter>Debugging</Filter>
     </ClCompile>
+    <ClCompile Include="..\Utilities\OBJMeshLoader.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Bombast\BombastApp.h">
@@ -332,6 +335,9 @@
     </ClInclude>
     <ClInclude Include="..\Graphics3D\MovementController.h">
       <Filter>Graphics3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Utilities\OBJMeshLoader.h">
+      <Filter>Utilities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
