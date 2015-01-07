@@ -61,7 +61,7 @@ namespace OBJMeshLoader
 				if (input == ' ') { faceCount++; }
 			}
 
-			while (input != '\n')
+			while (input != '\n' && !ss.eof())
 			{
 				ss.get(input);
 			}
@@ -160,15 +160,13 @@ namespace OBJMeshLoader
 				}
 			}
 
-			while (input != '\n')
+			while (input != '\n' && !ss.eof())
 			{
 				ss.get(input);
 			}
 
 			ss.get(input);
 		}
-
-		BE_INFO(ToStr(vertCount));
 
 		model->SetVertexData(vertices, vertCount);
 		model->SetTextureData(texCoords, texCount);
