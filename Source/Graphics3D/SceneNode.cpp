@@ -723,6 +723,8 @@ HRESULT D3D11PrimitiveNode::InitializeBuffers()
 		{
 			return result;
 		}
+		SAFE_DELETE_ARRAY(vertices);
+		SAFE_DELETE_ARRAY(indices);
 	}
 
 	return S_OK;
