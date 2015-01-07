@@ -1,11 +1,11 @@
 #pragma once
 
 #include "..\Utilities\rapidxml.hpp"
-#include "../Graphics3D/Geometry.h"
-#include <string>
 #include <list>
 
 class Actor;
+class Vec4;
+class Vec3;
 
 typedef unsigned int ActorId;
 typedef unsigned int ComponentId;
