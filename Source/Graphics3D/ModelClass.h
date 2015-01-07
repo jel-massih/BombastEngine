@@ -24,7 +24,7 @@ public:
 	Vec3* GetVertexData() { return m_vertexData; }
 	Vec3* GetTextureData() { return m_textureData; }
 	Vec3* GetNormalData() { return m_normalData; }
-	FaceType* GetFaceData() { return m_faceData; }
+	void GetFaceData(FaceType** faces, int& count) { *faces = m_faceData; count = m_faceCount; }
 
 private:
 	Vec3* m_vertexData, *m_textureData, *m_normalData;
