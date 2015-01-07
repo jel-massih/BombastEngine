@@ -31,10 +31,14 @@ protected:
 	float m_targetPitch;
 	float m_yaw;
 	float m_pitch;
-	float m_pitchOnDown;
-	float m_yawOnDown;
+
 	float m_maxSpeed;
-	float m_currentSpeed;
+	float m_accelRate;
+	float m_deccelRate;
+
+	float m_forwardSpeed, m_backwardSpeed, m_leftSpeed, m_rightSpeed, m_upSpeed, m_downSpeed;
+
+	float m_turnRate;
 
 	SceneNode* m_pObject;
 };
