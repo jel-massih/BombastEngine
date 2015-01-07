@@ -1,7 +1,6 @@
 #pragma once
 
 #include "../BombastEngineStd.h"
-#include "../Graphics2D/TextureClass.h"
 
 class ModelClass
 {

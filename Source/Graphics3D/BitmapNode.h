@@ -1,9 +1,6 @@
 #pragma once
 
-#include "Material.h"
 #include "SceneNode.h"
-#include "../Resources/TextureResource.h"
-#include "../Graphics2D/TextureShaderClass.h"
 
 class BitmapNode : public SceneNode
 {
