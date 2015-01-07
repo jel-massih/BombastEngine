@@ -665,22 +665,38 @@ HRESULT D3D11PrimitiveNode::InitializeBuffers()
 
 		ModelClass* model = ModelResourceLoader::LoadAndReturnModelResource("Data\\cube.obj");
 
+		ModelClass::FaceType* faces;
+		int faceCount;
+		model->GetFaceData(&faces, faceCount);
+
+		Vec3* vertexPositions = model->GetVertexData();
+		Vec3* textureCoords = model->GetTextureData();
+
 		// Create vertex buffer
-		VertexType vertices[] =
+		VertexType* vertices = BE_NEW VertexType[faceCount * 3];
+
+		WORD* indices = BE_NEW WORD[faceCount * 3];
+
+		int vertexIndex = 0;
+		for (int i = 0; i < faceCount; i++)
 		{
-			{ XMFLOAT3(-radius, radius, -radius), XMFLOAT4(0.0f, 0.0f, radius, radius) },
-			{ XMFLOAT3(radius, radius, -radius), XMFLOAT4(0.0f, radius, 0.0f, radius) },
-			{ XMFLOAT3(radius, radius, radius), XMFLOAT4(0.0f, radius, radius, radius) },
-			{ XMFLOAT3(-radius, radius, radius), XMFLOAT4(radius, 0.0f, 0.0f, radius) },
-			{ XMFLOAT3(-radius, -radius, -radius), XMFLOAT4(radius, 0.0f, radius, radius) },
-			{ XMFLOAT3(radius, -radius, -radius), XMFLOAT4(radius, radius, 0.0f, radius) },
-			{ XMFLOAT3(radius, -radius, radius), XMFLOAT4(radius, radius, radius, radius) },
-			{ XMFLOAT3(-radius, -radius, radius), XMFLOAT4(0.0f, 0.0f, 0.0f, radius) },
-		};
+			vertices[vertexIndex].position = vertexPositions[faces[i].vIndex1];
+			vertices[vertexIndex].texture = XMFLOAT2(textureCoords[faces[i].tIndex1].x, textureCoords[faces[i].tIndex1].y);
+			indices[vertexIndex] = vertexIndex;
+			vertexIndex++;
+			vertices[vertexIndex].position = vertexPositions[faces[i].vIndex2];
+			vertices[vertexIndex].texture = XMFLOAT2(textureCoords[faces[i].tIndex2].x, textureCoords[faces[i].tIndex2].y);
+			indices[vertexIndex] = vertexIndex;
+			vertexIndex++;
+			vertices[vertexIndex].position = vertexPositions[faces[i].vIndex3];
+			vertices[vertexIndex].texture = XMFLOAT2(textureCoords[faces[i].tIndex3].x, textureCoords[faces[i].tIndex3].y);
+			indices[vertexIndex] = vertexIndex;
+			vertexIndex++;
+		}
 		
 		ZeroMemory(&vertexBufferDesc, sizeof(vertexBufferDesc));
 		vertexBufferDesc.Usage = D3D11_USAGE_DEFAULT;
-		vertexBufferDesc.ByteWidth = sizeof(VertexType) * m_vertCount;
+		vertexBufferDesc.ByteWidth = sizeof(VertexType) * faceCount * 3;
 		vertexBufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
 		vertexBufferDesc.CPUAccessFlags = 0;
 
@@ -693,30 +709,9 @@ HRESULT D3D11PrimitiveNode::InitializeBuffers()
 			return result;
 		}
 
-		WORD indices[] =
-		{
-			3, 1, 0,
-			2, 1, 3,
-
-			0, 5, 4,
-			1, 5, 0,
-
-			3, 4, 7,
-			0, 4, 3,
-
-			1, 6, 5,
-			2, 6, 1,
-
-			2, 7, 6,
-			3, 7, 2,
-
-			6, 4, 5,
-			7, 4, 6,
-		};
-
 		ZeroMemory(&indexBufferDesc, sizeof(indexBufferDesc));
 		indexBufferDesc.Usage = D3D11_USAGE_DEFAULT;
-		indexBufferDesc.ByteWidth = sizeof(WORD) * m_indexCount;
+		indexBufferDesc.ByteWidth = sizeof(WORD) * faceCount * 3;
 		indexBufferDesc.BindFlags = D3D11_BIND_INDEX_BUFFER;
 		indexBufferDesc.CPUAccessFlags = 0;
 

@@ -217,7 +217,7 @@ protected:
 	struct VertexType
 	{
 		Vec3 position;
-		XMFLOAT4 color;
+		XMFLOAT2 texture;
 	};
 };
 
