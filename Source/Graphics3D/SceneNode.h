@@ -171,8 +171,10 @@ public:
 	HRESULT VOnRestore(Scene* pScene);
 	HRESULT VRender(Scene* pScene);
 
+	virtual bool VIsVisible(Scene* pScene) const { return true; }
+
 private:
-	HRESULT InitializeBuffers(ID3D11Device* device);
+	HRESULT InitializeBuffers();
 	void RenderBuffers(ID3D11DeviceContext* deviceContext);
 
 	struct VertexType

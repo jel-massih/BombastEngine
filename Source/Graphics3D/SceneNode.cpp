@@ -381,6 +381,8 @@ D3D11GridNode::D3D11GridNode(ActorId actorId, BaseRenderComponent* renderCompone
 
 	m_gridWidth = 100;
 	m_gridHeight = 100;
+
+	SetPosition(Vec3(-(m_gridWidth / 2), 0, -(m_gridHeight / 2)));
 }
 
 D3D11GridNode::~D3D11GridNode()
@@ -398,7 +400,7 @@ HRESULT D3D11GridNode::VOnRestore(Scene* pScene)
 	SAFE_RELEASE(m_pVertexBuffer);
 	SAFE_RELEASE(m_pIndexBuffer);
 
-	if (!InitializeBuffers(g_pApp->GetGraphicsManager()->GetRenderer()->GetDevice()))
+	if (!InitializeBuffers())
 	{
 		return S_FALSE;
 	}
@@ -406,8 +408,10 @@ HRESULT D3D11GridNode::VOnRestore(Scene* pScene)
 	return S_OK;
 }
 
-HRESULT D3D11GridNode::InitializeBuffers(ID3D11Device* device)
+HRESULT D3D11GridNode::InitializeBuffers()
 {
+	ID3D11Device* device = g_pApp->GetGraphicsManager()->GetRenderer()->GetDevice();
+
 	VertexType* vertices;
 	unsigned long* indices;
 	int index, i, j;
@@ -541,19 +545,40 @@ HRESULT D3D11GridNode::InitializeBuffers(ID3D11Device* device)
 
 HRESULT D3D11GridNode::VRender(Scene* pScene)
 {
-	unsigned int stride;
-	unsigned int offset;
+	bool result;
 
-	ID3D11DeviceContext* context = g_pApp->GetGraphicsManager()->GetRenderer()->GetDeviceContext();
+	IRenderer* pRenderer = g_pApp->GetGraphicsManager()->GetRenderer();
+	ID3D11DeviceContext* context = pRenderer->GetDeviceContext();
+
+	Mat4x4 worldMatrix, viewMatrix, projectionMatrix;
+	pRenderer->VGetViewMatrix(viewMatrix);
+	pRenderer->VGetWorldMatrix(worldMatrix);
+	pRenderer->VGetProjectionMatrix(projectionMatrix);
+
+	RenderBuffers(context);
+
+	result = g_pApp->GetGraphicsManager()->GetColorShader()->Render(context, m_indexCount, DirectX::XMLoadFloat4x4(&worldMatrix),
+		XMLoadFloat4x4(&viewMatrix), XMLoadFloat4x4(&projectionMatrix));
+	if (!result)
+	{
+		return S_FALSE;
+	}
+
+	return S_OK;
+}
+
+void D3D11GridNode::RenderBuffers(ID3D11DeviceContext* deviceContext)
+{
+	unsigned int stride, offset;
 
 	stride = sizeof(VertexType);
 	offset = 0;
 
-	context->IASetVertexBuffers(0, 1, &m_pVertexBuffer, &stride, &offset);
-	context->IASetIndexBuffer(m_pVertexBuffer, DXGI_FORMAT_R32_UINT, 0);
-	context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_LINELIST);
+	deviceContext->IASetVertexBuffers(0, 1, &m_pVertexBuffer, &stride, &offset);
 
-	return S_OK;
+	deviceContext->IASetIndexBuffer(m_pIndexBuffer, DXGI_FORMAT_R32_UINT, 0);
+
+	deviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_LINELIST);
 }
 
 PrimitiveNode::PrimitiveNode(const ActorId actorId, BaseRenderComponent* renderComponent, std::string textureFilename, RenderPass renderPass, PrimitiveType type, Vec3 size, const Mat4x4* t)
@@ -735,8 +760,6 @@ void D3D11PrimitiveNode::RenderBuffers(ID3D11DeviceContext* deviceContext)
 
 	stride = sizeof(VertexType);
 	offset = 0;
-
-	IRenderer* pRenderer = g_pApp->GetGraphicsManager()->GetRenderer();
 
 	deviceContext->IASetVertexBuffers(0, 1, &m_pVertexBuffer, &stride, &offset);
 
