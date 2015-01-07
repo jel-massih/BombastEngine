@@ -1,14 +1,19 @@
 #include "DebugManager.h"
 #include "../Bombast/BombastApp.h"
 
+#include "../Game/HumanView.h"
+
 DebugManager::DebugManager()
 {
 	m_pDebugText = 0;
+	m_pOwner = 0;
 }
 
-bool DebugManager::Initialize()
+bool DebugManager::Initialize(HumanView* owner)
 {
 	bool result;
+	
+	m_pOwner = owner;
 
 	m_pDebugText = BE_NEW DebugText();
 	if (!m_pDebugText)
@@ -24,7 +29,6 @@ bool DebugManager::Initialize()
 
 	m_pDebugText->AddString("CameraPos");
 	m_pDebugText->AddString("CameraRot");
-
 	return true;
 }
 
@@ -39,16 +43,12 @@ void DebugManager::Shutdown()
 
 bool DebugManager::Update(const int deltaMs)
 {
-	Mat4x4 viewMat;
-	g_pApp->GetGraphicsManager()->GetRenderer()->VGetViewMatrix(viewMat);
-
-	Vec3 viewPos = viewMat.GetPosition();
-	Vec3 viewRot = viewMat.GetYawPitchRoll();
+	Vec3 viewPos = m_pOwner->m_pCamera->GetPosition();
+	Vec3 viewRot = m_pOwner->m_pCamera->GetDirection();
+	
+	m_pDebugText->UpdateString("CameraPos", (std::string("Pos: ") + ToStr(viewPos)).c_str());
 
 	char buffer[100];
-	_snprintf_s(buffer, 100, "Pos: (X: %d, Y: %d, Z: %d)", (int)viewPos.x, (int)viewPos.y, (int)viewPos.z);
-	m_pDebugText->UpdateString("CameraPos", buffer);
-
 	_snprintf_s(buffer, 100, "Rot: (X: %d, Y: %d, Z: %d)", (int)XMConvertToDegrees(viewRot.x), (int)XMConvertToDegrees(viewRot.y), (int)XMConvertToDegrees(viewRot.z));
 	m_pDebugText->UpdateString("CameraRot", buffer);
 

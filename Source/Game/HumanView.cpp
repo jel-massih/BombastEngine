@@ -33,7 +33,7 @@ HumanView::HumanView(IRenderer* renderer)
 	}
 
 	bool result;
-	result = m_pDebugManager->Initialize();
+	result = m_pDebugManager->Initialize(this);
 	if (!result)
 	{
 		BE_ERROR("Failed to Initialze DebugManager");

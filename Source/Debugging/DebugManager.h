@@ -2,12 +2,14 @@
 
 #include "DebugText.h"
 
+class HumanView;
+
 class DebugManager
 {
 public:
 	DebugManager();
 
-	bool Initialize();
+	bool Initialize(HumanView* owner);
 	void Shutdown();
 
 	bool Update(const int deltaMs);
@@ -17,4 +19,5 @@ public:
 
 private:
 	DebugText* m_pDebugText;
+	HumanView* m_pOwner;
 };
