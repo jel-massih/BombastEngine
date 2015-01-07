@@ -1,7 +1,6 @@
 #pragma once
 
 #include "../BombastEngineStd.h"
-#include "../Resources/ResourceCache.h"
 
 #include <d3dcompiler.h>
 

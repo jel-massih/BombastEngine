@@ -3,6 +3,7 @@
 #include "../Graphics3D/Raycast.h"
 #include "../Graphics3D/MovementController.h"
 #include "../Game/ProcessManager.h"
+#include "../Resources/ResourceCache.h"
 #include "Msvc/PongSample.h"
 #include "PongSampleEvents.h"
 #include "PongSampleController.h"

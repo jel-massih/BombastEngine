@@ -1,7 +1,6 @@
 #pragma once
 
-#include "TextureClass.h"
-#include "../Resources/ResourceCache.h"
+class TextureClass;
 
 class FontClass
 {

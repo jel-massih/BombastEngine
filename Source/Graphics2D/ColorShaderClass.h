@@ -3,7 +3,6 @@
 #include "../BombastEngineStd.h"
 #include <d3dcompiler.h>
 
-
 class ColorShaderClass
 {
 private:
