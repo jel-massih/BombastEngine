@@ -2,6 +2,7 @@
 #include "../Bombast/BombastApp.h"
 #include "TransformComponent.h"
 #include "..\Events\Events.h"
+#include "../Graphics3D/BitmapNode.h"
 
 const char* InvisibleRenderComponent::g_Name = "InvisibleRenderComponent";
 const char* BitmapRenderComponent::g_Name = "BitmapRenderComponent";
