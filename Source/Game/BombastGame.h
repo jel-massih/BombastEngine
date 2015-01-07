@@ -1,7 +1,8 @@
 #pragma once
 
 #include "../BombastEngineStd.h"
-#include "../InputCore/InputCore.h"
+
+class InputCore;
 
 class BombastGame {
 public:

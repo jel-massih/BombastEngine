@@ -1,5 +1,6 @@
 #include "BombastGame.h"
 #include "../Bombast/BombastApp.h"
+#include "../InputCore/InputCore.h"
 
 
 BombastGame::BombastGame()
