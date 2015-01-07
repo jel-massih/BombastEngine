@@ -49,7 +49,7 @@ bool DebugManager::Update(const int deltaMs)
 	_snprintf_s(buffer, 100, "Pos: (X: %d, Y: %d, Z: %d)", (int)viewPos.x, (int)viewPos.y, (int)viewPos.z);
 	m_pDebugText->UpdateString("CameraPos", buffer);
 
-	_snprintf_s(buffer, 100, "Rot: (X: %d, Y: %d, Z: %d)", (int)viewRot.x, (int)viewRot.y, (int)viewRot.z);
+	_snprintf_s(buffer, 100, "Rot: (X: %d, Y: %d, Z: %d)", (int)XMConvertToDegrees(viewRot.x), (int)XMConvertToDegrees(viewRot.y), (int)XMConvertToDegrees(viewRot.z));
 	m_pDebugText->UpdateString("CameraRot", buffer);
 
 	return true;
