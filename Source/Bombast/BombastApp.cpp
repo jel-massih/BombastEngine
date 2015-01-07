@@ -1,9 +1,8 @@
-//========================================================================
-// BombastApp.cpp : Defines Application Layer for BombastEngine
-//========================================================================
-
 #include "BombastApp.h"
 #include "../Resources/ResourceCache.h"
+#include "../Events/EventManagerImpl.h"
+#include "..\Utilities\Timer.h"
+#include "..\Graphics3D\SceneNode.h"
 
 #include <cstdio>
 

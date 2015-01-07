@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../Graphics3D/Geometry.h"
+#include "../Actor/Actor.h"
 
 //Simple representation of actor. Does not register with any physics or anything
 class TransformComponent : public ActorComponent

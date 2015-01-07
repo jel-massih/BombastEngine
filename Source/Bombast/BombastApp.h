@@ -1,25 +1,22 @@
 #pragma once
 
-//===============================================================
-// BombastApp.h : Defines the entry point of the application
-//=============================================================
 #include "..\BombastEngineStd.h"
 #include "..\Constants.h"
 #include "..\Graphics3D\GraphicsManager.h"
 #include "..\Scripting\LuaCoreManager.h"
 #include "..\Utilities\Initialization.h"
 #include "CoreGameLogic.h"
-#include "..\Graphics3D\SceneNode.h"
-#include "..\Events\EventManagerImpl.h"
-#include "..\Utilities\Timer.h"
+
+class EventManager;
+class Timer;
 
 class BombastApp
 {
 protected:
 	HWND m_hWnd;
-	HINSTANCE m_hInstance; //The Module Instance
-	bool m_bWindowedMode; //True if app is windowed, False if Fullscreen
-	bool m_bIsRunning; //true if everything initialized and game in main loop
+	HINSTANCE m_hInstance;
+	bool m_bWindowedMode;
+	bool m_bIsRunning;
 	bool m_bQuitting;
 	int m_iColorDepth;
 	Point m_screenSize;

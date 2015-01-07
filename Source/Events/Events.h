@@ -3,6 +3,8 @@
 #include "EventManager.h"
 #include "../Bombast/BombastApp.h"
 
+class SceneNode;
+
 class EvtData_New_Actor : public BaseEventData
 {
 	ActorId m_actorId;
