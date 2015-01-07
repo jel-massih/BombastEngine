@@ -28,6 +28,10 @@ public:
 		return m_pTextureShader;
 	}
 
+	ColorShaderClass* GetColorShader() const {
+		return m_pColorShader;
+	}
+
 private:
 	IRenderer* m_pRenderer;
 	ColorShaderClass* m_pColorShader;
