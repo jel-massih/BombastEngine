@@ -66,11 +66,12 @@ public:
 
 	EventManager* m_pEventManager;
 
+	void AbortGame() { m_bQuitting = true; }
+
 private:
 	void InitializeWindows();
 	bool InitializeApp(int screenWidth, int screenHeight);
 
-	void AbortGame() { m_bQuitting = true; }
 	void SetQuitting(bool quitting) { m_bQuitting = quitting; }
 
 	bool Frame();

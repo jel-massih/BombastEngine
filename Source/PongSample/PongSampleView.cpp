@@ -98,7 +98,7 @@ LRESULT CALLBACK PongSampleHumanView::VOnMsgProc(AppMsg msg)
 		{
 			if (MessageBox(g_pApp->GetHwnd(), L"Are you sure you want to quit?", L"Quit", MB_YESNO) == IDYES)
 			{
-				//Quit Game
+				g_pApp->AbortGame();
 			}
 
 			return 1;
