@@ -1,4 +1,5 @@
 #include "DebugManager.h"
+#include "DebugText.h"
 #include "../Bombast/BombastApp.h"
 
 #include "../Game/HumanView.h"

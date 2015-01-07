@@ -1,6 +1,6 @@
 #pragma once
 
-#include "DebugText.h"
+class DebugText;
 
 class HumanView;
 

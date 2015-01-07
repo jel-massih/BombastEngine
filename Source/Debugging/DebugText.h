@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../Graphics2D/FontClass.h"
-#include "../Graphics2D/FontShaderClass.h"
+class FontClass;
+class FontShaderClass;
 
 class DebugText
 {

@@ -1,6 +1,8 @@
 #include "DebugText.h"
 
 #include "../Bombast/BombastApp.h"
+#include "../Graphics2D/FontClass.h"
+#include "../Graphics2D/FontShaderClass.h"
 
 DebugText::DebugText()
 {
