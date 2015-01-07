@@ -351,11 +351,6 @@ HRESULT CameraNode::SetViewTransform(Scene* pScene)
 		mat.SetPosition(pos);
 		VSetTransform(&mat);
 	}
-	else
-	{
-		Mat4x4 mat = VGet()->ToWorld();
-		VSetTransform(&mat);
-	}
 
 	m_view = VGet()->FromWorld();
 
