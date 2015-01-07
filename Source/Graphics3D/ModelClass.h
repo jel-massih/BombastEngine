@@ -14,6 +14,7 @@ public:
 
 public:
 	ModelClass();
+	~ModelClass();
 
 	void SetVertexData(Vec3* vertexData, int count) { m_vertexData = vertexData; m_vertexCount = count; }
 	void SetTextureData(Vec3* textureData, int count) { m_textureData = textureData; m_textureCount = count; }

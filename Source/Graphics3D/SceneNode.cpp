@@ -665,7 +665,6 @@ HRESULT D3D11PrimitiveNode::InitializeBuffers()
 
 		ModelClass* model = ModelResourceLoader::LoadAndReturnModelResource("Data\\cube.obj");
 
-
 		// Create vertex buffer
 		VertexType vertices[] =
 		{

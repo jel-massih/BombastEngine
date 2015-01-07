@@ -9,3 +9,11 @@ ModelClass::ModelClass()
 
 	m_faceCount = m_textureCount = m_normalCount = m_faceCount = 0;
 }
+
+ModelClass::~ModelClass()
+{
+	SAFE_DELETE_ARRAY(m_vertexData);
+	SAFE_DELETE_ARRAY(m_textureData);
+	SAFE_DELETE_ARRAY(m_normalData);
+	SAFE_DELETE_ARRAY(m_faceData);
+}
