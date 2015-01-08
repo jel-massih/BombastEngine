@@ -2,7 +2,7 @@
 
 #include <timeapi.h>
 
-const unsigned int SCREEN_REFRESH_RATE(1000 / 60);
+const unsigned int MAX_FPS = 60;
 const GameViewId be_InvalidGameViewId = 0xffffffff;
 
 HumanView::HumanView(IRenderer* renderer)
@@ -18,6 +18,8 @@ HumanView::HumanView(IRenderer* renderer)
 
 	RegisterAllDelegates();
 	m_coreGameState = CGS_Initializing;
+
+	m_runFullSpeed = true;
 
 	if (renderer)
 	{
@@ -97,7 +99,7 @@ void HumanView::VOnRender(double deltaMs, double elapsedMs)
 		return;
 	}
 
-	if (m_runFullSpeed || ((m_currTick - m_lastDraw) > SCREEN_REFRESH_RATE))
+	if (m_runFullSpeed || ((m_currTick - m_lastDraw) > 1000 / MAX_FPS))
 	{
 		if (g_pApp->GetGraphicsManager()->GetRenderer()->VBeginScene())
 		{
