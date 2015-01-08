@@ -49,6 +49,7 @@ public:
 
 	GraphicsManager*  GetGraphicsManager() const;
 	LuaCoreManager*  GetLuaCoreManager() const;
+	const Timer*  GetTimer() const;
 
 	CoreGameLogic* GetGameLogic() const { return m_pGame; }
 

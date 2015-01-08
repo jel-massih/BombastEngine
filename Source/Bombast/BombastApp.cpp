@@ -419,6 +419,11 @@ LuaCoreManager* BombastApp::GetLuaCoreManager() const
 	return m_pLuaCoreManager;
 }
 
+const Timer* BombastApp::GetTimer() const
+{
+	return m_pTimer;
+}
+
 bool BombastApp::VLoadGame()
 {
 	return m_pGame->VLoadGame(m_options.m_level.c_str());
