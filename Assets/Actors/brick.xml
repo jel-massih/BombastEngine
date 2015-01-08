@@ -6,7 +6,7 @@
 
 
     <BlockRenderComponent>
-        <Texture path="data\dirt01.dds"></Texture>
+        <Texture path="data\grid.dds"></Texture>
 		<Size x="50" y="50" z="50"/>
     </BlockRenderComponent>
 </Actor>
