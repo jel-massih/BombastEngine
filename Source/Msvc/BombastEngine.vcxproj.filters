@@ -155,6 +155,9 @@
     <ClCompile Include="..\Utilities\TinyObjLoader\tiny_obj_loader.cc">
       <Filter>Utilities\TinyObjLoader</Filter>
     </ClCompile>
+    <ClCompile Include="..\Utilities\SystemResourceMonitor.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Bombast\BombastApp.h">
@@ -344,6 +347,9 @@
     </ClInclude>
     <ClInclude Include="..\Utilities\TinyObjLoader\tiny_obj_loader.h">
       <Filter>Utilities\TinyObjLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Utilities\SystemResourceMonitor.h">
+      <Filter>Utilities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

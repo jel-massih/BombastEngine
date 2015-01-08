@@ -70,6 +70,7 @@
     <ClInclude Include="..\Utilities\Math.h" />
     <ClInclude Include="..\Utilities\rapidxml.hpp" />
     <ClInclude Include="..\Utilities\String.h" />
+    <ClInclude Include="..\Utilities\SystemResourceMonitor.h" />
     <ClInclude Include="..\Utilities\templates.h" />
     <ClInclude Include="..\Utilities\Timer.h" />
     <ClInclude Include="..\Utilities\TinyObjLoader\tiny_obj_loader.h" />
@@ -125,6 +126,7 @@
     <ClCompile Include="..\Utilities\Initialization.cpp" />
     <ClCompile Include="..\Utilities\Math.cpp" />
     <ClCompile Include="..\Utilities\String.cpp" />
+    <ClCompile Include="..\Utilities\SystemResourceMonitor.cpp" />
     <ClCompile Include="..\Utilities\Timer.cpp" />
     <ClCompile Include="..\Utilities\TinyObjLoader\tiny_obj_loader.cc" />
     <ClCompile Include="BombastEngine.cpp">
