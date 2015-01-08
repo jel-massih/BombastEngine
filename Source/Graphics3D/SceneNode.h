@@ -157,12 +157,12 @@ protected:
 
 class D3D11GridNode : public SceneNode
 {
-protected:
-	int m_vertCount, m_indexCount;
-	int m_gridWidth, m_gridHeight;
-
-	ID3D11Buffer* m_pIndexBuffer;
-	ID3D11Buffer* m_pVertexBuffer;
+private:
+	struct VertexType
+	{
+		Vec3 position;
+		Vec4 color;
+	};
 
 public:
 	D3D11GridNode(ActorId actorId, BaseRenderComponent* renderComponent, const Mat4x4* pMatrix);
@@ -171,17 +171,22 @@ public:
 	HRESULT VOnRestore(Scene* pScene);
 	HRESULT VRender(Scene* pScene);
 
-	virtual bool VIsVisible(Scene* pScene) const { return true; }
+	virtual bool VIsVisible(Scene* pScene) const { return m_bShow; }
+
+	void SetVisible(bool bVisible) { m_bShow = bVisible; }
 
 private:
 	HRESULT InitializeBuffers();
 	void RenderBuffers(ID3D11DeviceContext* deviceContext);
 
-	struct VertexType
-	{
-		Vec3 position;
-		Vec4 color;
-	};
+protected:
+	int m_vertCount, m_indexCount;
+	int m_gridWidth, m_gridHeight;
+
+	ID3D11Buffer* m_pIndexBuffer;
+	ID3D11Buffer* m_pVertexBuffer;
+
+	bool m_bShow;
 };
 
 class PrimitiveNode : public SceneNode

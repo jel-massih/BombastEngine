@@ -374,7 +374,7 @@ HRESULT CameraNode::VOnUpdate(Scene* pScene, DWORD const elapsedMs)
 }
 
 D3D11GridNode::D3D11GridNode(ActorId actorId, BaseRenderComponent* renderComponent, const Mat4x4* pMatrix)
-	: SceneNode(actorId, renderComponent, RenderPass_0, pMatrix)
+	: SceneNode(actorId, renderComponent, RenderPass_0, pMatrix), m_bShow(true)
 {
 	m_vertCount = m_indexCount = 0;
 	m_pVertexBuffer = NULL;
