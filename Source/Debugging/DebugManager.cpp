@@ -6,6 +6,7 @@
 
 DebugManager::DebugManager()
 {
+	m_pSystemResourceMonitor = 0;
 	m_pDebugText = 0;
 	m_pOwner = 0;
 }
@@ -15,6 +16,12 @@ bool DebugManager::Initialize(HumanView* owner)
 	bool result;
 	
 	m_pOwner = owner;
+
+	m_pSystemResourceMonitor = BE_NEW SystemResourceMonitor;
+	if (!m_pSystemResourceMonitor)
+	{
+		return false;
+	}
 
 	m_pDebugText = BE_NEW DebugText();
 	if (!m_pDebugText)
@@ -30,6 +37,9 @@ bool DebugManager::Initialize(HumanView* owner)
 
 	m_pDebugText->AddString("CameraPos");
 	m_pDebugText->AddString("CameraRot");
+
+	m_pDebugText->AddString("FPS");
+
 	return true;
 }
 
@@ -40,6 +50,8 @@ void DebugManager::Shutdown()
 		m_pDebugText->Shutdown();
 		SAFE_DELETE(m_pDebugText);
 	}
+
+	SAFE_DELETE(m_pSystemResourceMonitor);
 }
 
 bool DebugManager::Update(const int deltaMs)
@@ -47,6 +59,8 @@ bool DebugManager::Update(const int deltaMs)
 	Vec3 viewPos = m_pOwner->m_pCamera->GetPosition();
 	Vec3 viewRot = m_pOwner->m_pCamera->GetDirection();
 	
+	m_pSystemResourceMonitor->Frame();
+
 	m_pDebugText->UpdateString("CameraPos", (std::string("Pos: ") + ToStr(viewPos)).c_str());
 
 	char buffer[100];
@@ -58,6 +72,8 @@ bool DebugManager::Update(const int deltaMs)
 
 void DebugManager::Render()
 {
+	m_pSystemResourceMonitor->Render();
+	m_pDebugText->UpdateString("FPS", ("FPS: " + ToStr((int)m_pSystemResourceMonitor->GetFPS())).c_str());
 	if (m_pDebugText)
 	{
 		m_pDebugText->Render();

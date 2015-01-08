@@ -28,8 +28,6 @@ protected:
 
 	Timer* m_pTimer;
 
-	SystemResourceMonitor* m_pSystemResourceMonitor;
-
 public:
 	BombastApp();
 
@@ -53,7 +51,6 @@ public:
 	GraphicsManager*  GetGraphicsManager() const { return m_pGraphicsManager; }
 	LuaCoreManager*  GetLuaCoreManager() const { return m_pLuaCoreManager; }
 	const Timer*  GetTimer() const { return m_pTimer; }
-	const SystemResourceMonitor* GetSystemResourceMonitor() const { return m_pSystemResourceMonitor; }
 
 	CoreGameLogic* GetGameLogic() const { return m_pGame; }
 

@@ -4,11 +4,11 @@ class SystemResourceMonitor
 {
 public:
 	SystemResourceMonitor();
-	~SystemResourceMonitor();
 
 	double GetFPS() const;
 
-	void Update();
+	void Frame();
+	void Render();
 
 private:
 	double m_fps;

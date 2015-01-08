@@ -19,5 +19,7 @@ public:
 
 private:
 	DebugText* m_pDebugText;
+	SystemResourceMonitor* m_pSystemResourceMonitor;
+
 	HumanView* m_pOwner;
 };

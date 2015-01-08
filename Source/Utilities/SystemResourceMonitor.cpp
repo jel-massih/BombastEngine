@@ -5,16 +5,25 @@ SystemResourceMonitor::SystemResourceMonitor()
 {
 }
 
-void SystemResourceMonitor::Update()
+void SystemResourceMonitor::Frame()
+{
+
+}
+
+void SystemResourceMonitor::Render()
 {
 	m_frameCount++;
 
-	if (g_pApp->GetTimer()->GetTime() >= m_startTime + 1000.f)
+	double time = g_pApp->GetTimer()->GetTime()/1000.f;
+
+	if (time >= m_startTime + 1000.f)
 	{
+		BE_INFO(ToStr(m_fps));
 		m_fps = m_frameCount;
 		m_frameCount = 0;
-		m_startTime = g_pApp->GetTimer()->GetTime();
+		m_startTime = time;
 	}
+
 }
 
 double SystemResourceMonitor::GetFPS() const
