@@ -3,6 +3,7 @@
 #include "../Bombast/BombastApp.h"
 
 #include "../Game/HumanView.h"
+#include "../Utilities/SystemResourceMonitor.h"
 
 DebugManager::DebugManager()
 {
@@ -66,6 +67,7 @@ bool DebugManager::Update(const int deltaMs)
 	char buffer[100];
 	_snprintf_s(buffer, 100, "Rot: (X: %d, Y: %d, Z: %d)", (int)XMConvertToDegrees(viewRot.x), (int)XMConvertToDegrees(viewRot.y), (int)XMConvertToDegrees(viewRot.z));
 	m_pDebugText->UpdateString("CameraRot", buffer);
+	m_pDebugText->UpdateString("FPS", ("FPS: " + ToStr((int)m_pSystemResourceMonitor->GetFPS())).c_str());
 
 	return true;
 }
@@ -73,7 +75,6 @@ bool DebugManager::Update(const int deltaMs)
 void DebugManager::Render()
 {
 	m_pSystemResourceMonitor->Render();
-	m_pDebugText->UpdateString("FPS", ("FPS: " + ToStr((int)m_pSystemResourceMonitor->GetFPS())).c_str());
 	if (m_pDebugText)
 	{
 		m_pDebugText->Render();

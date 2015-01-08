@@ -14,5 +14,5 @@ private:
 	double m_fps;
 	int m_frameCount;
 
-	unsigned long m_startTime;
+	double m_startTime;
 };
