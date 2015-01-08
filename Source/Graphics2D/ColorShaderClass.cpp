@@ -24,7 +24,7 @@ bool ColorShaderClass::Initialize(ID3D11Device* device)
 {
 	bool result;
 
-	result = InitializeShader(device, "Data\\color.vs", "Data\\color.ps");
+	result = InitializeShader(device, "Shaders\\color.vs", "Shaders\\color.ps");
 	if (!result)
 	{
 		return false;

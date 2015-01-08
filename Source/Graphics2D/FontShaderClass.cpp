@@ -13,7 +13,7 @@ FontShaderClass::FontShaderClass()
 
 bool FontShaderClass::Initialize(ID3D11Device* device)
 {
-	if (!InitializeShader(device, "Data\\font.vs", "Data\\font.ps"))
+	if (!InitializeShader(device, "Shaders\\font.vs", "Shaders\\font.ps"))
 	{
 		return false;
 	}

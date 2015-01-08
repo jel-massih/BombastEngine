@@ -6,7 +6,7 @@
 
 
     <BitmapRenderComponent>
-        <Texture path="data\paddle.dds"></Texture>
+        <Texture path="textures\paddle.dds"></Texture>
 		<RelativeSize x="0.1" y="0.25"/>
     </BitmapRenderComponent>
 </Actor>
