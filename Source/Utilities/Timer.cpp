@@ -30,13 +30,3 @@ void Timer::Frame()
 
 	return;
 }
-
-float Timer::GetFrameTime()
-{
-	return m_frameTime;
-}
-
-double Timer::GetTime()
-{
-	return (double)m_startTime;
-}

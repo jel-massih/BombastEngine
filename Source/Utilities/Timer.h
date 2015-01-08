@@ -6,8 +6,8 @@ public:
 	bool Initialize();
 	void Frame();
 
-	float GetFrameTime();
-	double GetTime();
+	float GetFrameTime() const { return m_frameTime; }
+	double GetTime() const { return (double)m_startTime; };
 
 private:
 	INT64 m_frequency;
