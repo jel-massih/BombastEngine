@@ -2,31 +2,35 @@
 
 bool Timer::Initialize()
 {
-	QueryPerformanceFrequency((LARGE_INTEGER*)&m_frequency);
-	if (m_frequency == 0)
+	bool result;
+
+	result = QueryPerformanceFrequency(&m_frequency);
+	if (!result)
 	{
 		return false;
 	}
 
-	m_ticksPerMs = (float)(m_frequency / 1000);
+	m_ticksPerMs = double(m_frequency.QuadPart) / 1000.0;
 
-	QueryPerformanceCounter((LARGE_INTEGER*)&m_startTime);
+	QueryPerformanceCounter(&m_counter);
+	m_counterStart = m_counter.QuadPart;
 
 	return true;
 }
 
 void Timer::Frame()
 {
-	INT64 currentTime;
-	float timeDifference;
+	double frameDifference;
 
-	QueryPerformanceCounter((LARGE_INTEGER*)&currentTime);
+	QueryPerformanceCounter(&m_counter);
 
-	timeDifference = (float)(currentTime - m_startTime);
+	double newElapsedTime = (double(m_counter.QuadPart) - m_counterStart) / m_ticksPerMs;
 
-	m_frameTime = timeDifference / m_ticksPerMs;
 
-	m_startTime = currentTime;
+	frameDifference = newElapsedTime - m_currentTime;
+	m_frameTime = frameDifference;
+	
+	m_currentTime = newElapsedTime;
 
 	return;
 }
