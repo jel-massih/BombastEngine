@@ -42,7 +42,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)..\..\Game\$(ProjectName)$(PlatformName)$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)..\..\Temp\$(ProjectName)$(PlatformName)$(Configuration)\</IntDir>
+    <IntDir>$(SolutionDir)..\..\Game\Temp\$(ProjectName)$(PlatformName)$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -62,7 +62,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)..\Libraries\zlib128\lib\;$(SolutionDir)..\Libraries\lua-5.2.3\;$(SolutionDir)..\Libraries\PhysX-3.3.2\lib\win32\;$(SolutionDir)..\..\Lib\$(PlatformName)$(Configuration)\</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\Libraries\zlib128\lib\;$(SolutionDir)..\Libraries\lua-5.2.3\;$(SolutionDir)..\Libraries\PhysX-3.3.2\lib\win32\;$(SolutionDir)..\..\Game\Lib\$(PlatformName)$(Configuration)\</AdditionalLibraryDirectories>
       <AdditionalDependencies>lua52.lib;zdll.lib;d3d11.lib;dxgi.lib;D3dcompiler.lib;dxguid.lib;dinput8.lib;BombastEngine.lib;winmm.lib;PhysX3DEBUG_x86.lib;PhysX3CommonDEBUG_x86.lib;PhysX3ExtensionsDEBUG.lib;PhysXVisualDebuggerSDKDEBUG.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
