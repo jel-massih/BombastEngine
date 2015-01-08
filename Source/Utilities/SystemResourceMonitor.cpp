@@ -12,13 +12,11 @@ void SystemResourceMonitor::Frame()
 
 void SystemResourceMonitor::Render()
 {
+	double time = g_pApp->GetTimer()->GetTime();
 	m_frameCount++;
-
-	double time = g_pApp->GetTimer()->GetTime()/1000.f;
 
 	if (time >= m_startTime + 1000.f)
 	{
-		BE_INFO(ToStr(m_fps));
 		m_fps = m_frameCount;
 		m_frameCount = 0;
 		m_startTime = time;
