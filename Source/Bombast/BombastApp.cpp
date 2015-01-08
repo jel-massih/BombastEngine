@@ -342,7 +342,7 @@ void BombastApp::Run()
 				bDone = true;
 			}
 
-			UpdateGame(m_pTimer->GetTime(), m_pTimer->GetFrameTime());
+			UpdateGame(m_pTimer->GetFrameTime(), m_pTimer->GetTime());
 		}
 	}
 
@@ -360,7 +360,7 @@ bool BombastApp::Render()
 {
 	if (m_pGame)
 	{
-		m_pGame->VOnRender(m_pTimer->GetTime(), m_pTimer->GetFrameTime());
+		m_pGame->VOnRender(m_pTimer->GetFrameTime(), m_pTimer->GetTime());
 	}
 
 	return true;
@@ -414,7 +414,7 @@ bool BombastApp::VLoadGame()
 	return m_pGame->VLoadGame(m_options.m_level.c_str());
 }
 
-void BombastApp::UpdateGame(double dTime, float fElapsedTime)
+void BombastApp::UpdateGame(double deltaMs, double elapsedMs)
 {
 	if (g_pApp->m_bQuitting)
 	{
@@ -425,6 +425,6 @@ void BombastApp::UpdateGame(double dTime, float fElapsedTime)
 	{
 		IEventManager::Get()->VUpdate(20);
 
-		g_pApp->m_pGame->VOnUpdate(dTime, fElapsedTime);
+		g_pApp->m_pGame->VOnUpdate(deltaMs, elapsedMs);
 	}
 }

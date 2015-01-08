@@ -28,7 +28,7 @@ public:
 
 	virtual bool VInitialize() override;
 	virtual void VSyncVisibleScene() override;
-	virtual void VOnUpdate(float deltaSeconds) override;
+	virtual void VOnUpdate(float deltaMs) override;
 	
 	virtual void VAddSphere(float radius, Actor* gameActor, const std::string& densityStr, const std::string& physicsMaterial, bool gravityEnabled, float linearDamping, float angularDamping) override;
 	virtual void VRemoveActor(ActorId id) override;

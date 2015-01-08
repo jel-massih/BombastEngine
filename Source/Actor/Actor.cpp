@@ -36,11 +36,11 @@ void Actor::Shutdown()
 	m_components.clear();
 }
 
-void Actor::Update(int deltaTime)
+void Actor::Update(int deltaMs)
 {
 	for (ActorComponents::iterator it = m_components.begin(); it != m_components.end(); ++it)
 	{
-		it->second->VUpdate(deltaTime);
+		it->second->VUpdate(deltaMs);
 	}
 }
 

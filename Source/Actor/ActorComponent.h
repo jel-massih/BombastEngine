@@ -9,7 +9,7 @@ public:
 	//Meant to be overwriten by implementation classes
 	virtual bool VInitialize(rapidxml::xml_node<>* pData) = 0;
 	virtual void VPostInit() {};
-	virtual void VUpdate(int deltaTime){}
+	virtual void VUpdate(int deltaMs){}
 	virtual void VOnChanged() {};
 
 

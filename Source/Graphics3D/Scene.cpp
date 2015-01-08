@@ -130,13 +130,13 @@ HRESULT Scene::OnUpdate(const int deltaMS)
 		return S_OK;
 
 	static DWORD lastTime = timeGetTime();
-	DWORD elapsedTime = 0;
+	DWORD elapsedMs = 0;
 	DWORD now = timeGetTime();
 
-	elapsedTime = now - lastTime;
+	elapsedMs = now - lastTime;
 	lastTime = now;
 
-	return m_pRoot->VOnUpdate(this, elapsedTime);
+	return m_pRoot->VOnUpdate(this, elapsedMs);
 }
 
 ISceneNode* Scene::FindActor(ActorId id)

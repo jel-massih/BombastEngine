@@ -230,9 +230,8 @@ void CoreGameLogic::VRenderDiagnostics()
 	}
 }
 
-void CoreGameLogic::VOnUpdate(double time, float deltaTime)
+void CoreGameLogic::VOnUpdate(double deltaMs, double elapsedMs)
 {
-	int deltaMs = int(deltaTime);
 	m_lifetime += deltaMs;
 
 	switch (m_gameState)
@@ -258,7 +257,7 @@ void CoreGameLogic::VOnUpdate(double time, float deltaTime)
 	case CGS_Running:
 		if (m_pGamePhysics)
 		{
-			m_pGamePhysics->VOnUpdate(deltaTime);
+			m_pGamePhysics->VOnUpdate(deltaMs);
 			m_pGamePhysics->VSyncVisibleScene();
 		}
 		break;
@@ -277,10 +276,10 @@ void CoreGameLogic::VOnUpdate(double time, float deltaTime)
 	}
 }
 
-void CoreGameLogic::VOnRender(double dTime, float fElapsedTime)
+void CoreGameLogic::VOnRender(double deltaMs, double elapsedMs)
 {
 	for (auto it = m_gameViews.begin(); it != m_gameViews.end(); it++)
 	{
-		(*it)->VOnRender(dTime, fElapsedTime);
+		(*it)->VOnRender(deltaMs, elapsedMs);
 	}
 }

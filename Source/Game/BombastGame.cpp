@@ -6,7 +6,6 @@
 BombastGame::BombastGame()
 {
 	m_pInputCore = 0;
-	m_lastTime = GetTickCount();
 }
 
 BombastGame::~BombastGame()
@@ -42,12 +41,6 @@ void BombastGame::Shutdown()
 bool BombastGame::Frame()
 {
 	bool result;
-
-	DWORD current_time = GetTickCount();
-	DWORD delta_time = current_time - m_lastTime;
-	m_lastTime = current_time;
-
-	double elapsed_ms = (double)delta_time / 1000;
 
 	result = m_pInputCore->Frame();
 	if (!result)

@@ -89,7 +89,7 @@ HRESULT HumanView::VOnLostDevice()
 	return S_OK;
 }
 
-void HumanView::VOnRender(double dTime, float fElapsedTime)
+void HumanView::VOnRender(double deltaMs, double elapsedMs)
 {
 	m_currTick = timeGetTime();
 	if (m_currTick == m_lastDraw)
@@ -107,7 +107,7 @@ void HumanView::VOnRender(double dTime, float fElapsedTime)
 			{
 				if ((*it)->VIsVisible())
 				{
-					(*it)->VOnRender(dTime, fElapsedTime);
+					(*it)->VOnRender(deltaMs, elapsedMs);
 				}
 			}
 

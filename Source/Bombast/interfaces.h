@@ -27,7 +27,7 @@ class IScreenElement
 public:
 	virtual HRESULT VOnRestore() = 0;
 	virtual HRESULT VOnLostDevice() = 0;
-	virtual HRESULT VOnRender(double dTime, float fElapsedTime) = 0;
+	virtual HRESULT VOnRender(double deltaMs, double elapsedMs) = 0;
 	virtual void VOnUpdate(int deltaMs) = 0;
 
 	virtual int VGetZOrder() const = 0;
@@ -66,7 +66,7 @@ class IGameView
 {
 public:
 	virtual HRESULT VOnRestore() = 0;
-	virtual void VOnRender(double dTime, float fElapsedTime) = 0;
+	virtual void VOnRender(double deltaMs, double elapsedMs) = 0;
 	virtual HRESULT VOnLostDevice() = 0;
 	virtual GameViewType VGetType() = 0;
 	virtual GameViewId VGetId() const = 0;
@@ -205,7 +205,7 @@ class IGamePhysics
 public:
 	virtual bool VInitialize() = 0;
 	virtual void VSyncVisibleScene() = 0;
-	virtual void VOnUpdate(float deltaSeconds) = 0;
+	virtual void VOnUpdate(float deltaMs) = 0;
 
 	virtual void VAddSphere(float radius, Actor* gameActor, const std::string& densityStr, const std::string& physicsMaterial, bool gravityEnabled, float linearDamping, float angularDamping) = 0;
 	virtual void VRemoveActor(ActorId actor) = 0;

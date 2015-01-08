@@ -17,6 +17,4 @@ public:
 
 private:
 	InputCore* m_pInputCore;
-
-	DWORD m_lastTime;
 };

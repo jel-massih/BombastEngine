@@ -58,8 +58,8 @@ public:
 	const LevelManager* GetLevelManager() { return m_pLevelManager; }
 	virtual bool VLoadGame(const char* levelResource) override;
 
-	virtual void VOnUpdate(double time, float deltaTime);
-	virtual void VOnRender(double dTime, float fElapsedTime);
+	virtual void VOnUpdate(double deltaMs, double elapsedMs);
+	virtual void VOnRender(double deltaMs, double elapsedMs);
 
 	virtual void VChangeState(CoreGameState newState);
 	const CoreGameState GetState() const { return m_gameState; }
