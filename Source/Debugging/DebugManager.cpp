@@ -74,7 +74,11 @@ bool DebugManager::Update(const int deltaMs)
 
 void DebugManager::Render()
 {
-	m_pSystemResourceMonitor->Render();
+	if (m_pSystemResourceMonitor)
+	{
+		m_pSystemResourceMonitor->Render();
+	}
+
 	if (m_pDebugText)
 	{
 		m_pDebugText->Render();
