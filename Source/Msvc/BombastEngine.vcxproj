@@ -38,7 +38,6 @@
     <ClInclude Include="..\Graphics2D\FontShaderClass.h" />
     <ClInclude Include="..\Graphics2D\TextureClass.h" />
     <ClInclude Include="..\Graphics2D\TextureShaderClass.h" />
-    <ClInclude Include="..\Graphics3D\BitmapNode.h" />
     <ClInclude Include="..\Graphics3D\D3DClass.h" />
     <ClInclude Include="..\Graphics3D\Geometry.h" />
     <ClInclude Include="..\Graphics3D\GraphicsManager.h" />
@@ -46,6 +45,7 @@
     <ClInclude Include="..\Graphics3D\ModelClass.h" />
     <ClInclude Include="..\Graphics3D\MovementController.h" />
     <ClInclude Include="..\Graphics3D\Raycast.h" />
+    <ClInclude Include="..\Graphics3D\RenderNodes.h" />
     <ClInclude Include="..\Graphics3D\Scene.h" />
     <ClInclude Include="..\Graphics3D\SceneNode.h" />
     <ClInclude Include="..\InputCore\InputCore.h" />
@@ -101,13 +101,13 @@
     <ClCompile Include="..\Graphics2D\FontShaderClass.cpp" />
     <ClCompile Include="..\Graphics2D\TextureClass.cpp" />
     <ClCompile Include="..\Graphics2D\TextureShaderClass.cpp" />
-    <ClCompile Include="..\Graphics3D\BitmapNode.cpp" />
     <ClCompile Include="..\Graphics3D\D3DClass.cpp" />
     <ClCompile Include="..\Graphics3D\Geometry.cpp" />
     <ClCompile Include="..\Graphics3D\GraphicsManager.cpp" />
     <ClCompile Include="..\Graphics3D\Material.cpp" />
     <ClCompile Include="..\Graphics3D\ModelClass.cpp" />
     <ClCompile Include="..\Graphics3D\MovementController.cpp" />
+    <ClCompile Include="..\Graphics3D\RenderNodes.cpp" />
     <ClCompile Include="..\Graphics3D\Scene.cpp" />
     <ClCompile Include="..\Graphics3D\SceneNode.cpp" />
     <ClCompile Include="..\Graphics3D\Raycast.cpp" />

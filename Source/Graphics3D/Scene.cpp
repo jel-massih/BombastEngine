@@ -3,6 +3,7 @@
 #include "../Actor/Actor.h"
 #include "../Bombast/BombastApp.h"
 #include "../Events/Events.h"
+#include "RenderNodes.h"
 #include <timeapi.h>
 
 Scene::Scene(IRenderer* renderer)

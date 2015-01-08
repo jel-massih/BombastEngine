@@ -1,19 +1,16 @@
 #pragma once
 
-//Scene.h - Container class for 3d graphics scenes
-
 #include "Geometry.h"
 #include "SceneNode.h"
 #include "../Events/EventManager.h"
 
-//STL map allowing lookup of scenenode by actorid
 typedef std::map<ActorId, ISceneNode*> SceneActorMap;
 
-//p.536
 class CameraNode;
 class SkyNode;
 class LightNode;
 class LightManager;
+class D3D11GridNode;
 
 class Scene
 {

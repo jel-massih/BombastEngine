@@ -80,9 +80,6 @@
     <ClCompile Include="..\Graphics3D\Scene.cpp">
       <Filter>Graphics3D</Filter>
     </ClCompile>
-    <ClCompile Include="..\Graphics3D\BitmapNode.cpp">
-      <Filter>Graphics3D</Filter>
-    </ClCompile>
     <ClCompile Include="..\Resources\TextureResource.cpp">
       <Filter>Resources</Filter>
     </ClCompile>
@@ -157,6 +154,9 @@
     </ClCompile>
     <ClCompile Include="..\Utilities\SystemResourceMonitor.cpp">
       <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Graphics3D\RenderNodes.cpp">
+      <Filter>Graphics3D</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -258,9 +258,6 @@
     <ClInclude Include="..\Graphics3D\Scene.h">
       <Filter>Graphics3D</Filter>
     </ClInclude>
-    <ClInclude Include="..\Graphics3D\BitmapNode.h">
-      <Filter>Graphics3D</Filter>
-    </ClInclude>
     <ClInclude Include="..\Resources\TextureResource.h">
       <Filter>Resources</Filter>
     </ClInclude>
@@ -350,6 +347,9 @@
     </ClInclude>
     <ClInclude Include="..\Utilities\SystemResourceMonitor.h">
       <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Graphics3D\RenderNodes.h">
+      <Filter>Graphics3D</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
