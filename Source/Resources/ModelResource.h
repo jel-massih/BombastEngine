@@ -16,7 +16,7 @@ public:
 
 	virtual std::string VToString() { return "ModelResourceExtraData"; }
 
-	bool LoadModel(char* pRawBuffer, unsigned int rawSize);
+	bool LoadModel(char* pRawBuffer, unsigned int rawSize, std::string modelFilepath);
 
 	ModelClass* GetModel();
 };
