@@ -9,6 +9,7 @@
 
 class EventManager;
 class Timer;
+class SystemResourceMonitor;
 
 class BombastApp
 {
@@ -26,6 +27,8 @@ protected:
 	LuaCoreManager* m_pLuaCoreManager;
 
 	Timer* m_pTimer;
+
+	SystemResourceMonitor* m_pSystemResourceMonitor;
 
 public:
 	BombastApp();
@@ -47,9 +50,10 @@ public:
 	void Run();
 	void ShutDown();
 
-	GraphicsManager*  GetGraphicsManager() const;
-	LuaCoreManager*  GetLuaCoreManager() const;
-	const Timer*  GetTimer() const;
+	GraphicsManager*  GetGraphicsManager() const { return m_pGraphicsManager; }
+	LuaCoreManager*  GetLuaCoreManager() const { return m_pLuaCoreManager; }
+	const Timer*  GetTimer() const { return m_pTimer; }
+	const SystemResourceMonitor* GetSystemResourceMonitor() const { return m_pSystemResourceMonitor; }
 
 	CoreGameLogic* GetGameLogic() const { return m_pGame; }
 
