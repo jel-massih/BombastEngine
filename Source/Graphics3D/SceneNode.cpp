@@ -660,7 +660,7 @@ HRESULT D3D11PrimitiveNode::InitializeBuffers()
 	{
 		float radius = 1.0f;
 
-		ModelClass* model = ModelResourceLoader::LoadAndReturnModelResource("Data\\test.obj");
+		ModelClass* model = ModelResourceLoader::LoadAndReturnModelResource("Data\\cube.obj");
 		
 		std::vector<VertexType> vertices;
 		std::vector<WORD> indices;
