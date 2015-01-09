@@ -4,7 +4,7 @@
     </PreLoadScripts>
 
     <StaticActors>
-      <Actor resource="actors\brick.xml" />
+      <Actor resource="actors\city.xml" />
     </StaticActors>
 
     <PostLoadScripts>
