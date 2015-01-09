@@ -4,7 +4,7 @@
 
 namespace BELogger
 {
-	void Init(bool bDebugConsoleEnabled);
+	void Init(bool bDebugConsoleEnabled, const char* logPath, const char* logName);
 	void Destroy();
 
 	void Log(const std::string& tag, const std::string& message, const char* func, const char* file, unsigned int lineNum);

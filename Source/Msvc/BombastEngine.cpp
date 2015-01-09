@@ -22,7 +22,7 @@ int WINAPI BombastEngine(HINSTANCE hInstance,
 
 	g_pApp->m_options.Init((ROOT_GAME_PATH + "Options.xml").c_str(), lpCmdLine);
 
-	BELogger::Init(g_pApp->m_options.m_bDebugConsoleEnabled);
+	BELogger::Init(g_pApp->m_options.m_bDebugConsoleEnabled, g_pApp->m_options.m_debugLogPath.c_str(), g_pApp->m_options.m_debugLogName.c_str());
 
 	if (g_pApp->InitInstance(hInstance, lpCmdLine, 0, g_pApp->m_options.m_screenSize.x, g_pApp->m_options.m_screenSize.y, g_pApp->m_options.m_screenPosition.x, g_pApp->m_options.m_screenPosition.y))
 	{
