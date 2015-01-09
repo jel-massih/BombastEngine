@@ -2,11 +2,12 @@
 #include "../Bombast/BombastApp.h"
 #include "TransformComponent.h"
 #include "..\Events\Events.h"
-#include "../Graphics3D/BitmapNode.h"
+#include "../Graphics3D/RenderNodes.h"
 
 const char* InvisibleRenderComponent::g_Name = "InvisibleRenderComponent";
 const char* BitmapRenderComponent::g_Name = "BitmapRenderComponent";
 const char* BlockRenderComponent::g_Name = "BlockRenderComponent";
+const char* MeshRenderComponent::g_Name = "MeshRenderComponent";
 
 BaseRenderComponent::BaseRenderComponent()
 {
@@ -47,19 +48,7 @@ void BaseRenderComponent::VOnChanged()
 
 rapidxml::xml_node<>* BaseRenderComponent::VGenerateXml()
 {
-	rapidxml::xml_document<> outDoc;
-	rapidxml::xml_node<>* pBaseElement = VCreateBaseElement(&outDoc);
-
-	rapidxml::xml_node<>* pColor = outDoc.allocate_node(rapidxml::node_element, "Color");
-	pColor->append_attribute(outDoc.allocate_attribute("r", ToStr(m_color.r).c_str()));
-	pColor->append_attribute(outDoc.allocate_attribute("g", ToStr(m_color.g).c_str()));
-	pColor->append_attribute(outDoc.allocate_attribute("b", ToStr(m_color.b).c_str()));
-	pColor->append_attribute(outDoc.allocate_attribute("a", ToStr(m_color.a).c_str()));
-	pBaseElement->append_node(pColor);
-
-	VCreateInheritedXmlElements(pBaseElement);
-
-	return pBaseElement;
+	return NULL;
 }
 
 SceneNode* BaseRenderComponent::VGetSceneNode()
@@ -107,11 +96,6 @@ SceneNode* InvisibleRenderComponent::VCreateSceneNode()
 	return NULL;
 }
 
-void InvisibleRenderComponent::VCreateInheritedXmlElements(rapidxml::xml_node<>* pBaseElement)
-{
-	BE_ERROR("ERROR: Not Implemented Yet");
-}
-
 bool BitmapRenderComponent::VDelegateInitialize(rapidxml::xml_node<>* pData)
 {
 	bool result = false;
@@ -151,11 +135,6 @@ SceneNode* BitmapRenderComponent::VCreateSceneNode()
 	}
 
 	return NULL;
-}
-
-void BitmapRenderComponent::VCreateInheritedXmlElements(rapidxml::xml_node<>* pBaseElement)
-{
-	BE_ERROR("ERROR: Not Implemented Yet");
 }
 
 bool BlockRenderComponent::VDelegateInitialize(rapidxml::xml_node<>* pData)
@@ -202,7 +181,49 @@ SceneNode* BlockRenderComponent::VCreateSceneNode()
 	return NULL;
 }
 
-void BlockRenderComponent::VCreateInheritedXmlElements(rapidxml::xml_node<>* pBaseElement)
+bool MeshRenderComponent::VDelegateInitialize(rapidxml::xml_node<>* pData)
 {
-	BE_ERROR("ERROR: Not Implemented Yet");
+	bool result = false;
+
+	rapidxml::xml_node<>* pTexture = pData->first_node("Texture");
+	if (pTexture)
+	{
+		if (pTexture->first_attribute("path") != NULL)
+		{
+			m_textureResource = pTexture->first_attribute("path")->value();
+		}
+		else
+		{
+			BE_ERROR("Texture path Exception: Make sure path attribute is set for Texture Element");
+			return false;
+		}
+	}
+
+	rapidxml::xml_node<>* pMesh = pData->first_node("Mesh");
+	if (pMesh)
+	{
+		if (pMesh->first_attribute("path") != NULL)
+		{
+			m_meshResource = pMesh->first_attribute("path")->value();
+		}
+		else
+		{
+			BE_ERROR("Mesh path Exception: Make sure path attribute is set for Mesh Element");
+			return false;
+		}
+	}
+
+	return true;
+}
+
+SceneNode* MeshRenderComponent::VCreateSceneNode()
+{
+	TransformComponent* pTransformComponent = m_pOwner->GetComponent<TransformComponent>(TransformComponent::g_Name);
+
+	if (pTransformComponent)
+	{
+
+	}
+
+	return NULL;
 }
