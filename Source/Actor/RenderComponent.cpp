@@ -126,11 +126,11 @@ bool BitmapRenderComponent::VDelegateInitialize(rapidxml::xml_node<>* pData)
 
 SceneNode* BitmapRenderComponent::VCreateSceneNode()
 {
-	TransformComponent* pTransformCompnent = m_pOwner->GetComponent<TransformComponent>(TransformComponent::g_Name);
+	TransformComponent* pTransformComponent = m_pOwner->GetComponent<TransformComponent>(TransformComponent::g_Name);
 
-	if (pTransformCompnent)
+	if (pTransformComponent)
 	{
-		SceneNode* bitmap = BE_NEW D3DBitmapNode11(m_pOwner->GetId(), (BaseRenderComponent*)this, m_textureResource, m_relativeSize, RenderPass_GUI, &pTransformCompnent->GetTransform());
+		SceneNode* bitmap = BE_NEW D3DBitmapNode11(m_pOwner->GetId(), (BaseRenderComponent*)this, m_textureResource, m_relativeSize, RenderPass_GUI, &pTransformComponent->GetTransform());
 		return bitmap;
 	}
 
@@ -222,7 +222,8 @@ SceneNode* MeshRenderComponent::VCreateSceneNode()
 
 	if (pTransformComponent)
 	{
-
+		SceneNode* mesh = BE_NEW D3DMeshNode11(m_pOwner->GetId(), (BaseRenderComponent*)this, m_textureResource, m_meshResource, RenderPass_GUI, &pTransformComponent->GetTransform());
+		return mesh;
 	}
 
 	return NULL;
