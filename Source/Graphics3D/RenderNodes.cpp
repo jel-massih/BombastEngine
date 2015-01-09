@@ -1,4 +1,6 @@
 #include "RenderNodes.h"
+#include "ModelClass.h"
+#include "../Resources/ModelResource.h"
 
 BitmapNode::BitmapNode(const ActorId actorId,
 	BaseRenderComponent* renderComponent,
@@ -644,6 +646,175 @@ HRESULT D3D11PrimitiveNode::VRender(Scene* pScene)
 }
 
 void D3D11PrimitiveNode::RenderBuffers(ID3D11DeviceContext* deviceContext)
+{
+	unsigned int stride, offset;
+
+	stride = sizeof(VertexType);
+	offset = 0;
+
+	deviceContext->IASetVertexBuffers(0, 1, &m_pVertexBuffer, &stride, &offset);
+
+	deviceContext->IASetIndexBuffer(m_pIndexBuffer, DXGI_FORMAT_R16_UINT, 0);
+
+	deviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+}
+
+MeshNode::MeshNode(const ActorId actorId, BaseRenderComponent* renderComponent, std::string textureFileName, std::string meshFileName, RenderPass renderPass, const Mat4x4 *t)
+	: SceneNode(actorId, renderComponent, renderPass, t), m_meshFilename(meshFileName), m_textureFilename(textureFileName)
+{
+	m_vertexCount = m_indexCount = 0;
+}
+
+D3DMeshNode11::D3DMeshNode11(const ActorId actorId, BaseRenderComponent* renderComponent, std::string textureFilename, std::string meshFilename, RenderPass renderPass, const Mat4x4* t)
+	: MeshNode(actorId, renderComponent, textureFilename, meshFilename, renderPass, t), m_lastPosition(Vec3::g_InvalidVec3)
+{
+	m_pVertexBuffer = nullptr;
+	m_pIndexBuffer = nullptr;
+	m_pTexture = nullptr;
+	m_pLoadedMesh = nullptr;
+}
+
+D3DMeshNode11::~D3DMeshNode11()
+{
+	SAFE_RELEASE(m_pVertexBuffer);
+	SAFE_RELEASE(m_pIndexBuffer);
+	SAFE_RELEASE(m_pTexture);
+}
+
+HRESULT D3DMeshNode11::VOnRestore(Scene* pScene)
+{
+	HRESULT hr;
+
+	BE_HRETURN(SceneNode::VOnRestore(pScene), "Failed to restore scenenode for D3DMeshNode11");
+
+	SAFE_RELEASE(m_pVertexBuffer);
+	SAFE_RELEASE(m_pIndexBuffer);
+
+	hr = LoadMesh(m_meshFilename);
+	if (FAILED(hr))
+	{
+		return hr;
+	}
+
+	hr = InitializeBuffers();
+	if (FAILED(hr))
+	{
+		return hr;
+	}
+
+	hr = LoadTexture(m_textureFilename);
+	if (FAILED(hr))
+	{
+		return hr;
+	}
+
+	return S_OK;
+}
+
+HRESULT D3DMeshNode11::LoadTexture(std::string textureFilename)
+{
+	m_pTexture = TextureResourceLoader::LoadAndReturnTextureResource(textureFilename.c_str());
+	if (!m_pTexture)
+	{
+		return S_FALSE;
+	}
+
+	return S_OK;
+}
+
+HRESULT D3DMeshNode11::LoadMesh(std::string meshFilename)
+{
+	m_pLoadedMesh = ModelResourceLoader::LoadAndReturnModelResource(meshFilename.c_str());;
+	if (!m_pLoadedMesh)
+	{
+		return S_FALSE;
+	}
+
+	return S_OK;
+}
+
+HRESULT D3DMeshNode11::InitializeBuffers()
+{
+	ID3D11Device* device = g_pApp->GetGraphicsManager()->GetRenderer()->GetDevice();
+
+	D3D11_BUFFER_DESC vertexBufferDesc, indexBufferDesc;
+	D3D11_SUBRESOURCE_DATA vertexData, indexData;
+	HRESULT result;
+
+	std::vector<VertexType> vertices;
+	std::vector<WORD> indices;
+
+	for (auto it = m_pLoadedMesh->shapes.begin(); it != m_pLoadedMesh->shapes.end(); it++)
+	{
+		indices.insert(indices.end(), it->mesh.indices.begin(), it->mesh.indices.end());
+
+		for (int i = 0; i < it->mesh.positions.size() / 3; i++)
+		{
+			vertices.push_back(VertexType{ Vec3(it->mesh.positions[i * 3 + 0], it->mesh.positions[i * 3 + 1], it->mesh.positions[i * 3 + 2]), XMFLOAT2(it->mesh.texcoords[i * 2 + 0], it->mesh.texcoords[i * 2 + 1]) });
+		}
+	}
+
+	m_vertexCount = vertices.size();
+	m_indexCount = indices.size();
+
+	ZeroMemory(&vertexBufferDesc, sizeof(vertexBufferDesc));
+	vertexBufferDesc.Usage = D3D11_USAGE_DEFAULT;
+	vertexBufferDesc.ByteWidth = sizeof(VertexType) * m_vertexCount;
+	vertexBufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
+	vertexBufferDesc.CPUAccessFlags = 0;
+
+	ZeroMemory(&vertexData, sizeof(vertexData));
+	vertexData.pSysMem = vertices.data();
+
+	result = device->CreateBuffer(&vertexBufferDesc, &vertexData, &m_pVertexBuffer);
+	if (FAILED(result))
+	{
+		return result;
+	}
+
+	ZeroMemory(&indexBufferDesc, sizeof(indexBufferDesc));
+	indexBufferDesc.Usage = D3D11_USAGE_DEFAULT;
+	indexBufferDesc.ByteWidth = sizeof(WORD) * m_indexCount;
+	indexBufferDesc.BindFlags = D3D11_BIND_INDEX_BUFFER;
+	indexBufferDesc.CPUAccessFlags = 0;
+
+	ZeroMemory(&indexData, sizeof(indexData));
+	indexData.pSysMem = indices.data();
+
+	result = device->CreateBuffer(&indexBufferDesc, &indexData, &m_pIndexBuffer);
+	if (FAILED(result))
+	{
+		return result;
+	}
+
+	return S_OK;
+}
+
+HRESULT D3DMeshNode11::VRender(Scene* pScene)
+{
+	bool result;
+
+	IRenderer* pRenderer = g_pApp->GetGraphicsManager()->GetRenderer();
+	ID3D11DeviceContext* context = pRenderer->GetDeviceContext();
+
+	Mat4x4 worldMatrix, viewMatrix, projectionMatrix;
+	pRenderer->VGetViewMatrix(viewMatrix);
+	pRenderer->VGetWorldMatrix(worldMatrix);
+	pRenderer->VGetProjectionMatrix(projectionMatrix);
+
+	RenderBuffers(context);
+
+	result = g_pApp->GetGraphicsManager()->GetTextureShader()->Render(context, m_indexCount, DirectX::XMLoadFloat4x4(&worldMatrix),
+		XMLoadFloat4x4(&viewMatrix), XMLoadFloat4x4(&projectionMatrix), m_pTexture);
+	if (!result)
+	{
+		return S_FALSE;
+	}
+
+	return S_OK;
+}
+
+void D3DMeshNode11::RenderBuffers(ID3D11DeviceContext* deviceContext)
 {
 	unsigned int stride, offset;
 
