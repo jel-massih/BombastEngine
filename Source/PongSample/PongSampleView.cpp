@@ -148,12 +148,12 @@ bool PongSampleHumanView::VLoadGameDelegate(rapidxml::xml_node<>* pLevelData)
 	m_pCamera->ClearTarget();
 	SetCapture(g_pApp->GetHwnd());
 
-	m_pScene->VOnRestore();
-	
 	m_pGrid = BE_NEW D3D11GridNode(INVALID_ACTOR_ID, nullptr, &Mat4x4::g_Identity);
 	m_pScene->AddChild(INVALID_ACTOR_ID, m_pGrid);
 	m_pGrid->SetVisible(m_bShowGrid);
-	
+
+	m_pScene->VOnRestore();
+
 	return true;
 }
 
