@@ -111,6 +111,9 @@ GameOptions::GameOptions()
 	m_bDebugConsoleEnabled = false;
 	m_debugConsolePosition = Point(0, 0);	
 
+	m_debugLogPath = DEBUG_LOG_PATH;
+	m_debugLogName = DEBUG_LOG_FILENAME;
+
 	m_pDoc = NULL;
 }
 
@@ -182,29 +185,48 @@ void GameOptions::Init(const char* xmlFilePath, LPWSTR lpCmdLine)
 		m_level = attribute;
 	}
 
-	pNode = pRoot->first_node("DebugConsole");
+	pNode = pRoot->first_node("Debugging");
 	if (pNode)
 	{
-		if (pNode->first_attribute("enabled"))
+		xml_node<> *pDebugNode = pNode->first_node("DebugConsole");
+		if (pDebugNode)
 		{
-			std::string val = pNode->first_attribute("enabled")->value();
-			std::transform(val.begin(), val.end(), val.begin(), ::tolower); //Convert to lower for equality check
-			m_bDebugConsoleEnabled = val != "false";
-		} else {
-			m_bDebugConsoleEnabled = true;
+			if (pDebugNode->first_attribute("enabled"))
+			{
+				std::string val = pDebugNode->first_attribute("enabled")->value();
+				std::transform(val.begin(), val.end(), val.begin(), ::tolower); //Convert to lower for equality check
+				m_bDebugConsoleEnabled = val != "false";
+			}
+			else {
+				m_bDebugConsoleEnabled = true;
+			}
+
+			std::string attribute;
+			if (pDebugNode->first_attribute("x"))
+			{
+				attribute = pDebugNode->first_attribute("x")->value();
+				m_screenPosition.x = atoi(attribute.c_str());
+			}
+
+			if (pDebugNode->first_attribute("y"))
+			{
+				attribute = pDebugNode->first_attribute("y")->value();
+				m_screenPosition.y = atoi(attribute.c_str());
+			}
 		}
 
-		std::string attribute;
-		if (pNode->first_attribute("x"))
+		pDebugNode = pNode->first_node("Logging");
+		if (pDebugNode)
 		{
-			attribute = pNode->first_attribute("x")->value();
-			m_screenPosition.x = atoi(attribute.c_str());
-		}
-
-		if (pNode->first_attribute("y"))
-		{
-			attribute = pNode->first_attribute("y")->value();
-			m_screenPosition.y = atoi(attribute.c_str());
+			if (pDebugNode->first_attribute("path"))
+			{
+				m_debugLogPath = pDebugNode->first_attribute("path")->value();
+			}
+			
+			if (pDebugNode->first_attribute("filename"))
+			{
+				m_debugLogName = pDebugNode->first_attribute("filename")->value();
+			}
 		}
 	}
 }

@@ -21,6 +21,8 @@ struct GameOptions
 
 	bool m_bDebugConsoleEnabled;
 	Point m_debugConsolePosition;
+	std::string m_debugLogPath;
+	std::string m_debugLogName;
 
 	GameOptions();
 	~GameOptions() { SAFE_DELETE(m_pDoc); }
