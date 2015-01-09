@@ -1,5 +1,8 @@
 <Options>
-  <Graphics renderer="Direct3D 11" x="0" y="0" width="1280" height="720" />
+  <Graphics renderer="Direct3D 11" x="1000" y="650" width="640" height="480" />
   <World level="World\world.xml" />
-  <DebugConsole enabled="true" />
+  <Debugging>
+  	<DebugConsole enabled="true" />
+	<Logging path="../../../Game/Logs" filename="Output.log"></Logging>
+  </Debugging>
 </Options>
