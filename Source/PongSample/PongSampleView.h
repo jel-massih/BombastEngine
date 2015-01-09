@@ -4,6 +4,7 @@
 
 class MovementController;
 class PongSampleController;
+class D3D11GridNode;
 
 class PongSampleHumanView : public HumanView
 {
@@ -21,12 +22,14 @@ public:
 	void SetControlledActorDelegate(IEventDataPtr pEventData);
 
 protected:
-	bool m_bShowUI;
+	bool m_bShowUI, m_bShowGrid;
 	std::wstring m_gameplayText;
 
 	PongSampleController* m_pPongController;
 	MovementController* m_pFreeCameraController;
 	SceneNode* m_pControlledActor;
+
+	D3D11GridNode* m_pGrid;
 
 private:
 	void RegisterAllDelegates();

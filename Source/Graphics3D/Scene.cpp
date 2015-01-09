@@ -21,10 +21,6 @@ Scene::Scene(IRenderer* renderer)
 	m_pCamera = BE_NEW CameraNode(&Mat4x4::g_Identity, frustum);
 	AddChild(INVALID_ACTOR_ID, m_pCamera);
 	m_pCamera->SetViewTransform(this);
-
-	m_pGrid = BE_NEW D3D11GridNode(INVALID_ACTOR_ID, nullptr, &Mat4x4::g_Identity);
-	AddChild(INVALID_ACTOR_ID, m_pGrid);
-	m_pGrid->SetVisible(false);
 }
 
 Scene::~Scene()

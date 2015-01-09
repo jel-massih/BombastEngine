@@ -10,14 +10,12 @@ class CameraNode;
 class SkyNode;
 class LightNode;
 class LightManager;
-class D3D11GridNode;
 
 class Scene
 {
 protected:
 	SceneNode* m_pRoot;
 	CameraNode* m_pCamera;
-	D3D11GridNode* m_pGrid;
 	IRenderer* m_pRenderer;
 
 	BMMatrixStack* m_pMatrixStack;
@@ -42,7 +40,6 @@ public:
 	void SetCamera(CameraNode* camera) { m_pCamera = camera; }
 	const CameraNode* GetCamera() const { return m_pCamera; }
 
-	//p.541
 	const Mat4x4 GetTopMatrix()
 	{
 		return static_cast<const Mat4x4>(*m_pMatrixStack->Top());

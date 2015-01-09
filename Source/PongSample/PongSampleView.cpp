@@ -1,6 +1,7 @@
 #include "PongSampleView.h"
 #include "../Bombast/interfaces.h"
 #include "../Graphics3D/Raycast.h"
+#include "../Graphics3D/RenderNodes.h"
 #include "../Graphics3D/MovementController.h"
 #include "../Game/ProcessManager.h"
 #include "../Resources/ResourceCache.h"
@@ -17,7 +18,9 @@ HumanView(renderer)
 {
 	m_pPongController = 0;
 	m_pFreeCameraController = 0;
+	m_pGrid = nullptr;
 	m_bShowUI = true;
+	m_bShowGrid = false;
 	RegisterAllDelegates();
 }
 
@@ -70,8 +73,8 @@ LRESULT CALLBACK PongSampleHumanView::VOnMsgProc(AppMsg msg)
 		}
 		else if (msg.m_wParam == VK_F4)
 		{
-			Resource resource("scripts\\test.lua");
-			ResourceHandle* pResourceHandle = g_pApp->m_pResourceCache->GetHandle(&resource);
+			m_bShowGrid = !m_bShowGrid;
+			m_pGrid->SetVisible(m_bShowGrid);
 		}
 		else if (msg.m_wParam == VK_F8)
 		{
@@ -146,6 +149,11 @@ bool PongSampleHumanView::VLoadGameDelegate(rapidxml::xml_node<>* pLevelData)
 	SetCapture(g_pApp->GetHwnd());
 
 	m_pScene->VOnRestore();
+	
+	m_pGrid = BE_NEW D3D11GridNode(INVALID_ACTOR_ID, nullptr, &Mat4x4::g_Identity);
+	m_pScene->AddChild(INVALID_ACTOR_ID, m_pGrid);
+	m_pGrid->SetVisible(m_bShowGrid);
+	
 	return true;
 }
 
