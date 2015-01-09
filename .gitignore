@@ -1,13 +1,10 @@
 Temp/
-Source/Msvc/BombastEngine.v11.suo
-Source/Msvc/BombastEngine.sdf
-Game/BombastEngineWin32Debug/BombastEngine.pdb
-Game/BombastEngineWin32Debug/BombastEngine.ilk
-Game/BombastEngineWin32Debug/BombastEngine.exe
-Source/Msvc/BombastEngine.opensdf
 Source/Libraries/*
 !Source/Libraries/.gitkeep
 Source/Msvc/ipch/
+
+Assets/Meshes/*
+Assets/Textures/*
 
 *.dll
 *.exe
@@ -15,3 +12,4 @@ Source/Msvc/ipch/
 *.pdb
 *.lib
 *.suo
+*.sdf
