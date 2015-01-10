@@ -175,6 +175,16 @@ void GameOptions::Init(const char* xmlFilePath, LPWSTR lpCmdLine)
 			attribute = pNode->first_attribute("y")->value();
 			m_screenPosition.y = atoi(attribute.c_str());
 		}
+
+		if (pNode->first_attribute("fullscreen"))
+		{
+			std::string val = pNode->first_attribute("fullscreen")->value();
+			std::transform(val.begin(), val.end(), val.begin(), ::tolower); //Convert to lower for equality check
+			m_bFullscreen = val != "false";
+		}
+		else {
+			m_bFullscreen = false;
+		}
 	}
 
 	pNode = pRoot->first_node("World");

@@ -1,5 +1,5 @@
 <Options>
-  <Graphics renderer="Direct3D 11" x="1000" y="650" width="640" height="480" />
+  <Graphics renderer="Direct3D 11" fullscreen="true" x="0" y="0" width="640" height="480" />
   <World level="World\world.xml" />
   <Debugging>
   	<DebugConsole enabled="true" />
