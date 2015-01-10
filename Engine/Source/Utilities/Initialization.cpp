@@ -185,6 +185,16 @@ void GameOptions::Init(const char* xmlFilePath, LPWSTR lpCmdLine)
 		else {
 			m_bFullscreen = false;
 		}
+
+		if (pNode->first_attribute("vsync"))
+		{
+			std::string val = pNode->first_attribute("vsync")->value();
+			std::transform(val.begin(), val.end(), val.begin(), ::tolower); //Convert to lower for equality check
+			m_bVsync = val != "false";
+		}
+		else {
+			m_bVsync = true;
+		}
 	}
 
 	pNode = pRoot->first_node("World");

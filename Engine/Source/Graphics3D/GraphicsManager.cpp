@@ -35,7 +35,7 @@ bool GraphicsManager::Initialize(HWND hwnd)
 		return false;
 	}
 
-	if (!m_pRenderer->VInitialize(g_pApp->m_options.m_screenSize.x, g_pApp->m_options.m_screenSize.y, true, hwnd, g_pApp->m_options.m_bFullscreen, 1000.0f, 0.1f))
+	if (!m_pRenderer->VInitialize(g_pApp->m_options.m_screenSize.x, g_pApp->m_options.m_screenSize.y, g_pApp->m_options.m_bVsync, hwnd, g_pApp->m_options.m_bFullscreen, 1000.0f, 0.1f))
 	{
 		BE_ERROR("Could not initialize Renderer");
 		return FALSE;

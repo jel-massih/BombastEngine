@@ -17,6 +17,7 @@ struct GameOptions
 	Point m_screenSize;
 	Point m_screenPosition;
 	bool m_bFullscreen;
+	bool m_bVsync;
 
 	rapidxml::xml_document<> *m_pDoc;
 
