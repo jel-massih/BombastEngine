@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BombastEngine", "Msvc\BombastEngine.vcxproj", "{B8DE6183-26FF-4787-B7BB-BDB3697E6887}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GameSample", "GameSample\Msvc\GameSample.vcxproj", "{FCC5A23D-02B5-4049-9257-F4E58F9474FA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B8DE6183-26FF-4787-B7BB-BDB3697E6887}.Debug|Win32.ActiveCfg = Debug|Win32
+		{B8DE6183-26FF-4787-B7BB-BDB3697E6887}.Debug|Win32.Build.0 = Debug|Win32
+		{B8DE6183-26FF-4787-B7BB-BDB3697E6887}.Release|Win32.ActiveCfg = Release|Win32
+		{B8DE6183-26FF-4787-B7BB-BDB3697E6887}.Release|Win32.Build.0 = Release|Win32
+		{FCC5A23D-02B5-4049-9257-F4E58F9474FA}.Debug|Win32.ActiveCfg = Debug|Win32
+		{FCC5A23D-02B5-4049-9257-F4E58F9474FA}.Debug|Win32.Build.0 = Debug|Win32
+		{FCC5A23D-02B5-4049-9257-F4E58F9474FA}.Release|Win32.ActiveCfg = Release|Win32
+		{FCC5A23D-02B5-4049-9257-F4E58F9474FA}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

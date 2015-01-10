@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Application">
+      <UniqueIdentifier>{afa6afd2-bc81-43d5-a6fb-3d09c856a372}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameSample">
+      <UniqueIdentifier>{bbb58af4-53f4-47e0-b65e-cefa69281451}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="GameSampleStd.h">
+      <Filter>Application</Filter>
+    </ClInclude>
+    <ClInclude Include="GameSample.h">
+      <Filter>Application</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameSampleView.h">
+      <Filter>GameSample</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameSampleController.h">
+      <Filter>GameSample</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameSampleEvents.h">
+      <Filter>GameSample</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="GameSampleStd.cpp">
+      <Filter>Application</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameSample.cpp">
+      <Filter>GameSample</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameSampleController.cpp">
+      <Filter>GameSample</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameSampleView.cpp">
+      <Filter>GameSample</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameSampleEvents.cpp">
+      <Filter>GameSample</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
