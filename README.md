@@ -1,7 +1,7 @@
 Bombast Engine
 =============
 
-C++ Game Engine (DirectX) (WIP)
+C++ 3D Game Engine (DirectX) (WIP)
 
 <b>Dependencies:</b>
 * PhysX 3.3.2
