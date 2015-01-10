@@ -1,10 +1,10 @@
-Temp/
-Source/Libraries/*
-!Source/Libraries/.gitkeep
-Source/Msvc/ipch/
+Engine/Temp/
+Engine/Source/Libraries/*
+!Engine/Source/Libraries/.gitkeep
+Engine/Source/Msvc/ipch/
 
-Assets/Meshes/*
-Assets/Textures/*
+Engine/Assets/Meshes/*
+Engine/Assets/Textures/*
 
 *.dll
 *.exe
@@ -13,3 +13,5 @@ Assets/Textures/*
 *.lib
 *.suo
 *.sdf
+*.tlog
+*.idb
