@@ -1,6 +1,27 @@
 #include "Lighting.h"
 #include "../Actor/RenderComponent.h"
 
+void LightProperties::GetLightTypeFromString(std::string type)
+{
+	if (type == "directional")
+	{
+		m_lightType = BLT_DIRECTIONAL;
+	}
+	if (type == "point")
+	{
+		m_lightType = BLT_POINT;
+	}
+	if (type == "spot")
+	{
+		m_lightType = BLT_SPOT;
+	}
+	if (type == "area")
+	{
+		m_lightType = BLT_AREA;
+	}
+	m_lightType = BLT_INVALID;
+}
+
 LightNode::LightNode(const ActorId actorId, BaseRenderComponent* renderComponent, const LightProperties& props, const Mat4x4* t)
 	: SceneNode(actorId, renderComponent, RenderPass_NotRendered, t)
 {

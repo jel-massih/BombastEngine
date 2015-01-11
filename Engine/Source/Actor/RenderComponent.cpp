@@ -3,11 +3,13 @@
 #include "TransformComponent.h"
 #include "..\Events\Events.h"
 #include "../Graphics3D/RenderNodes.h"
+#include "../Graphics3D/Lighting.h"
 
 const char* InvisibleRenderComponent::g_Name = "InvisibleRenderComponent";
 const char* BitmapRenderComponent::g_Name = "BitmapRenderComponent";
 const char* BlockRenderComponent::g_Name = "BlockRenderComponent";
 const char* MeshRenderComponent::g_Name = "MeshRenderComponent";
+const char* LightRenderComponent::g_Name = "LightRenderComponent";
 
 BaseRenderComponent::BaseRenderComponent()
 {
@@ -224,6 +226,37 @@ SceneNode* MeshRenderComponent::VCreateSceneNode()
 	{
 		SceneNode* mesh = BE_NEW D3DMeshNode11(m_pOwner->GetId(), (BaseRenderComponent*)this, m_textureResource, m_meshResource, RenderPass_Actor, &pTransformComponent->GetTransform());
 		return mesh;
+	}
+
+	return NULL;
+}
+
+bool LightRenderComponent::VDelegateInitialize(rapidxml::xml_node<>* pData)
+{
+	rapidxml::xml_node<>* pShape = pData->first_node("Shape");
+	if (pShape)
+	{
+		m_properties.m_falloff = (float)atof(pShape->first_attribute("falloff")->value());
+		m_properties.m_range = (float)atof(pShape->first_attribute("range")->value());
+	}
+
+	rapidxml::xml_node<>* pType = pData->first_node("Type");
+	if (pType)
+	{
+		m_properties.GetLightTypeFromString(pType->value());
+	}
+
+	return true;
+}
+
+SceneNode* LightRenderComponent::VCreateSceneNode()
+{
+	TransformComponent* pTransformComponent = m_pOwner->GetComponent<TransformComponent>(TransformComponent::g_Name);
+
+	if (pTransformComponent && m_properties.m_lightType != BLT_INVALID)
+	{
+		SceneNode* light = BE_NEW D3DLightNode11(m_pOwner->GetId(), (BaseRenderComponent*)this, m_properties, &pTransformComponent->GetTransform());
+		return light;
 	}
 
 	return NULL;

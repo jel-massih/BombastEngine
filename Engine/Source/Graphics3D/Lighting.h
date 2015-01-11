@@ -1,9 +1,22 @@
 #pragma once
 
+enum LightType
+{
+	BLT_INVALID = -1,
+	BLT_DIRECTIONAL,
+	BLT_POINT,
+	BLT_SPOT,
+	BLT_AREA,
+	BLT_MAX = BLT_AREA
+};
+
 struct LightProperties
 {
 	float m_range;
 	float m_falloff;
+	LightType m_lightType;
+
+	void GetLightTypeFromString(const std::string type);
 };
 
 class LightNode : public SceneNode

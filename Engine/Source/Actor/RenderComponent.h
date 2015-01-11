@@ -84,10 +84,8 @@ protected:
 class LightRenderComponent : public BaseRenderComponent
 {
 public:
-	static const char* g_name;
-	virtual const char* VGetName() const { return g_name; }
-
-	LightRenderComponent();
+	static const char* g_Name;
+	virtual const char* VGetName() const { return g_Name; }
 
 protected:
 	virtual bool VDelegateInitialize(rapidxml::xml_node<>* pBaseElement) override;
