@@ -155,6 +155,9 @@
     <ClCompile Include="..\Graphics3D\RenderNodes.cpp">
       <Filter>Graphics3D</Filter>
     </ClCompile>
+    <ClCompile Include="..\Utilities\BMDLMeshLoader.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Bombast\BombastApp.h">
@@ -344,6 +347,9 @@
     </ClInclude>
     <ClInclude Include="..\Graphics3D\RenderNodes.h">
       <Filter>Graphics3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Utilities\BMDLMeshLoader.h">
+      <Filter>Utilities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

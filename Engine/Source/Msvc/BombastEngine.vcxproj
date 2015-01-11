@@ -64,6 +64,7 @@
     <ClInclude Include="..\Scripting\LuaEvent.h" />
     <ClInclude Include="..\Scripting\LuaExports.h" />
     <ClInclude Include="..\UI\UserInterface.h" />
+    <ClInclude Include="..\Utilities\BMDLMeshLoader.h" />
     <ClInclude Include="..\Utilities\DDSTextureLoader.h" />
     <ClInclude Include="..\Utilities\FastDelegate\FastDelegate.h" />
     <ClInclude Include="..\Utilities\Initialization.h" />
@@ -121,6 +122,7 @@
     <ClCompile Include="..\Resources\XmlResource.cpp" />
     <ClCompile Include="..\Resources\ZipFile.cpp" />
     <ClCompile Include="..\Scripting\LuaCoreManager.cpp" />
+    <ClCompile Include="..\Utilities\BMDLMeshLoader.cpp" />
     <ClCompile Include="..\Utilities\DDSTextureLoader.cpp" />
     <ClCompile Include="..\Utilities\Initialization.cpp" />
     <ClCompile Include="..\Utilities\Math.cpp" />

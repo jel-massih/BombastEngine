@@ -1,6 +1,6 @@
 #include "ModelResource.h"
 #include "../Bombast/BombastApp.h"
-#include <sstream>
+#include "../Utilities/BMDLMeshLoader.h"
 
 void ModelResourceExtraData::Shutdown()
 {
@@ -19,14 +19,11 @@ void TestSt(std::istream& is)
 
 bool ModelResourceExtraData::LoadModel(char* pRawBuffer, unsigned int rawSize, std::string modelFilepath)
 {
-	SAFE_DELETE(m_pModelData);
 	m_pModelData = BE_NEW ModelClass;
-	std::istringstream ss(pRawBuffer);
-	unsigned int slashIndex = modelFilepath.find_last_of("\\");
 
+	LoadMesh(&m_pModelData, reinterpret_cast<byte*>(pRawBuffer));
 
-
-	return false;
+	return true;
 }
 
 bool ModelResourceLoader::VLoadResource(char* rawBuffer, unsigned int rawSize, ResourceHandle* handle)

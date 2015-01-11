@@ -7,6 +7,6 @@
 
     <MeshRenderComponent>
         <Texture path="textures\grid.dds"></Texture>
-        <Mesh path="meshes\cube.obj"></Mesh>
+        <Mesh path="meshes\cube.bmdl"></Mesh>
     </BitmapRenderComponent>
 </Actor>

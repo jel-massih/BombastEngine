@@ -740,22 +740,8 @@ HRESULT D3DMeshNode11::InitializeBuffers()
 	D3D11_BUFFER_DESC vertexBufferDesc, indexBufferDesc;
 	D3D11_SUBRESOURCE_DATA vertexData, indexData;
 	HRESULT result;
-
-	std::vector<VertexType> vertices;
-	std::vector<WORD> indices;
-
-	for (auto it = m_pLoadedMesh->shapes.begin(); it != m_pLoadedMesh->shapes.end(); it++)
-	{
-		indices.insert(indices.end(), it->mesh.indices.begin(), it->mesh.indices.end());
-
-		for (int i = 0; i < it->mesh.positions.size() / 3; i++)
-		{
-			vertices.push_back(VertexType{ Vec3(it->mesh.positions[i * 3 + 0], it->mesh.positions[i * 3 + 1], it->mesh.positions[i * 3 + 2]), XMFLOAT2(it->mesh.texcoords[i * 2 + 0], it->mesh.texcoords[i * 2 + 1]) });
-		}
-	}
-
-	m_vertexCount = vertices.size();
-	m_indexCount = indices.size();
+	m_vertexCount = 0;
+	m_indexCount = 0;
 
 	ZeroMemory(&vertexBufferDesc, sizeof(vertexBufferDesc));
 	vertexBufferDesc.Usage = D3D11_USAGE_DEFAULT;
@@ -764,7 +750,7 @@ HRESULT D3DMeshNode11::InitializeBuffers()
 	vertexBufferDesc.CPUAccessFlags = 0;
 
 	ZeroMemory(&vertexData, sizeof(vertexData));
-	vertexData.pSysMem = vertices.data();
+	vertexData.pSysMem = NULL;
 
 	result = device->CreateBuffer(&vertexBufferDesc, &vertexData, &m_pVertexBuffer);
 	if (FAILED(result))
@@ -779,7 +765,7 @@ HRESULT D3DMeshNode11::InitializeBuffers()
 	indexBufferDesc.CPUAccessFlags = 0;
 
 	ZeroMemory(&indexData, sizeof(indexData));
-	indexData.pSysMem = indices.data();
+	indexData.pSysMem = NULL;
 
 	result = device->CreateBuffer(&indexBufferDesc, &indexData, &m_pIndexBuffer);
 	if (FAILED(result))
