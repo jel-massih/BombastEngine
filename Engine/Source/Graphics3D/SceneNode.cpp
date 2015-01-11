@@ -139,10 +139,6 @@ bool SceneNode::VIsVisible(Scene* pScene) const
 const Vec3 SceneNode::GetWorldPosition() const
 {
 	Vec3 pos = GetPosition();
-	if (m_pParent)
-	{
-//		pos += m_pParent->GetWorldPosition();
-	}
 
 	return pos;
 }
