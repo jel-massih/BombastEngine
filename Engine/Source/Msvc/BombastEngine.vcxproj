@@ -139,6 +139,16 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">stdafx.h</PrecompiledHeaderFile>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\Assets\Shaders\color.ps" />
+    <None Include="..\..\Assets\Shaders\color.vs" />
+    <None Include="..\..\Assets\Shaders\font.ps" />
+    <None Include="..\..\Assets\Shaders\font.vs" />
+    <None Include="..\..\Assets\Shaders\light.ps" />
+    <None Include="..\..\Assets\Shaders\light.vs" />
+    <None Include="..\..\Assets\Shaders\texture.ps" />
+    <None Include="..\..\Assets\Shaders\texture.vs" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{B8DE6183-26FF-4787-B7BB-BDB3697E6887}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
