@@ -297,6 +297,7 @@ ResourceHandle* ResourceCache::Load(Resource* r)
 	if (rawBuffer == NULL || m_pFile->VGetRawResource(*r, rawBuffer) == 0)
 	{
 		//Resource Cache Out of memory
+		BE_ERROR("Error Loading Resource: " + r->m_name + " Resource Cache out of memory");
 		return NULL;
 	}
 
@@ -320,6 +321,7 @@ ResourceHandle* ResourceCache::Load(Resource* r)
 		if (rawBuffer == NULL || buffer == NULL)
 		{
 			//Resource Cache Out of memory
+			BE_ERROR("Error Loading Resource: " + r->m_name + " Resource Cache out of memory");
 			return NULL;
 		}
 
@@ -334,6 +336,7 @@ ResourceHandle* ResourceCache::Load(Resource* r)
 		if (!success)
 		{
 			//Failed To load Resource
+			BE_ERROR("Error Loading Resource: " + r->m_name + " Failed to load resource");
 			SAFE_DELETE(handle);
 			return NULL;
 		}
