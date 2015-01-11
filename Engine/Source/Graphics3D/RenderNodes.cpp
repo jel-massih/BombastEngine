@@ -816,7 +816,7 @@ HRESULT D3DMeshNode11::VRender(Scene* pScene)
 	RenderBuffers(context);
 
 	result = g_pApp->GetGraphicsManager()->GetLightShader()->Render(context, m_indexCount, DirectX::XMLoadFloat4x4(&worldMatrix),
-		XMLoadFloat4x4(&viewMatrix), XMLoadFloat4x4(&projectionMatrix), m_pTexture, XMFLOAT4(1.0f,0.0f,1.0f,1.0f), XMFLOAT3(1.0f,0.0f,1.0f));
+		XMLoadFloat4x4(&viewMatrix), XMLoadFloat4x4(&projectionMatrix), m_pTexture, XMFLOAT3(1.0f, 0.0f, 1.0f), XMFLOAT4(1.0f, 0.0f, 1.0f, 1.0f), XMFLOAT4(0.15f, 0.15f, 0.15f, 1.0f));
 	if (!result)
 	{
 		return S_FALSE;
