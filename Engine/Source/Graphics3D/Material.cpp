@@ -8,6 +8,7 @@ Material::Material()
 	m_D3DMat.Ambient = ambientMat;
 	m_D3DMat.Specular = g_White;
 	m_D3DMat.Emissive = g_Black;
+	m_D3DMat.Power = 32.0f;
 }
 
 void Material::SetAmbient(const Color& color)
