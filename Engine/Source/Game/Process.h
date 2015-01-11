@@ -42,7 +42,7 @@ public:
 
 protected:
 	virtual void VOnInit() { m_state = RUNNING; }
-	virtual void VOnUpdate(unsigned long deltaMs) = 0;
+	virtual void VOnUpdate(const float deltaMs) = 0;
 	virtual void VOnSuccess() {}
 	virtual void VOnFail() {}
 	virtual void VOnAbort() {}

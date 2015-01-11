@@ -91,7 +91,7 @@ HRESULT HumanView::VOnLostDevice()
 	return S_OK;
 }
 
-void HumanView::VOnRender(double deltaMs, double elapsedMs)
+void HumanView::VOnRender(const float deltaMs, double elapsedMs)
 {
 	m_currTick = timeGetTime();
 	if (m_currTick == m_lastDraw)
@@ -207,7 +207,7 @@ LRESULT CALLBACK HumanView::VOnMsgProc(AppMsg msg)
 	return 0;
 }
 
-void HumanView::VOnUpdate(const int deltaMs)
+void HumanView::VOnUpdate(const float deltaMs)
 {
 	m_pProcessManager->UpdateProcesses(deltaMs);
 

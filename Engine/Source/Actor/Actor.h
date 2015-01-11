@@ -18,7 +18,7 @@ public:
 
 	void Shutdown();
 
-	void Update(int deltaMs);
+	void Update(const float deltaMs);
 
 	ActorId GetId() const { return m_id; }
 	std::string GetType() const { return m_type; }

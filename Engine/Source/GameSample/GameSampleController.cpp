@@ -25,7 +25,7 @@ bool GameSampleController::VOnMouseDown(const Point& mousePos, const int radius,
 	return true;
 }
 
-void GameSampleController::OnUpdate(DWORD const deltaMs)
+void GameSampleController::OnUpdate(const float deltaMs)
 {
 
 }

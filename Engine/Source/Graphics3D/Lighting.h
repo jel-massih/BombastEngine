@@ -22,7 +22,7 @@ public:
 		: LightNode(actorId, renderComponent, props, t){}
 
 	virtual HRESULT VOnRestore() { return S_OK; }
-	virtual HRESULT VOnUpdate(Scene* pScene, DWORD const elapsedMs);
+	virtual HRESULT VOnUpdate(Scene* pScene, const float deltaMs);
 };
 
 class LightingManager

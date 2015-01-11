@@ -6,7 +6,7 @@ public:
 	MovementController(SceneNode* pObject, float initialYaw, float initialPitch, bool rotateWhenLButtonDown);
 	void SetObject(SceneNode* pNewObject);
 
-	void OnUpdate(DWORD const deltaMs);
+	void OnUpdate(const float deltaMs);
 
 public:
 	bool VOnMouseMove(const Point &pos, const int radius);

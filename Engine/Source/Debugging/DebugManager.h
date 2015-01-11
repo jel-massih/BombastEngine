@@ -12,7 +12,7 @@ public:
 	bool Initialize(HumanView* owner);
 	void Shutdown();
 
-	bool Update(const int deltaMs);
+	bool Update(const float deltaMs);
 	void Render();
 
 	DebugText* GetDebugText() const { return m_pDebugText; }

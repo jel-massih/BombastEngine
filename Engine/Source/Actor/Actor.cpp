@@ -36,7 +36,7 @@ void Actor::Shutdown()
 	m_components.clear();
 }
 
-void Actor::Update(int deltaMs)
+void Actor::Update(const float deltaMs)
 {
 	for (ActorComponents::iterator it = m_components.begin(); it != m_components.end(); ++it)
 	{

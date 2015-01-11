@@ -13,7 +13,7 @@ public:
 	virtual ~GameSampleHumanView();
 
 	virtual LRESULT CALLBACK VOnMsgProc(AppMsg msg);
-	virtual void VOnUpdate(unsigned long deltaMs);
+	virtual void VOnUpdate(const float deltaMs);
 	virtual void VOnAttach(GameViewId vid, ActorId aid);
 
 	virtual void VSetControlledActor(ActorId actorId);

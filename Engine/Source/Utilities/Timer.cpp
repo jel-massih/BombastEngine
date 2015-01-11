@@ -2,7 +2,7 @@
 
 bool Timer::Initialize()
 {
-	bool result;
+	BOOL result;
 
 	result = QueryPerformanceFrequency(&m_frequency);
 	if (!result)
@@ -20,14 +20,14 @@ bool Timer::Initialize()
 
 void Timer::Frame()
 {
-	double frameDifference;
+	float frameDifference;
 
 	QueryPerformanceCounter(&m_counter);
 
 	double newElapsedTime = (double(m_counter.QuadPart) - m_counterStart) / m_ticksPerMs;
 
 
-	frameDifference = newElapsedTime - m_currentTime;
+	frameDifference = (float)(newElapsedTime - m_currentTime);
 	m_frameTime = frameDifference;
 	
 	m_currentTime = newElapsedTime;

@@ -7,9 +7,9 @@ public:
 	ScreenElementScene(IRenderer* renderer) : Scene(renderer) {}
 	virtual ~ScreenElementScene() {}
 
-	virtual void VOnUpdate(int deltaMs) { OnUpdate(deltaMs); }
+	virtual void VOnUpdate(const float deltaMs) { OnUpdate(deltaMs); }
 	virtual HRESULT VOnRestore() { OnRestore(); return S_OK; }
-	virtual HRESULT VOnRender(double deltaMs, double elapsedMs) { OnRender(); return S_OK; }
+	virtual HRESULT VOnRender(const float deltaMs, double elapsedMs) { OnRender(); return S_OK; }
 	
 	virtual HRESULT VOnLostDevice() { OnLostDevice(); return S_OK; }
 	virtual int VGetZOrder() const { return 0; }

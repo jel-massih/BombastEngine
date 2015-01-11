@@ -5,7 +5,7 @@ ProcessManager::~ProcessManager()
 	ClearAllProcesses();
 }
 
-unsigned int ProcessManager::UpdateProcesses(unsigned long deltaMs)
+unsigned int ProcessManager::UpdateProcesses(const float deltaMs)
 {
 	unsigned short int successCount = 0;
 	unsigned short int failCount = 0;

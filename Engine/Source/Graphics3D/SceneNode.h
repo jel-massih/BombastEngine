@@ -67,7 +67,7 @@ public:
 	virtual void VSetTransform(const Mat4x4* toWorld, const Mat4x4* fromWorld = NULL);
 	
 	virtual HRESULT VOnRestore(Scene* pScene);
-	virtual HRESULT VOnUpdate(Scene* pScene, DWORD const elapsedMs);
+	virtual HRESULT VOnUpdate(Scene* pScene, const float deltaMs);
 
 	virtual HRESULT VPreRender(Scene* pScene);
 	virtual bool VIsVisible(Scene* pScene) const;
@@ -125,7 +125,7 @@ public :
 
 	virtual HRESULT VRender(Scene* pScene);
 	virtual HRESULT VOnRestore(Scene* pScene);
-	virtual HRESULT VOnUpdate(Scene* pScene, DWORD const elapsedMs);
+	virtual HRESULT VOnUpdate(Scene* pScene, const float deltaMs);
 	virtual bool VIsVisible(Scene* pScene) const { return m_bActive; }
 
 	const Frustum& GetFrustum() const { return m_frustum; }

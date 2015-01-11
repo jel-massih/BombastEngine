@@ -55,7 +55,7 @@ void DebugManager::Shutdown()
 	SAFE_DELETE(m_pSystemResourceMonitor);
 }
 
-bool DebugManager::Update(const int deltaMs)
+bool DebugManager::Update(const float deltaMs)
 {
 	Vec3 viewPos = m_pOwner->m_pCamera->GetPosition();
 	Vec3 viewRot = m_pOwner->m_pCamera->GetDirection();

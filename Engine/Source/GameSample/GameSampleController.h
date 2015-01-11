@@ -9,7 +9,7 @@ class GameSampleController : public IMouseHandler, public IKeyboardHandler
 {
 public:
 	GameSampleController(SceneNode* object);
-	void OnUpdate(DWORD const elapsedMs);
+	void OnUpdate(const float deltaMs);
 
 protected:
 	BYTE m_bKey[256];

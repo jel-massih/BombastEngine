@@ -6,7 +6,7 @@ public:
 	bool Initialize();
 	void Frame();
 
-	double GetFrameTime() const { return m_frameTime; }
+	float GetFrameTime() const { return m_frameTime; }
 	double GetTime() const { return m_currentTime; };
 
 private:
@@ -16,5 +16,5 @@ private:
 
 	double m_ticksPerMs;
 	double m_currentTime;
-	double m_frameTime;
+	float m_frameTime;
 };

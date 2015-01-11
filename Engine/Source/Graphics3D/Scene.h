@@ -20,7 +20,7 @@ public:
 	HRESULT OnRender();
 	HRESULT OnRestore();
 	HRESULT OnLostDevice();
-	HRESULT OnUpdate(const int deltaMS);
+	HRESULT OnUpdate(const float deltaMs);
 	ISceneNode* FindActor(ActorId id);
 	bool AddChild(ActorId id, ISceneNode* kid);
 	bool RemoveChild(ActorId id);

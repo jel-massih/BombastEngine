@@ -230,7 +230,7 @@ void CoreGameLogic::VRenderDiagnostics()
 	}
 }
 
-void CoreGameLogic::VOnUpdate(double deltaMs, double elapsedMs)
+void CoreGameLogic::VOnUpdate(const float deltaMs, double elapsedMs)
 {
 	m_lifetime += deltaMs;
 
@@ -276,7 +276,7 @@ void CoreGameLogic::VOnUpdate(double deltaMs, double elapsedMs)
 	}
 }
 
-void CoreGameLogic::VOnRender(double deltaMs, double elapsedMs)
+void CoreGameLogic::VOnRender(const float deltaMs, double elapsedMs)
 {
 	for (auto it = m_gameViews.begin(); it != m_gameViews.end(); it++)
 	{

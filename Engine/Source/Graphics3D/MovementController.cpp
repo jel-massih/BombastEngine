@@ -32,7 +32,7 @@ void MovementController::SetObject(SceneNode* pNewObject)
 {
 }
 
-void MovementController::OnUpdate(DWORD const deltaMs)
+void MovementController::OnUpdate(const float deltaMs)
 {
 	float deltaSeconds = (deltaMs / 1000.f);
 

@@ -27,8 +27,8 @@ class IScreenElement
 public:
 	virtual HRESULT VOnRestore() = 0;
 	virtual HRESULT VOnLostDevice() = 0;
-	virtual HRESULT VOnRender(double deltaMs, double elapsedMs) = 0;
-	virtual void VOnUpdate(int deltaMs) = 0;
+	virtual HRESULT VOnRender(const float deltaMs, double elapsedMs) = 0;
+	virtual void VOnUpdate(const float deltaMs) = 0;
 
 	virtual int VGetZOrder() const = 0;
 	virtual void VSetZOrder(int const zOrder) = 0;
@@ -66,14 +66,14 @@ class IGameView
 {
 public:
 	virtual HRESULT VOnRestore() = 0;
-	virtual void VOnRender(double deltaMs, double elapsedMs) = 0;
+	virtual void VOnRender(const float deltaMs, double elapsedMs) = 0;
 	virtual HRESULT VOnLostDevice() = 0;
 	virtual GameViewType VGetType() = 0;
 	virtual GameViewId VGetId() const = 0;
 	virtual void VOnAttach(GameViewId vid, ActorId aid) = 0;
 
 	virtual LRESULT CALLBACK VOnMsgProc(AppMsg msg) = 0;
-	virtual void VOnUpdate(unsigned long deltaMs) = 0;
+	virtual void VOnUpdate(const float deltaMs) = 0;
 
 	virtual ~IGameView(){};
 };
@@ -185,7 +185,7 @@ public:
 
 	virtual void VSetTransform(const Mat4x4* toWorld, const Mat4x4* fromWorld = NULL) = 0;
 
-	virtual HRESULT VOnUpdate(Scene* pScene, DWORD const elapsedMs) = 0;
+	virtual HRESULT VOnUpdate(Scene* pScene, const float deltaMs) = 0;
 	virtual HRESULT VOnRestore(Scene* pScene) = 0;
 
 	virtual HRESULT VPreRender(Scene* pScene) = 0;

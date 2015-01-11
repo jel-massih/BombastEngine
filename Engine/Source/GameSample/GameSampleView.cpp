@@ -111,7 +111,7 @@ LRESULT CALLBACK GameSampleHumanView::VOnMsgProc(AppMsg msg)
 	return 0;
 }
 
-void GameSampleHumanView::VOnUpdate(unsigned long deltaMs)
+void GameSampleHumanView::VOnUpdate(const float deltaMs)
 {
 	HumanView::VOnUpdate(deltaMs);
 

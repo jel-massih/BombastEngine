@@ -11,7 +11,7 @@ class ProcessManager
 public:
 	~ProcessManager();
 
-	unsigned int UpdateProcesses(unsigned long deltaMs);
+	unsigned int UpdateProcesses(const float deltaMs);
 	Process* AttachProcess(Process* pProcess);
 	void AbortAllProcesses(bool immediate);
 

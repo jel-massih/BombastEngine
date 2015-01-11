@@ -147,14 +147,14 @@ const Vec3 SceneNode::GetWorldPosition() const
 	return pos;
 }
 
-HRESULT SceneNode::VOnUpdate(Scene* pScene, DWORD const elapsedMs)
+HRESULT SceneNode::VOnUpdate(Scene* pScene, const float deltaMs)
 {
 	SceneNodeList::iterator i = m_children.begin();
 	SceneNodeList::iterator end = m_children.end();
 
 	while (i != end)
 	{
-		(*i)->VOnUpdate(pScene, elapsedMs);
+		(*i)->VOnUpdate(pScene, deltaMs);
 		i++;
 	}
 
@@ -368,7 +368,7 @@ Mat4x4 CameraNode::GetWorldViewProjection(Scene* pScene)
 	return worldView * m_projection;
 }
 
-HRESULT CameraNode::VOnUpdate(Scene* pScene, DWORD const elapsedMs)
+HRESULT CameraNode::VOnUpdate(Scene* pScene, const float deltaMs)
 {
 	return S_OK;
 }

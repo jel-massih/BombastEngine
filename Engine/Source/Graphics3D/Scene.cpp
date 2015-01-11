@@ -133,19 +133,12 @@ void Scene::NewRenderComponentDelegate(IEventDataPtr pEventData)
 	AddChild(actorId, pSceneNode);
 }
 
-HRESULT Scene::OnUpdate(const int deltaMS)
+HRESULT Scene::OnUpdate(const float deltaMs)
 {
 	if (!m_pRoot)
 		return S_OK;
 
-	static DWORD lastTime = timeGetTime();
-	DWORD elapsedMs = 0;
-	DWORD now = timeGetTime();
-
-	elapsedMs = now - lastTime;
-	lastTime = now;
-
-	return m_pRoot->VOnUpdate(this, elapsedMs);
+	return m_pRoot->VOnUpdate(this, deltaMs);
 }
 
 ISceneNode* Scene::FindActor(ActorId id)

@@ -100,7 +100,7 @@ void PhysicsComponent::VPostInit()
 	}
 }
 
-void PhysicsComponent::VUpdate(int deltaMs)
+void PhysicsComponent::VUpdate(const float deltaMs)
 {
 	TransformComponent* pTransformComponent = m_pOwner->GetComponent<TransformComponent>(TransformComponent::g_Name);
 
@@ -114,7 +114,7 @@ void PhysicsComponent::VUpdate(int deltaMs)
 
 	if (m_acceleration != 0)
 	{
-		float frameAcceleration = m_acceleration / 1000.0f * (float)deltaMs;
+		float frameAcceleration = m_acceleration / 1000.0f * deltaMs;
 
 		Vec3 velocity(m_pGamePhysics->VGetVelocity(m_pOwner->GetId()));
 		float magnitude = velocity.Length();
@@ -125,7 +125,7 @@ void PhysicsComponent::VUpdate(int deltaMs)
 
 	if (m_angularAcceleration != 0)
 	{
-		float frameAngularAcceleration = m_angularAcceleration / 1000.0f * (float)deltaMs;
+		float frameAngularAcceleration = m_angularAcceleration / 1000.0f * deltaMs;
 		m_pGamePhysics->VApplyTorque(transform.GetUp(), frameAngularAcceleration, m_pOwner->GetId());
 	}
 }

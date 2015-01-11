@@ -7,7 +7,7 @@ LightNode::LightNode(const ActorId actorId, BaseRenderComponent* renderComponent
 	m_lightProperties = props;
 }
 
-HRESULT D3DLightNode11::VOnUpdate(Scene* pScene, DWORD const elapsedMs)
+HRESULT D3DLightNode11::VOnUpdate(Scene* pScene, const float deltaMs)
 {
 	LightRenderComponent* lrc = static_cast<LightRenderComponent*>(m_pRenderComponent);
 	m_properties.GetMaterial().SetDiffuse(lrc->GetColor());

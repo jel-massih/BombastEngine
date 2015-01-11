@@ -16,6 +16,6 @@ public:
 
 protected:
 	virtual void VOnInit();
-	virtual void VOnUpdate(unsigned long deltaMs) override {}
+	virtual void VOnUpdate(const float deltaMs) override {}
 	virtual void VThreadProc() = 0;
 };

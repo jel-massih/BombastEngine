@@ -13,7 +13,7 @@ public:
 	
 	virtual bool VInitialize(rapidxml::xml_node<>* pData) override;
 	virtual void VPostInit() override;
-	virtual void VUpdate(int deltaMs) override;
+	virtual void VUpdate(const float deltaMs) override;
 	virtual rapidxml::xml_node<>* VGenerateXml() override { return NULL; }
 
 	//Physics

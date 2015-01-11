@@ -17,7 +17,7 @@ public:
 
 	virtual HRESULT VOnRestore();
 	virtual HRESULT VOnLostDevice();
-	virtual void VOnRender(double deltaMs, double elapsedMs);
+	virtual void VOnRender(const float deltaMs, double elapsedMs);
 	virtual GameViewType VGetType() { return GameView_Human; }
 	virtual GameViewId VGetId() const { return m_viewId; }
 
@@ -27,7 +27,7 @@ public:
 		m_actorId = aid;
 	}
 	virtual LRESULT CALLBACK VOnMsgProc(AppMsg msg);
-	virtual void VOnUpdate(const int deltaMs);
+	virtual void VOnUpdate(const float deltaMs);
 
 	virtual void VPushElement(IScreenElement* pElement);
 	virtual void VRemoveElement(IScreenElement* pElement);
