@@ -222,7 +222,7 @@ SceneNode* MeshRenderComponent::VCreateSceneNode()
 
 	if (pTransformComponent)
 	{
-		SceneNode* mesh = BE_NEW D3DMeshNode11(m_pOwner->GetId(), (BaseRenderComponent*)this, m_textureResource, m_meshResource, RenderPass_GUI, &pTransformComponent->GetTransform());
+		SceneNode* mesh = BE_NEW D3DMeshNode11(m_pOwner->GetId(), (BaseRenderComponent*)this, m_textureResource, m_meshResource, RenderPass_Actor, &pTransformComponent->GetTransform());
 		return mesh;
 	}
 
