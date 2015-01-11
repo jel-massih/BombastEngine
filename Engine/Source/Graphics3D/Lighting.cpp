@@ -3,6 +3,8 @@
 
 void LightProperties::GetLightTypeFromString(std::string type)
 {
+	m_lightType = BLT_INVALID;
+
 	if (type == "directional")
 	{
 		m_lightType = BLT_DIRECTIONAL;
@@ -19,7 +21,6 @@ void LightProperties::GetLightTypeFromString(std::string type)
 	{
 		m_lightType = BLT_AREA;
 	}
-	m_lightType = BLT_INVALID;
 }
 
 LightNode::LightNode(const ActorId actorId, BaseRenderComponent* renderComponent, const LightProperties& props, const Mat4x4* t)

@@ -19,6 +19,7 @@ ActorFactory::ActorFactory()
 	m_componentFactory.Register<BitmapRenderComponent>(ActorComponent::GetIdFromName(BitmapRenderComponent::g_Name));
 	m_componentFactory.Register<BlockRenderComponent>(ActorComponent::GetIdFromName(BlockRenderComponent::g_Name));
 	m_componentFactory.Register<MeshRenderComponent>(ActorComponent::GetIdFromName(MeshRenderComponent::g_Name));
+	m_componentFactory.Register<LightRenderComponent>(ActorComponent::GetIdFromName(LightRenderComponent::g_Name));
 	m_componentFactory.Register<PhysicsComponent>(ActorComponent::GetIdFromName(PhysicsComponent::g_Name));
 }
 
