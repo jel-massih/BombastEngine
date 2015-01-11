@@ -740,8 +740,9 @@ HRESULT D3DMeshNode11::InitializeBuffers()
 	D3D11_BUFFER_DESC vertexBufferDesc, indexBufferDesc;
 	D3D11_SUBRESOURCE_DATA vertexData, indexData;
 	HRESULT result;
-	m_vertexCount = 0;
-	m_indexCount = 0;
+
+	m_vertexCount = m_pLoadedMesh->vertices.size();
+	m_indexCount = m_pLoadedMesh->indices.size();
 
 	ZeroMemory(&vertexBufferDesc, sizeof(vertexBufferDesc));
 	vertexBufferDesc.Usage = D3D11_USAGE_DEFAULT;
@@ -750,7 +751,7 @@ HRESULT D3DMeshNode11::InitializeBuffers()
 	vertexBufferDesc.CPUAccessFlags = 0;
 
 	ZeroMemory(&vertexData, sizeof(vertexData));
-	vertexData.pSysMem = NULL;
+	vertexData.pSysMem = m_pLoadedMesh->vertices.data();
 
 	result = device->CreateBuffer(&vertexBufferDesc, &vertexData, &m_pVertexBuffer);
 	if (FAILED(result))
@@ -765,7 +766,7 @@ HRESULT D3DMeshNode11::InitializeBuffers()
 	indexBufferDesc.CPUAccessFlags = 0;
 
 	ZeroMemory(&indexData, sizeof(indexData));
-	indexData.pSysMem = NULL;
+	indexData.pSysMem = m_pLoadedMesh->indices.data();
 
 	result = device->CreateBuffer(&indexBufferDesc, &indexData, &m_pIndexBuffer);
 	if (FAILED(result))
