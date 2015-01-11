@@ -65,7 +65,7 @@ void LoggingManager::Initialize()
 
 void LoggingManager::Log(const std::string& tag, const std::string& message, const char* func, const char* file, unsigned int lineNum)
 {
-	std::string msg = "[" + tag + "] " + message + "\n";
+	std::string msg = "[" + tag + "] " + message;
 	
 	if (func != NULL)
 	{
@@ -86,7 +86,7 @@ void LoggingManager::Log(const std::string& tag, const std::string& message, con
 		msg += ToStr(lineNum);
 	}
 
-	msg += "\n";
+	msg += "\n\n";
 
 	std::cout << msg;
 
