@@ -47,11 +47,13 @@ void usage()
 
 int main(int argc, char *argv[])
 {
+	int x;
 	// Parse arguments
 
 	if (argc < 3 || argc > 4)
 	{
 		usage();
+		cin >> x;
 		return -1;
 	}
 
@@ -65,6 +67,7 @@ int main(int argc, char *argv[])
 		else
 		{
 			usage();
+			cin >> x;
 			return -1;
 		}
 	}
@@ -73,6 +76,7 @@ int main(int argc, char *argv[])
 	if (!objFile.is_open())
 	{
 		cout << "error: could not open file \"" << argv[1] << "\" for read" << endl;
+		cin >> x;
 		return -1;
 	}
 
@@ -189,6 +193,7 @@ int main(int argc, char *argv[])
 	if (positions.size() == 0 || faces.size() == 0)
 	{
 		cout << "error: obj file \"" << argv[1] << "\" contains no geometry" << endl;
+		cin >> x;
 		return -1;
 	}
 
@@ -199,6 +204,7 @@ int main(int argc, char *argv[])
 		if (face->size() < 3)
 		{
 			cout << "error: face size " << face->size() << " invalid" << endl;
+			cin >> x;
 			return -1;
 		}
 		for (auto triplet = face->begin(); triplet != face->end(); triplet++)
@@ -206,16 +212,19 @@ int main(int argc, char *argv[])
 			if (triplet->pos > positions.size() || triplet->pos < 1)
 			{
 				cout << "error: position index " << triplet->pos << " out of range" << endl;
+				cin >> x;
 				return -1;
 			}
 			if (triplet->norm > normals.size() || triplet->norm < 0)
 			{
 				cout << "error: normal index " << triplet->norm << " out of range" << endl;
+				cin >> x;
 				return -1;
 			}
 			if (triplet->tex > texcoords.size() || triplet->tex < 0)
 			{
 				cout << "error: texcoord index " << triplet->tex << " out of range" << endl;
+				cin >> x;
 				return -1;
 			}
 		}
@@ -329,6 +338,7 @@ int main(int argc, char *argv[])
 	if (!vboFile.is_open())
 	{
 		cout << "error: could not open file \"" << argv[2] << "\" for write" << endl;
+		cin >> x;
 		return -1;
 	}
 
