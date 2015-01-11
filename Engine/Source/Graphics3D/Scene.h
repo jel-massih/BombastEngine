@@ -9,20 +9,10 @@ typedef std::map<ActorId, ISceneNode*> SceneActorMap;
 class CameraNode;
 class SkyNode;
 class LightNode;
-class LightManager;
+class LightingManager;
 
 class Scene
 {
-protected:
-	SceneNode* m_pRoot;
-	CameraNode* m_pCamera;
-	IRenderer* m_pRenderer;
-
-	BMMatrixStack* m_pMatrixStack;
-	SceneActorMap m_actorMap;
-
-	void RenderAlphaPass();
-
 public:
 	Scene(IRenderer* renderer);
 	virtual ~Scene();
@@ -59,7 +49,22 @@ public:
 		m_pRenderer->VSetWorldTransform(&mat);
 	}
 
-	IRenderer* GetRenderer() { return m_pRenderer; }
+	IRenderer* GetRenderer() const { return m_pRenderer; }
+
+	LightingManager* GetLightingManager() const { return m_pLightManager; }
+
 
 	HRESULT Pick(RayCast *pRayCast) { return m_pRoot->VPick(this, pRayCast); }
+
+protected:
+	SceneNode* m_pRoot;
+	CameraNode* m_pCamera;
+	IRenderer* m_pRenderer;
+
+	BMMatrixStack* m_pMatrixStack;
+	SceneActorMap m_actorMap;
+
+	LightingManager* m_pLightManager;
+
+	void RenderAlphaPass();
 };

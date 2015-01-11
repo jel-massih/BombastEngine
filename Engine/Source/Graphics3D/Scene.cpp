@@ -3,6 +3,7 @@
 #include "../Actor/Actor.h"
 #include "../Bombast/BombastApp.h"
 #include "../Events/Events.h"
+#include "Lighting.h"
 #include "RenderNodes.h"
 #include <timeapi.h>
 
@@ -10,6 +11,7 @@ Scene::Scene(IRenderer* renderer)
 {
 	m_pRoot = BE_NEW RootNode();
 	m_pRenderer = renderer;
+	m_pLightManager = BE_NEW LightingManager;
 
 	m_pMatrixStack = BE_NEW BMMatrixStack();
 
@@ -29,7 +31,7 @@ Scene::~Scene()
 	pEventManager->VRemoveListener(fastdelegate::MakeDelegate(this, &Scene::NewRenderComponentDelegate), EvtData_New_Render_Component::sk_EventType);
 
 	SAFE_DELETE(m_pMatrixStack);
-	
+	SAFE_DELETE(m_pLightManager);
 	SAFE_DELETE(m_pRoot);
 }
 
@@ -38,6 +40,8 @@ HRESULT Scene::OnRender()
 	if (m_pRoot && m_pCamera)
 	{
 		m_pCamera->SetViewTransform(this);
+
+		m_pLightManager->CalcLighting(this);
 
 		if (m_pRoot->VPreRender(this) == S_OK)
 		{
@@ -79,7 +83,11 @@ bool Scene::AddChild(ActorId id, ISceneNode* child)
 		m_actorMap[id] = child;
 	}
 
-	//@TODO: Add Lights
+	LightNode* pLight = static_cast<LightNode*>(child);
+	if (pLight != NULL && m_pLightManager->m_lights.size() + 1 < MAXIMUM_LIGHTS_SUPPORTED)
+	{
+		m_pLightManager->m_lights.push_back(pLight);
+	}
 
 	return m_pRoot->VAddChild(child);
 }
@@ -93,7 +101,11 @@ bool Scene::RemoveChild(ActorId id)
 
 	ISceneNode* child = FindActor(id);
 
-	//@TODO: Remove Light
+	LightNode* pLight = static_cast<LightNode*>(child);
+	if (pLight != NULL)
+	{
+		m_pLightManager->m_lights.remove(pLight);
+	}
 
 	m_actorMap.erase(id);
 	return m_pRoot->VRemoveChild(id);

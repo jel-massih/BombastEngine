@@ -42,6 +42,7 @@
     <ClInclude Include="..\Graphics3D\D3DClass.h" />
     <ClInclude Include="..\Graphics3D\Geometry.h" />
     <ClInclude Include="..\Graphics3D\GraphicsManager.h" />
+    <ClInclude Include="..\Graphics3D\Lighting.h" />
     <ClInclude Include="..\Graphics3D\Material.h" />
     <ClInclude Include="..\Graphics3D\ModelClass.h" />
     <ClInclude Include="..\Graphics3D\MovementController.h" />
@@ -106,6 +107,7 @@
     <ClCompile Include="..\Graphics3D\D3DClass.cpp" />
     <ClCompile Include="..\Graphics3D\Geometry.cpp" />
     <ClCompile Include="..\Graphics3D\GraphicsManager.cpp" />
+    <ClCompile Include="..\Graphics3D\Lighting.cpp" />
     <ClCompile Include="..\Graphics3D\Material.cpp" />
     <ClCompile Include="..\Graphics3D\ModelClass.cpp" />
     <ClCompile Include="..\Graphics3D\MovementController.cpp" />

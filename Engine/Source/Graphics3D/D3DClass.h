@@ -3,6 +3,31 @@
 #include "../BombastEngineStd.h"
 #include "../Bombast/interfaces.h"
 
+struct ConstantBuffer_Matrices
+{
+	Mat4x4 m_worldViewProj;
+	Mat4x4 m_world;
+};
+
+struct ConstantBuffer_Material
+{
+	Vec4 m_diffuseObjectColor;
+	Vec4 m_ambientObjectColor;
+	bool m_bHasTexture;
+	Vec3 m_unused;
+};
+
+#define MAXIMUM_LIGHTS_SUPPORTED (16)
+
+struct ConstantBuffer_Lighting
+{
+	Vec4 m_lightDiffuse[MAXIMUM_LIGHTS_SUPPORTED];
+	Vec4 m_lightDir[MAXIMUM_LIGHTS_SUPPORTED];
+	Vec4 m_lightAmbient;
+	unsigned int m_numLights;
+	Vec3 m_unused;
+};
+
 class D3DClass11 : public IRenderer
 {
 public:
@@ -39,6 +64,8 @@ public:
 	void VToggleFillMode();
 
 	void VToggleFullscreen();
+
+	virtual void VCalcLighting(std::list<LightNode*>* lights, int maxLights) {}
 
 private:
 	bool m_vsyncEnabled;

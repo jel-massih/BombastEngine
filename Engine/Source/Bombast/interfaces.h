@@ -135,6 +135,7 @@ enum RenderPass
 class Scene;
 class SceneNodeProperties;
 class RayCast;
+class LightNode;
 
 class IRenderState
 {
@@ -169,6 +170,8 @@ public:
 	virtual void VToggleFillMode() = 0;
 
 	virtual void VToggleFullscreen() = 0;
+
+	virtual void VCalcLighting(std::list<LightNode*>* lights, int maxLights) = 0;
 
 	//@TODO: Remove D3D Specific Method
 	virtual ID3D11Device* GetDevice() = 0;

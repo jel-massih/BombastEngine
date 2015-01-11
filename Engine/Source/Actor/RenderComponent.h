@@ -2,6 +2,7 @@
 
 #include "RenderComponentInterface.h"
 #include "../Utilities/rapidxml.hpp"
+#include "../Graphics3D/Lighting.h"
 
 class BaseRenderComponent : public RenderComponentInterface
 {
@@ -78,4 +79,20 @@ public:
 protected:
 	virtual bool VDelegateInitialize(rapidxml::xml_node<>* pData) override;
 	virtual SceneNode* VCreateSceneNode() override;
+};
+
+class LightRenderComponent : public BaseRenderComponent
+{
+public:
+	static const char* g_name;
+	virtual const char* VGetName() const { return g_name; }
+
+	LightRenderComponent();
+
+protected:
+	virtual bool VDelegateInitialize(rapidxml::xml_node<>* pBaseElement) override;
+	virtual SceneNode* VCreateSceneNode() override;
+
+private:
+	LightProperties m_properties;
 };
