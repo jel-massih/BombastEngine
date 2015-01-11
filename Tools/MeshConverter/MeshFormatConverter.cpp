@@ -317,8 +317,8 @@ int main(int argc, char *argv[])
 			if (triplet >= face->begin() + 2)
 			{
 				indices.push_back(tripletIndices[*face->begin()]);
-				indices.push_back(tripletIndices[*triplet]);
 				indices.push_back(tripletIndices[*(triplet - 1)]);
+				indices.push_back(tripletIndices[*triplet]);
 			}
 		}
 	}
