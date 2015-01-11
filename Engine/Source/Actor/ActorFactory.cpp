@@ -100,7 +100,7 @@ void ActorFactory::ModifyActor(Actor* pActor, rapidxml::xml_node<>* overrides)
 	//Loop theough each child and load component
 	for (rapidxml::xml_node<>* pNode = overrides->first_node(); pNode; pNode = pNode->next_sibling())
 	{
-		ComponentId componentId = ActorComponent::GetIdFromName(pNode->value());
+		ComponentId componentId = ActorComponent::GetIdFromName(pNode->name());
 		ActorComponent* pComponent = pActor->GetComponent<ActorComponent>(componentId);
 		if (pComponent)
 		{

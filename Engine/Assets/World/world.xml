@@ -4,7 +4,12 @@
     </PreLoadScripts>
 
     <StaticActors>
-      <Actor resource="actors\city.xml" />
+      <Actor resource="actors\city.xml">
+		<TransformComponent>
+			<Position x="0" y="0" z="0"/>
+			<YawPitchRoll x="0" y="180" z="0"/>
+		</TransformComponent>
+      </Actor>
     </StaticActors>
 
     <PostLoadScripts>

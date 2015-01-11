@@ -1,12 +1,7 @@
 <Actor type="City" resource="actors\city.xml">
-	<TransformComponent>
-		<Position x="0" y="0" z="0"/>
-		<YawPitchRoll x="0" y="0" z="0"/>
-	</TransformComponent>
-
-
+	<TransformComponent/>
     <MeshRenderComponent>
         <Texture path="textures\grid.dds"></Texture>
-        <Mesh path="meshes\cube.bmdl"></Mesh>
+        <Mesh path="meshes\monkey.bmdl"></Mesh>
     </BitmapRenderComponent>
 </Actor>
