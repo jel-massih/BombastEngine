@@ -36,6 +36,7 @@
     <ClInclude Include="..\Graphics2D\ColorShaderClass.h" />
     <ClInclude Include="..\Graphics2D\FontClass.h" />
     <ClInclude Include="..\Graphics2D\FontShaderClass.h" />
+    <ClInclude Include="..\Graphics2D\LightShaderClass.h" />
     <ClInclude Include="..\Graphics2D\TextureClass.h" />
     <ClInclude Include="..\Graphics2D\TextureShaderClass.h" />
     <ClInclude Include="..\Graphics3D\D3DClass.h" />
@@ -99,6 +100,7 @@
     <ClCompile Include="..\Graphics2D\ColorShaderClass.cpp" />
     <ClCompile Include="..\Graphics2D\FontClass.cpp" />
     <ClCompile Include="..\Graphics2D\FontShaderClass.cpp" />
+    <ClCompile Include="..\Graphics2D\LightShaderClass.cpp" />
     <ClCompile Include="..\Graphics2D\TextureClass.cpp" />
     <ClCompile Include="..\Graphics2D\TextureShaderClass.cpp" />
     <ClCompile Include="..\Graphics3D\D3DClass.cpp" />

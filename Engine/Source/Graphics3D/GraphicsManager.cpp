@@ -7,6 +7,7 @@ GraphicsManager::GraphicsManager()
 	m_pRenderer = 0;
 	m_pColorShader = 0;
 	m_pTextureShader = 0;
+	m_pLightShader = 0;
 }
 
 GraphicsManager::GraphicsManager(const GraphicsManager& other)
@@ -67,11 +68,31 @@ bool GraphicsManager::Initialize(HWND hwnd)
 		return FALSE;
 	}
 
+	m_pLightShader = BE_NEW LightShaderClass;
+	if (!m_pLightShader)
+	{
+		return false;
+	}
+
+	result = m_pLightShader->Initialize(m_pRenderer->GetDevice());
+	if (!result)
+	{
+		BE_ERROR("Could not initialize the LightShader Object!");
+		return FALSE;
+	}
+
 	return true;
 }
 
 void GraphicsManager::Shutdown()
 {
+	if (m_pLightShader)
+	{
+		m_pLightShader->Shutdown();
+
+		SAFE_DELETE(m_pLightShader);
+	}
+
 	if (m_pTextureShader)
 	{
 		m_pTextureShader->Shutdown();

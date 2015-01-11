@@ -158,6 +158,9 @@
     <ClCompile Include="..\Utilities\BMDLMeshLoader.cpp">
       <Filter>Utilities</Filter>
     </ClCompile>
+    <ClCompile Include="..\Graphics2D\LightShaderClass.cpp">
+      <Filter>Graphics2D</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Bombast\BombastApp.h">
@@ -350,6 +353,9 @@
     </ClInclude>
     <ClInclude Include="..\Utilities\BMDLMeshLoader.h">
       <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Graphics2D\LightShaderClass.h">
+      <Filter>Graphics2D</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

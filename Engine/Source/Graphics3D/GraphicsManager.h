@@ -3,6 +3,7 @@
 #include "../Graphics3D/D3DClass.h"
 #include "../Graphics2D/ColorShaderClass.h"
 #include "../Graphics2D/TextureShaderClass.h"
+#include "../Graphics2D/LightShaderClass.h"
 
 class GraphicsManager
 {
@@ -32,8 +33,13 @@ public:
 		return m_pColorShader;
 	}
 
+	LightShaderClass* GetLightShader() const {
+		return m_pLightShader;
+	}
+
 private:
 	IRenderer* m_pRenderer;
 	ColorShaderClass* m_pColorShader;
 	TextureShaderClass* m_pTextureShader;
+	LightShaderClass* m_pLightShader;
 };
