@@ -149,9 +149,6 @@
     <ClCompile Include="..\Resources\ModelResource.cpp">
       <Filter>Resources</Filter>
     </ClCompile>
-    <ClCompile Include="..\Utilities\TinyObjLoader\tiny_obj_loader.cc">
-      <Filter>Utilities\TinyObjLoader</Filter>
-    </ClCompile>
     <ClCompile Include="..\Utilities\SystemResourceMonitor.cpp">
       <Filter>Utilities</Filter>
     </ClCompile>
@@ -342,9 +339,6 @@
     <ClInclude Include="..\Resources\ModelResource.h">
       <Filter>Resources</Filter>
     </ClInclude>
-    <ClInclude Include="..\Utilities\TinyObjLoader\tiny_obj_loader.h">
-      <Filter>Utilities\TinyObjLoader</Filter>
-    </ClInclude>
     <ClInclude Include="..\Utilities\SystemResourceMonitor.h">
       <Filter>Utilities</Filter>
     </ClInclude>
@@ -400,9 +394,6 @@
     </Filter>
     <Filter Include="Physics">
       <UniqueIdentifier>{84d99599-6e85-48f2-8342-f8a6f588ea21}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Utilities\TinyObjLoader">
-      <UniqueIdentifier>{39db2a3a-b5a6-4241-be6e-206daf2dfe64}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

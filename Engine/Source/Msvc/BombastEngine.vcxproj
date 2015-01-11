@@ -73,7 +73,6 @@
     <ClInclude Include="..\Utilities\SystemResourceMonitor.h" />
     <ClInclude Include="..\Utilities\templates.h" />
     <ClInclude Include="..\Utilities\Timer.h" />
-    <ClInclude Include="..\Utilities\TinyObjLoader\tiny_obj_loader.h" />
     <ClInclude Include="..\Utilities\types.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
@@ -128,7 +127,6 @@
     <ClCompile Include="..\Utilities\String.cpp" />
     <ClCompile Include="..\Utilities\SystemResourceMonitor.cpp" />
     <ClCompile Include="..\Utilities\Timer.cpp" />
-    <ClCompile Include="..\Utilities\TinyObjLoader\tiny_obj_loader.cc" />
     <ClCompile Include="BombastEngine.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">stdafx.h</PrecompiledHeaderFile>
