@@ -3,6 +3,6 @@
     <MeshRenderComponent>
         <Texture path="textures\red.dds"></Texture>
         <Mesh path="meshes\sphere.bmdl"></Mesh>
-		<Material resource="materials\box_mat.xml"/>
+		<Material path="materials\box_mat.bmtl"/>
     </BitmapRenderComponent>
 </Actor>
