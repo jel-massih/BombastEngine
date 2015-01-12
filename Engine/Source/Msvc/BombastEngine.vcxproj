@@ -37,6 +37,7 @@
     <ClInclude Include="..\Graphics2D\FontClass.h" />
     <ClInclude Include="..\Graphics2D\FontShaderClass.h" />
     <ClInclude Include="..\Graphics2D\LightShaderClass.h" />
+    <ClInclude Include="..\Graphics2D\MultiTextureShader.h" />
     <ClInclude Include="..\Graphics2D\TextureClass.h" />
     <ClInclude Include="..\Graphics2D\TextureShaderClass.h" />
     <ClInclude Include="..\Graphics3D\D3DClass.h" />
@@ -102,6 +103,7 @@
     <ClCompile Include="..\Graphics2D\FontClass.cpp" />
     <ClCompile Include="..\Graphics2D\FontShaderClass.cpp" />
     <ClCompile Include="..\Graphics2D\LightShaderClass.cpp" />
+    <ClCompile Include="..\Graphics2D\MultiTextureShader.cpp" />
     <ClCompile Include="..\Graphics2D\TextureClass.cpp" />
     <ClCompile Include="..\Graphics2D\TextureShaderClass.cpp" />
     <ClCompile Include="..\Graphics3D\D3DClass.cpp" />
@@ -151,6 +153,16 @@
     <None Include="..\..\Assets\Shaders\light.vs" />
     <None Include="..\..\Assets\Shaders\texture.ps" />
     <None Include="..\..\Assets\Shaders\texture.vs" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="..\..\Assets\Shaders\multitexture_pixel.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+    </FxCompile>
+    <FxCompile Include="..\..\Assets\Shaders\multitexture_vertex.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+    </FxCompile>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{B8DE6183-26FF-4787-B7BB-BDB3697E6887}</ProjectGuid>
