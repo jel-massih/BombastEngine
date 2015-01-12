@@ -1,4 +1,4 @@
-<Actor type="City" resource="actors\city.xml">
+<Actor type="Sphere" resource="actors\sphere.xml">
 	<TransformComponent/>
     <MeshRenderComponent>
         <Texture path="textures\red.dds"></Texture>
