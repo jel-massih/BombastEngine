@@ -1,0 +1,6 @@
+<Material name="Box Material">
+	<Ambient r="0.15" g="0.15" b="0.15" a="1"/>
+	<BaseDiffuse r="1" g="1" b="1" a="1"/>
+	<Specular r="1" g="1" b="1" a="1" power="32"/>
+	<Emmisive r="1" g="1" b="1" a="1"/>
+</Material>

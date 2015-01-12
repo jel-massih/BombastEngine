@@ -3,5 +3,6 @@
     <MeshRenderComponent>
         <Texture path="textures\grid.dds"></Texture>
         <Mesh path="meshes\cornell.bmdl"></Mesh>
+		<Material path="materials\box_mat.xml"/>
     </BitmapRenderComponent>
 </Actor>

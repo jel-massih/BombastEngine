@@ -71,6 +71,7 @@ class MeshRenderComponent : public BaseRenderComponent
 {
 	char* m_textureResource;
 	char* m_meshResource;
+	char* m_materialResource;
 
 public:
 	static const char* g_Name;

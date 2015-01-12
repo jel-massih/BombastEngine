@@ -215,6 +215,20 @@ bool MeshRenderComponent::VDelegateInitialize(rapidxml::xml_node<>* pData)
 		}
 	}
 
+	rapidxml::xml_node<>* pMaterial = pData->first_node("Material");
+	if (pMaterial)
+	{
+		if (pMaterial->first_attribute("path") != NULL)
+		{
+			m_materialResource = pMaterial->first_attribute("path")->value();
+		}
+		else
+		{
+			BE_ERROR("Material path Exception: Make sure path attribute is set for Material Element");
+			return false;
+		}
+	}
+
 	return true;
 }
 
