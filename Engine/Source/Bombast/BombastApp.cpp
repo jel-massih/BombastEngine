@@ -416,7 +416,7 @@ bool BombastApp::VLoadGame()
 	return m_pGame->VLoadGame(m_options.m_level.c_str());
 }
 
-void BombastApp::UpdateGame(double deltaMs, double elapsedMs)
+void BombastApp::UpdateGame(float deltaMs, double elapsedMs)
 {
 	if (g_pApp->m_bQuitting)
 	{
