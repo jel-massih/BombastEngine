@@ -745,30 +745,6 @@ HRESULT D3DMeshNode11::InitializeBuffers()
 	m_vertexCount = m_pLoadedMesh->vertices.size();
 	m_indexCount = m_pLoadedMesh->indices.size();
 
-	//create vertex array
-	VertexType* vertices = BE_NEW VertexType[m_vertexCount];
-	if (!vertices) {
-		return false;
-	}
-	
-	int i = 0;
-	for (auto vertex = m_pLoadedMesh->vertices.begin(); vertex != m_pLoadedMesh->vertices.end(); vertex++)
-	{
-		VertexType vert;
-		vert.position.x = vertex->pos.x;
-		vert.position.y = vertex->pos.y;
-		vert.position.z = vertex->pos.z;
-
-		vert.texture.x = vertex->tex.u;
-		vert.texture.y = vertex->tex.v;
-
-		vert.normal.x = vertex->normal.x;
-		vert.normal.y = vertex->normal.y;
-		vert.normal.z = vertex->normal.z;
-		vertices[i] = vert;
-		i++;
-	}
-
 	ZeroMemory(&vertexBufferDesc, sizeof(vertexBufferDesc));
 	vertexBufferDesc.Usage = D3D11_USAGE_DEFAULT;
 	vertexBufferDesc.ByteWidth = sizeof(VertexType) * m_vertexCount;
@@ -776,7 +752,7 @@ HRESULT D3DMeshNode11::InitializeBuffers()
 	vertexBufferDesc.CPUAccessFlags = 0;
 
 	ZeroMemory(&vertexData, sizeof(vertexData));
-	vertexData.pSysMem = vertices;
+	vertexData.pSysMem = m_pLoadedMesh->vertices.data();
 
 	result = device->CreateBuffer(&vertexBufferDesc, &vertexData, &m_pVertexBuffer);
 	if (FAILED(result))

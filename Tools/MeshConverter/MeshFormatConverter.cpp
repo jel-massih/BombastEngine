@@ -19,8 +19,8 @@ using namespace std;
 struct BasicVertex
 {
 	Vector3<float> pos;  // position
-	Vector3<float> norm; // surface normal vector
 	Vector2<float> tex;  // texture coordinate
+	Vector3<float> norm; // surface normal vector
 };
 
 struct IndexTriplet

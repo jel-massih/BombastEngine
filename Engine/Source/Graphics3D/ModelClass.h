@@ -12,15 +12,15 @@ public:
 		} pos;
 
 		struct {
+			float u;
+			float v;
+		} tex;
+
+		struct {
 			float x;
 			float y;
 			float z;
 		} normal;
-
-		struct {
-			float u;
-			float v;
-		} tex;
 	};
 
 
