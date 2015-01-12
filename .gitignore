@@ -20,3 +20,5 @@ Engine/Assets/Textures/*
 *.bmdl
 *.lastbuildstate
 *.mtl
+*.cso
+*.opensdf
