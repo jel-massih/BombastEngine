@@ -80,11 +80,13 @@ bool BombastApp::InitInstance(HINSTANCE hInstance, LPWSTR lpCmdLine, HWND hWnd, 
 	extern IResourceLoader* CreateTextureResourceLoader();
 	extern IResourceLoader* CreateLuaResourceLoader();
 	extern IResourceLoader* CreateModelResourceLoader();
+	extern IResourceLoader* CreateMaterialResourceLoader();
 
 	m_pResourceCache->RegisterLoader(CreateXmlResourceLoader());
 	m_pResourceCache->RegisterLoader(CreateTextureResourceLoader());
 	m_pResourceCache->RegisterLoader(CreateLuaResourceLoader());
 	m_pResourceCache->RegisterLoader(CreateModelResourceLoader());
+	m_pResourceCache->RegisterLoader(CreateMaterialResourceLoader());
 
 	InitializeWindows();
 

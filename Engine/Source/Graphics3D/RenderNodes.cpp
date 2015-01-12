@@ -2,6 +2,7 @@
 #include "ModelClass.h"
 #include "Lighting.h"
 #include "../Resources/ModelResource.h"
+#include "../Resources/MaterialResource.h"
 
 BitmapNode::BitmapNode(const ActorId actorId,
 	BaseRenderComponent* renderComponent,
@@ -660,14 +661,14 @@ void D3D11PrimitiveNode::RenderBuffers(ID3D11DeviceContext* deviceContext)
 	deviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 }
 
-MeshNode::MeshNode(const ActorId actorId, BaseRenderComponent* renderComponent, std::string textureFileName, std::string meshFileName, RenderPass renderPass, const Mat4x4 *t)
-	: SceneNode(actorId, renderComponent, renderPass, t), m_meshFilename(meshFileName), m_textureFilename(textureFileName)
+MeshNode::MeshNode(const ActorId actorId, BaseRenderComponent* renderComponent, std::string textureFileName, std::string meshFileName, std::string materialFilename, RenderPass renderPass, const Mat4x4 *t)
+	: SceneNode(actorId, renderComponent, renderPass, t), m_meshFilename(meshFileName), m_textureFilename(textureFileName), m_materialFilename(materialFilename)
 {
 	m_vertexCount = m_indexCount = 0;
 }
 
-D3DMeshNode11::D3DMeshNode11(const ActorId actorId, BaseRenderComponent* renderComponent, std::string textureFilename, std::string meshFilename, RenderPass renderPass, const Mat4x4* t)
-	: MeshNode(actorId, renderComponent, textureFilename, meshFilename, renderPass, t), m_lastPosition(Vec3::g_InvalidVec3)
+D3DMeshNode11::D3DMeshNode11(const ActorId actorId, BaseRenderComponent* renderComponent, std::string textureFilename, std::string meshFilename, std::string materialFilename, RenderPass renderPass, const Mat4x4* t)
+	: MeshNode(actorId, renderComponent, textureFilename, meshFilename, materialFilename, renderPass, t), m_lastPosition(Vec3::g_InvalidVec3)
 {
 	m_pVertexBuffer = nullptr;
 	m_pIndexBuffer = nullptr;
@@ -709,6 +710,12 @@ HRESULT D3DMeshNode11::VOnRestore(Scene* pScene)
 		return hr;
 	}
 
+	hr = LoadMaterial(m_materialFilename);
+	if (FAILED(hr))
+	{
+		return hr;
+	}
+
 	return S_OK;
 }
 
@@ -719,6 +726,19 @@ HRESULT D3DMeshNode11::LoadTexture(std::string textureFilename)
 	{
 		return S_FALSE;
 	}
+
+	return S_OK;
+}
+
+HRESULT D3DMeshNode11::LoadMaterial(std::string filename)
+{
+	Material* mat = MaterialResourceLoader::LoadAndReturnMaterialResource(filename.c_str());
+	if (!mat)
+	{
+		return false;
+	}
+
+	SetMaterial(*mat);
 
 	return S_OK;
 }

@@ -58,6 +58,7 @@
     <ClInclude Include="..\Physics\Physics.h" />
     <ClInclude Include="..\Physics\PhysXPhysics.h" />
     <ClInclude Include="..\Resources\LuaResource.h" />
+    <ClInclude Include="..\Resources\MaterialResource.h" />
     <ClInclude Include="..\Resources\ModelResource.h" />
     <ClInclude Include="..\Resources\ResourceCache.h" />
     <ClInclude Include="..\Resources\TextureResource.h" />
@@ -121,6 +122,7 @@
     <ClCompile Include="..\Physics\Physics.cpp" />
     <ClCompile Include="..\Physics\PhysXPhysics.cpp" />
     <ClCompile Include="..\Resources\LuaResource.cpp" />
+    <ClCompile Include="..\Resources\MaterialResource.cpp" />
     <ClCompile Include="..\Resources\ModelResource.cpp" />
     <ClCompile Include="..\Resources\ResourceCache.cpp" />
     <ClCompile Include="..\Resources\TextureResource.cpp" />

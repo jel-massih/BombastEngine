@@ -167,6 +167,7 @@ public:
 		BaseRenderComponent* renderComponent,
 		std::string textureFileName,
 		std::string meshFileName,
+		std::string materialFilename,
 		RenderPass renderPass,
 		const Mat4x4 *t);
 
@@ -177,6 +178,9 @@ public:
 protected:
 	virtual HRESULT InitializeBuffers() = 0;
 	virtual HRESULT LoadTexture(std::string filename) = 0;
+
+	virtual HRESULT LoadMaterial(std::string filename) = 0;
+
 	bool VIsVisible(Scene* pScene) const { return true; }
 
 	int GetIndexCount() const {
@@ -193,6 +197,7 @@ protected:
 protected:
 	std::string m_textureFilename;
 	std::string m_meshFilename;
+	std::string m_materialFilename;
 
 	int m_vertexCount; //Number of Vertices in Vertex Array
 	int m_indexCount; //Number of Indices in Index array
@@ -201,7 +206,7 @@ protected:
 class D3DMeshNode11 : public MeshNode
 {
 public:
-	D3DMeshNode11(const ActorId actorId, BaseRenderComponent* renderComponent, std::string textureFilename, std::string meshFilename, RenderPass renderPass, const Mat4x4* t);
+	D3DMeshNode11(const ActorId actorId, BaseRenderComponent* renderComponent, std::string textureFilename, std::string meshFilename, std::string materialFilename, RenderPass renderPass, const Mat4x4* t);
 	~D3DMeshNode11();
 
 	HRESULT VOnRestore(Scene* pScene);
@@ -210,6 +215,7 @@ public:
 private:
 	HRESULT InitializeBuffers();
 	HRESULT LoadTexture(std::string textureFilename);
+	HRESULT LoadMaterial(std::string filename);
 	HRESULT LoadMesh(std::string meshFilename);
 	HRESULT UpdateBuffers(ID3D11DeviceContext* deviceContext);
 	void RenderBuffers(ID3D11DeviceContext* deviceContext);

@@ -164,6 +164,9 @@
     <ClCompile Include="..\Graphics2D\MultiTextureShader.cpp">
       <Filter>Graphics2D</Filter>
     </ClCompile>
+    <ClCompile Include="..\Resources\MaterialResource.cpp">
+      <Filter>Resources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Bombast\BombastApp.h">
@@ -365,6 +368,9 @@
     </ClInclude>
     <ClInclude Include="..\Graphics2D\MultiTextureShader.h">
       <Filter>Graphics2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Resources\MaterialResource.h">
+      <Filter>Resources</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
