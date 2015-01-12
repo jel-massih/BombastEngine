@@ -12,11 +12,6 @@ ModelClass* ModelResourceExtraData::GetModel()
 	return m_pModelData;
 }
 
-void TestSt(std::istream& is)
-{
-
-}
-
 bool ModelResourceExtraData::LoadModel(char* pRawBuffer, unsigned int rawSize, std::string modelFilepath)
 {
 	m_pModelData = BE_NEW ModelClass;
