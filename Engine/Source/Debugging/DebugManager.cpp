@@ -40,6 +40,7 @@ bool DebugManager::Initialize(HumanView* owner)
 	m_pDebugText->AddString("CameraRot");
 
 	m_pDebugText->AddString("FPS");
+	m_pDebugText->AddString("CPU");
 
 	return true;
 }
@@ -68,6 +69,7 @@ bool DebugManager::Update(const float deltaMs)
 	_snprintf_s(buffer, 100, "Rot: (X: %d, Y: %d, Z: %d)", (int)XMConvertToDegrees(viewRot.x), (int)XMConvertToDegrees(viewRot.y), (int)XMConvertToDegrees(viewRot.z));
 	m_pDebugText->UpdateString("CameraRot", buffer);
 	m_pDebugText->UpdateString("FPS", ("FPS: " + ToStr((int)m_pSystemResourceMonitor->GetFPS())).c_str());
+	m_pDebugText->UpdateString("CPU", ("CPU: " + ToStr(m_pSystemResourceMonitor->GetCpuPercentage())).c_str());
 
 	return true;
 }
