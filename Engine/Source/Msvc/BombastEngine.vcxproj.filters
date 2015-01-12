@@ -16,9 +16,6 @@
     <ClCompile Include="..\Graphics2D\TextureShaderClass.cpp">
       <Filter>Graphics2D</Filter>
     </ClCompile>
-    <ClCompile Include="..\Graphics3D\ModelClass.cpp">
-      <Filter>Graphics3D</Filter>
-    </ClCompile>
     <ClCompile Include="..\Graphics2D\ColorShaderClass.cpp">
       <Filter>Graphics2D</Filter>
     </ClCompile>

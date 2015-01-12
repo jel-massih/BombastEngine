@@ -109,7 +109,6 @@
     <ClCompile Include="..\Graphics3D\GraphicsManager.cpp" />
     <ClCompile Include="..\Graphics3D\Lighting.cpp" />
     <ClCompile Include="..\Graphics3D\Material.cpp" />
-    <ClCompile Include="..\Graphics3D\ModelClass.cpp" />
     <ClCompile Include="..\Graphics3D\MovementController.cpp" />
     <ClCompile Include="..\Graphics3D\RenderNodes.cpp" />
     <ClCompile Include="..\Graphics3D\Scene.cpp" />
