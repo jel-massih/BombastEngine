@@ -70,6 +70,11 @@ Vec4 Vec4::operator+(Vec4& rhs) const
 	return v2;
 }
 
+Vec4 Vec4::operator* (const Vec4& rhs) const
+{
+	return Vec4(x * rhs.x, y * rhs.y, z * rhs.z, w * rhs.z);
+}
+
 Vec4& Vec4::operator*=(const float rhs)
 {
 	x *= rhs;

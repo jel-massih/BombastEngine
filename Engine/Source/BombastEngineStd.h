@@ -58,10 +58,8 @@ public:
 	BE_NonCopyable() {};
 };
 
-typedef D3DCOLORVALUE Color;
-
-extern Color g_White;
-extern Color g_Black;
+extern Vec4 g_White;
+extern Vec4 g_Black;
 
 extern const float fOPAQUE;
 extern const int iOPAQUE;

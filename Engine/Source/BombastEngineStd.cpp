@@ -1,7 +1,7 @@
 #include "BombastEngineStd.h"
 
-Color g_White = { 1.0f, 1.0f, 1.0f, fOPAQUE };
-Color g_Black = { 0.0f, 0.0f, 0.0f, fOPAQUE };
+Vec4 g_White = { 1.0f, 1.0f, 1.0f, fOPAQUE };
+Vec4 g_Black = { 0.0f, 0.0f, 0.0f, fOPAQUE };
 
 Vec3 g_Right(1.0f, 0.0f, 0.0f);
 Vec3 g_Up(0.0f, 1.0f, 0.0f);

@@ -4,23 +4,31 @@
 
 class Material
 {
-	D3DMATERIAL9 m_D3DMat;
+	struct BEMaterial
+	{
+		Vec4 Ambient;
+		Vec4 Diffuse;
+		Vec4 Specular;
+		float Power;
+		Vec4 Emissive;
+	};
+	BEMaterial m_material;
 public:
 	Material();
 
-	void SetAmbient(const Color& color);
-	const Color GetAmbient() { return m_D3DMat.Ambient; }
+	void SetAmbient(const Vec4& color);
+	const Vec4 GetAmbient() { return m_material.Ambient; }
 
-	void SetDiffuse(const Color& color);
-	const Color GetDiffuse() { return m_D3DMat.Diffuse; }
+	void SetDiffuse(const Vec4& color);
+	const Vec4 GetDiffuse() { return m_material.Diffuse; }
 
-	void SetSpecular(const Color& color, const float power);
-	void GetSpecular(Color &_color, float &_power) { _color = m_D3DMat.Specular; _power = m_D3DMat.Power; }
+	void SetSpecular(const Vec4& color, const float power);
+	void GetSpecular(Vec4 &_color, float &_power) { _color = m_material.Specular; _power = m_material.Power; }
 
-	void SetEmissive(const Color& color);
-	const Color GetEmissive() { return m_D3DMat.Emissive; }
+	void SetEmissive(const Vec4& color);
+	const Vec4 GetEmissive() { return m_material.Emissive; }
 
 	void SetAlpha(const float alpha);
 	bool HasAlpha() const { return GetAlpha() != fOPAQUE; }
-	float GetAlpha() const { return m_D3DMat.Diffuse.a; }
+	float GetAlpha() const { return m_material.Diffuse.w; }
 };

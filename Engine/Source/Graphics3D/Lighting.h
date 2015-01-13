@@ -46,14 +46,14 @@ public:
 	int GetLightCount() const { return m_lights.size(); }
 	const Vec4* GetAmbientLight() const { return &m_lightAmbient; }
 	const Vec4* GetLightDirection() const { return m_lightDir; }
-	const Color* GetLightDiffuse() const { return m_lightDiffuse; }
+	const Vec4* GetLightDiffuse() const { return m_lightDiffuse; }
 	const Vec4* GetLightSpecular() const { return m_lightSpecular; }
 	const float* GetLightSpecularPower() const { return m_lightSpecularPower; }
 	
 	std::list<LightNode*> m_lights;
 protected:
 	Vec4 m_lightDir[MAXIMUM_LIGHTS_SUPPORTED];
-	Color m_lightDiffuse[MAXIMUM_LIGHTS_SUPPORTED];
+	Vec4 m_lightDiffuse[MAXIMUM_LIGHTS_SUPPORTED];
 	Vec4 m_lightSpecular[MAXIMUM_LIGHTS_SUPPORTED];
 	float m_lightSpecularPower[MAXIMUM_LIGHTS_SUPPORTED];
 	Vec4 m_lightAmbient;

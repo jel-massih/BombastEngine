@@ -63,9 +63,9 @@ SceneNode* BaseRenderComponent::VGetSceneNode()
 	return m_pSceneNode;
 }
 
-Color BaseRenderComponent::LoadColor(rapidxml::xml_node<>* pData)
+Vec4 BaseRenderComponent::LoadColor(rapidxml::xml_node<>* pData)
 {
-	Color color;
+	Vec4 color;
 
 	double r = 1.0;
 	double g = 1.0;
@@ -77,10 +77,10 @@ Color BaseRenderComponent::LoadColor(rapidxml::xml_node<>* pData)
 	b = atof(pData->first_attribute("b")->value());
 	a = atof(pData->first_attribute("a")->value());
 
-	color.r = (float)r;
-	color.g = (float)g;
-	color.b = (float)b;
-	color.a = (float)a;
+	color.x = (float)r;
+	color.y = (float)g;
+	color.z = (float)b;
+	color.w = (float)a;
 
 	return color;
 }

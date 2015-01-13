@@ -47,17 +47,17 @@ void LightingManager::CalcLighting(Scene* pScene)
 	{
 		if (count == 0)
 		{
-			Color ambient = (*light)->VGet()->GetMaterial().GetAmbient();
-			m_lightAmbient = Vec4(ambient.r, ambient.g, ambient.b, 1.0f);
+			Vec4 ambient = (*light)->VGet()->GetMaterial().GetAmbient();
+			m_lightAmbient = Vec4(ambient.x, ambient.y, ambient.z, 1.0f);
 		}
 
 		Vec3 lightDir = (*light)->GetDirection();
 		m_lightDir[count] = Vec4(lightDir.x, lightDir.y, lightDir.z, 1.0f);
 		m_lightDiffuse[count] = (*light)->VGet()->GetMaterial().GetDiffuse();
-		Color specular;
+		Vec4 specular;
 		float power;
 		(*light)->VGet()->GetMaterial().GetSpecular(specular, power);
-		m_lightSpecular[count] = Vec4(specular.r, specular.g, specular.b, specular.a);
+		m_lightSpecular[count] = Vec4(specular.x, specular.y, specular.z, specular.w);
 		m_lightSpecularPower[count] = power;
 	}
 }

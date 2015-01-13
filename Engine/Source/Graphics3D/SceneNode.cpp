@@ -57,7 +57,7 @@ SceneNode::~SceneNode()
 
 HRESULT SceneNode::VOnRestore(Scene* pScene)
 {
-	Color color = (m_pRenderComponent) ? m_pRenderComponent->GetColor() : g_White;
+	Vec4 color = (m_pRenderComponent) ? m_pRenderComponent->GetColor() : g_White;
 	m_properties.m_material.SetDiffuse(color);
 
 	SceneNodeList::iterator i = m_children.begin();

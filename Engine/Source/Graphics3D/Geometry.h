@@ -65,6 +65,7 @@ public:
 
 	Vec4 operator+(Vec4& rhs) const;
 	Vec4& operator*=(const float rhs);
+	Vec4 operator*(const Vec4& rhs) const;
 };
 
 extern Vec4 g_Up4;

@@ -21,22 +21,22 @@ bool MaterialResourceExtraData::LoadMaterial(char* pRawBuffer, unsigned int rawS
 	rapidxml::xml_node<>* pAttribute = pDoc.first_node("Ambient");
 	if (pAttribute)
 	{
-		Color c;
-		c.r = (float)atof(pAttribute->first_attribute("r")->value());
-		c.g = (float)atof(pAttribute->first_attribute("g")->value());
-		c.b = (float)atof(pAttribute->first_attribute("b")->value());
-		c.a = (float)atof(pAttribute->first_attribute("a")->value());
+		Vec4 c;
+		c.x = (float)atof(pAttribute->first_attribute("r")->value());
+		c.y = (float)atof(pAttribute->first_attribute("g")->value());
+		c.z = (float)atof(pAttribute->first_attribute("b")->value());
+		c.w = (float)atof(pAttribute->first_attribute("a")->value());
 		m_pMaterial->SetAmbient(c);
 	}
 
 	pAttribute = pDoc.first_node("BaseDiffuse");
 	if (pAttribute)
 	{
-		Color c;
-		c.r = (float)atof(pAttribute->first_attribute("r")->value());
-		c.g = (float)atof(pAttribute->first_attribute("g")->value());
-		c.b = (float)atof(pAttribute->first_attribute("b")->value());
-		c.a = (float)atof(pAttribute->first_attribute("a")->value());
+		Vec4 c;
+		c.x = (float)atof(pAttribute->first_attribute("r")->value());
+		c.y = (float)atof(pAttribute->first_attribute("g")->value());
+		c.z = (float)atof(pAttribute->first_attribute("b")->value());
+		c.w = (float)atof(pAttribute->first_attribute("a")->value());
 		m_pMaterial->SetDiffuse(c);
 	}
 
@@ -44,11 +44,11 @@ bool MaterialResourceExtraData::LoadMaterial(char* pRawBuffer, unsigned int rawS
 	if (pAttribute)
 	{
 		float power;
-		Color c;
-		c.r = (float)atof(pAttribute->first_attribute("r")->value());
-		c.g = (float)atof(pAttribute->first_attribute("g")->value());
-		c.b = (float)atof(pAttribute->first_attribute("b")->value());
-		c.a = (float)atof(pAttribute->first_attribute("a")->value());
+		Vec4 c;
+		c.x = (float)atof(pAttribute->first_attribute("r")->value());
+		c.y = (float)atof(pAttribute->first_attribute("g")->value());
+		c.z = (float)atof(pAttribute->first_attribute("b")->value());
+		c.w = (float)atof(pAttribute->first_attribute("a")->value());
 		power = (float)atof(pAttribute->first_attribute("power")->value());
 		m_pMaterial->SetSpecular(c, power);
 	}
@@ -56,11 +56,11 @@ bool MaterialResourceExtraData::LoadMaterial(char* pRawBuffer, unsigned int rawS
 	pAttribute = pDoc.first_node("Emmisive");
 	if (pAttribute)
 	{
-		Color c;
-		c.r = (float)atof(pAttribute->first_attribute("r")->value());
-		c.g = (float)atof(pAttribute->first_attribute("g")->value());
-		c.b = (float)atof(pAttribute->first_attribute("b")->value());
-		c.a = (float)atof(pAttribute->first_attribute("a")->value());
+		Vec4 c;
+		c.x = (float)atof(pAttribute->first_attribute("r")->value());
+		c.y = (float)atof(pAttribute->first_attribute("g")->value());
+		c.z = (float)atof(pAttribute->first_attribute("b")->value());
+		c.w = (float)atof(pAttribute->first_attribute("a")->value());
 		m_pMaterial->SetEmissive(c);
 	}
 

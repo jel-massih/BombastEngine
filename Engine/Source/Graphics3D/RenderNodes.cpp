@@ -813,14 +813,16 @@ HRESULT D3DMeshNode11::VRender(Scene* pScene)
 	RenderBuffers(context);
 
 	const Vec4* ambient = pScene->GetLightingManager()->GetAmbientLight();
-	const Color* diffuse = pScene->GetLightingManager()->GetLightDiffuse();
+	const Vec4* diffuse = pScene->GetLightingManager()->GetLightDiffuse();
 	const Vec4* dir = pScene->GetLightingManager()->GetLightDirection();
 	const Vec4* specular = pScene->GetLightingManager()->GetLightSpecular();
-	const float* specularPower = pScene->GetLightingManager()->GetLightSpecularPower();
+	float specularPower;
+	Vec4 specularColor;
+	VGet()->GetMaterial().GetSpecular(specularColor, specularPower);
 
 	result = g_pApp->GetGraphicsManager()->GetLightShader()->Render(context, m_indexCount, DirectX::XMLoadFloat4x4(&worldMatrix),
-		XMLoadFloat4x4(&viewMatrix), XMLoadFloat4x4(&projectionMatrix), m_pTexture, Vec3(dir->x, dir->y, dir->z), XMFLOAT4(diffuse->r, diffuse->g, diffuse->b, diffuse->a), *ambient, pScene->GetCamera()->GetPosition(),
-		*specular, *specularPower);
+		XMLoadFloat4x4(&viewMatrix), XMLoadFloat4x4(&projectionMatrix), m_pTexture, Vec3(dir->x, dir->y, dir->z), *diffuse, *ambient, pScene->GetCamera()->GetPosition(),
+		*specular, specularPower);
 	if (!result)
 	{
 		return S_FALSE;

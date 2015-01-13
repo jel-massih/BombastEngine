@@ -14,18 +14,18 @@ public:
 	virtual void VPostInit() override;
 	virtual void VOnChanged() override;
 	virtual rapidxml::xml_node<>* VGenerateXml() override;
-	const Color GetColor() const { return m_color; }
+	const Vec4 GetColor() const { return m_color; }
 
 protected:
 	virtual bool VDelegateInitialize(rapidxml::xml_node<>* pData) { return true; }
 	virtual SceneNode* VCreateSceneNode() = 0;
-	Color LoadColor(rapidxml::xml_node<>* pData);
+	Vec4 LoadColor(rapidxml::xml_node<>* pData);
 
 private:
 	virtual SceneNode* VGetSceneNode() override;
 
 protected:
-	Color m_color;
+	Vec4 m_color;
 	SceneNode* m_pSceneNode;
 };
 
