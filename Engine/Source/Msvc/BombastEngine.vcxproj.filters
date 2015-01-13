@@ -459,5 +459,8 @@
     <FxCompile Include="..\..\Assets\Shaders\multitexture_vertex.hlsl">
       <Filter>Shaders</Filter>
     </FxCompile>
+    <FxCompile Include="..\..\Assets\Shaders\LitTexturedPixelShader.hlsl">
+      <Filter>Shaders</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>
