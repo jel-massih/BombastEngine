@@ -2,7 +2,7 @@
 
 #include "../Bombast/BombastApp.h"
 #include "../Graphics2D/FontClass.h"
-#include "../Graphics2D/FontShaderClass.h"
+#include "../Graphics2D/FontShader.h"
 
 DebugText::DebugText()
 {
@@ -43,7 +43,7 @@ bool DebugText::Initialize()
 		return false;
 	}
 
-	m_pFontShader = BE_NEW FontShaderClass;
+	m_pFontShader = BE_NEW FontShader;
 	if (!m_pFontShader)
 	{
 		return false;

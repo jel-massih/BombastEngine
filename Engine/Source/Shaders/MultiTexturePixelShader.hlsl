@@ -7,7 +7,7 @@ struct PixelInputType
 	float2 tex : TEXCOORD0;
 };
 
-float4 main(PixelInputType input) : SV_TARGET
+float4 MultiTexturePixelShader(PixelInputType input) : SV_TARGET
 {
 	float4 textureColor1;
 	float4 textureColor2;

@@ -4,10 +4,10 @@
 
 GraphicsManager::GraphicsManager()
 {
-	m_pRenderer = 0;
-	m_pColorShader = 0;
-	m_pTextureShader = 0;
-	m_pLightShader = 0;
+	m_pRenderer = nullptr;
+	m_pLightShader = nullptr;
+	m_pColorShader = nullptr;
+	m_pLightShader = nullptr;
 }
 
 GraphicsManager::GraphicsManager(const GraphicsManager& other)
@@ -42,7 +42,20 @@ bool GraphicsManager::Initialize(HWND hwnd)
 		return FALSE;
 	}
 
-	m_pColorShader = BE_NEW ColorShaderClass;
+	m_pLightShader = BE_NEW LightShader;
+	if (!m_pLightShader)
+	{
+		return false;
+	}
+
+	result = m_pLightShader->Initialize(m_pRenderer->GetDevice());
+	if (!result)
+	{
+		BE_ERROR("Could not initialize the LightShader Object!");
+		return FALSE;
+	}
+
+	m_pColorShader = BE_NEW ColorShader;
 	if (!m_pColorShader)
 	{
 		return false;
@@ -55,7 +68,7 @@ bool GraphicsManager::Initialize(HWND hwnd)
 		return FALSE;
 	}
 
-	m_pTextureShader = BE_NEW TextureShaderClass;
+	m_pTextureShader = BE_NEW TextureShader;
 	if (!m_pTextureShader)
 	{
 		return false;
@@ -65,19 +78,6 @@ bool GraphicsManager::Initialize(HWND hwnd)
 	if (!result)
 	{
 		BE_ERROR("Could not initialize the TextureShader Object!");
-		return FALSE;
-	}
-
-	m_pLightShader = BE_NEW LightShaderClass;
-	if (!m_pLightShader)
-	{
-		return false;
-	}
-
-	result = m_pLightShader->Initialize(m_pRenderer->GetDevice());
-	if (!result)
-	{
-		BE_ERROR("Could not initialize the LightShader Object!");
 		return FALSE;
 	}
 
@@ -93,18 +93,18 @@ void GraphicsManager::Shutdown()
 		SAFE_DELETE(m_pLightShader);
 	}
 
-	if (m_pTextureShader)
-	{
-		m_pTextureShader->Shutdown();
-
-		SAFE_DELETE(m_pTextureShader);
-	}
-
 	if (m_pColorShader)
 	{
 		m_pColorShader->Shutdown();
 
 		SAFE_DELETE(m_pColorShader);
+	}
+
+	if (m_pTextureShader)
+	{
+		m_pTextureShader->Shutdown();
+
+		SAFE_DELETE(m_pTextureShader);
 	}
 
 	if (m_pRenderer)

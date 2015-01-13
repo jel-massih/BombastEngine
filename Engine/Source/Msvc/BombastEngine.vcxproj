@@ -33,13 +33,12 @@
     <ClInclude Include="..\Game\HumanView.h" />
     <ClInclude Include="..\Game\Process.h" />
     <ClInclude Include="..\Game\ProcessManager.h" />
-    <ClInclude Include="..\Graphics2D\ColorShaderClass.h" />
+    <ClInclude Include="..\Graphics2D\BasicShaders.h" />
     <ClInclude Include="..\Graphics2D\FontClass.h" />
-    <ClInclude Include="..\Graphics2D\FontShaderClass.h" />
-    <ClInclude Include="..\Graphics2D\LightShaderClass.h" />
+    <ClInclude Include="..\Graphics2D\FontShader.h" />
+    <ClInclude Include="..\Graphics2D\LightShader.h" />
     <ClInclude Include="..\Graphics2D\MultiTextureShader.h" />
     <ClInclude Include="..\Graphics2D\TextureClass.h" />
-    <ClInclude Include="..\Graphics2D\TextureShaderClass.h" />
     <ClInclude Include="..\Graphics3D\D3DClass.h" />
     <ClInclude Include="..\Graphics3D\Geometry.h" />
     <ClInclude Include="..\Graphics3D\GraphicsManager.h" />
@@ -61,6 +60,7 @@
     <ClInclude Include="..\Resources\MaterialResource.h" />
     <ClInclude Include="..\Resources\ModelResource.h" />
     <ClInclude Include="..\Resources\ResourceCache.h" />
+    <ClInclude Include="..\Resources\ShaderResource.h" />
     <ClInclude Include="..\Resources\TextureResource.h" />
     <ClInclude Include="..\Resources\XmlResource.h" />
     <ClInclude Include="..\Resources\ZipFile.h" />
@@ -100,13 +100,12 @@
     <ClCompile Include="..\Game\HumanView.cpp" />
     <ClCompile Include="..\Game\Process.cpp" />
     <ClCompile Include="..\Game\ProcessManager.cpp" />
-    <ClCompile Include="..\Graphics2D\ColorShaderClass.cpp" />
+    <ClCompile Include="..\Graphics2D\BasicShaders.cpp" />
     <ClCompile Include="..\Graphics2D\FontClass.cpp" />
-    <ClCompile Include="..\Graphics2D\FontShaderClass.cpp" />
-    <ClCompile Include="..\Graphics2D\LightShaderClass.cpp" />
+    <ClCompile Include="..\Graphics2D\FontShader.cpp" />
+    <ClCompile Include="..\Graphics2D\LightShader.cpp" />
     <ClCompile Include="..\Graphics2D\MultiTextureShader.cpp" />
     <ClCompile Include="..\Graphics2D\TextureClass.cpp" />
-    <ClCompile Include="..\Graphics2D\TextureShaderClass.cpp" />
     <ClCompile Include="..\Graphics3D\D3DClass.cpp" />
     <ClCompile Include="..\Graphics3D\Geometry.cpp" />
     <ClCompile Include="..\Graphics3D\GraphicsManager.cpp" />
@@ -125,6 +124,7 @@
     <ClCompile Include="..\Resources\MaterialResource.cpp" />
     <ClCompile Include="..\Resources\ModelResource.cpp" />
     <ClCompile Include="..\Resources\ResourceCache.cpp" />
+    <ClCompile Include="..\Resources\ShaderResource.cpp" />
     <ClCompile Include="..\Resources\TextureResource.cpp" />
     <ClCompile Include="..\Resources\XmlResource.cpp" />
     <ClCompile Include="..\Resources\ZipFile.cpp" />
@@ -147,31 +147,57 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\Assets\Shaders\color.ps" />
-    <None Include="..\..\Assets\Shaders\color.vs" />
-    <None Include="..\..\Assets\Shaders\font.ps" />
-    <None Include="..\..\Assets\Shaders\font.vs" />
-    <None Include="..\..\Assets\Shaders\light.ps" />
-    <None Include="..\..\Assets\Shaders\light.vs" />
-    <None Include="..\..\Assets\Shaders\texture.ps" />
-    <None Include="..\..\Assets\Shaders\texture.vs" />
-  </ItemGroup>
-  <ItemGroup>
-    <FxCompile Include="..\..\Assets\Shaders\LitTexturedPixelShader.hlsl">
+    <FxCompile Include="..\Shaders\FontPixelShader.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
-      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">LitTexturedPixelShader</EntryPointName>
-      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">LitTexturedPixelShader</EntryPointName>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">5.0</ShaderModel>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">4.0</ShaderModel>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">FontPixelShader</EntryPointName>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">FontPixelShader</EntryPointName>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)../Assets/Shaders/%(Filename).cso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)../Assets/Shaders/%(Filename).cso</ObjectFileOutput>
     </FxCompile>
-    <FxCompile Include="..\..\Assets\Shaders\multitexture_pixel.hlsl">
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
-    </FxCompile>
-    <FxCompile Include="..\..\Assets\Shaders\multitexture_vertex.hlsl">
+    <FxCompile Include="..\Shaders\FontVertexShader.hlsl">
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">FontVertexShader</EntryPointName>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">FontVertexShader</EntryPointName>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)../Assets/Shaders/%(Filename).cso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)../Assets/Shaders/%(Filename).cso</ObjectFileOutput>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <DisableOptimizations Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</DisableOptimizations>
+      <EnableDebuggingInformation Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</EnableDebuggingInformation>
+    </FxCompile>
+    <FxCompile Include="..\Shaders\LitTexturedPixelShader.hlsl">
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">LitTexturedPixelShader</EntryPointName>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">LitTexturedPixelShader</EntryPointName>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)../Assets/Shaders/%(Filename).cso</ObjectFileOutput>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">4.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)../Assets/Shaders/%(Filename).cso</ObjectFileOutput>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">4.0</ShaderModel>
+    </FxCompile>
+    <FxCompile Include="..\Shaders\LitTexturedVertexShader.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">LitTexturedVertexShader</EntryPointName>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)../Assets/Shaders/%(Filename).cso</ObjectFileOutput>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">LitTexturedVertexShader</EntryPointName>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)../Assets/Shaders/%(Filename).cso</ObjectFileOutput>
+    </FxCompile>
+    <FxCompile Include="..\Shaders\MultiTexturePixelShader.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">4.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">4.0</ShaderModel>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)../Assets/Shaders/%(Filename).cso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)../Assets/Shaders/%(Filename).cso</ObjectFileOutput>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MultiTexturePixelShader</EntryPointName>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MultiTexturePixelShader</EntryPointName>
+    </FxCompile>
+    <FxCompile Include="..\Shaders\MultiTextureVertexShader.hlsl">
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MultiTextureVertexShader</EntryPointName>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)../Assets/Shaders/%(Filename).cso</ObjectFileOutput>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MultiTextureVertexShader</EntryPointName>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)../Assets/Shaders/%(Filename).cso</ObjectFileOutput>
     </FxCompile>
   </ItemGroup>
   <PropertyGroup Label="Globals">

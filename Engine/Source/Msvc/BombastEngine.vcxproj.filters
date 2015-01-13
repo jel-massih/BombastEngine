@@ -13,12 +13,6 @@
     <ClCompile Include="..\Graphics2D\TextureClass.cpp">
       <Filter>Graphics2D</Filter>
     </ClCompile>
-    <ClCompile Include="..\Graphics2D\TextureShaderClass.cpp">
-      <Filter>Graphics2D</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Graphics2D\ColorShaderClass.cpp">
-      <Filter>Graphics2D</Filter>
-    </ClCompile>
     <ClCompile Include="..\Utilities\DDSTextureLoader.cpp">
       <Filter>Utilities</Filter>
     </ClCompile>
@@ -122,9 +116,6 @@
     <ClCompile Include="..\Graphics2D\FontClass.cpp">
       <Filter>Graphics2D</Filter>
     </ClCompile>
-    <ClCompile Include="..\Graphics2D\FontShaderClass.cpp">
-      <Filter>Graphics2D</Filter>
-    </ClCompile>
     <ClCompile Include="..\Debugging\DebugManager.cpp">
       <Filter>Debugging</Filter>
     </ClCompile>
@@ -155,9 +146,6 @@
     <ClCompile Include="..\Utilities\BMDLMeshLoader.cpp">
       <Filter>Utilities</Filter>
     </ClCompile>
-    <ClCompile Include="..\Graphics2D\LightShaderClass.cpp">
-      <Filter>Graphics2D</Filter>
-    </ClCompile>
     <ClCompile Include="..\Graphics3D\Lighting.cpp">
       <Filter>Graphics3D</Filter>
     </ClCompile>
@@ -165,6 +153,18 @@
       <Filter>Graphics2D</Filter>
     </ClCompile>
     <ClCompile Include="..\Resources\MaterialResource.cpp">
+      <Filter>Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Graphics2D\FontShader.cpp">
+      <Filter>Graphics2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Graphics2D\LightShader.cpp">
+      <Filter>Graphics2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Graphics2D\BasicShaders.cpp">
+      <Filter>Graphics2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Resources\ShaderResource.cpp">
       <Filter>Resources</Filter>
     </ClCompile>
   </ItemGroup>
@@ -183,14 +183,8 @@
     <ClInclude Include="..\Graphics2D\TextureClass.h">
       <Filter>Graphics2D</Filter>
     </ClInclude>
-    <ClInclude Include="..\Graphics2D\TextureShaderClass.h">
-      <Filter>Graphics2D</Filter>
-    </ClInclude>
     <ClInclude Include="..\Graphics3D\ModelClass.h">
       <Filter>Graphics3D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Graphics2D\ColorShaderClass.h">
-      <Filter>Graphics2D</Filter>
     </ClInclude>
     <ClInclude Include="..\Utilities\DDSTextureLoader.h">
       <Filter>Utilities</Filter>
@@ -330,9 +324,6 @@
     <ClInclude Include="..\Graphics2D\FontClass.h">
       <Filter>Graphics2D</Filter>
     </ClInclude>
-    <ClInclude Include="..\Graphics2D\FontShaderClass.h">
-      <Filter>Graphics2D</Filter>
-    </ClInclude>
     <ClInclude Include="..\Debugging\DebugManager.h">
       <Filter>Debugging</Filter>
     </ClInclude>
@@ -360,9 +351,6 @@
     <ClInclude Include="..\Utilities\BMDLMeshLoader.h">
       <Filter>Utilities</Filter>
     </ClInclude>
-    <ClInclude Include="..\Graphics2D\LightShaderClass.h">
-      <Filter>Graphics2D</Filter>
-    </ClInclude>
     <ClInclude Include="..\Graphics3D\Lighting.h">
       <Filter>Graphics3D</Filter>
     </ClInclude>
@@ -370,6 +358,18 @@
       <Filter>Graphics2D</Filter>
     </ClInclude>
     <ClInclude Include="..\Resources\MaterialResource.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Graphics2D\FontShader.h">
+      <Filter>Graphics2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Graphics2D\LightShader.h">
+      <Filter>Graphics2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Graphics2D\BasicShaders.h">
+      <Filter>Graphics2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Resources\ShaderResource.h">
       <Filter>Resources</Filter>
     </ClInclude>
   </ItemGroup>
@@ -427,39 +427,22 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\Assets\Shaders\color.ps">
-      <Filter>Shaders</Filter>
-    </None>
-    <None Include="..\..\Assets\Shaders\color.vs">
-      <Filter>Shaders</Filter>
-    </None>
-    <None Include="..\..\Assets\Shaders\font.ps">
-      <Filter>Shaders</Filter>
-    </None>
-    <None Include="..\..\Assets\Shaders\font.vs">
-      <Filter>Shaders</Filter>
-    </None>
-    <None Include="..\..\Assets\Shaders\light.ps">
-      <Filter>Shaders</Filter>
-    </None>
-    <None Include="..\..\Assets\Shaders\light.vs">
-      <Filter>Shaders</Filter>
-    </None>
-    <None Include="..\..\Assets\Shaders\texture.ps">
-      <Filter>Shaders</Filter>
-    </None>
-    <None Include="..\..\Assets\Shaders\texture.vs">
-      <Filter>Shaders</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <FxCompile Include="..\..\Assets\Shaders\multitexture_pixel.hlsl">
+    <FxCompile Include="..\Shaders\LitTexturedPixelShader.hlsl">
       <Filter>Shaders</Filter>
     </FxCompile>
-    <FxCompile Include="..\..\Assets\Shaders\multitexture_vertex.hlsl">
+    <FxCompile Include="..\Shaders\FontPixelShader.hlsl">
       <Filter>Shaders</Filter>
     </FxCompile>
-    <FxCompile Include="..\..\Assets\Shaders\LitTexturedPixelShader.hlsl">
+    <FxCompile Include="..\Shaders\FontVertexShader.hlsl">
+      <Filter>Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="..\Shaders\LitTexturedVertexShader.hlsl">
+      <Filter>Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="..\Shaders\MultiTexturePixelShader.hlsl">
+      <Filter>Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="..\Shaders\MultiTextureVertexShader.hlsl">
       <Filter>Shaders</Filter>
     </FxCompile>
   </ItemGroup>

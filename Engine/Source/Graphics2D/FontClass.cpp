@@ -1,6 +1,5 @@
 #include "FontClass.h"
 #include "TextureClass.h"
-#include "../Bombast/BombastApp.h"
 #include "../Resources/ResourceCache.h"
 #include <sstream>
 #include <vector>

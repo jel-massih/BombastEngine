@@ -1,9 +1,8 @@
 #pragma once
 
 #include "../Graphics3D/D3DClass.h"
-#include "../Graphics2D/ColorShaderClass.h"
-#include "../Graphics2D/TextureShaderClass.h"
-#include "../Graphics2D/LightShaderClass.h"
+#include "../Graphics2D/BasicShaders.h"
+#include "../Graphics2D/LightShader.h"
 
 class GraphicsManager
 {
@@ -25,21 +24,21 @@ public:
 
 	static Renderer GetRendererImpl();
 
-	TextureShaderClass* GetTextureShader() const {
-		return m_pTextureShader;
+	LightShader* GetLightShader() const {
+		return m_pLightShader;
 	}
 
-	ColorShaderClass* GetColorShader() const {
+	ColorShader* GetColorShader() const {
 		return m_pColorShader;
 	}
 
-	LightShaderClass* GetLightShader() const {
-		return m_pLightShader;
+	TextureShader* GetTextureShader() const {
+		return m_pTextureShader;
 	}
 
 private:
 	IRenderer* m_pRenderer;
-	ColorShaderClass* m_pColorShader;
-	TextureShaderClass* m_pTextureShader;
-	LightShaderClass* m_pLightShader;
+	LightShader* m_pLightShader;
+	ColorShader* m_pColorShader;
+	TextureShader* m_pTextureShader;
 };

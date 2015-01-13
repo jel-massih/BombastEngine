@@ -22,21 +22,9 @@ cbuffer MaterialProperties : register(b0)
 
 struct Light
 {
-	float4 Position;
-	//--
-	float4 Direction;
-	//--
+	float3 Direction;
 	float4 Color;
-	//--
-	float SpotAngle;
-	float ConstantAttenuation;
-	float LinearAttenuation;
-	float QuadraticAttenuation;
-	//--
-	int LightType;
 	bool Enabled;
-	int2 Padding;
-	//--
 };
 
 cbuffer LightProperties : register(b1)

@@ -1,6 +1,7 @@
-#include "LightShaderClass.h"
+#include "LightShader.h"
+#include "../Graphics3D/Material.h"
 
-LightShaderClass::LightShaderClass()
+LightShader::LightShader()
 {
 	m_pVertexShader = nullptr;
 	m_pPixelShader = nullptr;
@@ -11,11 +12,11 @@ LightShaderClass::LightShaderClass()
 	m_pSampleState = nullptr;
 }
 
-bool LightShaderClass::Initialize(ID3D11Device* device)
+bool LightShader::Initialize(ID3D11Device* device)
 {
 	bool result;
 
-	result = InitializeShader(device, "Shaders\\light.vs", "Shaders\\light.ps");
+	result = InitializeShader(device, "Shaders\\LitTexturedVertexShader.cso", "Shaders\\LitTexturedPixelShader.cso");
 	if (!result)
 	{
 		return false;
@@ -24,18 +25,18 @@ bool LightShaderClass::Initialize(ID3D11Device* device)
 	return true;
 }
 
-void LightShaderClass::Shutdown()
+void LightShader::Shutdown()
 {
 	ShutdownShader();
 
 	return;
 }
 
-bool LightShaderClass::Render(ID3D11DeviceContext* deviceContext, int indexCount, DirectX::XMMATRIX &world, DirectX::XMMATRIX &view, DirectX::XMMATRIX &projection, ID3D11ShaderResourceView* texture, DirectX::XMFLOAT3 lightDirection, DirectX::XMFLOAT4 diffuseColor, DirectX::XMFLOAT4 ambientColor, DirectX::XMFLOAT3 cameraPosition, DirectX::XMFLOAT4 specularColor, float specularPower)
+bool LightShader::Render(ID3D11DeviceContext* deviceContext, int indexCount, DirectX::XMMATRIX &world, DirectX::XMMATRIX &view, DirectX::XMMATRIX &projection, ID3D11ShaderResourceView* texture, DirectX::XMFLOAT3 lightDirection, DirectX::XMFLOAT4 diffuseColor, DirectX::XMFLOAT3 cameraPosition, Material* material)
 {
 	bool result;
 
-	result = SetShaderParameters(deviceContext, world, view, projection, texture, lightDirection, diffuseColor, ambientColor, cameraPosition, specularColor, specularPower);
+	result = SetShaderParameters(deviceContext, world, view, projection, texture, lightDirection, diffuseColor, cameraPosition, material);
 	if (!result)
 	{
 		return false;
@@ -46,76 +47,44 @@ bool LightShaderClass::Render(ID3D11DeviceContext* deviceContext, int indexCount
 	return true;
 }
 
-bool LightShaderClass::InitializeShader(ID3D11Device* device, std::string vertexShaderPath, std::string pixelShaderPath)
+bool LightShader::InitializeShader(ID3D11Device* device, std::string vertexShaderPath, std::string pixelShaderPath)
 {
 	HRESULT result;
-	ID3D10Blob* errorMessage;
 	ID3D10Blob* vertexShaderBuffer;
 	ID3D10Blob* pixelShaderBuffer;
 	D3D11_INPUT_ELEMENT_DESC polygonLayout[3];
 	unsigned int numElements;
 	D3D11_BUFFER_DESC matrixBufferDesc;
 	D3D11_BUFFER_DESC cameraBufferDesc;
+	D3D11_BUFFER_DESC materialBufferDesc;
 	D3D11_BUFFER_DESC lightBufferDesc;
 	D3D11_SAMPLER_DESC samplerDesc;
 
-	errorMessage = 0;
 	vertexShaderBuffer = 0;
 	pixelShaderBuffer = 0;
 
-	//Compile Vertex Shader
 	Resource vertexShaderResource(vertexShaderPath.c_str());
 	ResourceHandle* pVertexResHandle = g_pApp->m_pResourceCache->GetHandle(&vertexShaderResource);
 
-	result = D3DCompile(pVertexResHandle->Buffer(), pVertexResHandle->Size(), vertexShaderPath.c_str(), NULL, NULL, "LightVertexShader", "vs_5_0", D3D10_SHADER_DEBUG | D3D10_SHADER_SKIP_OPTIMIZATION | D3D10_SHADER_ENABLE_STRICTNESS, 0, &vertexShaderBuffer, &errorMessage);
+	result = device->CreateVertexShader(pVertexResHandle->Buffer(), pVertexResHandle->Size(), nullptr, &m_pVertexShader);
 	if (FAILED(result))
 	{
-		if (errorMessage)
-		{
-			BE_ERROR((char*)errorMessage->GetBufferPointer());
-		}
-		else
-		{
-			BE_ERROR("Missing Vertex Shader File");
-		}
+		BE_ERROR("Failed to create vertex shader");
 
 		return false;
 	}
 
-	//Compile Pixel Shader
 	Resource pixelShaderResource(pixelShaderPath.c_str());
 	ResourceHandle* pPixelResHandle = g_pApp->m_pResourceCache->GetHandle(&pixelShaderResource);
 
-	result = D3DCompile(pPixelResHandle->Buffer(), pPixelResHandle->Size(), pixelShaderPath.c_str(), NULL, NULL, "LightPixelShader", "ps_5_0", D3D10_SHADER_DEBUG | D3D10_SHADER_SKIP_OPTIMIZATION | D3D10_SHADER_ENABLE_STRICTNESS, 0, &pixelShaderBuffer, &errorMessage);
+	result = device->CreatePixelShader(pPixelResHandle->Buffer(), pPixelResHandle->Size(), nullptr, &m_pPixelShader);
 	if (FAILED(result))
 	{
-		if (errorMessage)
-		{
-			BE_ERROR((char*)errorMessage->GetBufferPointer());
-		}
-		else
-		{
-			BE_ERROR("Missing Pixel Shader File");
-		}
+		BE_ERROR("Failed to create Pixel shader");
 
 		return false;
 	}
 
-	//Create Vertex Shader From Buffer
-	result = device->CreateVertexShader(vertexShaderBuffer->GetBufferPointer(), vertexShaderBuffer->GetBufferSize(), NULL, &m_pVertexShader);
-	if (FAILED(result))
-	{
-		return false;
-	}
-
-	//Create Pixel Shader From Buffer
-	result = device->CreatePixelShader(pixelShaderBuffer->GetBufferPointer(), pixelShaderBuffer->GetBufferSize(), NULL, &m_pPixelShader);
-	if (FAILED(result))
-	{
-		return false;
-	}
-
-	//Create Vertex Input layout Description
 	polygonLayout[0].SemanticName = "POSITION";
 	polygonLayout[0].SemanticIndex = 0;
 	polygonLayout[0].Format = DXGI_FORMAT_R32G32B32_FLOAT;
@@ -144,7 +113,7 @@ bool LightShaderClass::InitializeShader(ID3D11Device* device, std::string vertex
 	numElements = sizeof(polygonLayout) / sizeof(polygonLayout[0]);
 
 	//Create vertex input layout
-	result = device->CreateInputLayout(polygonLayout, numElements, vertexShaderBuffer->GetBufferPointer(), vertexShaderBuffer->GetBufferSize(), &m_pLayout);
+	result = device->CreateInputLayout(polygonLayout, numElements, pPixelResHandle->Buffer(), pPixelResHandle->Size(), &m_pLayout);
 	if (FAILED(result))
 	{
 		return false;
@@ -206,6 +175,19 @@ bool LightShaderClass::InitializeShader(ID3D11Device* device, std::string vertex
 		return false;
 	}
 
+	materialBufferDesc.Usage = D3D11_USAGE_DYNAMIC;
+	materialBufferDesc.ByteWidth = sizeof(materialBufferDesc);
+	materialBufferDesc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+	materialBufferDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+	materialBufferDesc.MiscFlags = 0;
+	materialBufferDesc.StructureByteStride = 0;
+
+	result = device->CreateBuffer(&materialBufferDesc, NULL, &m_pMaterialBuffer);
+	if (FAILED(result))
+	{
+		return false;
+	}
+
 	lightBufferDesc.Usage = D3D11_USAGE_DYNAMIC;
 	lightBufferDesc.ByteWidth = sizeof(LightBufferType);
 	lightBufferDesc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
@@ -222,11 +204,12 @@ bool LightShaderClass::InitializeShader(ID3D11Device* device, std::string vertex
 	return true;
 }
 
-void LightShaderClass::ShutdownShader()
+void LightShader::ShutdownShader()
 {
 	SAFE_RELEASE(m_pSampleState);
 	SAFE_RELEASE(m_pLayout);
 	SAFE_RELEASE(m_pLightBuffer);
+	SAFE_RELEASE(m_pMaterialBuffer);
 	SAFE_RELEASE(m_pCameraBuffer);
 	SAFE_RELEASE(m_pMatrixBuffer);
 	SAFE_RELEASE(m_pLayout);
@@ -236,42 +219,36 @@ void LightShaderClass::ShutdownShader()
 	return;
 }
 
-bool LightShaderClass::SetShaderParameters(ID3D11DeviceContext* deviceContext, DirectX::XMMATRIX &world, DirectX::XMMATRIX &view, DirectX::XMMATRIX &projection, ID3D11ShaderResourceView* texture, DirectX::XMFLOAT3 lightDirection, DirectX::XMFLOAT4 diffuseColor, DirectX::XMFLOAT4 ambientColor, DirectX::XMFLOAT3 cameraPosition, DirectX::XMFLOAT4 specularColor, float specularPower)
+bool LightShader::SetShaderParameters(ID3D11DeviceContext* deviceContext, DirectX::XMMATRIX &world, DirectX::XMMATRIX &view, DirectX::XMMATRIX &projection, ID3D11ShaderResourceView* texture, DirectX::XMFLOAT3 lightDirection, DirectX::XMFLOAT4 diffuseColor, DirectX::XMFLOAT3 cameraPosition, Material* material)
 {
 	HRESULT result;
 	D3D11_MAPPED_SUBRESOURCE mappedResource;
 	MatrixBufferType* dataPtr;
-	LightBufferType* dataPtr2;
-	CameraBufferType* dataPtr3;
+	CameraBufferType* dataPtr2;
+	MaterialBufferType* dataPtr3;
+	LightBufferType* dataPtr4;
 	unsigned int bufferNumber;
 
-	//Transpose Matrices to prep for Shader
 	world = DirectX::XMMatrixTranspose(world);
 	view = DirectX::XMMatrixTranspose(view);
 	projection = DirectX::XMMatrixTranspose(projection);
 
-	//Lock constant buffer so it can be written to
 	result = deviceContext->Map(m_pMatrixBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource);
 	if (FAILED(result))
 	{
 		return false;
 	}
 
-	//Get pointer to data in constant buffer
 	dataPtr = (MatrixBufferType*)mappedResource.pData;
 
-	//Copy matrices into constant buffer
 	dataPtr->world = world;
 	dataPtr->view = view;
 	dataPtr->projection = projection;
 
-	//unlock constant buffer
 	deviceContext->Unmap(m_pMatrixBuffer, 0);
 
-	//set position of constant buffer in vertex shader
 	bufferNumber = 0;
 
-	//set constant buffer in vertex shader with updated values
 	deviceContext->VSSetConstantBuffers(bufferNumber, 1, &m_pMatrixBuffer);
 
 	result = deviceContext->Map(m_pCameraBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource);
@@ -280,10 +257,10 @@ bool LightShaderClass::SetShaderParameters(ID3D11DeviceContext* deviceContext, D
 		return false;
 	}
 
-	dataPtr3 = (CameraBufferType*)mappedResource.pData;
+	dataPtr2 = (CameraBufferType*)mappedResource.pData;
 
-	dataPtr3->cameraPosition = cameraPosition;
-	dataPtr3->padding = 0.0f;
+	dataPtr2->cameraPosition = cameraPosition;
+	dataPtr2->padding = 0.0f;
 
 	deviceContext->Unmap(m_pCameraBuffer, 0);
 
@@ -291,19 +268,38 @@ bool LightShaderClass::SetShaderParameters(ID3D11DeviceContext* deviceContext, D
 
 	deviceContext->VSSetConstantBuffers(bufferNumber, 1, &m_pCameraBuffer);
 
+	result = deviceContext->Map(m_pMaterialBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource);
+	if (FAILED(result))
+	{
+		return false;
+	}
+
+	dataPtr3 = (MaterialBufferType*)mappedResource.pData;
+
+	dataPtr3->ambient = material->GetAmbient();
+	dataPtr3->diffuse = material->GetDiffuse();
+	dataPtr3->emissive = material->GetEmissive();
+	dataPtr3->useTexture = true;
+	dataPtr3->padding = XMFLOAT2(0, 0);
+	Vec4 specular;
+	material->GetSpecular(specular, dataPtr3->specularPower);
+	dataPtr3->specular = specular;
+
+	deviceContext->Unmap(m_pMaterialBuffer, 0);
+
+	bufferNumber = 0;
+
+	deviceContext->PSSetConstantBuffers(bufferNumber, 1, &m_pMaterialBuffer);
+
 	result = deviceContext->Map(m_pLightBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource);
 	if (FAILED(result))
 	{
 		return false;
 	}
 
-	dataPtr2 = (LightBufferType*)mappedResource.pData;
+	dataPtr4 = (LightBufferType*)mappedResource.pData;
 
-	dataPtr2->ambientColor = ambientColor;
-	dataPtr2->diffuseColor = diffuseColor;
-	dataPtr2->lightDirection = lightDirection;
-	dataPtr2->specularColor = specularColor;
-	dataPtr2->specularPower = specularPower;
+	dataPtr4->lightDirection = lightDirection;
 
 	deviceContext->Unmap(m_pLightBuffer, 0);
 	bufferNumber = 0;
@@ -316,7 +312,7 @@ bool LightShaderClass::SetShaderParameters(ID3D11DeviceContext* deviceContext, D
 	return true;
 }
 
-void LightShaderClass::RenderShader(ID3D11DeviceContext* deviceContext, int indexCount)
+void LightShader::RenderShader(ID3D11DeviceContext* deviceContext, int indexCount)
 {
 	//Set the vertex input layout.
 	deviceContext->IASetInputLayout(m_pLayout);

@@ -4,10 +4,10 @@
 
 #include <d3dcompiler.h>
 
-class FontShaderClass
+class FontShader
 {
 public:
-	FontShaderClass();
+	FontShader();
 
 	bool Initialize(ID3D11Device* device);
 	void Shutdown();

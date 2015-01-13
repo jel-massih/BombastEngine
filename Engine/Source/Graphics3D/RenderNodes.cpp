@@ -443,8 +443,7 @@ HRESULT D3D11GridNode::VRender(Scene* pScene)
 
 	RenderBuffers(context);
 
-	result = g_pApp->GetGraphicsManager()->GetColorShader()->Render(context, m_indexCount, DirectX::XMLoadFloat4x4(&worldMatrix),
-		XMLoadFloat4x4(&viewMatrix), XMLoadFloat4x4(&projectionMatrix));
+	result = g_pApp->GetGraphicsManager()->GetColorShader()->Render(context, m_indexCount, DirectX::XMLoadFloat4x4(&worldMatrix), XMLoadFloat4x4(&viewMatrix), XMLoadFloat4x4(&projectionMatrix), Vec4(1.0f, 1.0f, 0.0f, 1.0f));
 	if (!result)
 	{
 		return S_FALSE;

@@ -1,7 +1,7 @@
-#include "FontShaderClass.h"
-#include "../Bombast/BombastApp.h"
+#include "FontShader.h"
+#include "../Resources/ShaderResource.h"
 
-FontShaderClass::FontShaderClass()
+FontShader::FontShader()
 {
 	m_pVertexShader = 0;
 	m_pPixelShader = 0;
@@ -11,9 +11,9 @@ FontShaderClass::FontShaderClass()
 	m_pPixelBuffer = 0;
 }
 
-bool FontShaderClass::Initialize(ID3D11Device* device)
+bool FontShader::Initialize(ID3D11Device* device)
 {
-	if (!InitializeShader(device, "Shaders\\font.vs", "Shaders\\font.ps"))
+	if (!InitializeShader(device, "Shaders\\FontVertexShader.cso", "Shaders\\FontPixelShader.cso"))
 	{
 		return false;
 	}
@@ -21,12 +21,12 @@ bool FontShaderClass::Initialize(ID3D11Device* device)
 	return true;
 }
 
-void FontShaderClass::Shutdown()
+void FontShader::Shutdown()
 {
 	ShutdownShader();
 }
 
-bool FontShaderClass::Render(ID3D11DeviceContext* deviceContext, int indexCount, XMMATRIX& worldMatrix, 
+bool FontShader::Render(ID3D11DeviceContext* deviceContext, int indexCount, XMMATRIX& worldMatrix,
 	XMMATRIX& viewMatrix, XMMATRIX& projectionMatrix, ID3D11ShaderResourceView* texture, XMFLOAT4 pixelColor)
 {
 	if (!SetShaderParameters(deviceContext, worldMatrix, viewMatrix, projectionMatrix, texture, pixelColor))
@@ -39,7 +39,7 @@ bool FontShaderClass::Render(ID3D11DeviceContext* deviceContext, int indexCount,
 	return true;
 }
 
-bool FontShaderClass::InitializeShader(ID3D11Device* device, std::string vertexShaderPath, std::string pixelShaderPath)
+bool FontShader::InitializeShader(ID3D11Device* device, std::string vertexShaderPath, std::string pixelShaderPath)
 {
 	HRESULT result;
 	ID3D10Blob* errorMessage;
@@ -57,51 +57,6 @@ bool FontShaderClass::InitializeShader(ID3D11Device* device, std::string vertexS
 
 	Resource vertexShaderResource(vertexShaderPath.c_str());
 	ResourceHandle* pVertexResHandle = g_pApp->m_pResourceCache->GetHandle(&vertexShaderResource);
-
-	result = D3DCompile(pVertexResHandle->Buffer(), pVertexResHandle->Size(), vertexShaderPath.c_str(), NULL, NULL, "FontVertexShader", "vs_5_0", D3D10_SHADER_ENABLE_STRICTNESS, 0, &vertexShaderBuffer, &errorMessage);
-	if (FAILED(result))
-	{
-		if (errorMessage)
-		{
-			BE_ERROR((char*)errorMessage->GetBufferPointer());
-		}
-		else
-		{
-			BE_ERROR("Missing Vertex Shader File");
-		}
-
-		return false;
-	}
-
-	Resource pixelShaderResource(pixelShaderPath.c_str());
-	ResourceHandle* pPixelResHandle = g_pApp->m_pResourceCache->GetHandle(&pixelShaderResource);
-
-	result = D3DCompile(pPixelResHandle->Buffer(), pPixelResHandle->Size(), pixelShaderPath.c_str(), NULL, NULL, "FontPixelShader", "ps_5_0", D3D10_SHADER_ENABLE_STRICTNESS, 0, &pixelShaderBuffer, &errorMessage);
-	if (FAILED(result))
-	{
-		if (errorMessage)
-		{
-			BE_ERROR((char*)errorMessage->GetBufferPointer());
-		}
-		else
-		{
-			BE_ERROR("Missing Vertex Shader File");
-		}
-
-		return false;
-	}
-
-	result = device->CreateVertexShader(vertexShaderBuffer->GetBufferPointer(), vertexShaderBuffer->GetBufferSize(), NULL, &m_pVertexShader);
-	if (FAILED(result))
-	{
-		return false;
-	}
-
-	result = device->CreatePixelShader(pixelShaderBuffer->GetBufferPointer(), pixelShaderBuffer->GetBufferSize(), NULL, &m_pPixelShader);
-	if (FAILED(result))
-	{
-		return false;
-	}
 
 	polygonLayout[0].SemanticName = "Position";
 	polygonLayout[0].SemanticIndex = 0;
@@ -183,7 +138,7 @@ bool FontShaderClass::InitializeShader(ID3D11Device* device, std::string vertexS
 	return true;
 }
 
-void FontShaderClass::ShutdownShader()
+void FontShader::ShutdownShader()
 {
 	SAFE_RELEASE(m_pPixelBuffer);
 	SAFE_RELEASE(m_pSampleState);
@@ -193,7 +148,7 @@ void FontShaderClass::ShutdownShader()
 	SAFE_RELEASE(m_pVertexShader);
 }
 
-bool FontShaderClass::SetShaderParameters(ID3D11DeviceContext* deviceContext, XMMATRIX& world, XMMATRIX& view, XMMATRIX& projection, ID3D11ShaderResourceView* texture, XMFLOAT4 pixelColor)
+bool FontShader::SetShaderParameters(ID3D11DeviceContext* deviceContext, XMMATRIX& world, XMMATRIX& view, XMMATRIX& projection, ID3D11ShaderResourceView* texture, XMFLOAT4 pixelColor)
 {
 	HRESULT result;
 	D3D11_MAPPED_SUBRESOURCE mappedResource;
@@ -244,7 +199,7 @@ bool FontShaderClass::SetShaderParameters(ID3D11DeviceContext* deviceContext, XM
 	return true;
 }
 
-void FontShaderClass::RenderShaders(ID3D11DeviceContext* deviceContext, int indexCount)
+void FontShader::RenderShaders(ID3D11DeviceContext* deviceContext, int indexCount)
 {
 	deviceContext->IASetInputLayout(m_pLayout);
 

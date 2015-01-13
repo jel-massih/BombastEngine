@@ -1,7 +1,7 @@
 #pragma once
 
 class FontClass;
-class FontShaderClass;
+class FontShader;
 
 class DebugText
 {
@@ -41,7 +41,7 @@ private:
 
 private:
 	FontClass* m_pFont;
-	FontShaderClass* m_pFontShader;
+	FontShader* m_pFontShader;
 	int m_screenWidth, m_screenHeight;
 	Mat4x4 m_baseViewMatrix;
 	SentenceType** m_pStrings;

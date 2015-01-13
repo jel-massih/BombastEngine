@@ -1,5 +1,4 @@
 #include "MultiTextureShader.h"
-#include "../Bombast/BombastApp.h"
 #include "../Resources/ResourceCache.h"
 
 MultiTextureShader::MultiTextureShader()
@@ -15,7 +14,7 @@ bool MultiTextureShader::Initialize(ID3D11Device* device)
 {
 	bool result;
 
-	result = InitializeShader(device, "Shaders\\multitexture_vertex.hlsl", "Shaders\\multitexture_pixel.hlsl");
+	result = InitializeShader(device, "Shaders\\MultiTextureVertexShader.cbo", "Shaders\\MultiTextureVertexShader.cbo");
 	if (!result)
 	{
 		return false;
@@ -220,7 +219,7 @@ bool MultiTextureShader::SetShaderParameters(ID3D11DeviceContext* deviceContext,
 	return true;
 }
 
-void TextureShaderClass::RenderShader(ID3D11DeviceContext* deviceContext, int indexCount)
+void MultiTextureShader::RenderShader(ID3D11DeviceContext* deviceContext, int indexCount)
 {
 	deviceContext->IASetInputLayout(m_pLayout);
 
