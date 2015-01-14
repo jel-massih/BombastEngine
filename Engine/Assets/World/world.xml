@@ -5,7 +5,18 @@
 
     <StaticActors>
       <Actor resource="actors\directionalLight.xml"/>
+      
+      <Actor resource="actors\cornell_room.xml">
+        <TransformComponent>
+            <YawPitchRoll x="0" y="180" z="0"/>
+        </TransformComponent>
+      </Actor>
 
+      <Actor resource="actors\sphere.xml">
+        <TransformComponent>
+            <Position x="0.3" y="0.3" z="0"/>
+        </TransformComponent>
+      </Actor>
     </StaticActors>
 
     <PostLoadScripts>

@@ -85,7 +85,7 @@ bool ColorShader::InitializeShader(ID3D11Device* device, std::string vertexShade
 
 	numElements = sizeof(polygonLayout) / sizeof(polygonLayout[0]);
 
-	result = device->CreateInputLayout(polygonLayout, numElements, pPixelResHandle->Buffer(), pPixelResHandle->Size(), &m_pLayout);
+	result = device->CreateInputLayout(polygonLayout, numElements, pVertexResHandle->Buffer(), pVertexResHandle->Size(), &m_pLayout);
 	if (FAILED(result))
 	{
 		return false;
