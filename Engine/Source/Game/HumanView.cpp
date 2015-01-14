@@ -40,9 +40,6 @@ HumanView::HumanView(IRenderer* renderer)
 	{
 		BE_ERROR("Failed to Initialze DebugManager");
 	}
-
-	m_pDebugManager->GetDebugText()->AddString("TEST");
-	m_pDebugManager->GetDebugText()->UpdateString("TEST", "Debug Text is Working");
 }
 
 HumanView::~HumanView()
