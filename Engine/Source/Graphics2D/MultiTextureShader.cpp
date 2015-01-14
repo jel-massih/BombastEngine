@@ -14,7 +14,7 @@ bool MultiTextureShader::Initialize(ID3D11Device* device)
 {
 	bool result;
 
-	result = InitializeShader(device, "Shaders\\MultiTextureVertexShader.cbo", "Shaders\\MultiTextureVertexShader.cbo");
+	result = InitializeShader(device, "Shaders\\MultiTextureVertexShader.cso", "Shaders\\MultiTextureVertexShader.cso");
 	if (!result)
 	{
 		return false;

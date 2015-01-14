@@ -42,21 +42,33 @@ bool FontShader::Render(ID3D11DeviceContext* deviceContext, int indexCount, XMMA
 bool FontShader::InitializeShader(ID3D11Device* device, std::string vertexShaderPath, std::string pixelShaderPath)
 {
 	HRESULT result;
-	ID3D10Blob* errorMessage;
-	ID3D10Blob* vertexShaderBuffer;
-	ID3D10Blob* pixelShaderBuffer;
 	D3D11_INPUT_ELEMENT_DESC polygonLayout[2];
 	unsigned int numElements;
 	D3D11_BUFFER_DESC constantBufferDesc;
 	D3D11_SAMPLER_DESC samplerDesc;
 	D3D11_BUFFER_DESC pixelBufferDesc;
 
-	errorMessage = 0;
-	vertexShaderBuffer = 0;
-	pixelShaderBuffer = 0;
-
 	Resource vertexShaderResource(vertexShaderPath.c_str());
 	ResourceHandle* pVertexResHandle = g_pApp->m_pResourceCache->GetHandle(&vertexShaderResource);
+
+	result = device->CreateVertexShader(pVertexResHandle->Buffer(), pVertexResHandle->Size(), nullptr, &m_pVertexShader);
+	if (FAILED(result))
+	{
+		BE_ERROR("Failed to create Font Vertex Shader");
+
+		return false;
+	}
+
+	Resource pixelShaderResource(pixelShaderPath.c_str());
+	ResourceHandle* pPixelResHandle = g_pApp->m_pResourceCache->GetHandle(&pixelShaderResource);
+
+	result = device->CreatePixelShader(pPixelResHandle->Buffer(), pPixelResHandle->Size(), nullptr, &m_pPixelShader);
+	if (FAILED(result))
+	{
+		BE_ERROR("Failed to create Font Pixel Shader");
+
+		return false;
+	}
 
 	polygonLayout[0].SemanticName = "Position";
 	polygonLayout[0].SemanticIndex = 0;
@@ -76,18 +88,11 @@ bool FontShader::InitializeShader(ID3D11Device* device, std::string vertexShader
 
 	numElements = sizeof(polygonLayout) / sizeof(polygonLayout[0]);
 
-	result = device->CreateInputLayout(polygonLayout, numElements, vertexShaderBuffer->GetBufferPointer(),
-		vertexShaderBuffer->GetBufferSize(), &m_pLayout);
+	result = device->CreateInputLayout(polygonLayout, numElements, pVertexResHandle->Buffer(), pVertexResHandle->Size(), &m_pLayout);
 	if (FAILED(result))
 	{
 		return false;
 	}
-
-	vertexShaderBuffer->Release();
-	vertexShaderBuffer = 0;
-
-	pixelShaderBuffer->Release();
-	pixelShaderBuffer = 0;
 
 	constantBufferDesc.Usage = D3D11_USAGE_DYNAMIC;
 	constantBufferDesc.ByteWidth = sizeof(ConstantBufferType);

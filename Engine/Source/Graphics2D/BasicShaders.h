@@ -21,6 +21,7 @@ private:
 
 	struct PixelBufferType
 	{
+		XMFLOAT4 position;
 		XMFLOAT4 color;
 	};
 
