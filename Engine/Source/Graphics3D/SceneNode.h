@@ -37,7 +37,7 @@ public:
 	RenderPass GetRenderPass() const { return m_renderPass; }
 	float GetRadius() const { return m_radius; }
 
-	Material GetMaterial() const { return m_material; }
+	const Material& GetMaterial() const { return m_material; }
 
 protected:
 	ActorId m_actorId;

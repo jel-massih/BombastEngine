@@ -17,16 +17,16 @@ public:
 	Material();
 
 	void SetAmbient(const Vec4& color);
-	const Vec4 GetAmbient() { return m_material.Ambient; }
+	const Vec4 GetAmbient() const { return m_material.Ambient; }
 
 	void SetDiffuse(const Vec4& color);
-	const Vec4 GetDiffuse() { return m_material.Diffuse; }
+	const Vec4 GetDiffuse() const { return m_material.Diffuse; }
 
 	void SetSpecular(const Vec4& color, const float power);
-	void GetSpecular(Vec4 &_color, float &_power) { _color = m_material.Specular; _power = m_material.Power; }
+	void GetSpecular(Vec4 &_color, float &_power) const { _color = m_material.Specular; _power = m_material.Power; }
 
 	void SetEmissive(const Vec4& color);
-	const Vec4 GetEmissive() { return m_material.Emissive; }
+	const Vec4 GetEmissive() const { return m_material.Emissive; }
 
 	void SetAlpha(const float alpha);
 	bool HasAlpha() const { return GetAlpha() != fOPAQUE; }

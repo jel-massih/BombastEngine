@@ -32,8 +32,9 @@ LightNode::LightNode(const ActorId actorId, BaseRenderComponent* renderComponent
 HRESULT D3DLightNode11::VOnUpdate(Scene* pScene, const float deltaMs)
 {
 	LightRenderComponent* lrc = static_cast<LightRenderComponent*>(m_pRenderComponent);
-	m_properties.GetMaterial().SetDiffuse(lrc->GetColor());
-	
+	Material mat = m_properties.GetMaterial();
+	mat.SetDiffuse(lrc->GetColor());
+
 	return S_OK;
 }
 
@@ -47,7 +48,7 @@ void LightingManager::CalcLighting(Scene* pScene)
 	{
 		if (count == 0)
 		{
-			Vec4 ambient = (*light)->VGet()->GetMaterial().GetAmbient();
+			const Vec4 ambient = (*light)->VGet()->GetMaterial().GetAmbient();
 			m_lightAmbient = Vec4(ambient.x, ambient.y, ambient.z, 1.0f);
 		}
 

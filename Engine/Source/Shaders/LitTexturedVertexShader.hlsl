@@ -41,7 +41,7 @@ PixelInputType LitTexturedVertexShader(VertexInputType input)
 	output.normal = normalize(output.normal);
 
 	worldPosition = mul(eyePos, worldMatrix);
-	output.viewDirection = eyePos.xyz - worldMatrix.xyz;
+	output.viewDirection = eyePos.xyz - input.position.xyz;
 	output.viewDirection = normalize(output.viewDirection);
 
 	return output;
