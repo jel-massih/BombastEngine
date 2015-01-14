@@ -52,9 +52,9 @@ public:
 	
 	std::list<LightNode*> m_lights;
 protected:
-	Vec4 m_lightDir[MAXIMUM_LIGHTS_SUPPORTED];
-	Vec4 m_lightDiffuse[MAXIMUM_LIGHTS_SUPPORTED];
-	Vec4 m_lightSpecular[MAXIMUM_LIGHTS_SUPPORTED];
-	float m_lightSpecularPower[MAXIMUM_LIGHTS_SUPPORTED];
+	Vec4 m_lightDir[MAX_LIGHTS_SUPPORTED];
+	Vec4 m_lightDiffuse[MAX_LIGHTS_SUPPORTED];
+	Vec4 m_lightSpecular[MAX_LIGHTS_SUPPORTED];
+	float m_lightSpecularPower[MAX_LIGHTS_SUPPORTED];
 	Vec4 m_lightAmbient;
 };

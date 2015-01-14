@@ -84,7 +84,7 @@ bool Scene::AddChild(ActorId id, ISceneNode* child)
 	}
 
 	LightNode* pLight = static_cast<LightNode*>(child);
-	if (pLight != NULL && m_pLightManager->m_lights.size() + 1 < MAXIMUM_LIGHTS_SUPPORTED)
+	if (pLight != NULL && m_pLightManager->m_lights.size() + 1 < MAX_LIGHTS_SUPPORTED)
 	{
 		m_pLightManager->m_lights.push_back(pLight);
 	}

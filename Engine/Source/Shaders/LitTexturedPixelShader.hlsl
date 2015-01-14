@@ -90,8 +90,8 @@ LightingResult CalcLighting(float4 pixelPos, float3 normal)
 
 struct PixelShaderInput
 {
-	float4 Position : TEXCOORD1;
-	float3 Normal : TEXCOORD2;
+	float4 Position : POSITION;
+	float3 Normal : NORMAL;
 	float2 TexCoord : TEXCOORD0;
 };
 

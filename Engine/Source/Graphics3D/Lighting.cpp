@@ -40,10 +40,10 @@ HRESULT D3DLightNode11::VOnUpdate(Scene* pScene, const float deltaMs)
 
 void LightingManager::CalcLighting(Scene* pScene)
 {
-	pScene->GetRenderer()->VCalcLighting(&m_lights, MAXIMUM_LIGHTS_SUPPORTED);
+	pScene->GetRenderer()->VCalcLighting(&m_lights, MAX_LIGHTS_SUPPORTED);
 
 	int count = 0;
-	BE_ASSERT(m_lights.size() < MAXIMUM_LIGHTS_SUPPORTED);
+	BE_ASSERT(m_lights.size() < MAX_LIGHTS_SUPPORTED);
 	for (auto light = m_lights.begin(); light != m_lights.end(); light++)
 	{
 		if (count == 0)
