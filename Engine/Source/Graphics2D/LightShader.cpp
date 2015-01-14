@@ -108,7 +108,7 @@ bool LightShader::InitializeShader(ID3D11Device* device, std::string vertexShade
 	numElements = sizeof(polygonLayout) / sizeof(polygonLayout[0]);
 
 	//Create vertex input layout
-	result = device->CreateInputLayout(polygonLayout, numElements, pPixelResHandle->Buffer(), pPixelResHandle->Size(), &m_pLayout);
+	result = device->CreateInputLayout(polygonLayout, numElements, pVertexResHandle->Buffer(), pVertexResHandle->Size(), &m_pLayout);
 	if (FAILED(result))
 	{
 		return false;
@@ -291,7 +291,7 @@ bool LightShader::SetShaderParameters(ID3D11DeviceContext* deviceContext, Direct
 	dataPtr4->eyePosition = Vec4(cameraPosition, 0.0f);
 
 	deviceContext->Unmap(m_pLightBuffer, 0);
-	bufferNumber = 0;
+	bufferNumber = 1;
 	deviceContext->PSSetConstantBuffers(bufferNumber, 1, &m_pLightBuffer);
 
 

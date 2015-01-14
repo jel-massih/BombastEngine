@@ -13,7 +13,7 @@ cbuffer CameraBuffer : register(b1)
 
 struct VertexInputType
 {
-	float3 position : POSITION;
+	float4 position : POSITION;
 	float3 normal : NORMAL;
 	float2 tex : TEXCOORD0;
 };
@@ -32,6 +32,8 @@ PixelInputType LitTexturedVertexShader(VertexInputType input)
 	float4 worldPosition;
 
 	output.tex = input.tex;
+
+	input.position.w = 1.0f;
 
 	output.position = mul(input.position, worldMatrix);
 	output.position = mul(output.position, viewMatrix);
