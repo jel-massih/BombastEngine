@@ -40,10 +40,10 @@ float CalcDiffuse(Light light, float3 lightDir, float3 normal)
 	return light.Color * intensity;
 };
 
-float CalcSpecular(Light light, float3 eyePos, float3 lightDir, float3 normal)
+float CalcSpecular(Light light, float3 viewDir, float3 lightDir, float3 normal)
 {
-	float3 R = normalize(reflect(-lightDir, normal));
-	float posDot = saturate(dot(R, eyePos));
+	float3 reflection = normalize(reflect(-lightDir, normal));
+	float posDot = saturate(dot(reflection, viewDir));
 	return light.Color * pow(posDot, Material.SpecularPower);
 };
 
@@ -53,39 +53,26 @@ struct LightingResult
 	float4 Specular;
 };
 
-LightingResult CalcDirectionalLight(Light light, float3 eyePos, float4 pixelPos, float3 normal)
+LightingResult CalcDirectionalLight(Light light, float3 viewDir, float3 normal)
 {
 	LightingResult result;
 
 	float3 lightDir = -light.Direction.xyz;
 
 	result.Diffuse = CalcDiffuse(light, lightDir, normal); 
-	result.Specular = CalcSpecular(light, eyePos, lightDir, normal);
+	result.Specular = CalcSpecular(light, viewDir, lightDir, normal);
 
 	return result;
 };
 
-LightingResult CalcLighting(float4 pixelPos, float3 normal)
+LightingResult CalcLighting(float3 viewDir, float3 normal)
 {
-	float3 eyePos = normalize(EyePosition - pixelPos).xyz;
-	LightingResult totalResult = { { 0, 0, 0, 0 }, { 0, 0, 0, 0 } };
-	
-	[unroll]
-	for (int i = 0; i < MAX_LIGHTS; i++)
-	{
-		LightingResult result = { { 0, 0, 0, 0 }, { 0, 0, 0, 0 } };
+	LightingResult result = CalcDirectionalLight(Lights[0], viewDir, normal);
 
-		if (!Lights[i].Enabled) continue;
+	result.Diffuse = saturate(result.Diffuse);
+	result.Specular = saturate(result.Specular);
 
-		result = CalcDirectionalLight(Lights[i], eyePos, pixelPos, normal);
-		totalResult.Diffuse += result.Diffuse;
-		totalResult.Specular += result.Specular;
-	}
-
-	totalResult.Diffuse = saturate(totalResult.Diffuse);
-	totalResult.Specular = saturate(totalResult.Specular);
-
-	return totalResult;
+	return result;
 };
 
 struct PixelShaderInput
@@ -98,7 +85,7 @@ struct PixelShaderInput
 
 float4 LitTexturedPixelShader(PixelShaderInput input) : SV_TARGET
 {
-	LightingResult lit = CalcLighting(input.Position, normalize(input.Normal));
+	LightingResult lit = CalcLighting(input.viewDirection, normalize(input.Normal));
 	
 	float4 emissive = Material.Emissive;
 	float4 ambient = Material.Ambient * GlobalAmbient;
@@ -113,6 +100,6 @@ float4 LitTexturedPixelShader(PixelShaderInput input) : SV_TARGET
 	}
 
 	float4 finalColor = (emissive + ambient + diffuse + specular) * texColor;
-	
+
 	return finalColor;
 }
