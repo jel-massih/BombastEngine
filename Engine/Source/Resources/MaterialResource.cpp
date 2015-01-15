@@ -18,7 +18,14 @@ bool MaterialResourceExtraData::LoadMaterial(char* pRawBuffer, unsigned int rawS
 
 	pDoc.parse<0>(pRawBuffer);
 
-	rapidxml::xml_node<>* pAttribute = pDoc.first_node("Ambient");
+	rapidxml::xml_node<>* pMaterialBase = pDoc.first_node("Material");
+	if (!pMaterialBase)
+	{
+		BE_ERROR("Error Parsing XML For Material Resource");
+		return false;
+	}
+
+	rapidxml::xml_node<>* pAttribute = pMaterialBase->first_node("Ambient");
 	if (pAttribute)
 	{
 		Vec4 c;
@@ -29,7 +36,7 @@ bool MaterialResourceExtraData::LoadMaterial(char* pRawBuffer, unsigned int rawS
 		m_pMaterial->SetAmbient(c);
 	}
 
-	pAttribute = pDoc.first_node("BaseDiffuse");
+	pAttribute = pMaterialBase->first_node("BaseDiffuse");
 	if (pAttribute)
 	{
 		Vec4 c;
@@ -40,7 +47,7 @@ bool MaterialResourceExtraData::LoadMaterial(char* pRawBuffer, unsigned int rawS
 		m_pMaterial->SetDiffuse(c);
 	}
 
-	pAttribute = pDoc.first_node("Specular");
+	pAttribute = pMaterialBase->first_node("Specular");
 	if (pAttribute)
 	{
 		float power;
@@ -53,7 +60,7 @@ bool MaterialResourceExtraData::LoadMaterial(char* pRawBuffer, unsigned int rawS
 		m_pMaterial->SetSpecular(c, power);
 	}
 
-	pAttribute = pDoc.first_node("Emmisive");
+	pAttribute = pMaterialBase->first_node("Emmisive");
 	if (pAttribute)
 	{
 		Vec4 c;
@@ -65,7 +72,7 @@ bool MaterialResourceExtraData::LoadMaterial(char* pRawBuffer, unsigned int rawS
 	}
 
 	//Iterate over all textures and add to material
-	pAttribute = pDoc.first_node("Textures");
+	pAttribute = pMaterialBase->first_node("Textures");
 	if (pAttribute)
 	{
 		for (rapidxml::xml_node<> *child = pAttribute->first_node(); child; child = child->next_sibling())

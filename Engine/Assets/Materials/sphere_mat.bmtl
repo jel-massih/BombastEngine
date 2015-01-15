@@ -2,9 +2,12 @@
 	<Ambient r="1" g="1" b="1" a="1"/>
 	<BaseDiffuse r="1" g="1" b="1" a="1"/>
 	<Specular r="1" g="1" b="1" a="1" power="32"/>
-	<Emmisive r="1" g="1" b="1" a="1"/>
+	<Emmisive r="0" g="0" b="0" a="0"/>
+
+	<Textures>
+  	<Texture path="textures\red.dds"></Texture>
+	</Textures>
 
 	<Shader type="LitTextured">
-		
 	</Shader>
 </Material>

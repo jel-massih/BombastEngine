@@ -282,7 +282,6 @@ bool LightShader::SetShaderParameters(ID3D11DeviceContext* deviceContext, Direct
 		deviceContext->PSSetShaderResources(0, 1, &texture);
 	}
 
-
 	deviceContext->Unmap(m_pMaterialBuffer, 0);
 
 	bufferNumber = 0;
