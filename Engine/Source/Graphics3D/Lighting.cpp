@@ -51,12 +51,6 @@ void LightingManager::CalcLighting(Scene* pScene)
 	BE_ASSERT(m_lights.size() < MAX_LIGHTS_SUPPORTED);
 	for (auto light = m_lights.begin(); light != m_lights.end(); light++)
 	{
-		if (count == 0)
-		{
-			const Vec4 ambient = (*light)->VGet()->GetMaterial().GetAmbient();
-			m_lightAmbient = Vec4(ambient.x, ambient.y, ambient.z, 1.0f);
-		}
-
 		Vec3 lightDir = (*light)->GetDirection();
 		m_lightDir[count] = Vec4(lightDir.x, lightDir.y, lightDir.z, 1.0f);
 		m_lightDiffuse[count] = (*light)->VGet()->GetMaterial().GetDiffuse();
@@ -73,7 +67,7 @@ void LightingManager::CalcLighting(ConstantBuffer_Lighting* pLighting, SceneNode
 	int count = GetLightCount();
 	if (count)
 	{
-		pLighting->m_lightAmbient = *GetAmbientLight();
+		pLighting->m_lightAmbient = *GetGlobalAmbient();
 		memcpy(pLighting->m_lightDir, GetLightDirection(), sizeof(Vec4) * count);
 		memcpy(pLighting->m_lightDiffuse, GetLightDiffuse(), sizeof(Vec4) * count);
 		pLighting->m_numLights = count;

@@ -41,10 +41,13 @@ public:
 class LightingManager
 {
 public:
+	LightingManager() { m_lightAmbient = Vec4(0.15, 0.15, 0.15, 0.15); }
+
 	void CalcLighting(Scene* pScene);
 	void CalcLighting(ConstantBuffer_Lighting* pLighting, SceneNode* pNode);
 	int GetLightCount() const { return m_lights.size(); }
-	const Vec4* GetAmbientLight() const { return &m_lightAmbient; }
+	void SetGlobalAmbient(const Vec4 newAmbient) { m_lightAmbient = newAmbient; }
+	const Vec4* GetGlobalAmbient() const { return &m_lightAmbient; }
 	const Vec4* GetLightDirection() const { return m_lightDir; }
 	const Vec4* GetLightDiffuse() const { return m_lightDiffuse; }
 	const Vec4* GetLightSpecular() const { return m_lightSpecular; }

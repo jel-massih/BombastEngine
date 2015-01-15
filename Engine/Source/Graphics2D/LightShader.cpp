@@ -289,7 +289,7 @@ bool LightShader::SetShaderParameters(ID3D11DeviceContext* deviceContext, Direct
 
 	dataPtr4 = (LightBufferType*)mappedResource.pData;
 	dataPtr4->eyePosition = Vec4(pScene->GetCamera()->GetPosition(), 1.0f);
-	dataPtr4->globalAmbient = Vec4(0.15, 0.15, 0.15, 0.15);
+	dataPtr4->globalAmbient = *pScene->GetLightingManager()->GetGlobalAmbient();
 
 	const Vec4* lightDiffuse = pScene->GetLightingManager()->GetLightDiffuse();
 	const Vec4* lightDirection = pScene->GetLightingManager()->GetLightDirection();
