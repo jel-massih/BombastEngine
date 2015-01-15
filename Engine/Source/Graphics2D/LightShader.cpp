@@ -1,5 +1,6 @@
 #include "LightShader.h"
 #include "../Graphics3D/Material.h"
+#include "../Graphics3D/Scene.h"
 
 LightShader::LightShader()
 {
@@ -32,11 +33,11 @@ void LightShader::Shutdown()
 	return;
 }
 
-bool LightShader::Render(ID3D11DeviceContext* deviceContext, int indexCount, DirectX::XMMATRIX &world, DirectX::XMMATRIX &view, DirectX::XMMATRIX &projection, ID3D11ShaderResourceView* texture, DirectX::XMFLOAT3 lightDirection, DirectX::XMFLOAT4 diffuseColor, Vec3 cameraPosition, const Material* material)
+bool LightShader::Render(ID3D11DeviceContext* deviceContext, int indexCount, DirectX::XMMATRIX &world, DirectX::XMMATRIX &view, DirectX::XMMATRIX &projection, ID3D11ShaderResourceView* texture, const Material* material, const Scene* pScene)
 {
 	bool result;
 
-	result = SetShaderParameters(deviceContext, world, view, projection, texture, lightDirection, diffuseColor, cameraPosition, material);
+	result = SetShaderParameters(deviceContext, world, view, projection, texture, material, pScene);
 	if (!result)
 	{
 		return false;
@@ -208,7 +209,7 @@ void LightShader::ShutdownShader()
 	return;
 }
 
-bool LightShader::SetShaderParameters(ID3D11DeviceContext* deviceContext, DirectX::XMMATRIX &world, DirectX::XMMATRIX &view, DirectX::XMMATRIX &projection, ID3D11ShaderResourceView* texture, DirectX::XMFLOAT3 lightDirection, DirectX::XMFLOAT4 diffuseColor, Vec3 cameraPosition, const Material* material)
+bool LightShader::SetShaderParameters(ID3D11DeviceContext* deviceContext, DirectX::XMMATRIX &world, DirectX::XMMATRIX &view, DirectX::XMMATRIX &projection, ID3D11ShaderResourceView* texture, const Material* material, const Scene* pScene)
 {
 	HRESULT result;
 	D3D11_MAPPED_SUBRESOURCE mappedResource;
@@ -248,7 +249,7 @@ bool LightShader::SetShaderParameters(ID3D11DeviceContext* deviceContext, Direct
 
 	dataPtr2 = (CameraBufferType*)mappedResource.pData;
 
-	dataPtr2->cameraPosition = cameraPosition;
+	dataPtr2->cameraPosition = pScene->GetCamera()->GetPosition();
 	dataPtr2->padding = 0.0f;
 
 	deviceContext->Unmap(m_pCameraBuffer, 0);
@@ -287,18 +288,23 @@ bool LightShader::SetShaderParameters(ID3D11DeviceContext* deviceContext, Direct
 	}
 
 	dataPtr4 = (LightBufferType*)mappedResource.pData;
-	dataPtr4->eyePosition = Vec4(cameraPosition, 1.0f);
+	dataPtr4->eyePosition = Vec4(pScene->GetCamera()->GetPosition(), 1.0f);
 	dataPtr4->globalAmbient = Vec4(0.15, 0.15, 0.15, 0.15);
 
-	ZeroMemory(dataPtr4->lights, sizeof(LightProperties) * MAX_LIGHTS_SUPPORTED);
-	dataPtr4->lights[0].lightColor = Vec4(1, 1, 1, 1);
-	dataPtr4->lights[0].lightDirection = lightDirection;
-	dataPtr4->lights[0].enabled = true;
+	const Vec4* lightDiffuse = pScene->GetLightingManager()->GetLightDiffuse();
+	const Vec4* lightDirection = pScene->GetLightingManager()->GetLightDirection();
+
+	for (int i = 0; i < MAX_LIGHTS_SUPPORTED;i++)
+	{
+		dataPtr4->lights[i].enabled = true;
+		dataPtr4->lights[i].lightColor = lightDiffuse[i];
+		Vec4 dir = lightDirection[i];
+		dataPtr4->lights[i].lightDirection = Vec3(dir.x, dir.y, dir.z);
+	}
 
 	deviceContext->Unmap(m_pLightBuffer, 0);
 	bufferNumber = 1;
 	deviceContext->PSSetConstantBuffers(bufferNumber, 1, &m_pLightBuffer);
-
 
 	//set shader texture resource in pixel shader
 	deviceContext->PSSetShaderResources(0, 1, &texture);

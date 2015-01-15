@@ -42,6 +42,11 @@ void LightingManager::CalcLighting(Scene* pScene)
 {
 	pScene->GetRenderer()->VCalcLighting(&m_lights, MAX_LIGHTS_SUPPORTED);
 
+	ZeroMemory(&m_lightDiffuse, sizeof(Vec4) * MAX_LIGHTS_SUPPORTED);
+	ZeroMemory(&m_lightSpecular, sizeof(Vec4) * MAX_LIGHTS_SUPPORTED);
+	ZeroMemory(&m_lightDir, sizeof(Vec4) * MAX_LIGHTS_SUPPORTED);
+	ZeroMemory(&m_lightSpecularPower, sizeof(float) * MAX_LIGHTS_SUPPORTED);
+
 	int count = 0;
 	BE_ASSERT(m_lights.size() < MAX_LIGHTS_SUPPORTED);
 	for (auto light = m_lights.begin(); light != m_lights.end(); light++)

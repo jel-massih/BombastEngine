@@ -3,13 +3,13 @@
 #include "Geometry.h"
 #include "SceneNode.h"
 #include "../Events/EventManager.h"
+#include "Lighting.h"
 
 typedef std::map<ActorId, ISceneNode*> SceneActorMap;
 
 class CameraNode;
 class SkyNode;
 class LightNode;
-class LightingManager;
 
 class Scene
 {

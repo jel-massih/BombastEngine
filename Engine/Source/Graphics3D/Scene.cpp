@@ -3,7 +3,6 @@
 #include "../Actor/Actor.h"
 #include "../Bombast/BombastApp.h"
 #include "../Events/Events.h"
-#include "Lighting.h"
 #include "RenderNodes.h"
 #include <timeapi.h>
 
