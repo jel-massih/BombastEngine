@@ -1,6 +1,13 @@
 <Material name="Box Material">
 	<Ambient r="0.15" g="0.15" b="0.15" a="1"/>
 	<BaseDiffuse r="1" g="1" b="1" a="1"/>
-	<Specular r="1" g="1" b="1" a="1" power="32"/>
+	<Specular r="0" g="0" b="0" a="0" power="0"/>
 	<Emmisive r="1" g="1" b="1" a="1"/>
+
+	<Shader type="MultiTexture">
+		<Textures>
+    	<Texture path="textures\grid.dds"></Texture>
+    	<Texture path="textures\red.dds"></Texture>
+		</Textures>
+	</Shader>
 </Material>

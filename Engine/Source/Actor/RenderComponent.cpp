@@ -245,19 +245,66 @@ SceneNode* MeshRenderComponent::VCreateSceneNode()
 	return NULL;
 }
 
+LightRenderComponent::LightRenderComponent()
+{
+	m_properties.m_range = 10;
+	m_properties.m_falloff = 0.1f;
+	m_properties.m_lightType = LightProperties::GetLightTypeFromString("directional");
+	m_properties.m_diffuseColor = g_White;
+	m_properties.m_specularColor = g_White;
+	m_properties.m_specularPower = 32;
+}
+
 bool LightRenderComponent::VDelegateInitialize(rapidxml::xml_node<>* pData)
 {
 	rapidxml::xml_node<>* pShape = pData->first_node("Shape");
 	if (pShape)
 	{
-		m_properties.m_falloff = (float)atof(pShape->first_attribute("falloff")->value());
-		m_properties.m_range = (float)atof(pShape->first_attribute("range")->value());
+		if (pShape->first_attribute("falloff"))
+		{
+			m_properties.m_falloff = (float)atof(pShape->first_attribute("falloff")->value());
+		}
+		if (pShape->first_attribute("range"))
+		{
+			m_properties.m_range = (float)atof(pShape->first_attribute("range")->value());
+		}
 	}
 
 	rapidxml::xml_node<>* pType = pData->first_node("Type");
 	if (pType)
 	{
-		m_properties.GetLightTypeFromString(pType->value());
+		m_properties.m_lightType = LightProperties::GetLightTypeFromString(pType->value());
+	}
+
+	rapidxml::xml_node<>* pProperties = pData->first_node("Properties");
+	if (pProperties)
+	{
+		rapidxml::xml_node<>* pDiffuseElement = pProperties->first_node("Diffuse");
+		if (pDiffuseElement)
+		{
+			float r, g, b, a;
+			r = g = b = a = 1;
+			r = std::stof(pDiffuseElement->first_attribute("r")->value());
+			g = std::stof(pDiffuseElement->first_attribute("g")->value());
+			b = std::stof(pDiffuseElement->first_attribute("b")->value());
+			a = std::stof(pDiffuseElement->first_attribute("a")->value());
+			m_properties.m_diffuseColor = Vec4(r, g, b, a);
+		}
+
+		rapidxml::xml_node<>* pSpecularElement = pProperties->first_node("Specular");
+		if (pSpecularElement)
+		{
+			float r, g, b, a, power;
+			r = g = b = a = 1;
+			power = 32;
+			r = std::stof(pSpecularElement->first_attribute("r")->value());
+			g = std::stof(pSpecularElement->first_attribute("g")->value());
+			b = std::stof(pSpecularElement->first_attribute("b")->value());
+			a = std::stof(pSpecularElement->first_attribute("a")->value());
+			power = std::stof(pSpecularElement->first_attribute("power")->value());
+			m_properties.m_specularColor = Vec4(r, g, b, a);
+			m_properties.m_specularPower = power;
+		}
 	}
 
 	return true;

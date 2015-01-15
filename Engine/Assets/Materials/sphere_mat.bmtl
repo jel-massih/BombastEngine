@@ -1,0 +1,10 @@
+<Material name="Sphere Material">
+	<Ambient r="1" g="1" b="1" a="1"/>
+	<BaseDiffuse r="1" g="1" b="1" a="1"/>
+	<Specular r="1" g="1" b="1" a="1" power="32"/>
+	<Emmisive r="1" g="1" b="1" a="1"/>
+
+	<Shader type="LitTextured">
+		
+	</Shader>
+</Material>

@@ -1,8 +1,8 @@
 <Actor type="Sphere" resource="actors\sphere.xml">
 	<TransformComponent/>
-    <MeshRenderComponent>
-        <Texture path="textures\red.dds"></Texture>
-        <Mesh path="meshes\sphere.bmdl"></Mesh>
+  <MeshRenderComponent>
+    <Texture path="textures\red.dds"></Texture>
+    <Mesh path="meshes\sphere.bmdl"></Mesh>
 		<Material path="materials\box_mat.bmtl"/>
-    </BitmapRenderComponent>
+  </MeshRenderComponent>
 </Actor>

@@ -15,14 +15,18 @@ struct LightProperties
 	float m_range;
 	float m_falloff;
 	LightType m_lightType;
+	Vec4 m_diffuseColor;
+	Vec4 m_specularColor;
+	float m_specularPower;
 
-	void GetLightTypeFromString(const std::string type);
+	static LightType GetLightTypeFromString(const std::string type);
 };
 
 class LightNode : public SceneNode
 {
 public:
 	LightNode(const ActorId actorId, BaseRenderComponent* renderComponent, const LightProperties& props, const Mat4x4* t);
+	const LightProperties* GetLightProperties() const { return &m_lightProperties; }
 
 protected:
 	LightProperties m_lightProperties;
@@ -41,7 +45,7 @@ public:
 class LightingManager
 {
 public:
-	LightingManager() { m_lightAmbient = Vec4(0.15, 0.15, 0.15, 0.15); }
+	LightingManager() { m_lightAmbient = Vec4(0.15f, 0.15f, 0.15f, 0.15f); }
 
 	void CalcLighting(Scene* pScene);
 	void CalcLighting(ConstantBuffer_Lighting* pLighting, SceneNode* pNode);

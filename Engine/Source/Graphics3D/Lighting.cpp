@@ -1,26 +1,28 @@
 #include "Lighting.h"
 #include "../Actor/RenderComponent.h"
 
-void LightProperties::GetLightTypeFromString(std::string type)
+LightType LightProperties::GetLightTypeFromString(std::string type)
 {
-	m_lightType = BLT_INVALID;
+	LightType lightType = BLT_INVALID;
 
 	if (type == "directional")
 	{
-		m_lightType = BLT_DIRECTIONAL;
+		lightType = BLT_DIRECTIONAL;
 	}
 	if (type == "point")
 	{
-		m_lightType = BLT_POINT;
+		lightType = BLT_POINT;
 	}
 	if (type == "spot")
 	{
-		m_lightType = BLT_SPOT;
+		lightType = BLT_SPOT;
 	}
 	if (type == "area")
 	{
-		m_lightType = BLT_AREA;
+		lightType = BLT_AREA;
 	}
+
+	return lightType;
 }
 
 LightNode::LightNode(const ActorId actorId, BaseRenderComponent* renderComponent, const LightProperties& props, const Mat4x4* t)
@@ -31,10 +33,6 @@ LightNode::LightNode(const ActorId actorId, BaseRenderComponent* renderComponent
 
 HRESULT D3DLightNode11::VOnUpdate(Scene* pScene, const float deltaMs)
 {
-	LightRenderComponent* lrc = static_cast<LightRenderComponent*>(m_pRenderComponent);
-	Material mat = m_properties.GetMaterial();
-	mat.SetDiffuse(lrc->GetColor());
-
 	return S_OK;
 }
 
@@ -53,12 +51,9 @@ void LightingManager::CalcLighting(Scene* pScene)
 	{
 		Vec3 lightDir = (*light)->GetDirection();
 		m_lightDir[count] = Vec4(lightDir.x, lightDir.y, lightDir.z, 1.0f);
-		m_lightDiffuse[count] = (*light)->VGet()->GetMaterial().GetDiffuse();
-		Vec4 specular;
-		float power;
-		(*light)->VGet()->GetMaterial().GetSpecular(specular, power);
-		m_lightSpecular[count] = Vec4(specular.x, specular.y, specular.z, specular.w);
-		m_lightSpecularPower[count] = power;
+		m_lightDiffuse[count] = (*light)->GetLightProperties()->m_diffuseColor;
+		m_lightSpecular[count] = (*light)->GetLightProperties()->m_specularColor;
+		m_lightSpecularPower[count] = (*light)->GetLightProperties()->m_specularPower;
 	}
 }
 

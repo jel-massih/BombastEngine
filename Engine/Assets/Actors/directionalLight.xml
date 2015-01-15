@@ -3,9 +3,12 @@
 		<YawPitchRoll x="0" y="-1" z="0"/>
 	</TransformComponent>
 
-
-    <LightRenderComponent>
-    	<Type>directional</Type>
+  <LightRenderComponent>
+  	<Type>directional</Type>
 		<Shape falloff="0.1" range="0.25"/>
-    </LightRenderComponent>
+		<Properties>
+			<Diffuse r="1" g="1" b="1" a="1"/>
+			<Specular r="0" g="0" b="0" a="0" power="0"/>
+		</Properties>
+  </LightRenderComponent>
 </Actor>
