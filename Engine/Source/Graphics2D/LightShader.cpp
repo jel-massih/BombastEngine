@@ -294,7 +294,6 @@ bool LightShader::SetShaderParameters(ID3D11DeviceContext* deviceContext, Direct
 	dataPtr4->lights[0].lightColor = Vec4(1, 1, 1, 1);
 	dataPtr4->lights[0].lightDirection = lightDirection;
 	dataPtr4->lights[0].enabled = true;
-	dataPtr4->lights[1].lightDirection = Vec3(42, 3, 5);
 
 	deviceContext->Unmap(m_pLightBuffer, 0);
 	bufferNumber = 1;

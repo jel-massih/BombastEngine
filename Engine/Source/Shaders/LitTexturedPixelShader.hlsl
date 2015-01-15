@@ -1,4 +1,4 @@
-#define MAX_LIGHTS 8
+#define MAX_LIGHTS 4
 
 Texture2D Texture : register(t0);
 sampler Sampler : register(s0);
@@ -22,8 +22,8 @@ cbuffer MaterialProperties : register(b0)
 
 struct Light
 {
-	float3 Direction;
 	float4 Color;
+	float3 Direction;
 	bool Enabled;
 };
 

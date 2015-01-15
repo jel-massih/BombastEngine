@@ -822,7 +822,7 @@ HRESULT D3DMeshNode11::VRender(Scene* pScene)
 	VGet()->GetMaterial().GetSpecular(specularColor, specularPower);
 
 	result = g_pApp->GetGraphicsManager()->GetLightShader()->Render(context, m_indexCount, DirectX::XMLoadFloat4x4(&worldMatrix),
-		XMLoadFloat4x4(&viewMatrix), XMLoadFloat4x4(&projectionMatrix), m_pTexture, Vec3(dir->x, dir->y, dir->z), *diffuse, pScene->GetCamera()->GetPosition(), &VGet()->GetMaterial());
+		XMLoadFloat4x4(&viewMatrix), XMLoadFloat4x4(&projectionMatrix), m_pTexture, Vec3(0, 0, 1), *diffuse, pScene->GetCamera()->GetPosition(), &VGet()->GetMaterial());
 	if (!result)
 	{
 		return S_FALSE;

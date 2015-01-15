@@ -31,8 +31,8 @@ private:
 
 	struct LightProperties
 	{
-		XMFLOAT3 lightDirection;
 		XMFLOAT4 lightColor;
+		XMFLOAT3 lightDirection;
 		bool enabled;
 	};
 
