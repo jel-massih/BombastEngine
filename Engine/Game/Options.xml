@@ -3,6 +3,6 @@
   <World level="World\world.xml" />
   <Debugging>
   	<DebugConsole enabled="true" />
-	<Logging path="../../../Game/Logs" filename="Output.log"></Logging>
+	<Logging path="../Game/Logs" filename="Output.log"></Logging>
   </Debugging>
 </Options>
