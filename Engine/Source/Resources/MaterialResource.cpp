@@ -64,6 +64,23 @@ bool MaterialResourceExtraData::LoadMaterial(char* pRawBuffer, unsigned int rawS
 		m_pMaterial->SetEmissive(c);
 	}
 
+	//Iterate over all textures and add to material
+	pAttribute = pDoc.first_node("Textures");
+	if (pAttribute)
+	{
+		for (rapidxml::xml_node<> *child = pAttribute->first_node(); child; child = child->next_sibling())
+		{
+			if (child->first_attribute("path") != NULL)
+			{
+				 m_pMaterial->AddTexture(child->first_attribute("path")->value());
+			}
+			else
+			{
+				BE_ERROR("Texture path Exception: Make sure path attribute is set for texture Element");
+			}
+		}
+	}
+
 	return true;
 }
 

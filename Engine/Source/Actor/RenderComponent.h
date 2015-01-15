@@ -69,12 +69,11 @@ protected:
 
 class MeshRenderComponent : public BaseRenderComponent
 {
-	char* m_textureResource;
 	char* m_meshResource;
 	char* m_materialResource;
 
 public:
-	MeshRenderComponent() : m_textureResource(""), m_meshResource(""), m_materialResource("") {}
+	MeshRenderComponent() : m_meshResource(""), m_materialResource("") {}
 
 	static const char* g_Name;
 	virtual const char* VGetName() const override { return MeshRenderComponent::g_Name; }

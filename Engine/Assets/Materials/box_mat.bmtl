@@ -4,10 +4,11 @@
 	<Specular r="0" g="0" b="0" a="0" power="0"/>
 	<Emmisive r="1" g="1" b="1" a="1"/>
 
+	<Textures>
+  	<Texture path="textures\grid.dds"></Texture>
+  	<Texture path="textures\red.dds"></Texture>
+	</Textures>
+
 	<Shader type="MultiTexture">
-		<Textures>
-    	<Texture path="textures\grid.dds"></Texture>
-    	<Texture path="textures\red.dds"></Texture>
-		</Textures>
 	</Shader>
 </Material>

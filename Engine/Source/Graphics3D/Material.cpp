@@ -36,3 +36,37 @@ void Material::SetAlpha(const float alpha)
 {
 	m_material.Diffuse.w = alpha;
 }
+
+bool Material::AddTexture(std::string textureName)
+{
+	TextureClass* texture = BE_NEW TextureClass;
+	if (!texture)
+	{
+		return false;
+	}
+
+	if (!texture->Initialize(g_pApp->GetGraphicsManager()->GetRenderer()->GetDevice(), textureName))
+	{
+		return false;
+	}
+
+	m_material.Textures.push_back(texture);
+
+	return true;
+}
+
+bool Material::RemoveTexture(std::string textureName)
+{
+	bool bRemoved = false;
+	for (auto it = m_material.Textures.begin(); it != m_material.Textures.end(); it++)
+	{
+		if ((*it)->GetTextureName() == textureName)
+		{
+			(*it)->Shutdown();
+			it = m_material.Textures.erase(it);
+			bRemoved = true;
+		}
+	}
+
+	return bRemoved;
+}

@@ -1,18 +1,10 @@
 #pragma once
 
 #include <d3d9types.h>
+#include "../Graphics2D/TextureClass.h"
 
 class Material
 {
-	struct BEMaterial
-	{
-		Vec4 Ambient;
-		Vec4 Diffuse;
-		Vec4 Specular;
-		float Power;
-		Vec4 Emissive;
-	};
-	BEMaterial m_material;
 public:
 	Material();
 
@@ -31,4 +23,21 @@ public:
 	void SetAlpha(const float alpha);
 	bool HasAlpha() const { return GetAlpha() != fOPAQUE; }
 	float GetAlpha() const { return m_material.Diffuse.w; }
+
+	bool AddTexture(std::string textureName);
+	bool RemoveTexture(std::string textureName);
+
+	const std::vector<TextureClass*>& GetTextures() const { return m_material.Textures; }
+
+private:
+	struct BEMaterial
+	{
+		Vec4 Ambient;
+		Vec4 Diffuse;
+		Vec4 Specular;
+		float Power;
+		Vec4 Emissive;
+		std::vector<TextureClass*> Textures;
+	};
+	BEMaterial m_material;
 };

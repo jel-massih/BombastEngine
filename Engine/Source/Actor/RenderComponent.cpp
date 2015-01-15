@@ -187,20 +187,6 @@ bool MeshRenderComponent::VDelegateInitialize(rapidxml::xml_node<>* pData)
 {
 	bool result = false;
 
-	rapidxml::xml_node<>* pTexture = pData->first_node("Texture");
-	if (pTexture)
-	{
-		if (pTexture->first_attribute("path") != NULL)
-		{
-			m_textureResource = pTexture->first_attribute("path")->value();
-		}
-		else
-		{
-			BE_ERROR("Texture path Exception: Make sure path attribute is set for Texture Element");
-			return false;
-		}
-	}
-
 	rapidxml::xml_node<>* pMesh = pData->first_node("Mesh");
 	if (pMesh)
 	{
@@ -238,7 +224,7 @@ SceneNode* MeshRenderComponent::VCreateSceneNode()
 
 	if (pTransformComponent)
 	{
-		SceneNode* mesh = BE_NEW D3DMeshNode11(m_pOwner->GetId(), (BaseRenderComponent*)this, m_textureResource, m_meshResource, m_materialResource, RenderPass_Actor, &pTransformComponent->GetTransform());
+		SceneNode* mesh = BE_NEW D3DMeshNode11(m_pOwner->GetId(), (BaseRenderComponent*)this, m_meshResource, m_materialResource, RenderPass_Actor, &pTransformComponent->GetTransform());
 		return mesh;
 	}
 

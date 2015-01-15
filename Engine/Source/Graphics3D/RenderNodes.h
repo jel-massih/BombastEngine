@@ -165,7 +165,6 @@ public:
 
 	MeshNode(const ActorId actorId,
 		BaseRenderComponent* renderComponent,
-		std::string textureFileName,
 		std::string meshFileName,
 		std::string materialFilename,
 		RenderPass renderPass,
@@ -177,7 +176,6 @@ public:
 
 protected:
 	virtual HRESULT InitializeBuffers() = 0;
-	virtual HRESULT LoadTexture(std::string filename) = 0;
 
 	virtual HRESULT LoadMaterial(std::string filename) = 0;
 
@@ -195,7 +193,6 @@ protected:
 	};
 
 protected:
-	std::string m_textureFilename;
 	std::string m_meshFilename;
 	std::string m_materialFilename;
 
@@ -206,7 +203,7 @@ protected:
 class D3DMeshNode11 : public MeshNode
 {
 public:
-	D3DMeshNode11(const ActorId actorId, BaseRenderComponent* renderComponent, std::string textureFilename, std::string meshFilename, std::string materialFilename, RenderPass renderPass, const Mat4x4* t);
+	D3DMeshNode11(const ActorId actorId, BaseRenderComponent* renderComponent, std::string meshFilename, std::string materialFilename, RenderPass renderPass, const Mat4x4* t);
 	~D3DMeshNode11();
 
 	HRESULT VOnRestore(Scene* pScene);
@@ -214,7 +211,6 @@ public:
 
 private:
 	HRESULT InitializeBuffers();
-	HRESULT LoadTexture(std::string textureFilename);
 	HRESULT LoadMaterial(std::string filename);
 	HRESULT LoadMesh(std::string meshFilename);
 	HRESULT UpdateBuffers(ID3D11DeviceContext* deviceContext);
@@ -222,7 +218,6 @@ private:
 
 private:
 	ID3D11Buffer *m_pVertexBuffer, *m_pIndexBuffer;
-	ID3D11ShaderResourceView* m_pTexture;
 	ModelClass* m_pLoadedMesh;
 	Vec3 m_lastPosition;
 };

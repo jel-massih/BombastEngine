@@ -7,14 +7,15 @@ class TextureClass
 {
 public:
 	TextureClass();
-	TextureClass(const TextureClass& other);
-	~TextureClass();
 
 	bool Initialize(ID3D11Device* device,  std::string title);
 	void Shutdown();
 
-	ID3D11ShaderResourceView* GetTexture();
+	ID3D11ShaderResourceView* GetTexture() const { return m_pTexture; }
+	std::string GetTextureName() const { return m_textureName; }
 
 private:
 	ID3D11ShaderResourceView* m_pTexture;
+
+	std::string m_textureName;
 };

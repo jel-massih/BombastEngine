@@ -33,11 +33,11 @@ void LightShader::Shutdown()
 	return;
 }
 
-bool LightShader::Render(ID3D11DeviceContext* deviceContext, int indexCount, DirectX::XMMATRIX &world, DirectX::XMMATRIX &view, DirectX::XMMATRIX &projection, ID3D11ShaderResourceView* texture, const Material* material, const Scene* pScene)
+bool LightShader::Render(ID3D11DeviceContext* deviceContext, int indexCount, DirectX::XMMATRIX &world, DirectX::XMMATRIX &view, DirectX::XMMATRIX &projection, const Material* material, const Scene* pScene)
 {
 	bool result;
 
-	result = SetShaderParameters(deviceContext, world, view, projection, texture, material, pScene);
+	result = SetShaderParameters(deviceContext, world, view, projection, material, pScene);
 	if (!result)
 	{
 		return false;
@@ -209,7 +209,7 @@ void LightShader::ShutdownShader()
 	return;
 }
 
-bool LightShader::SetShaderParameters(ID3D11DeviceContext* deviceContext, DirectX::XMMATRIX &world, DirectX::XMMATRIX &view, DirectX::XMMATRIX &projection, ID3D11ShaderResourceView* texture, const Material* material, const Scene* pScene)
+bool LightShader::SetShaderParameters(ID3D11DeviceContext* deviceContext, DirectX::XMMATRIX &world, DirectX::XMMATRIX &view, DirectX::XMMATRIX &projection, const Material* material, const Scene* pScene)
 {
 	HRESULT result;
 	D3D11_MAPPED_SUBRESOURCE mappedResource;
@@ -269,11 +269,19 @@ bool LightShader::SetShaderParameters(ID3D11DeviceContext* deviceContext, Direct
 	dataPtr3->ambient = material->GetAmbient();
 	dataPtr3->diffuse = material->GetDiffuse();
 	dataPtr3->emissive = material->GetEmissive();
-	dataPtr3->useTexture = true;
 	dataPtr3->padding = XMFLOAT2(0, 0);
 	Vec4 specular;
 	material->GetSpecular(specular, dataPtr3->specularPower);
 	dataPtr3->specular = specular;
+	dataPtr3->useTexture = false;
+
+	//if material has any textures, then use first one
+	if (material->GetTextures().size() > 0) {
+		dataPtr3->useTexture = true;
+		ID3D11ShaderResourceView* texture = material->GetTextures().front()->GetTexture();
+		deviceContext->PSSetShaderResources(0, 1, &texture);
+	}
+
 
 	deviceContext->Unmap(m_pMaterialBuffer, 0);
 
@@ -305,9 +313,6 @@ bool LightShader::SetShaderParameters(ID3D11DeviceContext* deviceContext, Direct
 	deviceContext->Unmap(m_pLightBuffer, 0);
 	bufferNumber = 1;
 	deviceContext->PSSetConstantBuffers(bufferNumber, 1, &m_pLightBuffer);
-
-	//set shader texture resource in pixel shader
-	deviceContext->PSSetShaderResources(0, 1, &texture);
 
 	return true;
 }

@@ -660,18 +660,17 @@ void D3D11PrimitiveNode::RenderBuffers(ID3D11DeviceContext* deviceContext)
 	deviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 }
 
-MeshNode::MeshNode(const ActorId actorId, BaseRenderComponent* renderComponent, std::string textureFileName, std::string meshFileName, std::string materialFilename, RenderPass renderPass, const Mat4x4 *t)
-	: SceneNode(actorId, renderComponent, renderPass, t), m_meshFilename(meshFileName), m_textureFilename(textureFileName), m_materialFilename(materialFilename)
+MeshNode::MeshNode(const ActorId actorId, BaseRenderComponent* renderComponent, std::string meshFileName, std::string materialFilename, RenderPass renderPass, const Mat4x4 *t)
+	: SceneNode(actorId, renderComponent, renderPass, t), m_meshFilename(meshFileName), m_materialFilename(materialFilename)
 {
 	m_vertexCount = m_indexCount = 0;
 }
 
-D3DMeshNode11::D3DMeshNode11(const ActorId actorId, BaseRenderComponent* renderComponent, std::string textureFilename, std::string meshFilename, std::string materialFilename, RenderPass renderPass, const Mat4x4* t)
-	: MeshNode(actorId, renderComponent, textureFilename, meshFilename, materialFilename, renderPass, t), m_lastPosition(Vec3::g_InvalidVec3)
+D3DMeshNode11::D3DMeshNode11(const ActorId actorId, BaseRenderComponent* renderComponent, std::string meshFilename, std::string materialFilename, RenderPass renderPass, const Mat4x4* t)
+	: MeshNode(actorId, renderComponent, meshFilename, materialFilename, renderPass, t), m_lastPosition(Vec3::g_InvalidVec3)
 {
 	m_pVertexBuffer = nullptr;
 	m_pIndexBuffer = nullptr;
-	m_pTexture = nullptr;
 	m_pLoadedMesh = nullptr;
 }
 
@@ -679,7 +678,6 @@ D3DMeshNode11::~D3DMeshNode11()
 {
 	SAFE_RELEASE(m_pVertexBuffer);
 	SAFE_RELEASE(m_pIndexBuffer);
-	SAFE_RELEASE(m_pTexture);
 }
 
 HRESULT D3DMeshNode11::VOnRestore(Scene* pScene)
@@ -703,27 +701,10 @@ HRESULT D3DMeshNode11::VOnRestore(Scene* pScene)
 		return hr;
 	}
 
-	hr = LoadTexture(m_textureFilename);
-	if (FAILED(hr))
-	{
-		return hr;
-	}
-
 	hr = LoadMaterial(m_materialFilename);
 	if (FAILED(hr))
 	{
 		return hr;
-	}
-
-	return S_OK;
-}
-
-HRESULT D3DMeshNode11::LoadTexture(std::string textureFilename)
-{
-	m_pTexture = TextureResourceLoader::LoadAndReturnTextureResource(textureFilename.c_str());
-	if (!m_pTexture)
-	{
-		return S_FALSE;
 	}
 
 	return S_OK;
@@ -812,7 +793,7 @@ HRESULT D3DMeshNode11::VRender(Scene* pScene)
 	RenderBuffers(context);
 
 	result = g_pApp->GetGraphicsManager()->GetLightShader()->Render(context, m_indexCount, DirectX::XMLoadFloat4x4(&worldMatrix),
-		XMLoadFloat4x4(&viewMatrix), XMLoadFloat4x4(&projectionMatrix), m_pTexture, &VGet()->GetMaterial(), pScene);
+		XMLoadFloat4x4(&viewMatrix), XMLoadFloat4x4(&projectionMatrix), &VGet()->GetMaterial(), pScene);
 	if (!result)
 	{
 		return S_FALSE;
