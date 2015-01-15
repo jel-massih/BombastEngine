@@ -72,10 +72,24 @@ LightingResult CalcDirectionalLight(Light light, float3 viewDir, float3 normal)
 
 LightingResult CalcLighting(float3 viewDir, float3 normal)
 {
-	LightingResult result = CalcDirectionalLight(Lights[0], viewDir, normal);
+	LightingResult totalResult = { { 0, 0, 0, 0 }, { 0, 0, 0, 0 } };
 
+	[unroll]
+	for (int i = 0; i < MAX_LIGHTS; i++)
+	{
+		LightingResult result = { { 0, 0, 0, 0 }, { 0, 0, 0, 0 } };
 
-	return result;
+		if (!Lights[i].Enabled) continue;
+
+		result = CalcDirectionalLight(Lights[i], viewDir, normal);
+		totalResult.Diffuse += result.Diffuse;
+		totalResult.Specular += result.Specular;
+	}
+
+	totalResult.Diffuse = saturate(totalResult.Diffuse);
+	totalResult.Specular = saturate(totalResult.Specular);
+
+	return totalResult;
 };
 
 struct PixelShaderInput
