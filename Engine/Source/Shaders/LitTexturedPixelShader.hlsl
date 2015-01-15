@@ -34,17 +34,22 @@ cbuffer LightProperties : register(b1)
 	Light Lights[MAX_LIGHTS];
 };
 
-float CalcDiffuse(Light light, float3 lightDir, float3 normal)
+float4 CalcDiffuse(Light light, float3 lightDir, float3 normal)
 {
 	float intensity = saturate(dot(normal, lightDir));
 	return light.Color * intensity;
 };
 
-float CalcSpecular(Light light, float3 viewDir, float3 lightDir, float3 normal)
+float4 CalcSpecular(Light light, float3 viewDir, float3 lightDir, float3 normal)
 {
-	float3 reflection = normalize(reflect(-lightDir, normal));
-	float posDot = saturate(dot(reflection, viewDir));
-	return light.Color * pow(posDot, Material.SpecularPower);
+	float intensity = saturate(dot(normal, lightDir));
+	if (intensity > 0.0f) {
+		float3 reflection = normalize(2 * intensity * normal - lightDir);
+		float posDot = saturate(dot(reflection, viewDir));
+		return pow(posDot, Material.SpecularPower);
+	}
+
+	return float4(0, 0, 0, 0);
 };
 
 struct LightingResult
@@ -69,8 +74,6 @@ LightingResult CalcLighting(float3 viewDir, float3 normal)
 {
 	LightingResult result = CalcDirectionalLight(Lights[0], viewDir, normal);
 
-	result.Diffuse = saturate(result.Diffuse);
-	result.Specular = saturate(result.Specular);
 
 	return result;
 };
@@ -99,7 +102,9 @@ float4 LitTexturedPixelShader(PixelShaderInput input) : SV_TARGET
 		texColor = Texture.Sample(Sampler, input.TexCoord);
 	}
 
-	float4 finalColor = (emissive + ambient + diffuse + specular) * texColor;
+	float4 finalColor = (emissive + ambient + diffuse) * texColor;
+
+	finalColor = saturate(finalColor + specular);
 
 	return finalColor;
 }
