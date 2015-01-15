@@ -7,6 +7,7 @@ class Material
 {
 public:
 	Material();
+	~Material();
 
 	void SetAmbient(const Vec4& color);
 	const Vec4 GetAmbient() const { return m_material.Ambient; }

@@ -718,7 +718,7 @@ HRESULT D3DMeshNode11::LoadMaterial(std::string filename)
 		return false;
 	}
 
-	SetMaterial(*mat);
+	SetMaterial(mat);
 
 	return S_OK;
 }

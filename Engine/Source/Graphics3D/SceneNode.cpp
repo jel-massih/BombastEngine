@@ -4,7 +4,7 @@
 #include "../Actor/TransformComponent.h"
 #include "../Bombast/BombastApp.h"
 #include "Scene.h"
-#include "../Resources/ModelResource.h"
+#include "../Resources/MaterialResource.h"
 
 SceneNodeProperties::SceneNodeProperties()
 {
@@ -37,6 +37,7 @@ SceneNode::SceneNode(ActorId actorId, BaseRenderComponent* renderComponent, Rend
 	m_properties.m_name = (renderComponent) ? renderComponent->VGetName(): "SceneNode";
 	m_properties.m_renderPass = renderPass;
 	m_properties.m_alphaType = AlphaOpaque;
+	m_properties.m_material = MaterialResourceLoader::LoadAndReturnMaterialResource("Materials\\default_mat.bmtl");
 	m_pRenderComponent = renderComponent;
 	VSetTransform(to, from);
 	SetRadius(0);
@@ -58,7 +59,7 @@ SceneNode::~SceneNode()
 HRESULT SceneNode::VOnRestore(Scene* pScene)
 {
 	Vec4 color = (m_pRenderComponent) ? m_pRenderComponent->GetColor() : g_White;
-	m_properties.m_material.SetDiffuse(color);
+	m_properties.m_material->SetDiffuse(color);
 
 	SceneNodeList::iterator i = m_children.begin();
 	SceneNodeList::iterator end = m_children.end();
@@ -168,7 +169,7 @@ HRESULT SceneNode::VRenderChildren(Scene* pScene)
 		{
 			if ((*i)->VIsVisible(pScene))
 			{
-				float alpha = (*i)->VGet()->m_material.GetAlpha();
+				float alpha = (*i)->VGet()->m_material->GetAlpha();
 				if (alpha == fOPAQUE)
 				{
 					(*i)->VRender(pScene);

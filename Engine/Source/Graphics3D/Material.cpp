@@ -11,6 +11,16 @@ Material::Material()
 	m_material.Power = 32.0f;
 }
 
+Material::~Material()
+{
+	for (auto it = m_material.Textures.begin(); it != m_material.Textures.end(); ++it)
+	{
+		SAFE_DELETE(*it);
+	}
+
+	m_material.Textures.clear();
+}
+
 void Material::SetAmbient(const Vec4& color)
 {
 	m_material.Ambient = color;
