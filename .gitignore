@@ -22,3 +22,4 @@ Engine/Assets/Textures/*
 *.mtl
 *.cso
 *.opensdf
+*.nvuser
