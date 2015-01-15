@@ -2,7 +2,7 @@
 
 Material::Material()
 {
-	Vec4 ambientMat = Vec4(0.10f, 0.10f, 0.10f, 1.0f);
+	Vec4 ambientMat = Vec4(1.0f, 1.0f, 1.0f, 1.0f);
 	ZeroMemory(&m_material, sizeof(D3DMATERIAL9));
 	m_material.Diffuse = g_White;
 	m_material.Ambient = ambientMat;

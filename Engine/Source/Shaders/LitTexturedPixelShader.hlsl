@@ -102,9 +102,9 @@ float4 LitTexturedPixelShader(PixelShaderInput input) : SV_TARGET
 	
 	float4 emissive = Material.Emissive;
 	float4 ambient = Material.Ambient * GlobalAmbient;
-	float4 diffuse = Material.Diffuse;
+	float4 diffuse = Material.Diffuse * lit.Diffuse;
 	float4 specular = Material.Specular * lit.Specular;
-
+	
 	float4 texColor = {1,1,1,1};
 
 	if (Material.UseTexture)
