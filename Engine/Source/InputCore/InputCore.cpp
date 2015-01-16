@@ -7,12 +7,21 @@ InputCore::InputCore()
 	m_pMouse = 0;
 }
 
-InputCore::InputCore(const InputCore& other)
-{
-}
-
 InputCore::~InputCore()
 {
+	if (m_pMouse)
+	{
+		m_pMouse->Unacquire();
+		SAFE_RELEASE(m_pMouse);
+	}
+
+	if (m_pKeyboard)
+	{
+		m_pKeyboard->Unacquire();
+		SAFE_RELEASE(m_pKeyboard);
+	}
+
+	SAFE_RELEASE(m_pDirectInput);
 }
 
 bool InputCore::Initialize(HINSTANCE hInstance, HWND hWnd)
@@ -77,26 +86,6 @@ bool InputCore::Initialize(HINSTANCE hInstance, HWND hWnd)
 	}
 
 	return true;
-}
-
-void InputCore::Shutdown()
-{
-	if (m_pMouse)
-	{
-		m_pMouse->Unacquire();
-		SAFE_RELEASE(m_pMouse);
-	}
-
-	if (m_pKeyboard)
-	{
-		m_pKeyboard->Unacquire();
-		SAFE_RELEASE(m_pKeyboard);
-	}
-
-	if (m_pDirectInput)
-	{
-		SAFE_RELEASE(m_pDirectInput);
-	}
 }
 
 bool InputCore::Frame()

@@ -9,11 +9,9 @@ class InputCore
 {
 public:
 	InputCore();
-	InputCore(const InputCore& other);
 	~InputCore();
 
 	bool Initialize(HINSTANCE hInstance, HWND hWnd);
-	void Shutdown();
 
 	bool Frame();
 

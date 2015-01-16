@@ -31,11 +31,7 @@ bool BombastGame::Initialize(HWND hWnd, HINSTANCE hInstance)
 
 void BombastGame::Shutdown()
 {
-	if (m_pInputCore)
-	{
-		m_pInputCore->Shutdown();
-		SAFE_DELETE(m_pInputCore);
-	}
+	SAFE_DELETE(m_pInputCore);
 }
 
 bool BombastGame::Frame()
