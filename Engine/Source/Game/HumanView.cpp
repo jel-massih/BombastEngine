@@ -50,11 +50,7 @@ HumanView::~HumanView()
 		m_screenElements.pop_front();
 	}
 
-	if (m_pDebugManager)
-	{
-		m_pDebugManager->Shutdown();
-		SAFE_DELETE(m_pDebugManager);
-	}
+	SAFE_DELETE(m_pDebugManager);
 
 	SAFE_DELETE(m_pProcessManager);
 	SAFE_DELETE(m_pScene);

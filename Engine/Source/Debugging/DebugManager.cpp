@@ -12,6 +12,13 @@ DebugManager::DebugManager()
 	m_pOwner = 0;
 }
 
+DebugManager::~DebugManager()
+{
+	SAFE_DELETE(m_pDebugText);
+
+	SAFE_DELETE(m_pSystemResourceMonitor);
+}
+
 bool DebugManager::Initialize(HumanView* owner)
 {
 	bool result;
@@ -43,17 +50,6 @@ bool DebugManager::Initialize(HumanView* owner)
 	m_pDebugText->AddString("CPU");
 
 	return true;
-}
-
-void DebugManager::Shutdown()
-{
-	if (m_pDebugText)
-	{
-		m_pDebugText->Shutdown();
-		SAFE_DELETE(m_pDebugText);
-	}
-
-	SAFE_DELETE(m_pSystemResourceMonitor);
 }
 
 bool DebugManager::Update(const float deltaMs)

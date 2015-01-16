@@ -12,6 +12,23 @@ DebugText::DebugText()
 	m_pStrings = 0;
 }
 
+DebugText::~DebugText()
+{
+	if (m_pStrings)
+	{
+		for (int i = 0; i < m_stringCount; i++)
+		{
+			ReleaseSentence(&m_pStrings[i]);
+		}
+
+		SAFE_DELETE(m_pStrings);
+	}
+
+	SAFE_DELETE(m_pFontShader);
+
+	SAFE_DELETE(m_pFont);
+}
+
 bool DebugText::Initialize()
 {
 	ID3D11Device* device;
@@ -57,27 +74,6 @@ bool DebugText::Initialize()
 	}
 
 	return true;
-}
-
-void DebugText::Shutdown()
-{
-	if (m_pStrings)
-	{
-		for (int i = 0; i < m_stringCount; i++)
-		{
-			ReleaseSentence(&m_pStrings[i]);
-		}
-
-		SAFE_DELETE(m_pStrings);
-	}
-
-	SAFE_DELETE(m_pFontShader);
-
-	if (m_pFont)
-	{
-		m_pFont->Shutdown();
-		SAFE_DELETE(m_pFont);
-	}
 }
 
 bool DebugText::Render()

@@ -8,9 +8,9 @@ class DebugManager
 {
 public:
 	DebugManager();
+	~DebugManager();
 
 	bool Initialize(HumanView* owner);
-	void Shutdown();
 
 	bool Update(const float deltaMs);
 	void Render();

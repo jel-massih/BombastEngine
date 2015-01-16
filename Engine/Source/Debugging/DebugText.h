@@ -7,9 +7,9 @@ class DebugText
 {
 public:
 	DebugText();
+	~DebugText();
 
 	bool Initialize();
-	void Shutdown();
 	bool Render();
 
 	bool AddString(const char* stringId);

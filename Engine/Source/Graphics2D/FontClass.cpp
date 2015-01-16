@@ -12,6 +12,13 @@ FontClass::FontClass()
 	m_pTexture = 0;
 }
 
+FontClass::~FontClass()
+{
+	SAFE_DELETE(m_pTexture);
+
+	SAFE_DELETE_ARRAY(m_pFont);
+}
+
 bool FontClass::Initialize(ID3D11Device* device, std::string fontFilename, std::string textureFilename)
 {
 	if (!LoadFontData(fontFilename.c_str()))
@@ -25,13 +32,6 @@ bool FontClass::Initialize(ID3D11Device* device, std::string fontFilename, std::
 	}
 
 	return true;
-}
-
-void FontClass::Shutdown()
-{
-	ReleaseTexture();
-
-	ReleaseFontData();
 }
 
 bool FontClass::LoadFontData(const char* filename)
@@ -76,10 +76,6 @@ bool FontClass::LoadFontData(const char* filename)
 
 void FontClass::ReleaseFontData()
 {
-	if (m_pFont)
-	{
-		SAFE_DELETE_ARRAY(m_pFont);
-	}
 }
 
 bool FontClass::LoadTexture(ID3D11Device* device, std::string filename)
@@ -96,15 +92,6 @@ bool FontClass::LoadTexture(ID3D11Device* device, std::string filename)
 	}
 
 	return true;
-}
-
-void FontClass::ReleaseTexture()
-{
-	if (m_pTexture)
-	{
-		m_pTexture->Shutdown();
-		SAFE_DELETE(m_pTexture);
-	}
 }
 
 ID3D11ShaderResourceView* FontClass::GetTexture()

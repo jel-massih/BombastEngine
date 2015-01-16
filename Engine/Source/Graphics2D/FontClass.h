@@ -6,9 +6,9 @@ class FontClass
 {
 public:
 	FontClass();
+	~FontClass();
 
 	bool Initialize(ID3D11Device* device, std::string fontFilename, std::string textureFilename);
-	void Shutdown();
 
 	ID3D11ShaderResourceView* GetTexture();
 
