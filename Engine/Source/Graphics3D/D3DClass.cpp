@@ -18,6 +18,22 @@ D3DClass11::D3DClass11()
 
 D3DClass11::~D3DClass11()
 {
+	if (m_pSwapChain)
+	{
+		m_pSwapChain->SetFullscreenState(false, NULL);
+	}
+
+	SAFE_RELEASE(m_pAlphaEnableBlendingState);
+	SAFE_RELEASE(m_pAlphaDisabledBlendingState);
+	SAFE_RELEASE(m_pRasterState);
+	SAFE_RELEASE(m_pDepthStencilView);
+	SAFE_RELEASE(m_pDepthDisabledStencilState);
+	SAFE_RELEASE(m_pDepthStencilState);
+	SAFE_RELEASE(m_pDepthStencilBuffer);
+	SAFE_RELEASE(m_pRenderTargetView);
+	SAFE_RELEASE(m_pDeviceContext);
+	SAFE_RELEASE(m_pDevice);
+	SAFE_RELEASE(m_pSwapChain);
 }
 
 bool D3DClass11::VInitialize(int screenWidth, int screenHeight, bool vsync, HWND hwnd, bool fullscreen, float screenDepth, float screenNear)
@@ -342,28 +358,6 @@ bool D3DClass11::VInitialize(int screenWidth, int screenHeight, bool vsync, HWND
 	}
 
 	return true;
-}
-
-void D3DClass11::VShutdown()
-{
-	if(m_pSwapChain)
-	{
-		m_pSwapChain->SetFullscreenState(false, NULL);
-	}
-
-	SAFE_RELEASE(m_pAlphaEnableBlendingState);
-	SAFE_RELEASE(m_pAlphaDisabledBlendingState);
-	SAFE_RELEASE(m_pRasterState);
-	SAFE_RELEASE(m_pDepthStencilView);
-	SAFE_RELEASE(m_pDepthDisabledStencilState);
-	SAFE_RELEASE(m_pDepthStencilState);
-	SAFE_RELEASE(m_pDepthStencilBuffer);
-	SAFE_RELEASE(m_pRenderTargetView);
-	SAFE_RELEASE(m_pDeviceContext);
-	SAFE_RELEASE(m_pDevice);
-	SAFE_RELEASE(m_pSwapChain);
-
-	return;
 }
 
 void D3DClass11::VSetBackgroundColor(float a, float r, float g, float b)

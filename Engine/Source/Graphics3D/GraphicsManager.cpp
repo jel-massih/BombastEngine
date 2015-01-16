@@ -10,13 +10,7 @@ GraphicsManager::GraphicsManager()
 
 GraphicsManager::~GraphicsManager()
 {
-	if (m_pRenderer)
-	{
-		m_pRenderer->VShutdown();
-
-		SAFE_DELETE(m_pRenderer);
-	}
-
+	SAFE_DELETE(m_pRenderer);
 	SAFE_DELETE(m_pShaderManager);
 }
 
