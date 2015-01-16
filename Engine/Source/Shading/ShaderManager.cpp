@@ -22,6 +22,13 @@ ShaderManager::~ShaderManager()
 
 		SAFE_DELETE(m_pTextureShader);
 	}
+
+	if (m_pMultiTextureShader)
+	{
+		m_pMultiTextureShader->Shutdown();
+
+		SAFE_DELETE(m_pMultiTextureShader);
+	}
 }
 
 bool ShaderManager::Initialize(IRenderer* renderer)
