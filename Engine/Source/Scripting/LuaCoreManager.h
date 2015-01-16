@@ -5,12 +5,10 @@
 
 class LuaCoreManager {
 public:
-	LuaCoreManager();
-	LuaCoreManager(const LuaCoreManager& other);
+	LuaCoreManager():L(nullptr){}
 	~LuaCoreManager();
 
 	bool Initialize();
-	void Shutdown();
 
 	bool LoadScript(std::string fileName);
 	bool LoadScriptFromBuffer(char* rawBuffer, int rawSize, std::string filename);

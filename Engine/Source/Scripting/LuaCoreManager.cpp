@@ -3,17 +3,12 @@
 #include "../Resources/LuaResource.h"
 #include "LuaExports.h"
 
-LuaCoreManager::LuaCoreManager()
-{
-	L = 0;
-}
-
-LuaCoreManager::LuaCoreManager(const LuaCoreManager& other)
-{
-}
-
 LuaCoreManager::~LuaCoreManager()
 {
+	if (L)
+	{
+		lua_close(L);
+	}
 }
 
 bool LuaCoreManager::Initialize()
@@ -30,14 +25,6 @@ bool LuaCoreManager::Initialize()
 	}
 
 	return true;
-}
-
-void LuaCoreManager::Shutdown()
-{
-	if (L)
-	{
-		lua_close(L);
-	}
 }
 
 bool LuaCoreManager::LoadScript(std::string filename)

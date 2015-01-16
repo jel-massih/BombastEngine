@@ -373,19 +373,10 @@ bool BombastApp::Render()
 void BombastApp::ShutDown()
 {
 	SAFE_DELETE(m_pGame);
-
 	SAFE_DELETE(m_pEventManager);
-
-	if (m_pLuaCoreManager)
-	{
-		m_pLuaCoreManager->Shutdown();
-		SAFE_DELETE(m_pLuaCoreManager);
-	}
-
+	SAFE_DELETE(m_pLuaCoreManager);
 	SAFE_DELETE(m_pGraphicsManager);
-
 	SAFE_DELETE(m_pResourceCache);
-
 	SAFE_DELETE(m_pTimer);
 
 	ShutdownWindows();
