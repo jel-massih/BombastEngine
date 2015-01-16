@@ -11,6 +11,16 @@ FontShader::FontShader()
 	m_pPixelBuffer = 0;
 }
 
+FontShader::~FontShader()
+{
+	SAFE_RELEASE(m_pPixelBuffer);
+	SAFE_RELEASE(m_pSampleState);
+	SAFE_RELEASE(m_pConstantBuffer);
+	SAFE_RELEASE(m_pLayout);
+	SAFE_RELEASE(m_pPixelShader);
+	SAFE_RELEASE(m_pVertexShader);
+}
+
 bool FontShader::Initialize(ID3D11Device* device)
 {
 	if (!InitializeShader(device, "Shaders\\FontVertexShader.cso", "Shaders\\FontPixelShader.cso"))
@@ -19,11 +29,6 @@ bool FontShader::Initialize(ID3D11Device* device)
 	}
 
 	return true;
-}
-
-void FontShader::Shutdown()
-{
-	ShutdownShader();
 }
 
 bool FontShader::Render(ID3D11DeviceContext* deviceContext, int indexCount, XMMATRIX& worldMatrix,
@@ -141,16 +146,6 @@ bool FontShader::InitializeShader(ID3D11Device* device, std::string vertexShader
 	}
 
 	return true;
-}
-
-void FontShader::ShutdownShader()
-{
-	SAFE_RELEASE(m_pPixelBuffer);
-	SAFE_RELEASE(m_pSampleState);
-	SAFE_RELEASE(m_pConstantBuffer);
-	SAFE_RELEASE(m_pLayout);
-	SAFE_RELEASE(m_pPixelShader);
-	SAFE_RELEASE(m_pVertexShader);
 }
 
 bool FontShader::SetShaderParameters(ID3D11DeviceContext* deviceContext, XMMATRIX& world, XMMATRIX& view, XMMATRIX& projection, ID3D11ShaderResourceView* texture, XMFLOAT4 pixelColor)

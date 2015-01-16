@@ -2,33 +2,10 @@
 
 ShaderManager::~ShaderManager()
 {
-	if (m_pLightShader)
-	{
-		m_pLightShader->Shutdown();
-
-		SAFE_DELETE(m_pLightShader);
-	}
-
-	if (m_pColorShader)
-	{
-		m_pColorShader->Shutdown();
-
-		SAFE_DELETE(m_pColorShader);
-	}
-
-	if (m_pTextureShader)
-	{
-		m_pTextureShader->Shutdown();
-
-		SAFE_DELETE(m_pTextureShader);
-	}
-
-	if (m_pMultiTextureShader)
-	{
-		m_pMultiTextureShader->Shutdown();
-
-		SAFE_DELETE(m_pMultiTextureShader);
-	}
+	SAFE_DELETE(m_pLightShader);
+	SAFE_DELETE(m_pColorShader);
+	SAFE_DELETE(m_pTextureShader);
+	SAFE_DELETE(m_pMultiTextureShader);
 }
 
 bool ShaderManager::Initialize(IRenderer* renderer)

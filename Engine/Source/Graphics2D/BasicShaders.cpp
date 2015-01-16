@@ -9,6 +9,15 @@ ColorShader::ColorShader()
 	m_pPixelBuffer = 0;
 }
 
+ColorShader::~ColorShader()
+{
+	SAFE_RELEASE(m_pPixelBuffer);
+	SAFE_RELEASE(m_pConstantBuffer);
+	SAFE_RELEASE(m_pLayout);
+	SAFE_RELEASE(m_pPixelShader);
+	SAFE_RELEASE(m_pVertexShader);
+}
+
 bool ColorShader::Initialize(ID3D11Device* device)
 {
 	if (!InitializeShader(device, "Shaders\\ColorVertexShader.cso", "Shaders\\ColorPixelShader.cso"))
@@ -19,10 +28,6 @@ bool ColorShader::Initialize(ID3D11Device* device)
 	return true;
 }
 
-void ColorShader::Shutdown()
-{
-	ShutdownShader();
-}
 
 bool ColorShader::Render(ID3D11DeviceContext* deviceContext, int indexCount, XMMATRIX& worldMatrix,
 	XMMATRIX& viewMatrix, XMMATRIX& projectionMatrix, XMFLOAT4 pixelColor)
@@ -120,15 +125,6 @@ bool ColorShader::InitializeShader(ID3D11Device* device, std::string vertexShade
 	return true;
 }
 
-void ColorShader::ShutdownShader()
-{
-	SAFE_RELEASE(m_pPixelBuffer);
-	SAFE_RELEASE(m_pConstantBuffer);
-	SAFE_RELEASE(m_pLayout);
-	SAFE_RELEASE(m_pPixelShader);
-	SAFE_RELEASE(m_pVertexShader);
-}
-
 bool ColorShader::SetShaderParameters(ID3D11DeviceContext* deviceContext, XMMATRIX& world, XMMATRIX& view, XMMATRIX& projection, XMFLOAT4 pixelColor)
 {
 	HRESULT result;
@@ -197,6 +193,15 @@ TextureShader::TextureShader()
 	m_pSampleState = 0;
 }
 
+TextureShader::~TextureShader()
+{
+	SAFE_RELEASE(m_pSampleState);
+	SAFE_RELEASE(m_pMatrixBuffer);
+	SAFE_RELEASE(m_pLayout);
+	SAFE_RELEASE(m_pPixelShader);
+	SAFE_RELEASE(m_pVertexShader);
+}
+
 bool TextureShader::Initialize(ID3D11Device* device)
 {
 	bool result;
@@ -208,13 +213,6 @@ bool TextureShader::Initialize(ID3D11Device* device)
 	}
 
 	return true;
-}
-
-void TextureShader::Shutdown()
-{
-	ShutdownShader();
-
-	return;
 }
 
 bool TextureShader::Render(ID3D11DeviceContext* deviceContext, int indexCount, DirectX::XMMATRIX &world, DirectX::XMMATRIX &view, DirectX::XMMATRIX &projection, ID3D11ShaderResourceView* texture)
@@ -320,17 +318,6 @@ bool TextureShader::InitializeShader(ID3D11Device* device, std::string vertexSha
 	}
 
 	return true;
-}
-
-void TextureShader::ShutdownShader()
-{
-	SAFE_RELEASE(m_pSampleState);
-	SAFE_RELEASE(m_pMatrixBuffer);
-	SAFE_RELEASE(m_pLayout);
-	SAFE_RELEASE(m_pPixelShader);
-	SAFE_RELEASE(m_pVertexShader);
-
-	return;
 }
 
 bool TextureShader::SetShaderParameters(ID3D11DeviceContext* deviceContext, DirectX::XMMATRIX &world, DirectX::XMMATRIX &view, DirectX::XMMATRIX &projection, ID3D11ShaderResourceView* texture)

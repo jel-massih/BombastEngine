@@ -6,9 +6,9 @@ class ColorShader
 {
 public:
 	ColorShader();
+	~ColorShader();
 
 	bool Initialize(ID3D11Device* device);
-	void Shutdown();
 	bool Render(ID3D11DeviceContext* deviceContext, int indexCount, XMMATRIX& worldMatrix, XMMATRIX& viewMatrix, XMMATRIX& projMatrix, XMFLOAT4 pixelColor);
 
 private:
@@ -27,7 +27,6 @@ private:
 
 private:
 	bool InitializeShader(ID3D11Device* device, std::string vertexShaderPath, std::string pixelShaderPath);
-	void ShutdownShader();
 
 	bool SetShaderParameters(ID3D11DeviceContext* deviceContext, XMMATRIX& worldMatrix, XMMATRIX& viewMatrix, XMMATRIX& projectionMatrix, XMFLOAT4 pixelColor);
 	void RenderShaders(ID3D11DeviceContext* deviceContext, int indexCount);
@@ -52,14 +51,13 @@ private:
 
 public:
 	TextureShader();
+	~TextureShader();
 
 	bool Initialize(ID3D11Device* device);
-	void Shutdown();
 	bool Render(ID3D11DeviceContext* deviceContext, int indexCount, DirectX::XMMATRIX &world, DirectX::XMMATRIX &view, DirectX::XMMATRIX &projection, ID3D11ShaderResourceView* texture);
 
 private:
 	bool InitializeShader(ID3D11Device* device, std::string vertexShaderPath, std::string pixelShaderPath);
-	void ShutdownShader();
 
 	bool SetShaderParameters(ID3D11DeviceContext* deviceContext, DirectX::XMMATRIX &world, DirectX::XMMATRIX &view, DirectX::XMMATRIX &projection, ID3D11ShaderResourceView* texture);
 	void RenderShader(ID3D11DeviceContext* deviceContext, int);

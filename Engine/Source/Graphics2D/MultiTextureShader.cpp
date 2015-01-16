@@ -10,6 +10,15 @@ MultiTextureShader::MultiTextureShader()
 	m_pSampleState = 0;
 }
 
+MultiTextureShader::~MultiTextureShader()
+{
+	SAFE_RELEASE(m_pSampleState);
+	SAFE_RELEASE(m_pMatrixBuffer);
+	SAFE_RELEASE(m_pLayout);
+	SAFE_RELEASE(m_pPixelShader);
+	SAFE_RELEASE(m_pVertexShader);
+}
+
 bool MultiTextureShader::Initialize(ID3D11Device* device)
 {
 	bool result;
@@ -21,13 +30,6 @@ bool MultiTextureShader::Initialize(ID3D11Device* device)
 	}
 
 	return true;
-}
-
-void MultiTextureShader::Shutdown()
-{
-	ShutdownShader();
-
-	return;
 }
 
 bool MultiTextureShader::Render(ID3D11DeviceContext* deviceContext, int indexCount, DirectX::XMMATRIX &world, DirectX::XMMATRIX &view, DirectX::XMMATRIX &projection, const std::vector<TextureClass*>& textures)
@@ -133,17 +135,6 @@ bool MultiTextureShader::InitializeShader(ID3D11Device* device, std::string vert
 	}
 
 	return true;
-}
-
-void MultiTextureShader::ShutdownShader()
-{
-	SAFE_RELEASE(m_pSampleState);
-	SAFE_RELEASE(m_pMatrixBuffer);
-	SAFE_RELEASE(m_pLayout);
-	SAFE_RELEASE(m_pPixelShader);
-	SAFE_RELEASE(m_pVertexShader);
-
-	return;
 }
 
 bool MultiTextureShader::SetShaderParameters(ID3D11DeviceContext* deviceContext, DirectX::XMMATRIX &world, DirectX::XMMATRIX &view, DirectX::XMMATRIX &projection, const std::vector<TextureClass*>& textures)

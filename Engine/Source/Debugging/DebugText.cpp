@@ -71,11 +71,7 @@ void DebugText::Shutdown()
 		SAFE_DELETE(m_pStrings);
 	}
 
-	if (m_pFontShader)
-	{
-		m_pFontShader->Shutdown();
-		SAFE_DELETE(m_pFontShader);
-	}
+	SAFE_DELETE(m_pFontShader);
 
 	if (m_pFont)
 	{

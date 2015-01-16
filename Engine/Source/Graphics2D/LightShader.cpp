@@ -13,6 +13,19 @@ LightShader::LightShader()
 	m_pSampleState = nullptr;
 }
 
+LightShader::~LightShader()
+{
+	SAFE_RELEASE(m_pSampleState);
+	SAFE_RELEASE(m_pLayout);
+	SAFE_RELEASE(m_pLightBuffer);
+	SAFE_RELEASE(m_pMaterialBuffer);
+	SAFE_RELEASE(m_pCameraBuffer);
+	SAFE_RELEASE(m_pMatrixBuffer);
+	SAFE_RELEASE(m_pLayout);
+	SAFE_RELEASE(m_pPixelShader);
+	SAFE_RELEASE(m_pVertexShader);
+}
+
 bool LightShader::Initialize(ID3D11Device* device)
 {
 	bool result;
@@ -24,13 +37,6 @@ bool LightShader::Initialize(ID3D11Device* device)
 	}
 
 	return true;
-}
-
-void LightShader::Shutdown()
-{
-	ShutdownShader();
-
-	return;
 }
 
 bool LightShader::Render(ID3D11DeviceContext* deviceContext, int indexCount, DirectX::XMMATRIX &world, DirectX::XMMATRIX &view, DirectX::XMMATRIX &projection, const Material* material, const Scene* pScene)
@@ -192,21 +198,6 @@ bool LightShader::InitializeShader(ID3D11Device* device, std::string vertexShade
 	}
 
 	return true;
-}
-
-void LightShader::ShutdownShader()
-{
-	SAFE_RELEASE(m_pSampleState);
-	SAFE_RELEASE(m_pLayout);
-	SAFE_RELEASE(m_pLightBuffer);
-	SAFE_RELEASE(m_pMaterialBuffer);
-	SAFE_RELEASE(m_pCameraBuffer);
-	SAFE_RELEASE(m_pMatrixBuffer);
-	SAFE_RELEASE(m_pLayout);
-	SAFE_RELEASE(m_pPixelShader);
-	SAFE_RELEASE(m_pVertexShader);
-
-	return;
 }
 
 bool LightShader::SetShaderParameters(ID3D11DeviceContext* deviceContext, DirectX::XMMATRIX &world, DirectX::XMMATRIX &view, DirectX::XMMATRIX &projection, const Material* material, const Scene* pScene)

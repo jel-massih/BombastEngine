@@ -8,9 +8,9 @@ class FontShader
 {
 public:
 	FontShader();
+	~FontShader();
 
 	bool Initialize(ID3D11Device* device);
-	void Shutdown();
 	bool Render(ID3D11DeviceContext* deviceContext, int indexCount, XMMATRIX& worldMatrix, XMMATRIX& viewMatrix, XMMATRIX& projMatrix, ID3D11ShaderResourceView* texture, XMFLOAT4 pixelColor);
 
 private:
@@ -28,7 +28,6 @@ private:
 
 private:
 	bool InitializeShader(ID3D11Device* device, std::string vertexShaderPath, std::string pixelShaderPath);
-	void ShutdownShader();
 	
 	bool SetShaderParameters(ID3D11DeviceContext* deviceContext, XMMATRIX& worldMatrix, XMMATRIX& viewMatrix, XMMATRIX& projectionMatrix,
 		ID3D11ShaderResourceView* texture, XMFLOAT4 pixelColor);
