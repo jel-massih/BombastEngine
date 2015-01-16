@@ -8,14 +8,16 @@ GraphicsManager::GraphicsManager()
 	m_pShaderManager = nullptr;
 }
 
-GraphicsManager::GraphicsManager(const GraphicsManager& other)
-{
-
-}
-
 GraphicsManager::~GraphicsManager()
 {
+	if (m_pRenderer)
+	{
+		m_pRenderer->VShutdown();
 
+		SAFE_DELETE(m_pRenderer);
+	}
+
+	SAFE_DELETE(m_pShaderManager);
 }
 
 bool GraphicsManager::Initialize(HWND hwnd)
@@ -56,20 +58,6 @@ bool GraphicsManager::Initialize(HWND hwnd)
 
 
 	return true;
-}
-
-void GraphicsManager::Shutdown()
-{
-	if (m_pRenderer)
-	{
-		m_pRenderer->VShutdown();
-
-		SAFE_DELETE(m_pRenderer);
-	}
-
-	SAFE_DELETE(m_pShaderManager);
-
-	return;
 }
 
 IRenderer* GraphicsManager::GetRenderer()

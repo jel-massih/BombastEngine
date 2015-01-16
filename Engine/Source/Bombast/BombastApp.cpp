@@ -382,11 +382,7 @@ void BombastApp::ShutDown()
 		SAFE_DELETE(m_pLuaCoreManager);
 	}
 
-	if (m_pGraphicsManager)
-	{
-		m_pGraphicsManager->Shutdown();
-		SAFE_DELETE(m_pGraphicsManager);
-	}
+	SAFE_DELETE(m_pGraphicsManager);
 
 	SAFE_DELETE(m_pResourceCache);
 

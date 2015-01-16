@@ -7,11 +7,9 @@ class GraphicsManager
 {
 public:
 	GraphicsManager();
-	GraphicsManager(const GraphicsManager& other);
 	~GraphicsManager();
 
 	bool Initialize(HWND hwnd);
-	void Shutdown();
 	IRenderer* GetRenderer();
 
 	enum Renderer
