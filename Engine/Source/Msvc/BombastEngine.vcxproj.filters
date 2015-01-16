@@ -149,25 +149,25 @@
     <ClCompile Include="..\Graphics3D\Lighting.cpp">
       <Filter>Graphics3D</Filter>
     </ClCompile>
-    <ClCompile Include="..\Graphics2D\MultiTextureShader.cpp">
-      <Filter>Graphics2D</Filter>
-    </ClCompile>
     <ClCompile Include="..\Resources\MaterialResource.cpp">
       <Filter>Resources</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Graphics2D\FontShader.cpp">
-      <Filter>Graphics2D</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Graphics2D\LightShader.cpp">
-      <Filter>Graphics2D</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Graphics2D\BasicShaders.cpp">
-      <Filter>Graphics2D</Filter>
     </ClCompile>
     <ClCompile Include="..\Resources\ShaderResource.cpp">
       <Filter>Resources</Filter>
     </ClCompile>
     <ClCompile Include="..\Shading\ShaderManager.cpp">
+      <Filter>Shading</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Shading\BasicShaders.cpp">
+      <Filter>Shading</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Shading\FontShader.cpp">
+      <Filter>Shading</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Shading\LightShader.cpp">
+      <Filter>Shading</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Shading\MultiTextureShader.cpp">
       <Filter>Shading</Filter>
     </ClCompile>
   </ItemGroup>
@@ -357,25 +357,25 @@
     <ClInclude Include="..\Graphics3D\Lighting.h">
       <Filter>Graphics3D</Filter>
     </ClInclude>
-    <ClInclude Include="..\Graphics2D\MultiTextureShader.h">
-      <Filter>Graphics2D</Filter>
-    </ClInclude>
     <ClInclude Include="..\Resources\MaterialResource.h">
       <Filter>Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Graphics2D\FontShader.h">
-      <Filter>Graphics2D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Graphics2D\LightShader.h">
-      <Filter>Graphics2D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Graphics2D\BasicShaders.h">
-      <Filter>Graphics2D</Filter>
     </ClInclude>
     <ClInclude Include="..\Resources\ShaderResource.h">
       <Filter>Resources</Filter>
     </ClInclude>
     <ClInclude Include="..\Shading\ShaderManager.h">
+      <Filter>Shading</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Shading\BasicShaders.h">
+      <Filter>Shading</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Shading\FontShader.h">
+      <Filter>Shading</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Shading\LightShader.h">
+      <Filter>Shading</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Shading\MultiTextureShader.h">
       <Filter>Shading</Filter>
     </ClInclude>
   </ItemGroup>

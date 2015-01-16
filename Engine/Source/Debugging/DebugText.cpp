@@ -2,7 +2,7 @@
 
 #include "../Bombast/BombastApp.h"
 #include "../Graphics2D/FontClass.h"
-#include "../Graphics2D/FontShader.h"
+#include "../Shading/FontShader.h"
 
 DebugText::DebugText()
 {

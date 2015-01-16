@@ -1,8 +1,8 @@
 #pragma once
 
-#include "../Graphics2D/BasicShaders.h"
-#include "../Graphics2D/LightShader.h"
-#include "../Graphics2D/MultiTextureShader.h"
+#include "BasicShaders.h"
+#include "LightShader.h"
+#include "MultiTextureShader.h"
 
 class SceneNode;
 
