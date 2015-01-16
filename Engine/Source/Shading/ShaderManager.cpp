@@ -16,13 +16,14 @@ bool ShaderManager::Initialize(IRenderer* renderer)
 	if (!m_pLightShader)
 	{
 		BE_ERROR("Could not Allocate the LightShader Object!");
+		return false;
 	}
 
 	result = m_pLightShader->Initialize(renderer->GetDevice());
 	if (!result)
 	{
 		BE_ERROR("Could not initialize the LightShader Object!");
-		return FALSE;
+		return false;
 	}
 
 	m_pColorShader = BE_NEW ColorShader;
@@ -36,7 +37,7 @@ bool ShaderManager::Initialize(IRenderer* renderer)
 	if (!result)
 	{
 		BE_ERROR("Could not initialize the ColorShader Object!");
-		return FALSE;
+		return false;
 	}
 
 	m_pTextureShader = BE_NEW TextureShader;
@@ -50,7 +51,7 @@ bool ShaderManager::Initialize(IRenderer* renderer)
 	if (!result)
 	{
 		BE_ERROR("Could not initialize the TextureShader Object!");
-		return FALSE;
+		return false;
 	}
 
 	m_pMultiTextureShader = BE_NEW MultiTextureShader;
@@ -64,8 +65,10 @@ bool ShaderManager::Initialize(IRenderer* renderer)
 	if (!result)
 	{
 		BE_ERROR("Could not initialize the MultiTextureShader Object!");
-		return FALSE;
+		return false;
 	}
+
+	return true;
 }
 
 bool ShaderManager::RenderRenderable(SceneNode* pRenderableNode, int indexCount, const Scene* pScene) const
@@ -97,4 +100,6 @@ bool ShaderManager::RenderRenderable(SceneNode* pRenderableNode, int indexCount,
 		return m_pMultiTextureShader->Render(context, indexCount, XMLoadFloat4x4(&worldMatrix), XMLoadFloat4x4(&viewMatrix), XMLoadFloat4x4(&projectionMatrix), pRenderableNode->VGet()->GetMaterial().GetTextures());
 		break;
 	}
+
+	return false;
 }
