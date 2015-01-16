@@ -45,6 +45,7 @@ protected:
 	Mat4x4 m_toWorld, m_fromWorld;
 	float m_radius;
 	RenderPass m_renderPass;
+	//Material references a Material Resource shared across all Nodes using it.
 	Material* m_material;
 	AlphaType m_alphaType;
 
