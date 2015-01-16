@@ -8,6 +8,8 @@
     <Texture path="textures\grid.dds"></Texture>
   </Textures>
 
+  <UVScale x="3" y="3" />
+
   <Shader type="LitTextured">
   </Shader>
 </Material>

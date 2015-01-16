@@ -9,6 +9,7 @@ Material::Material()
 	m_material.Specular = g_White;
 	m_material.Emissive = g_Black;
 	m_material.Power = 32.0f;
+	m_material.UVScale = XMFLOAT2(1.0f, 1.0f);
 }
 
 Material::~Material()
@@ -109,4 +110,9 @@ void Material::SetShaderType(std::string shaderName)
 void Material::SetShaderType(ShaderType shaderType)
 {
 	m_material.ShaderType = shaderType;
+}
+
+void Material::SetUVScale(XMFLOAT2 scale)
+{
+	m_material.UVScale = scale;
 }

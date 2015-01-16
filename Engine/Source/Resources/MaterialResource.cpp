@@ -94,6 +94,15 @@ bool MaterialResourceExtraData::LoadMaterial(char* pRawBuffer, unsigned int rawS
 		m_pMaterial->SetShaderType(pAttribute->first_attribute("type")->value());
 	}
 
+	pAttribute = pMaterialBase->first_node("UVScale");
+	if (pAttribute)
+	{
+		XMFLOAT2 c;
+		c.x = (float)atof(pAttribute->first_attribute("x")->value());
+		c.y = (float)atof(pAttribute->first_attribute("y")->value());
+		m_pMaterial->SetUVScale(c);
+	}
+
 	return true;
 }
 

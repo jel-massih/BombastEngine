@@ -737,6 +737,17 @@ HRESULT D3DMeshNode11::InitializeBuffers()
 	m_vertexCount = m_pLoadedMesh->vertices.size();
 	m_indexCount = m_pLoadedMesh->indices.size();
 
+	//If Material has non-standard UV Scale, then update uvs
+	XMFLOAT2 uvScale = VGet()->GetMaterial().GetUVScale();
+	if (fabs(uvScale.x - 1.0f) > 0.0005 || fabs(uvScale.y - 1.0f) > 0.0005)
+	{
+		for (auto it = m_pLoadedMesh->vertices.begin(); it != m_pLoadedMesh->vertices.end(); it++)
+		{
+			(*it).tex.u *= uvScale.x;
+			(*it).tex.v *= uvScale.x;
+		}
+	}
+
 	ZeroMemory(&vertexBufferDesc, sizeof(vertexBufferDesc));
 	vertexBufferDesc.Usage = D3D11_USAGE_DEFAULT;
 	vertexBufferDesc.ByteWidth = sizeof(VertexType) * m_vertexCount;

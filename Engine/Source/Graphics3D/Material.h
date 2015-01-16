@@ -35,6 +35,9 @@ public:
 	void SetShaderType(std::string shaderName);
 	void SetShaderType(ShaderType shaderType);
 
+	XMFLOAT2 GetUVScale() const { return m_material.UVScale; }
+	void SetUVScale(XMFLOAT2 scale);
+
 private:
 	struct BEMaterial
 	{
@@ -45,6 +48,7 @@ private:
 		Vec4 Emissive;
 		std::vector<TextureClass*> Textures;
 		ShaderType ShaderType;
+		XMFLOAT2 UVScale;
 	};
 	BEMaterial m_material;
 };
