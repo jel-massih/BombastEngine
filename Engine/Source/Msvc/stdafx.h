@@ -10,7 +10,6 @@
 #include "../Utilities/Timer.h"
 #include "../Graphics2D/TextureClass.h"
 #include "../Graphics2D/FontClass.h"
-#include "../Graphics2D/LightShader.h"
 #include "../Graphics3D/D3DClass.h"
 #include "../Graphics3D/Geometry.h"
 #include "../Graphics3D/GraphicsManager.h"
@@ -22,3 +21,4 @@
 #include "../Debugging/DebugText.h"
 #include "../Events/EventManager.h"
 #include "../Game/ProcessManager.h"
+#include "../Shading/ShaderManager.h"

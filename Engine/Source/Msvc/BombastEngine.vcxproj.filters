@@ -167,6 +167,9 @@
     <ClCompile Include="..\Resources\ShaderResource.cpp">
       <Filter>Resources</Filter>
     </ClCompile>
+    <ClCompile Include="..\Shading\ShaderManager.cpp">
+      <Filter>Shading</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Bombast\BombastApp.h">
@@ -372,6 +375,9 @@
     <ClInclude Include="..\Resources\ShaderResource.h">
       <Filter>Resources</Filter>
     </ClInclude>
+    <ClInclude Include="..\Shading\ShaderManager.h">
+      <Filter>Shading</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Bombast">
@@ -422,34 +428,37 @@
     <Filter Include="Physics">
       <UniqueIdentifier>{84d99599-6e85-48f2-8342-f8a6f588ea21}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Shaders">
+    <Filter Include="Shading">
+      <UniqueIdentifier>{1e94e3cb-37b3-4a40-a3c7-3db9058a0acc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shading\Shaders">
       <UniqueIdentifier>{b78e3ae5-3fb9-4486-b66b-d8ab6b87bcde}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="..\Shaders\LitTexturedPixelShader.hlsl">
-      <Filter>Shaders</Filter>
+    <FxCompile Include="..\Shading\Shaders\ColorPixelShader.hlsl">
+      <Filter>Shading\Shaders</Filter>
     </FxCompile>
-    <FxCompile Include="..\Shaders\FontPixelShader.hlsl">
-      <Filter>Shaders</Filter>
+    <FxCompile Include="..\Shading\Shaders\ColorVertexShader.hlsl">
+      <Filter>Shading\Shaders</Filter>
     </FxCompile>
-    <FxCompile Include="..\Shaders\FontVertexShader.hlsl">
-      <Filter>Shaders</Filter>
+    <FxCompile Include="..\Shading\Shaders\FontPixelShader.hlsl">
+      <Filter>Shading\Shaders</Filter>
     </FxCompile>
-    <FxCompile Include="..\Shaders\LitTexturedVertexShader.hlsl">
-      <Filter>Shaders</Filter>
+    <FxCompile Include="..\Shading\Shaders\FontVertexShader.hlsl">
+      <Filter>Shading\Shaders</Filter>
     </FxCompile>
-    <FxCompile Include="..\Shaders\MultiTexturePixelShader.hlsl">
-      <Filter>Shaders</Filter>
+    <FxCompile Include="..\Shading\Shaders\LitTexturedPixelShader.hlsl">
+      <Filter>Shading\Shaders</Filter>
     </FxCompile>
-    <FxCompile Include="..\Shaders\MultiTextureVertexShader.hlsl">
-      <Filter>Shaders</Filter>
+    <FxCompile Include="..\Shading\Shaders\LitTexturedVertexShader.hlsl">
+      <Filter>Shading\Shaders</Filter>
     </FxCompile>
-    <FxCompile Include="..\Shaders\ColorVertexShader.hlsl">
-      <Filter>Shaders</Filter>
+    <FxCompile Include="..\Shading\Shaders\MultiTexturePixelShader.hlsl">
+      <Filter>Shading\Shaders</Filter>
     </FxCompile>
-    <FxCompile Include="..\Shaders\ColorPixelShader.hlsl">
-      <Filter>Shaders</Filter>
+    <FxCompile Include="..\Shading\Shaders\MultiTextureVertexShader.hlsl">
+      <Filter>Shading\Shaders</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

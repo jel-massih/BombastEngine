@@ -159,9 +159,7 @@ HRESULT D3DBitmapNode11::VRender(Scene* pScene)
 	RenderBuffers(context);
 
 	//Render Bitmap with texture shader
-	result = g_pApp->GetGraphicsManager()->GetTextureShader()->Render(context, m_indexCount,
-		DirectX::XMLoadFloat4x4(&worldMatrix), DirectX::XMLoadFloat4x4(&viewMatrix), DirectX::XMLoadFloat4x4(&orthoMatrix),
-		m_pTexture);
+	result = g_pApp->GetGraphicsManager()->GetShaderManager()->RenderRenderable(this, m_indexCount, pScene);
 	if (!result)
 	{
 		return S_FALSE;
@@ -436,14 +434,9 @@ HRESULT D3D11GridNode::VRender(Scene* pScene)
 	IRenderer* pRenderer = g_pApp->GetGraphicsManager()->GetRenderer();
 	ID3D11DeviceContext* context = pRenderer->GetDeviceContext();
 
-	Mat4x4 worldMatrix, viewMatrix, projectionMatrix;
-	pRenderer->VGetViewMatrix(viewMatrix);
-	pRenderer->VGetWorldMatrix(worldMatrix);
-	pRenderer->VGetProjectionMatrix(projectionMatrix);
-
 	RenderBuffers(context);
 
-	result = g_pApp->GetGraphicsManager()->GetColorShader()->Render(context, m_indexCount, DirectX::XMLoadFloat4x4(&worldMatrix), XMLoadFloat4x4(&viewMatrix), XMLoadFloat4x4(&projectionMatrix), Vec4(1.0f, 1.0f, 0.0f, 1.0f));
+	result = g_pApp->GetGraphicsManager()->GetShaderManager()->RenderRenderable(this, m_indexCount, pScene);
 	if (!result)
 	{
 		return S_FALSE;
@@ -636,8 +629,7 @@ HRESULT D3D11PrimitiveNode::VRender(Scene* pScene)
 
 	RenderBuffers(context);
 
-	result = g_pApp->GetGraphicsManager()->GetTextureShader()->Render(context, m_indexCount, DirectX::XMLoadFloat4x4(&worldMatrix),
-		XMLoadFloat4x4(&viewMatrix), XMLoadFloat4x4(&projectionMatrix), m_pTexture);
+	result = g_pApp->GetGraphicsManager()->GetShaderManager()->RenderRenderable(this, m_indexCount, pScene);
 	if (!result)
 	{
 		return S_FALSE;
@@ -792,8 +784,7 @@ HRESULT D3DMeshNode11::VRender(Scene* pScene)
 
 	RenderBuffers(context);
 
-	result = g_pApp->GetGraphicsManager()->GetLightShader()->Render(context, m_indexCount, DirectX::XMLoadFloat4x4(&worldMatrix),
-		XMLoadFloat4x4(&viewMatrix), XMLoadFloat4x4(&projectionMatrix), &VGet()->GetMaterial(), pScene);
+	result = g_pApp->GetGraphicsManager()->GetShaderManager()->RenderRenderable(this, m_indexCount, pScene);
 	if (!result)
 	{
 		return S_FALSE;

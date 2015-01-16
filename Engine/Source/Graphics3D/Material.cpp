@@ -80,3 +80,34 @@ bool Material::RemoveTexture(std::string textureName)
 
 	return bRemoved;
 }
+
+void Material::SetShaderType(std::string shaderName)
+{
+	m_material.ShaderType = BSHADER_TYPE_INVALID;
+
+	if (shaderName == "Color")
+	{
+		m_material.ShaderType = BSHADER_TYPE_COLOR;
+	}
+	if (shaderName == "Font")
+	{
+		m_material.ShaderType = BSHADER_TYPE_FONT;
+	}
+	if (shaderName == "LitTextured")
+	{
+		m_material.ShaderType = BSHADER_TYPE_LIT;
+	}
+	if (shaderName == "Texture")
+	{
+		m_material.ShaderType = BSHADER_TYPE_TEXTURE;
+	}
+	if (shaderName == "MultiTexture")
+	{
+		m_material.ShaderType = BSHADER_TYPE_MULTI_TEXTURE;
+	}
+}
+
+void Material::SetShaderType(ShaderType shaderType)
+{
+	m_material.ShaderType = shaderType;
+}

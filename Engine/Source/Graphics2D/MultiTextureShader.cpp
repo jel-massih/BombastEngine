@@ -14,7 +14,7 @@ bool MultiTextureShader::Initialize(ID3D11Device* device)
 {
 	bool result;
 
-	result = InitializeShader(device, "Shaders\\MultiTextureVertexShader.cso", "Shaders\\MultiTextureVertexShader.cso");
+	result = InitializeShader(device, "Shaders\\MultiTextureVertexShader.cso", "Shaders\\MultiTexturePixelShader.cso");
 	if (!result)
 	{
 		return false;
@@ -30,7 +30,7 @@ void MultiTextureShader::Shutdown()
 	return;
 }
 
-bool MultiTextureShader::Render(ID3D11DeviceContext* deviceContext, int indexCount, DirectX::XMMATRIX &world, DirectX::XMMATRIX &view, DirectX::XMMATRIX &projection, ID3D11ShaderResourceView** textures)
+bool MultiTextureShader::Render(ID3D11DeviceContext* deviceContext, int indexCount, DirectX::XMMATRIX &world, DirectX::XMMATRIX &view, DirectX::XMMATRIX &projection, const std::vector<TextureClass*>& textures)
 {
 	bool result;
 
@@ -48,32 +48,18 @@ bool MultiTextureShader::Render(ID3D11DeviceContext* deviceContext, int indexCou
 bool MultiTextureShader::InitializeShader(ID3D11Device* device, std::string vertexShaderPath, std::string pixelShaderPath)
 {
 	HRESULT result;
-	ID3D10Blob* errorMessage;
-	ID3D10Blob* vertexShaderBuffer;
-	ID3D10Blob* pixelShaderBuffer;
 	D3D11_INPUT_ELEMENT_DESC polygonLayout[2];
 	unsigned int numElements;
 	D3D11_BUFFER_DESC matrixBufferDesc;
 	D3D11_SAMPLER_DESC samplerDesc;
 
-	errorMessage = 0;
-	vertexShaderBuffer = 0;
-	pixelShaderBuffer = 0;
-
 	Resource vertexShaderResource(vertexShaderPath.c_str());
 	ResourceHandle* pVertexResHandle = g_pApp->m_pResourceCache->GetHandle(&vertexShaderResource);
 
-	result = D3DCompile(pVertexResHandle->Buffer(), pVertexResHandle->Size(), vertexShaderPath.c_str(), NULL, NULL, "main", "vs_5_0", D3D10_SHADER_DEBUG | D3D10_SHADER_SKIP_OPTIMIZATION | D3D10_SHADER_ENABLE_STRICTNESS, 0, &vertexShaderBuffer, &errorMessage);
+	result = device->CreateVertexShader(pVertexResHandle->Buffer(), pVertexResHandle->Size(), nullptr, &m_pVertexShader);
 	if (FAILED(result))
 	{
-		if (errorMessage)
-		{
-			BE_ERROR((char*)errorMessage->GetBufferPointer());
-		}
-		else
-		{
-			BE_ERROR("Missing Vertex Shader File");
-		}
+		BE_ERROR("Failed to create vertex shader");
 
 		return false;
 	}
@@ -81,30 +67,11 @@ bool MultiTextureShader::InitializeShader(ID3D11Device* device, std::string vert
 	Resource pixelShaderResource(pixelShaderPath.c_str());
 	ResourceHandle* pPixelResHandle = g_pApp->m_pResourceCache->GetHandle(&pixelShaderResource);
 
-	result = D3DCompile(pPixelResHandle->Buffer(), pPixelResHandle->Size(), pixelShaderPath.c_str(), NULL, NULL, "main", "ps_5_0", D3D10_SHADER_DEBUG | D3D10_SHADER_SKIP_OPTIMIZATION | D3D10_SHADER_ENABLE_STRICTNESS, 0, &pixelShaderBuffer, &errorMessage);
+	result = device->CreatePixelShader(pPixelResHandle->Buffer(), pPixelResHandle->Size(), nullptr, &m_pPixelShader);
 	if (FAILED(result))
 	{
-		if (errorMessage)
-		{
-			BE_ERROR((char*)errorMessage->GetBufferPointer());
-		}
-		else
-		{
-			BE_ERROR("Missing Pixel Shader File");
-		}
+		BE_ERROR("Failed to create Pixel shader");
 
-		return false;
-	}
-
-	result = device->CreateVertexShader(vertexShaderBuffer->GetBufferPointer(), vertexShaderBuffer->GetBufferSize(), NULL, &m_pVertexShader);
-	if (FAILED(result))
-	{
-		return false;
-	}
-
-	result = device->CreatePixelShader(pixelShaderBuffer->GetBufferPointer(), pixelShaderBuffer->GetBufferSize(), NULL, &m_pPixelShader);
-	if (FAILED(result))
-	{
 		return false;
 	}
 
@@ -126,17 +93,11 @@ bool MultiTextureShader::InitializeShader(ID3D11Device* device, std::string vert
 
 	numElements = sizeof(polygonLayout) / sizeof(polygonLayout[0]);
 
-	result = device->CreateInputLayout(polygonLayout, numElements, vertexShaderBuffer->GetBufferPointer(), vertexShaderBuffer->GetBufferSize(), &m_pLayout);
+	result = device->CreateInputLayout(polygonLayout, numElements, pVertexResHandle->Buffer(), pVertexResHandle->Size(), &m_pLayout);
 	if (FAILED(result))
 	{
 		return false;
 	}
-
-	vertexShaderBuffer->Release();
-	vertexShaderBuffer = 0;
-
-	pixelShaderBuffer->Release();
-	pixelShaderBuffer = 0;
 
 	matrixBufferDesc.Usage = D3D11_USAGE_DYNAMIC;
 	matrixBufferDesc.ByteWidth = sizeof(MatrixBufferType);
@@ -185,7 +146,7 @@ void MultiTextureShader::ShutdownShader()
 	return;
 }
 
-bool MultiTextureShader::SetShaderParameters(ID3D11DeviceContext* deviceContext, DirectX::XMMATRIX &world, DirectX::XMMATRIX &view, DirectX::XMMATRIX &projection, ID3D11ShaderResourceView** textures)
+bool MultiTextureShader::SetShaderParameters(ID3D11DeviceContext* deviceContext, DirectX::XMMATRIX &world, DirectX::XMMATRIX &view, DirectX::XMMATRIX &projection, const std::vector<TextureClass*>& textures)
 {
 	HRESULT result;
 	D3D11_MAPPED_SUBRESOURCE mappedResource;
@@ -214,7 +175,12 @@ bool MultiTextureShader::SetShaderParameters(ID3D11DeviceContext* deviceContext,
 
 	deviceContext->VSSetConstantBuffers(bufferNumber, 1, &m_pMatrixBuffer);
 
-	deviceContext->PSSetShaderResources(0, 2, textures);
+	if (textures.size() >= 2) {
+		ID3D11ShaderResourceView* texture1 = textures[0]->GetTexture();
+		ID3D11ShaderResourceView* texture2 = textures[1]->GetTexture();
+		ID3D11ShaderResourceView* shaderTextures[2] = { texture1, texture2 };
+		deviceContext->PSSetShaderResources(0, 2, shaderTextures);
+	}
 
 	return true;
 }

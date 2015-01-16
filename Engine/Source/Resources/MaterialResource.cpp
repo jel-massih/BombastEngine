@@ -88,6 +88,12 @@ bool MaterialResourceExtraData::LoadMaterial(char* pRawBuffer, unsigned int rawS
 		}
 	}
 
+	pAttribute = pMaterialBase->first_node("Shader");
+	if (pAttribute)
+	{
+		m_pMaterial->SetShaderType(pAttribute->first_attribute("type")->value());
+	}
+
 	return true;
 }
 

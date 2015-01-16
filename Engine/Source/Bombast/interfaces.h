@@ -132,6 +132,15 @@ enum RenderPass
 	RenderPass_Last
 };
 
+enum ShaderType {
+	BSHADER_TYPE_INVALID = -1,
+	BSHADER_TYPE_COLOR,
+	BSHADER_TYPE_FONT,
+	BSHADER_TYPE_LIT,
+	BSHADER_TYPE_TEXTURE,
+	BSHADER_TYPE_MULTI_TEXTURE
+};
+
 class Scene;
 class SceneNodeProperties;
 class RayCast;

@@ -30,6 +30,11 @@ public:
 
 	const std::vector<TextureClass*>& GetTextures() const { return m_material.Textures; }
 
+	ShaderType GetShaderType() const { return m_material.ShaderType; }
+
+	void SetShaderType(std::string shaderName);
+	void SetShaderType(ShaderType shaderType);
+
 private:
 	struct BEMaterial
 	{
@@ -39,6 +44,7 @@ private:
 		float Power;
 		Vec4 Emissive;
 		std::vector<TextureClass*> Textures;
+		ShaderType ShaderType;
 	};
 	BEMaterial m_material;
 };
