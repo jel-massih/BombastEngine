@@ -318,17 +318,13 @@ bool LightShader::SetShaderParameters(ID3D11DeviceContext* deviceContext, Direct
 
 void LightShader::RenderShader(ID3D11DeviceContext* deviceContext, int indexCount)
 {
-	//Set the vertex input layout.
 	deviceContext->IASetInputLayout(m_pLayout);
 
-	//Set the vertex and pixel shaders that will be used to render triangle
 	deviceContext->VSSetShader(m_pVertexShader, NULL, 0);
 	deviceContext->PSSetShader(m_pPixelShader, NULL, 0);
 
-	//Set the sampler state in pixel shader
 	deviceContext->PSSetSamplers(0, 1, &m_pSampleState);
 
-	//Render the triangle
 	deviceContext->DrawIndexed(indexCount, 0, 0);
 
 	return;

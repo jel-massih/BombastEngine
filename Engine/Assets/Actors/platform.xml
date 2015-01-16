@@ -1,0 +1,7 @@
+<Actor type="Platform" resource="actors\platform.xml">
+	<TransformComponent/>
+  <MeshRenderComponent>
+    <Mesh path="meshes\platform.bmdl"></Mesh>
+    <Material path="materials\platform_mat.bmtl"/>
+  </MeshRenderComponent>
+</Actor>

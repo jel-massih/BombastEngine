@@ -1,7 +1,0 @@
-<Actor type="City" resource="actors\city.xml">
-	<TransformComponent/>
-    <MeshRenderComponent>
-        <Texture path="textures\red.dds"></Texture>
-        <Mesh path="meshes\sphere.bmdl"></Mesh>
-    </BitmapRenderComponent>
-</Actor>
