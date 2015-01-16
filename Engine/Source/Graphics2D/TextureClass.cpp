@@ -6,6 +6,11 @@ TextureClass::TextureClass()
 	m_textureName = "";
 }
 
+TextureClass::~TextureClass()
+{
+	SAFE_RELEASE(m_pTexture);
+}
+
 bool TextureClass::Initialize(ID3D11Device* device, std::string textureTitle)
 {
 	m_textureName = textureTitle;
@@ -16,11 +21,4 @@ bool TextureClass::Initialize(ID3D11Device* device, std::string textureTitle)
 	}
 
 	return true;	
-}
-
-void TextureClass::Shutdown()
-{
-	SAFE_RELEASE(m_pTexture);
-
-	return;
 }

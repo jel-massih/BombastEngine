@@ -72,7 +72,6 @@ bool Material::RemoveTexture(std::string textureName)
 	{
 		if ((*it)->GetTextureName() == textureName)
 		{
-			(*it)->Shutdown();
 			it = m_material.Textures.erase(it);
 			bRemoved = true;
 		}
