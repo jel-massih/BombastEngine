@@ -56,7 +56,6 @@ Actor* ActorFactory::CreateActor(const char* actorResource, rapidxml::xml_node<>
 		{
 			if (pActor)
 			{
-				pActor->Shutdown();
 				SAFE_DELETE(pActor);
 			}
 			return NULL;

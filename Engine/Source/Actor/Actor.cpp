@@ -9,6 +9,12 @@ Actor::Actor(ActorId id)
 
 Actor::~Actor()
 {
+	for (auto it = m_components.begin(); it != m_components.end(); ++it)
+	{
+		SAFE_DELETE(it->second);
+	}
+	m_components.clear();
+
 	BE_ASSERT(m_components.empty());
 }
 
@@ -25,15 +31,6 @@ void Actor::PostInitialize()
 	{
 		it->second->VPostInit();
 	}
-}
-
-void Actor::Shutdown()
-{
-	for (auto it = m_components.begin(); it != m_components.end(); ++it)
-	{
-		SAFE_DELETE(it->second);
-	}
-	m_components.clear();
 }
 
 void Actor::Update(const float deltaMs)

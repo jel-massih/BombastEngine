@@ -44,7 +44,6 @@ CoreGameLogic::~CoreGameLogic()
 
 	for (auto it = m_actors.begin(); it != m_actors.end(); it++)
 	{
-		it->second->Shutdown();
 		SAFE_DELETE(it->second);
 	}
 
@@ -117,7 +116,6 @@ void CoreGameLogic::VDestroyActor(const ActorId actorId)
 
 	if (target != m_actors.end())
 	{
-		target->second->Shutdown();
 		SAFE_DELETE(target->second);
 		m_actors.erase(target);
 	}

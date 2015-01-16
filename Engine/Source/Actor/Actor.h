@@ -16,8 +16,6 @@ public:
 	bool Initialize(rapidxml::xml_node<>* pData);
 	void PostInitialize();
 
-	void Shutdown();
-
 	void Update(const float deltaMs);
 
 	ActorId GetId() const { return m_id; }
