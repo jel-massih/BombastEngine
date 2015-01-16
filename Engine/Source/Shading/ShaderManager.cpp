@@ -6,6 +6,7 @@ ShaderManager::~ShaderManager()
 	SAFE_DELETE(m_pColorShader);
 	SAFE_DELETE(m_pTextureShader);
 	SAFE_DELETE(m_pMultiTextureShader);
+	SAFE_DELETE(m_pLightmapShader);
 }
 
 bool ShaderManager::Initialize(IRenderer* renderer)
@@ -68,6 +69,20 @@ bool ShaderManager::Initialize(IRenderer* renderer)
 		return false;
 	}
 
+	m_pLightmapShader = BE_NEW LightmapShader;
+	if (!m_pLightmapShader)
+	{
+		BE_ERROR("Could not Allocate the LightmapShader Object!");
+		return false;
+	}
+
+	result = m_pLightmapShader->Initialize(renderer->GetDevice());
+	if (!result)
+	{
+		BE_ERROR("Could not initialize the LightmapShader Object!");
+		return false;
+	}
+
 	return true;
 }
 
@@ -98,6 +113,9 @@ bool ShaderManager::RenderRenderable(SceneNode* pRenderableNode, int indexCount,
 		break;
 	case BSHADER_TYPE_MULTI_TEXTURE:
 		return m_pMultiTextureShader->Render(context, indexCount, XMLoadFloat4x4(&worldMatrix), XMLoadFloat4x4(&viewMatrix), XMLoadFloat4x4(&projectionMatrix), pRenderableNode->VGet()->GetMaterial().GetTextures());
+		break;
+	case BSHADER_TYPE_LIGHTMAP:
+		return m_pLightmapShader->Render(context, indexCount, XMLoadFloat4x4(&worldMatrix), XMLoadFloat4x4(&viewMatrix), XMLoadFloat4x4(&projectionMatrix), pRenderableNode->VGet()->GetMaterial().GetTextures());
 		break;
 	}
 

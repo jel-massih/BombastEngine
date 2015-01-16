@@ -105,6 +105,10 @@ void Material::SetShaderType(std::string shaderName)
 	{
 		m_material.ShaderType = BSHADER_TYPE_MULTI_TEXTURE;
 	}
+	if (shaderName == "Lightmap")
+	{
+		m_material.ShaderType = BSHADER_TYPE_LIGHTMAP;
+	}
 }
 
 void Material::SetShaderType(ShaderType shaderType)

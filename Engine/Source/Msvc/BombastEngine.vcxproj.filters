@@ -170,6 +170,9 @@
     <ClCompile Include="..\Shading\MultiTextureShader.cpp">
       <Filter>Shading</Filter>
     </ClCompile>
+    <ClCompile Include="..\Shading\LightmapShader.cpp">
+      <Filter>Shading</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Bombast\BombastApp.h">
@@ -378,6 +381,9 @@
     <ClInclude Include="..\Shading\MultiTextureShader.h">
       <Filter>Shading</Filter>
     </ClInclude>
+    <ClInclude Include="..\Shading\LightmapShader.h">
+      <Filter>Shading</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Bombast">
@@ -458,6 +464,12 @@
       <Filter>Shading\Shaders</Filter>
     </FxCompile>
     <FxCompile Include="..\Shading\Shaders\MultiTextureVertexShader.hlsl">
+      <Filter>Shading\Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="..\Shading\Shaders\LightmapPixelShader.hlsl">
+      <Filter>Shading\Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="..\Shading\Shaders\LightmapVertexShader.hlsl">
       <Filter>Shading\Shaders</Filter>
     </FxCompile>
   </ItemGroup>

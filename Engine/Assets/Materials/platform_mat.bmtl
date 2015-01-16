@@ -5,11 +5,12 @@
   <Emmisive r="0" g="0" b="0" a="0"/>
 
   <Textures>
-    <Texture path="textures\grid.dds"></Texture>
+    <Texture path="textures\stone.dds"></Texture>
+    <Texture path="textures\light.dds"></Texture>
   </Textures>
 
   <UVScale x="3" y="3" />
 
-  <Shader type="LitTextured">
+  <Shader type="Lightmap">
   </Shader>
 </Material>

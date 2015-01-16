@@ -3,6 +3,7 @@
 #include "BasicShaders.h"
 #include "LightShader.h"
 #include "MultiTextureShader.h"
+#include "LightmapShader.h"
 
 class SceneNode;
 
@@ -22,4 +23,5 @@ private:
 	ColorShader* m_pColorShader;
 	TextureShader* m_pTextureShader;
 	MultiTextureShader* m_pMultiTextureShader;
+	LightmapShader* m_pLightmapShader;
 };
