@@ -80,9 +80,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="MeshFormatConverter.cpp" />
+    <ClCompile Include="tinyobjloader.cc" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BasicMath.h" />
+    <ClInclude Include="tiny_obj_loader.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
