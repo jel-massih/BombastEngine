@@ -43,8 +43,8 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)Bin\</OutDir>
-    <IncludePath>C:\Users\Jason\Documents\Visual Studio 2013\Projects\BombastEngine\Tools\MeshConverter\libraries\assimp\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\Jason\Documents\Visual Studio 2013\Projects\BombastEngine\Tools\MeshConverter\libraries\assimp\lib32;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir)\libraries\assimp\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)\libraries\assimp\lib\assimp_release-dll_win32;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>

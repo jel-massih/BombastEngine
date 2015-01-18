@@ -14,7 +14,6 @@
 
 #include "BasicMath.h"
 
-
 #include <assimp/Importer.hpp>      // C++ importer interface
 #include <assimp/scene.h>           // Output data structure
 #include <assimp/postprocess.h>     // Post processing fla
@@ -196,7 +195,12 @@ int main(int argc, char *argv[])
 				aiString aiTexPath;
 				if (pMat->GetTexture(aiTextureType_DIFFUSE, j, &aiTexPath, NULL, NULL, NULL, NULL, NULL) == AI_SUCCESS)
 				{
-					mtlFile << "\t\t<Texture path=\"" << aiTexPath.C_Str() << ".dds\"/>";
+					//remove extension
+					string filePath = string(aiTexPath.C_Str());
+					size_t lastDot = filePath.find_last_of(".");
+					string finalFilename = (lastDot == std::string::npos) ? filePath : filePath.substr(0, lastDot);
+					
+					mtlFile << "\t\t<Texture path=\"textures\\" << finalFilename << ".dds\"/>";
 				}
 			}
 			mtlFile << "\t</Textures>" << endl;

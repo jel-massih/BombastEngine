@@ -1,9 +1,0 @@
-<Material name="Material.001">
-	<Ambient r="0" g="0" b="0" a="1"/>
-	<Diffuse r="0.64" g="0.64" b="0.64" a="1"/>
-	<Specular r="0.5" g="0.5" b="0.5" a="1" power="01163104" />
-	<Emmisive r="0" g="0" b="0" a="1"/>
-<Textures>
-<Texture path="cube1.jpg.dds"/></Textures>
-<Shader type="LitTextured"/>
-</Material>
