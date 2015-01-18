@@ -13,7 +13,11 @@
 #include <algorithm>
 
 #include "BasicMath.h"
-#include "tiny_obj_loader.h"
+
+
+#include <assimp/Importer.hpp>      // C++ importer interface
+#include <assimp/scene.h>           // Output data structure
+#include <assimp/postprocess.h>     // Post processing fla
 
 using namespace std;
 
@@ -72,21 +76,21 @@ int main(int argc, char *argv[])
 		}
 	}
 
-	std::vector<tinyobj::shape_t> shapes;
-	std::vector<tinyobj::material_t> materials;
-	
-	std::string err = tinyobj::LoadObj(shapes, materials, argv[1]);
+	std::vector<aiMesh> meshes;
+	std::vector<aiMaterial> materials;
 
-	if (!err.empty())
-	{
-		std::cerr << err << endl;
+	Assimp::Importer importer;
+	const aiScene* pScene = importer.ReadFile(argv[1], aiProcess_Triangulate | aiProcess_GenSmoothNormals);
+
+	if (!pScene) {
+		cerr << "Error Parsing: " << importer.GetErrorString() << endl;
 		cin >> x;
 		return -1;
 	}
 
-	cout << shapes.size() << " Shapes found" << endl;
+	cout << pScene->mNumMeshes << " Shapes found" << endl;
 	
-	const auto sz = sizeof(unsigned long);
+	const auto szui = sizeof(unsigned int);
 	
 	// Dump vertex and index data to the output VBO file
 	ofstream vboFile(argv[2], ofstream::out | ofstream::binary);
@@ -96,62 +100,107 @@ int main(int argc, char *argv[])
 		cin >> x;
 		return -1;
 	}
+	unsigned int numObjects = pScene->mNumMeshes;
 
+	vboFile.write(reinterpret_cast<char*>(&numObjects), szui);
 
-	unsigned long numObjects = shapes.size();
-
-	vboFile.write(reinterpret_cast<char*>(&numObjects), sz);
-
-	for (int i = 0; i < numObjects; i++)
+	for (unsigned int i = 0; i < pScene->mNumMeshes; i++)
 	{
-		unsigned long numVertices = shapes[i].mesh.positions.size();
-		unsigned long numNormals = shapes[i].mesh.normals.size();
-		unsigned long numTexCoords = shapes[i].mesh.texcoords.size();
-		unsigned long numIndices = shapes[i].mesh.indices.size();
-		unsigned long numMaterials = shapes[i].mesh.material_ids.size();
+		const aiMesh* pAiMesh = pScene->mMeshes[i];
+		//Normal/tex is same size as verts
+		unsigned int numVertices = pAiMesh->mNumVertices;
+		unsigned int numIndices = pAiMesh->mNumFaces * 3;
+		vboFile.write(reinterpret_cast<char*>(&numVertices), szui);
+		vboFile.write(reinterpret_cast<char*>(&numIndices), szui);
 
-		vboFile.write(reinterpret_cast<char*>(&numVertices), sz);
-		vboFile.write(reinterpret_cast<char*>(&numNormals), sz);
-		vboFile.write(reinterpret_cast<char*>(&numTexCoords), sz);
-		vboFile.write(reinterpret_cast<char*>(&numIndices), sz);
-		vboFile.write(reinterpret_cast<char*>(&numMaterials), sz);
+		BasicVertex* vertices = new BasicVertex[numVertices];
+		for (int j = 0; j < numVertices; j++)
+		{
+			BasicVertex vert;
+			vert.pos = Vector3<float>(pAiMesh->mVertices[j].x, pAiMesh->mVertices[j].y, pAiMesh->mVertices[j].z);
+			vert.norm = Vector3<float>(pAiMesh->mNormals[j].x, pAiMesh->mNormals[j].y, pAiMesh->mNormals[j].z);
+			if (pAiMesh->HasTextureCoords(0))
+			{
+				vert.tex = Vector2<float>(pAiMesh->mTextureCoords[0][j].x, pAiMesh->mTextureCoords[0][j].y);
+			}
+			else 
+			{
+				vert.tex = Vector2<float>(0, 0);
+			}
 
-		vboFile.write(reinterpret_cast<char*>(&shapes[i].mesh.positions[0]), numVertices * sizeof(float));
-		if (numNormals > 0) {
-			vboFile.write(reinterpret_cast<char*>(&shapes[i].mesh.normals[0]), numNormals * sizeof(float));
+			vertices[j] = vert;
 		}
-		if (numTexCoords > 0) {
-			vboFile.write(reinterpret_cast<char*>(&shapes[i].mesh.texcoords[0]), numTexCoords * sizeof(float));
+		vboFile.write(reinterpret_cast<char*>(&vertices), numVertices * sizeof(BasicVertex));
+
+		unsigned int* indices = new unsigned int[numIndices];
+		for (int j = 0; j < pAiMesh->mNumFaces; j++)
+		{
+			const aiFace& face = pAiMesh->mFaces[j];
+
+			indices[j * 3] = face.mIndices[0];
+			indices[j * 3 + 1] = face.mIndices[1];
+			indices[j * 3 + 2] = face.mIndices[2];
 		}
-		vboFile.write(reinterpret_cast<char*>(&shapes[i].mesh.indices[0]), numIndices * sizeof(unsigned int));
-		vboFile.write(reinterpret_cast<char*>(&shapes[i].mesh.material_ids[0]), numMaterials * sizeof(float));
+		vboFile.write(reinterpret_cast<char*>(&indices), numIndices * szui);
 	}
 
 	vboFile.close();
 
 	//Convert mtl to set of material files
-	cout << materials.size() << " Materials found" << endl;
+	cout << pScene->mNumMaterials << " Materials found" << endl;
 
-	for (auto it = materials.begin(); it != materials.end(); it++)
+	for (int i = 0; i < pScene->mNumMaterials; i++)
 	{
-		tinyobj::material_t& mat = (*it);
-		ofstream mtlFile(mat.name + ".bmtl", ofstream::out | ofstream::binary);
+		aiMaterial* pMat = pScene->mMaterials[i];
+
+		aiString name;
+		pMat->Get(AI_MATKEY_NAME, name);
+		std::string materialName = string(name.C_Str());
+		
+		aiColor3D aiDiffuse (0.f, 0.f, 0.f);
+		pMat->Get(AI_MATKEY_COLOR_DIFFUSE, aiDiffuse);
+
+		aiColor3D aiAmbient(0.f, 0.f, 0.f);
+		pMat->Get(AI_MATKEY_COLOR_AMBIENT, aiAmbient);
+
+		aiColor3D aiEmissive(0.f, 0.f, 0.f);
+		pMat->Get(AI_MATKEY_COLOR_EMISSIVE, aiEmissive);
+
+		aiColor3D aiSpecular(0.f, 0.f, 0.f);
+		pMat->Get(AI_MATKEY_COLOR_SPECULAR, aiSpecular);
+
+		float specularStrength = 0.f;
+		pMat->Get(AI_MATKEY_SHININESS, specularStrength);
+
+		unsigned int texCount = pMat->GetTextureCount(aiTextureType_DIFFUSE);
+
+		ofstream mtlFile(materialName + ".bmtl", ofstream::out | ofstream::binary);
 		if (!mtlFile.is_open())
 		{
-			cerr << "error: could not open file \"" << mat.name << ".bmtl" << "\" for write" << endl;
+			cerr << "error: could not open file \"" << materialName << ".bmtl" << "\" for write" << endl;
 			cin >> x;
 			return -1;
 		}
 
-		mtlFile << "<Material name=\"" << mat.name << "\">" << endl;
-		mtlFile << "\t<Ambient r=\"" << mat.ambient[0] << "\" g=\"" << mat.ambient[1] << "\" b=\"" << mat.ambient[2] << "\" a=\"1\"/>" << endl;
-		mtlFile << "\t<Diffuse r=\"" << mat.diffuse[0] << "\" g=\"" << mat.diffuse[1] << "\" b=\"" << mat.diffuse[2] << "\" a=\"1\"/>" << endl;
-		mtlFile << "\t<Specular r=\"" << mat.specular[0] << "\" g=\"" << mat.specular[1] << "\" b=\"" << mat.specular[2] << "\" a=\"1\" power=\"" << mat.shininess << "\" />" << endl;
-		mtlFile << "\t<Emmisive r=\"" << mat.emission[0] << "\" g=\"" << mat.emission[1] << "\" b=\"" << mat.emission[2] << "\" a=\"1\"/>" << endl;
+		mtlFile << "<Material name=\"" << materialName << "\">" << endl;
+		mtlFile << "\t<Ambient r=\"" << aiAmbient.r << "\" g=\"" << aiAmbient.g << "\" b=\"" << aiAmbient.b << "\" a=\"1\"/>" << endl;
+		mtlFile << "\t<Diffuse r=\"" << aiDiffuse.r << "\" g=\"" << aiDiffuse.g << "\" b=\"" << aiDiffuse.b << "\" a=\"1\"/>" << endl;
+		mtlFile << "\t<Specular r=\"" << aiSpecular.r << "\" g=\"" << aiSpecular.g << "\" b=\"" << aiSpecular.b << "\" a=\"1\" power=\"" << specularStrength << "\" />" << endl;
+		mtlFile << "\t<Emmisive r=\"" << aiEmissive.r << "\" g=\"" << aiEmissive.g << "\" b=\"" << aiEmissive.b << "\" a=\"1\"/>" << endl;
 		
-		mtlFile << "\t<Textures>" << endl;
-		mtlFile << "\t\t<Texture path=\"" << mat.diffuse_texname << ".dds\"/>";
-		mtlFile << "\t</Textures>" << endl;
+		if (texCount > 0) 
+		{
+			mtlFile << "\t<Textures>" << endl;
+			for (int j = 0; j < texCount; j++)
+			{
+				aiString aiTexPath;
+				if (pMat->GetTexture(aiTextureType_DIFFUSE, j, &aiTexPath, NULL, NULL, NULL, NULL, NULL) == AI_SUCCESS)
+				{
+					mtlFile << "\t\t<Texture path=\"" << aiTexPath.C_Str() << ".dds\"/>";
+				}
+			}
+			mtlFile << "\t</Textures>" << endl;
+		}
 
 		mtlFile << "\t<Shader type=\"LitTextured\"/>" << endl;
 		mtlFile << "</Material>";

@@ -23,8 +23,13 @@ public:
 		} normal;
 	};
 
+	struct SubMesh
+	{
+		std::vector<BasicVertex> vertices;
+		std::vector<unsigned short> indices;
+	};
 
 public:
-	std::vector<BasicVertex> vertices;
-	std::vector<unsigned short> indices;
+
+	std::vector<SubMesh> meshes;
 };

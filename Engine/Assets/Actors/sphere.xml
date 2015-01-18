@@ -1,7 +1,7 @@
 <Actor type="Sphere" resource="actors\sphere.xml">
 	<TransformComponent/>
   <MeshRenderComponent>
-    <Mesh path="meshes\sphere.bmdl"></Mesh>
+    <Mesh path="meshes\cubes.bmdl"></Mesh>
 		<Material path="materials\sphere_mat.bmtl"/>
   </MeshRenderComponent>
 </Actor>

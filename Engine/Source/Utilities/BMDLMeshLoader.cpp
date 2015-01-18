@@ -6,14 +6,10 @@ void LoadMesh(
 	ModelClass** model,
 	byte* data)
 {
-	//first 4 bytes are vertexCount
 	unsigned int numVertices = *reinterpret_cast<unsigned int*>(data);
-
-	//Next 4 are index count
 	unsigned int numIndices = *reinterpret_cast<unsigned int*>(data + sizeof(unsigned int));
 
 	ModelClass::BasicVertex* vertices = reinterpret_cast<ModelClass::BasicVertex*>(data + (sizeof(unsigned int) * 2));
-
 	unsigned short* indices = reinterpret_cast<unsigned short*>(data + (sizeof(unsigned int) * 2) + (sizeof(ModelClass::BasicVertex) * numVertices));
 
 	(*model)->vertices = std::vector<ModelClass::BasicVertex>(&vertices[0], &vertices[numVertices]);

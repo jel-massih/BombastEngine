@@ -14,7 +14,7 @@
     <ClCompile Include="MeshFormatConverter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="tinyobjloader.cc">
+    <ClCompile Include="AssimpImporter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -22,7 +22,7 @@
     <ClInclude Include="BasicMath.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="tiny_obj_loader.h">
+    <ClInclude Include="AssimpImporter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
