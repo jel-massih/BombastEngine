@@ -1,5 +1,4 @@
 #include "RenderNodes.h"
-#include "ModelClass.h"
 #include "Lighting.h"
 #include "../Resources/ModelResource.h"
 #include "../Resources/MaterialResource.h"
@@ -655,21 +654,23 @@ void D3D11PrimitiveNode::RenderBuffers(ID3D11DeviceContext* deviceContext)
 MeshNode::MeshNode(const ActorId actorId, BaseRenderComponent* renderComponent, std::string meshFileName, std::string materialFilename, RenderPass renderPass, const Mat4x4 *t)
 	: SceneNode(actorId, renderComponent, renderPass, t), m_meshFilename(meshFileName), m_materialFilename(materialFilename)
 {
-	m_vertexCount = m_indexCount = 0;
 }
 
 D3DMeshNode11::D3DMeshNode11(const ActorId actorId, BaseRenderComponent* renderComponent, std::string meshFilename, std::string materialFilename, RenderPass renderPass, const Mat4x4* t)
 	: MeshNode(actorId, renderComponent, meshFilename, materialFilename, renderPass, t), m_lastPosition(Vec3::g_InvalidVec3)
 {
-	m_pVertexBuffer = nullptr;
-	m_pIndexBuffer = nullptr;
 	m_pLoadedMesh = nullptr;
 }
 
 D3DMeshNode11::~D3DMeshNode11()
 {
-	SAFE_RELEASE(m_pVertexBuffer);
-	SAFE_RELEASE(m_pIndexBuffer);
+	for (auto it = m_submeshBuffers.begin(); it != m_submeshBuffers.end(); it++)
+	{
+		SAFE_DELETE((*it).pVertexBuffer);
+		SAFE_DELETE((*it).pIndexBuffer);
+	}
+
+	m_submeshBuffers.clear();
 }
 
 HRESULT D3DMeshNode11::VOnRestore(Scene* pScene)
@@ -677,9 +678,6 @@ HRESULT D3DMeshNode11::VOnRestore(Scene* pScene)
 	HRESULT hr;
 
 	BE_HRETURN(SceneNode::VOnRestore(pScene), "Failed to restore scenenode for D3DMeshNode11");
-
-	SAFE_RELEASE(m_pVertexBuffer);
-	SAFE_RELEASE(m_pIndexBuffer);
 
 	hr = LoadMesh(m_meshFilename);
 	if (FAILED(hr))
@@ -728,36 +726,60 @@ HRESULT D3DMeshNode11::LoadMesh(std::string meshFilename)
 
 HRESULT D3DMeshNode11::InitializeBuffers()
 {
+	HRESULT result;
+	
+	ID3D11Device* device = g_pApp->GetGraphicsManager()->GetRenderer()->GetDevice();
+	for (unsigned int i = 0; i < m_pLoadedMesh->meshes.size(); i++)
+	{
+		SubMeshBuffers submeshBuffer;
+
+		//If Material has non-standard UV Scale, then update uvs
+		XMFLOAT2 uvScale = VGet()->GetMaterial().GetUVScale();
+		if (fabs(uvScale.x - 1.0f) > 0.0005 || fabs(uvScale.y - 1.0f) > 0.0005)
+		{
+			for (auto it = m_pLoadedMesh->meshes[i].vertices.begin(); it != m_pLoadedMesh->meshes[i].vertices.end(); it++)
+			{
+				(*it).tex.u *= uvScale.x;
+				(*it).tex.v *= uvScale.x;
+			}
+		}
+
+
+		result = InitializeSubMeshBuffers(m_pLoadedMesh->meshes[i], &submeshBuffer.pVertexBuffer, &submeshBuffer.pIndexBuffer);
+		if (FAILED(result)) {
+			return false;
+		}
+
+		submeshBuffer.vertexCount = m_pLoadedMesh->meshes[i].vertices.size();
+		submeshBuffer.indexCount = m_pLoadedMesh->meshes[i].indices.size();
+
+		m_submeshBuffers.push_back(submeshBuffer);
+	}
+
+	return S_OK;
+}
+
+HRESULT D3DMeshNode11::InitializeSubMeshBuffers(const ModelClass::SubMesh& submesh, ID3D11Buffer** pVertexBuffer, ID3D11Buffer** pIndexBuffer)
+{
 	ID3D11Device* device = g_pApp->GetGraphicsManager()->GetRenderer()->GetDevice();
 
 	D3D11_BUFFER_DESC vertexBufferDesc, indexBufferDesc;
 	D3D11_SUBRESOURCE_DATA vertexData, indexData;
 	HRESULT result;
 
-	m_vertexCount = m_pLoadedMesh->vertices.size();
-	m_indexCount = m_pLoadedMesh->indices.size();
-
-	//If Material has non-standard UV Scale, then update uvs
-	XMFLOAT2 uvScale = VGet()->GetMaterial().GetUVScale();
-	if (fabs(uvScale.x - 1.0f) > 0.0005 || fabs(uvScale.y - 1.0f) > 0.0005)
-	{
-		for (auto it = m_pLoadedMesh->vertices.begin(); it != m_pLoadedMesh->vertices.end(); it++)
-		{
-			(*it).tex.u *= uvScale.x;
-			(*it).tex.v *= uvScale.x;
-		}
-	}
+	unsigned int vertCount = submesh.vertices.size();
+	unsigned int indexCount = submesh.indices.size();
 
 	ZeroMemory(&vertexBufferDesc, sizeof(vertexBufferDesc));
 	vertexBufferDesc.Usage = D3D11_USAGE_DEFAULT;
-	vertexBufferDesc.ByteWidth = sizeof(VertexType) * m_vertexCount;
+	vertexBufferDesc.ByteWidth = sizeof(VertexType) * vertCount;
 	vertexBufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
 	vertexBufferDesc.CPUAccessFlags = 0;
 
 	ZeroMemory(&vertexData, sizeof(vertexData));
-	vertexData.pSysMem = m_pLoadedMesh->vertices.data();
+	vertexData.pSysMem = submesh.vertices.data();
 
-	result = device->CreateBuffer(&vertexBufferDesc, &vertexData, &m_pVertexBuffer);
+	result = device->CreateBuffer(&vertexBufferDesc, &vertexData, pVertexBuffer);
 	if (FAILED(result))
 	{
 		return result;
@@ -765,14 +787,14 @@ HRESULT D3DMeshNode11::InitializeBuffers()
 
 	ZeroMemory(&indexBufferDesc, sizeof(indexBufferDesc));
 	indexBufferDesc.Usage = D3D11_USAGE_DEFAULT;
-	indexBufferDesc.ByteWidth = sizeof(WORD) * m_indexCount;
+	indexBufferDesc.ByteWidth = sizeof(WORD) * indexCount;
 	indexBufferDesc.BindFlags = D3D11_BIND_INDEX_BUFFER;
 	indexBufferDesc.CPUAccessFlags = 0;
 
 	ZeroMemory(&indexData, sizeof(indexData));
-	indexData.pSysMem = m_pLoadedMesh->indices.data();
+	indexData.pSysMem = submesh.indices.data();
 
-	result = device->CreateBuffer(&indexBufferDesc, &indexData, &m_pIndexBuffer);
+	result = device->CreateBuffer(&indexBufferDesc, &indexData, pIndexBuffer);
 	if (FAILED(result))
 	{
 		return result;
@@ -793,27 +815,36 @@ HRESULT D3DMeshNode11::VRender(Scene* pScene)
 	pRenderer->VGetWorldMatrix(worldMatrix);
 	pRenderer->VGetProjectionMatrix(projectionMatrix);
 
-	RenderBuffers(context);
-
-	result = g_pApp->GetGraphicsManager()->GetShaderManager()->RenderRenderable(this, m_indexCount, pScene);
-	if (!result)
-	{
+	result = RenderBuffers(context, pScene);
+	if (!result) {
 		return S_FALSE;
 	}
 
 	return S_OK;
 }
 
-void D3DMeshNode11::RenderBuffers(ID3D11DeviceContext* deviceContext)
+bool D3DMeshNode11::RenderBuffers(ID3D11DeviceContext* deviceContext, Scene* pScene)
 {
+	bool result;
 	unsigned int stride, offset;
 
 	stride = sizeof(VertexType);
 	offset = 0;
 
-	deviceContext->IASetVertexBuffers(0, 1, &m_pVertexBuffer, &stride, &offset);
+	for (auto it = m_submeshBuffers.begin(); it != m_submeshBuffers.end(); it++)
+	{
+		deviceContext->IASetVertexBuffers(0, 1, &(*it).pVertexBuffer, &stride, &offset);
 
-	deviceContext->IASetIndexBuffer(m_pIndexBuffer, DXGI_FORMAT_R16_UINT, 0);
+		deviceContext->IASetIndexBuffer((*it).pIndexBuffer, DXGI_FORMAT_R16_UINT, 0);
 
-	deviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+		deviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+
+		result = g_pApp->GetGraphicsManager()->GetShaderManager()->RenderRenderable(this, (*it).indexCount, pScene);
+		if (!result)
+		{
+			return false;
+		}
+	}
+
+	return true;
 }

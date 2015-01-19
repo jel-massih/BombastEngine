@@ -79,7 +79,7 @@ int main(int argc, char *argv[])
 	std::vector<aiMaterial> materials;
 
 	Assimp::Importer importer;
-	const aiScene* pScene = importer.ReadFile(argv[1], aiProcess_Triangulate | aiProcess_GenSmoothNormals);
+	const aiScene* pScene = importer.ReadFile(argv[1], aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_ConvertToLeftHanded);
 
 	if (!pScene) {
 		cerr << "Error Parsing: " << importer.GetErrorString() << endl;
@@ -129,7 +129,8 @@ int main(int argc, char *argv[])
 
 			vertices[j] = vert;
 		}
-		vboFile.write(reinterpret_cast<char*>(&vertices), numVertices * sizeof(BasicVertex));
+
+		vboFile.write(reinterpret_cast<char*>(&vertices[0]), numVertices * sizeof(BasicVertex));
 
 		unsigned int* indices = new unsigned int[numIndices];
 		for (int j = 0; j < pAiMesh->mNumFaces; j++)
@@ -140,7 +141,7 @@ int main(int argc, char *argv[])
 			indices[j * 3 + 1] = face.mIndices[1];
 			indices[j * 3 + 2] = face.mIndices[2];
 		}
-		vboFile.write(reinterpret_cast<char*>(&indices), numIndices * szui);
+		vboFile.write(reinterpret_cast<char*>(&indices[0]), numIndices * szui);
 	}
 
 	vboFile.close();

@@ -6,12 +6,28 @@ void LoadMesh(
 	ModelClass** model,
 	byte* data)
 {
-	unsigned int numVertices = *reinterpret_cast<unsigned int*>(data);
-	unsigned int numIndices = *reinterpret_cast<unsigned int*>(data + sizeof(unsigned int));
+	const auto szui = sizeof(unsigned int);
 
-	ModelClass::BasicVertex* vertices = reinterpret_cast<ModelClass::BasicVertex*>(data + (sizeof(unsigned int) * 2));
-	unsigned short* indices = reinterpret_cast<unsigned short*>(data + (sizeof(unsigned int) * 2) + (sizeof(ModelClass::BasicVertex) * numVertices));
+	int offset = 0;
+	unsigned int numMeshes = *reinterpret_cast<unsigned int*>(data);
+	offset += szui;
 
-	(*model)->vertices = std::vector<ModelClass::BasicVertex>(&vertices[0], &vertices[numVertices]);
-	(*model)->indices = std::vector<unsigned short>(&indices[0], &indices[numIndices]);
+	for (int i = 0; i < numMeshes; i++)
+	{
+		unsigned int numVertices = *reinterpret_cast<unsigned int*>(data + offset);
+		offset += szui;
+		unsigned int numIndices = *reinterpret_cast<unsigned int*>(data + offset);
+		offset += szui;
+
+		ModelClass::SubMesh mesh;
+		ModelClass::BasicVertex* vertices = reinterpret_cast<ModelClass::BasicVertex*>(data + offset);
+		offset += sizeof(ModelClass::BasicVertex) * numVertices;
+		unsigned int* indices = reinterpret_cast<unsigned int*>(data + offset);
+		offset += sizeof(unsigned int) * numIndices;
+
+		mesh.vertices = std::vector<ModelClass::BasicVertex>(&vertices[0], &vertices[numVertices-1]);
+		mesh.indices = std::vector<unsigned int>(&indices[0], &indices[numIndices-1]);
+
+		(*model)->meshes.push_back(mesh);
+	}
 }

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "SceneNode.h"
+#include "ModelClass.h"
 
 //Forawrd Declares
 class ModelClass;
@@ -176,14 +177,11 @@ public:
 
 protected:
 	virtual HRESULT InitializeBuffers() = 0;
+	virtual HRESULT InitializeSubMeshBuffers(const ModelClass::SubMesh& submesh, ID3D11Buffer** pVertexBuffer, ID3D11Buffer** pIndexBuffer) = 0;
 
 	virtual HRESULT LoadMaterial(std::string filename) = 0;
 
 	bool VIsVisible(Scene* pScene) const { return true; }
-
-	int GetIndexCount() const {
-		return m_indexCount;
-	}
 
 	struct VertexType
 	{
@@ -195,9 +193,6 @@ protected:
 protected:
 	std::string m_meshFilename;
 	std::string m_materialFilename;
-
-	int m_vertexCount; //Number of Vertices in Vertex Array
-	int m_indexCount; //Number of Indices in Index array
 };
 
 class D3DMeshNode11 : public MeshNode
@@ -211,13 +206,20 @@ public:
 
 private:
 	HRESULT InitializeBuffers();
+	HRESULT InitializeSubMeshBuffers(const ModelClass::SubMesh& submesh, ID3D11Buffer** pVertexBuffer, ID3D11Buffer** pIndexBuffer);
 	HRESULT LoadMaterial(std::string filename);
 	HRESULT LoadMesh(std::string meshFilename);
 	HRESULT UpdateBuffers(ID3D11DeviceContext* deviceContext);
-	void RenderBuffers(ID3D11DeviceContext* deviceContext);
+	bool RenderBuffers(ID3D11DeviceContext* deviceContext, Scene* pScene);
 
 private:
-	ID3D11Buffer *m_pVertexBuffer, *m_pIndexBuffer;
+	struct SubMeshBuffers
+	{
+		ID3D11Buffer *pVertexBuffer, *pIndexBuffer;
+		unsigned int vertexCount, indexCount;
+	};
+
 	ModelClass* m_pLoadedMesh;
 	Vec3 m_lastPosition;
+	std::vector<SubMeshBuffers> m_submeshBuffers;
 };
