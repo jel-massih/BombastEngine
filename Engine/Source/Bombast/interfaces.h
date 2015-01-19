@@ -2,6 +2,7 @@
 
 #include "..\Utilities\rapidxml.hpp"
 #include <list>
+#include <vector>
 
 class Actor;
 class Vec4;
@@ -102,7 +103,7 @@ class Resource;
 class IResourceLoader
 {
 public:
-	virtual std::string VGetPattern() = 0;
+	virtual std::vector<std::string> VGetPatterns() = 0;
 	virtual bool VUseRawFile() = 0;
 	virtual bool VDiscardRawBufferAfterLoad() = 0;
 	virtual bool VAddNullZero() { return false; }

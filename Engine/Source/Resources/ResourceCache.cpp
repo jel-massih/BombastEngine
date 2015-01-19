@@ -270,9 +270,18 @@ ResourceHandle* ResourceCache::Load(Resource* r)
 	{
 		IResourceLoader* testLoader = *it;
 
-		if (WildcardMatch(testLoader->VGetPattern().c_str(), r->m_name.c_str()))
+		std::vector<std::string>& testPatterns = testLoader->VGetPatterns();
+		for (auto it2 = testPatterns.begin(); it2 != testPatterns.end(); it2++)
 		{
-			loader = testLoader;
+			if (WildcardMatch(it2->c_str(), r->m_name.c_str()))
+			{
+				loader = testLoader;
+				break;
+			}
+		}
+
+		if (loader != NULL)
+		{
 			break;
 		}
 	}

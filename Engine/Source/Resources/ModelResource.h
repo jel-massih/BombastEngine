@@ -28,7 +28,7 @@ public:
 	virtual bool VDiscardRawBufferAfterLoad() { return true; }
 	virtual unsigned int VGetLoadedResourceSize(char* rawBuffer, unsigned int rawSize) { return rawSize; }
 	virtual bool VLoadResource(char* rawBuffer, unsigned int rawSize, ResourceHandle* handle);
-	virtual std::string VGetPattern() { return "*.bmdl"; }
+	virtual std::vector<std::string> VGetPatterns() { return std::vector<std::string>({ "*.bmdl" }); }
 	virtual bool VAddNullZero() { return true; }
 
 	static ModelClass* LoadAndReturnModelResource(const char* resourceString);

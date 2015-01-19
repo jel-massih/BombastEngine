@@ -23,7 +23,7 @@ public:
 	virtual bool VDiscardRawBufferAfterLoad() { return false; }
 	virtual unsigned int VGetLoadedResourceSize(char* rawBuffer, unsigned int rawSize) { return rawSize; }
 	virtual bool VLoadResource(char* rawBuffer, unsigned int rawSize, ResourceHandle* handle);
-	virtual std::string VGetPattern() { return "*.dds"; }
+	virtual std::vector<std::string> VGetPatterns() { return std::vector<std::string>({ "*.dds" }); }
 
 	static ID3D11ShaderResourceView* LoadAndReturnTextureResource(const char* resourceString);
 };
