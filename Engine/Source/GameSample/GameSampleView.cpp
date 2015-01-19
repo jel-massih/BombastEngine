@@ -76,6 +76,10 @@ LRESULT CALLBACK GameSampleHumanView::VOnMsgProc(AppMsg msg)
 			m_bShowGrid = !m_bShowGrid;
 			m_pGrid->SetVisible(m_bShowGrid);
 		}
+		else if (msg.m_wParam == VK_F5)
+		{
+			g_pApp->GetGraphicsManager()->GetRenderer()->VToggleFillMode();
+		}
 		else if (msg.m_wParam == VK_F8)
 		{
 			GameSampleLogic* psl = static_cast<GameSampleLogic*>(g_pApp->m_pGame);
