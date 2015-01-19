@@ -79,7 +79,7 @@ int main(int argc, char *argv[])
 	std::vector<aiMaterial> materials;
 
 	Assimp::Importer importer;
-	const aiScene* pScene = importer.ReadFile(argv[1], aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_ConvertToLeftHanded);
+	const aiScene* pScene = importer.ReadFile(argv[1], aiProcess_Triangulate | aiProcess_ConvertToLeftHanded | aiProcess_CalcTangentSpace | aiProcess_JoinIdenticalVertices | aiProcess_SortByPType);
 
 	if (!pScene) {
 		cerr << "Error Parsing: " << importer.GetErrorString() << endl;

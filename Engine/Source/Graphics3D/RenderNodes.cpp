@@ -727,12 +727,14 @@ HRESULT D3DMeshNode11::LoadMesh(std::string meshFilename)
 HRESULT D3DMeshNode11::InitializeBuffers()
 {
 	HRESULT result;
-	
+
+	m_submeshBuffers.clear();
+
 	ID3D11Device* device = g_pApp->GetGraphicsManager()->GetRenderer()->GetDevice();
 	for (unsigned int i = 0; i < m_pLoadedMesh->meshes.size(); i++)
 	{
 		SubMeshBuffers submeshBuffer;
-
+		
 		//If Material has non-standard UV Scale, then update uvs
 		XMFLOAT2 uvScale = VGet()->GetMaterial().GetUVScale();
 		if (fabs(uvScale.x - 1.0f) > 0.0005 || fabs(uvScale.y - 1.0f) > 0.0005)
@@ -772,7 +774,7 @@ HRESULT D3DMeshNode11::InitializeSubMeshBuffers(const ModelClass::SubMesh& subme
 
 	ZeroMemory(&vertexBufferDesc, sizeof(vertexBufferDesc));
 	vertexBufferDesc.Usage = D3D11_USAGE_DEFAULT;
-	vertexBufferDesc.ByteWidth = sizeof(VertexType) * vertCount;
+	vertexBufferDesc.ByteWidth = sizeof(ModelClass::BasicVertex) * vertCount;
 	vertexBufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
 	vertexBufferDesc.CPUAccessFlags = 0;
 
@@ -787,7 +789,7 @@ HRESULT D3DMeshNode11::InitializeSubMeshBuffers(const ModelClass::SubMesh& subme
 
 	ZeroMemory(&indexBufferDesc, sizeof(indexBufferDesc));
 	indexBufferDesc.Usage = D3D11_USAGE_DEFAULT;
-	indexBufferDesc.ByteWidth = sizeof(WORD) * indexCount;
+	indexBufferDesc.ByteWidth = sizeof(unsigned int) * indexCount;
 	indexBufferDesc.BindFlags = D3D11_BIND_INDEX_BUFFER;
 	indexBufferDesc.CPUAccessFlags = 0;
 
@@ -835,7 +837,7 @@ bool D3DMeshNode11::RenderBuffers(ID3D11DeviceContext* deviceContext, Scene* pSc
 	{
 		deviceContext->IASetVertexBuffers(0, 1, &(*it).pVertexBuffer, &stride, &offset);
 
-		deviceContext->IASetIndexBuffer((*it).pIndexBuffer, DXGI_FORMAT_R16_UINT, 0);
+		deviceContext->IASetIndexBuffer((*it).pIndexBuffer, DXGI_FORMAT_R32_UINT, 0);
 
 		deviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 

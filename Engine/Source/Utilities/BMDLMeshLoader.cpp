@@ -25,8 +25,8 @@ void LoadMesh(
 		unsigned int* indices = reinterpret_cast<unsigned int*>(data + offset);
 		offset += sizeof(unsigned int) * numIndices;
 
-		mesh.vertices = std::vector<ModelClass::BasicVertex>(&vertices[0], &vertices[numVertices-1]);
-		mesh.indices = std::vector<unsigned int>(&indices[0], &indices[numIndices-1]);
+		mesh.vertices = std::vector<ModelClass::BasicVertex>(&vertices[0], &vertices[numVertices]);
+		mesh.indices = std::vector<unsigned int>(&indices[0], &indices[numIndices]);
 
 		(*model)->meshes.push_back(mesh);
 	}
