@@ -11,7 +11,7 @@ public:
 
 	virtual std::string VToString() { return "TextureResourceExtraData"; }
 	
-	bool LoadTexture(char* pRawBuffer, unsigned int rawSize);
+	bool LoadTexture(char* pRawBuffer, unsigned int rawSize, std::string extension);
 
 	ID3D11ShaderResourceView* GetTexture();
 };
@@ -23,7 +23,7 @@ public:
 	virtual bool VDiscardRawBufferAfterLoad() { return false; }
 	virtual unsigned int VGetLoadedResourceSize(char* rawBuffer, unsigned int rawSize) { return rawSize; }
 	virtual bool VLoadResource(char* rawBuffer, unsigned int rawSize, ResourceHandle* handle);
-	virtual std::vector<std::string> VGetPatterns() { return std::vector<std::string>({ "*.dds" }); }
+	virtual std::vector<std::string> VGetPatterns() { return std::vector<std::string>({ "*.dds", "*.jpg" }); }
 
 	static ID3D11ShaderResourceView* LoadAndReturnTextureResource(const char* resourceString);
 };

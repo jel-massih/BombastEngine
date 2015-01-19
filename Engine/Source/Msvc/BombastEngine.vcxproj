@@ -81,6 +81,7 @@
     <ClInclude Include="..\Utilities\templates.h" />
     <ClInclude Include="..\Utilities\Timer.h" />
     <ClInclude Include="..\Utilities\types.h" />
+    <ClInclude Include="..\Utilities\WICTextureLoader.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
@@ -140,6 +141,7 @@
     <ClCompile Include="..\Utilities\String.cpp" />
     <ClCompile Include="..\Utilities\SystemResourceMonitor.cpp" />
     <ClCompile Include="..\Utilities\Timer.cpp" />
+    <ClCompile Include="..\Utilities\WICTextureLoader.cpp" />
     <ClCompile Include="BombastEngine.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">stdafx.h</PrecompiledHeaderFile>

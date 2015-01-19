@@ -12,11 +12,18 @@ ID3D11ShaderResourceView* TextureResourceExtraData::GetTexture()
 	return m_pTexture;
 }
 
-bool TextureResourceExtraData::LoadTexture(char* pRawBuffer, unsigned int rawSize)
+bool TextureResourceExtraData::LoadTexture(char* pRawBuffer, unsigned int rawSize, std::string extension)
 {
 	HRESULT result;
 	
-	result = CreateDDSTextureFromMemory(g_pApp->GetGraphicsManager()->GetRenderer()->GetDevice(), reinterpret_cast<uint8_t*>(pRawBuffer), rawSize, nullptr, &m_pTexture);
+	if (extension == ".dds")
+	{
+		result = CreateDDSTextureFromMemory(g_pApp->GetGraphicsManager()->GetRenderer()->GetDevice(), reinterpret_cast<uint8_t*>(pRawBuffer), rawSize, nullptr, &m_pTexture);
+	}
+	else
+	{
+		result = CreateWICTextureFromMemory(g_pApp->GetGraphicsManager()->GetRenderer()->GetDevice(), reinterpret_cast<uint8_t*>(pRawBuffer), rawSize, nullptr, &m_pTexture);
+	}
 
 	if (FAILED(result)) {
 		return false;
@@ -33,9 +40,13 @@ bool TextureResourceLoader::VLoadResource(char* rawBuffer, unsigned int rawSize,
 	{
 		return false;
 	}
-
+	
 	TextureResourceExtraData* pExtraData = BE_NEW TextureResourceExtraData();
-	result = pExtraData->LoadTexture(rawBuffer, rawSize);
+
+	
+	std::string fileExtension = handle->GetName().substr(handle->GetName().find_last_of("."));
+
+	result = pExtraData->LoadTexture(rawBuffer, rawSize, fileExtension);
 
 	//Delete buffer since no longer needed after loading texture
 	SAFE_DELETE_ARRAY(rawBuffer); 

@@ -2,6 +2,7 @@
 
 #include "../BombastEngineStd.h"
 #include "../Utilities/DDSTextureLoader.h"
+#include "../Utilities/WICTextureLoader.h"
 #include "../Utilities/rapidxml.hpp"
 #include "../Utilities/String.h"
 #include "../Utilities/types.h"
