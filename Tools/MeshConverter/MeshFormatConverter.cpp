@@ -13,7 +13,7 @@
 #include <algorithm>
 
 #include "BasicMath.h"
-
+#include <Windows.h>
 #include <assimp/Importer.hpp>      // C++ importer interface
 #include <assimp/scene.h>           // Output data structure
 #include <assimp/postprocess.h>     // Post processing fla
@@ -62,7 +62,7 @@ int main(int argc, char *argv[])
 	std::vector<aiMaterial> materials;
 
 	Assimp::Importer importer;
-	const aiScene* pScene = importer.ReadFile(argv[1], aiProcess_Triangulate | aiProcess_ConvertToLeftHanded | aiProcess_CalcTangentSpace | aiProcess_JoinIdenticalVertices | aiProcess_SortByPType | aiProcess_GenNormals);
+	const aiScene* pScene = importer.ReadFile(argv[1], aiProcess_Triangulate | aiProcess_ConvertToLeftHanded | aiProcess_CalcTangentSpace | aiProcess_JoinIdenticalVertices | aiProcess_SortByPType | aiProcess_GenSmoothNormals);
 
 	if (!pScene) {
 		cerr << "Error Parsing: " << importer.GetErrorString() << endl;
@@ -164,11 +164,15 @@ int main(int argc, char *argv[])
 		pMat->Get(AI_MATKEY_SHININESS, specularStrength);
 
 		unsigned int texCount = pMat->GetTextureCount(aiTextureType_DIFFUSE);
+		string temp = "Materials\\" + finalFilename;
+		std::wstring matDir(temp.length(), L' ');
+		std::copy(temp.begin(), temp.end(), matDir.begin());
 
-		ofstream mtlFile("Materials\\" + materialName + ".bmtl", ofstream::out | ofstream::binary);
+		CreateDirectory(matDir.c_str(), NULL);
+		ofstream mtlFile("Materials\\" + finalFilename + "\\" + materialName + ".bmtl", ofstream::out | ofstream::binary);
 		if (!mtlFile.is_open())
 		{
-			cerr << "error: could not open file \"Materials\\" << materialName << ".bmtl" << "\" for write" << endl;
+			cerr << "error: could not open file \"Materials\\" << materialName + "\\" + materialName << ".bmtl" << "\" for write" << endl;
 			cin >> x;
 			return -1;
 		}
@@ -187,7 +191,7 @@ int main(int argc, char *argv[])
 				aiString aiTexPath;
 				if (pMat->GetTexture(aiTextureType_DIFFUSE, j, &aiTexPath, NULL, NULL, NULL, NULL, NULL) == AI_SUCCESS)
 				{
-					mtlFile << "\t\t<Texture path=\"textures\\" << aiTexPath.C_Str() << "\"/>";
+					mtlFile << "\t\t<Texture path=\"textures\\" << finalFilename << "\\" << aiTexPath.C_Str() << "\"/>";
 				}
 			}
 			mtlFile << "\t</Textures>" << endl;
@@ -217,7 +221,7 @@ int main(int argc, char *argv[])
 	actorFile << "\t\t<Materials>" << endl;
 	for (auto it = materialNames.begin(); it != materialNames.end(); it++)
 	{
-		actorFile << "\t\t\t<Material path=\"materials\\" << *it << ".bmtl\"/>" << endl;
+		actorFile << "\t\t\t<Material path=\"materials\\" << finalFilename << "\\" << *it << ".bmtl\"/>" << endl;
 
 	}
 	actorFile << "\t\t</Materials>" << endl;
