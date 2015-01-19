@@ -27,6 +27,8 @@ public:
 	{
 		std::vector<BasicVertex> vertices;
 		std::vector<unsigned int> indices;
+
+		unsigned int materialIndex;
 	};
 
 public:

@@ -732,8 +732,8 @@ HRESULT D3DMeshNode11::InitializeBuffers()
 		
 		submeshBuffer.material = nullptr;
 
-		if (i < m_materialFilenames.size()) {
-			submeshBuffer.material = LoadMaterial(m_materialFilenames[i]);
+		if (m_pLoadedMesh->meshes[i].materialIndex < m_materialFilenames.size()) {
+			submeshBuffer.material = LoadMaterial(m_materialFilenames[m_pLoadedMesh->meshes[i].materialIndex]);
 		}
 
 		if (submeshBuffer.material == nullptr)

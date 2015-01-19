@@ -14,6 +14,9 @@ void LoadMesh(
 
 	for (int i = 0; i < numMeshes; i++)
 	{
+		unsigned int materialIndex = *reinterpret_cast<unsigned int*>(data + offset);
+		offset += szui;
+
 		unsigned int numVertices = *reinterpret_cast<unsigned int*>(data + offset);
 		offset += szui;
 		unsigned int numIndices = *reinterpret_cast<unsigned int*>(data + offset);
@@ -27,6 +30,8 @@ void LoadMesh(
 
 		mesh.vertices = std::vector<ModelClass::BasicVertex>(&vertices[0], &vertices[numVertices]);
 		mesh.indices = std::vector<unsigned int>(&indices[0], &indices[numIndices]);
+		
+		mesh.materialIndex = materialIndex;
 
 		(*model)->meshes.push_back(mesh);
 	}

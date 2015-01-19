@@ -43,8 +43,6 @@ void usage()
 {
 	cout << "usage: obj2vbo.exe [input obj] [output vbo] [/normalize]" << endl;
 	cout << "  input obj    specifies the input OBJ mesh file" << endl;
-	cout << "  output vbo   specifies the output VBO file" << endl;
-	cout << "  /normalize   transform vertex positions to fit a unit bounding box about the origin" << endl;
 }
 
 #pragma warning(disable : 4447)
@@ -53,26 +51,11 @@ int main(int argc, char *argv[])
 {
 	int x;
 
-	if (argc < 3 || argc > 4)
+	if (argc != 2)
 	{
 		usage();
 		cin >> x;
 		return -1;
-	}
-
-	bool normalizePositions = false;
-	if (argc == 4)
-	{
-		if (strcmp(argv[3], "/normalize") == 0)
-		{
-			normalizePositions = true;
-		}
-		else
-		{
-			usage();
-			cin >> x;
-			return -1;
-		}
 	}
 
 	std::vector<aiMesh> meshes;
@@ -90,12 +73,17 @@ int main(int argc, char *argv[])
 	cout << pScene->mNumMeshes << " Shapes found" << endl;
 	
 	const auto szui = sizeof(unsigned int);
-	
+
+	//remove extension
+	string filePath = string(argv[1]);
+	size_t lastDot = filePath.find_last_of(".");
+	string finalFilename = (lastDot == std::string::npos) ? filePath : filePath.substr(0, lastDot);
+
 	// Dump vertex and index data to the output VBO file
-	ofstream vboFile(argv[2], ofstream::out | ofstream::binary);
+	ofstream vboFile("Meshes\\" + std::string(finalFilename) + ".bmdl", ofstream::out | ofstream::binary);
 	if (!vboFile.is_open())
 	{
-		cerr << "error: could not open file \"" << argv[2] << "\" for write" << endl;
+		cerr << "error: could not open file \"Meshes\\" << finalFilename << "\" for write" << endl;
 		cin >> x;
 		return -1;
 	}
@@ -106,6 +94,9 @@ int main(int argc, char *argv[])
 	for (unsigned int i = 0; i < pScene->mNumMeshes; i++)
 	{
 		const aiMesh* pAiMesh = pScene->mMeshes[i];
+		unsigned int materialIndex = pAiMesh->mMaterialIndex;
+		vboFile.write(reinterpret_cast<char*>(&materialIndex), szui);
+
 		//Normal/tex is same size as verts
 		unsigned int numVertices = pAiMesh->mNumVertices;
 		unsigned int numIndices = pAiMesh->mNumFaces * 3;
@@ -148,7 +139,7 @@ int main(int argc, char *argv[])
 
 	//Convert mtl to set of material files
 	cout << pScene->mNumMaterials << " Materials found" << endl;
-
+	std::vector<std::string> materialNames;
 	for (int i = 0; i < pScene->mNumMaterials; i++)
 	{
 		aiMaterial* pMat = pScene->mMaterials[i];
@@ -174,10 +165,10 @@ int main(int argc, char *argv[])
 
 		unsigned int texCount = pMat->GetTextureCount(aiTextureType_DIFFUSE);
 
-		ofstream mtlFile(materialName + ".bmtl", ofstream::out | ofstream::binary);
+		ofstream mtlFile("Materials\\" + materialName + ".bmtl", ofstream::out | ofstream::binary);
 		if (!mtlFile.is_open())
 		{
-			cerr << "error: could not open file \"" << materialName << ".bmtl" << "\" for write" << endl;
+			cerr << "error: could not open file \"Materials\\" << materialName << ".bmtl" << "\" for write" << endl;
 			cin >> x;
 			return -1;
 		}
@@ -196,12 +187,7 @@ int main(int argc, char *argv[])
 				aiString aiTexPath;
 				if (pMat->GetTexture(aiTextureType_DIFFUSE, j, &aiTexPath, NULL, NULL, NULL, NULL, NULL) == AI_SUCCESS)
 				{
-					//remove extension
-					string filePath = string(aiTexPath.C_Str());
-					size_t lastDot = filePath.find_last_of(".");
-					string finalFilename = (lastDot == std::string::npos) ? filePath : filePath.substr(0, lastDot);
-					
-					mtlFile << "\t\t<Texture path=\"textures\\" << finalFilename << ".dds\"/>";
+					mtlFile << "\t\t<Texture path=\"textures\\" << aiTexPath.C_Str() << "\"/>";
 				}
 			}
 			mtlFile << "\t</Textures>" << endl;
@@ -210,8 +196,35 @@ int main(int argc, char *argv[])
 		mtlFile << "\t<Shader type=\"LitTextured\"/>" << endl;
 		mtlFile << "</Material>";
 
+		materialNames.push_back(materialName);
+
 		mtlFile.close();
 	}
+
+	//Export Actor file
+	ofstream actorFile("Actors\\" + std::string(finalFilename) + ".xml", ofstream::out);
+	if (!actorFile.is_open())
+	{
+		cerr << "error: could not open file \"Actors\\" << finalFilename << "\" for write" << endl;
+		cin >> x;
+		return -1;
+	}
+
+	actorFile << "<Actor type=\"" << finalFilename << "\" resource=\"actors\\" << finalFilename << ".xml\">" << endl;
+	actorFile << "\t<TransformComponent/>" << endl;
+	actorFile << "\t<MeshRenderComponent>" << endl;
+	actorFile << "\t\t<Mesh path=\"meshes\\" << finalFilename << ".bmdl\"/>" << endl;
+	actorFile << "\t\t<Materials>" << endl;
+	for (auto it = materialNames.begin(); it != materialNames.end(); it++)
+	{
+		actorFile << "\t\t\t<Material path=\"materials\\" << *it << ".bmtl\"/>" << endl;
+
+	}
+	actorFile << "\t\t</Materials>" << endl;
+	actorFile << "\t</MeshRenderComponent>" << endl;
+	actorFile << "</Actor>" << endl;
+
+	actorFile.close();
 
 	return 0;
 }
