@@ -2,6 +2,8 @@
 	<TransformComponent/>
   <MeshRenderComponent>
     <Mesh path="meshes\platform.bmdl"></Mesh>
-    <Material path="materials\platform_mat.bmtl"/>
+    <Materials>
+    	<Material path="materials\platform_mat.bmtl"/>
+    </Materials>
   </MeshRenderComponent>
 </Actor>
