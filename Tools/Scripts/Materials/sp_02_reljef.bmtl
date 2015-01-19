@@ -1,9 +1,0 @@
-<Material name="sp_02_reljef">
-	<Ambient r="0" g="0" b="0" a="1"/>
-	<Diffuse r="0.529412" g="0.498039" b="0.490196" a="1"/>
-	<Specular r="0" g="0" b="0" a="1" power="200" />
-	<Emmisive r="0" g="0" b="0" a="1"/>
-	<Textures>
-		<Texture path="textures\RELJEF.JPG"/>	</Textures>
-	<Shader type="LitTextured"/>
-</Material>
