@@ -5,6 +5,12 @@ Engine/Source/Msvc/ipch/
 
 Engine/Assets/Meshes/*
 Engine/Assets/Textures/*
+Engine/Assets/Materials/*
+Engine/Assets/Actors/*
+
+Tools/Scripts/Materials/*
+Tools/Scripts/Actors/*
+Tools/Scripts/Meshes/*
 
 *.dll
 *.exe
