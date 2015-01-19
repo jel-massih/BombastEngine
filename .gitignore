@@ -17,7 +17,6 @@ Engine/Assets/Textures/*
 *.idb
 *.ipch
 *.vsld
-*.bmdl
 *.lastbuildstate
 *.mtl
 *.cso
