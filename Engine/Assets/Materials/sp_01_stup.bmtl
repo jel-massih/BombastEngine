@@ -1,9 +1,0 @@
-<Material name="sp_01_stup">
-	<Ambient r="0" g="0" b="0" a="1"/>
-	<Diffuse r="0.827451" g="0.8" b="0.768628" a="1"/>
-	<Specular r="0" g="0" b="0" a="1" power="200" />
-	<Emmisive r="0" g="0" b="0" a="1"/>
-	<Textures>
-		<Texture path="textures\X01_ST.JPG"/>	</Textures>
-	<Shader type="LitTextured"/>
-</Material>
