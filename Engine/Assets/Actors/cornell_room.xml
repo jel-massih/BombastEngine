@@ -1,8 +1,0 @@
-<Actor type="Cornell_Room" resource="actors\cornell_room.xml">
-	<TransformComponent/>
-  <MeshRenderComponent>
-    <Texture path="textures\grid.dds"></Texture>
-    <Mesh path="meshes\cornell.bmdl"></Mesh>
-		<Material path="materials\box_mat.bmtl"/>
-  </MeshRenderComponent>
-</Actor>
