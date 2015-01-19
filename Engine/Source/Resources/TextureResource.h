@@ -26,4 +26,7 @@ public:
 	virtual std::vector<std::string> VGetPatterns() { return std::vector<std::string>({ "*.dds", "*.jpg", "*.png" }); }
 
 	static ID3D11ShaderResourceView* LoadAndReturnTextureResource(const char* resourceString);
+	static ID3D11ShaderResourceView* LoadDefaultTextureResource();
+private:
+	static const char* m_defaultTextureName;
 };

@@ -6,11 +6,7 @@
     <StaticActors>
       <Actor resource="actors\directionalLight.xml"/>
 
-      <Actor resource="actors\sponza.xml">
-        <TransformComponent>
-            <Position x="0" y="0.6" z="0"/>
-        </TransformComponent>
-      </Actor>
+      <Actor resource="actors\sponza.xml"/>
     </StaticActors>
 
     <PostLoadScripts>

@@ -699,13 +699,7 @@ HRESULT D3DMeshNode11::VOnRestore(Scene* pScene)
 
 Material* D3DMeshNode11::LoadMaterial(std::string filename)
 {
-	Material* mat = MaterialResourceLoader::LoadAndReturnMaterialResource(filename.c_str());
-	if (!mat)
-	{
-		return nullptr;
-	}
-
-	return mat;
+	return MaterialResourceLoader::LoadAndReturnMaterialResource(filename.c_str());
 }
 
 HRESULT D3DMeshNode11::LoadMesh(std::string meshFilename)

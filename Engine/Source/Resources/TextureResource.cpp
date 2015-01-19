@@ -2,6 +2,8 @@
 #include "../Bombast/BombastApp.h"
 #include <fstream>
 
+const char* TextureResourceLoader::m_defaultTextureName= "textures\\grid.dds";
+
 void TextureResourceExtraData::Shutdown()
 {
 	SAFE_RELEASE(m_pTexture);
@@ -68,6 +70,21 @@ IResourceLoader* CreateTextureResourceLoader()
 ID3D11ShaderResourceView* TextureResourceLoader::LoadAndReturnTextureResource(const char* resourceString)
 {
 	Resource resource(resourceString);
+	ResourceHandle* pResourceHandle = g_pApp->m_pResourceCache->GetHandle(&resource);
+	if (!pResourceHandle)
+	{
+		BE_ERROR("Texture not found, loading default texture: " + std::string(m_defaultTextureName));
+		return LoadDefaultTextureResource();
+	}
+	TextureResourceExtraData* pExtraData = (TextureResourceExtraData*)(pResourceHandle->GetExtra());
+
+	ID3D11ShaderResourceView* texture = pExtraData->GetTexture();
+	return texture;
+}
+
+ID3D11ShaderResourceView* TextureResourceLoader::LoadDefaultTextureResource()
+{
+	Resource resource(m_defaultTextureName);
 	ResourceHandle* pResourceHandle = g_pApp->m_pResourceCache->GetHandle(&resource);
 	TextureResourceExtraData* pExtraData = (TextureResourceExtraData*)(pResourceHandle->GetExtra());
 

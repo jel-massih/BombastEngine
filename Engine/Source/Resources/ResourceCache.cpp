@@ -250,7 +250,6 @@ ResourceHandle* ResourceCache::GetHandle(Resource* r)
 	if (handle == NULL)
 	{
 		handle = Load(r);
-		BE_ASSERT_MESSAGE(handle, "Resource Handle Not Loaded");
 	}
 	else
 	{
