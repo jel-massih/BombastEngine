@@ -1,5 +1,7 @@
 #include "MaterialResource.h"
 
+const char* MaterialResourceLoader::m_defaultMaterialName = "materials\\DefaultMaterial.bmtl";
+
 void MaterialResourceExtraData::Shutdown()
 {
 	SAFE_DELETE(m_pMaterial);
@@ -135,6 +137,16 @@ IResourceLoader* CreateMaterialResourceLoader()
 Material* MaterialResourceLoader::LoadAndReturnMaterialResource(const char* resourceString)
 {
 	Resource resource(resourceString);
+	ResourceHandle* pResourceHandle = g_pApp->m_pResourceCache->GetHandle(&resource);
+	MaterialResourceExtraData* pExtraData = (MaterialResourceExtraData*)(pResourceHandle->GetExtra());
+
+	Material* material = pExtraData->GetMaterial();
+	return material;
+}
+
+Material* MaterialResourceLoader::LoadAndReturnDefaultMaterialResource()
+{
+	Resource resource(m_defaultMaterialName);
 	ResourceHandle* pResourceHandle = g_pApp->m_pResourceCache->GetHandle(&resource);
 	MaterialResourceExtraData* pExtraData = (MaterialResourceExtraData*)(pResourceHandle->GetExtra());
 

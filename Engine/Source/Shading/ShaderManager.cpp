@@ -86,7 +86,7 @@ bool ShaderManager::Initialize(IRenderer* renderer)
 	return true;
 }
 
-bool ShaderManager::RenderRenderable(SceneNode* pRenderableNode, int indexCount, const Scene* pScene) const
+bool ShaderManager::RenderRenderable(SceneNode* pRenderableNode, Material* pMaterial, int indexCount, const Scene* pScene) const
 {
 	IRenderer* pRenderer = g_pApp->GetGraphicsManager()->GetRenderer();
 	ID3D11DeviceContext* context = pRenderer->GetDeviceContext();
@@ -96,26 +96,26 @@ bool ShaderManager::RenderRenderable(SceneNode* pRenderableNode, int indexCount,
 	pRenderer->VGetWorldMatrix(worldMatrix);
 	pRenderer->VGetProjectionMatrix(projectionMatrix);
 
-	switch (pRenderableNode->VGet()->GetMaterial().GetShaderType())
+	switch (pMaterial->GetShaderType())
 	{
 	case BSHADER_TYPE_COLOR:
-		return m_pColorShader->Render(context, indexCount, XMLoadFloat4x4(&worldMatrix), XMLoadFloat4x4(&viewMatrix), XMLoadFloat4x4(&projectionMatrix), pRenderableNode->VGet()->GetMaterial().GetDiffuse());
+		return m_pColorShader->Render(context, indexCount, XMLoadFloat4x4(&worldMatrix), XMLoadFloat4x4(&viewMatrix), XMLoadFloat4x4(&projectionMatrix), pMaterial->GetDiffuse());
 		break;
 	case BSHADER_TYPE_LIT:
-		return m_pLightShader->Render(context, indexCount, XMLoadFloat4x4(&worldMatrix), XMLoadFloat4x4(&viewMatrix), XMLoadFloat4x4(&projectionMatrix), &pRenderableNode->VGet()->GetMaterial(), pScene);
+		return m_pLightShader->Render(context, indexCount, XMLoadFloat4x4(&worldMatrix), XMLoadFloat4x4(&viewMatrix), XMLoadFloat4x4(&projectionMatrix), pMaterial, pScene);
 		break;
 	case BSHADER_TYPE_TEXTURE:
-		if (pRenderableNode->VGet()->GetMaterial().GetTextures().size() <= 0)
+		if (pMaterial->GetTextures().size() <= 0)
 		{
 			return false;
 		}
-		return m_pTextureShader->Render(context, indexCount, XMLoadFloat4x4(&worldMatrix), XMLoadFloat4x4(&viewMatrix), XMLoadFloat4x4(&projectionMatrix), pRenderableNode->VGet()->GetMaterial().GetTextures().front()->GetTexture());
+		return m_pTextureShader->Render(context, indexCount, XMLoadFloat4x4(&worldMatrix), XMLoadFloat4x4(&viewMatrix), XMLoadFloat4x4(&projectionMatrix), pMaterial->GetTextures().front()->GetTexture());
 		break;
 	case BSHADER_TYPE_MULTI_TEXTURE:
-		return m_pMultiTextureShader->Render(context, indexCount, XMLoadFloat4x4(&worldMatrix), XMLoadFloat4x4(&viewMatrix), XMLoadFloat4x4(&projectionMatrix), pRenderableNode->VGet()->GetMaterial().GetTextures());
+		return m_pMultiTextureShader->Render(context, indexCount, XMLoadFloat4x4(&worldMatrix), XMLoadFloat4x4(&viewMatrix), XMLoadFloat4x4(&projectionMatrix), pMaterial->GetTextures());
 		break;
 	case BSHADER_TYPE_LIGHTMAP:
-		return m_pLightmapShader->Render(context, indexCount, XMLoadFloat4x4(&worldMatrix), XMLoadFloat4x4(&viewMatrix), XMLoadFloat4x4(&projectionMatrix), pRenderableNode->VGet()->GetMaterial().GetTextures());
+		return m_pLightmapShader->Render(context, indexCount, XMLoadFloat4x4(&worldMatrix), XMLoadFloat4x4(&viewMatrix), XMLoadFloat4x4(&projectionMatrix), pMaterial->GetTextures());
 		break;
 	}
 

@@ -70,10 +70,10 @@ protected:
 class MeshRenderComponent : public BaseRenderComponent
 {
 	char* m_meshResource;
-	char* m_materialResource;
+	std::vector<std::string> m_materialResources;
 
 public:
-	MeshRenderComponent() : m_meshResource(""), m_materialResource("") {}
+	MeshRenderComponent() : m_meshResource("") {}
 
 	static const char* g_Name;
 	virtual const char* VGetName() const override { return MeshRenderComponent::g_Name; }

@@ -99,6 +99,8 @@ protected:
 	ID3D11Buffer* m_pIndexBuffer;
 	ID3D11Buffer* m_pVertexBuffer;
 
+	Material* m_material;
+
 	bool m_bShow;
 };
 
@@ -113,13 +115,6 @@ public:
 		PT_Cylinder,
 		PT_MAX
 	};
-
-protected:
-	int m_vertCount, m_indexCount;
-	Vec3 m_size;
-
-	PrimitiveType m_primitiveType;
-	std::string m_textureFilename;
 
 public:
 	PrimitiveNode(const ActorId actorId, BaseRenderComponent* renderComponent, std::string textureFilename, RenderPass renderPass, PrimitiveType type, Vec3 size, const Mat4x4* t);
@@ -137,6 +132,15 @@ protected:
 		Vec3 position;
 		XMFLOAT2 texture;
 	};
+
+protected:
+	int m_vertCount, m_indexCount;
+	Vec3 m_size;
+
+	PrimitiveType m_primitiveType;
+	std::string m_textureFilename;
+
+	Material* m_pMaterial;
 };
 
 class D3D11PrimitiveNode : public PrimitiveNode
@@ -167,7 +171,6 @@ public:
 	MeshNode(const ActorId actorId,
 		BaseRenderComponent* renderComponent,
 		std::string meshFileName,
-		std::string materialFilename,
 		RenderPass renderPass,
 		const Mat4x4 *t);
 
@@ -179,7 +182,7 @@ protected:
 	virtual HRESULT InitializeBuffers() = 0;
 	virtual HRESULT InitializeSubMeshBuffers(const ModelClass::SubMesh& submesh, ID3D11Buffer** pVertexBuffer, ID3D11Buffer** pIndexBuffer) = 0;
 
-	virtual HRESULT LoadMaterial(std::string filename) = 0;
+	virtual Material* LoadMaterial(std::string filename) = 0;
 
 	bool VIsVisible(Scene* pScene) const { return true; }
 
@@ -192,13 +195,12 @@ protected:
 
 protected:
 	std::string m_meshFilename;
-	std::string m_materialFilename;
 };
 
 class D3DMeshNode11 : public MeshNode
 {
 public:
-	D3DMeshNode11(const ActorId actorId, BaseRenderComponent* renderComponent, std::string meshFilename, std::string materialFilename, RenderPass renderPass, const Mat4x4* t);
+	D3DMeshNode11(const ActorId actorId, BaseRenderComponent* renderComponent, std::string meshFilename, std::vector<std::string> materialsFilename, RenderPass renderPass, const Mat4x4* t);
 	~D3DMeshNode11();
 
 	HRESULT VOnRestore(Scene* pScene);
@@ -207,7 +209,7 @@ public:
 private:
 	HRESULT InitializeBuffers();
 	HRESULT InitializeSubMeshBuffers(const ModelClass::SubMesh& submesh, ID3D11Buffer** pVertexBuffer, ID3D11Buffer** pIndexBuffer);
-	HRESULT LoadMaterial(std::string filename);
+	Material* LoadMaterial(std::string filename);
 	HRESULT LoadMesh(std::string meshFilename);
 	HRESULT UpdateBuffers(ID3D11DeviceContext* deviceContext);
 	bool RenderBuffers(ID3D11DeviceContext* deviceContext, Scene* pScene);
@@ -217,9 +219,11 @@ private:
 	{
 		ID3D11Buffer *pVertexBuffer, *pIndexBuffer;
 		unsigned int vertexCount, indexCount;
+		Material* material;
 	};
 
 	ModelClass* m_pLoadedMesh;
 	Vec3 m_lastPosition;
 	std::vector<SubMeshBuffers> m_submeshBuffers;
+	std::vector<std::string> m_materialFilenames;
 };

@@ -30,14 +30,10 @@ public:
 
 	const char* GetName() const { return m_name.c_str(); }
 
-	bool HasAlpha() const { return m_material->HasAlpha(); }
-	float GetAlpha() const { return m_material->GetAlpha(); }
 	AlphaType GetAlphaType() const { return m_alphaType; }
 
 	RenderPass GetRenderPass() const { return m_renderPass; }
 	float GetRadius() const { return m_radius; }
-
-	const Material& GetMaterial() const { return *m_material; }
 
 protected:
 	ActorId m_actorId;
@@ -45,11 +41,7 @@ protected:
 	Mat4x4 m_toWorld, m_fromWorld;
 	float m_radius;
 	RenderPass m_renderPass;
-	//Material references a Material Resource shared across all Nodes using it.
-	Material* m_material;
 	AlphaType m_alphaType;
-
-	void SetAlpha(const float alpha) { m_alphaType = AlphaMaterial; m_material->SetAlpha(alpha); }
 };
 
 typedef std::vector<ISceneNode*> SceneNodeList;
@@ -82,7 +74,6 @@ public:
 	virtual HRESULT VPick(Scene* pScene, RayCast* pRayCast);
 
 	void SetAlpha(float alpha);
-	float GetAlpha() const { return m_properties.GetAlpha(); }
 
 	Vec3 GetPosition() const { return m_properties.m_toWorld.GetPosition(); }
 	void SetPosition(const Vec3& pos) { m_properties.m_toWorld.SetPosition(pos); m_properties.m_fromWorld = m_properties.m_toWorld.Inverse(); }
@@ -92,7 +83,6 @@ public:
 	Vec3 GetDirection() const { return m_properties.m_toWorld.GetDirection(); }
 
 	void SetRadius(const float radius) { m_properties.m_radius = radius; }
-	void SetMaterial(Material* mat) { m_properties.m_material = mat; }
 
 protected:
 	SceneNodeList m_children;

@@ -201,17 +201,19 @@ bool MeshRenderComponent::VDelegateInitialize(rapidxml::xml_node<>* pData)
 		}
 	}
 
-	rapidxml::xml_node<>* pMaterial = pData->first_node("Material");
-	if (pMaterial)
+	rapidxml::xml_node<>* pMaterials = pData->first_node("Materials");
+	if (pMaterials)
 	{
-		if (pMaterial->first_attribute("path") != NULL)
+		for (rapidxml::xml_node<> *child = pMaterials->first_node(); child; child = child->next_sibling())
 		{
-			m_materialResource = pMaterial->first_attribute("path")->value();
-		}
-		else
-		{
-			BE_ERROR("Material path Exception: Make sure path attribute is set for Material Element");
-			return false;
+			if (child->first_attribute("path") != NULL)
+			{
+				m_materialResources.push_back(child->first_attribute("path")->value());
+			}
+			else
+			{
+				BE_ERROR("Material path Exception: Make sure path attribute is set for Material Element");
+			}
 		}
 	}
 
@@ -224,7 +226,7 @@ SceneNode* MeshRenderComponent::VCreateSceneNode()
 
 	if (pTransformComponent)
 	{
-		SceneNode* mesh = BE_NEW D3DMeshNode11(m_pOwner->GetId(), (BaseRenderComponent*)this, m_meshResource, m_materialResource, RenderPass_Actor, &pTransformComponent->GetTransform());
+		SceneNode* mesh = BE_NEW D3DMeshNode11(m_pOwner->GetId(), (BaseRenderComponent*)this, m_meshResource, m_materialResources, RenderPass_Actor, &pTransformComponent->GetTransform());
 		return mesh;
 	}
 

@@ -158,11 +158,11 @@ HRESULT D3DBitmapNode11::VRender(Scene* pScene)
 	RenderBuffers(context);
 
 	//Render Bitmap with texture shader
-	result = g_pApp->GetGraphicsManager()->GetShaderManager()->RenderRenderable(this, m_indexCount, pScene);
+	/*result = g_pApp->GetGraphicsManager()->GetShaderManager()->RenderRenderable(this, m_indexCount, pScene);
 	if (!result)
 	{
 		return S_FALSE;
-	}
+	}*/
 
 	return S_OK;
 }
@@ -266,12 +266,17 @@ D3D11GridNode::D3D11GridNode(ActorId actorId, BaseRenderComponent* renderCompone
 	m_gridHeight = 100;
 
 	SetPosition(Vec3(-(m_gridWidth / 2), 0, -(m_gridHeight / 2)));
+
+	m_material = BE_NEW Material;
+	m_material->SetShaderType(BSHADER_TYPE_COLOR);
+	m_material->SetDiffuse(Vec4(1, 1, 1, 1));
 }
 
 D3D11GridNode::~D3D11GridNode()
 {
 	SAFE_RELEASE(m_pVertexBuffer);
 	SAFE_RELEASE(m_pIndexBuffer);
+	SAFE_DELETE(m_material);
 }
 
 HRESULT D3D11GridNode::VOnRestore(Scene* pScene)
@@ -435,7 +440,7 @@ HRESULT D3D11GridNode::VRender(Scene* pScene)
 
 	RenderBuffers(context);
 
-	result = g_pApp->GetGraphicsManager()->GetShaderManager()->RenderRenderable(this, m_indexCount, pScene);
+	result = g_pApp->GetGraphicsManager()->GetShaderManager()->RenderRenderable(this, m_material, m_indexCount, pScene);
 	if (!result)
 	{
 		return S_FALSE;
@@ -477,9 +482,12 @@ D3D11PrimitiveNode::D3D11PrimitiveNode(const ActorId actorId, BaseRenderComponen
 {
 	m_pVertexBuffer = NULL;
 	m_pIndexBuffer = NULL;
-	m_pTexture = NULL;
 
 	m_lastPos = Vec3::g_InvalidVec3;
+
+	m_pMaterial = BE_NEW Material;
+	m_pMaterial->SetShaderType(BSHADER_TYPE_COLOR);
+	m_pMaterial->SetDiffuse(Vec4(1, 1, 1, 1));
 }
 
 D3D11PrimitiveNode::~D3D11PrimitiveNode()
@@ -487,6 +495,7 @@ D3D11PrimitiveNode::~D3D11PrimitiveNode()
 	SAFE_RELEASE(m_pVertexBuffer);
 	SAFE_RELEASE(m_pIndexBuffer);
 	SAFE_RELEASE(m_pTexture);
+	SAFE_DELETE(m_pMaterial);
 }
 
 HRESULT D3D11PrimitiveNode::VOnRestore(Scene* pScene)
@@ -628,7 +637,7 @@ HRESULT D3D11PrimitiveNode::VRender(Scene* pScene)
 
 	RenderBuffers(context);
 
-	result = g_pApp->GetGraphicsManager()->GetShaderManager()->RenderRenderable(this, m_indexCount, pScene);
+	result = g_pApp->GetGraphicsManager()->GetShaderManager()->RenderRenderable(this, m_pMaterial, m_indexCount, pScene);
 	if (!result)
 	{
 		return S_FALSE;
@@ -651,25 +660,19 @@ void D3D11PrimitiveNode::RenderBuffers(ID3D11DeviceContext* deviceContext)
 	deviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 }
 
-MeshNode::MeshNode(const ActorId actorId, BaseRenderComponent* renderComponent, std::string meshFileName, std::string materialFilename, RenderPass renderPass, const Mat4x4 *t)
-	: SceneNode(actorId, renderComponent, renderPass, t), m_meshFilename(meshFileName), m_materialFilename(materialFilename)
+MeshNode::MeshNode(const ActorId actorId, BaseRenderComponent* renderComponent, std::string meshFileName, RenderPass renderPass, const Mat4x4 *t)
+	: SceneNode(actorId, renderComponent, renderPass, t), m_meshFilename(meshFileName)
 {
 }
 
-D3DMeshNode11::D3DMeshNode11(const ActorId actorId, BaseRenderComponent* renderComponent, std::string meshFilename, std::string materialFilename, RenderPass renderPass, const Mat4x4* t)
-	: MeshNode(actorId, renderComponent, meshFilename, materialFilename, renderPass, t), m_lastPosition(Vec3::g_InvalidVec3)
+D3DMeshNode11::D3DMeshNode11(const ActorId actorId, BaseRenderComponent* renderComponent, std::string meshFilename, std::vector<std::string> materialsFilenames, RenderPass renderPass, const Mat4x4* t)
+	: MeshNode(actorId, renderComponent, meshFilename, renderPass, t), m_lastPosition(Vec3::g_InvalidVec3), m_materialFilenames(materialsFilenames)
 {
 	m_pLoadedMesh = nullptr;
 }
 
 D3DMeshNode11::~D3DMeshNode11()
 {
-	for (auto it = m_submeshBuffers.begin(); it != m_submeshBuffers.end(); it++)
-	{
-		SAFE_DELETE((*it).pVertexBuffer);
-		SAFE_DELETE((*it).pIndexBuffer);
-	}
-
 	m_submeshBuffers.clear();
 }
 
@@ -691,26 +694,18 @@ HRESULT D3DMeshNode11::VOnRestore(Scene* pScene)
 		return hr;
 	}
 
-	hr = LoadMaterial(m_materialFilename);
-	if (FAILED(hr))
-	{
-		return hr;
-	}
-
 	return S_OK;
 }
 
-HRESULT D3DMeshNode11::LoadMaterial(std::string filename)
+Material* D3DMeshNode11::LoadMaterial(std::string filename)
 {
 	Material* mat = MaterialResourceLoader::LoadAndReturnMaterialResource(filename.c_str());
 	if (!mat)
 	{
-		return false;
+		return nullptr;
 	}
 
-	SetMaterial(mat);
-
-	return S_OK;
+	return mat;
 }
 
 HRESULT D3DMeshNode11::LoadMesh(std::string meshFilename)
@@ -735,8 +730,19 @@ HRESULT D3DMeshNode11::InitializeBuffers()
 	{
 		SubMeshBuffers submeshBuffer;
 		
+		submeshBuffer.material = nullptr;
+
+		if (i < m_materialFilenames.size()) {
+			submeshBuffer.material = LoadMaterial(m_materialFilenames[i]);
+		}
+
+		if (submeshBuffer.material == nullptr)
+		{
+			submeshBuffer.material = MaterialResourceLoader::LoadAndReturnDefaultMaterialResource();
+		}
+
 		//If Material has non-standard UV Scale, then update uvs
-		XMFLOAT2 uvScale = VGet()->GetMaterial().GetUVScale();
+		XMFLOAT2 uvScale = submeshBuffer.material->GetUVScale();
 		if (fabs(uvScale.x - 1.0f) > 0.0005 || fabs(uvScale.y - 1.0f) > 0.0005)
 		{
 			for (auto it = m_pLoadedMesh->meshes[i].vertices.begin(); it != m_pLoadedMesh->meshes[i].vertices.end(); it++)
@@ -841,7 +847,7 @@ bool D3DMeshNode11::RenderBuffers(ID3D11DeviceContext* deviceContext, Scene* pSc
 
 		deviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
-		result = g_pApp->GetGraphicsManager()->GetShaderManager()->RenderRenderable(this, (*it).indexCount, pScene);
+		result = g_pApp->GetGraphicsManager()->GetShaderManager()->RenderRenderable(this, (*it).material, (*it).indexCount, pScene);
 		if (!result)
 		{
 			return false;

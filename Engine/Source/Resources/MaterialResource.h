@@ -27,4 +27,8 @@ public:
 	virtual bool VAddNullZero() { return true; }
 
 	static Material* LoadAndReturnMaterialResource(const char* resourceString);
+	static Material* LoadAndReturnDefaultMaterialResource();
+
+private:
+	static const char* m_defaultMaterialName;
 };

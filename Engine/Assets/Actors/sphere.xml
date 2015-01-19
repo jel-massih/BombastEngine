@@ -2,6 +2,9 @@
 	<TransformComponent/>
   <MeshRenderComponent>
     <Mesh path="meshes\cubes.bmdl"></Mesh>
-		<Material path="materials\sphere_mat.bmtl"/>
+    <Materials>
+			<Material path="materials\sphere_mat.bmtl"/>
+			<Material path="materials\platform_mat.bmtl"/>
+  	</Materials>
   </MeshRenderComponent>
 </Actor>
