@@ -1,0 +1,29 @@
+<Actor type="sponza" resource="actors\sponza.xml">
+	<TransformComponent/>
+	<MeshRenderComponent>
+		<Mesh path="meshes\sponza.bmdl"/>
+		<Materials>
+			<Material path="materials\DefaultMaterial.bmtl"/>
+			<Material path="materials\sp_00_luk_mali.bmtl"/>
+			<Material path="materials\sp_svod_kapitel.bmtl"/>
+			<Material path="materials\sp_01_stub_baza_.bmtl"/>
+			<Material path="materials\sp_01_stub_kut.bmtl"/>
+			<Material path="materials\sp_00_stup.bmtl"/>
+			<Material path="materials\sp_01_stub_baza.bmtl"/>
+			<Material path="materials\sp_00_luk_mal1.bmtl"/>
+			<Material path="materials\sp_01_stub.bmtl"/>
+			<Material path="materials\sp_01_stup.bmtl"/>
+			<Material path="materials\sp_vijenac.bmtl"/>
+			<Material path="materials\sp_00_svod.bmtl"/>
+			<Material path="materials\sp_02_reljef.bmtl"/>
+			<Material path="materials\sp_01_luk_a.bmtl"/>
+			<Material path="materials\sp_zid_vani.bmtl"/>
+			<Material path="materials\sp_01_stup_baza.bmtl"/>
+			<Material path="materials\sp_00_zid.bmtl"/>
+			<Material path="materials\sp_00_prozor.bmtl"/>
+			<Material path="materials\sp_00_vrata_krug.bmtl"/>
+			<Material path="materials\sp_00_pod.bmtl"/>
+			<Material path="materials\sp_00_vrata_kock.bmtl"/>
+		</Materials>
+	</MeshRenderComponent>
+</Actor>

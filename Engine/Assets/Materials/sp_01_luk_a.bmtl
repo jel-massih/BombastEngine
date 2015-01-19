@@ -1,0 +1,9 @@
+<Material name="sp_01_luk_a">
+	<Ambient r="0" g="0" b="0" a="1"/>
+	<Diffuse r="0.745098" g="0.709804" b="0.67451" a="1"/>
+	<Specular r="0" g="0" b="0" a="1" power="200" />
+	<Emmisive r="0" g="0" b="0" a="1"/>
+	<Textures>
+		<Texture path="textures\SP_LUK.JPG"/>	</Textures>
+	<Shader type="LitTextured"/>
+</Material>

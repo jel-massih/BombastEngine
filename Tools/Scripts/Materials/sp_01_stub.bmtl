@@ -1,0 +1,9 @@
+<Material name="sp_01_stub">
+	<Ambient r="0" g="0" b="0" a="1"/>
+	<Diffuse r="0.737255" g="0.709804" b="0.670588" a="1"/>
+	<Specular r="0" g="0" b="0" a="1" power="200" />
+	<Emmisive r="0" g="0" b="0" a="1"/>
+	<Textures>
+		<Texture path="textures\01_STUB.JPG"/>	</Textures>
+	<Shader type="LitTextured"/>
+</Material>
