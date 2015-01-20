@@ -176,6 +176,9 @@
     <ClCompile Include="..\Utilities\WICTextureLoader.cpp">
       <Filter>Utilities</Filter>
     </ClCompile>
+    <ClCompile Include="..\Shading\DeferredRenderingBuffers.cpp">
+      <Filter>Shading</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Bombast\BombastApp.h">
@@ -389,6 +392,9 @@
     </ClInclude>
     <ClInclude Include="..\Utilities\WICTextureLoader.h">
       <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Shading\DeferredRenderingBuffers.h">
+      <Filter>Shading</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
