@@ -176,7 +176,7 @@ public:
 
 	virtual HRESULT VOnRestore(Scene* pScene) = 0;
 	virtual HRESULT VOnLostDevice(Scene* pScene) { return S_OK; }
-	virtual HRESULT VForwardRender(Scene* pScene) = 0;
+	virtual HRESULT VDeferredRender(Scene* pScene) = 0;
 
 protected:
 	virtual HRESULT InitializeBuffers() = 0;
@@ -204,7 +204,7 @@ public:
 	~D3DMeshNode11();
 
 	HRESULT VOnRestore(Scene* pScene);
-	HRESULT VForwardRender(Scene* pScene);
+	HRESULT VDeferredRender(Scene* pScene);
 
 private:
 	HRESULT InitializeBuffers();

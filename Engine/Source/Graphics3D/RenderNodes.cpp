@@ -805,7 +805,7 @@ HRESULT D3DMeshNode11::InitializeSubMeshBuffers(const ModelClass::SubMesh& subme
 	return S_OK;
 }
 
-HRESULT D3DMeshNode11::VForwardRender(Scene* pScene)
+HRESULT D3DMeshNode11::VDeferredRender(Scene* pScene)
 {
 	bool result;
 

@@ -1,6 +1,6 @@
 #pragma once
 
-const int BUFFER_COUNT = 2;
+const int BUFFER_COUNT = 3;
 
 class DeferredRenderingBuffers
 {
