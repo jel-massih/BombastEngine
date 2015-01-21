@@ -135,7 +135,7 @@ HRESULT D3DBitmapNode11::InitializeBuffers()
 	return S_OK;
 }
 
-HRESULT D3DBitmapNode11::VRender(Scene* pScene)
+HRESULT D3DBitmapNode11::VForwardRender(Scene* pScene)
 {
 	HRESULT hr;
 	bool result;
@@ -431,7 +431,7 @@ HRESULT D3D11GridNode::InitializeBuffers()
 	return S_OK;
 }
 
-HRESULT D3D11GridNode::VRender(Scene* pScene)
+HRESULT D3D11GridNode::VForwardRender(Scene* pScene)
 {
 	bool result;
 
@@ -623,7 +623,7 @@ HRESULT D3D11PrimitiveNode::InitializeBuffers()
 	return S_OK;
 }
 
-HRESULT D3D11PrimitiveNode::VRender(Scene* pScene)
+HRESULT D3D11PrimitiveNode::VForwardRender(Scene* pScene)
 {
 	bool result;
 
@@ -805,7 +805,7 @@ HRESULT D3DMeshNode11::InitializeSubMeshBuffers(const ModelClass::SubMesh& subme
 	return S_OK;
 }
 
-HRESULT D3DMeshNode11::VRender(Scene* pScene)
+HRESULT D3DMeshNode11::VForwardRender(Scene* pScene)
 {
 	bool result;
 

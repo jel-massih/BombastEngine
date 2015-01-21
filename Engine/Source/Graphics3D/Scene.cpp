@@ -42,8 +42,12 @@ HRESULT Scene::DoRender()
 
 		m_pLightManager->CalcLighting(this);
 
-		OnDeferredRender();
-		OnForwardRender();
+		if (m_pRoot->VPreRender(this) == S_OK)
+		{
+			OnDeferredRender();
+			OnForwardRender();
+			m_pRoot->VPostRender(this);
+		}
 	}
 
 	return S_OK;
@@ -51,17 +55,18 @@ HRESULT Scene::DoRender()
 
 HRESULT Scene::OnDeferredRender()
 {
+	//g_pApp->GetGraphicsManager()->GetShaderManager()->PrepGBuffer();
+
+	//m_pRoot->VDeferredRender(this);
+	//m_pRoot->VDeferredRenderChildren(this);
+
 	return S_OK;
 }
 
 HRESULT Scene::OnForwardRender()
 {
-	if (m_pRoot->VPreRender(this) == S_OK)
-	{
-		m_pRoot->VRender(this);
-		m_pRoot->VRenderChildren(this);
-		m_pRoot->VPostRender(this);
-	}
+	m_pRoot->VForwardRender(this);
+	m_pRoot->VForwardRenderChildren(this);
 
 	RenderAlphaPass();
 

@@ -62,11 +62,16 @@ public:
 	virtual HRESULT VOnRestore(Scene* pScene);
 	virtual HRESULT VOnUpdate(Scene* pScene, const float deltaMs);
 
-	virtual HRESULT VPreRender(Scene* pScene);
 	virtual bool VIsVisible(Scene* pScene) const;
-	virtual HRESULT VRender(Scene* pScene) { return S_OK; }
-	virtual HRESULT VRenderChildren(Scene* pScene);
+
+	virtual HRESULT VPreRender(Scene* pScene);
 	virtual HRESULT VPostRender(Scene* pScene);
+
+	virtual HRESULT VDeferredRender(Scene* pScene) { return S_OK; }
+	virtual HRESULT VDeferredRenderChildren(Scene* pScene);
+
+	virtual HRESULT VForwardRender(Scene* pScene) { return S_OK; }
+	virtual HRESULT VForwardRenderChildren(Scene* pScene);
 
 	virtual bool VAddChild(ISceneNode* kid);
 	virtual bool VRemoveChild(ActorId id);
@@ -96,7 +101,8 @@ class RootNode : public SceneNode
 public:
 	RootNode();
 	virtual bool VAddChild(ISceneNode* child);
-	virtual HRESULT VRenderChildren(Scene* pScene);
+	virtual HRESULT VDeferredRenderChildren(Scene* pScene);
+	virtual HRESULT VForwardRenderChildren(Scene* pScene);
 	virtual bool VRemoveChild(ActorId id);
 	virtual bool VIsVisible(Scene* pScene) const { return true; }
 };
@@ -114,7 +120,7 @@ public :
 	{
 	}
 
-	virtual HRESULT VRender(Scene* pScene);
+	virtual HRESULT VForwardRender(Scene* pScene);
 	virtual HRESULT VOnRestore(Scene* pScene);
 	virtual HRESULT VOnUpdate(Scene* pScene, const float deltaMs);
 	virtual bool VIsVisible(Scene* pScene) const { return m_bActive; }

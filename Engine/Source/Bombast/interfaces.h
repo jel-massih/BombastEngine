@@ -198,11 +198,17 @@ public:
 	virtual HRESULT VOnUpdate(Scene* pScene, const float deltaMs) = 0;
 	virtual HRESULT VOnRestore(Scene* pScene) = 0;
 
-	virtual HRESULT VPreRender(Scene* pScene) = 0;
 	virtual bool VIsVisible(Scene* pScene) const = 0;
-	virtual HRESULT VRender(Scene* pScene) = 0;
-	virtual HRESULT VRenderChildren(Scene* pScene) = 0;
+	
+	virtual HRESULT VPreRender(Scene* pScene) = 0;
 	virtual HRESULT VPostRender(Scene* pScene) = 0;
+
+
+	virtual HRESULT VDeferredRender(Scene* pScene) = 0;
+	virtual HRESULT VDeferredRenderChildren(Scene* pScene) = 0;
+
+	virtual HRESULT VForwardRender(Scene* pScene) = 0;
+	virtual HRESULT VForwardRenderChildren(Scene* pScene) = 0;
 
 	virtual bool VAddChild(ISceneNode* kid) = 0;
 	virtual bool VRemoveChild(ActorId id) = 0;

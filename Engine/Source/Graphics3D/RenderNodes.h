@@ -19,7 +19,7 @@ public:
 
 	virtual HRESULT VOnRestore(Scene* pScene) = 0;
 	virtual HRESULT VOnLostDevice(Scene* pScene) { return S_OK; }
-	virtual HRESULT VRender(Scene* pScene) = 0;
+	virtual HRESULT VForwardRender(Scene* pScene) = 0;
 
 protected:
 	virtual HRESULT InitializeBuffers() = 0;
@@ -53,7 +53,7 @@ class D3DBitmapNode11 : public BitmapNode
 public:
 	D3DBitmapNode11(const ActorId actorId, BaseRenderComponent* renderComponent, std::string textureFileName, DirectX::XMFLOAT2 relativeSize, RenderPass renderPass, const Mat4x4* t);
 	HRESULT VOnRestore(Scene* pScene);
-	HRESULT VRender(Scene* pScene);
+	HRESULT VForwardRender(Scene* pScene);
 
 private:
 	HRESULT InitializeBuffers();
@@ -82,7 +82,7 @@ public:
 	~D3D11GridNode();
 
 	HRESULT VOnRestore(Scene* pScene);
-	HRESULT VRender(Scene* pScene);
+	HRESULT VForwardRender(Scene* pScene);
 
 	virtual bool VIsVisible(Scene* pScene) const { return m_bShow; }
 
@@ -120,7 +120,7 @@ public:
 	PrimitiveNode(const ActorId actorId, BaseRenderComponent* renderComponent, std::string textureFilename, RenderPass renderPass, PrimitiveType type, Vec3 size, const Mat4x4* t);
 
 	virtual HRESULT VOnRestore(Scene* pScene) = 0;
-	virtual HRESULT VRender(Scene* pScene) = 0;
+	virtual HRESULT VForwardRender(Scene* pScene) = 0;
 
 protected:
 	virtual HRESULT InitializeBuffers() = 0;
@@ -150,7 +150,7 @@ public:
 	~D3D11PrimitiveNode();
 
 	HRESULT VOnRestore(Scene* pScene);
-	HRESULT VRender(Scene* pScene);
+	HRESULT VForwardRender(Scene* pScene);
 
 private:
 	HRESULT InitializeBuffers();
@@ -176,7 +176,7 @@ public:
 
 	virtual HRESULT VOnRestore(Scene* pScene) = 0;
 	virtual HRESULT VOnLostDevice(Scene* pScene) { return S_OK; }
-	virtual HRESULT VRender(Scene* pScene) = 0;
+	virtual HRESULT VForwardRender(Scene* pScene) = 0;
 
 protected:
 	virtual HRESULT InitializeBuffers() = 0;
@@ -204,7 +204,7 @@ public:
 	~D3DMeshNode11();
 
 	HRESULT VOnRestore(Scene* pScene);
-	HRESULT VRender(Scene* pScene);
+	HRESULT VForwardRender(Scene* pScene);
 
 private:
 	HRESULT InitializeBuffers();

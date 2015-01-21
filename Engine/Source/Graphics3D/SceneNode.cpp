@@ -156,7 +156,7 @@ HRESULT SceneNode::VOnUpdate(Scene* pScene, const float deltaMs)
 	return S_OK;
 }
 
-HRESULT SceneNode::VRenderChildren(Scene* pScene)
+HRESULT SceneNode::VDeferredRenderChildren(Scene* pScene)
 {
 	SceneNodeList::iterator i = m_children.begin();
 	SceneNodeList::iterator end = m_children.end();
@@ -167,9 +167,31 @@ HRESULT SceneNode::VRenderChildren(Scene* pScene)
 		{
 			if ((*i)->VIsVisible(pScene))
 			{
-				(*i)->VRender(pScene);
+				(*i)->VDeferredRender(pScene);
 			}
-			(*i)->VRenderChildren(pScene);
+			(*i)->VDeferredRenderChildren(pScene);
+		}
+		(*i)->VPostRender(pScene);
+		i++;
+	}
+
+	return S_OK;
+}
+
+HRESULT SceneNode::VForwardRenderChildren(Scene* pScene)
+{
+	SceneNodeList::iterator i = m_children.begin();
+	SceneNodeList::iterator end = m_children.end();
+
+	while (i != end)
+	{
+		if ((*i)->VPreRender(pScene) == S_OK)
+		{
+			if ((*i)->VIsVisible(pScene))
+			{
+				(*i)->VForwardRender(pScene);
+			}
+			(*i)->VForwardRenderChildren(pScene);
 		}
 		(*i)->VPostRender(pScene);
 		i++;
@@ -279,7 +301,7 @@ bool RootNode::VRemoveChild(ActorId id)
 	return bRemoved;
 }
 
-HRESULT RootNode::VRenderChildren(Scene* pScene)
+HRESULT RootNode::VDeferredRenderChildren(Scene* pScene)
 {
 	for (int pass = RenderPass_0; pass < RenderPass_Last; pass++)
 	{
@@ -287,16 +309,11 @@ HRESULT RootNode::VRenderChildren(Scene* pScene)
 		{
 		case RenderPass_Static:
 		case RenderPass_Actor:
-			m_children[pass]->VRenderChildren(pScene);
+			m_children[pass]->VDeferredRenderChildren(pScene);
 			break;
 		case RenderPass_GUI:
-			pScene->GetRenderer()->VEnableZBuffer(false);
-			m_children[pass]->VRenderChildren(pScene);
-			pScene->GetRenderer()->VEnableZBuffer(true);
-			break;
 		case RenderPass_Sky:
-//			IRenderState* skyPass = pScene->GetRenderer()->VPrepareSkyBoxPass();
-			m_children[pass]->VRenderChildren(pScene);
+		default:
 			break;
 		}
 	}
@@ -304,7 +321,32 @@ HRESULT RootNode::VRenderChildren(Scene* pScene)
 	return S_OK;
 }
 
-HRESULT CameraNode::VRender(Scene* pScene)
+HRESULT RootNode::VForwardRenderChildren(Scene* pScene)
+{
+	for (int pass = RenderPass_0; pass < RenderPass_Last; pass++)
+	{
+		switch (pass)
+		{
+		case RenderPass_Static:
+		case RenderPass_Actor:
+			m_children[pass]->VForwardRenderChildren(pScene);
+			break;
+		case RenderPass_GUI:
+			pScene->GetRenderer()->VEnableZBuffer(false);
+			m_children[pass]->VForwardRenderChildren(pScene);
+			pScene->GetRenderer()->VEnableZBuffer(true);
+			break;
+		case RenderPass_Sky:
+			//			IRenderState* skyPass = pScene->GetRenderer()->VPrepareSkyBoxPass();
+			m_children[pass]->VForwardRenderChildren(pScene);
+			break;
+		}
+	}
+
+	return S_OK;
+}
+
+HRESULT CameraNode::VForwardRender(Scene* pScene)
 {
 	if (m_bDebugCamera)
 	{
