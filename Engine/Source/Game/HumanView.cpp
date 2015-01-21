@@ -94,6 +94,8 @@ void HumanView::VOnRender(const float deltaMs, double elapsedMs)
 
 	if (m_runFullSpeed || ((m_currTick - m_lastDraw) > 1000 / MAX_FPS))
 	{
+		m_lastDraw = m_currTick;
+
 		if (g_pApp->GetGraphicsManager()->GetRenderer()->VBeginScene())
 		{
 			m_screenElements.sort(SortBy_Ptr_Content<IScreenElement>());
@@ -105,8 +107,6 @@ void HumanView::VOnRender(const float deltaMs, double elapsedMs)
 					(*it)->VOnRender(deltaMs, elapsedMs);
 				}
 			}
-
-			m_lastDraw = m_currTick;
 
 			g_pApp->GetGraphicsManager()->GetRenderer()->VEnableZBuffer(false);
 			g_pApp->GetGraphicsManager()->GetRenderer()->VEnableAlphaBlending(true);

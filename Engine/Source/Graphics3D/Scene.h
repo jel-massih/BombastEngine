@@ -17,7 +17,7 @@ public:
 	Scene(IRenderer* renderer);
 	virtual ~Scene();
 
-	HRESULT OnRender();
+	HRESULT DoRender();
 	HRESULT OnRestore();
 	HRESULT OnLostDevice();
 	HRESULT OnUpdate(const float deltaMs);
@@ -55,6 +55,10 @@ public:
 
 
 	HRESULT Pick(RayCast *pRayCast) { return m_pRoot->VPick(this, pRayCast); }
+
+protected:
+	HRESULT OnForwardRender();
+	HRESULT OnDeferredRender();
 
 protected:
 	SceneNode* m_pRoot;

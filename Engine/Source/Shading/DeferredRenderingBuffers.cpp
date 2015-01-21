@@ -132,7 +132,7 @@ void DeferredRenderingBuffers::SetRenderTargets(ID3D11DeviceContext* context)
 {
 	context->OMSetRenderTargets(BUFFER_COUNT, m_renderTargetViews, m_pDepthStencilView);
 
-	context->RSSetViewports(1, &m_viewport);
+	//context->RSSetViewports(1, &m_viewport);
 }
 
 void DeferredRenderingBuffers::ClearRenderTargets(ID3D11DeviceContext* context, Vec4 clearColor)

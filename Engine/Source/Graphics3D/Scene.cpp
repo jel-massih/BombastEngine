@@ -34,7 +34,7 @@ Scene::~Scene()
 	SAFE_DELETE(m_pRoot);
 }
 
-HRESULT Scene::OnRender()
+HRESULT Scene::DoRender()
 {
 	if (m_pRoot && m_pCamera)
 	{
@@ -42,15 +42,28 @@ HRESULT Scene::OnRender()
 
 		m_pLightManager->CalcLighting(this);
 
-		if (m_pRoot->VPreRender(this) == S_OK)
-		{
-			m_pRoot->VRender(this);
-			m_pRoot->VRenderChildren(this);
-			m_pRoot->VPostRender(this);
-		}
-
-		RenderAlphaPass();
+		OnDeferredRender();
+		OnForwardRender();
 	}
+
+	return S_OK;
+}
+
+HRESULT Scene::OnDeferredRender()
+{
+	return S_OK;
+}
+
+HRESULT Scene::OnForwardRender()
+{
+	if (m_pRoot->VPreRender(this) == S_OK)
+	{
+		m_pRoot->VRender(this);
+		m_pRoot->VRenderChildren(this);
+		m_pRoot->VPostRender(this);
+	}
+
+	RenderAlphaPass();
 
 	return S_OK;
 }

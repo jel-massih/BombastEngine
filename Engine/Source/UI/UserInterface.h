@@ -9,7 +9,7 @@ public:
 
 	virtual void VOnUpdate(const float deltaMs) { OnUpdate(deltaMs); }
 	virtual HRESULT VOnRestore() { OnRestore(); return S_OK; }
-	virtual HRESULT VOnRender(const float deltaMs, double elapsedMs) { OnRender(); return S_OK; }
+	virtual HRESULT VOnRender(const float deltaMs, double elapsedMs) { return DoRender(); }
 	
 	virtual HRESULT VOnLostDevice() { OnLostDevice(); return S_OK; }
 	virtual int VGetZOrder() const { return 0; }
