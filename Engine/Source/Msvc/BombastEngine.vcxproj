@@ -64,7 +64,7 @@
     <ClInclude Include="..\Scripting\LuaEvent.h" />
     <ClInclude Include="..\Scripting\LuaExports.h" />
     <ClInclude Include="..\Shading\BasicShaders.h" />
-    <ClInclude Include="..\Shading\DeferredRenderingBuffers.h" />
+    <ClInclude Include="..\Shading\DeferredRenderingManager.h" />
     <ClInclude Include="..\Shading\FontShader.h" />
     <ClInclude Include="..\Shading\LightmapShader.h" />
     <ClInclude Include="..\Shading\LightShader.h" />
@@ -130,7 +130,7 @@
     <ClCompile Include="..\Resources\ZipFile.cpp" />
     <ClCompile Include="..\Scripting\LuaCoreManager.cpp" />
     <ClCompile Include="..\Shading\BasicShaders.cpp" />
-    <ClCompile Include="..\Shading\DeferredRenderingBuffers.cpp" />
+    <ClCompile Include="..\Shading\DeferredRenderingManager.cpp" />
     <ClCompile Include="..\Shading\FontShader.cpp" />
     <ClCompile Include="..\Shading\LightmapShader.cpp" />
     <ClCompile Include="..\Shading\LightShader.cpp" />
@@ -169,6 +169,14 @@
       <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)..\Assets\Shaders\%(Filename).cso</ObjectFileOutput>
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">ColorVertexShader</EntryPointName>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)..\Assets\Shaders\%(Filename).cso</ObjectFileOutput>
+    </FxCompile>
+    <FxCompile Include="..\Shading\Shaders\FillGBuffer.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">VS</EntryPointName>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">VS</EntryPointName>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)..\Assets\Shaders\%(Filename).cso</ObjectFileOutput>
       <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)..\Assets\Shaders\%(Filename).cso</ObjectFileOutput>
     </FxCompile>
     <FxCompile Include="..\Shading\Shaders\FontPixelShader.hlsl">
