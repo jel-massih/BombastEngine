@@ -55,19 +55,21 @@ HRESULT Scene::DoRender()
 
 HRESULT Scene::OnDeferredRender()
 {
-	//g_pApp->GetGraphicsManager()->GetShaderManager()->PrepGBuffer();
+	g_pApp->GetGraphicsManager()->GetShaderManager()->PrepGBuffer();
 
 	m_pRoot->VDeferredRender(this);
 	m_pRoot->VDeferredRenderChildren(this);
 
 	ID3D11RenderTargetView* pClearRTV[] = { NULL, NULL, NULL };
-	//g_pApp->GetGraphicsManager()->GetRenderer()->GetDeviceContext()->OMSetRenderTargets(3, pClearRTV, NULL);
+	g_pApp->GetGraphicsManager()->GetRenderer()->GetDeviceContext()->OMSetRenderTargets(3, pClearRTV, NULL);
 
 	return S_OK;
 }
 
 HRESULT Scene::OnForwardRender()
 {
+	g_pApp->GetGraphicsManager()->GetRenderer()->VPrepForwardRendering();
+
 	m_pRoot->VForwardRender(this);
 	m_pRoot->VForwardRenderChildren(this);
 

@@ -64,6 +64,8 @@ public:
 
 	virtual void VCalcLighting(std::list<LightNode*>* lights, int maxLights) {}
 
+	virtual void VPrepForwardRendering() const;
+
 private:
 	bool m_vsyncEnabled;
 	bool m_bFullscreen;

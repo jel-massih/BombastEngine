@@ -512,3 +512,8 @@ void D3DClass11::VToggleFullscreen()
 		m_pSwapChain->SetFullscreenState(m_bFullscreen, NULL);
 	}
 }
+
+void D3DClass11::VPrepForwardRendering() const
+{
+	m_pDeviceContext->OMSetRenderTargets(1, &m_pRenderTargetView, m_pDepthStencilView);
+}
