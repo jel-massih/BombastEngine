@@ -1,6 +1,6 @@
-#include "DeferredRenderingBuffers.h"
+#include "DeferredRenderingManager.h"
 
-DeferredRenderingBuffers::DeferredRenderingBuffers()
+DeferredRenderingManager::DeferredRenderingManager()
 {
 	for (int i = 0; i < BUFFER_COUNT; i++)
 	{
@@ -13,7 +13,7 @@ DeferredRenderingBuffers::DeferredRenderingBuffers()
 	m_pDepthStencilView = nullptr;
 }
 
-DeferredRenderingBuffers::~DeferredRenderingBuffers()
+DeferredRenderingManager::~DeferredRenderingManager()
 {
 	SAFE_RELEASE(m_pDepthStencilView);
 	SAFE_RELEASE(m_pDepthStencilBuffer);
@@ -26,7 +26,7 @@ DeferredRenderingBuffers::~DeferredRenderingBuffers()
 	}
 }
 
-bool DeferredRenderingBuffers::Initialize(ID3D11Device* device, int texWidth, int texHeight)
+bool DeferredRenderingManager::Initialize(ID3D11Device* device, int texWidth, int texHeight)
 {
 	HRESULT result;
 	D3D11_TEXTURE2D_DESC texDesc;
@@ -128,14 +128,14 @@ bool DeferredRenderingBuffers::Initialize(ID3D11Device* device, int texWidth, in
 	return true;
 }
 
-void DeferredRenderingBuffers::SetRenderTargets(ID3D11DeviceContext* context)
+void DeferredRenderingManager::SetRenderTargets(ID3D11DeviceContext* context)
 {
 	context->OMSetRenderTargets(BUFFER_COUNT, m_renderTargetViews, m_pDepthStencilView);
 
 	//context->RSSetViewports(1, &m_viewport);
 }
 
-void DeferredRenderingBuffers::ClearRenderTargets(ID3D11DeviceContext* context, Vec4 clearColor)
+void DeferredRenderingManager::ClearRenderTargets(ID3D11DeviceContext* context, Vec4 clearColor)
 {
 	float color[4];
 

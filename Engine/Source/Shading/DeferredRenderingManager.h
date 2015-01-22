@@ -2,11 +2,11 @@
 
 const int BUFFER_COUNT = 3;
 
-class DeferredRenderingBuffers
+class DeferredRenderingManager
 {
 public:
-	DeferredRenderingBuffers();
-	~DeferredRenderingBuffers();
+	DeferredRenderingManager();
+	~DeferredRenderingManager();
 
 	bool Initialize(ID3D11Device* device, int texWidth, int texHeight);
 

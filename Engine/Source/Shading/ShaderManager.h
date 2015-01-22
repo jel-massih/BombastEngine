@@ -6,13 +6,13 @@
 #include "LightmapShader.h"
 
 class SceneNode;
-class DeferredRenderingBuffers;
+class DeferredRenderingManager;
 
 class ShaderManager
 {
 
 public:
-	ShaderManager() : m_pLightShader(nullptr), m_pColorShader(nullptr), m_pTextureShader(nullptr), m_pMultiTextureShader(nullptr), m_pDeferredBuffers(nullptr){}
+	ShaderManager() : m_pLightShader(nullptr), m_pColorShader(nullptr), m_pTextureShader(nullptr), m_pMultiTextureShader(nullptr), m_pDeferredRenderingManager(nullptr){}
 	~ShaderManager();
 
 	bool Initialize(IRenderer* renderer);
@@ -28,5 +28,5 @@ private:
 	MultiTextureShader* m_pMultiTextureShader;
 	LightmapShader* m_pLightmapShader;
 
-	DeferredRenderingBuffers* m_pDeferredBuffers;
+	DeferredRenderingManager* m_pDeferredRenderingManager;
 };

@@ -1,9 +1,9 @@
 #include "ShaderManager.h"
-#include "DeferredRenderingBuffers.h"
+#include "DeferredRenderingManager.h"
 
 ShaderManager::~ShaderManager()
 {
-	SAFE_DELETE(m_pDeferredBuffers);
+	SAFE_DELETE(m_pDeferredRenderingManager);
 	SAFE_DELETE(m_pLightShader);
 	SAFE_DELETE(m_pColorShader);
 	SAFE_DELETE(m_pTextureShader);
@@ -85,15 +85,15 @@ bool ShaderManager::Initialize(IRenderer* renderer)
 		return false;
 	}
 
-	m_pDeferredBuffers = BE_NEW DeferredRenderingBuffers;
-	if (!m_pDeferredBuffers)
+	m_pDeferredRenderingManager = BE_NEW DeferredRenderingManager;
+	if (!m_pDeferredRenderingManager)
 	{
 		BE_ERROR("Could not allocate the Deferred Buffers");
 		return false;
 	}
 
 	Point screenSize = g_pApp->GetScreenSize();
-	result = m_pDeferredBuffers->Initialize(renderer->GetDevice(), screenSize.GetX(), screenSize.GetY());
+	result = m_pDeferredRenderingManager->Initialize(renderer->GetDevice(), screenSize.GetX(), screenSize.GetY());
 	if (!result)
 	{
 		BE_ERROR("Could not initialize the Deferred Buffers");
@@ -143,8 +143,8 @@ bool ShaderManager::PrepGBuffer() const
 {
 	IRenderer* pRenderer = g_pApp->GetGraphicsManager()->GetRenderer();
 	ID3D11DeviceContext* pDeviceContext = pRenderer->GetDeviceContext();
-	m_pDeferredBuffers->ClearRenderTargets(pDeviceContext, Vec4(0.0f, 0.0f, 0.0f, 1.0f));
-	m_pDeferredBuffers->SetRenderTargets(pDeviceContext);
+	m_pDeferredRenderingManager->ClearRenderTargets(pDeviceContext, Vec4(0.0f, 0.0f, 0.0f, 1.0f));
+	m_pDeferredRenderingManager->SetRenderTargets(pDeviceContext);
 
 	pDeviceContext->OMSetDepthStencilState(NULL, 0);
 
