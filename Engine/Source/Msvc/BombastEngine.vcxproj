@@ -73,6 +73,7 @@
     <ClInclude Include="..\UI\UserInterface.h" />
     <ClInclude Include="..\Utilities\BMDLMeshLoader.h" />
     <ClInclude Include="..\Utilities\DDSTextureLoader.h" />
+    <ClInclude Include="..\Utilities\DirectXUtils.h" />
     <ClInclude Include="..\Utilities\FastDelegate\FastDelegate.h" />
     <ClInclude Include="..\Utilities\Initialization.h" />
     <ClInclude Include="..\Utilities\Math.h" />
