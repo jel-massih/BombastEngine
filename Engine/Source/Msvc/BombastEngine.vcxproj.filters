@@ -487,7 +487,10 @@
     <FxCompile Include="..\Shading\Shaders\LightmapVertexShader.hlsl">
       <Filter>Shading\Shaders</Filter>
     </FxCompile>
-    <FxCompile Include="..\Shading\Shaders\FillGBuffer.hlsl">
+    <FxCompile Include="..\Shading\Shaders\FillGBufferVertexShader.hlsl">
+      <Filter>Shading\Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="..\Shading\Shaders\FillGBufferPixelShader.hlsl">
       <Filter>Shading\Shaders</Filter>
     </FxCompile>
   </ItemGroup>

@@ -1,25 +1,10 @@
-//Shader used to fill GBuffer with Vert info
 Texture2D textureDiffuse : register(t0);
 SamplerState textureSampler : register(s0);
 
-cbuffer MeshBuffer : register(b0)
-{
-	matrix LocalToProjected4x4;
-	matrix LocalToWorld4x4;
-	matrix WorldToView4x4;
-};
-
-cbuffer SubMeshBuffer : register(b1)
+cbuffer SubMeshBuffer : register(b0)
 {
 	float3 DiffuseColor;
 	int bTextured;
-};
-
-struct VertexInputType
-{
-	float4 pos : POSITION;
-	float3 normal : NORMAL;
-	float2 uv : TEXCOORD;
 };
 
 struct PixelInputType
@@ -36,21 +21,6 @@ struct FragmentInputType
 	float4 fragment2 : SV_Target1;
 	uint fragment3 : SV_Target2;
 };
-
-PixelInputType VS(VertexInputType input)
-{
-	PixelInputType output;
-
-	float4 wp = mul(input.pos, LocalToWorld4x4);
-	output.pos = mul(input.pos, LocalToProjected4x4);
-
-	output.uv = input.uv;
-	
-	output.worldNorm = mul(input.normal, (float3x3)LocalToWorld4x4);
-	output.viewDepth = mul(wp, WorldToView4x4).z;
-
-	return output;
-}
 
 FragmentInputType PS(PixelInputType input, uint coverage : SV_Coverage) : SV_TARGET
 {
