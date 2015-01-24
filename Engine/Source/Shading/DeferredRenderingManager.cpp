@@ -4,7 +4,8 @@ DeferredRenderingManager::DeferredRenderingManager()
 	: m_pGbufferInputLayout(nullptr),
 	m_pFillGBufferVertexShader(nullptr),
 	m_pFillGBufferPixelShader(nullptr),
-	m_pTextureSampler(nullptr)
+	m_pTextureSampler(nullptr),
+	m_pMatrixBuffer(nullptr)
 {
 }
 
@@ -18,6 +19,8 @@ DeferredRenderingManager::~DeferredRenderingManager()
 	SAFE_RELEASE(m_pPointSampler);
 	SAFE_RELEASE(m_pWriteStencilState);
 	SAFE_RELEASE(m_pTestStencilState);
+
+	SAFE_RELEASE(m_pMatrixBuffer);
 
 	m_texGBuffer.Release();
 	m_texGBuffer2.Release();
@@ -170,18 +173,31 @@ bool DeferredRenderingManager::Initialize(ID3D11Device* device, std::string vert
 		}
 	}
 
+	{
+		D3D11_BUFFER_DESC bd;
+		ZeroMemory(&bd, sizeof(D3D11_BUFFER_DESC));
+		bd.Usage = D3D11_USAGE_DYNAMIC;
+		bd.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+		bd.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+		bd.MiscFlags = 0;
+		bd.StructureByteStride = 0;
+		bd.ByteWidth = sizeof(MatrixBufferType);
+
+		result = device->CreateBuffer(&bd, NULL, &m_pMatrixBuffer);
+		if (FAILED(result)) {
+			BE_ERROR("Error: Failed to create ");
+			return false;
+		}
+	}
+
 	return true;
 }
 
-void DeferredRenderingManager::Render(ID3D11Device* device, ID3D11DeviceContext* context, DirectX::XMMATRIX &world, DirectX::XMMATRIX &view, DirectX::XMMATRIX &projection, ID3D11RenderTargetView* pRTV, ID3D11DepthStencilView* pDSV)
+void DeferredRenderingManager::StartRender(ID3D11Device* device, ID3D11DeviceContext* context, ID3D11RenderTargetView* pRTV, ID3D11DepthStencilView* pDSV) const
 {
 	HRESULT result;
 	D3D11_MAPPED_SUBRESOURCE mappedResource;
 	unsigned int bufferNumber;
-
-	world = DirectX::XMMatrixTranspose(world);
-	view = DirectX::XMMatrixTranspose(view);
-	projection = DirectX::XMMatrixTranspose(projection);
 
 	//Clear the Back Buffer
 	float clearColor[4] = { 0.0f, 0.0f, 0.0f, 0.0f };
@@ -190,7 +206,6 @@ void DeferredRenderingManager::Render(ID3D11Device* device, ID3D11DeviceContext*
 
 	{
 		//Fill G Buffer
-		
 		ID3D11RenderTargetView* pGBufRTV[] = { m_texGBuffer.GetRenderTargetView(), m_texGBuffer2.GetRenderTargetView(), m_texCoverageMask.GetRenderTargetView() };
 		context->ClearRenderTargetView(pGBufRTV[0], clearColor);
 		context->ClearRenderTargetView(pGBufRTV[1], clearColor);
@@ -211,6 +226,26 @@ void DeferredRenderingManager::Render(ID3D11Device* device, ID3D11DeviceContext*
 		ID3D11RenderTargetView* pClearRTV[] = { NULL, NULL, NULL };
 		context->OMSetRenderTargets(3, pClearRTV, NULL);
 	}
+}
 
+void DeferredRenderingManager::DrawRenderable(ID3D11DeviceContext* deviceContext, int indexCount, XMMATRIX& worldMatrix, XMMATRIX& viewMatrix, XMMATRIX& projectionMatrix) const
+{
+	D3D11_MAPPED_SUBRESOURCE mappedResource;
+	deviceContext->Map(m_pMatrixBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource);
+	MatrixBufferType* dataPtr = (MatrixBufferType*)mappedResource.pData;
+
+	dataPtr->world = worldMatrix;
+	dataPtr->view = viewMatrix;
+	dataPtr->projection = projectionMatrix;
+
+	deviceContext->Unmap(m_pMatrixBuffer, 0);
+
+	deviceContext->VSSetConstantBuffers(0, 1, &m_pMatrixBuffer);
+	
+	deviceContext->DrawIndexed(indexCount, 0, 0);
+}
+
+void DeferredRenderingManager::FinishRender()
+{
 
 }

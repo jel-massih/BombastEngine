@@ -841,11 +841,13 @@ bool D3DMeshNode11::RenderBuffers(ID3D11DeviceContext* deviceContext, Scene* pSc
 
 		deviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
-		result = g_pApp->GetGraphicsManager()->GetShaderManager()->RenderRenderable(this, (*it).material, (*it).indexCount, pScene);
-		if (!result)
-		{
-			return false;
-		}
+		IRenderer* pRenderer = g_pApp->GetGraphicsManager()->GetRenderer();
+		Mat4x4 worldMatrix, viewMatrix, projectionMatrix;
+		pRenderer->VGetViewMatrix(viewMatrix);
+		pRenderer->VGetWorldMatrix(worldMatrix);
+		pRenderer->VGetProjectionMatrix(projectionMatrix);
+
+		g_pApp->GetGraphicsManager()->GetDeferredRenderingManager()->DrawRenderable(deviceContext, (*it).indexCount, XMLoadFloat4x4(&worldMatrix), XMLoadFloat4x4(&viewMatrix), XMLoadFloat4x4(&projectionMatrix));
 	}
 
 	return true;

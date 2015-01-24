@@ -2,6 +2,7 @@
 
 #include "../Graphics3D/D3DClass.h"
 #include "../Shading/ShaderManager.h"
+#include "../Shading/DeferredRenderingManager.h"
 
 class GraphicsManager
 {
@@ -25,7 +26,12 @@ public:
 		return m_pShaderManager;
 	}
 
+	const DeferredRenderingManager* GetDeferredRenderingManager() const {
+		return m_pDeferredRenderingManager;
+	}
+
 private:
 	IRenderer* m_pRenderer;
 	ShaderManager* m_pShaderManager;
+	DeferredRenderingManager* m_pDeferredRenderingManager;
 };

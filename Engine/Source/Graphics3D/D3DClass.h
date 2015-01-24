@@ -64,6 +64,7 @@ public:
 
 	virtual void VCalcLighting(std::list<LightNode*>* lights, int maxLights) {}
 
+	virtual void VPrepDeferredRendering() const;
 	virtual void VPrepForwardRendering() const;
 
 private:

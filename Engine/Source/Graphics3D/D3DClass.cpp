@@ -513,6 +513,11 @@ void D3DClass11::VToggleFullscreen()
 	}
 }
 
+void D3DClass11::VPrepDeferredRendering() const
+{
+	g_pApp->GetGraphicsManager()->GetDeferredRenderingManager()->StartRender(m_pDevice, m_pDeviceContext, m_pRenderTargetView, m_pDepthStencilView);
+}
+
 void D3DClass11::VPrepForwardRendering() const
 {
 	m_pDeviceContext->OMSetRenderTargets(1, &m_pRenderTargetView, m_pDepthStencilView);

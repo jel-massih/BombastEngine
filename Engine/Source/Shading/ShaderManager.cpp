@@ -1,9 +1,7 @@
 #include "ShaderManager.h"
-#include "DeferredRenderingManager.h"
 
 ShaderManager::~ShaderManager()
 {
-	SAFE_DELETE(m_pDeferredRenderingManager);
 	SAFE_DELETE(m_pLightShader);
 	SAFE_DELETE(m_pColorShader);
 	SAFE_DELETE(m_pTextureShader);
@@ -85,21 +83,6 @@ bool ShaderManager::Initialize(IRenderer* renderer)
 		return false;
 	}
 
-	m_pDeferredRenderingManager = BE_NEW DeferredRenderingManager;
-	if (!m_pDeferredRenderingManager)
-	{
-		BE_ERROR("Could not allocate the Deferred Buffers");
-		return false;
-	}
-
-	Point screenSize = g_pApp->GetScreenSize();
-	result = m_pDeferredRenderingManager->Initialize(renderer->GetDevice(), "Shaders\\FillGBufferVertexShader.cso", "Shaders\\FillGBufferPixelShader.cso", screenSize.GetX(), screenSize.GetY());
-	if (!result)
-	{
-		BE_ERROR("Could not initialize the Deferred Buffers");
-		return false;
-	}
-
 	return true;
 }
 
@@ -137,14 +120,4 @@ bool ShaderManager::RenderRenderable(SceneNode* pRenderableNode, Material* pMate
 	}
 
 	return false;
-}
-
-bool ShaderManager::PrepGBuffer() const
-{
-	IRenderer* pRenderer = g_pApp->GetGraphicsManager()->GetRenderer();
-	ID3D11DeviceContext* pDeviceContext = pRenderer->GetDeviceContext();
-
-	pDeviceContext->OMSetDepthStencilState(NULL, 0);
-
-	return true;
 }

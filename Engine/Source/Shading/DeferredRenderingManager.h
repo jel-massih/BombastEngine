@@ -1,4 +1,5 @@
 #pragma once
+#include "../Utilities/DirectXUtils.h"
 
 class DeferredRenderingManager
 {
@@ -8,7 +9,9 @@ public:
 
 	bool Initialize(ID3D11Device* device, std::string vertexShaderPath, std::string pixelShaderPath, int texWidth, int texHeight);
 
-	void Render(ID3D11Device* device, ID3D11DeviceContext* context, DirectX::XMMATRIX &world, DirectX::XMMATRIX &view, DirectX::XMMATRIX &projection, ID3D11RenderTargetView* pRTV, ID3D11DepthStencilView* pDSV);
+	void StartRender(ID3D11Device* device, ID3D11DeviceContext* context, ID3D11RenderTargetView* pRTV, ID3D11DepthStencilView* pDSV) const;
+	void DrawRenderable(ID3D11DeviceContext* deviceContext, int indexCount, XMMATRIX& worldMatrix, XMMATRIX& viewMatrix, XMMATRIX& projectionMatrix) const;
+	void FinishRender();
 
 private:
 
@@ -25,4 +28,14 @@ private:
 	ID3D11SamplerState* m_pPointSampler;
 	ID3D11DepthStencilState* m_pWriteStencilState;
 	ID3D11DepthStencilState* m_pTestStencilState;
+
+	ID3D11Buffer* m_pMatrixBuffer;
+
+private:
+	struct MatrixBufferType
+	{
+		DirectX::XMMATRIX world;
+		DirectX::XMMATRIX view;
+		DirectX::XMMATRIX projection;
+	};
 };

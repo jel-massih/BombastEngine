@@ -6,12 +6,14 @@ GraphicsManager::GraphicsManager()
 {
 	m_pRenderer = nullptr;
 	m_pShaderManager = nullptr;
+	m_pDeferredRenderingManager = nullptr;
 }
 
 GraphicsManager::~GraphicsManager()
 {
 	SAFE_DELETE(m_pRenderer);
 	SAFE_DELETE(m_pShaderManager);
+	SAFE_DELETE(m_pDeferredRenderingManager);
 }
 
 bool GraphicsManager::Initialize(HWND hwnd)
@@ -50,6 +52,20 @@ bool GraphicsManager::Initialize(HWND hwnd)
 		return FALSE;
 	}
 
+	m_pDeferredRenderingManager = BE_NEW DeferredRenderingManager;
+	if (!m_pDeferredRenderingManager)
+	{
+		BE_ERROR("Could not allocate the Deferred Buffers");
+		return false;
+	}
+
+	Point screenSize = g_pApp->GetScreenSize();
+	result = m_pDeferredRenderingManager->Initialize(m_pRenderer->GetDevice(), "Shaders\\FillGBufferVertexShader.cso", "Shaders\\FillGBufferPixelShader.cso", screenSize.GetX(), screenSize.GetY());
+	if (!result)
+	{
+		BE_ERROR("Could not initialize the Deferred Buffers");
+		return false;
+	}
 
 	return true;
 }

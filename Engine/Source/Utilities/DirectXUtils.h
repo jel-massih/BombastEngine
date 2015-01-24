@@ -1,7 +1,5 @@
 #pragma once
 
-#include "../Bombast/BombastApp.h"
-
 inline HRESULT InitTexture2D(ID3D11Device* device, DXGI_FORMAT format, UINT width, UINT height, ID3D11Texture2D** ppTex2D, ID3D11ShaderResourceView** ppSRV, ID3D11RenderTargetView** ppRTV, ID3D11DepthStencilView** ppDSV)
 {
 	HRESULT hr = S_OK;
@@ -18,7 +16,7 @@ inline HRESULT InitTexture2D(ID3D11Device* device, DXGI_FORMAT format, UINT widt
 	desc.SampleDesc.Count = 1;
 	desc.SampleDesc.Quality = 0;
 	desc.MipLevels = 1;
-	BE_HRETURN(device->CreateTexture2D(&desc, NULL, ppTex2D), "Failed to create Texture 2D");
+	device->CreateTexture2D(&desc, NULL, ppTex2D);
 
 	DXGI_FORMAT srvFormat = desc.Format;
 	DXGI_FORMAT rtvFormat = desc.Format;
@@ -39,7 +37,7 @@ inline HRESULT InitTexture2D(ID3D11Device* device, DXGI_FORMAT format, UINT widt
 		SRVDesc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D;
 		SRVDesc.Texture2D.MipLevels - 1;
 
-		BE_HRETURN(device->CreateShaderResourceView(*ppTex2D, &SRVDesc, ppSRV), "Failed to create Shader Resource View");
+		device->CreateShaderResourceView(*ppTex2D, &SRVDesc, ppSRV);
 	}
 
 	if (ppRTV)
@@ -48,7 +46,7 @@ inline HRESULT InitTexture2D(ID3D11Device* device, DXGI_FORMAT format, UINT widt
 		ZeroMemory(&RTVDesc, rtvFormat);
 		RTVDesc.Format = rtvFormat;
 		RTVDesc.ViewDimension = D3D11_RTV_DIMENSION_TEXTURE2D;
-		BE_HRETURN(device->CreateRenderTargetView(*ppTex2D, &RTVDesc, ppRTV), "Failed to create Render Target View");
+		device->CreateRenderTargetView(*ppTex2D, &RTVDesc, ppRTV);
 	}
 
 	if (ppDSV)
@@ -57,7 +55,7 @@ inline HRESULT InitTexture2D(ID3D11Device* device, DXGI_FORMAT format, UINT widt
 		ZeroMemory(&DSVDesc, sizeof(D3D11_DEPTH_STENCIL_VIEW_DESC));
 		DSVDesc.Format = dsvFormat;
 		DSVDesc.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
-		BE_HRETURN(device->CreateDepthStencilView(*ppTex2D, &DSVDesc, ppDSV), "Failed to Create Despth Stencil View");
+		device->CreateDepthStencilView(*ppTex2D, &DSVDesc, ppDSV);
 	}
 
 	return hr;
@@ -73,7 +71,7 @@ public:
 		HRESULT hr;
 		Release();
 
-		BE_HRETURN(InitTexture2D(device, format, width, height, &this->m_pTexture2D, bShaderResourceView ? &this->m_pShaderResourceView : NULL, bRenderTargetView ? &this->m_pRenderTargetView : NULL, bDepthStencilView ? &this->m_pDepthStencilView : NULL), "Failed to initialize Texture2D");
+		InitTexture2D(device, format, width, height, &this->m_pTexture2D, bShaderResourceView ? &this->m_pShaderResourceView : NULL, bRenderTargetView ? &this->m_pRenderTargetView : NULL, bDepthStencilView ? &this->m_pDepthStencilView : NULL);
 		
 		return S_OK;
 	}
