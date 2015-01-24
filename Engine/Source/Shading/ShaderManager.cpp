@@ -93,7 +93,7 @@ bool ShaderManager::Initialize(IRenderer* renderer)
 	}
 
 	Point screenSize = g_pApp->GetScreenSize();
-	result = m_pDeferredRenderingManager->Initialize(renderer->GetDevice(), screenSize.GetX(), screenSize.GetY());
+	result = m_pDeferredRenderingManager->Initialize(renderer->GetDevice(), "Shaders\\FillGBufferVertexShader.cso", "Shaders\\FillGBufferPixelShader.cso", screenSize.GetX(), screenSize.GetY());
 	if (!result)
 	{
 		BE_ERROR("Could not initialize the Deferred Buffers");
@@ -143,8 +143,6 @@ bool ShaderManager::PrepGBuffer() const
 {
 	IRenderer* pRenderer = g_pApp->GetGraphicsManager()->GetRenderer();
 	ID3D11DeviceContext* pDeviceContext = pRenderer->GetDeviceContext();
-	m_pDeferredRenderingManager->ClearRenderTargets(pDeviceContext, Vec4(0.0f, 0.0f, 0.0f, 1.0f));
-	m_pDeferredRenderingManager->SetRenderTargets(pDeviceContext);
 
 	pDeviceContext->OMSetDepthStencilState(NULL, 0);
 

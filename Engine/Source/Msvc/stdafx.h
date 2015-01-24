@@ -9,6 +9,7 @@
 #include "../Utilities/Initialization.h"
 #include "../Utilities/Math.h"
 #include "../Utilities/Timer.h"
+#include "../Utilities/DirectXUtils.h"
 #include "../Graphics2D/TextureClass.h"
 #include "../Graphics2D/FontClass.h"
 #include "../Graphics3D/D3DClass.h"

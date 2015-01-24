@@ -20,6 +20,7 @@ public:
 	bool RenderRenderable(SceneNode* pRenderableNode, Material* pMaterial, int indexCount, const Scene* pScene) const;
 
 	bool PrepGBuffer() const;
+	bool WriteToGBuffer(SceneNode* pRenderableNode, Material* pMaterial, int indexCount, const Scene* pScene) const;
 
 private:
 	LightShader* m_pLightShader;

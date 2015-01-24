@@ -396,6 +396,9 @@
     <ClInclude Include="..\Shading\DeferredRenderingManager.h">
       <Filter>Shading</Filter>
     </ClInclude>
+    <ClInclude Include="..\Utilities\DirectXUtils.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Bombast">

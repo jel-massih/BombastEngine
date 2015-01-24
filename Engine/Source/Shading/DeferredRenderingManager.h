@@ -1,28 +1,28 @@
 #pragma once
 
-const int BUFFER_COUNT = 3;
-
 class DeferredRenderingManager
 {
 public:
 	DeferredRenderingManager();
 	~DeferredRenderingManager();
 
-	bool Initialize(ID3D11Device* device, int texWidth, int texHeight);
+	bool Initialize(ID3D11Device* device, std::string vertexShaderPath, std::string pixelShaderPath, int texWidth, int texHeight);
 
-	void SetRenderTargets(ID3D11DeviceContext* context);
-	void ClearRenderTargets(ID3D11DeviceContext* context, Vec4 clearColor);
-
-	ID3D11ShaderResourceView* GetShaderResourceView(int index) { return m_shaderResources[index];
-	}
+	void Render(ID3D11Device* device, ID3D11DeviceContext* context, DirectX::XMMATRIX &world, DirectX::XMMATRIX &view, DirectX::XMMATRIX &projection, ID3D11RenderTargetView* pRTV, ID3D11DepthStencilView* pDSV);
 
 private:
-	int m_textureWidth, m_textureHeight;
 
-	ID3D11Texture2D* m_renderTargetTextures[BUFFER_COUNT];
-	ID3D11RenderTargetView* m_renderTargetViews[BUFFER_COUNT];
-	ID3D11ShaderResourceView* m_shaderResources[BUFFER_COUNT];
-	ID3D11Texture2D* m_pDepthStencilBuffer;
-	ID3D11DepthStencilView* m_pDepthStencilView;
-	D3D11_VIEWPORT m_viewport;
+	ID3D11InputLayout* m_pGbufferInputLayout;
+	ID3D11VertexShader* m_pFillGBufferVertexShader;
+	ID3D11PixelShader* m_pFillGBufferPixelShader;
+
+	SimpleTexture m_texGBuffer;
+	SimpleTexture m_texGBuffer2;
+	SimpleTexture m_texGBufResolved2;
+	SimpleTexture m_texCoverageMask;
+
+	ID3D11SamplerState* m_pTextureSampler;
+	ID3D11SamplerState* m_pPointSampler;
+	ID3D11DepthStencilState* m_pWriteStencilState;
+	ID3D11DepthStencilState* m_pTestStencilState;
 };
