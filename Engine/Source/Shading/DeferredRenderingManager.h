@@ -11,11 +11,12 @@ public:
 
 	void StartRender(ID3D11Device* device, ID3D11DeviceContext* context, ID3D11RenderTargetView* pRTV, ID3D11DepthStencilView* pDSV) const;
 	void DrawRenderable(ID3D11DeviceContext* deviceContext, int indexCount, XMMATRIX& worldMatrix, XMMATRIX& viewMatrix, XMMATRIX& projectionMatrix, ID3D11ShaderResourceView* texture) const;
-	void FinishRender(ID3D11DeviceContext* deviceContext, ID3D11RenderTargetView* pRTV, ID3D11DepthStencilView* pDSV) const;
+	
+	const SimpleTexture& GetColorRenderTexture() const { return m_texGBuffer; }
+	const SimpleTexture& GetNormalRenderTexture() const { return m_texGBuffer2; }
 
 private:
 	bool InitializeGBufferShader(ID3D11Device* device);
-	bool InitializeLightShader(ID3D11Device* device);
 
 private:
 
@@ -23,15 +24,10 @@ private:
 	ID3D11VertexShader* m_pFillGBufferVertexShader;
 	ID3D11PixelShader* m_pFillGBufferPixelShader;
 
-	ID3D11InputLayout* m_pLightingInputLayout;
-	ID3D11VertexShader* m_pLightingVertexShader;
-	ID3D11PixelShader* m_pLightingPixelShader;
-
 	SimpleTexture m_texGBuffer;
 	SimpleTexture m_texGBuffer2;
 
 	ID3D11SamplerState* m_pTextureSampler;
-	ID3D11SamplerState* m_pLightPointSampler;
 
 	ID3D11Buffer* m_pMatrixBuffer;
 

@@ -179,6 +179,9 @@
     <ClCompile Include="..\Shading\DeferredRenderingManager.cpp">
       <Filter>Shading</Filter>
     </ClCompile>
+    <ClCompile Include="..\Shading\DeferredLightShader.cpp">
+      <Filter>Shading</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Bombast\BombastApp.h">
@@ -398,6 +401,9 @@
     </ClInclude>
     <ClInclude Include="..\Utilities\DirectXUtils.h">
       <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Shading\DeferredLightShader.h">
+      <Filter>Shading</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

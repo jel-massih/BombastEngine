@@ -61,19 +61,18 @@ HRESULT Scene::OnDeferredRender()
 	m_pRoot->VDeferredRender(this);
 	m_pRoot->VDeferredRenderChildren(this);
 
-	g_pApp->GetGraphicsManager()->GetRenderer()->VFinishDeferredRendering();
-
 	return S_OK;
 }
 
 HRESULT Scene::OnForwardRender()
 {
-/*	g_pApp->GetGraphicsManager()->GetRenderer()->VPrepForwardRendering();
+	//Set RenderTArget back to original render target
+	g_pApp->GetGraphicsManager()->GetRenderer()->VPrepForwardRendering();
 
 	m_pRoot->VForwardRender(this);
 	m_pRoot->VForwardRenderChildren(this);
 
-	RenderAlphaPass();*/
+	RenderAlphaPass();
 
 	return S_OK;
 }

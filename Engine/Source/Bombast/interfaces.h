@@ -140,7 +140,8 @@ enum ShaderType {
 	BSHADER_TYPE_LIT,
 	BSHADER_TYPE_TEXTURE,
 	BSHADER_TYPE_MULTI_TEXTURE,
-	BSHADER_TYPE_LIGHTMAP
+	BSHADER_TYPE_LIGHTMAP,
+	BSHADER_TYPE_DEFERRED_LIT
 };
 
 class Scene;
@@ -184,8 +185,6 @@ public:
 	virtual void VCalcLighting(std::list<LightNode*>* lights, int maxLights) = 0;
 
 	virtual void VPrepDeferredRendering() const = 0;
-	virtual void VFinishDeferredRendering() const = 0;
-
 	virtual void VPrepForwardRendering() const = 0;
 
 	//@TODO: Remove D3D Specific Method

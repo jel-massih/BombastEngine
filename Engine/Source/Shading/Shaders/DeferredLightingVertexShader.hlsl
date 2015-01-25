@@ -1,4 +1,4 @@
-cbuffer LightPassBuffer : register(b0)
+cbuffer MatrixBuffer : register(b0)
 {
 	matrix worldMatrix;
 	matrix viewMatrix;

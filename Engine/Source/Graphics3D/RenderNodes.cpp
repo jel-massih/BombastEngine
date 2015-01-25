@@ -811,7 +811,7 @@ HRESULT D3DMeshNode11::VDeferredRender(Scene* pScene)
 
 	ID3D11DeviceContext* context = g_pApp->GetGraphicsManager()->GetRenderer()->GetDeviceContext();
 
-	result = RenderBuffers(context, pScene);
+	result = RenderDeferredBuffers(context);
 	if (!result) {
 		return S_FALSE;
 	}
@@ -819,7 +819,7 @@ HRESULT D3DMeshNode11::VDeferredRender(Scene* pScene)
 	return S_OK;
 }
 
-bool D3DMeshNode11::RenderBuffers(ID3D11DeviceContext* deviceContext, Scene* pScene)
+bool D3DMeshNode11::RenderDeferredBuffers(ID3D11DeviceContext* deviceContext)
 {
 	bool result;
 	unsigned int stride, offset;
@@ -843,6 +843,45 @@ bool D3DMeshNode11::RenderBuffers(ID3D11DeviceContext* deviceContext, Scene* pSc
 
 		if ((*it).material->GetTextures().size() > 0) {
 			g_pApp->GetGraphicsManager()->GetDeferredRenderingManager()->DrawRenderable(deviceContext, (*it).indexCount, XMLoadFloat4x4(&worldMatrix), XMLoadFloat4x4(&viewMatrix), XMLoadFloat4x4(&projectionMatrix), (*it).material->GetTextures().front()->GetTexture());
+		}
+	}
+
+	return true;
+}
+
+HRESULT D3DMeshNode11::VForwardRender(Scene* pScene)
+{
+	bool result;
+
+	IRenderer* pRenderer = g_pApp->GetGraphicsManager()->GetRenderer();
+	ID3D11DeviceContext* context = pRenderer->GetDeviceContext();
+
+	if (!RenderForwardBuffers(context, pScene))
+	{
+		return S_FALSE;
+	}
+	
+	return S_OK;
+}
+
+bool D3DMeshNode11::RenderForwardBuffers(ID3D11DeviceContext* deviceContext, Scene* pScene)
+{
+	unsigned int stride, offset;
+
+	stride = sizeof(VertexType);
+	offset = 0;
+
+	for (auto it = m_submeshBuffers.begin(); it != m_submeshBuffers.end(); it++)
+	{
+		deviceContext->IASetVertexBuffers(0, 1, &(*it).pVertexBuffer, &stride, &offset);
+
+		deviceContext->IASetIndexBuffer((*it).pIndexBuffer, DXGI_FORMAT_R32_UINT, 0);
+
+		deviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+
+		if (!g_pApp->GetGraphicsManager()->GetShaderManager()->RenderRenderable(this, (*it).material, (*it).indexCount, pScene))
+		{
+			return false;
 		}
 	}
 

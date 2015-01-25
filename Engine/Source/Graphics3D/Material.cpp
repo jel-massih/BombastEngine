@@ -109,6 +109,10 @@ void Material::SetShaderType(std::string shaderName)
 	{
 		m_material.ShaderType = BSHADER_TYPE_LIGHTMAP;
 	}
+	if (shaderName == "DeferredLit")
+	{
+		m_material.ShaderType = BSHADER_TYPE_DEFERRED_LIT;
+	}
 }
 
 void Material::SetShaderType(ShaderType shaderType)
