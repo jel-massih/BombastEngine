@@ -258,15 +258,14 @@ void DeferredRenderingManager::StartRender(ID3D11Device* device, ID3D11DeviceCon
 
 	//Clear the Back Buffer
 	float clearColor[4] = { 0.0f, 0.0f, 0.0f, 0.0f };
-	context->ClearRenderTargetView(pRTV, clearColor);
-	context->ClearDepthStencilView(m_pDepthStencilView, D3D11_CLEAR_DEPTH, 1.0f, 0);
 
 	{
 		//Fill G Buffer
 		ID3D11RenderTargetView* pGBufRTV[] = { m_texGBuffer.GetRenderTargetView(), m_texGBuffer2.GetRenderTargetView() };
 		context->ClearRenderTargetView(pGBufRTV[0], clearColor);
 		context->ClearRenderTargetView(pGBufRTV[1], clearColor);
-	
+		context->ClearDepthStencilView(m_pDepthStencilView, D3D11_CLEAR_DEPTH, 1.0f, 0);
+
 		context->OMSetRenderTargets(2, pGBufRTV, m_pDepthStencilView);
 
 		context->IASetInputLayout(m_pGbufferInputLayout);
@@ -283,6 +282,10 @@ void DeferredRenderingManager::DrawRenderable(ID3D11DeviceContext* deviceContext
 	D3D11_MAPPED_SUBRESOURCE mappedResource;
 	deviceContext->Map(m_pMatrixBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource);
 	MatrixBufferType* dataPtr = (MatrixBufferType*)mappedResource.pData;
+
+	worldMatrix = DirectX::XMMatrixTranspose(worldMatrix);
+	viewMatrix = DirectX::XMMatrixTranspose(viewMatrix);
+	projectionMatrix = DirectX::XMMatrixTranspose(projectionMatrix);
 
 	dataPtr->world = worldMatrix;
 	dataPtr->view = viewMatrix;

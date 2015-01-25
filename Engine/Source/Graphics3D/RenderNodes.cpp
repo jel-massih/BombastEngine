@@ -809,13 +809,7 @@ HRESULT D3DMeshNode11::VDeferredRender(Scene* pScene)
 {
 	bool result;
 
-	IRenderer* pRenderer = g_pApp->GetGraphicsManager()->GetRenderer();
-	ID3D11DeviceContext* context = pRenderer->GetDeviceContext();
-
-	Mat4x4 worldMatrix, viewMatrix, projectionMatrix;
-	pRenderer->VGetViewMatrix(viewMatrix);
-	pRenderer->VGetWorldMatrix(worldMatrix);
-	pRenderer->VGetProjectionMatrix(projectionMatrix);
+	ID3D11DeviceContext* context = g_pApp->GetGraphicsManager()->GetRenderer()->GetDeviceContext();
 
 	result = RenderBuffers(context, pScene);
 	if (!result) {
