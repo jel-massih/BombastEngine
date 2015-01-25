@@ -57,12 +57,12 @@ public:
 
 	HRESULT Initialize(ID3D11Device* device, DXGI_FORMAT format, UINT width, UINT height, bool bShaderResourceView = true, bool bRenderTargetView = true)
 	{
-		HRESULT hr;
+		HRESULT hr = S_OK;
 		Release();
 
-		InitTexture2D(device, format, width, height, &this->m_pTexture2D, bShaderResourceView ? &this->m_pShaderResourceView : NULL, bRenderTargetView ? &this->m_pRenderTargetView : NULL);
+		hr = InitTexture2D(device, format, width, height, &this->m_pTexture2D, bShaderResourceView ? &this->m_pShaderResourceView : NULL, bRenderTargetView ? &this->m_pRenderTargetView : NULL);
 		
-		return S_OK;
+		return hr;
 	}
 
 	ID3D11Texture2D* GetTexture() const { return m_pTexture2D; }

@@ -10,7 +10,7 @@ public:
 	bool Initialize(ID3D11Device* device, int texWidth, int texHeight);
 
 	void StartRender(ID3D11Device* device, ID3D11DeviceContext* context, ID3D11RenderTargetView* pRTV, ID3D11DepthStencilView* pDSV) const;
-	void DrawRenderable(ID3D11DeviceContext* deviceContext, int indexCount, XMMATRIX& worldMatrix, XMMATRIX& viewMatrix, XMMATRIX& projectionMatrix) const;
+	void DrawRenderable(ID3D11DeviceContext* deviceContext, int indexCount, XMMATRIX& worldMatrix, XMMATRIX& viewMatrix, XMMATRIX& projectionMatrix, ID3D11ShaderResourceView* texture) const;
 	void FinishRender(ID3D11DeviceContext* deviceContext, ID3D11RenderTargetView* pRTV, ID3D11DepthStencilView* pDSV) const;
 
 private:
@@ -34,6 +34,9 @@ private:
 	ID3D11SamplerState* m_pLightPointSampler;
 
 	ID3D11Buffer* m_pMatrixBuffer;
+
+	ID3D11Texture2D* m_pDepthStencilBuffer;
+	ID3D11DepthStencilView* m_pDepthStencilView;
 
 private:
 	struct MatrixBufferType

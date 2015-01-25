@@ -8,7 +8,10 @@ DeferredRenderingManager::DeferredRenderingManager()
 	m_pLightingPixelShader(nullptr),
 	m_pLightingInputLayout(nullptr),
 	m_pTextureSampler(nullptr),
-	m_pMatrixBuffer(nullptr)
+	m_pLightPointSampler(nullptr),
+	m_pMatrixBuffer(nullptr),
+	m_pDepthStencilBuffer(nullptr),
+	m_pDepthStencilView(nullptr)
 {
 }
 
@@ -26,6 +29,8 @@ DeferredRenderingManager::~DeferredRenderingManager()
 	SAFE_RELEASE(m_pLightPointSampler);
 
 	SAFE_RELEASE(m_pMatrixBuffer);
+	SAFE_RELEASE(m_pDepthStencilBuffer);
+	SAFE_RELEASE(m_pDepthStencilView);
 
 	m_texGBuffer.Release();
 	m_texGBuffer2.Release();
@@ -49,12 +54,17 @@ bool DeferredRenderingManager::Initialize(ID3D11Device* device, int texWidth, in
 	{
 		D3D11_SAMPLER_DESC sampDesc;
 		ZeroMemory(&sampDesc, sizeof(D3D11_SAMPLER_DESC));
-		sampDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_POINT;
+		sampDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
 		sampDesc.AddressU = sampDesc.AddressV = sampDesc.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
-		sampDesc.MaxAnisotropy = 0;
+		sampDesc.MipLODBias = 0.0f;
+		sampDesc.MaxAnisotropy = 1;
+		sampDesc.ComparisonFunc = D3D11_COMPARISON_ALWAYS;
+		sampDesc.BorderColor[0] = 0;
+		sampDesc.BorderColor[1] = 0;
+		sampDesc.BorderColor[2] = 0;
+		sampDesc.BorderColor[3] = 0;
 		sampDesc.MinLOD = 0;
 		sampDesc.MaxLOD = FLT_MAX;
-		sampDesc.ComparisonFunc = D3D11_COMPARISON_NEVER;
 
 		result = device->CreateSamplerState(&sampDesc, &m_pTextureSampler);
 		if (FAILED(result)) {
@@ -75,7 +85,45 @@ bool DeferredRenderingManager::Initialize(ID3D11Device* device, int texWidth, in
 
 		result = device->CreateBuffer(&bd, NULL, &m_pMatrixBuffer);
 		if (FAILED(result)) {
-			BE_ERROR("Error: Failed to create ");
+			BE_ERROR("Error: Failed to create Matrix Buffer");
+			return false;
+		}
+	}
+
+	{
+		D3D11_TEXTURE2D_DESC depthBufferDesc;
+		ZeroMemory(&depthBufferDesc, sizeof(D3D11_TEXTURE2D_DESC));
+
+		depthBufferDesc.Width = texWidth;
+		depthBufferDesc.Height = texHeight;
+		depthBufferDesc.MipLevels = 1;
+		depthBufferDesc.ArraySize = 1;
+		depthBufferDesc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
+		depthBufferDesc.SampleDesc.Count = 1;
+		depthBufferDesc.SampleDesc.Quality = 0;
+		depthBufferDesc.Usage = D3D11_USAGE_DEFAULT;
+		depthBufferDesc.BindFlags = D3D11_BIND_DEPTH_STENCIL;
+		depthBufferDesc.CPUAccessFlags = 0;
+		depthBufferDesc.MiscFlags = 0;
+
+		result = device->CreateTexture2D(&depthBufferDesc, NULL, &m_pDepthStencilBuffer);
+		if (FAILED(result)) {
+			BE_ERROR("Error: Failed to create Depth Buffer");
+			return false;
+		}
+	}
+
+	{
+		D3D11_DEPTH_STENCIL_VIEW_DESC dsvDesc;
+		ZeroMemory(&dsvDesc, sizeof(D3D11_DEPTH_STENCIL_VIEW_DESC));
+
+		dsvDesc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
+		dsvDesc.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
+		dsvDesc.Texture2D.MipSlice = 0;
+
+		result = device->CreateDepthStencilView(m_pDepthStencilBuffer, &dsvDesc, &m_pDepthStencilView);
+		if (FAILED(result)) {
+			BE_ERROR("Error: Failed to create Depth Stencil View");
 			return false;
 		}
 	}
@@ -114,7 +162,7 @@ bool DeferredRenderingManager::InitializeGBufferShader(ID3D11Device* device)
 
 	polygonLayout[0].SemanticName = "POSITION";
 	polygonLayout[0].SemanticIndex = 0;
-	polygonLayout[0].Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
+	polygonLayout[0].Format = DXGI_FORMAT_R32G32B32_FLOAT;
 	polygonLayout[0].InputSlot = 0;
 	polygonLayout[0].AlignedByteOffset = 0;
 	polygonLayout[0].InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
@@ -207,13 +255,11 @@ bool DeferredRenderingManager::InitializeLightShader(ID3D11Device* device)
 void DeferredRenderingManager::StartRender(ID3D11Device* device, ID3D11DeviceContext* context, ID3D11RenderTargetView* pRTV, ID3D11DepthStencilView* pDSV) const
 {
 	HRESULT result;
-	D3D11_MAPPED_SUBRESOURCE mappedResource;
-	unsigned int bufferNumber;
 
 	//Clear the Back Buffer
 	float clearColor[4] = { 0.0f, 0.0f, 0.0f, 0.0f };
 	context->ClearRenderTargetView(pRTV, clearColor);
-	context->ClearDepthStencilView(pDSV, D3D11_CLEAR_DEPTH, 1.0f, 0);
+	context->ClearDepthStencilView(m_pDepthStencilView, D3D11_CLEAR_DEPTH, 1.0f, 0);
 
 	{
 		//Fill G Buffer
@@ -221,8 +267,7 @@ void DeferredRenderingManager::StartRender(ID3D11Device* device, ID3D11DeviceCon
 		context->ClearRenderTargetView(pGBufRTV[0], clearColor);
 		context->ClearRenderTargetView(pGBufRTV[1], clearColor);
 	
-		context->OMSetRenderTargets(2, pGBufRTV, pDSV);
-		context->OMSetDepthStencilState(NULL, 0);
+		context->OMSetRenderTargets(2, pGBufRTV, m_pDepthStencilView);
 
 		context->IASetInputLayout(m_pGbufferInputLayout);
 		context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
@@ -233,7 +278,7 @@ void DeferredRenderingManager::StartRender(ID3D11Device* device, ID3D11DeviceCon
 	}
 }
 
-void DeferredRenderingManager::DrawRenderable(ID3D11DeviceContext* deviceContext, int indexCount, XMMATRIX& worldMatrix, XMMATRIX& viewMatrix, XMMATRIX& projectionMatrix) const
+void DeferredRenderingManager::DrawRenderable(ID3D11DeviceContext* deviceContext, int indexCount, XMMATRIX& worldMatrix, XMMATRIX& viewMatrix, XMMATRIX& projectionMatrix, ID3D11ShaderResourceView* texture) const
 {
 	D3D11_MAPPED_SUBRESOURCE mappedResource;
 	deviceContext->Map(m_pMatrixBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource);
@@ -246,6 +291,7 @@ void DeferredRenderingManager::DrawRenderable(ID3D11DeviceContext* deviceContext
 	deviceContext->Unmap(m_pMatrixBuffer, 0);
 
 	deviceContext->VSSetConstantBuffers(0, 1, &m_pMatrixBuffer);
+	deviceContext->PSSetShaderResources(0, 1, &texture);
 	
 	deviceContext->DrawIndexed(indexCount, 0, 0);
 }

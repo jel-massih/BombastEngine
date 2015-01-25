@@ -847,7 +847,9 @@ bool D3DMeshNode11::RenderBuffers(ID3D11DeviceContext* deviceContext, Scene* pSc
 		pRenderer->VGetWorldMatrix(worldMatrix);
 		pRenderer->VGetProjectionMatrix(projectionMatrix);
 
-		g_pApp->GetGraphicsManager()->GetDeferredRenderingManager()->DrawRenderable(deviceContext, (*it).indexCount, XMLoadFloat4x4(&worldMatrix), XMLoadFloat4x4(&viewMatrix), XMLoadFloat4x4(&projectionMatrix));
+		if ((*it).material->GetTextures().size() > 0) {
+			g_pApp->GetGraphicsManager()->GetDeferredRenderingManager()->DrawRenderable(deviceContext, (*it).indexCount, XMLoadFloat4x4(&worldMatrix), XMLoadFloat4x4(&viewMatrix), XMLoadFloat4x4(&projectionMatrix), (*it).material->GetTextures().front()->GetTexture());
+		}
 	}
 
 	return true;
