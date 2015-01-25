@@ -67,6 +67,8 @@ public:
 	virtual void VPrepDeferredRendering() const;
 	virtual void VPrepForwardRendering() const;
 
+	virtual void VFinishDeferredRendering() const;
+
 private:
 	bool m_vsyncEnabled;
 	bool m_bFullscreen;

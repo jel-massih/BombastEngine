@@ -7,11 +7,15 @@ public:
 	DeferredRenderingManager();
 	~DeferredRenderingManager();
 
-	bool Initialize(ID3D11Device* device, std::string vertexShaderPath, std::string pixelShaderPath, int texWidth, int texHeight);
+	bool Initialize(ID3D11Device* device, int texWidth, int texHeight);
 
 	void StartRender(ID3D11Device* device, ID3D11DeviceContext* context, ID3D11RenderTargetView* pRTV, ID3D11DepthStencilView* pDSV) const;
 	void DrawRenderable(ID3D11DeviceContext* deviceContext, int indexCount, XMMATRIX& worldMatrix, XMMATRIX& viewMatrix, XMMATRIX& projectionMatrix) const;
-	void FinishRender();
+	void FinishRender(ID3D11DeviceContext* deviceContext, ID3D11RenderTargetView* pRTV, ID3D11DepthStencilView* pDSV) const;
+
+private:
+	bool InitializeGBufferShader(ID3D11Device* device);
+	bool InitializeLightShader(ID3D11Device* device);
 
 private:
 
@@ -19,15 +23,15 @@ private:
 	ID3D11VertexShader* m_pFillGBufferVertexShader;
 	ID3D11PixelShader* m_pFillGBufferPixelShader;
 
+	ID3D11InputLayout* m_pLightingInputLayout;
+	ID3D11VertexShader* m_pLightingVertexShader;
+	ID3D11PixelShader* m_pLightingPixelShader;
+
 	SimpleTexture m_texGBuffer;
 	SimpleTexture m_texGBuffer2;
-	SimpleTexture m_texGBufResolved2;
-	SimpleTexture m_texCoverageMask;
 
 	ID3D11SamplerState* m_pTextureSampler;
-	ID3D11SamplerState* m_pPointSampler;
-	ID3D11DepthStencilState* m_pWriteStencilState;
-	ID3D11DepthStencilState* m_pTestStencilState;
+	ID3D11SamplerState* m_pLightPointSampler;
 
 	ID3D11Buffer* m_pMatrixBuffer;
 

@@ -184,6 +184,8 @@ public:
 	virtual void VCalcLighting(std::list<LightNode*>* lights, int maxLights) = 0;
 
 	virtual void VPrepDeferredRendering() const = 0;
+	virtual void VFinishDeferredRendering() const = 0;
+
 	virtual void VPrepForwardRendering() const = 0;
 
 	//@TODO: Remove D3D Specific Method

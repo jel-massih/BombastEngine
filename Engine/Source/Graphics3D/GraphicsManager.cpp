@@ -60,7 +60,7 @@ bool GraphicsManager::Initialize(HWND hwnd)
 	}
 
 	Point screenSize = g_pApp->GetScreenSize();
-	result = m_pDeferredRenderingManager->Initialize(m_pRenderer->GetDevice(), "Shaders\\FillGBufferVertexShader.cso", "Shaders\\FillGBufferPixelShader.cso", screenSize.GetX(), screenSize.GetY());
+	result = m_pDeferredRenderingManager->Initialize(m_pRenderer->GetDevice(), screenSize.GetX(), screenSize.GetY());
 	if (!result)
 	{
 		BE_ERROR("Could not initialize the Deferred Buffers");

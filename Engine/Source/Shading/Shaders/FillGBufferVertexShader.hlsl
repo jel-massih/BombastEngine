@@ -1,36 +1,38 @@
-cbuffer MeshBuffer : register(b0)
+cbuffer MatrixBuffer : register(b0)
 {
-	matrix LocalToProjected4x4;
-	matrix LocalToWorld4x4;
-	matrix WorldToView4x4;
+	matrix WorldMatrix;
+	matrix ViewMatrix;
+	matrix ProjectionMatrix;
 };
 
-struct VertexInputType
+struct A2V
 {
 	float4 pos : POSITION;
+	float2 uv : TEXCOORD0;
 	float3 normal : NORMAL;
-	float2 uv : TEXCOORD;
 };
 
-struct PixelInputType
+struct V2P
 {
 	float4 pos : SV_POSITION;
 	float2 uv :  TEXCOORD0;
-	float3 worldNorm : TEXCOORD1;
-	float viewDepth : TEXCOORD2;
+	float3 normal : NORMAL;
 };
 
-PixelInputType VS(VertexInputType input)
+V2P VS(A2V input)
 {
-	PixelInputType output;
+	V2P result;
 
-	float4 wp = mul(input.pos, LocalToWorld4x4);
-	output.pos = mul(input.pos, LocalToProjected4x4);
+	input.pos.w = 1.0f;
 
-	output.uv = input.uv;
+	result.pos = mul(input.pos, WorldMatrix);
+	result.pos = mul(result.pos, ViewMatrix);
+	result.pos = mul(result.pos, ProjectionMatrix);
+
+	result.uv = input.uv;
 	
-	output.worldNorm = mul(input.normal, (float3x3)LocalToWorld4x4);
-	output.viewDepth = mul(wp, WorldToView4x4).z;
+	result.normal = mul(input.normal, (float3x3)WorldMatrix);
+	result.normal = normalize(result.normal);
 
-	return output;
+	return result;
 }
