@@ -1,4 +1,5 @@
 #include "ShaderManager.h"
+#include "../Graphics2D/PostProcessRenderWindow.h"
 
 ShaderManager::~ShaderManager()
 {
@@ -6,8 +7,9 @@ ShaderManager::~ShaderManager()
 	SAFE_DELETE(m_pColorShader);
 	SAFE_DELETE(m_pTextureShader);
 	SAFE_DELETE(m_pMultiTextureShader);
-	SAFE_DELETE(m_pLightmapShader);
+	SAFE_DELETE(m_pLightmapShader); 
 	SAFE_DELETE(m_pDeferredLightShader);
+	SAFE_DELETE(m_pPostProcessRenderWindow);
 }
 
 bool ShaderManager::Initialize(IRenderer* renderer)
@@ -83,7 +85,7 @@ bool ShaderManager::Initialize(IRenderer* renderer)
 		BE_ERROR("Could not initialize the LightmapShader Object!");
 		return false;
 	}
-
+	
 	m_pDeferredLightShader = BE_NEW DeferredLightShader;
 	if (!m_pDeferredLightShader)
 	{
@@ -95,6 +97,21 @@ bool ShaderManager::Initialize(IRenderer* renderer)
 	if (!result)
 	{
 		BE_ERROR("Could not initialize the DeferredLightShader Object!");
+		return false;
+	}
+
+	m_pPostProcessRenderWindow = BE_NEW PostProcessRenderWindow;
+	if (!m_pPostProcessRenderWindow)
+	{
+		BE_ERROR("Could not Allocate the PostProcessRenderWindow Object!");
+		return false;
+	}
+
+	Point screenSize = g_pApp->GetScreenSize();
+	result = m_pPostProcessRenderWindow->Initialize(renderer->GetDevice(), screenSize.GetX(), screenSize.GetY());
+	if (!result)
+	{
+		BE_ERROR("Could not initialize the PostProcessRenderWindow Object!");
 		return false;
 	}
 
@@ -134,7 +151,11 @@ bool ShaderManager::RenderRenderable(SceneNode* pRenderableNode, Material* pMate
 		return m_pLightmapShader->Render(context, indexCount, XMLoadFloat4x4(&worldMatrix), XMLoadFloat4x4(&viewMatrix), XMLoadFloat4x4(&projectionMatrix), pMaterial->GetTextures());
 		break;
 	case BSHADER_TYPE_DEFERRED_LIT:
-		return m_pDeferredLightShader->Render(context, indexCount, XMLoadFloat4x4(&worldMatrix), XMLoadFloat4x4(&viewMatrix), XMLoadFloat4x4(&projectionMatrix), g_pApp->GetGraphicsManager()->GetDeferredRenderingManager()->GetColorRenderTexture().GetShaderResourceView(), g_pApp->GetGraphicsManager()->GetDeferredRenderingManager()->GetNormalRenderTexture().GetShaderResourceView(), pScene);
+		pRenderer->VEnableZBuffer(false);
+		m_pPostProcessRenderWindow->Render(context);
+		m_pDeferredLightShader->Render(context, m_pPostProcessRenderWindow->GetIndexCount(), XMLoadFloat4x4(&worldMatrix), XMLoadFloat4x4(&viewMatrix), XMLoadFloat4x4(&projectionMatrix), g_pApp->GetGraphicsManager()->GetDeferredRenderingManager()->GetColorRenderTexture().GetShaderResourceView(), g_pApp->GetGraphicsManager()->GetDeferredRenderingManager()->GetNormalRenderTexture().GetShaderResourceView(), pScene);
+		pRenderer->VEnableZBuffer(true);
+		return true;
 		break;
 	}
 

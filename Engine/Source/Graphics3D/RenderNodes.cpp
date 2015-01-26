@@ -873,11 +873,12 @@ bool D3DMeshNode11::RenderForwardBuffers(ID3D11DeviceContext* deviceContext, Sce
 
 	for (auto it = m_submeshBuffers.begin(); it != m_submeshBuffers.end(); it++)
 	{
-		deviceContext->IASetVertexBuffers(0, 1, &(*it).pVertexBuffer, &stride, &offset);
-
-		deviceContext->IASetIndexBuffer((*it).pIndexBuffer, DXGI_FORMAT_R32_UINT, 0);
-
-		deviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+		if ((*it).material->GetShaderType() != BSHADER_TYPE_DEFERRED_LIT)
+		{
+			deviceContext->IASetVertexBuffers(0, 1, &(*it).pVertexBuffer, &stride, &offset);
+			deviceContext->IASetIndexBuffer((*it).pIndexBuffer, DXGI_FORMAT_R32_UINT, 0);
+			deviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+		}
 
 		if (!g_pApp->GetGraphicsManager()->GetShaderManager()->RenderRenderable(this, (*it).material, (*it).indexCount, pScene))
 		{

@@ -90,7 +90,6 @@ private:
 	Mat4x4 m_orthoMatrix;
 	Mat4x4 m_viewMatrix;
 
-	
 	ID3D11BlendState* m_pAlphaEnableBlendingState;
 	ID3D11BlendState* m_pAlphaDisabledBlendingState;
 };

@@ -190,9 +190,15 @@ bool DeferredLightShader::SetShaderParameters(ID3D11DeviceContext* deviceContext
 	deviceContext->VSSetConstantBuffers(bufferNumber, 1, &m_pMatrixBuffer);
 
 	deviceContext->PSSetShaderResources(0, 1, &colorTexture);
-	deviceContext->PSSetShaderResources(0, 1, &normalTexture);
+	deviceContext->PSSetShaderResources(1, 1, &normalTexture);
 
 	const Vec4* dir = pScene->GetLightingManager()->GetLightDirection();
+
+	result = deviceContext->Map(m_pLightBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource);
+	if (FAILED(result))
+	{
+		return false;
+	}
 
 	dataPtr2 = (LightBufferType*)mappedResource.pData;
 	dataPtr2->lightDirection = Vec3(dir->x, dir->y, dir->z);

@@ -8,6 +8,5 @@
 		<Texture path="textures\grid.dds"></Texture>
 	</Textures>
 
-	<Shader type="LitTextured">
-	</Shader>
+	<Shader type="DeferredLit"/>
 </Material>

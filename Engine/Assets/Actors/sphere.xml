@@ -4,7 +4,6 @@
     <Mesh path="meshes\sponza.bmdl"></Mesh>
     <Materials>
 			<Material path="materials\sphere_mat.bmtl"/>
-			<Material path="materials\platform_mat.bmtl"/>
   	</Materials>
   </MeshRenderComponent>
 </Actor>

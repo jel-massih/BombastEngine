@@ -182,6 +182,9 @@
     <ClCompile Include="..\Shading\DeferredLightShader.cpp">
       <Filter>Shading</Filter>
     </ClCompile>
+    <ClCompile Include="..\Graphics2D\PostProcessRenderWindow.cpp">
+      <Filter>Graphics2D</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Bombast\BombastApp.h">
@@ -404,6 +407,9 @@
     </ClInclude>
     <ClInclude Include="..\Shading\DeferredLightShader.h">
       <Filter>Shading</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Graphics2D\PostProcessRenderWindow.h">
+      <Filter>Graphics2D</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

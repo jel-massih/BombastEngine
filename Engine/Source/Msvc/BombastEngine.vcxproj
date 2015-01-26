@@ -34,6 +34,7 @@
     <ClInclude Include="..\Game\Process.h" />
     <ClInclude Include="..\Game\ProcessManager.h" />
     <ClInclude Include="..\Graphics2D\FontClass.h" />
+    <ClInclude Include="..\Graphics2D\PostProcessRenderWindow.h" />
     <ClInclude Include="..\Graphics2D\TextureClass.h" />
     <ClInclude Include="..\Graphics3D\D3DClass.h" />
     <ClInclude Include="..\Graphics3D\Geometry.h" />
@@ -107,6 +108,7 @@
     <ClCompile Include="..\Game\Process.cpp" />
     <ClCompile Include="..\Game\ProcessManager.cpp" />
     <ClCompile Include="..\Graphics2D\FontClass.cpp" />
+    <ClCompile Include="..\Graphics2D\PostProcessRenderWindow.cpp" />
     <ClCompile Include="..\Graphics2D\TextureClass.cpp" />
     <ClCompile Include="..\Graphics3D\D3DClass.cpp" />
     <ClCompile Include="..\Graphics3D\Geometry.cpp" />
