@@ -55,7 +55,7 @@ protected:
 
 class BlockRenderComponent : public BaseRenderComponent
 {
-	char* m_textureResource;
+	std::string m_materialResource;
 	Vec3 m_size;
 
 public:

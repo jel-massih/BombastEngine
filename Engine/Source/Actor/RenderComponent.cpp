@@ -144,13 +144,13 @@ bool BlockRenderComponent::VDelegateInitialize(rapidxml::xml_node<>* pData)
 	bool result = false;
 
 	//@TODO: Refactor code duplication for textures (Separate Component?)
-	rapidxml::xml_node<>* pTexture = pData->first_node("Texture");
-	if (pTexture)
+	rapidxml::xml_node<>* pMaterial = pData->first_node("Material");
+	if (pMaterial)
 	{
-		rapidxml::xml_attribute<char>* test = pTexture->first_attribute("path");
-		if (pTexture->first_attribute("path") != NULL)
+		rapidxml::xml_attribute<char>* test = pMaterial->first_attribute("path");
+		if (pMaterial->first_attribute("path") != NULL)
 		{
-			m_textureResource = pTexture->first_attribute("path")->value();
+			m_materialResource = pMaterial->first_attribute("path")->value();
 		}
 		else
 		{
@@ -176,7 +176,7 @@ SceneNode* BlockRenderComponent::VCreateSceneNode()
 
 	if (pTransformComponent)
 	{
-		SceneNode* blockNode = BE_NEW D3D11PrimitiveNode(m_pOwner->GetId(), (BaseRenderComponent*)this, m_textureResource, RenderPass_Static, D3D11PrimitiveNode::PrimitiveType::PT_Box, m_size, &pTransformComponent->GetTransform());
+		SceneNode* blockNode = BE_NEW D3D11PrimitiveNode(m_pOwner->GetId(), (BaseRenderComponent*)this, m_materialResource, RenderPass_Static, D3D11PrimitiveNode::PrimitiveType::PT_Box, m_size, &pTransformComponent->GetTransform());
 		return blockNode;
 	}
 

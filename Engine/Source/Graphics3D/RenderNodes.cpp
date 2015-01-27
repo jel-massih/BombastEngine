@@ -463,13 +463,14 @@ void D3D11GridNode::RenderBuffers(ID3D11DeviceContext* deviceContext)
 	deviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_LINELIST);
 }
 
-PrimitiveNode::PrimitiveNode(const ActorId actorId, BaseRenderComponent* renderComponent, std::string textureFilename, RenderPass renderPass, PrimitiveType type, Vec3 size, const Mat4x4* t)
+PrimitiveNode::PrimitiveNode(const ActorId actorId, BaseRenderComponent* renderComponent, std::string materialFilename, RenderPass renderPass, PrimitiveType type, Vec3 size, const Mat4x4* t)
 	: SceneNode(actorId, renderComponent, renderPass, t)
 {
 	m_vertCount = m_indexCount = 0;
 	m_size = size;
-	m_textureFilename = textureFilename;
 	m_primitiveType = type;
+
+	m_pMaterial = LoadMaterial(materialFilename);
 }
 
 bool PrimitiveNode::VIsVisible(Scene* pScene) const
@@ -477,25 +478,24 @@ bool PrimitiveNode::VIsVisible(Scene* pScene) const
 	return true;
 }
 
-D3D11PrimitiveNode::D3D11PrimitiveNode(const ActorId actorId, BaseRenderComponent* renderComponent, std::string textureFilename, RenderPass renderPass, PrimitiveType type, Vec3 size, const Mat4x4* t)
-	:PrimitiveNode(actorId, renderComponent, textureFilename, renderPass, type, size, t)
+Material* PrimitiveNode::LoadMaterial(std::string filename)
+{
+	return MaterialResourceLoader::LoadAndReturnMaterialResource(filename.c_str());
+}
+
+D3D11PrimitiveNode::D3D11PrimitiveNode(const ActorId actorId, BaseRenderComponent* renderComponent, std::string materialFilename, RenderPass renderPass, PrimitiveType type, Vec3 size, const Mat4x4* t)
+	:PrimitiveNode(actorId, renderComponent, materialFilename, renderPass, type, size, t)
 {
 	m_pVertexBuffer = NULL;
 	m_pIndexBuffer = NULL;
 
 	m_lastPos = Vec3::g_InvalidVec3;
-
-	m_pMaterial = BE_NEW Material;
-	m_pMaterial->SetShaderType(BSHADER_TYPE_COLOR);
-	m_pMaterial->SetDiffuse(Vec4(1, 1, 1, 1));
 }
 
 D3D11PrimitiveNode::~D3D11PrimitiveNode()
 {
 	SAFE_RELEASE(m_pVertexBuffer);
 	SAFE_RELEASE(m_pIndexBuffer);
-	SAFE_RELEASE(m_pTexture);
-	SAFE_DELETE(m_pMaterial);
 }
 
 HRESULT D3D11PrimitiveNode::VOnRestore(Scene* pScene)
@@ -511,23 +511,6 @@ HRESULT D3D11PrimitiveNode::VOnRestore(Scene* pScene)
 	if (FAILED(hr))
 	{
 		return hr;
-	}
-
-	hr = LoadTexture(m_textureFilename);
-	if (FAILED(hr))
-	{
-		return hr;
-	}
-
-	return S_OK;
-}
-
-HRESULT D3D11PrimitiveNode::LoadTexture(std::string textureFilename)
-{
-	m_pTexture = TextureResourceLoader::LoadAndReturnTextureResource(textureFilename.c_str());
-	if (!m_pTexture)
-	{
-		return S_FALSE;
 	}
 
 	return S_OK;
