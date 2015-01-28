@@ -222,8 +222,6 @@ bool DeferredRenderingManager::InitializeGBufferShader(ID3D11Device* device)
 
 void DeferredRenderingManager::StartRender(ID3D11Device* device, ID3D11DeviceContext* context, ID3D11RenderTargetView* pRTV, ID3D11DepthStencilView* pDSV) const
 {
-	HRESULT result;
-
 	//Clear the Back Buffer
 	float clearColor[4] = { 0.0f, 0.0f, 0.0f, 0.0f };
 

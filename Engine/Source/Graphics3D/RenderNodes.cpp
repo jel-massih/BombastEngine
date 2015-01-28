@@ -138,7 +138,6 @@ HRESULT D3DBitmapNode11::InitializeBuffers()
 HRESULT D3DBitmapNode11::VForwardRender(Scene* pScene)
 {
 	HRESULT hr;
-	bool result;
 
 	IRenderer* pRenderer = g_pApp->GetGraphicsManager()->GetRenderer();
 	ID3D11DeviceContext* context = pRenderer->GetDeviceContext();
@@ -804,7 +803,6 @@ HRESULT D3DMeshNode11::VDeferredRender(Scene* pScene)
 
 bool D3DMeshNode11::RenderDeferredBuffers(ID3D11DeviceContext* deviceContext)
 {
-	bool result;
 	unsigned int stride, offset;
 
 	stride = sizeof(VertexType);
@@ -839,8 +837,6 @@ bool D3DMeshNode11::RenderDeferredBuffers(ID3D11DeviceContext* deviceContext)
 
 HRESULT D3DMeshNode11::VForwardRender(Scene* pScene)
 {
-	bool result;
-
 	IRenderer* pRenderer = g_pApp->GetGraphicsManager()->GetRenderer();
 	ID3D11DeviceContext* context = pRenderer->GetDeviceContext();
 

@@ -12,7 +12,7 @@ void LoadMesh(
 	unsigned int numMeshes = *reinterpret_cast<unsigned int*>(data);
 	offset += szui;
 
-	for (int i = 0; i < numMeshes; i++)
+	for (unsigned int i = 0; i < numMeshes; i++)
 	{
 		unsigned int materialIndex = *reinterpret_cast<unsigned int*>(data + offset);
 		offset += szui;
