@@ -4,16 +4,14 @@
 #include "LightShader.h"
 #include "MultiTextureShader.h"
 #include "LightmapShader.h"
-#include "DeferredLightShader.h"
 
 class SceneNode;
-class PostProcessRenderWindow;
 
 class ShaderManager
 {
 
 public:
-	ShaderManager() : m_pLightShader(nullptr), m_pColorShader(nullptr), m_pTextureShader(nullptr), m_pMultiTextureShader(nullptr), m_pLightmapShader(nullptr), m_pDeferredLightShader(nullptr), m_pPostProcessRenderWindow(nullptr){}
+	ShaderManager() : m_pLightShader(nullptr), m_pColorShader(nullptr), m_pTextureShader(nullptr), m_pMultiTextureShader(nullptr), m_pLightmapShader(nullptr){}
 	~ShaderManager();
 
 	bool Initialize(IRenderer* renderer);
@@ -26,6 +24,4 @@ private:
 	TextureShader* m_pTextureShader;
 	MultiTextureShader* m_pMultiTextureShader;
 	LightmapShader* m_pLightmapShader;
-	DeferredLightShader* m_pDeferredLightShader;
-	PostProcessRenderWindow* m_pPostProcessRenderWindow;
 };

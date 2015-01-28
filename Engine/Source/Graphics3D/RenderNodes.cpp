@@ -812,6 +812,11 @@ bool D3DMeshNode11::RenderDeferredBuffers(ID3D11DeviceContext* deviceContext)
 
 	for (auto it = m_submeshBuffers.begin(); it != m_submeshBuffers.end(); it++)
 	{
+		if ((*it).material->GetShaderType() != BSHADER_TYPE_DEFERRED_LIT)
+		{
+			continue;
+		}
+
 		deviceContext->IASetVertexBuffers(0, 1, &(*it).pVertexBuffer, &stride, &offset);
 
 		deviceContext->IASetIndexBuffer((*it).pIndexBuffer, DXGI_FORMAT_R32_UINT, 0);

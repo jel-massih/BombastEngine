@@ -1,4 +1,6 @@
 #include "DeferredRenderingManager.h"
+#include "../Graphics2D/PostProcessRenderWindow.h"
+#include "DeferredLightShader.h"
 
 DeferredRenderingManager::DeferredRenderingManager()
 	: m_pGbufferInputLayout(nullptr),
@@ -7,7 +9,9 @@ DeferredRenderingManager::DeferredRenderingManager()
 	m_pTextureSampler(nullptr),
 	m_pMatrixBuffer(nullptr),
 	m_pDepthStencilBuffer(nullptr),
-	m_pDepthStencilView(nullptr)
+	m_pDepthStencilView(nullptr),
+	m_pDeferredLightShader(nullptr),
+	m_pPostProcessRenderWindow(nullptr)
 {
 }
 
@@ -22,6 +26,9 @@ DeferredRenderingManager::~DeferredRenderingManager()
 	SAFE_RELEASE(m_pMatrixBuffer);
 	SAFE_RELEASE(m_pDepthStencilBuffer);
 	SAFE_RELEASE(m_pDepthStencilView);
+
+	SAFE_DELETE(m_pDeferredLightShader);
+	SAFE_DELETE(m_pPostProcessRenderWindow);
 
 	m_texGBuffer.Release();
 	m_texGBuffer2.Release();
@@ -115,6 +122,35 @@ bool DeferredRenderingManager::Initialize(ID3D11Device* device, int texWidth, in
 		}
 	}
 
+	m_pDeferredLightShader = BE_NEW DeferredLightShader;
+	if (!m_pDeferredLightShader)
+	{
+		BE_ERROR("Could not Allocate the DeferredLightShader Object!");
+		return false;
+	}
+
+	result = m_pDeferredLightShader->Initialize(device);
+	if (!result)
+	{
+		BE_ERROR("Could not initialize the DeferredLightShader Object!");
+		return false;
+	}
+
+	m_pPostProcessRenderWindow = BE_NEW PostProcessRenderWindow;
+	if (!m_pPostProcessRenderWindow)
+	{
+		BE_ERROR("Could not Allocate the PostProcessRenderWindow Object!");
+		return false;
+	}
+
+	Point screenSize = g_pApp->GetScreenSize();
+	result = m_pPostProcessRenderWindow->Initialize(device, screenSize.GetX(), screenSize.GetY());
+	if (!result)
+	{
+		BE_ERROR("Could not initialize the PostProcessRenderWindow Object!");
+		return false;
+	}
+
 	return true;
 }
 
@@ -194,12 +230,12 @@ void DeferredRenderingManager::StartRender(ID3D11Device* device, ID3D11DeviceCon
 	{
 		//Fill G Buffer
 		ID3D11RenderTargetView* pGBufRTV[] = { m_texGBuffer.GetRenderTargetView(), m_texGBuffer2.GetRenderTargetView() };
-		context->OMSetRenderTargets(2, pGBufRTV, m_pDepthStencilView);
+		context->OMSetRenderTargets(2, pGBufRTV, pDSV);
 
 
 		context->ClearRenderTargetView(pGBufRTV[0], clearColor);
 		context->ClearRenderTargetView(pGBufRTV[1], clearColor);
-		context->ClearDepthStencilView(m_pDepthStencilView, D3D11_CLEAR_DEPTH, 1.0f, 0);
+		context->ClearDepthStencilView(pDSV, D3D11_CLEAR_DEPTH, 1.0f, 0);
 
 
 		context->IASetInputLayout(m_pGbufferInputLayout);
@@ -231,4 +267,16 @@ void DeferredRenderingManager::DrawRenderable(ID3D11DeviceContext* deviceContext
 	deviceContext->PSSetShaderResources(0, 1, &texture);
 	
 	deviceContext->DrawIndexed(indexCount, 0, 0);
+}
+
+void DeferredRenderingManager::DrawLightPass(ID3D11DeviceContext* context, const Scene* pScene) const
+{
+	IRenderer* pRenderer = g_pApp->GetGraphicsManager()->GetRenderer();
+
+	Mat4x4 worldMatrix, projectionMatrix, orthoMatrix;
+	pRenderer->VGetWorldMatrix(worldMatrix);
+	pRenderer->VGetOrthoMatrix(orthoMatrix);
+
+	m_pPostProcessRenderWindow->Render(context);
+	m_pDeferredLightShader->Render(context, m_pPostProcessRenderWindow->GetIndexCount(), XMLoadFloat4x4(&worldMatrix), XMLoadFloat4x4(&Mat4x4::g_Identity), XMLoadFloat4x4(&orthoMatrix), m_texGBuffer.GetShaderResourceView(), m_texGBuffer2.GetShaderResourceView(), pScene);
 }

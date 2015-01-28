@@ -1,6 +1,9 @@
 #pragma once
 #include "../Utilities/DirectXUtils.h"
 
+class PostProcessRenderWindow;
+class DeferredLightShader;
+
 class DeferredRenderingManager
 {
 public:
@@ -12,6 +15,8 @@ public:
 	void StartRender(ID3D11Device* device, ID3D11DeviceContext* context, ID3D11RenderTargetView* pRTV, ID3D11DepthStencilView* pDSV) const;
 	void DrawRenderable(ID3D11DeviceContext* deviceContext, int indexCount, XMMATRIX& worldMatrix, XMMATRIX& viewMatrix, XMMATRIX& projectionMatrix, ID3D11ShaderResourceView* texture) const;
 	
+	void DrawLightPass(ID3D11DeviceContext* context, const Scene* pScene) const;
+
 	const SimpleTexture& GetColorRenderTexture() const { return m_texGBuffer; }
 	const SimpleTexture& GetNormalRenderTexture() const { return m_texGBuffer2; }
 
@@ -33,6 +38,10 @@ private:
 
 	ID3D11Texture2D* m_pDepthStencilBuffer;
 	ID3D11DepthStencilView* m_pDepthStencilView;
+
+
+	DeferredLightShader* m_pDeferredLightShader;
+	PostProcessRenderWindow* m_pPostProcessRenderWindow;
 
 private:
 	struct MatrixBufferType
