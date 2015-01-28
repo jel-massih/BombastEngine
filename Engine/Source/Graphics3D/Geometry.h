@@ -105,6 +105,7 @@ public:
 	inline void BuildRotationY(const float radians) { XMStoreFloat4x4(this, XMMatrixRotationY(radians)); }
 	inline void BuildRotationZ(const float radians) { XMStoreFloat4x4(this, XMMatrixRotationZ(radians)); }
 	inline void BuildScale(const float x, const float y, const float z);
+	inline void BuildScale(const Vec3 vec);
 	inline void BuildYawPitchRoll(const float yawRadians, const float pitchRadians, const float rollRadians)
 	{
 		XMStoreFloat4x4(this, XMMatrixRotationRollPitchYaw(yawRadians, pitchRadians, rollRadians));
@@ -236,9 +237,17 @@ inline void Mat4x4::BuildTranslation(const float x, const float y, const float z
 inline void Mat4x4::BuildScale(const float x, const float y, const float z)
 {
 	*this = Mat4x4::g_Identity;
-	m[1][1] = x;
-	m[2][2] = y;
-	m[3][3] = z;
+	m[0][0] = x;
+	m[1][1] = y;
+	m[2][2] = z;
+}
+
+inline void Mat4x4::BuildScale(const Vec3 vec)
+{
+	*this = Mat4x4::g_Identity;
+	m[0][0] = vec.x;
+	m[1][1] = vec.y;
+	m[2][2] = vec.z;
 }
 
 inline Mat4x4 operator * (const Mat4x4& a, const Mat4x4& b)

@@ -34,6 +34,18 @@ bool TransformComponent::VInitialize(rapidxml::xml_node<>* pData)
 		m_rotation = Vec3(yaw, pitch, roll);
 	}
 
+	rapidxml::xml_node<>* pScaleElement = pData->first_node("Scale");
+	if (pScaleElement)
+	{
+		double x = 0;
+		double y = 0;
+		double z = 0;
+		x = atof(pScaleElement->first_attribute("x")->value());
+		y = atof(pScaleElement->first_attribute("y")->value());
+		z = atof(pScaleElement->first_attribute("z")->value());
+		m_scale = Vec3(x, y, z);
+	}
+
 	UpdateTransform();
 
 	return true;
@@ -56,6 +68,12 @@ rapidxml::xml_node<>* TransformComponent::VGenerateXml()
 	pDirection->append_attribute(outDoc.allocate_attribute("y", ToStr(m_rotation.y).c_str()));
 	pDirection->append_attribute(outDoc.allocate_attribute("z", ToStr(m_rotation.z).c_str()));
 	pBaseElement->append_node(pDirection);
+
+	rapidxml::xml_node<>* pScale = outDoc.allocate_node(rapidxml::node_element, "Scale");
+	pScale->append_attribute(outDoc.allocate_attribute("x", ToStr(m_scale.x).c_str()));
+	pScale->append_attribute(outDoc.allocate_attribute("y", ToStr(m_scale.y).c_str()));
+	pScale->append_attribute(outDoc.allocate_attribute("z", ToStr(m_scale.z).c_str()));
+	pBaseElement->append_node(pScale);
 	
 	return pBaseElement;
 }
@@ -68,7 +86,10 @@ void TransformComponent::UpdateTransform()
 	Mat4x4 rotation;
 	rotation.BuildYawPitchRoll(XMConvertToRadians(m_rotation.x), XMConvertToRadians(m_rotation.y), XMConvertToRadians(m_rotation.z));
 
-	m_transform = rotation * translation;
+	Mat4x4 scale;
+	scale.BuildScale(m_scale);
+
+	m_transform = scale * rotation * translation;
 }
 
 void TransformComponent::MoveForward(float magnitude)
