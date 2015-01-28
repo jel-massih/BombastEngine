@@ -143,7 +143,6 @@ bool BlockRenderComponent::VDelegateInitialize(rapidxml::xml_node<>* pData)
 {
 	bool result = false;
 
-	//@TODO: Refactor code duplication for textures (Separate Component?)
 	rapidxml::xml_node<>* pMaterial = pData->first_node("Material");
 	if (pMaterial)
 	{
@@ -154,7 +153,7 @@ bool BlockRenderComponent::VDelegateInitialize(rapidxml::xml_node<>* pData)
 		}
 		else
 		{
-			BE_ERROR("Texture path Exception: Make sure path attribute is set for Texture Element");
+			BE_ERROR("Material path Exception: Make sure path attribute is set for Material Element");
 			return false;
 		}
 	}

@@ -153,7 +153,10 @@ bool ShaderManager::RenderRenderable(SceneNode* pRenderableNode, Material* pMate
 	case BSHADER_TYPE_DEFERRED_LIT:
 		pRenderer->VEnableZBuffer(false);
 		m_pPostProcessRenderWindow->Render(context);
-		m_pDeferredLightShader->Render(context, m_pPostProcessRenderWindow->GetIndexCount(), XMLoadFloat4x4(&worldMatrix), XMLoadFloat4x4(&viewMatrix), XMLoadFloat4x4(&projectionMatrix), g_pApp->GetGraphicsManager()->GetDeferredRenderingManager()->GetColorRenderTexture().GetShaderResourceView(), g_pApp->GetGraphicsManager()->GetDeferredRenderingManager()->GetNormalRenderTexture().GetShaderResourceView(), pScene);
+		Mat4x4 orthoMatrix;
+		pRenderer->VGetOrthoMatrix(orthoMatrix);
+		viewMatrix = Mat4x4::g_Identity;
+		m_pDeferredLightShader->Render(context, m_pPostProcessRenderWindow->GetIndexCount(), XMLoadFloat4x4(&worldMatrix), XMLoadFloat4x4(&viewMatrix), XMLoadFloat4x4(&orthoMatrix), g_pApp->GetGraphicsManager()->GetDeferredRenderingManager()->GetColorRenderTexture().GetShaderResourceView(), g_pApp->GetGraphicsManager()->GetDeferredRenderingManager()->GetNormalRenderTexture().GetShaderResourceView(), pScene);
 		pRenderer->VEnableZBuffer(true);
 		return true;
 		break;

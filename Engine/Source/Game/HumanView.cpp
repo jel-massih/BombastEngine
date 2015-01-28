@@ -96,29 +96,25 @@ void HumanView::VOnRender(const float deltaMs, double elapsedMs)
 	{
 		m_lastDraw = m_currTick;
 
-		if (g_pApp->GetGraphicsManager()->GetRenderer()->VBeginScene())
+		m_screenElements.sort(SortBy_Ptr_Content<IScreenElement>());
+
+		for (ScreenElementList::iterator it = m_screenElements.begin(); it != m_screenElements.end(); it++)
 		{
-			m_screenElements.sort(SortBy_Ptr_Content<IScreenElement>());
-
-			for (ScreenElementList::iterator it = m_screenElements.begin(); it != m_screenElements.end(); it++)
+			if ((*it)->VIsVisible())
 			{
-				if ((*it)->VIsVisible())
-				{
-					(*it)->VOnRender(deltaMs, elapsedMs);
-				}
+				(*it)->VOnRender(deltaMs, elapsedMs);
 			}
-
-			g_pApp->GetGraphicsManager()->GetRenderer()->VEnableZBuffer(false);
-			g_pApp->GetGraphicsManager()->GetRenderer()->VEnableAlphaBlending(true);
-
-			if (m_pDebugManager)
-			{
-				m_pDebugManager->Render();
-			}
-
-			g_pApp->GetGraphicsManager()->GetRenderer()->VEnableAlphaBlending(false);
-			g_pApp->GetGraphicsManager()->GetRenderer()->VEnableZBuffer(true);
 		}
+		g_pApp->GetGraphicsManager()->GetRenderer()->VEnableZBuffer(false);
+		g_pApp->GetGraphicsManager()->GetRenderer()->VEnableAlphaBlending(true);
+
+		if (m_pDebugManager)
+		{
+			m_pDebugManager->Render();
+		}
+
+		g_pApp->GetGraphicsManager()->GetRenderer()->VEnableAlphaBlending(false);
+		g_pApp->GetGraphicsManager()->GetRenderer()->VEnableZBuffer(true);
 
 		g_pApp->GetGraphicsManager()->GetRenderer()->VEndScene();
 	}

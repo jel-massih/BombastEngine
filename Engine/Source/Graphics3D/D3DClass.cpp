@@ -521,4 +521,7 @@ void D3DClass11::VPrepDeferredRendering() const
 void D3DClass11::VPrepForwardRendering() const
 {
 	m_pDeviceContext->OMSetRenderTargets(1, &m_pRenderTargetView, m_pDepthStencilView);
+	m_pDeviceContext->ClearRenderTargetView(m_pRenderTargetView, m_backgroundColor);
+	m_pDeviceContext->ClearDepthStencilView(m_pDepthStencilView, D3D11_CLEAR_DEPTH, 1.0f, 0);
+
 }

@@ -194,11 +194,13 @@ void DeferredRenderingManager::StartRender(ID3D11Device* device, ID3D11DeviceCon
 	{
 		//Fill G Buffer
 		ID3D11RenderTargetView* pGBufRTV[] = { m_texGBuffer.GetRenderTargetView(), m_texGBuffer2.GetRenderTargetView() };
+		context->OMSetRenderTargets(2, pGBufRTV, m_pDepthStencilView);
+
+
 		context->ClearRenderTargetView(pGBufRTV[0], clearColor);
 		context->ClearRenderTargetView(pGBufRTV[1], clearColor);
 		context->ClearDepthStencilView(m_pDepthStencilView, D3D11_CLEAR_DEPTH, 1.0f, 0);
 
-		context->OMSetRenderTargets(2, pGBufRTV, m_pDepthStencilView);
 
 		context->IASetInputLayout(m_pGbufferInputLayout);
 		context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
