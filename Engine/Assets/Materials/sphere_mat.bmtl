@@ -8,6 +8,6 @@
   	<Texture path="textures\red.dds"></Texture>
 	</Textures>
 
-	<Shader type="LitTextured">
+	<Shader type="DeferredLit">
 	</Shader>
 </Material>

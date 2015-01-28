@@ -1,8 +1,11 @@
 <Actor type="Sphere" resource="actors\sphere.xml">
-	<TransformComponent/>
+	<TransformComponent>
+		<Scale x="0.25" y="0.25" z="0.25"/>
+	</TransformComponent>
   <MeshRenderComponent>
-    <Mesh path="meshes\sponza.bmdl"></Mesh>
+    <Mesh path="meshes\sphere.bmdl"></Mesh>
     <Materials>
+			<Material path="materials\sphere_mat.bmtl"/>
 			<Material path="materials\sphere_mat.bmtl"/>
   	</Materials>
   </MeshRenderComponent>

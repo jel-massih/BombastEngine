@@ -6,9 +6,35 @@
     <StaticActors>
       <Actor resource="actors\directionalLight.xml"/>
 
-      <Actor resource="actors\cube.xml">
+      <Actor resource="actors\platform.xml">
         <TransformComponent>
-        <Position x="0" y="0" z="5"/>
+          <Position x="0" y="0" z="3"/>
+        </TransformComponent>
+      </Actor>
+
+      <Actor resource="actors\sphere.xml">
+        <TransformComponent>
+          <Position x="0" y="0.5" z="3"/>
+        </TransformComponent>
+      </Actor>
+      <Actor resource="actors\sphere.xml">
+        <TransformComponent>
+          <Position x="-1" y="0.5" z="4"/>
+        </TransformComponent>
+      </Actor>
+      <Actor resource="actors\sphere.xml">
+        <TransformComponent>
+          <Position x="1" y="0.5" z="2"/>
+        </TransformComponent>
+      </Actor>
+      <Actor resource="actors\sphere.xml">
+        <TransformComponent>
+          <Position x="1" y="0.5" z="4"/>
+        </TransformComponent>
+      </Actor>
+      <Actor resource="actors\sphere.xml">
+        <TransformComponent>
+          <Position x="-1" y="0.5" z="2"/>
         </TransformComponent>
       </Actor>
     </StaticActors>
