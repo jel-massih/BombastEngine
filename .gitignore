@@ -8,6 +8,8 @@ Engine/Assets/Textures/*
 Engine/Assets/Materials/*
 Engine/Assets/Actors/*
 
+Editor/Bin/*
+
 Tools/Scripts/Materials/*
 Tools/Scripts/Actors/*
 Tools/Scripts/Meshes/*
@@ -28,3 +30,4 @@ Tools/Scripts/Meshes/*
 *.cso
 *.opensdf
 *.nvuser
+*.exp
