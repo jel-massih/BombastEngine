@@ -9,6 +9,7 @@ Engine/Assets/Materials/*
 Engine/Assets/Actors/*
 
 Editor/Bin/*
+Editor/Source/Libraries/*
 
 Tools/Scripts/Materials/*
 Tools/Scripts/Actors/*
