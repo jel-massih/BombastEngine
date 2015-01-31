@@ -104,62 +104,6 @@ protected:
 	bool m_bShow;
 };
 
-class PrimitiveNode : public SceneNode
-{
-public:
-	enum PrimitiveType
-	{
-		PT_MIN = 0,
-		PT_Box,
-		PT_Sphere,
-		PT_Cylinder,
-		PT_MAX
-	};
-
-public:
-	PrimitiveNode(const ActorId actorId, BaseRenderComponent* renderComponent, std::string materialFilename, RenderPass renderPass, PrimitiveType type, Vec3 size, const Mat4x4* t);
-
-	virtual HRESULT VOnRestore(Scene* pScene) = 0;
-	virtual HRESULT VForwardRender(Scene* pScene) = 0;
-
-protected:
-	virtual HRESULT InitializeBuffers() = 0;
-	Material* LoadMaterial(std::string materialFilename);
-	bool VIsVisible(Scene* pScene) const;
-
-	struct VertexType
-	{
-		Vec3 position;
-		XMFLOAT2 texture;
-	};
-
-protected:
-	int m_vertCount, m_indexCount;
-	Vec3 m_size;
-
-	PrimitiveType m_primitiveType;
-	Material* m_pMaterial;
-};
-
-class D3D11PrimitiveNode : public PrimitiveNode
-{
-public:
-	D3D11PrimitiveNode(const ActorId actorId, BaseRenderComponent* renderComponent, std::string materialFilename, RenderPass renderPass, PrimitiveType type, Vec3 size, const Mat4x4* t);
-	~D3D11PrimitiveNode();
-
-	HRESULT VOnRestore(Scene* pScene);
-	HRESULT VForwardRender(Scene* pScene);
-
-private:
-	HRESULT InitializeBuffers();
-	void RenderBuffers(ID3D11DeviceContext* deviceContext);
-
-private:
-	ID3D11Buffer* m_pVertexBuffer, *m_pIndexBuffer;
-
-	Vec3 m_lastPos;
-};
-
 class MeshNode : public SceneNode
 {
 public:

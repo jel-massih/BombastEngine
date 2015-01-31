@@ -7,7 +7,6 @@
 
 const char* InvisibleRenderComponent::g_Name = "InvisibleRenderComponent";
 const char* BitmapRenderComponent::g_Name = "BitmapRenderComponent";
-const char* BlockRenderComponent::g_Name = "BlockRenderComponent";
 const char* MeshRenderComponent::g_Name = "MeshRenderComponent";
 const char* LightRenderComponent::g_Name = "LightRenderComponent";
 
@@ -134,49 +133,6 @@ SceneNode* BitmapRenderComponent::VCreateSceneNode()
 	{
 		SceneNode* bitmap = BE_NEW D3DBitmapNode11(m_pOwner->GetId(), (BaseRenderComponent*)this, m_textureResource, m_relativeSize, RenderPass_GUI, &pTransformComponent->GetTransform());
 		return bitmap;
-	}
-
-	return NULL;
-}
-
-bool BlockRenderComponent::VDelegateInitialize(rapidxml::xml_node<>* pData)
-{
-	bool result = false;
-
-	rapidxml::xml_node<>* pMaterial = pData->first_node("Material");
-	if (pMaterial)
-	{
-		rapidxml::xml_attribute<char>* test = pMaterial->first_attribute("path");
-		if (pMaterial->first_attribute("path") != NULL)
-		{
-			m_materialResource = pMaterial->first_attribute("path")->value();
-		}
-		else
-		{
-			BE_ERROR("Material path Exception: Make sure path attribute is set for Material Element");
-			return false;
-		}
-	}
-
-	rapidxml::xml_node<>* pSize = pData->first_node("Size");
-	if (pSize)
-	{
-		m_size.x = (float)atof(pSize->first_attribute("x")->value());
-		m_size.y = (float)atof(pSize->first_attribute("y")->value());
-		m_size.z = (float)atof(pSize->first_attribute("z")->value());
-	}
-
-	return true;
-}
-
-SceneNode* BlockRenderComponent::VCreateSceneNode()
-{
-	TransformComponent* pTransformComponent = m_pOwner->GetComponent<TransformComponent>(TransformComponent::g_Name);
-
-	if (pTransformComponent)
-	{
-		SceneNode* blockNode = BE_NEW D3D11PrimitiveNode(m_pOwner->GetId(), (BaseRenderComponent*)this, m_materialResource, RenderPass_Static, D3D11PrimitiveNode::PrimitiveType::PT_Box, m_size, &pTransformComponent->GetTransform());
-		return blockNode;
 	}
 
 	return NULL;

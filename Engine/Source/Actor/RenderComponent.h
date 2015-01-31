@@ -53,20 +53,6 @@ protected:
 	virtual SceneNode* VCreateSceneNode() override;
 };
 
-class BlockRenderComponent : public BaseRenderComponent
-{
-	std::string m_materialResource;
-	Vec3 m_size;
-
-public:
-	static const char* g_Name;
-	virtual const char* VGetName() const override{ return BlockRenderComponent::g_Name; }
-
-protected:
-	virtual bool VDelegateInitialize(rapidxml::xml_node<>* pData) override;
-	virtual SceneNode* VCreateSceneNode() override;
-};
-
 class MeshRenderComponent : public BaseRenderComponent
 {
 	char* m_meshResource;
