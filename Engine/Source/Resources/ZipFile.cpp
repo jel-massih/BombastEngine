@@ -249,9 +249,9 @@ int ZipFile::GetFileLen(int i) const
 // Parameters:    The file index and the pre-allocated buffer
 // --------------------------------------------------------------------------
 bool ZipFile::ReadFile(int i, void *pBuf)
-{
+{/*
 	if (pBuf == NULL || i < 0 || i >= m_nEntries)
-		return false;
+	return false;
 
 	// Quick'n dirty read, the whole file at once.
 	// Ungood if the ZIP has huge files inside
@@ -263,24 +263,24 @@ bool ZipFile::ReadFile(int i, void *pBuf)
 	memset(&h, 0, sizeof(h));
 	fread(&h, sizeof(h), 1, m_pFile);
 	if (h.sig != TZipLocalHeader::SIGNATURE)
-		return false;
+	return false;
 
 	// Skip extra fields
 	fseek(m_pFile, h.fnameLen + h.xtraLen, SEEK_CUR);
 
 	if (h.compression == Z_NO_COMPRESSION)
 	{
-		// Simply read in raw stored data.
-		fread(pBuf, h.cSize, 1, m_pFile);
-		return true;
+	// Simply read in raw stored data.
+	fread(pBuf, h.cSize, 1, m_pFile);
+	return true;
 	}
 	else if (h.compression != Z_DEFLATED)
-		return false;
+	return false;
 
 	// Alloc compressed data buffer and read the whole stream
 	char *pcData = BE_NEW char[h.cSize];
 	if (!pcData)
-		return false;
+	return false;
 
 	memset(pcData, 0, h.cSize);
 	fread(pcData, h.cSize, 1, m_pFile);
@@ -302,17 +302,17 @@ bool ZipFile::ReadFile(int i, void *pBuf)
 	err = inflateInit2(&stream, -MAX_WBITS);
 	if (err == Z_OK)
 	{
-		err = inflate(&stream, Z_FINISH);
-		inflateEnd(&stream);
-		if (err == Z_STREAM_END)
-			err = Z_OK;
-		inflateEnd(&stream);
+	err = inflate(&stream, Z_FINISH);
+	inflateEnd(&stream);
+	if (err == Z_STREAM_END)
+	err = Z_OK;
+	inflateEnd(&stream);
 	}
 	if (err != Z_OK)
-		ret = false;
+	ret = false;
 
 	delete[] pcData;
-	return ret;
+	return ret;*/return true;
 }
 
 
@@ -324,6 +324,7 @@ bool ZipFile::ReadFile(int i, void *pBuf)
 // --------------------------------------------------------------------------
 bool ZipFile::ReadLargeFile(int i, void *pBuf, void(*progressCallback)(int, bool &))
 {
+	return true;/*
 	if (pBuf == NULL || i < 0 || i >= m_nEntries)
 		return false;
 
@@ -403,7 +404,7 @@ bool ZipFile::ReadLargeFile(int i, void *pBuf, void(*progressCallback)(int, bool
 		ret = false;
 
 	delete[] pcData;
-	return ret;
+	return ret;*/
 }
 
 
