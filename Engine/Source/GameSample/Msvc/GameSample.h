@@ -6,7 +6,7 @@ protected:
 	virtual CoreGameLogic *VCreateGameAndView();
 
 public:
-	virtual TCHAR *VGetGameTitle() { return _T("Pong Sample"); }
+	virtual TCHAR *VGetGameTitle() { return _T("Bombast Engine Sample Game"); }
 	//virtual TCHAR *VGetGameAppDirectory() { return _T(""); }
 
 protected:
