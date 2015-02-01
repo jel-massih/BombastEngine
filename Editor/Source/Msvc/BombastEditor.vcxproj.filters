@@ -29,24 +29,27 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\BombastEditor\bombasteditor.cpp">
-      <Filter>BombastEditor</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_bombasteditor.cpp">
+    <ClCompile Include="GeneratedFiles\Debug\moc_bombasteditormain.cpp">
       <Filter>Application\Generated Files\Debug</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_bombasteditor.cpp">
+    <ClCompile Include="GeneratedFiles\Release\moc_bombasteditormain.cpp">
       <Filter>Application\Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="..\BombastEditor\bombasteditormain.cpp">
+      <Filter>BombastEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\BombastEditor\BombastEditor.cpp">
+      <Filter>BombastEditor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="bombasteditor.qrc">
       <Filter>Application\Generated Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="..\UiViews\bombasteditor.ui">
+    <CustomBuild Include="..\UiViews\bombasteditormain.ui">
       <Filter>Form Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="..\BombastEditor\bombasteditor.h">
+    <CustomBuild Include="..\BombastEditor\bombasteditormain.h">
       <Filter>BombastEditor</Filter>
     </CustomBuild>
   </ItemGroup>
@@ -54,8 +57,11 @@
     <ClInclude Include="..\Msvc\BombastEditorStd.h">
       <Filter>Application</Filter>
     </ClInclude>
-    <ClInclude Include="GeneratedFiles\ui_bombasteditor.h">
+    <ClInclude Include="GeneratedFiles\ui_bombasteditormain.h">
       <Filter>Application\Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\BombastEditor\BombastEditor.h">
+      <Filter>BombastEditor</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -34,7 +34,7 @@
         <property name="frameShadow">
          <enum>QFrame::Raised</enum>
         </property>
-        <widget class="QGraphicsView" name="graphicsView">
+        <widget class="QGraphicsView" name="bombastViewport">
          <property name="geometry">
           <rect>
            <x>0</x>

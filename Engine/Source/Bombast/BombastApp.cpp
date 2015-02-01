@@ -90,7 +90,14 @@ bool BombastApp::InitInstance(HINSTANCE hInstance, HWND hWnd, int screenWidth, i
 	m_pResourceCache->RegisterLoader(CreateMaterialResourceLoader());
 	m_pResourceCache->RegisterLoader(CreateShaderResourceLoader());
 
-	InitializeWindows();
+	if (hWnd == NULL)
+	{
+		InitializeWindows();
+	}
+	else
+	{
+		m_hWnd = hWnd;
+	}
 
 	if(!GetHwnd())
 	{
@@ -98,7 +105,7 @@ bool BombastApp::InitInstance(HINSTANCE hInstance, HWND hWnd, int screenWidth, i
 		return FALSE;
 	}
 
-	if(!InitializeApp(screenWidth, screenheight))
+	if (!InitializeApp(screenWidth, screenheight))
 	{
 		BE_ERROR("App Error: Could Not Initialize Application layer");
 		return FALSE;
