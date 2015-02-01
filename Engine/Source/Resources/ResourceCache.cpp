@@ -73,7 +73,7 @@ DevelopmentResourceZipFile::DevelopmentResourceZipFile(const std::wstring resFil
 	GetCurrentDirectory(MAX_PATH, dir);
 
 	m_assetsDir = dir;
-	m_assetsDir += L"\\Assets";
+	m_assetsDir += L"\\..\\Assets\\";
 }
 
 int DevelopmentResourceZipFile::Find(const std::string &name)
