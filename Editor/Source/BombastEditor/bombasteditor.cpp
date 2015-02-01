@@ -1,22 +1,25 @@
 #include "../Msvc/BombastEditorStd.h"
 #include "BombastEditor.h"
-
 #include "Physics/Physics.h"
+
+#include <QtWidgets\qapplication.h>
+#include <QtWidgets\qtextedit.h>
 
 BombastEditorApp g_BombastEditorApp;
 
-INT WINAPI wWinMain(HINSTANCE hInstance,
-	HINSTANCE hPrevInstance,
-	LPWSTR    lpCmdLine,
-	int       nCmdShow)
+int main(int argv, char** args)
 {
-	return BombastEngine(hInstance, hPrevInstance, lpCmdLine, nCmdShow);
+	QApplication app(argv, args);
+
+	QTextEdit textEdit;
+	textEdit.show();
+
+	//return BombastEngine(hInstance, hPrevInstance, lpCmdLine, nCmdShow);
+	return app.exec();
 }
 
 CoreGameLogic* BombastEditorApp::VCreateGameAndView()
 {
-	g_pApp->m_options.m_level = "World\\World.xml";
-
 	m_pGame = BE_NEW BombastEditorLogic();
 	m_pGame->Initialize();
 
