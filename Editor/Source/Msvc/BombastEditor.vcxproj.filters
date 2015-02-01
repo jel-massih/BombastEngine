@@ -41,6 +41,18 @@
     <ClCompile Include="..\BombastEditor\BombastEditor.cpp">
       <Filter>BombastEditor</Filter>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_MessageHandler.cpp">
+      <Filter>Application\Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_MessageHandler.cpp">
+      <Filter>Application\Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Application\MessageHandler.cpp">
+      <Filter>Application</Filter>
+    </ClCompile>
+    <ClCompile Include="..\BombastEditor\BombastEditorLogic.cpp">
+      <Filter>BombastEditor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="bombasteditor.qrc">
@@ -52,6 +64,9 @@
     <CustomBuild Include="..\BombastEditor\bombasteditormain.h">
       <Filter>BombastEditor</Filter>
     </CustomBuild>
+    <CustomBuild Include="..\Application\MessageHandler.h">
+      <Filter>Application</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Msvc\BombastEditorStd.h">
@@ -61,6 +76,9 @@
       <Filter>Application\Generated Files</Filter>
     </ClInclude>
     <ClInclude Include="..\BombastEditor\BombastEditor.h">
+      <Filter>BombastEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\BombastEditor\BombastEditorLogic.h">
       <Filter>BombastEditor</Filter>
     </ClInclude>
   </ItemGroup>

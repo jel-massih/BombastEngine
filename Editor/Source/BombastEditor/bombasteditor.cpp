@@ -1,7 +1,7 @@
 #include "BombastEditor.h"
 #include "../Msvc/BombastEditorStd.h"
 #include "Bombast\interfaces.h"
-#include "Physics/Physics.h"
+#include "BombastEditorLogic.h"
 #include "bombasteditormain.h"
 
 #include <qapplication.h>
@@ -12,8 +12,7 @@ int main(int argc, char *argv[])
 {
 	QApplication a(argc, argv);
 
-	BombastEditorMain w;
-	w.show();
+	g_BombastEditorApp.InitEditorWindow();
 
 	return a.exec();
 }
@@ -24,10 +23,8 @@ INT EditorMain(HINSTANCE hInstance,
 {
 	bool bConsoleEnabled = false;
 
-	//Setup Checks for memory leaks
 	int tmpDbgFlag = _CrtSetDbgFlag(_CRTDBG_REPORT_FLAG);
 
-	//Used at Program Init to force leak check before exit
 	tmpDbgFlag |= _CRTDBG_LEAK_CHECK_DF;
 
 	_CrtSetDbgFlag(tmpDbgFlag);
@@ -41,7 +38,19 @@ INT EditorMain(HINSTANCE hInstance,
 		return FALSE;
 	}
 
-	return 0;
+	return TRUE;
+}
+
+void BombastEditorApp::OnIdleThread()
+{
+}
+
+void BombastEditorApp::InitEditorWindow()
+{
+	m_mainEditor = BE_NEW BombastEditorMain;
+	m_mainEditor->show();
+
+	//m_messageHandler.Init(this);
 }
 
 CoreGameLogic *BombastEditorApp::VCreateGameAndView()
@@ -52,13 +61,4 @@ CoreGameLogic *BombastEditorApp::VCreateGameAndView()
 	m_pGame->Initialize();
 
 	return m_pGame;
-}
-
-BombastEditorLogic::BombastEditorLogic()
-{
-	m_pGamePhysics = CreateGamePhysics();
-}
-
-BombastEditorLogic::~BombastEditorLogic()
-{
 }

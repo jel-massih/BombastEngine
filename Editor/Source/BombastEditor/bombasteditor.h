@@ -2,22 +2,23 @@
 
 #include "Bombast\BombastApp.h"
 #include "Bombast\CoreGameLogic.h"
+#include "../Application/MessageHandler.h"
+
+class BombastEditorMain;
 
 class BombastEditorApp : public BombastApp
 {
-protected:
-	virtual CoreGameLogic *VCreateGameAndView();
+public:
+	void OnIdleThread();
+	void InitEditorWindow();
 
 public:
 	virtual TCHAR *VGetGameTitle() { return _T("Bombast Editor"); }
-};
 
-
-class BombastEditorLogic : public CoreGameLogic
-{
 protected:
+	virtual CoreGameLogic *VCreateGameAndView();
 
-public:
-	BombastEditorLogic();
-	virtual ~BombastEditorLogic();
+private:
+	MessageHandler m_messageHandler;
+	BombastEditorMain* m_mainEditor;
 };
