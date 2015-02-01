@@ -6,11 +6,17 @@
 
 class BombastEditorMain;
 
+extern BombastEditorApp g_BombastEditorApp;
+
 class BombastEditorApp : public BombastApp
 {
 public:
+	~BombastEditorApp();
+
 	void OnIdleThread();
 	void InitEditorWindow();
+
+	void EditorQuit();
 
 public:
 	virtual TCHAR *VGetGameTitle() { return _T("Bombast Editor"); }

@@ -13,6 +13,8 @@ public:
 private:
 	void InitEngine();
 
+	void closeEvent(QCloseEvent* event);
+
 private:
 
 	Ui::BombastEditor ui;

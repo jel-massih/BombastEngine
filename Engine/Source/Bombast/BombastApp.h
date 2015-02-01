@@ -70,14 +70,15 @@ public:
 
 	void AbortGame() { m_bQuitting = true; }
 
+protected:
+	bool Render();
+	bool Frame();
+	void SetQuitting(bool quitting) { m_bQuitting = quitting; }
+
 private:
 	void InitializeWindows();
 	bool InitializeApp(int screenWidth, int screenHeight);
 
-	void SetQuitting(bool quitting) { m_bQuitting = quitting; }
-
-	bool Frame();
-	bool Render();
 
 	void ShutdownWindows();
 

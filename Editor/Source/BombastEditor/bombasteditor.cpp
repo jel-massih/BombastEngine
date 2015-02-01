@@ -3,6 +3,7 @@
 #include "Bombast\interfaces.h"
 #include "BombastEditorLogic.h"
 #include "bombasteditormain.h"
+#include "Utilities\Timer.h"
 
 #include <qapplication.h>
 
@@ -41,8 +42,16 @@ INT EditorMain(HINSTANCE hInstance,
 	return TRUE;
 }
 
+BombastEditorApp::~BombastEditorApp()
+{
+	SAFE_DELETE(m_mainEditor);
+}
+
 void BombastEditorApp::OnIdleThread()
 {
+	Frame();
+	Render();
+	UpdateGame(m_pTimer->GetFrameTime(), m_pTimer->GetTime());
 }
 
 void BombastEditorApp::InitEditorWindow()
@@ -50,7 +59,7 @@ void BombastEditorApp::InitEditorWindow()
 	m_mainEditor = BE_NEW BombastEditorMain;
 	m_mainEditor->show();
 
-	//m_messageHandler.Init(this);
+	m_messageHandler.Init(this);
 }
 
 CoreGameLogic *BombastEditorApp::VCreateGameAndView()
@@ -61,4 +70,14 @@ CoreGameLogic *BombastEditorApp::VCreateGameAndView()
 	m_pGame->Initialize();
 
 	return m_pGame;
+}
+
+void BombastEditorApp::EditorQuit()
+{
+	SetQuitting(true);
+	OnClose();
+
+	ShutDown();
+
+	BELogger::Destroy();
 }
