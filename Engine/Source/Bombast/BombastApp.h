@@ -35,7 +35,7 @@ public:
 
 	HWND GetHwnd() { return m_hWnd; }
 	HINSTANCE GetInstance() { return m_hInstance; }
-	virtual bool InitInstance(HINSTANCE hInstance, LPWSTR lpCmdLine, HWND hWnd = NULL, int screenWidth = SCREEN_WIDTH, int screenHeight = SCREEN_HEIGHT, int screenX = SCREEN_X, int screenY = SCREEN_Y);
+	virtual bool InitInstance(HINSTANCE hInstance, HWND hWnd = NULL, int screenWidth = SCREEN_WIDTH, int screenHeight = SCREEN_HEIGHT, int screenX = SCREEN_X, int screenY = SCREEN_Y);
 
 	static LRESULT CALLBACK MsgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
