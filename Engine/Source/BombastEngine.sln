@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BombastEngine", "Msvc\Bomba
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GameSample", "GameSample\Msvc\GameSample.vcxproj", "{FCC5A23D-02B5-4049-9257-F4E58F9474FA}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BombastEditor", "..\..\Editor\Source\Msvc\BombastEditor.vcxproj", "{AB8FA10A-5CA7-42F8-B05F-49711A24E0B3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -31,6 +33,13 @@ Global
 		{FCC5A23D-02B5-4049-9257-F4E58F9474FA}.Release|Win32.Build.0 = Release|Win32
 		{FCC5A23D-02B5-4049-9257-F4E58F9474FA}.Release|x64.ActiveCfg = Release|x64
 		{FCC5A23D-02B5-4049-9257-F4E58F9474FA}.Release|x64.Build.0 = Release|x64
+		{AB8FA10A-5CA7-42F8-B05F-49711A24E0B3}.Debug|Win32.ActiveCfg = Debug|Win32
+		{AB8FA10A-5CA7-42F8-B05F-49711A24E0B3}.Debug|Win32.Build.0 = Debug|Win32
+		{AB8FA10A-5CA7-42F8-B05F-49711A24E0B3}.Debug|x64.ActiveCfg = Debug|x64
+		{AB8FA10A-5CA7-42F8-B05F-49711A24E0B3}.Debug|x64.Build.0 = Debug|x64
+		{AB8FA10A-5CA7-42F8-B05F-49711A24E0B3}.Release|Win32.ActiveCfg = Release|Win32
+		{AB8FA10A-5CA7-42F8-B05F-49711A24E0B3}.Release|Win32.Build.0 = Release|Win32
+		{AB8FA10A-5CA7-42F8-B05F-49711A24E0B3}.Release|x64.ActiveCfg = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

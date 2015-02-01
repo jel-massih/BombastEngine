@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Application">
+      <UniqueIdentifier>{fb716862-8bd3-4e3d-afd2-4df472b12c67}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BombastEditor">
+      <UniqueIdentifier>{ac68db3f-ff8d-400d-b9e1-712e34fc3c3b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="BombastEditorStd.h">
+      <Filter>Application</Filter>
+    </ClInclude>
+    <ClInclude Include="..\BombastEditor\BombastEditor.h">
+      <Filter>Application</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\BombastEditor\BombastEditor.cpp">
+      <Filter>BombastEditor</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

@@ -1,17 +1,33 @@
-#include "bombasteditor.h"
-#include "ui_bombasteditor.h"
+#include "../Msvc/BombastEditorStd.h"
+#include "BombastEditor.h"
 
-BombastEditor::BombastEditor(QWidget *parent) :
-    QMainWindow(parent),
-    ui(new Ui::BombastEditor)
+#include "Physics/Physics.h"
+
+BombastEditorApp g_BombastEditorApp;
+
+INT WINAPI wWinMain(HINSTANCE hInstance,
+	HINSTANCE hPrevInstance,
+	LPWSTR    lpCmdLine,
+	int       nCmdShow)
 {
-    ui->setupUi(this);
-
-    HINSTANCE hInstance = qWinAppInst();
-    WId hwnd = ui->graphicsFrame->winId();
+	return BombastEngine(hInstance, hPrevInstance, lpCmdLine, nCmdShow);
 }
 
-BombastEditor::~BombastEditor()
+CoreGameLogic* BombastEditorApp::VCreateGameAndView()
 {
-    delete ui;
+	g_pApp->m_options.m_level = "World\\World.xml";
+
+	m_pGame = BE_NEW BombastEditorLogic();
+	m_pGame->Initialize();
+
+	return m_pGame;
+}
+
+BombastEditorLogic::BombastEditorLogic()
+{
+	m_pGamePhysics = CreateGamePhysics();
+}
+
+BombastEditorLogic::~BombastEditorLogic()
+{
 }
