@@ -28,7 +28,7 @@ bool ResourceZipFile::VOpen()
 
 int ResourceZipFile::VGetRawResourceSize(const Resource &r)
 {
-	int resourceNum = m_pZipFile->Find(r.m_name.c_str());
+	size_t resourceNum = m_pZipFile->Find(r.m_name.c_str());
 	if (resourceNum == -1)
 	{
 		return -1;
@@ -37,10 +37,10 @@ int ResourceZipFile::VGetRawResourceSize(const Resource &r)
 	return m_pZipFile->GetFileLen(resourceNum);
 }
 
-int ResourceZipFile::VGetRawResource(const Resource& r, char* buffer)
+size_t ResourceZipFile::VGetRawResource(const Resource& r, char* buffer)
 {
-	int size = 0;
-	int resourceNum = m_pZipFile->Find(r.m_name.c_str());
+	size_t size = 0;
+	size_t resourceNum = m_pZipFile->Find(r.m_name.c_str());
 	if (resourceNum != -1)
 	{
 		size = m_pZipFile->GetFileLen(resourceNum);
@@ -50,12 +50,12 @@ int ResourceZipFile::VGetRawResource(const Resource& r, char* buffer)
 	return size;
 }
 
-int ResourceZipFile::VGetNumResources() const
+size_t ResourceZipFile::VGetNumResources() const
 {
 	return (m_pZipFile == NULL) ? 0 : m_pZipFile->GetNumFiles();
 }
 
-std::string ResourceZipFile::VGetResourceName(int num) const
+std::string ResourceZipFile::VGetResourceName(size_t num) const
 {
 	std::string resName = "";
 	if (m_pZipFile != NULL && num >= 0 && num < m_pZipFile->GetNumFiles())
@@ -76,7 +76,7 @@ DevelopmentResourceZipFile::DevelopmentResourceZipFile(const std::wstring resFil
 	m_assetsDir += L"\\..\\Assets\\";
 }
 
-int DevelopmentResourceZipFile::Find(const std::string &name)
+size_t DevelopmentResourceZipFile::Find(const std::string &name)
 {
 	std::string lowerCase = name;
 	std::transform(lowerCase.begin(), lowerCase.end(), lowerCase.begin(), (int(*)(int))std::tolower);
@@ -99,7 +99,7 @@ bool DevelopmentResourceZipFile::VOpen()
 
 int DevelopmentResourceZipFile::VGetRawResourceSize(const Resource &r)
 {
-	int num = Find(r.m_name.c_str());
+	size_t num = Find(r.m_name.c_str());
 	if (num == -1)
 	{
 		return -1;
@@ -108,9 +108,9 @@ int DevelopmentResourceZipFile::VGetRawResourceSize(const Resource &r)
 	return m_assetsFileInfo[num].nFileSizeLow;
 }
 
-int DevelopmentResourceZipFile::VGetRawResource(const Resource &r, char* buffer)
+size_t DevelopmentResourceZipFile::VGetRawResource(const Resource &r, char* buffer)
 {
-	int num = Find(r.m_name.c_str());
+	size_t num = Find(r.m_name.c_str());
 	if (num == -1)
 	{
 		return -1;
@@ -129,12 +129,12 @@ int DevelopmentResourceZipFile::VGetRawResource(const Resource &r, char* buffer)
 	return bytes;
 }
 
-int DevelopmentResourceZipFile::VGetNumResources() const
+size_t DevelopmentResourceZipFile::VGetNumResources() const
 {
 	return m_assetsFileInfo.size();
 }
 
-std::string	DevelopmentResourceZipFile::VGetResourceName(int num) const
+std::string	DevelopmentResourceZipFile::VGetResourceName(size_t num) const
 {
 	std::wstring wideName = m_assetsFileInfo[num].cFileName;
 	return ws2s(wideName);
@@ -450,18 +450,18 @@ void ResourceCache::MemoryHasBeenFreed(unsigned int size)
 	m_allocated -= size;
 }
 
-int ResourceCache::Preload(const std::string pattern, void(*progressCallback)(int, bool&))
+int ResourceCache::Preload(const std::string pattern, void(*progressCallback)(size_t, bool&))
 {
 	if (m_pFile == NULL)
 	{
 		return 0;
 	}
 
-	int numFiles = m_pFile->VGetNumResources();
+	size_t numFiles = m_pFile->VGetNumResources();
 	int loaded = 0;
 	bool cancel = false;
 
-	for (int i = 0; i < numFiles; i++)
+	for (size_t i = 0; i < numFiles; i++)
 	{
 		Resource resource(m_pFile->VGetResourceName(i));
 
@@ -487,8 +487,8 @@ std::vector<std::string> ResourceCache::Match(const std::string pattern)
 	if (m_pFile == NULL)
 		return matchingNames;
 
-	int numFiles = m_pFile->VGetNumResources();
-	for (int i = 0; i<numFiles; ++i)
+	size_t numFiles = m_pFile->VGetNumResources();
+	for (size_t i = 0; i<numFiles; ++i)
 	{
 		std::string name = m_pFile->VGetResourceName(i);
 		std::transform(name.begin(), name.end(), name.begin(), (int(*)(int)) std::tolower);

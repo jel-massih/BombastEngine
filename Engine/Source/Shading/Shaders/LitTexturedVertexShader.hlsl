@@ -39,7 +39,7 @@ PixelInputType LitTexturedVertexShader(VertexInputType input)
 	output.position = mul(output.position, viewMatrix);
 	output.position = mul(output.position, projectionMatrix);
 
-	output.normal = mul(input.normal, worldMatrix);
+	output.normal = mul(input.normal, (float3x3)worldMatrix);
 	output.normal = normalize(output.normal);
 
 	worldPosition = mul(input.position, worldMatrix);

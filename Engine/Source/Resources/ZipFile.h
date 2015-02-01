@@ -11,7 +11,7 @@
 #include <stdio.h>
 #include <map>
 
-typedef std::map<std::string, int> ZipContentsMap;		// maps path to a zip content id
+typedef std::map<std::string, size_t> ZipContentsMap;		// maps path to a zip content id
 
 class ZipFile
 {
@@ -22,15 +22,15 @@ public:
 	bool Init(const std::wstring &resFileName);
 	void End();
 
-	int GetNumFiles()const { return m_nEntries; }
-	std::string GetFilename(int i) const;
-	int GetFileLen(int i) const;
-	bool ReadFile(int i, void *pBuf);
+	size_t GetNumFiles()const { return m_nEntries; }
+	std::string GetFilename(size_t i) const;
+	int GetFileLen(size_t i) const;
+	bool ReadFile(size_t i, void *pBuf);
 
 	// Added to show multi-threaded decompression
 	bool ReadLargeFile(int i, void *pBuf, void(*progressCallback)(int, bool &));
 
-	int Find(const std::string &path) const;
+	size_t Find(const std::string &path) const;
 
 	ZipContentsMap m_ZipContentsMap;
 
@@ -41,7 +41,7 @@ private:
 
 	FILE *m_pFile;		// Zip file
 	char *m_pDirData;	// Raw data buffer.
-	int  m_nEntries;	// Number of entries.
+	size_t  m_nEntries;	// Number of entries.
 
 	// Pointers to the dir entries in pDirData.
 	const TZipDirFileHeader **m_papDir;

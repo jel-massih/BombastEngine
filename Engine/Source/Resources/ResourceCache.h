@@ -34,9 +34,9 @@ public:
 
 	virtual bool VOpen();
 	virtual int VGetRawResourceSize(const Resource &r);
-	virtual int VGetRawResource(const Resource &r, char *buffer);
-	virtual int VGetNumResources() const;
-	virtual std::string VGetResourceName(int num) const;
+	virtual size_t VGetRawResource(const Resource &r, char *buffer);
+	virtual size_t VGetNumResources() const;
+	virtual std::string VGetResourceName(size_t num) const;
 	virtual bool VIsUsingDevelopmentDirectories(void) const { return false; }
 };
 
@@ -52,12 +52,12 @@ public:
 
 	virtual bool VOpen();
 	virtual int VGetRawResourceSize(const Resource &r);
-	virtual int VGetRawResource(const Resource &r, char *buffer);
-	virtual int VGetNumResources() const;
-	virtual std::string VGetResourceName(int num) const;
+	virtual size_t VGetRawResource(const Resource &r, char *buffer);
+	virtual size_t VGetNumResources() const;
+	virtual std::string VGetResourceName(size_t num) const;
 	virtual bool VIsUsingDevelopmentDirectories(void) const { return true; }
 
-	int Find(const std::string &path);
+	size_t Find(const std::string &path);
 
 protected:
 	void ReadAssetsDirectory(std::wstring fileSpec);
@@ -125,7 +125,7 @@ public:
 
 	ResourceHandle* GetHandle(Resource* r);
 
-	int Preload(const std::string pattern, void(*progressCallback)(int, bool &));
+	int Preload(const std::string pattern, void(*progressCallback)(size_t, bool &));
 
 	void Flush();
 

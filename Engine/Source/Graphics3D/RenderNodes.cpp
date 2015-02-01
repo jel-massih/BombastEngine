@@ -554,8 +554,8 @@ HRESULT D3DMeshNode11::InitializeBuffers()
 			return false;
 		}
 
-		submeshBuffer.vertexCount = m_pLoadedMesh->meshes[i].vertices.size();
-		submeshBuffer.indexCount = m_pLoadedMesh->meshes[i].indices.size();
+		submeshBuffer.vertexCount = (unsigned int)m_pLoadedMesh->meshes[i].vertices.size();
+		submeshBuffer.indexCount = (unsigned int)m_pLoadedMesh->meshes[i].indices.size();
 
 		m_submeshBuffers.push_back(submeshBuffer);
 	}
@@ -571,8 +571,8 @@ HRESULT D3DMeshNode11::InitializeSubMeshBuffers(const ModelClass::SubMesh& subme
 	D3D11_SUBRESOURCE_DATA vertexData, indexData;
 	HRESULT result;
 
-	unsigned int vertCount = submesh.vertices.size();
-	unsigned int indexCount = submesh.indices.size();
+	unsigned int vertCount = (unsigned int)submesh.vertices.size();
+	unsigned int indexCount = (unsigned int)submesh.indices.size();
 
 	ZeroMemory(&vertexBufferDesc, sizeof(vertexBufferDesc));
 	vertexBufferDesc.Usage = D3D11_USAGE_DEFAULT;

@@ -146,7 +146,7 @@ void Scene::NewRenderComponentDelegate(IEventDataPtr pEventData)
 
 	if (!pSceneNode)
 	{
-		BE_ERROR("Failed To get scene node for actorid: " + ToStr(actorId));
+                                                                                                                                                                                                            		BE_ERROR("Failed To get scene node for actorid: " + ToStr(actorId));
 		return;
 	}
 

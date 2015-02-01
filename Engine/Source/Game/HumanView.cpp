@@ -139,14 +139,14 @@ LRESULT CALLBACK HumanView::VOnMsgProc(AppMsg msg)
 	case WM_KEYDOWN:
 		if (m_pKeyboardHandler)
 		{
-			result = m_pKeyboardHandler->VOnKeyDown(msg.m_wParam);
+			result = m_pKeyboardHandler->VOnKeyDown((BYTE)msg.m_wParam);
 		}
 		break;
 
 	case WM_KEYUP:
 		if (m_pKeyboardHandler)
 		{
-			result = m_pKeyboardHandler->VOnKeyUp(msg.m_wParam);
+			result = m_pKeyboardHandler->VOnKeyUp((BYTE)msg.m_wParam);
 		}
 		break;
 

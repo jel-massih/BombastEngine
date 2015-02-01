@@ -186,7 +186,7 @@ bool ZipFile::Init(const std::wstring &resFileName)
 	return success;
 }
 
-int ZipFile::Find(const std::string &path) const
+size_t ZipFile::Find(const std::string &path) const
 {
 	std::string lowerCase = path;
 	std::transform(lowerCase.begin(), lowerCase.end(), lowerCase.begin(), (int(*)(int)) std::tolower);
@@ -216,7 +216,7 @@ void ZipFile::End()
 // Purpose:       Return the name of a file
 // Parameters:    The file index and the buffer where to store the filename
 // --------------------------------------------------------------------------
-std::string ZipFile::GetFilename(int i)  const
+std::string ZipFile::GetFilename(size_t i)  const
 {
 	std::string fileName = "";
 	if (i >= 0 && i < m_nEntries)
@@ -235,7 +235,7 @@ std::string ZipFile::GetFilename(int i)  const
 // Purpose:       Return the length of a file so a buffer can be allocated
 // Parameters:    The file index.
 // --------------------------------------------------------------------------
-int ZipFile::GetFileLen(int i) const
+int ZipFile::GetFileLen(size_t i) const
 {
 	if (i < 0 || i >= m_nEntries)
 		return -1;
@@ -248,7 +248,7 @@ int ZipFile::GetFileLen(int i) const
 // Purpose:       Uncompress a complete file
 // Parameters:    The file index and the pre-allocated buffer
 // --------------------------------------------------------------------------
-bool ZipFile::ReadFile(int i, void *pBuf)
+bool ZipFile::ReadFile(size_t i, void *pBuf)
 {/*
 	if (pBuf == NULL || i < 0 || i >= m_nEntries)
 	return false;

@@ -14,7 +14,7 @@ struct P2F
 	float4 normal: SV_Target1;
 };
 
-P2F PS(V2P input) : SV_TARGET
+P2F FillGBufferPixelShader(V2P input)
 {
 	P2F result;
 

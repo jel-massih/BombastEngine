@@ -22,7 +22,7 @@ struct ConstantBuffer_Lighting
 	Vec4 m_lightDiffuse[MAX_LIGHTS_SUPPORTED];
 	Vec4 m_lightDir[MAX_LIGHTS_SUPPORTED];
 	Vec4 m_lightAmbient;
-	unsigned int m_numLights;
+	size_t m_numLights;
 	Vec3 m_unused;
 };
 

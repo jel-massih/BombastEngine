@@ -49,7 +49,7 @@ public:
 
 	void CalcLighting(Scene* pScene);
 	void CalcLighting(ConstantBuffer_Lighting* pLighting, SceneNode* pNode);
-	int GetLightCount() const { return m_lights.size(); }
+	size_t GetLightCount() const { return m_lights.size(); }
 	void SetGlobalAmbient(const Vec4 newAmbient) { m_lightAmbient = newAmbient; }
 	const Vec4* GetGlobalAmbient() const { return &m_lightAmbient; }
 	const Vec4* GetLightDirection() const { return m_lightDir; }

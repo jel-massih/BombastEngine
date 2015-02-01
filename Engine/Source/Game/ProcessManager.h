@@ -15,7 +15,7 @@ public:
 	Process* AttachProcess(Process* pProcess);
 	void AbortAllProcesses(bool immediate);
 
-	unsigned int GetProcessCount() const { return m_processList.size(); }
+	size_t GetProcessCount() const { return m_processList.size(); }
 
 private:
 	void ClearAllProcesses();

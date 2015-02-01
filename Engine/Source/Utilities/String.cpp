@@ -63,6 +63,13 @@ string ToStr(unsigned long num, int base)
 	return (string(str));
 }
 
+string ToStr(std::size_t num)
+{
+	char str[256];  // I'm sure this is overkill
+	_sprintf_p(str, sizeof str, "%f", num);
+	return (string(str));
+}
+
 string ToStr(float num)
 {
 	char str[64];  // I'm sure this is overkill

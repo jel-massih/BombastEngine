@@ -59,7 +59,7 @@ void LightingManager::CalcLighting(Scene* pScene)
 
 void LightingManager::CalcLighting(ConstantBuffer_Lighting* pLighting, SceneNode* pNode)
 {
-	int count = GetLightCount();
+	size_t count = GetLightCount();
 	if (count)
 	{
 		pLighting->m_lightAmbient = *GetGlobalAmbient();
