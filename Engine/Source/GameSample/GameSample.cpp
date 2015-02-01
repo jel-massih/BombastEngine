@@ -17,7 +17,7 @@ INT WINAPI wWinMain(HINSTANCE hInstance,
 	LPWSTR    lpCmdLine,
 	int       nCmdShow)
 {
-	return BombastEngine(hInstance, hPrevInstance, lpCmdLine, nCmdShow);
+	return BombastEngine(hInstance, hPrevInstance, NULL);
 }
 
 CoreGameLogic *GameSampleApp::VCreateGameAndView()

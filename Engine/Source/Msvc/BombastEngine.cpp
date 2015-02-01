@@ -7,8 +7,7 @@ LRESULT CALLBACK WindowProc(HWND hWnd,
 
 int WINAPI BombastEngine(HINSTANCE hInstance,
                    HINSTANCE hPrevInstance,
-                   LPWSTR lpCmdLine,
-                   int nCmdShow)
+				   HWND hWnd)
 {
 	bool bConsoleEnabled = false;
 
@@ -24,7 +23,7 @@ int WINAPI BombastEngine(HINSTANCE hInstance,
 
 	BELogger::Init(g_pApp->m_options.m_bDebugConsoleEnabled, g_pApp->m_options.m_debugLogPath.c_str(), g_pApp->m_options.m_debugLogName.c_str());
 
-	if (g_pApp->InitInstance(hInstance, 0, g_pApp->m_options.m_screenSize.x, g_pApp->m_options.m_screenSize.y, g_pApp->m_options.m_screenPosition.x, g_pApp->m_options.m_screenPosition.y))
+	if (g_pApp->InitInstance(hInstance, hWnd, g_pApp->m_options.m_screenSize.x, g_pApp->m_options.m_screenSize.y, g_pApp->m_options.m_screenPosition.x, g_pApp->m_options.m_screenPosition.y))
 	{
 		g_pApp->Run();
 	}
