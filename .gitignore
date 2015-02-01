@@ -10,6 +10,7 @@ Engine/Assets/Actors/*
 
 Editor/Bin/*
 Editor/Source/Libraries/*
+Editor/Source/Msvc/GeneratedFiles/*
 
 Tools/Scripts/Materials/*
 Tools/Scripts/Actors/*
