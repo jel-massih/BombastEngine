@@ -1,24 +1,61 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
+    <Filter Include="Form Files">
+      <UniqueIdentifier>{99349809-55BA-4b9d-BF79-8FDBB0286EB3}</UniqueIdentifier>
+      <Extensions>ui</Extensions>
+    </Filter>
     <Filter Include="Application">
-      <UniqueIdentifier>{fb716862-8bd3-4e3d-afd2-4df472b12c67}</UniqueIdentifier>
+      <UniqueIdentifier>{8479fb2f-4b93-422e-b0dd-f6891078ad1f}</UniqueIdentifier>
     </Filter>
     <Filter Include="BombastEditor">
-      <UniqueIdentifier>{ac68db3f-ff8d-400d-b9e1-712e34fc3c3b}</UniqueIdentifier>
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;cxx;c;def</Extensions>
+    </Filter>
+    <Filter Include="Application\Generated Files">
+      <UniqueIdentifier>{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}</UniqueIdentifier>
+      <Extensions>moc;h;cpp</Extensions>
+      <SourceControlFiles>False</SourceControlFiles>
+    </Filter>
+    <Filter Include="Application\Generated Files\Debug">
+      <UniqueIdentifier>{2327dd2a-252d-4fa4-89ac-ab0defc950f6}</UniqueIdentifier>
+      <Extensions>cpp;moc</Extensions>
+      <SourceControlFiles>False</SourceControlFiles>
+    </Filter>
+    <Filter Include="Application\Generated Files\Release">
+      <UniqueIdentifier>{3fa34ad9-b855-40c2-b2e2-ddea0d259239}</UniqueIdentifier>
+      <Extensions>cpp;moc</Extensions>
+      <SourceControlFiles>False</SourceControlFiles>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BombastEditorStd.h">
-      <Filter>Application</Filter>
-    </ClInclude>
-    <ClInclude Include="..\BombastEditor\BombastEditor.h">
-      <Filter>Application</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\BombastEditor\BombastEditor.cpp">
+    <ClCompile Include="..\BombastEditor\bombasteditor.cpp">
       <Filter>BombastEditor</Filter>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_bombasteditor.cpp">
+      <Filter>Application\Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_bombasteditor.cpp">
+      <Filter>Application\Generated Files\Release</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="bombasteditor.qrc">
+      <Filter>Application\Generated Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\UiViews\bombasteditor.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\BombastEditor\bombasteditor.h">
+      <Filter>BombastEditor</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Msvc\BombastEditorStd.h">
+      <Filter>Application</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_bombasteditor.h">
+      <Filter>Application\Generated Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

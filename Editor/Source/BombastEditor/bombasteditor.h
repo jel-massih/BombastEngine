@@ -1,23 +1,16 @@
 #pragma once
 
-#include "Bombast\CoreGameLogic.h"
-#include "Bombast\BombastApp.h"
+#include <QtWidgets/QMainWindow>
+#include "ui_bombasteditor.h"
 
-class BombastEditorApp : public BombastApp
+class BombastEditor : public QMainWindow
 {
-protected:
-	virtual CoreGameLogic* VCreateGameAndView();
+	Q_OBJECT
 
 public:
-	virtual TCHAR *VGetGameTitle() { return _T("Bombast Editor"); }
-};
+	BombastEditor(QWidget *parent = 0);
+	~BombastEditor();
 
-
-class BombastEditorLogic : public CoreGameLogic
-{
-protected:
-
-public:
-	BombastEditorLogic();
-	virtual ~BombastEditorLogic();
+private:
+	Ui::BombastEditor ui;
 };

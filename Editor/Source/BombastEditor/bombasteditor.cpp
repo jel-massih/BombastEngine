@@ -1,36 +1,33 @@
+#include "bombasteditor.h"
 #include "../Msvc/BombastEditorStd.h"
-#include "BombastEditor.h"
+#include "Bombast\interfaces.h"
 #include "Physics/Physics.h"
 
-#include <QtWidgets\qapplication.h>
-#include <QtWidgets\qtextedit.h>
+#include <qapplication.h>
 
-BombastEditorApp g_BombastEditorApp;
-
-int main(int argv, char** args)
+int main(int argc, char *argv[])
 {
-	QApplication app(argv, args);
+	QApplication a(argc, argv);
 
-	QTextEdit textEdit;
-	textEdit.show();
+	HINSTANCE hInstance = qWinAppInst();
+	HINSTANCE hPrevInstance = qWinAppPrevInst();
 
 	//return BombastEngine(hInstance, hPrevInstance, lpCmdLine, nCmdShow);
-	return app.exec();
+
+	BombastEditor w;
+	w.show();
+
+
+	return a.exec();
 }
 
-CoreGameLogic* BombastEditorApp::VCreateGameAndView()
+BombastEditor::BombastEditor(QWidget *parent)
+	: QMainWindow(parent)
 {
-	m_pGame = BE_NEW BombastEditorLogic();
-	m_pGame->Initialize();
-
-	return m_pGame;
+	ui.setupUi(this);
 }
 
-BombastEditorLogic::BombastEditorLogic()
+BombastEditor::~BombastEditor()
 {
-	m_pGamePhysics = CreateGamePhysics();
-}
 
-BombastEditorLogic::~BombastEditorLogic()
-{
 }
