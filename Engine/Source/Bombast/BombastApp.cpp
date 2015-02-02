@@ -99,6 +99,10 @@ bool BombastApp::InitInstance(HINSTANCE hInstance, HWND hWnd, int screenWidth, i
 		m_hWnd = hWnd;
 	}
 
+	ShowWindow(m_hWnd, 10);
+	SetForegroundWindow(m_hWnd);
+	SetFocus(m_hWnd);
+
 	if(!GetHwnd())
 	{
 		BE_ERROR("Windows Error: Could Not Create The Window");
@@ -154,10 +158,6 @@ void BombastApp::InitializeWindows()
                           NULL,    // we aren't using menus, NULL
                           m_hInstance,    // application handle
                           NULL);    // used with multiple windows, NULL
-
-    ShowWindow(m_hWnd, 10);
-	SetForegroundWindow(m_hWnd);
-	SetFocus(m_hWnd);
 }
 
 LRESULT BombastApp::OnAltEnter()

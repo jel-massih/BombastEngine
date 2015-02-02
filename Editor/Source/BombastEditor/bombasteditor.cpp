@@ -62,6 +62,16 @@ void BombastEditorApp::InitEditorWindow()
 	m_messageHandler.Init(this);
 }
 
+void BombastEditorApp::OnViewportKeyDown(BYTE keyCode)
+{
+	static_cast<BombastEditorLogic*>(m_pGame)->OnKeyDown(keyCode);
+}
+
+void BombastEditorApp::OnViewportKeyUp(BYTE keyCode)
+{
+	static_cast<BombastEditorLogic*>(m_pGame)->OnKeyUp(keyCode);
+}
+
 CoreGameLogic *BombastEditorApp::VCreateGameAndView()
 {
 	g_pApp->m_options.m_level = "World\\World.xml";

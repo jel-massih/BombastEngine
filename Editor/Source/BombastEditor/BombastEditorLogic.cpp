@@ -5,6 +5,7 @@
 BombastEditorLogic::BombastEditorLogic()
 {
 	m_pGamePhysics = CreateGamePhysics();
+	m_pActiveHumanView = nullptr;
 }
 
 BombastEditorLogic::~BombastEditorLogic()
@@ -25,6 +26,7 @@ void BombastEditorLogic::VChangeState(CoreGameState newState)
 		{
 			IGameView* playerView = BE_NEW BombastEditorHumanView(g_pApp->GetGraphicsManager()->GetRenderer());
 			VAddView(playerView);
+			m_pActiveHumanView = (BombastEditorHumanView*)playerView;
 			m_humanPlayersAttached++;
 		}
 
@@ -48,4 +50,14 @@ void BombastEditorLogic::VChangeState(CoreGameState newState)
 		break;
 	}
 	}
+}
+
+void BombastEditorLogic::OnKeyDown(BYTE keyCode)
+{
+	m_pActiveHumanView->m_pKeyboardHandler->VOnKeyDown(keyCode);
+}
+
+void BombastEditorLogic::OnKeyUp(BYTE keyCode)
+{
+	m_pActiveHumanView->m_pKeyboardHandler->VOnKeyUp(keyCode);
 }

@@ -10,6 +10,10 @@ public:
 	BombastEditorMain(QWidget *parent = 0);
 	~BombastEditorMain();
 
+protected:
+	void keyPressEvent(QKeyEvent* event);
+	void keyReleaseEvent(QKeyEvent* event);
+
 private:
 	void InitEngine();
 

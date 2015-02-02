@@ -16,6 +16,9 @@ public:
 	void OnIdleThread();
 	void InitEditorWindow();
 
+	void OnViewportKeyDown(BYTE keyCode);
+	void OnViewportKeyUp(BYTE keyCode);
+
 	void EditorQuit();
 
 public:
