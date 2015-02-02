@@ -150,6 +150,7 @@
     <ClCompile Include="..\BombastEditor\BombastEditor.cpp" />
     <ClCompile Include="..\BombastEditor\BombastEditorLogic.cpp" />
     <ClCompile Include="..\BombastEditor\bombasteditormain.cpp" />
+    <ClCompile Include="..\BombastEditor\BombastEditorView.cpp" />
     <ClCompile Include="GeneratedFiles\Debug\moc_bombasteditormain.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
@@ -188,6 +189,7 @@
     </CustomBuild>
     <ClInclude Include="..\BombastEditor\BombastEditor.h" />
     <ClInclude Include="..\BombastEditor\BombastEditorLogic.h" />
+    <ClInclude Include="..\BombastEditor\BombastEditorView.h" />
     <ClInclude Include="GeneratedFiles\ui_bombasteditormain.h" />
     <CustomBuild Include="..\BombastEditor\bombasteditormain.h">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath);$(QTDIR)\bin\moc.exe;%(FullPath);$(QTDIR)\bin\moc.exe;%(FullPath);$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>

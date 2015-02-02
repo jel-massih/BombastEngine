@@ -1,5 +1,6 @@
 #include "BombastEditorLogic.h"
 #include "Physics/Physics.h"
+#include "BombastEditorView.h"
 
 BombastEditorLogic::BombastEditorLogic()
 {
@@ -8,4 +9,43 @@ BombastEditorLogic::BombastEditorLogic()
 
 BombastEditorLogic::~BombastEditorLogic()
 {
+}
+
+void BombastEditorLogic::VChangeState(CoreGameState newState)
+{
+	CoreGameLogic::VChangeState(newState);
+
+	switch (newState)
+	{
+	case CGS_WaitingForPlayers:
+	{
+		BE_ASSERT(m_expectedPlayers == 1);
+
+		for (int i = 0; i < m_expectedPlayers; i++)
+		{
+			IGameView* playerView = BE_NEW BombastEditorHumanView(g_pApp->GetGraphicsManager()->GetRenderer());
+			VAddView(playerView);
+			m_humanPlayersAttached++;
+		}
+
+		break;
+	}
+
+	case CGS_SpawningPlayersActors:
+	{
+		break;
+	}
+
+	case CGS_LoadingGameEnvironment:
+	{
+		VChangeState(CGS_SpawningPlayersActors);
+		break;
+	}
+
+	case CGS_Initializing:
+	{
+		VChangeState(CGS_WaitingForPlayers);
+		break;
+	}
+	}
 }

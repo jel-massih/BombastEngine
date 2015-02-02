@@ -6,4 +6,6 @@ class BombastEditorLogic : public CoreGameLogic
 public:
 	BombastEditorLogic();
 	virtual ~BombastEditorLogic();
+
+	void VChangeState(CoreGameState newState);
 };
