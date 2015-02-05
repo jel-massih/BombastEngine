@@ -13,7 +13,7 @@ public:
 	bool Initialize(ID3D11Device* device, int texWidth, int texHeight);
 
 	void StartRender(ID3D11Device* device, ID3D11DeviceContext* context, ID3D11RenderTargetView* pRTV, ID3D11DepthStencilView* pDSV) const;
-	void DrawRenderable(ID3D11DeviceContext* deviceContext, int indexCount, XMMATRIX& worldMatrix, XMMATRIX& viewMatrix, XMMATRIX& projectionMatrix, ID3D11ShaderResourceView* texture) const;
+	void DrawRenderable(ID3D11DeviceContext* deviceContext, int indexCount, XMMATRIX& worldMatrix, XMMATRIX& viewMatrix, XMMATRIX& projectionMatrix, ID3D11ShaderResourceView* diffuseTexture, ID3D11ShaderResourceView* normalTexture) const;
 	
 	void DrawLightPass(ID3D11DeviceContext* context, const Scene* pScene) const;
 
