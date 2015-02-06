@@ -39,7 +39,7 @@ bool LuaCoreManager::LoadScriptFromBuffer(char* rawBuffer, int rawSize, std::str
 	int error = luaL_loadbuffer(L, rawBuffer, rawSize, filename.c_str());
 	if (error)
 	{
-		BE_ERROR("Script Failed To Load: " + filename);
+		BE_ERROR("Script Failed To Load: %s", filename);
 		return false;
 	}
 
@@ -47,7 +47,7 @@ bool LuaCoreManager::LoadScriptFromBuffer(char* rawBuffer, int rawSize, std::str
 	if (error)
 	{
 		std::string errorMessage = lua_tostring(L, -1);
-		BE_ERROR("Script Failed To Run: [" + filename + "] ErrorCode: " + std::to_string(error) + " ErrorMessage" + errorMessage);
+		BE_ERROR("Script Failed To Run: [%s] ErrorCode: %d ErrorMessage: %s", filename, error, errorMessage);
 		//Load Was successful so still return true
 	}
 
@@ -56,7 +56,7 @@ bool LuaCoreManager::LoadScriptFromBuffer(char* rawBuffer, int rawSize, std::str
 
 void LuaCoreManager::PrintError(const std::string& variableName, const std::string& reason)
 {
-	BE_ERROR("Cant Get [" + variableName + "]. " + reason);
+	BE_ERROR("Cant Get [%s]. %s", variableName, reason);
 }
 
 bool LuaCoreManager::RegisterLoader()

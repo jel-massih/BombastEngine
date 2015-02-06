@@ -3,6 +3,9 @@
 #include <iostream>
 #include <fstream>
 
+//Size of a logged Message
+const int LOG_MESSAGE_SIZE = 512;
+
 class LoggingManager;
 static LoggingManager* s_pLogManager = NULL;
 
@@ -14,9 +17,13 @@ public:
 
 	void Initialize();
 
-	void Log(const std::string& tag, const std::string& message, const char* func, const char* file, unsigned int lineNum);
+	void Log(const char* tag, const char* message, const char* func, const char* file, unsigned int lineNum, va_list args);
+	void Log(const char* tag, const char* message, const char* func, const char* file, unsigned int lineNum);
 
 	void SetDisplayFlags(const std::string& tag, unsigned char flags);
+
+private:
+	void WriteToLog(const char* message);
 
 private:
 	bool m_bDebugConsoleEnabled;
@@ -30,7 +37,7 @@ LoggingManager::LoggingManager(const char* logFilePath, bool bDebugConsoleEnable
 	{
 		char buf[1000];
 		strerror_s(buf, 1000, errno);
-		BE_ERROR("Failed to open Log File: " + std::string(buf));
+		BE_ERROR("Failed to open Log File: %s", buf);
 	}
 
 	m_bDebugConsoleEnabled = bDebugConsoleEnabled;
@@ -63,36 +70,40 @@ void LoggingManager::Initialize()
 	Log("LOGGER", "LoggingManager Initialized", NULL, NULL, 0);
 }
 
-void LoggingManager::Log(const std::string& tag, const std::string& message, const char* func, const char* file, unsigned int lineNum)
+void LoggingManager::Log(const char* tag, const char* message, const char* func, const char* file, unsigned int lineNum, va_list args)
 {
-	std::string msg = "[" + tag + "] " + message;
-	
-	if (func != NULL)
-	{
-		msg += "\nFunction: ";
-		msg += func;
-		msg += " in: ";
+	char formattedMsg[LOG_MESSAGE_SIZE];
+	vsprintf_s(formattedMsg, sizeof(formattedMsg), message, args);
+	Log(tag, formattedMsg, func, file, lineNum);
+}
+
+void LoggingManager::Log(const char* tag, const char* message, const char* func, const char* file, unsigned int lineNum)
+{
+	char formattedMsg[LOG_MESSAGE_SIZE];
+
+	if (func != NULL && file != NULL && lineNum != NULL) {
+		sprintf_s(formattedMsg, sizeof(formattedMsg), "[%s] %s\nFunction: %s in: %s\n%s::%u", tag, message, func, file, lineNum);
+	}
+	else if (func != NULL && file != NULL) {
+		sprintf_s(formattedMsg, sizeof(formattedMsg), "[%s] %s\nFunction: %s in: %s\n%s", tag, message, func, file);
+	}
+	else if (file != NULL) {
+		sprintf_s(formattedMsg, sizeof(formattedMsg), "[%s] %s\File: %s", tag, message, file);
+	}
+	else {
+		sprintf_s(formattedMsg, sizeof(formattedMsg), "[%s] %s", tag, message);
 	}
 
-	if (file != NULL)
-	{
-		msg += "\n";
-		msg += file;
-	}
+	WriteToLog(message);
+}
 
-	if (lineNum != 0)
-	{
-		msg += "::";
-		msg += ToStr(lineNum);
-	}
-
-	msg += "\n\n";
-
-	std::cout << msg;
+void LoggingManager::WriteToLog(const char* message)
+{
+	std::cout << message << "\n";
 
 	if (m_logFile.is_open())
 	{
-		m_logFile << msg;
+		m_logFile << message << "\n";
 		m_logFile.flush();
 	}
 }
@@ -130,15 +141,17 @@ namespace BELogger
 		SAFE_DELETE(s_pLogManager);
 	}
 
-	void Log(const std::string& tag, const std::string& message, const char* func, const char* file, unsigned int lineNum)
+	void Log(const char* tag, const char* message, const char* func, const char* file, unsigned int lineNum, ...)
 	{
 		if (s_pLogManager)
 		{
-			s_pLogManager->Log(tag, message, func, file, lineNum);
+			va_list args;
+			va_start(args, message);
+			s_pLogManager->Log(tag, message, func, file, lineNum, args);
 		}
 	}
 
-	void SetDisplayFlags(const std::string& tag, unsigned char flags)
+	void SetDisplayFlags(const char* tag, unsigned char flags)
 	{
 		if (s_pLogManager)
 		{

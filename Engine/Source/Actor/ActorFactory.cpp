@@ -28,7 +28,7 @@ Actor* ActorFactory::CreateActor(const char* actorResource, rapidxml::xml_node<>
 	rapidxml::xml_node<>* pRoot = XmlResourceLoader::LoadAndReturnRootXmlElement(actorResource);
 	if (!pRoot)
 	{
-		BE_ERROR("ERROR: Failed to create actor from resource: " + std::string(actorResource));
+		BE_ERROR("ERROR: Failed to create actor from resource: %s", actorResource);
 		return NULL;
 	}
 	
@@ -37,7 +37,7 @@ Actor* ActorFactory::CreateActor(const char* actorResource, rapidxml::xml_node<>
 	Actor* pActor = BE_NEW Actor(nextActorId);
 	if (!pActor->Initialize(pRoot))
 	{
-		BE_ERROR("ERROR: Failed to initialize Actor: " + std::string(actorResource));
+		BE_ERROR("ERROR: Failed to initialize Actor: %s", actorResource);
 		SAFE_DELETE(pActor);
 		return NULL;
 	}
@@ -81,13 +81,13 @@ ActorComponent* ActorFactory::VCreateComponent(rapidxml::xml_node<>* pData)
 	{
 		if (!pComponent->VInitialize(pData))
 		{
-			BE_ERROR("ERROR: Component Failed to initialize: " + std::string(name));
+			BE_ERROR("ERROR: Component Failed to initialize: %s", name);
 			return NULL;
 		}
 	}
 	else
 	{
-		BE_ERROR("ERROR: Couldnt find ActorComponent with name: " + std::string(name));
+		BE_ERROR("ERROR: Couldnt find ActorComponent with name: %s", name);
 		return NULL;
 	}
 

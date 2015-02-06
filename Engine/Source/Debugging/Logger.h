@@ -7,8 +7,8 @@ namespace BELogger
 	void Init(bool bDebugConsoleEnabled, const char* logPath, const char* logName);
 	void Destroy();
 
-	void Log(const std::string& tag, const std::string& message, const char* func, const char* file, unsigned int lineNum);
-	void SetDisplayFlags(const std::string& tag, unsigned char flags);
+	void Log(const char* tag, const char* message, const char* func, const char* file, unsigned int lineNum, ...);
+	void SetDisplayFlags(const char* tag, unsigned char flags);
 }
 
 #define BE_ERROR(str) \
@@ -50,7 +50,9 @@ namespace BELogger
 		BELogger::Log("INFO", s, NULL, NULL, 0); \
 			} while(0) \
 
-#define BE_LOG(tag, str) \
+#define BE_LOG_GRAPHICS(str) BE_LOG("graphics", str);
+
+#define BE_LOG(tag, str, ...) \
 	do { \
 		std::string s(str); \
 		BELogger::Log(tag, s, NULL, NULL, 0); \

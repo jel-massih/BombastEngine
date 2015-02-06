@@ -73,7 +73,7 @@ ID3D11ShaderResourceView* TextureResourceLoader::LoadAndReturnTextureResource(co
 	ResourceHandle* pResourceHandle = g_pApp->m_pResourceCache->GetHandle(&resource);
 	if (!pResourceHandle)
 	{
-		BE_ERROR("Texture not found, loading default texture: " + std::string(m_defaultTextureName));
+		BE_ERROR("Texture not found, loading default texture: %s", m_defaultTextureName);
 		return LoadDefaultTextureResource();
 	}
 	TextureResourceExtraData* pExtraData = (TextureResourceExtraData*)(pResourceHandle->GetExtra());

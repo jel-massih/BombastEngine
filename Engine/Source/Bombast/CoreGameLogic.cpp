@@ -105,7 +105,7 @@ Actor* CoreGameLogic::VCreateActor(const std::string &actorResource, rapidxml::x
 	}
 	else
 	{
-		BE_ERROR("ERROR: Failed To Create Actor From resource: " + actorResource);
+		BE_ERROR("ERROR: Failed To Create Actor From resource: %s", actorResource);
 		return NULL;
 	}
 }
@@ -127,7 +127,7 @@ bool CoreGameLogic::VLoadGame(const char* levelResource)
 	rapidxml::xml_node<> *pRoot = XmlResourceLoader::LoadAndReturnRootXmlElement(levelResource);
 	if (!pRoot)
 	{
-		BE_ERROR("ERROR: Cannot find Level resource file: " + std::string(levelResource));
+		BE_ERROR("ERROR: Cannot find Level resource file: %s", levelResource);
 		return false;
 	}
 

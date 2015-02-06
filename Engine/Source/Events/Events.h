@@ -85,12 +85,12 @@ public:
 
 	virtual void VSerialize(std::ostrstream& out) const
 	{
-		BE_ERROR(GetName() + std::string(" should not be serialized!"));
+		BE_ERROR("%s should not be serialized!", GetName());
 	}
 
 	virtual void VDeserialize(std::istrstream& in)
 	{
-		BE_ERROR(GetName() + std::string(" should not be Deserialized!"));
+		BE_ERROR("%s should not be Deserialized!", GetName());
 	}
 
 	virtual const EventType& VGetEventType() const

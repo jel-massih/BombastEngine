@@ -140,7 +140,7 @@ Material* MaterialResourceLoader::LoadAndReturnMaterialResource(const char* reso
 	ResourceHandle* pResourceHandle = g_pApp->m_pResourceCache->GetHandle(&resource);
 	if (!pResourceHandle)
 	{
-		BE_ERROR("Failed to find Material, using default Material: " + std::string(m_defaultMaterialName));
+		BE_ERROR("Failed to find Material, using default Material: %s", m_defaultMaterialName);
 		return LoadAndReturnDefaultMaterialResource();
 	}
 
