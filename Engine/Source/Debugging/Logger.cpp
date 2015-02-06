@@ -99,7 +99,7 @@ void LoggingManager::Log(const std::string& tag, const std::string& message, con
 
 void LoggingManager::SetDisplayFlags(const std::string& tag, unsigned char flags)
 {
-
+	BE_ERROR("Method Not Implemented: LoggingManager::SetDisplayFlags");
 }
 
 namespace BELogger
