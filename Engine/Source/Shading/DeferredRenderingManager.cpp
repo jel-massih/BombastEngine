@@ -157,7 +157,7 @@ bool DeferredRenderingManager::Initialize(ID3D11Device* device, int texWidth, in
 bool DeferredRenderingManager::InitializeGBufferShader(ID3D11Device* device)
 {
 	HRESULT result;
-	D3D11_INPUT_ELEMENT_DESC polygonLayout[3];
+	D3D11_INPUT_ELEMENT_DESC polygonLayout[5];
 	unsigned int numElements;
 
 	Resource vertexShaderResource("Shaders\\FillGBufferVertexShader.cso");
@@ -207,6 +207,22 @@ bool DeferredRenderingManager::InitializeGBufferShader(ID3D11Device* device)
 	polygonLayout[2].InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
 	polygonLayout[2].InstanceDataStepRate = 0;
 
+	polygonLayout[3].SemanticName = "TANGENT";
+	polygonLayout[3].SemanticIndex = 0;
+	polygonLayout[3].Format = DXGI_FORMAT_R32G32B32_FLOAT;
+	polygonLayout[3].InputSlot = 0;
+	polygonLayout[3].AlignedByteOffset = D3D11_APPEND_ALIGNED_ELEMENT;
+	polygonLayout[3].InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
+	polygonLayout[3].InstanceDataStepRate = 0;
+
+	polygonLayout[4].SemanticName = "BINORMAL";
+	polygonLayout[4].SemanticIndex = 0;
+	polygonLayout[4].Format = DXGI_FORMAT_R32G32B32_FLOAT;
+	polygonLayout[4].InputSlot = 0;
+	polygonLayout[4].AlignedByteOffset = D3D11_APPEND_ALIGNED_ELEMENT;
+	polygonLayout[4].InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
+	polygonLayout[4].InstanceDataStepRate = 0;
+
 	//Get count of elements in layout
 	numElements = sizeof(polygonLayout) / sizeof(polygonLayout[0]);
 
@@ -245,7 +261,7 @@ void DeferredRenderingManager::StartRender(ID3D11Device* device, ID3D11DeviceCon
 	}
 }
 
-void DeferredRenderingManager::DrawRenderable(ID3D11DeviceContext* deviceContext, int indexCount, XMMATRIX& worldMatrix, XMMATRIX& viewMatrix, XMMATRIX& projectionMatrix, ID3D11ShaderResourceView* texture) const
+void DeferredRenderingManager::DrawRenderable(ID3D11DeviceContext* deviceContext, int indexCount, XMMATRIX& worldMatrix, XMMATRIX& viewMatrix, XMMATRIX& projectionMatrix, ID3D11ShaderResourceView* diffuseTexture, ID3D11ShaderResourceView* normalTexture) const
 {
 	D3D11_MAPPED_SUBRESOURCE mappedResource;
 	deviceContext->Map(m_pMatrixBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource);
@@ -262,7 +278,8 @@ void DeferredRenderingManager::DrawRenderable(ID3D11DeviceContext* deviceContext
 	deviceContext->Unmap(m_pMatrixBuffer, 0);
 
 	deviceContext->VSSetConstantBuffers(0, 1, &m_pMatrixBuffer);
-	deviceContext->PSSetShaderResources(0, 1, &texture);
+	deviceContext->PSSetShaderResources(0, 1, &diffuseTexture);
+	deviceContext->PSSetShaderResources(1, 1, &normalTexture);
 	
 	deviceContext->DrawIndexed(indexCount, 0, 0);
 }
