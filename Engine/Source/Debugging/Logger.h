@@ -11,7 +11,19 @@ namespace BELogger
 	void SetDisplayFlags(const char* tag, unsigned char flags);
 }
 
-#define BE_ERROR(str, ...) BELogger::Log("ERROR", str, __FUNCTION__, __FILE__, __LINE__, ##__VA_ARGS__)
+#define BE_ERROR(str, ...) \
+    do { \
+        BELogger::Log("ERROR", str, __FUNCTION__, __FILE__, __LINE__, ##__VA_ARGS__); \
+		wchar_t formattedMsg[256]; \
+		swprintf_s(formattedMsg, sizeof(formattedMsg), L"%hs", str); \
+		swprintf_s(formattedMsg, sizeof(formattedMsg), formattedMsg, ##__VA_ARGS__); \
+        if(g_pApp->GetHwnd() != NULL) { \
+            MessageBox(g_pApp->GetHwnd(), formattedMsg, L"Error", MB_OK); \
+		                } else { \
+            OutputDebugString(formattedMsg); \
+		                } \
+	            } while(0) \
+
 
 #define BE_ASSERT(expr) \
 	do { \
