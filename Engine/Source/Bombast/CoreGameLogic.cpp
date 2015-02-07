@@ -131,6 +131,13 @@ bool CoreGameLogic::VLoadGame(const char* levelResource)
 		return false;
 	}
 
+	//Load World Properties
+	rapidxml::xml_node<>* pWorldPropertiesNode = pRoot->first_node("WorldProperties");
+	if (pWorldPropertiesNode)
+	{
+		VLoadWorldProperties(pWorldPropertiesNode);
+	}
+
 	//Run all Pre Init Scripts
 	rapidxml::xml_node<>* pPreLoadNode = pRoot->first_node("PreLoadScripts");
 	if (pPreLoadNode)
@@ -183,6 +190,22 @@ bool CoreGameLogic::VLoadGame(const char* levelResource)
 	}
 
 	return true;
+}
+
+void CoreGameLogic::VLoadWorldProperties(rapidxml::xml_node<>* pWorldProperiesNode)
+{
+	rapidxml::xml_node<>* pPropertiesNode;
+
+	//Get BackgroundColor if Set
+	pPropertiesNode = pWorldProperiesNode->first_node("BackgroundColor");
+	if (pPropertiesNode)
+	{
+		float r = atof(pPropertiesNode->first_attribute("r")->value());
+		float g = atof(pPropertiesNode->first_attribute("g")->value());
+		float b = atof(pPropertiesNode->first_attribute("b")->value());
+		float a = atof(pPropertiesNode->first_attribute("a")->value());
+		g_pApp->GetGraphicsManager()->GetRenderer()->VSetBackgroundColor(r, g, b, a);
+	}
 }
 
 void CoreGameLogic::VChangeState(enum CoreGameState newState)

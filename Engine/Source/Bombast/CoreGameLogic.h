@@ -75,6 +75,7 @@ protected:
 	virtual ActorFactory* VCreateActorFactory();
 
 	virtual bool VLoadGameDelegate(rapidxml::xml_node<>* pLevelData) { return true; }
+	virtual void VLoadWorldProperties(rapidxml::xml_node<>* pWorldProperiesNode);
 
 protected:
 	float m_lifetime; //How long game has been active
