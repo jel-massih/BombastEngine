@@ -516,7 +516,7 @@ void D3DClass11::VToggleFullscreen()
 
 void D3DClass11::VPrepDeferredRendering() const
 {
-	g_pApp->GetGraphicsManager()->GetDeferredRenderingManager()->StartRender(m_pDevice, m_pDeviceContext, m_pRenderTargetView, m_pDepthStencilView);
+	g_pApp->GetGraphicsManager()->GetDeferredRenderingManager()->StartRender(m_pDevice, m_pDeviceContext, m_pRenderTargetView, m_pDepthStencilView, m_backgroundColor);
 }
 
 void D3DClass11::VPrepForwardRendering() const

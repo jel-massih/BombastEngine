@@ -220,19 +220,16 @@ bool DeferredRenderingManager::InitializeGBufferShader(ID3D11Device* device)
 	return true;
 }
 
-void DeferredRenderingManager::StartRender(ID3D11Device* device, ID3D11DeviceContext* context, ID3D11RenderTargetView* pRTV, ID3D11DepthStencilView* pDSV) const
+void DeferredRenderingManager::StartRender(ID3D11Device* device, ID3D11DeviceContext* context, ID3D11RenderTargetView* pRTV, ID3D11DepthStencilView* pDSV, const float* clearBufferColor) const
 {
-	//Clear the Back Buffer
-	float clearColor[4] = { 0.0f, 0.0f, 0.0f, 0.0f };
-
 	{
 		//Fill G Buffer
 		ID3D11RenderTargetView* pGBufRTV[] = { m_texGBuffer.GetRenderTargetView(), m_texGBuffer2.GetRenderTargetView() };
 		context->OMSetRenderTargets(2, pGBufRTV, pDSV);
 
 
-		context->ClearRenderTargetView(pGBufRTV[0], clearColor);
-		context->ClearRenderTargetView(pGBufRTV[1], clearColor);
+		context->ClearRenderTargetView(pGBufRTV[0], clearBufferColor);
+		context->ClearRenderTargetView(pGBufRTV[1], clearBufferColor);
 		context->ClearDepthStencilView(pDSV, D3D11_CLEAR_DEPTH, 1.0f, 0);
 
 
