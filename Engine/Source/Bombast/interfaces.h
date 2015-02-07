@@ -159,7 +159,7 @@ class IRenderer
 {
 public:
 	virtual bool VInitialize(int screenWidth, int screenHeight, bool vsync, HWND hwnd, bool bFullscreen, float screenDepth, float screenNear) = 0;
-	virtual void VSetBackgroundColor(float a, float r, float g, float b) = 0;
+	virtual void VSetBackgroundColor(float r, float g, float b, float a) = 0;
 	virtual bool VBeginScene() = 0;
 	virtual bool VEndScene() = 0;
 

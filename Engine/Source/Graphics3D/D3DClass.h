@@ -34,7 +34,7 @@ public:
 
 	bool VInitialize(int screenWidth, int screenHeight, bool vsync, HWND hwnd, bool bFullscreen, float screenDepth, float screenNear);
 	
-	void VSetBackgroundColor(float a, float r, float g, float b);
+	void VSetBackgroundColor(float r, float g, float b, float a);
 
 	bool VBeginScene();
 	bool VEndScene();

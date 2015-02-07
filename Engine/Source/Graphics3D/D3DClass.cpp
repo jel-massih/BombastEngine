@@ -361,7 +361,7 @@ bool D3DClass11::VInitialize(int screenWidth, int screenHeight, bool vsync, HWND
 	return true;
 }
 
-void D3DClass11::VSetBackgroundColor(float a, float r, float g, float b)
+void D3DClass11::VSetBackgroundColor(float r, float g, float b, float a)
 {
 	m_backgroundColor[0] = r;
 	m_backgroundColor[1] = g;
