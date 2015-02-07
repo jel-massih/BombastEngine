@@ -200,10 +200,10 @@ void CoreGameLogic::VLoadWorldProperties(rapidxml::xml_node<>* pWorldProperiesNo
 	pPropertiesNode = pWorldProperiesNode->first_node("BackgroundColor");
 	if (pPropertiesNode)
 	{
-		float r = atof(pPropertiesNode->first_attribute("r")->value());
-		float g = atof(pPropertiesNode->first_attribute("g")->value());
-		float b = atof(pPropertiesNode->first_attribute("b")->value());
-		float a = atof(pPropertiesNode->first_attribute("a")->value());
+		float r = std::stof(pPropertiesNode->first_attribute("r")->value());
+		float g = std::stof(pPropertiesNode->first_attribute("g")->value());
+		float b = std::stof(pPropertiesNode->first_attribute("b")->value());
+		float a = std::stof(pPropertiesNode->first_attribute("a")->value());
 		g_pApp->GetGraphicsManager()->GetRenderer()->VSetBackgroundColor(r, g, b, a);
 	}
 }

@@ -82,13 +82,13 @@ void LoggingManager::Log(const char* tag, const char* message, const char* func,
 	char formattedMsg[LOG_MESSAGE_SIZE];
 
 	if (func != NULL && file != NULL && lineNum != NULL) {
-		sprintf_s(formattedMsg, sizeof(formattedMsg), "[%s] %s\nFunction: %s in: %s\n%s::%u", tag, message, func, file, lineNum);
+		sprintf_s(formattedMsg, sizeof(formattedMsg), "[%s] %s\nFunction: %s in: %s::%u", tag, message, func, file, lineNum);
 	}
 	else if (func != NULL && file != NULL) {
-		sprintf_s(formattedMsg, sizeof(formattedMsg), "[%s] %s\nFunction: %s in: %s\n%s", tag, message, func, file);
+		sprintf_s(formattedMsg, sizeof(formattedMsg), "[%s] %s\nFunction: %s in: %s", tag, message, func, file);
 	}
 	else if (file != NULL) {
-		sprintf_s(formattedMsg, sizeof(formattedMsg), "[%s] %s\File: %s", tag, message, file);
+		sprintf_s(formattedMsg, sizeof(formattedMsg), "[%s] %s\nFile: %s", tag, message, file);
 	}
 	else {
 		sprintf_s(formattedMsg, sizeof(formattedMsg), "[%s] %s", tag, message);
