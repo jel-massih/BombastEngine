@@ -35,6 +35,8 @@
             this.metroTextBox1 = new MetroFramework.Controls.MetroTextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
+            this.presetSelect = new MetroFramework.Controls.MetroComboBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -91,7 +93,7 @@
             this.metroTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.metroTextBox1.Lines = new string[] {
         "metroTextBox1"};
-            this.metroTextBox1.Location = new System.Drawing.Point(184, 3);
+            this.metroTextBox1.Location = new System.Drawing.Point(184, 7);
             this.metroTextBox1.MaxLength = 32767;
             this.metroTextBox1.Name = "metroTextBox1";
             this.metroTextBox1.PasswordChar = '\0';
@@ -114,6 +116,8 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.metroLabel2);
+            this.panel2.Controls.Add(this.presetSelect);
             this.panel2.Controls.Add(this.shaderTypeLabel);
             this.panel2.Controls.Add(this.shaderModelSelect);
             this.panel2.Controls.Add(this.metroTextBox1);
@@ -123,6 +127,29 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(564, 567);
             this.panel2.TabIndex = 6;
+            // 
+            // metroLabel2
+            // 
+            this.metroLabel2.AutoSize = true;
+            this.metroLabel2.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.metroLabel2.Location = new System.Drawing.Point(22, 87);
+            this.metroLabel2.Name = "metroLabel2";
+            this.metroLabel2.Size = new System.Drawing.Size(93, 19);
+            this.metroLabel2.TabIndex = 6;
+            this.metroLabel2.Text = "Shader Preset";
+            this.metroLabel2.Theme = MetroFramework.MetroThemeStyle.Dark;
+            // 
+            // presetSelect
+            // 
+            this.presetSelect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.presetSelect.FormattingEnabled = true;
+            this.presetSelect.ItemHeight = 23;
+            this.presetSelect.Location = new System.Drawing.Point(184, 81);
+            this.presetSelect.Name = "presetSelect";
+            this.presetSelect.Size = new System.Drawing.Size(380, 29);
+            this.presetSelect.TabIndex = 5;
+            this.presetSelect.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.presetSelect.UseSelectable = true;
             // 
             // ShaderGenerator
             // 
@@ -152,6 +179,8 @@
         private MetroFramework.Controls.MetroTextBox metroTextBox1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
+        private MetroFramework.Controls.MetroLabel metroLabel2;
+        private MetroFramework.Controls.MetroComboBox presetSelect;
 
     }
 }
