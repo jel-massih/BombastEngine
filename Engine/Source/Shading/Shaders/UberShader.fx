@@ -31,7 +31,7 @@ struct VertexInputType
 #endif
 
 #if VERT_INPUT_NORMAL
-		float3 normal : NORMAL;
+	float3 normal : NORMAL;
 #endif
 };
 
