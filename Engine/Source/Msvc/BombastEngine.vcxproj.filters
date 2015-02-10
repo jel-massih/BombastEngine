@@ -185,6 +185,9 @@
     <ClCompile Include="..\Graphics2D\PostProcessRenderWindow.cpp">
       <Filter>Graphics2D</Filter>
     </ClCompile>
+    <ClCompile Include="..\Shading\EffectLoad.cpp">
+      <Filter>Shading</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Bombast\BombastApp.h">
@@ -410,6 +413,9 @@
     </ClInclude>
     <ClInclude Include="..\Graphics2D\PostProcessRenderWindow.h">
       <Filter>Graphics2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Shading\Effect.h">
+      <Filter>Shading</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

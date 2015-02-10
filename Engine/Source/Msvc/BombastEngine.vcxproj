@@ -75,6 +75,7 @@
     <ClInclude Include="..\Shading\BasicShaders.h" />
     <ClInclude Include="..\Shading\DeferredLightShader.h" />
     <ClInclude Include="..\Shading\DeferredRenderingManager.h" />
+    <ClInclude Include="..\Shading\Effect.h" />
     <ClInclude Include="..\Shading\FontShader.h" />
     <ClInclude Include="..\Shading\LightmapShader.h" />
     <ClInclude Include="..\Shading\LightShader.h" />
@@ -144,6 +145,7 @@
     <ClCompile Include="..\Shading\BasicShaders.cpp" />
     <ClCompile Include="..\Shading\DeferredLightShader.cpp" />
     <ClCompile Include="..\Shading\DeferredRenderingManager.cpp" />
+    <ClCompile Include="..\Shading\EffectLoad.cpp" />
     <ClCompile Include="..\Shading\FontShader.cpp" />
     <ClCompile Include="..\Shading\LightmapShader.cpp" />
     <ClCompile Include="..\Shading\LightShader.cpp" />
