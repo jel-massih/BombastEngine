@@ -5,7 +5,7 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MeshFormatConverter", "MeshConverter\MeshConverter.vcxproj", "{38E5E3F6-2EE0-45C5-A29A-0DEAF04C81EB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShaderGenerator", "ShaderExporter\ShaderGenerator.csproj", "{61798BAE-54B3-4095-AAF5-6AA3B39AA853}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShaderGenerator", "ShaderGenerator\ShaderGenerator.csproj", "{61798BAE-54B3-4095-AAF5-6AA3B39AA853}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
