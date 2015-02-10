@@ -5,16 +5,38 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MeshFormatConverter", "MeshConverter\MeshConverter.vcxproj", "{38E5E3F6-2EE0-45C5-A29A-0DEAF04C81EB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShaderGenerator", "ShaderExporter\ShaderGenerator.csproj", "{61798BAE-54B3-4095-AAF5-6AA3B39AA853}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
 		Debug|Win32 = Debug|Win32
+		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
 		Release|Win32 = Release|Win32
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{38E5E3F6-2EE0-45C5-A29A-0DEAF04C81EB}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{38E5E3F6-2EE0-45C5-A29A-0DEAF04C81EB}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{38E5E3F6-2EE0-45C5-A29A-0DEAF04C81EB}.Debug|Mixed Platforms.Build.0 = Debug|Win32
 		{38E5E3F6-2EE0-45C5-A29A-0DEAF04C81EB}.Debug|Win32.ActiveCfg = Debug|Win32
 		{38E5E3F6-2EE0-45C5-A29A-0DEAF04C81EB}.Debug|Win32.Build.0 = Debug|Win32
+		{38E5E3F6-2EE0-45C5-A29A-0DEAF04C81EB}.Release|Any CPU.ActiveCfg = Release|Win32
+		{38E5E3F6-2EE0-45C5-A29A-0DEAF04C81EB}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{38E5E3F6-2EE0-45C5-A29A-0DEAF04C81EB}.Release|Mixed Platforms.Build.0 = Release|Win32
 		{38E5E3F6-2EE0-45C5-A29A-0DEAF04C81EB}.Release|Win32.ActiveCfg = Release|Win32
 		{38E5E3F6-2EE0-45C5-A29A-0DEAF04C81EB}.Release|Win32.Build.0 = Release|Win32
+		{61798BAE-54B3-4095-AAF5-6AA3B39AA853}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61798BAE-54B3-4095-AAF5-6AA3B39AA853}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61798BAE-54B3-4095-AAF5-6AA3B39AA853}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{61798BAE-54B3-4095-AAF5-6AA3B39AA853}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{61798BAE-54B3-4095-AAF5-6AA3B39AA853}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{61798BAE-54B3-4095-AAF5-6AA3B39AA853}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61798BAE-54B3-4095-AAF5-6AA3B39AA853}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61798BAE-54B3-4095-AAF5-6AA3B39AA853}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{61798BAE-54B3-4095-AAF5-6AA3B39AA853}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{61798BAE-54B3-4095-AAF5-6AA3B39AA853}.Release|Win32.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

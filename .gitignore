@@ -15,6 +15,7 @@ Editor/Source/Msvc/GeneratedFiles/*
 Tools/Scripts/Materials/*
 Tools/Scripts/Actors/*
 Tools/Scripts/Meshes/*
+Tools/ShaderGenerator/obj/*
 
 *.dll
 *.exe
