@@ -39,7 +39,7 @@ namespace ShaderGenerator
         {
             var shaderDefines = GetShaderDefines();
             var shaderName = shaderNameInput.Text;
-            var shaderModel = shaderModelSelect.SelectedItem.GetType().GetProperty("Key").ToString();
+            var shaderModel = shaderModelSelect.SelectedItem.GetType().GetProperty("Key").GetValue(shaderModelSelect.SelectedItem).ToString();
             var entryPoint = "VSMain";
 
             if (shaderModel == "ps_4_0")
@@ -48,6 +48,9 @@ namespace ShaderGenerator
             }
 
             var generatedShaderCode = GenerateShaderCode(shaderDefines);
+
+            System.Diagnostics.Debug.WriteLine(generatedShaderCode);
+            currentEventLabel.Text = "Generating Shader: " + shaderName + " with model: " + shaderModel;
 
             string error;
             var compileSuccess = EffectCompiler.TryCompile(generatedShaderCode, shaderModel, entryPoint, out error);
@@ -67,7 +70,12 @@ namespace ShaderGenerator
         private string GenerateShaderCode(List<string> shaderDefines)
         {
             var code = "";
+            foreach (var define in shaderDefines)
+            {
+                code += "#define " + define + " \n";
+            }
 
+            code += "#include \"uberShader.fx\"";
             return code;
         }
 
