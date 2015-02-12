@@ -35,6 +35,7 @@
             this.shaderNameInput = new MetroFramework.Controls.MetroTextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.currentEventLabel = new MetroFramework.Controls.MetroLabel();
             this.generationStatusLabel = new MetroFramework.Controls.MetroLabel();
             this.PIXEL_TEX_SAMPLE = new MetroFramework.Controls.MetroCheckBox();
             this.PIXEL_COLOR_DIRECT = new MetroFramework.Controls.MetroCheckBox();
@@ -53,7 +54,6 @@
             this.VERT_INPUT_COLOR = new MetroFramework.Controls.MetroCheckBox();
             this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
             this.presetSelect = new MetroFramework.Controls.MetroComboBox();
-            this.currentEventLabel = new MetroFramework.Controls.MetroLabel();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -161,16 +161,29 @@
             this.panel2.Size = new System.Drawing.Size(564, 567);
             this.panel2.TabIndex = 6;
             // 
+            // currentEventLabel
+            // 
+            this.currentEventLabel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.currentEventLabel.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.currentEventLabel.Location = new System.Drawing.Point(0, 521);
+            this.currentEventLabel.Name = "currentEventLabel";
+            this.currentEventLabel.Size = new System.Drawing.Size(564, 23);
+            this.currentEventLabel.TabIndex = 23;
+            this.currentEventLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.currentEventLabel.Theme = MetroFramework.MetroThemeStyle.Dark;
+            // 
             // generationStatusLabel
             // 
+            this.generationStatusLabel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.generationStatusLabel.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.generationStatusLabel.Location = new System.Drawing.Point(3, 535);
+            this.generationStatusLabel.Location = new System.Drawing.Point(0, 544);
             this.generationStatusLabel.Name = "generationStatusLabel";
-            this.generationStatusLabel.Size = new System.Drawing.Size(558, 23);
+            this.generationStatusLabel.Size = new System.Drawing.Size(564, 23);
             this.generationStatusLabel.TabIndex = 22;
             this.generationStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.generationStatusLabel.Theme = MetroFramework.MetroThemeStyle.Dark;
             this.generationStatusLabel.UseCustomForeColor = true;
+            this.generationStatusLabel.WrapToLine = true;
             // 
             // PIXEL_TEX_SAMPLE
             // 
@@ -359,16 +372,6 @@
             this.presetSelect.TabIndex = 5;
             this.presetSelect.Theme = MetroFramework.MetroThemeStyle.Dark;
             this.presetSelect.UseSelectable = true;
-            // 
-            // currentEventLabel
-            // 
-            this.currentEventLabel.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.currentEventLabel.Location = new System.Drawing.Point(0, 512);
-            this.currentEventLabel.Name = "currentEventLabel";
-            this.currentEventLabel.Size = new System.Drawing.Size(558, 23);
-            this.currentEventLabel.TabIndex = 23;
-            this.currentEventLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.currentEventLabel.Theme = MetroFramework.MetroThemeStyle.Dark;
             // 
             // ShaderGenerator
             // 

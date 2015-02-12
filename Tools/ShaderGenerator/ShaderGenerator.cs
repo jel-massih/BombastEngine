@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Drawing;
 using System.Globalization;
 using System.Resources;
@@ -75,7 +76,7 @@ namespace ShaderGenerator
                 code += "#define " + define + " \n";
             }
 
-            code += "#include \"uberShader.fx\"";
+            code += string.Format("#include \"{0}\"", System.Configuration.ConfigurationManager.AppSettings["UberShaderPath"]);
             return code;
         }
 
