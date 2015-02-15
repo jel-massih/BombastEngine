@@ -288,7 +288,7 @@ ResourceHandle* ResourceCache::Load(Resource* r)
 	int rawSize = m_pFile->VGetRawResourceSize(*r);
 	if (rawSize < 0)
 	{
-		BE_ERROR("Resource returned: %d - Resource not found or empty: %s", rawSize, r->m_name);
+		BE_ERROR("Resource returned: %d - Resource not found or empty: %s", rawSize, r->m_name.c_str());
 		return NULL;
 	}
 

@@ -14,15 +14,16 @@ namespace BELogger
 #define BE_ERROR(str, ...) \
     do { \
         BELogger::Log("ERROR", str, __FUNCTION__, __FILE__, __LINE__, ##__VA_ARGS__); \
-		wchar_t formattedMsg[256]; \
-		swprintf_s(formattedMsg, sizeof(formattedMsg), L"%hs", str); \
-		swprintf_s(formattedMsg, sizeof(formattedMsg), formattedMsg, ##__VA_ARGS__); \
+		char formattedMsg[256]; \
+		wchar_t wideMsg[256]; \
+		sprintf_s(formattedMsg, sizeof(formattedMsg), str, ##__VA_ARGS__); \
+		MultiByteToWideChar(CP_ACP, 0, formattedMsg, -1, wideMsg, 256); \
         if(g_pApp->GetHwnd() != NULL) { \
-            MessageBox(g_pApp->GetHwnd(), formattedMsg, L"Error", MB_OK); \
-		                } else { \
-            OutputDebugString(formattedMsg); \
-		                } \
-	            } while(0) \
+            MessageBox(g_pApp->GetHwnd(), wideMsg, L"Error", MB_OK); \
+        } else { \
+            OutputDebugString(wideMsg); \
+		} \
+	   } while(0) \
 
 
 #define BE_ASSERT(expr) \
