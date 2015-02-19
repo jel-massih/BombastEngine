@@ -52,8 +52,6 @@
             this.VERT_INPUT_TEX = new MetroFramework.Controls.MetroCheckBox();
             this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
             this.VERT_INPUT_COLOR = new MetroFramework.Controls.MetroCheckBox();
-            this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
-            this.presetSelect = new MetroFramework.Controls.MetroComboBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -149,8 +147,6 @@
             this.panel2.Controls.Add(this.VERT_INPUT_TEX);
             this.panel2.Controls.Add(this.metroLabel3);
             this.panel2.Controls.Add(this.VERT_INPUT_COLOR);
-            this.panel2.Controls.Add(this.metroLabel2);
-            this.panel2.Controls.Add(this.presetSelect);
             this.panel2.Controls.Add(this.shaderTypeLabel);
             this.panel2.Controls.Add(this.shaderModelSelect);
             this.panel2.Controls.Add(this.shaderNameInput);
@@ -165,7 +161,7 @@
             // 
             this.currentEventLabel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.currentEventLabel.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.currentEventLabel.Location = new System.Drawing.Point(0, 521);
+            this.currentEventLabel.Location = new System.Drawing.Point(0, 472);
             this.currentEventLabel.Name = "currentEventLabel";
             this.currentEventLabel.Size = new System.Drawing.Size(564, 23);
             this.currentEventLabel.TabIndex = 23;
@@ -176,11 +172,11 @@
             // 
             this.generationStatusLabel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.generationStatusLabel.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.generationStatusLabel.Location = new System.Drawing.Point(0, 544);
+            this.generationStatusLabel.Location = new System.Drawing.Point(0, 495);
             this.generationStatusLabel.Name = "generationStatusLabel";
-            this.generationStatusLabel.Size = new System.Drawing.Size(564, 23);
+            this.generationStatusLabel.Size = new System.Drawing.Size(564, 72);
             this.generationStatusLabel.TabIndex = 22;
-            this.generationStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.generationStatusLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.generationStatusLabel.Theme = MetroFramework.MetroThemeStyle.Dark;
             this.generationStatusLabel.UseCustomForeColor = true;
             this.generationStatusLabel.WrapToLine = true;
@@ -350,29 +346,6 @@
             this.VERT_INPUT_COLOR.Theme = MetroFramework.MetroThemeStyle.Dark;
             this.VERT_INPUT_COLOR.UseSelectable = true;
             // 
-            // metroLabel2
-            // 
-            this.metroLabel2.AutoSize = true;
-            this.metroLabel2.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.metroLabel2.Location = new System.Drawing.Point(22, 87);
-            this.metroLabel2.Name = "metroLabel2";
-            this.metroLabel2.Size = new System.Drawing.Size(93, 19);
-            this.metroLabel2.TabIndex = 6;
-            this.metroLabel2.Text = "Shader Preset";
-            this.metroLabel2.Theme = MetroFramework.MetroThemeStyle.Dark;
-            // 
-            // presetSelect
-            // 
-            this.presetSelect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.presetSelect.FormattingEnabled = true;
-            this.presetSelect.ItemHeight = 23;
-            this.presetSelect.Location = new System.Drawing.Point(184, 81);
-            this.presetSelect.Name = "presetSelect";
-            this.presetSelect.Size = new System.Drawing.Size(380, 29);
-            this.presetSelect.TabIndex = 5;
-            this.presetSelect.Theme = MetroFramework.MetroThemeStyle.Dark;
-            this.presetSelect.UseSelectable = true;
-            // 
             // ShaderGenerator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -401,8 +374,6 @@
         private MetroFramework.Controls.MetroTextBox shaderNameInput;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
-        private MetroFramework.Controls.MetroLabel metroLabel2;
-        private MetroFramework.Controls.MetroComboBox presetSelect;
         private MetroFramework.Controls.MetroCheckBox VERT_INPUT_NORMAL;
         private MetroFramework.Controls.MetroCheckBox VERT_INPUT_TEX;
         private MetroFramework.Controls.MetroLabel metroLabel3;

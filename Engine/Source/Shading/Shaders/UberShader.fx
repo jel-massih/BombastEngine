@@ -79,7 +79,8 @@ PixelInputType VSMain(VertexInputType input)
 	output.normal = normalize(output.normal);
 #endif
 
-#if defined(PIXEL_INPUT_VIEWDIR) && defined(CAMERA_BUFFER)
+#if defined(PIXEL_INPUT_VIEWDIR) && defined(ENABLE_CAMERA_BUFFER)
+	float4 worldPosition;
 	worldPosition = mul(input.position, worldMatrix);
 	output.viewDirection = eyePos.xyz - worldPosition.xyz;
 	output.viewDirection = normalize(output.viewDirection);

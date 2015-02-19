@@ -25,13 +25,15 @@ namespace ShaderGenerator
                 return false;
             }
 
-            ProcessStartInfo processInfo = new ProcessStartInfo(fxcPath);
-            processInfo.CreateNoWindow = true;
-            processInfo.UseShellExecute = false;
-            processInfo.RedirectStandardError = true;
-            processInfo.Arguments = string.Format("/T {1} /E {2} /Fo\"{0}.obj\" \"{0}\"", path, shaderModelType, entrypoint);
+            var processInfo = new ProcessStartInfo(fxcPath)
+            {
+                CreateNoWindow = true,
+                UseShellExecute = false,
+                RedirectStandardError = true,
+                Arguments = string.Format("/T {1} /E {2} /Fo\"{0}.obj\" \"{0}\"", path, shaderModelType, entrypoint)
+            };
 
-            error = "";
+            error = string.Empty;
 
             using (Process p = Process.Start(processInfo))
             {
@@ -55,7 +57,7 @@ namespace ShaderGenerator
                 File.Delete(path + ".obj");
             }
 
-            return error == "";
+            return error == string.Empty;
         }
     }
 }
