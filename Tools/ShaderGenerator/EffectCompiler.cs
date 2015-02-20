@@ -8,7 +8,7 @@ namespace ShaderGenerator
 {
     public class EffectCompiler
     {
-        public static bool TryCompile(string shaderCode, string shaderModelType, string entrypoint, out string error)
+        public static bool TryCompile(string shaderCode, string shaderModelType, string entrypoint, string outputFilePath, out string error)
         {
             string path = Path.GetTempFileName();
 
@@ -54,6 +54,7 @@ namespace ShaderGenerator
 
             if (File.Exists(path + ".obj"))
             {
+                File.WriteAllBytes(outputFilePath, File.ReadAllBytes(path + ".obj"));
                 File.Delete(path + ".obj");
             }
 

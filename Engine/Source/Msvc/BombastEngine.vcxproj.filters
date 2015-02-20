@@ -517,8 +517,10 @@
     <FxCompile Include="..\Shading\Shaders\DeferredLightingPixelShader.hlsl">
       <Filter>Shading\Shaders</Filter>
     </FxCompile>
-    <FxCompile Include="..\Shading\Shaders\UberShader.fx">
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Shading\Shaders\UberShader.fx">
       <Filter>Shading\Shaders</Filter>
-    </FxCompile>
+    </None>
   </ItemGroup>
 </Project>

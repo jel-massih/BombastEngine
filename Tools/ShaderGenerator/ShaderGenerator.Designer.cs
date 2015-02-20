@@ -52,6 +52,8 @@
             this.VERT_INPUT_TEX = new MetroFramework.Controls.MetroCheckBox();
             this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
             this.VERT_INPUT_COLOR = new MetroFramework.Controls.MetroCheckBox();
+            this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
+            this.shaderPresetsSelect = new MetroFramework.Controls.MetroComboBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -130,6 +132,8 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.metroLabel2);
+            this.panel2.Controls.Add(this.shaderPresetsSelect);
             this.panel2.Controls.Add(this.currentEventLabel);
             this.panel2.Controls.Add(this.generationStatusLabel);
             this.panel2.Controls.Add(this.PIXEL_TEX_SAMPLE);
@@ -346,6 +350,30 @@
             this.VERT_INPUT_COLOR.Theme = MetroFramework.MetroThemeStyle.Dark;
             this.VERT_INPUT_COLOR.UseSelectable = true;
             // 
+            // metroLabel2
+            // 
+            this.metroLabel2.AutoSize = true;
+            this.metroLabel2.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.metroLabel2.Location = new System.Drawing.Point(22, 83);
+            this.metroLabel2.Name = "metroLabel2";
+            this.metroLabel2.Size = new System.Drawing.Size(99, 19);
+            this.metroLabel2.TabIndex = 25;
+            this.metroLabel2.Text = "Shader Presets";
+            this.metroLabel2.Theme = MetroFramework.MetroThemeStyle.Dark;
+            // 
+            // shaderPresetsSelect
+            // 
+            this.shaderPresetsSelect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.shaderPresetsSelect.FormattingEnabled = true;
+            this.shaderPresetsSelect.ItemHeight = 23;
+            this.shaderPresetsSelect.Location = new System.Drawing.Point(184, 77);
+            this.shaderPresetsSelect.Name = "shaderPresetsSelect";
+            this.shaderPresetsSelect.Size = new System.Drawing.Size(380, 29);
+            this.shaderPresetsSelect.TabIndex = 24;
+            this.shaderPresetsSelect.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.shaderPresetsSelect.UseSelectable = true;
+            this.shaderPresetsSelect.SelectedIndexChanged += new System.EventHandler(this.shaderPresetsSelect_SelectedIndexChanged);
+            // 
             // ShaderGenerator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -391,6 +419,8 @@
         private MetroFramework.Controls.MetroCheckBox PIXEL_TEX_SAMPLE;
         private MetroFramework.Controls.MetroLabel generationStatusLabel;
         private MetroFramework.Controls.MetroLabel currentEventLabel;
+        private MetroFramework.Controls.MetroLabel metroLabel2;
+        private MetroFramework.Controls.MetroComboBox shaderPresetsSelect;
 
     }
 }

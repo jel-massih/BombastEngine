@@ -18,7 +18,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\Bin\</OutputPath>
+    <OutputPath>..\Bin\ShaderGenerator\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -27,7 +27,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\Bin\ShaderGenerator\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -69,6 +69,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ShaderPreset.cs" />
     <EmbeddedResource Include="Config\ShaderProfiles.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ShaderProfiles.Designer.cs</LastGenOutput>
@@ -86,6 +87,7 @@
     <EmbeddedResource Include="ShaderGenerator.resx">
       <DependentUpon>ShaderGenerator.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="Config\ShaderPresets.config" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

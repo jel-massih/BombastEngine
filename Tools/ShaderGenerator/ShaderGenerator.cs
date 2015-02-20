@@ -1,10 +1,14 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Drawing;
 using System.Globalization;
+using System.IO;
+using System.Linq;
 using System.Resources;
 using System.Windows.Forms;
+using System.Xml.Serialization;
 using MetroFramework.Forms;
 using ShaderGenerator.Config;
 
@@ -12,28 +16,49 @@ namespace ShaderGenerator
 {
     public partial class ShaderGenerator : MetroForm
     {
+        private ShaderPresetsConfig _presetsConfig;
+        private Dictionary<string, string> _shaderModelDictionary; 
+
         public ShaderGenerator()
         {
             InitializeComponent();
 
             InitializeShaderModelSelect();
+            InitializeShaderPresetSelect();
         }
 
         private void InitializeShaderModelSelect()
         {
             shaderModelSelect.Items.Clear();
-            var dict = new Dictionary<string, string>();
+            _shaderModelDictionary = new Dictionary<string, string>();
             ResourceSet resourceSet = ShaderProfiles.ResourceManager.GetResourceSet(CultureInfo.CurrentUICulture, true, true);
             foreach (DictionaryEntry entry in resourceSet)
             {
                 //dict.Add(entry.Key.ToString(), entry.Value.ToString());
             }
-            dict.Add("vs_4_0", "Vertex Shader 4.0");
-            dict.Add("ps_4_0", "Pixel Shader 4.0");
+            _shaderModelDictionary.Add("vs_4_0", "Vertex Shader 4.0");
+            _shaderModelDictionary.Add("ps_4_0", "Pixel Shader 4.0");
 
-            shaderModelSelect.DataSource = new BindingSource(dict, null);
+            shaderModelSelect.DataSource = new BindingSource(_shaderModelDictionary, null);
             shaderModelSelect.DisplayMember = "Value";
             shaderModelSelect.ValueMember = "Key";
+        }
+
+        private void InitializeShaderPresetSelect()
+        {
+            shaderPresetsSelect.Items.Clear();
+            var list = new List<string>() {""};
+
+            var serializer = new XmlSerializer(typeof(ShaderPresetsConfig));
+            var stream = new FileStream("../../ShaderGenerator/Config/ShaderPresets.config", FileMode.Open);
+            _presetsConfig = (ShaderPresetsConfig)serializer.Deserialize(stream);
+
+            foreach (var preset in _presetsConfig.Presets)
+            {
+                list.Add(preset.PresetName);
+            }
+
+            shaderPresetsSelect.DataSource = new BindingSource(list, null);
         }
 
         private void generateBtn_Click(object sender, System.EventArgs e)
@@ -54,7 +79,7 @@ namespace ShaderGenerator
             currentEventLabel.Text = "Generating Shader: " + shaderName + " with model: " + shaderModel;
 
             string error;
-            var compileSuccess = EffectCompiler.TryCompile(generatedShaderCode, shaderModel, entryPoint, out error);
+            var compileSuccess = EffectCompiler.TryCompile(generatedShaderCode, shaderModel, entryPoint, ConfigurationManager.AppSettings["OutputPath"] + shaderName, out error);
 
             if (compileSuccess)
             {
@@ -76,7 +101,7 @@ namespace ShaderGenerator
                 code += "#define " + define + " \n";
             }
 
-            code += string.Format("#include \"{0}\"", System.Configuration.ConfigurationManager.AppSettings["UberShaderPath"]);
+            code += string.Format("#include \"{0}\"", ConfigurationManager.AppSettings["UberShaderPath"]);
             return code;
         }
 
@@ -114,6 +139,18 @@ namespace ShaderGenerator
                 shaderDefines.Add("PIXEL_TEX_SAMPLE");
 
             return shaderDefines;
+        }
+
+        private void shaderPresetsSelect_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            if (string.IsNullOrEmpty(shaderPresetsSelect.SelectedItem.ToString())) { return; }
+
+            var selectedPreset = _presetsConfig.Presets.FirstOrDefault(r => r.PresetName == shaderPresetsSelect.SelectedItem.ToString());
+            if (selectedPreset != null)
+            {
+                shaderNameInput.Text = selectedPreset.OutputName;
+                shaderModelSelect.SelectedIndex = Array.IndexOf(_shaderModelDictionary.Keys.ToArray(), selectedPreset.Model);
+            }
         }
     }
 }
