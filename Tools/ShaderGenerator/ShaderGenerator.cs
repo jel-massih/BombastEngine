@@ -150,6 +150,21 @@ namespace ShaderGenerator
             {
                 shaderNameInput.Text = selectedPreset.OutputName;
                 shaderModelSelect.SelectedIndex = Array.IndexOf(_shaderModelDictionary.Keys.ToArray(), selectedPreset.Model);
+
+                VERT_INPUT_COLOR.Checked = selectedPreset.GetVsInputs().Contains(VSInput.color);
+                VERT_INPUT_TEX.Checked = selectedPreset.GetVsInputs().Contains(VSInput.tex);
+                VERT_INPUT_NORMAL.Checked = selectedPreset.GetVsInputs().Contains(VSInput.normal);
+
+                PIXEL_INPUT_VIEWDIR.Checked = selectedPreset.GetPsInputs().Contains(PSInput.viewDirection);
+
+                ENABLE_CAMERA_BUFFER.Checked = selectedPreset.GetConstantBuffers().Contains(ConstantBuffer.camera);
+                ENABLE_TEXTURE_INPUT.Checked = selectedPreset.GetConstantBuffers().Contains(ConstantBuffer.textureIn);
+
+                PIXEL_OUT_FLOAT4.Checked = selectedPreset.GetPsOutputs().Contains(PSOutput.float4);
+                PIXEL_OUT_GBUFFER.Checked = selectedPreset.GetPsOutputs().Contains(PSOutput.gBuffer);
+
+                PIXEL_COLOR_DIRECT.Checked = selectedPreset.GetPsTransforms().Contains(PSTransform.colorDirect);
+                PIXEL_TEX_SAMPLE.Checked = selectedPreset.GetPsTransforms().Contains(PSTransform.texSample);
             }
         }
     }

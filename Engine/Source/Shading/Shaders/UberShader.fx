@@ -117,7 +117,7 @@ struct P2F
 	float4 normal: SV_Target1;
 };
 
-P2F FillGBufferPixelShader(PixelInputType input)
+P2F PSMain(PixelInputType input)
 {
 	P2F result;
 	
@@ -125,7 +125,7 @@ P2F FillGBufferPixelShader(PixelInputType input)
 	#if !defined(VERT_INPUT_TEX) || !defined(ENABLE_TEXTURE_INPUT)
 	ERR : PIXEL_TEX_SAMPLE requires VERT_INPUT_TEX and ENABLE_TEXTURE_INPUT to be set
 	#endif
-	result.color = textureDiffuse.Sample(textureSampler, input.uv);
+		result.color = shaderTexture.Sample(shaderTextureSampler, input.tex);
 	#endif
 
 	#ifndef VERT_INPUT_TEX

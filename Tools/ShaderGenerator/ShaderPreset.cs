@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Xml;
 using System.Xml.Serialization;
 
@@ -30,10 +31,11 @@ namespace ShaderGenerator
 
         public string VSInputs
         {
+            get { return string.Join(",", _VSInputs); }
             set
             {
                 _VSInputs = new List<VSInput>();
-                foreach (var input in value.Split(','))
+                foreach (var input in value.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries))
                 {
                     VSInput vsInput;
                     Enum.TryParse(input, out vsInput);
@@ -44,10 +46,11 @@ namespace ShaderGenerator
 
         public string PSInputs
         {
+            get { return string.Join(",", _PSInputs); }
             set
             {
                 _PSInputs = new List<PSInput>();
-                foreach (var input in value.Split(','))
+                foreach (var input in value.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries))
                 {
                     PSInput psInput;
                     Enum.TryParse(input, out psInput);
@@ -58,10 +61,11 @@ namespace ShaderGenerator
 
         public string ConstantBuffers
         {
+            get { return string.Join(",", _ConstantBuffers); }
             set
             {
                 _ConstantBuffers = new List<ConstantBuffer>();
-                foreach (var input in value.Split(','))
+                foreach (var input in value.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries))
                 {
                     ConstantBuffer cBuffer;
                     Enum.TryParse(input, out cBuffer);
@@ -72,10 +76,11 @@ namespace ShaderGenerator
 
         public string PSOutputs
         {
+            get { return string.Join(",", _PSOutputs); }
             set
             {
                 _PSOutputs = new List<PSOutput>();
-                foreach (var input in value.Split(','))
+                foreach (var input in value.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries))
                 {
                     PSOutput psOutput;
                     Enum.TryParse(input, out psOutput);
@@ -86,10 +91,11 @@ namespace ShaderGenerator
 
         public string PSTransforms
         {
+            get { return string.Join(",", _PSTransforms); }
             set
             {
                 _PSTransforms = new List<PSTransform>();
-                foreach (var input in value.Split(','))
+                foreach (var input in value.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries))
                 {
                     PSTransform psTransform;
                     Enum.TryParse(input, out psTransform);
@@ -115,7 +121,7 @@ namespace ShaderGenerator
             return _PSInputs;
         }
 
-        public List<ConstantBuffer> GetCosntanBuffers()
+        public List<ConstantBuffer> GetConstantBuffers()
         {
             return _ConstantBuffers;
         }
@@ -152,14 +158,19 @@ namespace ShaderGenerator
 
     public enum ConstantBuffer
     {
-        camera
+        camera,
+        textureIn
     }
 
     public enum PSOutput
     {
+        float4,
+        gBuffer
     }
 
     public enum PSTransform
     {
+        texSample,
+        colorDirect
     }
 }
