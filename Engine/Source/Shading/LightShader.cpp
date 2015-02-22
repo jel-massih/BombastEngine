@@ -275,7 +275,7 @@ bool LightShader::SetShaderParameters(ID3D11DeviceContext* deviceContext, Direct
 
 	deviceContext->Unmap(m_pMaterialBuffer, 0);
 
-	bufferNumber = 0;
+	bufferNumber = 2;
 
 	deviceContext->PSSetConstantBuffers(bufferNumber, 1, &m_pMaterialBuffer);
 
@@ -292,16 +292,13 @@ bool LightShader::SetShaderParameters(ID3D11DeviceContext* deviceContext, Direct
 	const Vec4* lightDiffuse = pScene->GetLightingManager()->GetLightDiffuse();
 	const Vec4* lightDirection = pScene->GetLightingManager()->GetLightDirection();
 
-	for (int i = 0; i < MAX_LIGHTS_SUPPORTED;i++)
-	{
-		dataPtr4->lights[i].enabled = true;
-		dataPtr4->lights[i].lightColor = lightDiffuse[i];
-		Vec4 dir = lightDirection[i];
-		dataPtr4->lights[i].lightDirection = Vec3(dir.x, dir.y, dir.z);
-	}
+	dataPtr4->light.enabled = true;
+	dataPtr4->light.lightColor = lightDiffuse[0];
+	Vec4 dir = lightDirection[0];
+	dataPtr4->light.lightDirection = Vec3(dir.x, dir.y, dir.z);
 
 	deviceContext->Unmap(m_pLightBuffer, 0);
-	bufferNumber = 1;
+	bufferNumber = 3;
 	deviceContext->PSSetConstantBuffers(bufferNumber, 1, &m_pLightBuffer);
 
 	return true;

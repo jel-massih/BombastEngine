@@ -40,7 +40,7 @@ private:
 	{
 		XMFLOAT4 eyePosition;
 		XMFLOAT4 globalAmbient;
-		LightProperties lights[MAX_LIGHTS_SUPPORTED];
+		LightProperties light;
 	};
 
 public:
