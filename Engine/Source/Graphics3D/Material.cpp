@@ -10,6 +10,8 @@ Material::Material()
 	m_material.Emissive = g_Black;
 	m_material.Power = 32.0f;
 	m_material.UVScale = XMFLOAT2(1.0f, 1.0f);
+	m_material.vsFilename = "";
+	m_material.psFilename = "";
 }
 
 Material::~Material()
@@ -118,6 +120,17 @@ void Material::SetShaderType(std::string shaderName)
 void Material::SetShaderType(ShaderType shaderType)
 {
 	m_material.ShaderType = shaderType;
+}
+
+void Material::SetVSFilename(std::string fileName)
+{
+	m_material.vsFilename = fileName;
+}
+
+void Material::SetPSFilename(std::string fileName)
+{
+	m_material.psFilename = fileName;
+
 }
 
 void Material::SetUVScale(XMFLOAT2 scale)

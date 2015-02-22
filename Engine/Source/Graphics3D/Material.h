@@ -38,6 +38,11 @@ public:
 	XMFLOAT2 GetUVScale() const { return m_material.UVScale; }
 	void SetUVScale(XMFLOAT2 scale);
 
+	void SetVSFilename(std::string fileName);
+	std::string GetVSFilename() { return m_material.vsFilename; }
+	void SetPSFilename(std::string fileName);
+	std::string GetPSFilename() { return m_material.psFilename; }
+
 private:
 	struct BEMaterial
 	{
@@ -48,6 +53,7 @@ private:
 		Vec4 Emissive;
 		std::vector<TextureClass*> Textures;
 		ShaderType ShaderType;
+		std::string vsFilename, psFilename;
 		XMFLOAT2 UVScale;
 	};
 	BEMaterial m_material;

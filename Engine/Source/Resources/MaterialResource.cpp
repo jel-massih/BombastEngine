@@ -94,6 +94,18 @@ bool MaterialResourceExtraData::LoadMaterial(char* pRawBuffer, unsigned int rawS
 	if (pAttribute)
 	{
 		m_pMaterial->SetShaderType(pAttribute->first_attribute("type")->value());
+
+		rapidxml::xml_attribute<>* vsFile = pAttribute->first_attribute("vs_filename");
+		if (vsFile)
+		{
+			m_pMaterial->SetVSFilename(vsFile->value());
+		}
+
+		rapidxml::xml_attribute<>* psFile = pAttribute->first_attribute("ps_filename");
+		if (psFile)
+		{
+			m_pMaterial->SetPSFilename(psFile->value());
+		}
 	}
 
 	pAttribute = pMaterialBase->first_node("UVScale");
