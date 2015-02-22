@@ -5,6 +5,7 @@ class Effect
 	Effect();
 
 	bool Init(const char* filename);
+	void Shutdown();
 
 public:
 	static const int MaxEffects = 512;
@@ -27,5 +28,20 @@ public:
 	//Create Effect from Filename. First loaded 
 	static Effect* CreateWithFallback(const char* name);
 
+	//Find effect, if available by hash code.
+	static Effect* LookupEffect(u32 hashCode);
+
+	static bool GetFullName(const char* pShaderName, char* pShaderDestination, int length);
+
 	~Effect();
+
+	u32 GetHashCode() const { return m_nameHash; }
+
+private:
+	char m_EffectName[40];
+	std::string m_effectPath;
+	u32 m_nameHash;
+
+
+	static std::vector<Effect*> sm_Effects;
 };

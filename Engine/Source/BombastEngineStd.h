@@ -19,6 +19,7 @@
 #include <memory>
 
 const int MAX_LIGHTS_SUPPORTED = 4;
+const int BOMBAST_MAX_PATH = 256;
 
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
