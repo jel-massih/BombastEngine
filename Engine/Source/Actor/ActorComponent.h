@@ -1,5 +1,7 @@
 #pragma once
 
+#include "../Utilities/String.h"
+
 class ActorComponent{
 	friend class ActorFactory;
 
@@ -20,7 +22,7 @@ public:
 	virtual const char* VGetName() const = 0;
 	static ComponentId GetIdFromName(const char* componentStr)
 	{
-		return static_cast<ComponentId>(HashString(componentStr));
+		return static_cast<ComponentId>(beStringHash(componentStr));
 	}
 
 protected:

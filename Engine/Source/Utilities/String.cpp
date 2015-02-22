@@ -115,12 +115,12 @@ std::wstring s2ws(const std::string &s)
 	return temp;
 }
 
-u32 beStringHash(const char * s)
+uint32_t beStringHash(const char * s)
 {
-	u32 hash = FNV_OFFSET_32;
+	uint32_t hash = FNV_OFFSET_32;
 	while (*s)
 	{
-		hash = hash * 101 + (u32)*s++;
+		hash = hash * 101 + (uint32_t)*s++;
 	}
 
 	return hash;

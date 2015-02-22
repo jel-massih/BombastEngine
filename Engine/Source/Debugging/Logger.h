@@ -1,7 +1,5 @@
 #pragma once
 
-#include "../Utilities/String.h"
-
 namespace BELogger
 {
 	void Init(bool bDebugConsoleEnabled, const char* logPath, const char* logName);

@@ -2,7 +2,6 @@
 #include "BombastApp.h"
 #include "../Actor/Actor.h"
 #include "../Actor/ActorFactory.h"
-#include "../Utilities/String.h"
 #include "../Resources/ResourceCache.h"
 #include "../Resources/XmlResource.h"
 #include "../Resources/LuaResource.h"
