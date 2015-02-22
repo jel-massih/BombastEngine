@@ -42,12 +42,12 @@ namespace BELogger
 					} \
 		} while (0) \
 
-#define BE_WARNING(str, ...) BELogger::Log("WARNING", s, __FUNCTION__, __FILE__, __LINE__, ##__VA_ARGS__)
+#define BE_WARNING(str, ...) BELogger::Log("WARNING", str, __FUNCTION__, __FILE__, __LINE__, ##__VA_ARGS__)
 
 #define BE_INFO(str, ...) BE_LOG("INFO", s, ##__VA_ARGS__)
 
 #define BE_LOG_GRAPHICS(str, ...) BE_LOG("graphics", str, ##__VA_ARGS__)
 
-#define BE_LOG(tag, str, ...) BELogger::Log(tag, s, NULL, NULL, 0, ##__VA_ARGS__)
+#define BE_LOG(tag, str, ...) BELogger::Log(tag, str, NULL, NULL, 0, ##__VA_ARGS__)
 
 #define BE_HRETURN(x, str) { hr = (x); if( FAILED(hr) ) { BE_ERROR( str ); return hr; } }
