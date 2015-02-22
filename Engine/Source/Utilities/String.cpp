@@ -125,3 +125,27 @@ uint32_t beStringHash(const char * s)
 
 	return hash;
 }
+
+const char* beFilename(const char* name)
+{
+	if (!name) 
+	{
+		return NULL;
+	}
+
+	//Set end to end of string and reverse search for first delimetter
+	const char *end = name + beStringLength(name);
+	while (end > name)
+	{
+		if (end[-1] == '/' || end[-1] == '\\')
+		{
+			break;
+		}
+		else
+		{
+			end--;
+		}
+	}
+
+	return end;
+}

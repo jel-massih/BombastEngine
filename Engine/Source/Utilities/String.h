@@ -24,3 +24,10 @@ extern std::wstring s2ws(const std::string &s);
 
 //Super simple 32 bit polynomial Hashing implementation
 extern u32 beStringHash(const char * s);
+
+extern const char* beFilename(const char* name);
+
+inline int beStringLength(const char* s) 
+{ 
+	return int(s ? ::strlen(s) : 0); 
+}
