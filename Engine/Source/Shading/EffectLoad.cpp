@@ -51,7 +51,10 @@ bool Effect::Init(const char* filename)
 		char fullPath[BOMBAST_MAX_PATH];
 		if (GetFullName(filename, fullPath, BOMBAST_MAX_PATH - 1))
 		{
-
+			{
+				Resource effectResource(fullPath);
+				ResourceHandle* pVertexResHandle = g_pApp->m_pResourceCache->GetHandle(&effectResource);
+			}
 		}
 	}
 	return false;
@@ -62,6 +65,11 @@ bool Effect::GetFullName(const char* pShaderName, char* pShaderDestination, int 
 	if (pShaderName)
 	{
 		BE_ASSERTf(!strchr(pShaderName, '.'), "Do not include Extension in Effect Name: %s", pShaderName);
+		const char* extension = ".cso";
+		memset(pShaderDestination, 0xFE, length);
+		pShaderDestination[--length] = 0;
+		sprintf_s(pShaderDestination, length, "%s.%s", pShaderName, extension);
+		return true;
 	}
 
 	return false;
