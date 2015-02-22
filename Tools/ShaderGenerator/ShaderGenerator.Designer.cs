@@ -35,25 +35,22 @@
             this.shaderNameInput = new MetroFramework.Controls.MetroTextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
+            this.shaderPresetsSelect = new MetroFramework.Controls.MetroComboBox();
             this.currentEventLabel = new MetroFramework.Controls.MetroLabel();
             this.generationStatusLabel = new MetroFramework.Controls.MetroLabel();
-            this.PIXEL_TEX_SAMPLE = new MetroFramework.Controls.MetroCheckBox();
-            this.PIXEL_COLOR_DIRECT = new MetroFramework.Controls.MetroCheckBox();
+            this.USE_ALBEDO_TEXTURE = new MetroFramework.Controls.MetroCheckBox();
             this.metroLabel7 = new MetroFramework.Controls.MetroLabel();
             this.PIXEL_OUT_GBUFFER = new MetroFramework.Controls.MetroCheckBox();
             this.metroLabel6 = new MetroFramework.Controls.MetroLabel();
             this.PIXEL_OUT_FLOAT4 = new MetroFramework.Controls.MetroCheckBox();
-            this.ENABLE_TEXTURE_INPUT = new MetroFramework.Controls.MetroCheckBox();
-            this.ENABLE_CAMERA_BUFFER = new MetroFramework.Controls.MetroCheckBox();
-            this.metroLabel5 = new MetroFramework.Controls.MetroLabel();
             this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
             this.PIXEL_INPUT_VIEWDIR = new MetroFramework.Controls.MetroCheckBox();
             this.VERT_INPUT_NORMAL = new MetroFramework.Controls.MetroCheckBox();
             this.VERT_INPUT_TEX = new MetroFramework.Controls.MetroCheckBox();
             this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
             this.VERT_INPUT_COLOR = new MetroFramework.Controls.MetroCheckBox();
-            this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
-            this.shaderPresetsSelect = new MetroFramework.Controls.MetroComboBox();
+            this.USE_NORMAL_MAP = new MetroFramework.Controls.MetroCheckBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -132,19 +129,16 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.USE_NORMAL_MAP);
             this.panel2.Controls.Add(this.metroLabel2);
             this.panel2.Controls.Add(this.shaderPresetsSelect);
             this.panel2.Controls.Add(this.currentEventLabel);
             this.panel2.Controls.Add(this.generationStatusLabel);
-            this.panel2.Controls.Add(this.PIXEL_TEX_SAMPLE);
-            this.panel2.Controls.Add(this.PIXEL_COLOR_DIRECT);
+            this.panel2.Controls.Add(this.USE_ALBEDO_TEXTURE);
             this.panel2.Controls.Add(this.metroLabel7);
             this.panel2.Controls.Add(this.PIXEL_OUT_GBUFFER);
             this.panel2.Controls.Add(this.metroLabel6);
             this.panel2.Controls.Add(this.PIXEL_OUT_FLOAT4);
-            this.panel2.Controls.Add(this.ENABLE_TEXTURE_INPUT);
-            this.panel2.Controls.Add(this.ENABLE_CAMERA_BUFFER);
-            this.panel2.Controls.Add(this.metroLabel5);
             this.panel2.Controls.Add(this.metroLabel4);
             this.panel2.Controls.Add(this.PIXEL_INPUT_VIEWDIR);
             this.panel2.Controls.Add(this.VERT_INPUT_NORMAL);
@@ -160,6 +154,30 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(564, 567);
             this.panel2.TabIndex = 6;
+            // 
+            // metroLabel2
+            // 
+            this.metroLabel2.AutoSize = true;
+            this.metroLabel2.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.metroLabel2.Location = new System.Drawing.Point(22, 83);
+            this.metroLabel2.Name = "metroLabel2";
+            this.metroLabel2.Size = new System.Drawing.Size(99, 19);
+            this.metroLabel2.TabIndex = 25;
+            this.metroLabel2.Text = "Shader Presets";
+            this.metroLabel2.Theme = MetroFramework.MetroThemeStyle.Dark;
+            // 
+            // shaderPresetsSelect
+            // 
+            this.shaderPresetsSelect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.shaderPresetsSelect.FormattingEnabled = true;
+            this.shaderPresetsSelect.ItemHeight = 23;
+            this.shaderPresetsSelect.Location = new System.Drawing.Point(184, 77);
+            this.shaderPresetsSelect.Name = "shaderPresetsSelect";
+            this.shaderPresetsSelect.Size = new System.Drawing.Size(380, 29);
+            this.shaderPresetsSelect.TabIndex = 24;
+            this.shaderPresetsSelect.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.shaderPresetsSelect.UseSelectable = true;
+            this.shaderPresetsSelect.SelectedIndexChanged += new System.EventHandler(this.shaderPresetsSelect_SelectedIndexChanged);
             // 
             // currentEventLabel
             // 
@@ -185,33 +203,22 @@
             this.generationStatusLabel.UseCustomForeColor = true;
             this.generationStatusLabel.WrapToLine = true;
             // 
-            // PIXEL_TEX_SAMPLE
+            // USE_ALBEDO_TEXTURE
             // 
-            this.PIXEL_TEX_SAMPLE.AutoSize = true;
-            this.PIXEL_TEX_SAMPLE.Location = new System.Drawing.Point(153, 329);
-            this.PIXEL_TEX_SAMPLE.Name = "PIXEL_TEX_SAMPLE";
-            this.PIXEL_TEX_SAMPLE.Size = new System.Drawing.Size(115, 15);
-            this.PIXEL_TEX_SAMPLE.TabIndex = 21;
-            this.PIXEL_TEX_SAMPLE.Text = "Texture Sampling";
-            this.PIXEL_TEX_SAMPLE.Theme = MetroFramework.MetroThemeStyle.Dark;
-            this.PIXEL_TEX_SAMPLE.UseSelectable = true;
-            // 
-            // PIXEL_COLOR_DIRECT
-            // 
-            this.PIXEL_COLOR_DIRECT.AutoSize = true;
-            this.PIXEL_COLOR_DIRECT.Location = new System.Drawing.Point(48, 329);
-            this.PIXEL_COLOR_DIRECT.Name = "PIXEL_COLOR_DIRECT";
-            this.PIXEL_COLOR_DIRECT.Size = new System.Drawing.Size(105, 15);
-            this.PIXEL_COLOR_DIRECT.TabIndex = 20;
-            this.PIXEL_COLOR_DIRECT.Text = "Color Sampling";
-            this.PIXEL_COLOR_DIRECT.Theme = MetroFramework.MetroThemeStyle.Dark;
-            this.PIXEL_COLOR_DIRECT.UseSelectable = true;
+            this.USE_ALBEDO_TEXTURE.AutoSize = true;
+            this.USE_ALBEDO_TEXTURE.Location = new System.Drawing.Point(48, 288);
+            this.USE_ALBEDO_TEXTURE.Name = "USE_ALBEDO_TEXTURE";
+            this.USE_ALBEDO_TEXTURE.Size = new System.Drawing.Size(103, 15);
+            this.USE_ALBEDO_TEXTURE.TabIndex = 21;
+            this.USE_ALBEDO_TEXTURE.Text = "Albedo Texture";
+            this.USE_ALBEDO_TEXTURE.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.USE_ALBEDO_TEXTURE.UseSelectable = true;
             // 
             // metroLabel7
             // 
             this.metroLabel7.AutoSize = true;
             this.metroLabel7.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.metroLabel7.Location = new System.Drawing.Point(22, 307);
+            this.metroLabel7.Location = new System.Drawing.Point(22, 266);
             this.metroLabel7.Name = "metroLabel7";
             this.metroLabel7.Size = new System.Drawing.Size(154, 19);
             this.metroLabel7.TabIndex = 19;
@@ -221,7 +228,7 @@
             // PIXEL_OUT_GBUFFER
             // 
             this.PIXEL_OUT_GBUFFER.AutoSize = true;
-            this.PIXEL_OUT_GBUFFER.Location = new System.Drawing.Point(159, 287);
+            this.PIXEL_OUT_GBUFFER.Location = new System.Drawing.Point(159, 246);
             this.PIXEL_OUT_GBUFFER.Name = "PIXEL_OUT_GBUFFER";
             this.PIXEL_OUT_GBUFFER.Size = new System.Drawing.Size(148, 15);
             this.PIXEL_OUT_GBUFFER.TabIndex = 18;
@@ -233,7 +240,7 @@
             // 
             this.metroLabel6.AutoSize = true;
             this.metroLabel6.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.metroLabel6.Location = new System.Drawing.Point(22, 260);
+            this.metroLabel6.Location = new System.Drawing.Point(22, 219);
             this.metroLabel6.Name = "metroLabel6";
             this.metroLabel6.Size = new System.Drawing.Size(137, 19);
             this.metroLabel6.TabIndex = 17;
@@ -243,46 +250,13 @@
             // PIXEL_OUT_FLOAT4
             // 
             this.PIXEL_OUT_FLOAT4.AutoSize = true;
-            this.PIXEL_OUT_FLOAT4.Location = new System.Drawing.Point(48, 287);
+            this.PIXEL_OUT_FLOAT4.Location = new System.Drawing.Point(48, 246);
             this.PIXEL_OUT_FLOAT4.Name = "PIXEL_OUT_FLOAT4";
             this.PIXEL_OUT_FLOAT4.Size = new System.Drawing.Size(105, 15);
             this.PIXEL_OUT_FLOAT4.TabIndex = 16;
             this.PIXEL_OUT_FLOAT4.Text = "Standard Float4";
             this.PIXEL_OUT_FLOAT4.Theme = MetroFramework.MetroThemeStyle.Dark;
             this.PIXEL_OUT_FLOAT4.UseSelectable = true;
-            // 
-            // ENABLE_TEXTURE_INPUT
-            // 
-            this.ENABLE_TEXTURE_INPUT.AutoSize = true;
-            this.ENABLE_TEXTURE_INPUT.Location = new System.Drawing.Point(153, 240);
-            this.ENABLE_TEXTURE_INPUT.Name = "ENABLE_TEXTURE_INPUT";
-            this.ENABLE_TEXTURE_INPUT.Size = new System.Drawing.Size(145, 15);
-            this.ENABLE_TEXTURE_INPUT.TabIndex = 15;
-            this.ENABLE_TEXTURE_INPUT.Text = "Single Texture/Sampler";
-            this.ENABLE_TEXTURE_INPUT.Theme = MetroFramework.MetroThemeStyle.Dark;
-            this.ENABLE_TEXTURE_INPUT.UseSelectable = true;
-            // 
-            // ENABLE_CAMERA_BUFFER
-            // 
-            this.ENABLE_CAMERA_BUFFER.AutoSize = true;
-            this.ENABLE_CAMERA_BUFFER.Location = new System.Drawing.Point(48, 240);
-            this.ENABLE_CAMERA_BUFFER.Name = "ENABLE_CAMERA_BUFFER";
-            this.ENABLE_CAMERA_BUFFER.Size = new System.Drawing.Size(99, 15);
-            this.ENABLE_CAMERA_BUFFER.TabIndex = 14;
-            this.ENABLE_CAMERA_BUFFER.Text = "Camera Buffer";
-            this.ENABLE_CAMERA_BUFFER.Theme = MetroFramework.MetroThemeStyle.Dark;
-            this.ENABLE_CAMERA_BUFFER.UseSelectable = true;
-            // 
-            // metroLabel5
-            // 
-            this.metroLabel5.AutoSize = true;
-            this.metroLabel5.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.metroLabel5.Location = new System.Drawing.Point(22, 218);
-            this.metroLabel5.Name = "metroLabel5";
-            this.metroLabel5.Size = new System.Drawing.Size(111, 19);
-            this.metroLabel5.TabIndex = 13;
-            this.metroLabel5.Text = "Constant Buffers";
-            this.metroLabel5.Theme = MetroFramework.MetroThemeStyle.Dark;
             // 
             // metroLabel4
             // 
@@ -350,29 +324,16 @@
             this.VERT_INPUT_COLOR.Theme = MetroFramework.MetroThemeStyle.Dark;
             this.VERT_INPUT_COLOR.UseSelectable = true;
             // 
-            // metroLabel2
+            // USE_NORMAL_MAP
             // 
-            this.metroLabel2.AutoSize = true;
-            this.metroLabel2.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.metroLabel2.Location = new System.Drawing.Point(22, 83);
-            this.metroLabel2.Name = "metroLabel2";
-            this.metroLabel2.Size = new System.Drawing.Size(99, 19);
-            this.metroLabel2.TabIndex = 25;
-            this.metroLabel2.Text = "Shader Presets";
-            this.metroLabel2.Theme = MetroFramework.MetroThemeStyle.Dark;
-            // 
-            // shaderPresetsSelect
-            // 
-            this.shaderPresetsSelect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.shaderPresetsSelect.FormattingEnabled = true;
-            this.shaderPresetsSelect.ItemHeight = 23;
-            this.shaderPresetsSelect.Location = new System.Drawing.Point(184, 77);
-            this.shaderPresetsSelect.Name = "shaderPresetsSelect";
-            this.shaderPresetsSelect.Size = new System.Drawing.Size(380, 29);
-            this.shaderPresetsSelect.TabIndex = 24;
-            this.shaderPresetsSelect.Theme = MetroFramework.MetroThemeStyle.Dark;
-            this.shaderPresetsSelect.UseSelectable = true;
-            this.shaderPresetsSelect.SelectedIndexChanged += new System.EventHandler(this.shaderPresetsSelect_SelectedIndexChanged);
+            this.USE_NORMAL_MAP.AutoSize = true;
+            this.USE_NORMAL_MAP.Location = new System.Drawing.Point(163, 288);
+            this.USE_NORMAL_MAP.Name = "USE_NORMAL_MAP";
+            this.USE_NORMAL_MAP.Size = new System.Drawing.Size(90, 15);
+            this.USE_NORMAL_MAP.TabIndex = 26;
+            this.USE_NORMAL_MAP.Text = "Normal Map";
+            this.USE_NORMAL_MAP.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.USE_NORMAL_MAP.UseSelectable = true;
             // 
             // ShaderGenerator
             // 
@@ -408,19 +369,16 @@
         private MetroFramework.Controls.MetroCheckBox VERT_INPUT_COLOR;
         private MetroFramework.Controls.MetroLabel metroLabel4;
         private MetroFramework.Controls.MetroCheckBox PIXEL_INPUT_VIEWDIR;
-        private MetroFramework.Controls.MetroCheckBox ENABLE_TEXTURE_INPUT;
-        private MetroFramework.Controls.MetroCheckBox ENABLE_CAMERA_BUFFER;
-        private MetroFramework.Controls.MetroLabel metroLabel5;
         private MetroFramework.Controls.MetroCheckBox PIXEL_OUT_GBUFFER;
         private MetroFramework.Controls.MetroLabel metroLabel6;
         private MetroFramework.Controls.MetroCheckBox PIXEL_OUT_FLOAT4;
-        private MetroFramework.Controls.MetroCheckBox PIXEL_COLOR_DIRECT;
         private MetroFramework.Controls.MetroLabel metroLabel7;
-        private MetroFramework.Controls.MetroCheckBox PIXEL_TEX_SAMPLE;
+        private MetroFramework.Controls.MetroCheckBox USE_ALBEDO_TEXTURE;
         private MetroFramework.Controls.MetroLabel generationStatusLabel;
         private MetroFramework.Controls.MetroLabel currentEventLabel;
         private MetroFramework.Controls.MetroLabel metroLabel2;
         private MetroFramework.Controls.MetroComboBox shaderPresetsSelect;
+        private MetroFramework.Controls.MetroCheckBox USE_NORMAL_MAP;
 
     }
 }

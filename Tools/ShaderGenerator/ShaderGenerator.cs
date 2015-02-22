@@ -120,23 +120,17 @@ namespace ShaderGenerator
             if (PIXEL_INPUT_VIEWDIR.Checked)
                 shaderDefines.Add("PIXEL_INPUT_VIEWDIR");
 
-            if (ENABLE_TEXTURE_INPUT.Checked)
-                shaderDefines.Add("ENABLE_TEXTURE_INPUT");
-
-            if (ENABLE_CAMERA_BUFFER.Checked)
-                shaderDefines.Add("ENABLE_CAMERA_BUFFER");
-
             if (PIXEL_OUT_FLOAT4.Checked)
                 shaderDefines.Add("PIXEL_OUT_FLOAT4");
 
             if (PIXEL_OUT_GBUFFER.Checked)
                 shaderDefines.Add("PIXEL_OUT_GBUFFER");
 
-            if (PIXEL_COLOR_DIRECT.Checked)
-                shaderDefines.Add("PIXEL_COLOR_DIRECT");
+            if (USE_ALBEDO_TEXTURE.Checked)
+                shaderDefines.Add("USE_ALBEDO_TEXTURE");
 
-            if (PIXEL_TEX_SAMPLE.Checked)
-                shaderDefines.Add("PIXEL_TEX_SAMPLE");
+            if (USE_NORMAL_MAP.Checked)
+                shaderDefines.Add("USE_NORMAL_MAP");
 
             return shaderDefines;
         }
@@ -157,14 +151,11 @@ namespace ShaderGenerator
 
                 PIXEL_INPUT_VIEWDIR.Checked = selectedPreset.GetPsInputs().Contains(PSInput.viewDirection);
 
-                ENABLE_CAMERA_BUFFER.Checked = selectedPreset.GetConstantBuffers().Contains(ConstantBuffer.camera);
-                ENABLE_TEXTURE_INPUT.Checked = selectedPreset.GetConstantBuffers().Contains(ConstantBuffer.textureIn);
-
                 PIXEL_OUT_FLOAT4.Checked = selectedPreset.GetPsOutputs().Contains(PSOutput.float4);
                 PIXEL_OUT_GBUFFER.Checked = selectedPreset.GetPsOutputs().Contains(PSOutput.gBuffer);
 
-                PIXEL_COLOR_DIRECT.Checked = selectedPreset.GetPsTransforms().Contains(PSTransform.colorDirect);
-                PIXEL_TEX_SAMPLE.Checked = selectedPreset.GetPsTransforms().Contains(PSTransform.texSample);
+                USE_NORMAL_MAP.Checked = selectedPreset.GetPsTransforms().Contains(PSTransform.normalMap);
+                USE_ALBEDO_TEXTURE.Checked = selectedPreset.GetPsTransforms().Contains(PSTransform.albedoTexture);
             }
         }
     }

@@ -1,22 +1,42 @@
+#ifdef USE_ALBEDO_TEXTURE
+	#define ALBEDO_TEXTURE 1
+#else
+	#define ALBEDO_TEXTURE 0
+#endif
+
+#ifdef USE_NORMAL_MAP
+	#define NORMAL_MAP 1
+#else
+	#define NORMAL_MAP 0
+#endif
+
+#ifdef USE_CAMERA_BUFFER
+	#define CAMERA_BUFFER 1
+#else
+	#define CAMERA_BUFFER 0
+#endif
+
+#if ALBEDO_TEXTURE || NORMAL_MAP
+	#define USE_POINT_SAMPLER
+#endif
+
 cbuffer MatrixBuffer
 {
 	matrix worldMatrix;
 	matrix viewMatrix;
 	matrix projectionMatrix;
-};
+} :register(b0);
 
-#ifdef ENABLE_TEXTURE_INPUT
-Texture2D shaderTexture;
-SamplerState shaderTextureSampler;
-#endif
+Texture2D albedoTexture : register(t0);
+Texture2D normalTexture : register(t1);
 
-#ifdef ENABLE_CAMERA_BUFFER
+SamplerState textureSampler : register(s0);
+
 cbuffer CameraBuffer
 {
 	float3 eyePos;
 	float padding;
-}
-#endif
+} : register(b1);
 
 struct VertexInputType
 {
@@ -79,7 +99,7 @@ PixelInputType VSMain(VertexInputType input)
 	output.normal = normalize(output.normal);
 #endif
 
-#if defined(PIXEL_INPUT_VIEWDIR) && defined(ENABLE_CAMERA_BUFFER)
+#ifdef PIXEL_INPUT_VIEWDIR
 	float4 worldPosition;
 	worldPosition = mul(input.position, worldMatrix);
 	output.viewDirection = eyePos.xyz - worldPosition.xyz;
@@ -94,18 +114,16 @@ float4 PSMain(PixelInputType input) : SV_TARGET
 {
 	float4 output = float4(0,0,0,0);
 
-	#ifdef PIXEL_COLOR_DIRECT
-	#ifndef VERT_INPUT_COLOR
-	ERR_PIXEL_COLOR_DIRECT_requires_VERT_INPUT_COLOR_to_be_set
-	#endif
+	#ifdef VERT_INPUT_COLOR
 	output = input.color;
 	#endif
 
-	#ifdef PIXEL_TEX_SAMPLE
-	#if !defined(VERT_INPUT_TEX) || !defined(ENABLE_TEXTURE_INPUT)
-	ERR_PIXEL_TEX_SAMPLE_requires_VERT_INPUT_TEX_and_ENABLE_TEXTURE_INPUT_to_be_set
-	#endif
-	output = shaderTexture.Sample(shaderTextureSampler, input.tex);
+	#ifdef ALBEDO_TEXTURE
+		#ifdef VERT_INPUT_TEX
+			output = shaderTexture.Sample(shaderTextureSampler, input.tex);
+		#else
+			ERR_PIXEL_TEX_SAMPLE_requires_VERT_INPUT_TEX_and_ENABLE_TEXTURE_INPUT_to_be_set
+		#endif
 	#endif
 
 	return output;
@@ -120,17 +138,15 @@ struct P2F
 P2F PSMain(PixelInputType input)
 {
 	P2F result;
-	
-	#ifdef PIXEL_TEX_SAMPLE
-	#if !defined(VERT_INPUT_TEX) || !defined(ENABLE_TEXTURE_INPUT)
-	ERR : PIXEL_TEX_SAMPLE requires VERT_INPUT_TEX and ENABLE_TEXTURE_INPUT to be set
-	#endif
-		result.color = shaderTexture.Sample(shaderTextureSampler, input.tex);
+
+	#ifdef ALBEDO_TEXTURE
+		#ifdef VERT_INPUT_TEX
+			result.color = shaderTexture.Sample(shaderTextureSampler, input.tex);
+		#else
+			ERR: PIXEL_TEX_SAMPLE requires VERT_INPUT_TEX and ENABLE_TEXTURE_INPUT to be set
+		#endif
 	#endif
 
-	#ifndef VERT_INPUT_TEX
-	ERR: PIXEL_OUT_GBUFFER Requires VERT_INPUT_TEX
-	#endif
 	result.normal = float4(input.normal, 1.0f);
 
 	return result;

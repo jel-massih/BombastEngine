@@ -59,21 +59,6 @@ namespace ShaderGenerator
             }
         }
 
-        public string ConstantBuffers
-        {
-            get { return string.Join(",", _ConstantBuffers); }
-            set
-            {
-                _ConstantBuffers = new List<ConstantBuffer>();
-                foreach (var input in value.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries))
-                {
-                    ConstantBuffer cBuffer;
-                    Enum.TryParse(input, out cBuffer);
-                    _ConstantBuffers.Add(cBuffer);
-                }
-            }
-        }
-
         public string PSOutputs
         {
             get { return string.Join(",", _PSOutputs); }
@@ -107,7 +92,6 @@ namespace ShaderGenerator
         private ShaderModel _Model { get; set; }
         private List<VSInput> _VSInputs { get; set; }
         private List<PSInput> _PSInputs { get; set; }
-        private List<ConstantBuffer> _ConstantBuffers { get; set; }
         private List<PSOutput> _PSOutputs { get; set; }
         private List<PSTransform> _PSTransforms { get; set; }
 
@@ -119,11 +103,6 @@ namespace ShaderGenerator
         public List<PSInput> GetPsInputs()
         {
             return _PSInputs;
-        }
-
-        public List<ConstantBuffer> GetConstantBuffers()
-        {
-            return _ConstantBuffers;
         }
 
         public List<PSOutput> GetPsOutputs()
@@ -156,12 +135,6 @@ namespace ShaderGenerator
         viewDirection,
     }
 
-    public enum ConstantBuffer
-    {
-        camera,
-        textureIn
-    }
-
     public enum PSOutput
     {
         float4,
@@ -170,7 +143,7 @@ namespace ShaderGenerator
 
     public enum PSTransform
     {
-        texSample,
-        colorDirect
+        albedoTexture,
+        normalMap
     }
 }
