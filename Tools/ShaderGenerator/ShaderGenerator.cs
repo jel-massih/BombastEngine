@@ -139,6 +139,9 @@ namespace ShaderGenerator
             if (USE_NORMAL_MAP.Checked)
                 shaderDefines.Add("USE_NORMAL_MAP");
 
+            if (CALC_LIGHTING.Checked)
+                shaderDefines.Add("CALC_LIGHTING");
+
             return shaderDefines;
         }
 
@@ -163,6 +166,7 @@ namespace ShaderGenerator
 
                 USE_NORMAL_MAP.Checked = selectedPreset.GetPsTransforms().Contains(PSTransform.normalMap);
                 USE_ALBEDO_TEXTURE.Checked = selectedPreset.GetPsTransforms().Contains(PSTransform.albedoTexture);
+                CALC_LIGHTING.Checked = selectedPreset.GetPsTransforms().Contains(PSTransform.calcLighting);
             }
         }
     }

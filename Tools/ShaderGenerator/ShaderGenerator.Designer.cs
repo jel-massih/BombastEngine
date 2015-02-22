@@ -35,6 +35,7 @@
             this.shaderNameInput = new MetroFramework.Controls.MetroTextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.USE_NORMAL_MAP = new MetroFramework.Controls.MetroCheckBox();
             this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
             this.shaderPresetsSelect = new MetroFramework.Controls.MetroComboBox();
             this.currentEventLabel = new MetroFramework.Controls.MetroLabel();
@@ -50,7 +51,7 @@
             this.VERT_INPUT_TEX = new MetroFramework.Controls.MetroCheckBox();
             this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
             this.VERT_INPUT_COLOR = new MetroFramework.Controls.MetroCheckBox();
-            this.USE_NORMAL_MAP = new MetroFramework.Controls.MetroCheckBox();
+            this.CALC_LIGHTING = new MetroFramework.Controls.MetroCheckBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -129,6 +130,7 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.CALC_LIGHTING);
             this.panel2.Controls.Add(this.USE_NORMAL_MAP);
             this.panel2.Controls.Add(this.metroLabel2);
             this.panel2.Controls.Add(this.shaderPresetsSelect);
@@ -154,6 +156,17 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(564, 567);
             this.panel2.TabIndex = 6;
+            // 
+            // USE_NORMAL_MAP
+            // 
+            this.USE_NORMAL_MAP.AutoSize = true;
+            this.USE_NORMAL_MAP.Location = new System.Drawing.Point(163, 288);
+            this.USE_NORMAL_MAP.Name = "USE_NORMAL_MAP";
+            this.USE_NORMAL_MAP.Size = new System.Drawing.Size(90, 15);
+            this.USE_NORMAL_MAP.TabIndex = 26;
+            this.USE_NORMAL_MAP.Text = "Normal Map";
+            this.USE_NORMAL_MAP.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.USE_NORMAL_MAP.UseSelectable = true;
             // 
             // metroLabel2
             // 
@@ -324,16 +337,16 @@
             this.VERT_INPUT_COLOR.Theme = MetroFramework.MetroThemeStyle.Dark;
             this.VERT_INPUT_COLOR.UseSelectable = true;
             // 
-            // USE_NORMAL_MAP
+            // CALC_LIGHTING
             // 
-            this.USE_NORMAL_MAP.AutoSize = true;
-            this.USE_NORMAL_MAP.Location = new System.Drawing.Point(163, 288);
-            this.USE_NORMAL_MAP.Name = "USE_NORMAL_MAP";
-            this.USE_NORMAL_MAP.Size = new System.Drawing.Size(90, 15);
-            this.USE_NORMAL_MAP.TabIndex = 26;
-            this.USE_NORMAL_MAP.Text = "Normal Map";
-            this.USE_NORMAL_MAP.Theme = MetroFramework.MetroThemeStyle.Dark;
-            this.USE_NORMAL_MAP.UseSelectable = true;
+            this.CALC_LIGHTING.AutoSize = true;
+            this.CALC_LIGHTING.Location = new System.Drawing.Point(48, 309);
+            this.CALC_LIGHTING.Name = "CALC_LIGHTING";
+            this.CALC_LIGHTING.Size = new System.Drawing.Size(93, 15);
+            this.CALC_LIGHTING.TabIndex = 27;
+            this.CALC_LIGHTING.Text = "Calc Lighting";
+            this.CALC_LIGHTING.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.CALC_LIGHTING.UseSelectable = true;
             // 
             // ShaderGenerator
             // 
@@ -379,6 +392,7 @@
         private MetroFramework.Controls.MetroLabel metroLabel2;
         private MetroFramework.Controls.MetroComboBox shaderPresetsSelect;
         private MetroFramework.Controls.MetroCheckBox USE_NORMAL_MAP;
+        private MetroFramework.Controls.MetroCheckBox CALC_LIGHTING;
 
     }
 }

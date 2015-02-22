@@ -144,6 +144,7 @@ namespace ShaderGenerator
     public enum PSTransform
     {
         albedoTexture,
-        normalMap
+        normalMap,
+        calcLighting
     }
 }

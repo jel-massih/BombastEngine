@@ -522,5 +522,8 @@
     <None Include="..\Shading\Shaders\UberShader.fxh">
       <Filter>Shading\Shaders</Filter>
     </None>
+    <None Include="..\Shading\Shaders\MaterialCommon.fxh">
+      <Filter>Shading\Shaders</Filter>
+    </None>
   </ItemGroup>
 </Project>

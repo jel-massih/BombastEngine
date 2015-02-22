@@ -20,6 +20,8 @@
 	#define USE_POINT_SAMPLER
 #endif
 
+#include "MaterialCommon.fxh"
+
 cbuffer MatrixBuffer : register(b0)
 {
 	matrix worldMatrix;
@@ -36,6 +38,18 @@ cbuffer CameraBuffer : register(b1)
 {
 	float3 eyePos;
 	float padding;
+};
+
+cbuffer MaterialProperties : register(b2)
+{
+	MaterialInfo Material;
+};
+
+cbuffer LightProperties : register(b3)
+{
+	float4 EyePosition;
+	float4 GlobalAmbient;
+	Light light;
 };
 
 struct VertexInputType
@@ -118,7 +132,7 @@ float4 PSMain(PixelInputType input) : SV_TARGET
 		output = input.color;
 	#endif
 
-	#ifdef ALBEDO_TEXTURE
+	#if ALBEDO_TEXTURE
 		#ifdef VERT_INPUT_TEX
 			output = albedoTexture.Sample(textureSampler, input.tex);
 		#else
@@ -126,7 +140,7 @@ float4 PSMain(PixelInputType input) : SV_TARGET
 		#endif
 	#endif
 
-	#ifdef NORMAL_MAP
+	#if NORMAL_MAP
 		#ifndef VERT_INPUT_TEX
 			ERR_PIXEL_TEX_SAMPLE_requires_VERT_INPUT_TEX_and_ENABLE_TEXTURE_INPUT_to_be_set
 		#endif
@@ -134,6 +148,16 @@ float4 PSMain(PixelInputType input) : SV_TARGET
 		float4 lightIntensity = saturate(dot(normals.xyz, -eyePos));
 
 		output = saturate(output * lightIntensity);
+	#endif
+
+	#ifdef CALC_LIGHTING
+		#ifndef PIXEL_INPUT_VIEWDIR
+			ERR_CALC_LIGHTING_requires_VERT_INPUT_TEX_and_PIXEL_INPUT_VIEWDIR
+		#endif
+	
+		LightingResult lit = CalcLighting(light, input.viewDirection, normalize(input.normal), Material.SpecularPower);
+		
+		output = CalcFinalMaterialResult(output, lit, Material, GlobalAmbient);
 	#endif
 
 	return output;
@@ -149,7 +173,7 @@ P2F PSMain(PixelInputType input)
 {
 	P2F result;
 
-	#ifdef ALBEDO_TEXTURE
+	#if ALBEDO_TEXTURE
 		#ifdef VERT_INPUT_TEX
 			result.color = albedoTexture.Sample(textureSampler, input.tex);
 		#else
