@@ -205,7 +205,7 @@ bool DeferredLightShader::SetShaderParameters(ID3D11DeviceContext* deviceContext
 	dataPtr2->padding = 0.0f;
 
 	deviceContext->Unmap(m_pLightBuffer, 0);
-	bufferNumber = 0;
+	bufferNumber = 1;
 	deviceContext->PSSetConstantBuffers(bufferNumber, 1, &m_pLightBuffer);
 
 	return true;
