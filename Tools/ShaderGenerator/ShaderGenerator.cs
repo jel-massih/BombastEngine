@@ -68,6 +68,13 @@ namespace ShaderGenerator
             var shaderModel = shaderModelSelect.SelectedItem.GetType().GetProperty("Key").GetValue(shaderModelSelect.SelectedItem).ToString();
             var entryPoint = "VSMain";
 
+            if (string.IsNullOrEmpty(shaderName))
+            {
+                generationStatusLabel.ForeColor = Color.DarkRed;
+                generationStatusLabel.Text = "Please Enter a Shader Name";
+                return;
+            }
+
             if (shaderModel == "ps_4_0")
             {
                 entryPoint = "PSMain";
