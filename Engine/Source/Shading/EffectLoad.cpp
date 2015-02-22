@@ -51,10 +51,16 @@ bool Effect::Init(const char* filename)
 		char fullPath[BOMBAST_MAX_PATH];
 		if (GetFullName(filename, fullPath, BOMBAST_MAX_PATH - 1))
 		{
+			m_effectPath = fullPath;
+			const char* srcName = beFilename(filename);
+			BE_ASSERTf(strlen(srcName) < sizeof(m_effectName), "Effect name '%s' is too large for current code. (size %i)", srcName, sizeof(m_effectName));
+			strncpy_s(m_effectName, srcName, strlen(srcName));
+			m_nameHash = beStringHash(m_effectName);
+			/*
 			{
 				Resource effectResource(fullPath);
 				ResourceHandle* pVertexResHandle = g_pApp->m_pResourceCache->GetHandle(&effectResource);
-			}
+			}*/
 		}
 	}
 	return false;

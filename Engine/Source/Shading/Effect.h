@@ -38,7 +38,7 @@ public:
 	u32 GetHashCode() const { return m_nameHash; }
 
 private:
-	char m_EffectName[40];
+	char m_effectName[40];
 	std::string m_effectPath;
 	u32 m_nameHash;
 
