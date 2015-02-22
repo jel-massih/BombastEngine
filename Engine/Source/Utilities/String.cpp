@@ -115,13 +115,12 @@ std::wstring s2ws(const std::string &s)
 	return temp;
 }
 
-uint32_t HashString(const char * s)
+u32 beStringHash(const char * s)
 {
-	uint32_t hash = FNV_OFFSET_32, i;
-	for (i = 0; i < strlen(s); i++)
+	u32 hash = FNV_OFFSET_32;
+	while (*s)
 	{
-		hash = hash ^ (s[i]); //xor next byte to bottom of hash
-		hash = hash * FNV_PRIME_32; //Multiply by prime number
+		hash = hash * 101 + (u32)*s++;
 	}
 
 	return hash;

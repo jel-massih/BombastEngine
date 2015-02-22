@@ -20,8 +20,7 @@ extern std::string ToStr(const Vec3& val);
 extern std::string ws2s(const std::wstring& s);
 extern std::wstring s2ws(const std::string &s);
 
-#define FNV_PRIME_32 16777619
 #define FNV_OFFSET_32 2166136261U
 
-//Super simple 32 bit FNV Hashing implementation
-extern uint32_t HashString(const char * s);
+//Super simple 32 bit polynomial Hashing implementation
+extern u32 beStringHash(const char * s);
