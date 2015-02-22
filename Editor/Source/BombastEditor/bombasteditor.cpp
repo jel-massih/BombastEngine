@@ -74,8 +74,6 @@ void BombastEditorApp::OnViewportKeyUp(BYTE keyCode)
 
 CoreGameLogic *BombastEditorApp::VCreateGameAndView()
 {
-	g_pApp->m_options.m_level = "World\\World.xml";
-
 	m_pGame = BE_NEW BombastEditorLogic();
 	m_pGame->Initialize();
 

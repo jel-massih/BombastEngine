@@ -22,8 +22,6 @@ INT WINAPI wWinMain(HINSTANCE hInstance,
 
 CoreGameLogic *GameSampleApp::VCreateGameAndView()
 {
-	g_pApp->m_options.m_level = "World\\World.xml";
-	
 	m_pGame = BE_NEW GameSampleLogic();
 	m_pGame->Initialize();
 
