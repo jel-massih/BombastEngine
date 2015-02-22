@@ -42,3 +42,5 @@ public:
 };
 
 inline Point operator-(const Point& left, const Point& right) { Point temp(left); temp -= right; return temp; }
+
+typedef uint32_t u32;
