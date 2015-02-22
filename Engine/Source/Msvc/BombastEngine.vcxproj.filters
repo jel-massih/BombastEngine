@@ -519,7 +519,7 @@
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\Shading\Shaders\UberShader.fx">
+    <None Include="..\Shading\Shaders\UberShader.fxh">
       <Filter>Shading\Shaders</Filter>
     </None>
   </ItemGroup>
