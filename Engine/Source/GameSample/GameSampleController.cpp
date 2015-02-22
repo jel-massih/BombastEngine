@@ -19,7 +19,7 @@ bool GameSampleController::VOnMouseDown(const Point& mousePos, const int radius,
 	}
 
 	ActorId actorId = m_pObject->VGet()->GetActorId();
-	BE_ASSERT_MESSAGE(actorId != INVALID_ACTOR_ID, "The Pong Sample Controller isnt attached to a valid actor");
+	BE_ASSERTf(actorId != INVALID_ACTOR_ID, "The Pong Sample Controller isnt attached to a valid actor");
 	std::shared_ptr<EvtData_Fire_Weapon> pFireEvent(BE_NEW EvtData_Fire_Weapon(actorId));
 	IEventManager::Get()->VQueueEvent(pFireEvent);
 	return true;

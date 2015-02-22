@@ -28,7 +28,7 @@ HumanView::HumanView(IRenderer* renderer)
 		Frustum frustum;
 		frustum.Init(BE_PI / 4.0f, 1.0f, 1.0f, 100.0f);
 		m_pCamera = BE_NEW CameraNode(&Mat4x4::g_Identity, frustum);
-		BE_ASSERT_MESSAGE(m_pScene && m_pCamera, "Out of Memory");
+		BE_ASSERTf(m_pScene && m_pCamera, "Out of Memory");
 
 		m_pScene->VAddChild(INVALID_ACTOR_ID, m_pCamera);
 		m_pScene->SetCamera(m_pCamera);

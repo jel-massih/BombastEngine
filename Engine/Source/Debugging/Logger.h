@@ -32,11 +32,15 @@ namespace BELogger
 				} \
 		} while (0) \
 
-#define BE_ASSERT_MESSAGE(expr, message) \
+#define BE_ASSERTf(expr, message, ...) \
 	do { \
 		if (!(expr)) \
 					{ \
-			assert(expr && message); \
+			char formattedMsg[1024]; \
+			va_list args; \
+			va_start(args, message); \
+			vsprintf_s(formattedMsg, sizeof(formattedMsg), message, args); \
+			assert(expr && formattedMsg); \
 					} \
 		} while (0) \
 

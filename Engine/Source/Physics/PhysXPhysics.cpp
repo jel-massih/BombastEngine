@@ -79,7 +79,7 @@ void PhysXPhysics::AddShape(Actor* pActor, PxGeometry* geometry, float density, 
 {
 	BE_ASSERT(pActor);
 	ActorId actorId = pActor->GetId();
-	BE_ASSERT_MESSAGE(m_actorRigidBodyMap.find(actorId) == m_actorRigidBodyMap.end(), "Actor with more than one rigidbody");
+	BE_ASSERTf(m_actorRigidBodyMap.find(actorId) == m_actorRigidBodyMap.end(), "Actor with more than one rigidbody");
 
 	Mat4x4 transform = Mat4x4::g_Identity;
 	
