@@ -3,6 +3,9 @@
 #include "../BombastEngineStd.h"
 #include "../Bombast/interfaces.h"
 
+extern ID3D11Device* g_pD3DDevice;
+#define BEDEVICE (*g_pD3DDevice)
+
 struct ConstantBuffer_Matrices
 {
 	Mat4x4 m_worldViewProj;

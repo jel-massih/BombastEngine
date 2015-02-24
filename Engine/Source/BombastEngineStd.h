@@ -1,6 +1,7 @@
 #pragma once
 
 #define WIN32_LEAN_AND_MEAN //Exclude Rarely used stuff from Windows Headers
+#define __D3D11 (1);
 
 #include <Windows.h>
 #include<windowsx.h>

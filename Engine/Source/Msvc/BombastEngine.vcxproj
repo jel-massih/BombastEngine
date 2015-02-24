@@ -145,7 +145,7 @@
     <ClCompile Include="..\Shading\BasicShaders.cpp" />
     <ClCompile Include="..\Shading\DeferredLightShader.cpp" />
     <ClCompile Include="..\Shading\DeferredRenderingManager.cpp" />
-    <ClCompile Include="..\Shading\EffectLoad.cpp" />
+    <ClCompile Include="..\Shading\Effect.cpp" />
     <ClCompile Include="..\Shading\FontShader.cpp" />
     <ClCompile Include="..\Shading\LightmapShader.cpp" />
     <ClCompile Include="..\Shading\LightShader.cpp" />

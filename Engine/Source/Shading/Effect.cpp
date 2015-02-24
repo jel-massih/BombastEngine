@@ -40,7 +40,6 @@ Effect* Effect::LookupEffect(u32 hashCode)
 	return NULL;
 }
 
-
 bool Effect::Init(const char* filename)
 {
 	Shutdown();
@@ -49,7 +48,7 @@ bool Effect::Init(const char* filename)
 	if (filename)
 	{
 		char fullPath[BOMBAST_MAX_PATH];
-		if (GetFullName(filename, fullPath, BOMBAST_MAX_PATH - 1))
+		if (GetNameWithPath(filename, fullPath, BOMBAST_MAX_PATH - 1))
 		{
 			m_effectPath = fullPath;
 			const char* srcName = beFilename(filename);
@@ -66,7 +65,7 @@ bool Effect::Init(const char* filename)
 	return false;
 }
 
-bool Effect::GetFullName(const char* pShaderName, char* pShaderDestination, int length)
+bool Effect::GetNameWithPath(const char* pShaderName, char* pShaderDestination, int length)
 {
 	if (pShaderName)
 	{
@@ -79,4 +78,98 @@ bool Effect::GetFullName(const char* pShaderName, char* pShaderDestination, int 
 	}
 
 	return false;
+}
+
+void Effect::Load(char* stream, int magic, const char* currentLoadingEffect)
+{
+
+}
+
+void Effect::Shutdown()
+{
+	m_techniques.clear();
+	m_vertexShaders.clear();
+	m_pixelShaders.clear();
+
+	//m_effectData
+}
+
+void Effect::StartEffectPass(int index, const EffectData& effectData) const
+{
+
+}
+
+void Effect::EndEffectPass()
+{
+
+}
+
+void Effect::BeginRender() const
+{
+
+}
+
+void Effect::EndRender()
+{
+
+}
+
+Program::Program()
+{
+
+}
+
+Program::~Program()
+{
+
+}
+
+bool Program::Load(const char* data, const int dataSize, const char* name)
+{
+	BE_LOG_GRAPHICS("Loading Program: [%s]", name);
+	return true;
+}
+
+VertexProgram::VertexProgram()
+{}
+
+void VertexProgram::Load(const char* data, const int dataSize, const char* name)
+{
+	HRESULT hr;
+
+	bool saveProgram = Program::Load(data, dataSize, name);
+
+	hr = BEDEVICE.CreateVertexShader(data, dataSize, nullptr, &m_pProgram);
+	
+	if (FAILED(hr))
+	{
+		BE_ERROR("Failed to create Vertex Shader [%s]", name);
+	}
+}
+
+VertexProgram::~VertexProgram()
+{
+	SAFE_RELEASE(m_pProgram);
+}
+
+PixelProgram::PixelProgram()
+{}
+
+void PixelProgram::Load(const char* data, const int dataSize, const char* name)
+{
+	HRESULT hr;
+
+	bool saveProgram = Program::Load(data, dataSize, name);
+
+	hr = BEDEVICE.CreatePixelShader(data, dataSize, nullptr, &m_pProgram);
+
+	if (FAILED(hr))
+	{
+		BE_ERROR("Failed to create Pixel Shader [%s]", name);
+	}
+}
+
+PixelProgram::~PixelProgram()
+{
+	SAFE_RELEASE(m_pProgram);
 }
