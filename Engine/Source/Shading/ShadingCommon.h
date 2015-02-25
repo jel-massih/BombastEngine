@@ -27,8 +27,7 @@ namespace beShading {
 		XMFLOAT4 diffuse;
 		XMFLOAT4 specular;
 		float specularPower;
-		bool useTexture;
-		XMFLOAT2 padding;
+		XMFLOAT3 padding;
 	};
 	
 	static_assert((sizeof(MaterialBufferType) % 16) == 0, "MaterialBufferType CB size not padded correctly");
@@ -50,11 +49,4 @@ namespace beShading {
 	};
 
 	static_assert((sizeof(LightBufferType) % 16) == 0, "LightBufferType CB size not padded correctly");
-
-	//============ Misc =============
-	struct ProgramMapping
-	{
-		short programIndex;
-		const char* programFilePath;
-	};
 };

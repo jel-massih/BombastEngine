@@ -5,33 +5,44 @@
 
 using namespace beShading;
 
-enum StaticMeshProgramType {
-	SMP_LIT_TEXTURED,
-	SMP_LIT_COLORED,
-	SMP_UNLIT_TEXTURED,
-	SMP_UNLIT_COLORED,
+const int PixelProgramIndices[] {
+	0, //SMP_UNLIT_COLORED
+	1, //SMP_UNLIT_TEXTURED
+
+	2, //SMP_LIT_COLORED
+	3 //SMP_LIT_TEXTURED
 };
 
-const ProgramMapping PixelShaderPrograms[] =
+const char* PixelShaderPrograms[] =
 {
-	{ SMP_LIT_TEXTURED, "staticmesh_lit_textured.cso" },
-	{ SMP_LIT_COLORED, "staticmesh_lit_colored.cso" },
-	{ SMP_UNLIT_TEXTURED, "staticmesh_unlit_textured.cso" },
-	{ SMP_UNLIT_COLORED, "staticmesh_unlit_colored.cso" }
+	"staticmesh_unlit_colored.cso", //SMP_UNLIT_COLORED
+	"staticmesh_unlit_textured.cso", //SMP_UNLIT_TEXTURED
+	"staticmesh_lit_colored.cso", //SMP_LIT_COLORED
+	"staticmesh_lit_textured.cso" //SMP_LIT_TEXTURED
 };
 
-const ProgramMapping DeferredShaderPrograms[] =
+const char* DeferredShaderPrograms[] =
 {
-	{ SMP_LIT_TEXTURED, "deferred_staticmesh_lit_textured.cso" },
-	{ SMP_LIT_COLORED, "deferred_staticmesh_lit_colored.cso" },
-	{ SMP_UNLIT_TEXTURED, "deferred_staticmesh_unlit_textured.cso" },
-	{ SMP_UNLIT_COLORED, "deferred_staticmesh_unlit_colored.cso" }
+	"deferred_staticmesh_unlit_colored.cso", //SMP_UNLIT_COLORED
+	"deferred_staticmesh_unlit_textured.cso", //SMP_UNLIT_TEXTURED
+	"deferred_staticmesh_lit_colored.cso", //SMP_LIT_COLORED
+	"deferred_staticmesh_lit_textured.cso" //SMP_LIT_TEXTURED
+};
+
+//Must be same size of pixelshaderprograms
+static_assert(sizeof(PixelShaderPrograms) / sizeof(char*) == sizeof(PixelProgramIndices) / sizeof(int), "Program Indices count must match Pixel program count");
+static_assert(sizeof(DeferredShaderPrograms) / sizeof(char*) == sizeof(PixelProgramIndices) / sizeof(int), "Program Indices count must match Deferred Pixel program count");
+
+class StaticMeshShader::ProgramImpl
+{
+public:
+	ID3D11PixelShader* m_loadedPixelPrograms[sizeof(PixelProgramIndices) / sizeof(int)];
 };
 
 StaticMeshShader::StaticMeshShader()
+	:m_pProgramImpl(new ProgramImpl())
 {
 	m_pVertexShader = nullptr;
-	m_pPixelShader = nullptr;
 	m_pLayout = nullptr;
 	m_pMatrixBuffer = nullptr;
 	m_pCameraBuffer = nullptr;
@@ -48,15 +59,18 @@ StaticMeshShader::~StaticMeshShader()
 	SAFE_RELEASE(m_pCameraBuffer);
 	SAFE_RELEASE(m_pMatrixBuffer);
 	SAFE_RELEASE(m_pLayout);
-	SAFE_RELEASE(m_pPixelShader);
 	SAFE_RELEASE(m_pVertexShader);
+
+	SAFE_DELETE(m_pProgramImpl);
 }
 
 bool StaticMeshShader::Initialize(ID3D11Device* device)
 {
 	bool result;
 
-	result = InitializeShader(device, "Shaders\\LitTexturedVertexShader.cso", "Shaders\\LitTexturedPixelShader.cso");
+	//Load all shaders
+
+	result = InitializeShaders(device);
 	if (!result)
 	{
 		return false;
@@ -69,18 +83,16 @@ bool StaticMeshShader::Render(ID3D11DeviceContext* deviceContext, int indexCount
 {
 	bool result;
 
-	result = SetShaderParameters(deviceContext, material, pScene);
+	result = SetShaderParameters(deviceContext, indexCount, material, pScene);
 	if (!result)
 	{
 		return false;
 	}
 
-	RenderShader(deviceContext, indexCount);
-
 	return true;
 }
 
-bool StaticMeshShader::InitializeShader(ID3D11Device* device, std::string vertexShaderPath, std::string pixelShaderPath)
+bool StaticMeshShader::InitializeShaders(ID3D11Device* device)
 {
 	HRESULT result;
 	D3D11_INPUT_ELEMENT_DESC polygonLayout[3];
@@ -91,7 +103,7 @@ bool StaticMeshShader::InitializeShader(ID3D11Device* device, std::string vertex
 	D3D11_BUFFER_DESC lightBufferDesc;
 	D3D11_SAMPLER_DESC samplerDesc;
 
-	Resource vertexShaderResource(vertexShaderPath.c_str());
+	Resource vertexShaderResource("Shaders\\LitTexturedVertexShader.cso");
 	ResourceHandle* pVertexResHandle = g_pApp->m_pResourceCache->GetHandle(&vertexShaderResource);
 
 	result = device->CreateVertexShader(pVertexResHandle->Buffer(), pVertexResHandle->Size(), nullptr, &m_pVertexShader);
@@ -102,15 +114,19 @@ bool StaticMeshShader::InitializeShader(ID3D11Device* device, std::string vertex
 		return false;
 	}
 
-	Resource pixelShaderResource(pixelShaderPath.c_str());
-	ResourceHandle* pPixelResHandle = g_pApp->m_pResourceCache->GetHandle(&pixelShaderResource);
-
-	result = device->CreatePixelShader(pPixelResHandle->Buffer(), pPixelResHandle->Size(), nullptr, &m_pPixelShader);
-	if (FAILED(result))
+	//Load each pixel shader
+	for (int i = 0; i < sizeof(PixelShaderPrograms) / sizeof(char*); i++)
 	{
-		BE_ERROR("Failed to create Pixel shader");
+		Resource pixelShaderResource(PixelShaderPrograms[i]);
+		ResourceHandle* pPixelResHandle = g_pApp->m_pResourceCache->GetHandle(&pixelShaderResource);
 
-		return false;
+		result = device->CreatePixelShader(pPixelResHandle->Buffer(), pPixelResHandle->Size(), nullptr, &(m_pProgramImpl->m_loadedPixelPrograms[i]));
+		if (FAILED(result))
+		{
+			BE_ERROR("Failed to create Pixel shader");
+
+			return false;
+		}
 	}
 
 	polygonLayout[0].SemanticName = "POSITION";
@@ -226,7 +242,7 @@ bool StaticMeshShader::InitializeShader(ID3D11Device* device, std::string vertex
 	return true;
 }
 
-bool StaticMeshShader::SetShaderParameters(ID3D11DeviceContext* deviceContext, const Material* material, const Scene* pScene)
+bool StaticMeshShader::SetShaderParameters(ID3D11DeviceContext* deviceContext, int indexCount, const Material* material, const Scene* pScene)
 {
 	HRESULT result;
 	D3D11_MAPPED_SUBRESOURCE mappedResource;
@@ -235,6 +251,10 @@ bool StaticMeshShader::SetShaderParameters(ID3D11DeviceContext* deviceContext, c
 	MaterialBufferType* dataPtr3;
 	LightBufferType* dataPtr4;
 	unsigned int bufferNumber;
+
+
+	bool bUseTexture = false;
+	bool bUseLight = true;
 
 	IRenderer* pRenderer = g_pApp->GetGraphicsManager()->GetRenderer();
 
@@ -289,15 +309,14 @@ bool StaticMeshShader::SetShaderParameters(ID3D11DeviceContext* deviceContext, c
 	dataPtr3->ambient = material->GetAmbient();
 	dataPtr3->diffuse = material->GetDiffuse();
 	dataPtr3->emissive = material->GetEmissive();
-	dataPtr3->padding = XMFLOAT2(0, 0);
+	dataPtr3->padding = XMFLOAT3(0, 0, 0);
 	Vec4 specular;
 	material->GetSpecular(specular, dataPtr3->specularPower);
 	dataPtr3->specular = specular;
-	dataPtr3->useTexture = false;
 
 	//if material has any textures, then use first one
 	if (material->GetTextures().size() > 0) {
-		dataPtr3->useTexture = true;
+		bUseTexture = true;
 		ID3D11ShaderResourceView* texture = material->GetTextures().front()->GetTexture();
 		deviceContext->PSSetShaderResources(0, 1, &texture);
 	}
@@ -330,15 +349,27 @@ bool StaticMeshShader::SetShaderParameters(ID3D11DeviceContext* deviceContext, c
 	bufferNumber = 3;
 	deviceContext->PSSetConstantBuffers(bufferNumber, 1, &m_pLightBuffer);
 
+	int programIndex = 0;
+
+	if (bUseTexture) {
+		programIndex += 1;
+	}
+
+	if (bUseLight) {
+		programIndex += 2;
+	}
+
+	RenderShader(deviceContext, indexCount, m_pProgramImpl->m_loadedPixelPrograms[programIndex]);
+
 	return true;
 }
 
-void StaticMeshShader::RenderShader(ID3D11DeviceContext* deviceContext, int indexCount)
+void StaticMeshShader::RenderShader(ID3D11DeviceContext* deviceContext, int indexCount, ID3D11PixelShader* program)
 {
 	deviceContext->IASetInputLayout(m_pLayout);
 
 	deviceContext->VSSetShader(m_pVertexShader, NULL, 0);
-	deviceContext->PSSetShader(m_pPixelShader, NULL, 0);
+	deviceContext->PSSetShader(program, NULL, 0);
 
 	deviceContext->PSSetSamplers(0, 1, &m_pSampleState);
 
