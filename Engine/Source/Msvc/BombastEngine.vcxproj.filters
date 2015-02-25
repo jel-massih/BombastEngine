@@ -452,6 +452,9 @@
     <Filter Include="Shading\Shaders">
       <UniqueIdentifier>{b78e3ae5-3fb9-4486-b66b-d8ab6b87bcde}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Shading\Shaders\StaticMesh">
+      <UniqueIdentifier>{f856e645-1420-47d6-8e4c-d76a5757cb28}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="..\Shading\Shaders\ColorPixelShader.hlsl">
@@ -466,12 +469,6 @@
     <FxCompile Include="..\Shading\Shaders\FontVertexShader.hlsl">
       <Filter>Shading\Shaders</Filter>
     </FxCompile>
-    <FxCompile Include="..\Shading\Shaders\LitTexturedPixelShader.hlsl">
-      <Filter>Shading\Shaders</Filter>
-    </FxCompile>
-    <FxCompile Include="..\Shading\Shaders\LitTexturedVertexShader.hlsl">
-      <Filter>Shading\Shaders</Filter>
-    </FxCompile>
     <FxCompile Include="..\Shading\Shaders\FillGBufferVertexShader.hlsl">
       <Filter>Shading\Shaders</Filter>
     </FxCompile>
@@ -483,6 +480,24 @@
     </FxCompile>
     <FxCompile Include="..\Shading\Shaders\DeferredLightingPixelShader.hlsl">
       <Filter>Shading\Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="..\Shading\Shaders\LitTexturedVertexShader.hlsl">
+      <Filter>Shading\Shaders\StaticMesh</Filter>
+    </FxCompile>
+    <FxCompile Include="..\Shading\Shaders\StaticMesh\staticmesh_lit_colored.hlsl">
+      <Filter>Shading\Shaders\StaticMesh</Filter>
+    </FxCompile>
+    <FxCompile Include="..\Shading\Shaders\StaticMesh\staticmesh_unlit_textured.hlsl">
+      <Filter>Shading\Shaders\StaticMesh</Filter>
+    </FxCompile>
+    <FxCompile Include="..\Shading\Shaders\StaticMesh\staticmesh_unlit_colored.hlsl">
+      <Filter>Shading\Shaders\StaticMesh</Filter>
+    </FxCompile>
+    <FxCompile Include="..\Shading\Shaders\StaticMesh\staticmesh_common.hlsl">
+      <Filter>Shading\Shaders\StaticMesh</Filter>
+    </FxCompile>
+    <FxCompile Include="..\Shading\Shaders\StaticMesh\staticmesh_lit_textured.hlsl">
+      <Filter>Shading\Shaders\StaticMesh</Filter>
     </FxCompile>
   </ItemGroup>
   <ItemGroup>

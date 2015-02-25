@@ -9,7 +9,7 @@ enum StaticMeshProgramType {
 	SMP_LIT_TEXTURED,
 	SMP_LIT_COLORED,
 	SMP_UNLIT_TEXTURED,
-	SMP_UNLIT_COLORED
+	SMP_UNLIT_COLORED,
 };
 
 const ProgramMapping PixelShaderPrograms[] =
@@ -18,6 +18,14 @@ const ProgramMapping PixelShaderPrograms[] =
 	{ SMP_LIT_COLORED, "staticmesh_lit_colored.cso" },
 	{ SMP_UNLIT_TEXTURED, "staticmesh_unlit_textured.cso" },
 	{ SMP_UNLIT_COLORED, "staticmesh_unlit_colored.cso" }
+};
+
+const ProgramMapping DeferredShaderPrograms[] =
+{
+	{ SMP_LIT_TEXTURED, "deferred_staticmesh_lit_textured.cso" },
+	{ SMP_LIT_COLORED, "deferred_staticmesh_lit_colored.cso" },
+	{ SMP_UNLIT_TEXTURED, "deferred_staticmesh_unlit_textured.cso" },
+	{ SMP_UNLIT_COLORED, "deferred_staticmesh_unlit_colored.cso" }
 };
 
 StaticMeshShader::StaticMeshShader()

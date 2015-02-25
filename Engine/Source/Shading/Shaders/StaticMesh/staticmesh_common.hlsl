@@ -1,5 +1,3 @@
-#define MAX_LIGHTS 4
-
 Texture2D Texture : register(t0);
 sampler Sampler : register(s0);
 
@@ -31,7 +29,7 @@ cbuffer LightProperties : register(b1)
 {
 	float4 EyePosition;
 	float4 GlobalAmbient;
-	Light Lights[MAX_LIGHTS];
+	Light light;
 };
 
 float4 CalcDiffuse(Light light, float3 lightDir, float3 normal)
@@ -45,7 +43,7 @@ float4 CalcSpecular(Light light, float3 viewDir, float3 lightDir, float3 normal)
 	float intensity = saturate(dot(normal, lightDir));
 	if (intensity > 0.0f) {
 		float3 reflection = normalize(2 * intensity * normal - lightDir);
-		float posDot = saturate(dot(reflection, viewDir));
+			float posDot = saturate(dot(reflection, viewDir));
 		return pow(posDot, Material.SpecularPower);
 	}
 
@@ -64,7 +62,7 @@ LightingResult CalcDirectionalLight(Light light, float3 viewDir, float3 normal)
 
 	float3 lightDir = -light.Direction.xyz;
 
-	result.Diffuse = CalcDiffuse(light, lightDir, normal); 
+		result.Diffuse = CalcDiffuse(light, lightDir, normal);
 	result.Specular = CalcSpecular(light, viewDir, lightDir, normal);
 
 	return result;
@@ -72,27 +70,17 @@ LightingResult CalcDirectionalLight(Light light, float3 viewDir, float3 normal)
 
 LightingResult CalcLighting(float3 viewDir, float3 normal)
 {
-	LightingResult totalResult = { { 0, 0, 0, 0 }, { 0, 0, 0, 0 } };
+	LightingResult result;
 
-	[unroll]
-	for (int i = 0; i < MAX_LIGHTS; i++)
-	{
-		LightingResult result = { { 0, 0, 0, 0 }, { 0, 0, 0, 0 } };
+	result = CalcDirectionalLight(light, viewDir, normal);
 
-		if (!Lights[i].Enabled) continue;
+	result.Diffuse = saturate(result.Diffuse);
+	result.Specular = saturate(result.Specular);
 
-		result = CalcDirectionalLight(Lights[i], viewDir, normal);
-		totalResult.Diffuse += result.Diffuse;
-		totalResult.Specular += result.Specular;
-	}
-
-	totalResult.Diffuse = saturate(totalResult.Diffuse);
-	totalResult.Specular = saturate(totalResult.Specular);
-
-	return totalResult;
+	return result;
 };
 
-struct PixelShaderInput
+struct V2P
 {
 	float4 Position : SV_POSITION;
 	float3 Normal : NORMAL;
@@ -100,25 +88,25 @@ struct PixelShaderInput
 	float3 viewDirection : TEXCOORD1;
 };
 
-float4 LitTexturedPixelShader(PixelShaderInput input) : SV_TARGET
+float4 PSMain(V2P input) : SV_TARGET
 {
 	LightingResult lit = CalcLighting(input.viewDirection, normalize(input.Normal));
-	
-	float4 emissive = Material.Emissive;
-	float4 ambient = Material.Ambient * GlobalAmbient;
-	float4 diffuse = Material.Diffuse * lit.Diffuse;
-	float4 specular = Material.Specular * lit.Specular;
-	
-	float4 texColor = {1,1,1,1};
 
-	if (Material.UseTexture)
-	{
-		texColor = Texture.Sample(Sampler, input.TexCoord);
-	}
+	float4 emissive = Material.Emissive;
+		float4 ambient = Material.Ambient * GlobalAmbient;
+		float4 diffuse = Material.Diffuse * lit.Diffuse;
+		float4 specular = Material.Specular * lit.Specular;
+
+		float4 texColor = { 1, 1, 1, 1 };
+
+		if (Material.UseTexture)
+		{
+			texColor = Texture.Sample(Sampler, input.TexCoord);
+		}
 
 	float4 finalColor = (emissive + ambient + diffuse) * texColor;
 
-	finalColor = saturate(finalColor + specular);
+		finalColor = saturate(finalColor + specular);
 
 	return finalColor;
 }
