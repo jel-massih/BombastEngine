@@ -439,7 +439,7 @@ HRESULT D3D11GridNode::VForwardRender(Scene* pScene)
 
 	RenderBuffers(context);
 
-	result = g_pApp->GetGraphicsManager()->GetShaderManager()->RenderRenderable(this, m_material, m_indexCount, pScene);
+	result = g_pApp->GetGraphicsManager()->GetShaderManager()->RenderStaticMesh(this, m_material, m_indexCount, pScene);
 	if (!result)
 	{
 		return S_FALSE;
@@ -684,7 +684,7 @@ bool D3DMeshNode11::RenderForwardBuffers(ID3D11DeviceContext* deviceContext, Sce
 			deviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 		}
 
-		if (!g_pApp->GetGraphicsManager()->GetShaderManager()->RenderRenderable(this, (*it).material, (*it).indexCount, pScene))
+		if (!g_pApp->GetGraphicsManager()->GetShaderManager()->RenderStaticMesh(this, (*it).material, (*it).indexCount, pScene))
 		{
 			return false;
 		}

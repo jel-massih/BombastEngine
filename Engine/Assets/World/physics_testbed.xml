@@ -6,9 +6,15 @@
     <StaticActors>
       <Actor resource="actors\directionalLight.xml"/>
 
-      <Actor resource="actors\platform.xml">
+      <Actor resource="actors\physics_testbed\platform.xml">
         <TransformComponent>
           <Position x="0" y="0" z="3"/>
+        </TransformComponent>
+      </Actor>
+
+      <Actor resource="actors\physics_testbed\sphere.xml">
+        <TransformComponent>
+          <Position x="0" y="0.5" z="3"/>
         </TransformComponent>
       </Actor>
     </StaticActors>

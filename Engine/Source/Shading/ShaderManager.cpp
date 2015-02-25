@@ -24,22 +24,8 @@ bool ShaderManager::Initialize(IRenderer* renderer)
 	}
 }
 
-bool ShaderManager::RenderRenderable(SceneNode* pRenderableNode, Material* pMaterial, int indexCount, const Scene* pScene) const
+bool ShaderManager::RenderStaticMesh(SceneNode* pRenderableNode, Material* pMaterial, int indexCount, const Scene* pScene) const
 {
-	IRenderer* pRenderer = g_pApp->GetGraphicsManager()->GetRenderer();
-	ID3D11DeviceContext* context = pRenderer->GetDeviceContext();
-
-	Mat4x4 worldMatrix, viewMatrix, projectionMatrix;
-	pRenderer->VGetViewMatrix(viewMatrix);
-	pRenderer->VGetWorldMatrix(worldMatrix);
-	pRenderer->VGetProjectionMatrix(projectionMatrix);
-
-	switch (pMaterial->GetShaderType())
-	{
-	case BSHADER_TYPE_LIT:
-		return m_pStaticMeshShader->Render(context, indexCount, pMaterial, pScene);
-		break;
-	}
-
-	return false;
+	ID3D11DeviceContext* context = g_pApp->GetGraphicsManager()->GetRenderer()->GetDeviceContext();
+	return m_pStaticMeshShader->Render(context, indexCount, pMaterial, pScene);
 }

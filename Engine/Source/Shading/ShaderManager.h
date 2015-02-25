@@ -16,7 +16,7 @@ public:
 
 	bool Initialize(IRenderer* renderer);
 
-	bool RenderRenderable(SceneNode* pRenderableNode, Material* pMaterial, int indexCount, const Scene* pScene) const;
+	bool RenderStaticMesh(SceneNode* pRenderableNode, Material* pMaterial, int indexCount, const Scene* pScene) const;
 
 private:
 	StaticMeshShader* m_pStaticMeshShader;
