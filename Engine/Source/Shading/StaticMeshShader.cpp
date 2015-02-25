@@ -1,6 +1,24 @@
 #include "StaticMeshShader.h"
 #include "../Graphics3D/Material.h"
 #include "../Graphics3D/Scene.h"
+#include "ShadingCommon.h"
+
+using namespace beShading;
+
+enum StaticMeshProgramType {
+	SMP_LIT_TEXTURED,
+	SMP_LIT_COLORED,
+	SMP_UNLIT_TEXTURED,
+	SMP_UNLIT_COLORED
+};
+
+const ProgramMapping PixelShaderPrograms[] =
+{
+	{ SMP_LIT_TEXTURED, "staticmesh_lit_textured.cso" },
+	{ SMP_LIT_COLORED, "staticmesh_lit_colored.cso" },
+	{ SMP_UNLIT_TEXTURED, "staticmesh_unlit_textured.cso" },
+	{ SMP_UNLIT_COLORED, "staticmesh_unlit_colored.cso" }
+};
 
 StaticMeshShader::StaticMeshShader()
 {

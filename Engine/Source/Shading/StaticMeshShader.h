@@ -4,44 +4,6 @@ class Material;
 
 class StaticMeshShader
 {
-private:
-	struct MatrixBufferType
-	{
-		XMMATRIX world;
-		XMMATRIX view;
-		XMMATRIX projection;
-	};
-
-	struct CameraBufferType
-	{
-		XMFLOAT3 cameraPosition;
-		float padding;
-	};
-
-	struct MaterialBufferType
-	{
-		XMFLOAT4 emissive;
-		XMFLOAT4 ambient;
-		XMFLOAT4 diffuse;
-		XMFLOAT4 specular;
-		float specularPower;
-		bool useTexture;
-		XMFLOAT2 padding;
-	};
-
-	struct LightProperties
-	{
-		XMFLOAT4 lightColor;
-		XMFLOAT3 lightDirection;
-		bool enabled;
-	};
-
-	struct LightBufferType
-	{
-		XMFLOAT4 eyePosition;
-		XMFLOAT4 globalAmbient;
-		LightProperties light;
-	};
 
 public:
 	StaticMeshShader();

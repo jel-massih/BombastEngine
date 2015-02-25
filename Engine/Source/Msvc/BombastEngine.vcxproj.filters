@@ -393,6 +393,9 @@
     <ClInclude Include="..\Shading\StaticMeshShader.h">
       <Filter>Shading</Filter>
     </ClInclude>
+    <ClInclude Include="..\Shading\ShadingCommon.h">
+      <Filter>Shading</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Bombast">
