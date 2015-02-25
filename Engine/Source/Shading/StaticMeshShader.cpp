@@ -1,8 +1,8 @@
-#include "LightShader.h"
+#include "StaticMeshShader.h"
 #include "../Graphics3D/Material.h"
 #include "../Graphics3D/Scene.h"
 
-LightShader::LightShader()
+StaticMeshShader::StaticMeshShader()
 {
 	m_pVertexShader = nullptr;
 	m_pPixelShader = nullptr;
@@ -13,7 +13,7 @@ LightShader::LightShader()
 	m_pSampleState = nullptr;
 }
 
-LightShader::~LightShader()
+StaticMeshShader::~StaticMeshShader()
 {
 	SAFE_RELEASE(m_pSampleState);
 	SAFE_RELEASE(m_pLayout);
@@ -26,7 +26,7 @@ LightShader::~LightShader()
 	SAFE_RELEASE(m_pVertexShader);
 }
 
-bool LightShader::Initialize(ID3D11Device* device)
+bool StaticMeshShader::Initialize(ID3D11Device* device)
 {
 	bool result;
 
@@ -39,11 +39,11 @@ bool LightShader::Initialize(ID3D11Device* device)
 	return true;
 }
 
-bool LightShader::Render(ID3D11DeviceContext* deviceContext, int indexCount, DirectX::XMMATRIX &world, DirectX::XMMATRIX &view, DirectX::XMMATRIX &projection, const Material* material, const Scene* pScene)
+bool StaticMeshShader::Render(ID3D11DeviceContext* deviceContext, int indexCount, const Material* material, const Scene* pScene)
 {
 	bool result;
 
-	result = SetShaderParameters(deviceContext, world, view, projection, material, pScene);
+	result = SetShaderParameters(deviceContext, material, pScene);
 	if (!result)
 	{
 		return false;
@@ -54,7 +54,7 @@ bool LightShader::Render(ID3D11DeviceContext* deviceContext, int indexCount, Dir
 	return true;
 }
 
-bool LightShader::InitializeShader(ID3D11Device* device, std::string vertexShaderPath, std::string pixelShaderPath)
+bool StaticMeshShader::InitializeShader(ID3D11Device* device, std::string vertexShaderPath, std::string pixelShaderPath)
 {
 	HRESULT result;
 	D3D11_INPUT_ELEMENT_DESC polygonLayout[3];
@@ -200,7 +200,7 @@ bool LightShader::InitializeShader(ID3D11Device* device, std::string vertexShade
 	return true;
 }
 
-bool LightShader::SetShaderParameters(ID3D11DeviceContext* deviceContext, DirectX::XMMATRIX &world, DirectX::XMMATRIX &view, DirectX::XMMATRIX &projection, const Material* material, const Scene* pScene)
+bool StaticMeshShader::SetShaderParameters(ID3D11DeviceContext* deviceContext, const Material* material, const Scene* pScene)
 {
 	HRESULT result;
 	D3D11_MAPPED_SUBRESOURCE mappedResource;
@@ -210,9 +210,12 @@ bool LightShader::SetShaderParameters(ID3D11DeviceContext* deviceContext, Direct
 	LightBufferType* dataPtr4;
 	unsigned int bufferNumber;
 
-	world = DirectX::XMMatrixTranspose(world);
-	view = DirectX::XMMatrixTranspose(view);
-	projection = DirectX::XMMatrixTranspose(projection);
+	IRenderer* pRenderer = g_pApp->GetGraphicsManager()->GetRenderer();
+
+	Mat4x4 world, view, projection;
+	pRenderer->VGetViewMatrix(view);
+	pRenderer->VGetWorldMatrix(world);
+	pRenderer->VGetProjectionMatrix(projection);
 
 	result = deviceContext->Map(m_pMatrixBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource);
 	if (FAILED(result))
@@ -222,9 +225,9 @@ bool LightShader::SetShaderParameters(ID3D11DeviceContext* deviceContext, Direct
 
 	dataPtr = (MatrixBufferType*)mappedResource.pData;
 
-	dataPtr->world = world;
-	dataPtr->view = view;
-	dataPtr->projection = projection;
+	dataPtr->world = DirectX::XMMatrixTranspose(DirectX::XMLoadFloat4x4(&world));
+	dataPtr->view = DirectX::XMMatrixTranspose(DirectX::XMLoadFloat4x4(&view));
+	dataPtr->projection = DirectX::XMMatrixTranspose(DirectX::XMLoadFloat4x4(&projection));
 
 	deviceContext->Unmap(m_pMatrixBuffer, 0);
 
@@ -304,7 +307,7 @@ bool LightShader::SetShaderParameters(ID3D11DeviceContext* deviceContext, Direct
 	return true;
 }
 
-void LightShader::RenderShader(ID3D11DeviceContext* deviceContext, int indexCount)
+void StaticMeshShader::RenderShader(ID3D11DeviceContext* deviceContext, int indexCount)
 {
 	deviceContext->IASetInputLayout(m_pLayout);
 

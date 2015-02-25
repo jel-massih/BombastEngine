@@ -99,18 +99,6 @@ void Material::SetShaderType(std::string shaderName)
 	{
 		m_material.ShaderType = BSHADER_TYPE_LIT;
 	}
-	if (shaderName == "Texture")
-	{
-		m_material.ShaderType = BSHADER_TYPE_TEXTURE;
-	}
-	if (shaderName == "MultiTexture")
-	{
-		m_material.ShaderType = BSHADER_TYPE_MULTI_TEXTURE;
-	}
-	if (shaderName == "Lightmap")
-	{
-		m_material.ShaderType = BSHADER_TYPE_LIGHTMAP;
-	}
 	if (shaderName == "DeferredLit")
 	{
 		m_material.ShaderType = BSHADER_TYPE_DEFERRED_LIT;

@@ -135,16 +135,6 @@ VertexProgram::VertexProgram()
 
 void VertexProgram::Load(const char* data, const int dataSize, const char* name)
 {
-	HRESULT hr;
-
-	bool saveProgram = Program::Load(data, dataSize, name);
-
-	hr = BEDEVICE.CreateVertexShader(data, dataSize, nullptr, &m_pProgram);
-	
-	if (FAILED(hr))
-	{
-		BE_ERROR("Failed to create Vertex Shader [%s]", name);
-	}
 }
 
 VertexProgram::~VertexProgram()
@@ -157,16 +147,6 @@ PixelProgram::PixelProgram()
 
 void PixelProgram::Load(const char* data, const int dataSize, const char* name)
 {
-	HRESULT hr;
-
-	bool saveProgram = Program::Load(data, dataSize, name);
-
-	hr = BEDEVICE.CreatePixelShader(data, dataSize, nullptr, &m_pProgram);
-
-	if (FAILED(hr))
-	{
-		BE_ERROR("Failed to create Pixel Shader [%s]", name);
-	}
 }
 
 PixelProgram::~PixelProgram()

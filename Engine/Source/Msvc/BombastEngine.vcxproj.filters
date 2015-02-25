@@ -158,19 +158,7 @@
     <ClCompile Include="..\Shading\ShaderManager.cpp">
       <Filter>Shading</Filter>
     </ClCompile>
-    <ClCompile Include="..\Shading\BasicShaders.cpp">
-      <Filter>Shading</Filter>
-    </ClCompile>
     <ClCompile Include="..\Shading\FontShader.cpp">
-      <Filter>Shading</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Shading\LightShader.cpp">
-      <Filter>Shading</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Shading\MultiTextureShader.cpp">
-      <Filter>Shading</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Shading\LightmapShader.cpp">
       <Filter>Shading</Filter>
     </ClCompile>
     <ClCompile Include="..\Utilities\WICTextureLoader.cpp">
@@ -185,7 +173,7 @@
     <ClCompile Include="..\Graphics2D\PostProcessRenderWindow.cpp">
       <Filter>Graphics2D</Filter>
     </ClCompile>
-    <ClCompile Include="..\Shading\Effect.cpp">
+    <ClCompile Include="..\Shading\StaticMeshShader.cpp">
       <Filter>Shading</Filter>
     </ClCompile>
   </ItemGroup>
@@ -384,19 +372,7 @@
     <ClInclude Include="..\Shading\ShaderManager.h">
       <Filter>Shading</Filter>
     </ClInclude>
-    <ClInclude Include="..\Shading\BasicShaders.h">
-      <Filter>Shading</Filter>
-    </ClInclude>
     <ClInclude Include="..\Shading\FontShader.h">
-      <Filter>Shading</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Shading\LightShader.h">
-      <Filter>Shading</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Shading\MultiTextureShader.h">
-      <Filter>Shading</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Shading\LightmapShader.h">
       <Filter>Shading</Filter>
     </ClInclude>
     <ClInclude Include="..\Utilities\WICTextureLoader.h">
@@ -414,7 +390,7 @@
     <ClInclude Include="..\Graphics2D\PostProcessRenderWindow.h">
       <Filter>Graphics2D</Filter>
     </ClInclude>
-    <ClInclude Include="..\Shading\Effect.h">
+    <ClInclude Include="..\Shading\StaticMeshShader.h">
       <Filter>Shading</Filter>
     </ClInclude>
   </ItemGroup>
@@ -491,18 +467,6 @@
       <Filter>Shading\Shaders</Filter>
     </FxCompile>
     <FxCompile Include="..\Shading\Shaders\LitTexturedVertexShader.hlsl">
-      <Filter>Shading\Shaders</Filter>
-    </FxCompile>
-    <FxCompile Include="..\Shading\Shaders\MultiTexturePixelShader.hlsl">
-      <Filter>Shading\Shaders</Filter>
-    </FxCompile>
-    <FxCompile Include="..\Shading\Shaders\MultiTextureVertexShader.hlsl">
-      <Filter>Shading\Shaders</Filter>
-    </FxCompile>
-    <FxCompile Include="..\Shading\Shaders\LightmapPixelShader.hlsl">
-      <Filter>Shading\Shaders</Filter>
-    </FxCompile>
-    <FxCompile Include="..\Shading\Shaders\LightmapVertexShader.hlsl">
       <Filter>Shading\Shaders</Filter>
     </FxCompile>
     <FxCompile Include="..\Shading\Shaders\FillGBufferVertexShader.hlsl">

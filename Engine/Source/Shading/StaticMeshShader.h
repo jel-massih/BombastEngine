@@ -2,7 +2,7 @@
 
 class Material;
 
-class LightShader
+class StaticMeshShader
 {
 private:
 	struct MatrixBufferType
@@ -44,16 +44,16 @@ private:
 	};
 
 public:
-	LightShader();
-	~LightShader();
+	StaticMeshShader();
+	~StaticMeshShader();
 
 	bool Initialize(ID3D11Device* device);
-	bool Render(ID3D11DeviceContext* deviceContext, int indexCount, DirectX::XMMATRIX &world, DirectX::XMMATRIX &view, DirectX::XMMATRIX &projection, const Material* material, const Scene* pScene);
+	bool Render(ID3D11DeviceContext* deviceContext, int indexCount, const Material* material, const Scene* pScene);
 
 private:
 	bool InitializeShader(ID3D11Device* device, std::string vertexShaderPath, std::string pixelShaderPath);
 
-	bool SetShaderParameters(ID3D11DeviceContext* deviceContext, DirectX::XMMATRIX &world, DirectX::XMMATRIX &view, DirectX::XMMATRIX &projection, const Material* material, const Scene* pScene);
+	bool SetShaderParameters(ID3D11DeviceContext* deviceContext, const Material* material, const Scene* pScene);
 	void RenderShader(ID3D11DeviceContext* deviceContext, int);
 
 private:
