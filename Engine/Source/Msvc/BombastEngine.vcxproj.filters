@@ -487,10 +487,10 @@
     <FxCompile Include="..\Shading\Shaders\StaticMesh\staticmesh_unlit_colored.hlsl">
       <Filter>Shading\Shaders\StaticMesh</Filter>
     </FxCompile>
-    <FxCompile Include="..\Shading\Shaders\StaticMesh\staticmesh_common.hlsl">
+    <FxCompile Include="..\Shading\Shaders\StaticMesh\staticmesh_lit_textured.hlsl">
       <Filter>Shading\Shaders\StaticMesh</Filter>
     </FxCompile>
-    <FxCompile Include="..\Shading\Shaders\StaticMesh\staticmesh_lit_textured.hlsl">
+    <FxCompile Include="..\Shading\Shaders\StaticMesh\staticmesh_common.fxh">
       <Filter>Shading\Shaders\StaticMesh</Filter>
     </FxCompile>
   </ItemGroup>

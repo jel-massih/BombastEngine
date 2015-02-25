@@ -1,5 +1,7 @@
-Texture2D Texture : register(t0);
-sampler Sampler : register(s0);
+#ifdef USE_ALBEDO_TEXTURE
+Texture2D AlbedoTexture : register(t0);
+sampler PointSampler : register(s0);
+#endif
 
 struct MaterialInfo
 {
@@ -39,14 +41,16 @@ float4 CalcDiffuse(Light light, float3 lightDir, float3 normal)
 
 float4 CalcSpecular(Light light, float3 viewDir, float3 lightDir, float3 normal)
 {
+	float4 result = float4(0,0,0,0);
+
 	float intensity = saturate(dot(normal, lightDir));
 	if (intensity > 0.0f) {
 		float3 reflection = normalize(2 * intensity * normal - lightDir);
 		float posDot = saturate(dot(reflection, viewDir));
-		return pow(posDot, Material.SpecularPower);
+		result = pow(posDot, Material.SpecularPower);
 	}
 
-	return float4(0, 0, 0, 0);
+	return result;
 };
 
 struct LightingResult
@@ -98,7 +102,9 @@ float4 PSMain(V2P input) : SV_TARGET
 
 	float4 texColor = { 1, 1, 1, 1 };
 
-	texColor = Texture.Sample(Sampler, input.TexCoord);
+#ifdef USE_ALBEDO_TEXTURE
+	texColor = AlbedoTexture.Sample(PointSampler, input.TexCoord);
+#endif
 
 	float4 finalColor = (emissive + ambient + diffuse) * texColor;
 

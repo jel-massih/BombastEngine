@@ -1,1 +1,1 @@
-#include "staticmesh_common.hlsl"
+#include "staticmesh_common.fxh"
