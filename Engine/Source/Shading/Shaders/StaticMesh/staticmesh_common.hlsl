@@ -42,7 +42,7 @@ float4 CalcSpecular(Light light, float3 viewDir, float3 lightDir, float3 normal)
 	float intensity = saturate(dot(normal, lightDir));
 	if (intensity > 0.0f) {
 		float3 reflection = normalize(2 * intensity * normal - lightDir);
-			float posDot = saturate(dot(reflection, viewDir));
+		float posDot = saturate(dot(reflection, viewDir));
 		return pow(posDot, Material.SpecularPower);
 	}
 
@@ -61,7 +61,7 @@ LightingResult CalcDirectionalLight(Light light, float3 viewDir, float3 normal)
 
 	float3 lightDir = -light.Direction.xyz;
 
-		result.Diffuse = CalcDiffuse(light, lightDir, normal);
+	result.Diffuse = CalcDiffuse(light, lightDir, normal);
 	result.Specular = CalcSpecular(light, viewDir, lightDir, normal);
 
 	return result;
@@ -82,8 +82,8 @@ LightingResult CalcLighting(float3 viewDir, float3 normal)
 struct V2P
 {
 	float4 Position : SV_POSITION;
-	float3 Normal : NORMAL;
 	float2 TexCoord : TEXCOORD0;
+	float3 Normal : NORMAL;
 	float3 viewDirection : TEXCOORD1;
 };
 
