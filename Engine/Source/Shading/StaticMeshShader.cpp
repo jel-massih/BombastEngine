@@ -323,7 +323,7 @@ bool StaticMeshShader::SetShaderParameters(ID3D11DeviceContext* deviceContext, i
 
 	deviceContext->Unmap(m_pMaterialBuffer, 0);
 
-	bufferNumber = 2;
+	bufferNumber = 0;
 
 	deviceContext->PSSetConstantBuffers(bufferNumber, 1, &m_pMaterialBuffer);
 
@@ -346,7 +346,7 @@ bool StaticMeshShader::SetShaderParameters(ID3D11DeviceContext* deviceContext, i
 	dataPtr4->light.lightDirection = Vec3(dir.x, dir.y, dir.z);
 
 	deviceContext->Unmap(m_pLightBuffer, 0);
-	bufferNumber = 3;
+	bufferNumber = 1;
 	deviceContext->PSSetConstantBuffers(bufferNumber, 1, &m_pLightBuffer);
 
 	int programIndex = 0;
