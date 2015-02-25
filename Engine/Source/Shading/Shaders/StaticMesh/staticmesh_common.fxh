@@ -86,8 +86,8 @@ LightingResult CalcLighting(float3 viewDir, float3 normal)
 struct V2P
 {
 	float4 Position : SV_POSITION;
-	float2 TexCoord : TEXCOORD0;
 	float3 Normal : NORMAL;
+	float2 TexCoord : TEXCOORD0;
 	float3 viewDirection : TEXCOORD1;
 };
 
