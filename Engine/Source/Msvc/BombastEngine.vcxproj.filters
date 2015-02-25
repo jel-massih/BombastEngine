@@ -457,12 +457,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="..\Shading\Shaders\ColorPixelShader.hlsl">
-      <Filter>Shading\Shaders</Filter>
-    </FxCompile>
-    <FxCompile Include="..\Shading\Shaders\ColorVertexShader.hlsl">
-      <Filter>Shading\Shaders</Filter>
-    </FxCompile>
     <FxCompile Include="..\Shading\Shaders\FontPixelShader.hlsl">
       <Filter>Shading\Shaders</Filter>
     </FxCompile>

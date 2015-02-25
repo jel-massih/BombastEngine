@@ -15,18 +15,18 @@ const int PixelProgramIndices[] {
 
 const char* PixelShaderPrograms[] =
 {
-	"staticmesh_unlit_colored.cso", //SMP_UNLIT_COLORED
-	"staticmesh_unlit_textured.cso", //SMP_UNLIT_TEXTURED
-	"staticmesh_lit_colored.cso", //SMP_LIT_COLORED
-	"staticmesh_lit_textured.cso" //SMP_LIT_TEXTURED
+	"shaders\\staticmesh_unlit_colored.cso", //SMP_UNLIT_COLORED
+	"shaders\\staticmesh_unlit_textured.cso", //SMP_UNLIT_TEXTURED
+	"shaders\\staticmesh_lit_colored.cso", //SMP_LIT_COLORED
+	"shaders\\staticmesh_lit_textured.cso" //SMP_LIT_TEXTURED
 };
 
 const char* DeferredShaderPrograms[] =
 {
-	"deferred_staticmesh_unlit_colored.cso", //SMP_UNLIT_COLORED
-	"deferred_staticmesh_unlit_textured.cso", //SMP_UNLIT_TEXTURED
-	"deferred_staticmesh_lit_colored.cso", //SMP_LIT_COLORED
-	"deferred_staticmesh_lit_textured.cso" //SMP_LIT_TEXTURED
+	"shaders\\deferred_staticmesh_unlit_colored.cso", //SMP_UNLIT_COLORED
+	"shaders\\deferred_staticmesh_unlit_textured.cso", //SMP_UNLIT_TEXTURED
+	"shaders\\deferred_staticmesh_lit_colored.cso", //SMP_LIT_COLORED
+	"shaders\\deferred_staticmesh_lit_textured.cso" //SMP_LIT_TEXTURED
 };
 
 //Must be same size of pixelshaderprograms
