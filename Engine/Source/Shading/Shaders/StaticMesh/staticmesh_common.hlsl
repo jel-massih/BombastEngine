@@ -9,8 +9,7 @@ struct MaterialInfo
 	float4 Specular;
 	float SpecularPower;
 
-	bool UseTexture;
-	float2 Padding;
+	float3 Padding;
 };
 
 cbuffer MaterialProperties : register(b0)
@@ -93,20 +92,17 @@ float4 PSMain(V2P input) : SV_TARGET
 	LightingResult lit = CalcLighting(input.viewDirection, normalize(input.Normal));
 
 	float4 emissive = Material.Emissive;
-		float4 ambient = Material.Ambient * GlobalAmbient;
-		float4 diffuse = Material.Diffuse * lit.Diffuse;
-		float4 specular = Material.Specular * lit.Specular;
+	float4 ambient = Material.Ambient * GlobalAmbient;
+	float4 diffuse = Material.Diffuse * lit.Diffuse;
+	float4 specular = Material.Specular * lit.Specular;
 
-		float4 texColor = { 1, 1, 1, 1 };
+	float4 texColor = { 1, 1, 1, 1 };
 
-		if (Material.UseTexture)
-		{
-			texColor = Texture.Sample(Sampler, input.TexCoord);
-		}
+	texColor = Texture.Sample(Sampler, input.TexCoord);
 
 	float4 finalColor = (emissive + ambient + diffuse) * texColor;
 
-		finalColor = saturate(finalColor + specular);
+	finalColor = saturate(finalColor + specular);
 
 	return finalColor;
 }
