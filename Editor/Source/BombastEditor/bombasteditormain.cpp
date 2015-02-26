@@ -27,13 +27,13 @@ void BombastEditorMain::InitEngine()
 
 void BombastEditorMain::keyPressEvent(QKeyEvent* event)
 {
-	int qKey = event->key();
+	int qKey = event->nativeVirtualKey();
 	g_BombastEditorApp.OnViewportKeyDown((BYTE)qKey);
 }
 
 void BombastEditorMain::keyReleaseEvent(QKeyEvent* event)
 {
-	int qKey = event->key();
+	int qKey = event->nativeVirtualKey();
 	g_BombastEditorApp.OnViewportKeyUp((BYTE)qKey);
 }
 
