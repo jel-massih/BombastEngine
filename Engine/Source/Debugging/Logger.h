@@ -46,7 +46,7 @@ namespace BELogger
 
 #define BE_WARNING(str, ...) BELogger::Log("WARNING", str, __FUNCTION__, __FILE__, __LINE__, ##__VA_ARGS__)
 
-#define BE_INFO(str, ...) BE_LOG("INFO", s, ##__VA_ARGS__)
+#define BE_INFO(str, ...) BE_LOG("INFO", str, ##__VA_ARGS__)
 
 #define BE_LOG_GRAPHICS(str, ...) BE_LOG("graphics", str, ##__VA_ARGS__)
 

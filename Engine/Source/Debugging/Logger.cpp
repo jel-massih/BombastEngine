@@ -146,7 +146,7 @@ namespace BELogger
 		if (s_pLogManager)
 		{
 			va_list args;
-			va_start(args, message);
+			va_start(args, lineNum);
 			s_pLogManager->Log(tag, message, func, file, lineNum, args);
 		}
 	}
