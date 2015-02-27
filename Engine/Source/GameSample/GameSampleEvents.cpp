@@ -13,3 +13,5 @@ const EventType EvtData_StartTurnUp::sk_EventType(0x6a61031d);
 const EventType EvtData_EndTurnUp::sk_EventType(0x44e9);
 const EventType EvtData_StartTurnRight::sk_EventType(0x4f7d);
 const EventType EvtData_EndTurnRight::sk_EventType(0xfa39a179);
+
+const EventType EvtData_SpawnPlayer::sk_EventType(0xf3691898);
