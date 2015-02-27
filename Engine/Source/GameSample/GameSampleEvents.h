@@ -430,13 +430,14 @@ public:
 class EvtData_SpawnPlayer : public BaseEventData
 {
 	ActorId m_id;
+	GameViewId m_viewId;
 
 public:
 	static const EventType sk_EventType;
 
 	EvtData_SpawnPlayer(void) { }
-	EvtData_SpawnPlayer(ActorId actorId)
-		: m_id(actorId)
+	EvtData_SpawnPlayer(ActorId actorId, GameViewId viewId)
+		: m_id(actorId), m_viewId(viewId)
 	{
 	}
 
@@ -447,22 +448,29 @@ public:
 
 	virtual IEventDataPtr VCopy() const
 	{
-		return IEventDataPtr(BE_NEW EvtData_SpawnPlayer(m_id));
+		return IEventDataPtr(BE_NEW EvtData_SpawnPlayer(m_id, m_viewId));
 	}
 
 	virtual void VSerialize(std::ostrstream& out) const
 	{
-		out << m_id;
+		out << m_id << " ";
+		out << m_viewId << " ";
 	}
 
 	virtual void VDeserialize(std::istrstream& in)
 	{
 		in >> m_id;
+		in >> m_viewId;
 	}
 
 	const ActorId& GetActorId(void) const
 	{
 		return m_id;
+	}
+
+	const GameViewId& GetViewId(void) const
+	{
+		return m_viewId;
 	}
 
 	virtual const char* GetName(void) const
