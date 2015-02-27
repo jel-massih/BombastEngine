@@ -69,8 +69,8 @@ void GameSampleLogic::VChangeState(CoreGameState newState)
 					Actor* pActor = VCreateActor("actors\\player_skateboard.xml", NULL);
 					if (pActor)
 					{
-						std::shared_ptr<EvtData_New_Actor> pNewActorEvent(BE_NEW EvtData_New_Actor(pActor->GetId(), pView->VGetId()));
-						IEventManager::Get()->VTriggerEvent(pNewActorEvent);
+						std::shared_ptr<EvtData_SpawnPlayer> pSpawnPlayerEvent(BE_NEW EvtData_SpawnPlayer(pActor->GetId(), pView->VGetId()));
+						IEventManager::Get()->VTriggerEvent(pSpawnPlayerEvent);
 					}
 				}
 			}
