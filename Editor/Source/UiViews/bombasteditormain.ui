@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>857</width>
-    <height>635</height>
+    <width>1280</width>
+    <height>720</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,8 +17,28 @@
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
      <layout class="QGridLayout" name="gridLayout">
+      <item row="0" column="1">
+       <widget class="QWidget" name="bombastViewport" native="true">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+       </widget>
+      </item>
       <item row="0" column="0">
-       <widget class="QWidget" name="bombastViewport" native="true"/>
+       <widget class="QTreeView" name="contentTree">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Maximum" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+       </widget>
       </item>
      </layout>
     </item>
@@ -29,7 +49,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>857</width>
+     <width>1280</width>
      <height>21</height>
     </rect>
    </property>

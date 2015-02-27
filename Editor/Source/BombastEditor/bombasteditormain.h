@@ -17,6 +17,8 @@ protected:
 private:
 	void InitEngine();
 
+	void SetupContentTree();
+
 	void closeEvent(QCloseEvent* event);
 
 private:

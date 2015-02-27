@@ -3,6 +3,8 @@
 #include "BombastEditor.h"
 
 #include <QKeyEvent>
+#include <QFileSystemModel>
+#include <QTreeView>
 
 BombastEditorMain::BombastEditorMain(QWidget *parent)
 	: QMainWindow(parent)
@@ -10,6 +12,7 @@ BombastEditorMain::BombastEditorMain(QWidget *parent)
 	ui.setupUi(this);
 
 	InitEngine();
+	SetupContentTree();
 }
 
 BombastEditorMain::~BombastEditorMain()
@@ -23,6 +26,13 @@ void BombastEditorMain::InitEngine()
 	HWND hWnd = (HWND)ui.bombastViewport->winId();
 
 	EditorMain(hInstance, hPrevInstance, hWnd);
+}
+
+void BombastEditorMain::SetupContentTree()
+{
+	QFileSystemModel *model = new QFileSystemModel;
+	ui.contentTree->setModel(model);
+	ui.contentTree->setRootIndex(model->setRootPath("C:/Users/jel-massih/Documents/BombastEngine/Engine/Assets"));
 }
 
 void BombastEditorMain::keyPressEvent(QKeyEvent* event)
