@@ -45,3 +45,20 @@ void BMMatrixStack::MultMatrixLocal(const XMFLOAT4X4* pM)
 {
 	XMStoreFloat4x4(&m_matrixStack.top(), XMMatrixMultiply(XMLoadFloat4x4(pM), XMLoadFloat4x4(&m_matrixStack.top())));
 }
+
+namespace BEMath
+{
+	Mat4x4 RotateToFace(Vec3 direction, Vec3 up)
+	{
+		Vec3 Right = up.Cross(direction);
+		Right = Right.Normalize();
+		Vec3 Back = Right.Cross(up);
+		Back = Back.Normalize();
+		Vec3 Up = Back.Cross(Right);
+
+		return Mat4x4(XMFLOAT4X4(Right.x, Right.y, Right.z, 0,
+			Up.x, Up.y, Up.z, 0,
+			Back.x, Back.y, Back.z, 0,
+			0, 0, 0, 1));
+	}
+};

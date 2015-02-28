@@ -19,13 +19,12 @@ public:
 	virtual void VSetControlledActor(ActorId actorId);
 	virtual bool VLoadGameDelegate(rapidxml::xml_node<>* pLevelData) override;
 
-	void SetControlledActorDelegate(IEventDataPtr pEventData);
 
 protected:
 	bool m_bShowUI, m_bShowGrid;
 	std::wstring m_gameplayText;
 
-	GameSampleController* m_pPongController;
+	GameSampleController* m_pPlayerController;
 	MovementController* m_pFreeCameraController;
 	SceneNode* m_pControlledActor;
 
@@ -34,4 +33,7 @@ protected:
 private:
 	void RegisterAllDelegates();
 	void RemoveAllDelegates();
+
+	void SetControlledActorDelegate(IEventDataPtr pEventData);
+	void NewPlayerSpawnedDelegate(IEventDataPtr pEventData);
 };

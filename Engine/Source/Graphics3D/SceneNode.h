@@ -115,7 +115,8 @@ public :
 		m_frustum(frustum),
 		m_bActive(true),
 		m_bDebugCamera(false),
-		m_pTarget(nullptr),
+		m_pFollowTarget(nullptr),
+		m_pViewTarget(nullptr),
 		m_camOffsetVector(0.0f, 0.0f, 0.0f, 0.0f)
 	{
 	}
@@ -126,9 +127,14 @@ public :
 	virtual bool VIsVisible(Scene* pScene) const { return m_bActive; }
 
 	const Frustum& GetFrustum() const { return m_frustum; }
-	void SetTarget(SceneNode* pTarget) { m_pTarget = pTarget; }
-	void ClearTarget() { m_pTarget = nullptr; }
-	SceneNode* GetTarget() { return m_pTarget; }
+	
+	void SetFollowTarget(SceneNode* pTarget) { m_pFollowTarget = pTarget; }
+	void ClearFollowTarget() { m_pFollowTarget = nullptr; }
+	SceneNode* GetFollowTarget() { return m_pFollowTarget; }
+
+	void SetViewTarget(SceneNode* pTarget) { m_pViewTarget = pTarget; }
+	void ClearViewTarget() { m_pViewTarget = nullptr; }
+	SceneNode* GetViewTarget() { return m_pViewTarget; }
 
 	Mat4x4 GetWorldViewProjection(Scene* pScene);
 	HRESULT SetViewTransform(Scene* pScene);
@@ -147,6 +153,7 @@ protected:
 	Mat4x4 m_view;
 	bool m_bActive;
 	bool m_bDebugCamera;
-	SceneNode* m_pTarget;
+	SceneNode* m_pFollowTarget;
+	SceneNode* m_pViewTarget;
 	Vec4 m_camOffsetVector;
 };

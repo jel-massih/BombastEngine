@@ -178,11 +178,8 @@ void GameSampleLogic::StartMoveForwardDelegate(IEventDataPtr pEventData)
 	Actor* pTarget = VGetActor(pStartForwardData->GetActorId());
 	if (pTarget)
 	{
-		PhysicsComponent* pPhysicsComponent = pTarget->GetComponent<PhysicsComponent>(PhysicsComponent::g_Name);
-		if (pPhysicsComponent)
-		{
-			pPhysicsComponent->ApplyAcceleration(pStartForwardData->GetAcceleration());
-		}
+		TransformComponent* pTransformComponent = pTarget->GetComponent<TransformComponent>(TransformComponent::g_Name);
+		pTransformComponent->MoveForward(pStartForwardData->GetAcceleration());
 	}
 }
 
@@ -222,11 +219,8 @@ void GameSampleLogic::StartTurnRightDelegate(IEventDataPtr pEventData)
 	Actor* pTarget = VGetActor(pStartRightData->GetActorId());
 	if (pTarget)
 	{
-		PhysicsComponent* pPhysicsComponent = pTarget->GetComponent<PhysicsComponent>(PhysicsComponent::g_Name);
-		if (pPhysicsComponent)
-		{
-			pPhysicsComponent->ApplyAngularAcceleration(pStartRightData->GetAcceleration());
-		}
+		TransformComponent* pTransformComponent = pTarget->GetComponent<TransformComponent>(TransformComponent::g_Name);
+		pTransformComponent->RotateRight(pStartRightData->GetAcceleration());
 	}
 }
 

@@ -38,7 +38,6 @@ public:
 	void SetY(const long newY) { y = newY; }
 	void Set(const long newX, const long newY) { x = newX; y = newY; }
 
-	// somewhat hacky vector emulation (maybe I should just write my own vector class)
 	float Length() const { return sqrt((float)(x*x + y*y)); }
 };
 

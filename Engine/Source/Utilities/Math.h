@@ -3,6 +3,7 @@
 #include "../BombastEngineStd.h"
 #include <stack>
 #include <DirectXMath.h>
+#include "../Graphics3D/Geometry.h"
 
 using namespace DirectX;
 
@@ -35,4 +36,9 @@ public:
 
 private:
 	std::stack<XMFLOAT4X4> m_matrixStack;
+};
+
+namespace BEMath
+{
+	Mat4x4 RotateToFace(Vec3 direction, Vec3 up);
 };

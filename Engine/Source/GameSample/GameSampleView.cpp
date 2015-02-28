@@ -16,7 +16,7 @@
 GameSampleHumanView::GameSampleHumanView(IRenderer* renderer) :
 HumanView(renderer)
 {
-	m_pPongController = 0;
+	m_pPlayerController = 0;
 	m_pFreeCameraController = 0;
 	m_pGrid = nullptr;
 	m_bShowUI = true;
@@ -29,7 +29,7 @@ GameSampleHumanView::~GameSampleHumanView()
 	RemoveAllDelegates();
 
 	SAFE_DELETE(m_pFreeCameraController);
-	SAFE_DELETE(m_pPongController);
+	SAFE_DELETE(m_pPlayerController);
 }
 
 LRESULT CALLBACK GameSampleHumanView::VOnMsgProc(AppMsg msg)
@@ -87,9 +87,10 @@ LRESULT CALLBACK GameSampleHumanView::VOnMsgProc(AppMsg msg)
 		}
 		else if (msg.m_wParam == VK_F9)
 		{
-			m_pKeyboardHandler = m_pPongController;
-			m_pMouseHandler = m_pPongController;
-			m_pCamera->SetTarget(m_pControlledActor);
+			m_pKeyboardHandler = m_pPlayerController;
+			m_pMouseHandler = m_pPlayerController;
+			m_pCamera->ClearViewTarget();
+			m_pCamera->SetFollowTarget(m_pControlledActor);
 			ReleaseCapture();
 			return 1;
 		}
@@ -97,7 +98,8 @@ LRESULT CALLBACK GameSampleHumanView::VOnMsgProc(AppMsg msg)
 		{
 			m_pKeyboardHandler = m_pFreeCameraController;
 			m_pMouseHandler = m_pFreeCameraController;
-			m_pCamera->ClearTarget();
+			m_pCamera->ClearFollowTarget();
+			m_pCamera->ClearViewTarget();
 			SetCapture(g_pApp->GetHwnd());
 			return 1;
 		}
@@ -124,9 +126,9 @@ void GameSampleHumanView::VOnUpdate(const float deltaMs)
 		m_pFreeCameraController->OnUpdate(deltaMs);
 	}
 
-	if (m_pPongController)
+	if (m_pPlayerController)
 	{
-		m_pPongController->OnUpdate(deltaMs);
+		m_pPlayerController->OnUpdate(deltaMs);
 	}
 
 	//Tick Event ?
@@ -149,7 +151,8 @@ bool GameSampleHumanView::VLoadGameDelegate(rapidxml::xml_node<>* pLevelData)
 
 	m_pKeyboardHandler = m_pFreeCameraController;
 	m_pMouseHandler = m_pFreeCameraController;
-	m_pCamera->ClearTarget();
+	m_pCamera->ClearFollowTarget();
+	m_pCamera->ClearViewTarget();
 	SetCapture(g_pApp->GetHwnd());
 
 	m_pGrid = BE_NEW D3D11GridNode(INVALID_ACTOR_ID, nullptr, &Mat4x4::g_Identity);
@@ -172,13 +175,14 @@ void GameSampleHumanView::VSetControlledActor(ActorId actorId)
 
 	HumanView::VSetControlledActor(actorId);
 
-	SAFE_DELETE(m_pPongController);
+	SAFE_DELETE(m_pPlayerController);
 
-	m_pPongController = BE_NEW GameSampleController(m_pControlledActor);
-	m_pKeyboardHandler = m_pPongController;
-	m_pMouseHandler = m_pPongController;
+	m_pPlayerController = BE_NEW GameSampleController(m_pControlledActor);
+	m_pKeyboardHandler = m_pPlayerController;
+	m_pMouseHandler = m_pPlayerController;
 
-	m_pCamera->SetTarget(m_pControlledActor);
+	m_pCamera->SetViewTarget(m_pControlledActor);
+	//m_pCamera->SetCameraOffset(Vec4(3, 3, 0, 0));
 }
 
 void GameSampleHumanView::SetControlledActorDelegate(IEventDataPtr pEventData)
@@ -191,6 +195,7 @@ void GameSampleHumanView::RegisterAllDelegates()
 {
 	IEventManager* pEventManager = IEventManager::Get();
 	pEventManager->VAddListener(fastdelegate::MakeDelegate(this, &GameSampleHumanView::SetControlledActorDelegate), EvtData_Set_Controlled_Actor::sk_EventType);
+	pEventManager->VAddListener(fastdelegate::MakeDelegate(this, &GameSampleHumanView::NewPlayerSpawnedDelegate), EvtData_SpawnPlayer::sk_EventType);
 }
 
 void GameSampleHumanView::RemoveAllDelegates()
@@ -198,4 +203,12 @@ void GameSampleHumanView::RemoveAllDelegates()
 	IEventManager* pEventManager = IEventManager::Get();
 
 	pEventManager->VRemoveListener(fastdelegate::MakeDelegate(this, &GameSampleHumanView::SetControlledActorDelegate), EvtData_Set_Controlled_Actor::sk_EventType);
+}
+
+void GameSampleHumanView::NewPlayerSpawnedDelegate(IEventDataPtr pEventData)
+{
+	std::shared_ptr<EvtData_SpawnPlayer> pCastEventData = std::static_pointer_cast<EvtData_SpawnPlayer>(pEventData);
+	if (pCastEventData->GetViewId() == m_viewId) {
+		VSetControlledActor(pCastEventData->GetActorId());
+	}
 }
