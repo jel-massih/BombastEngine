@@ -48,12 +48,13 @@ void BMMatrixStack::MultMatrixLocal(const XMFLOAT4X4* pM)
 
 namespace BEMath
 {
-	Mat4x4 RotateToFace(Vec3 direction, Vec3 up)
+	Mat4x4 RotateToFace(Vec3 sourcePosition, Vec3 lookAtPosition, Vec3 up)
 	{
+		Vec3 direction = lookAtPosition - sourcePosition;
+
 		Vec3 Right = up.Cross(direction);
 		Right = Right.Normalize();
-		Vec3 Back = Right.Cross(up);
-		Back = Back.Normalize();
+		Vec3 Back = direction.Normalize();
 		Vec3 Up = Back.Cross(Right);
 
 		return Mat4x4(XMFLOAT4X4(Right.x, Right.y, Right.z, 0,

@@ -381,20 +381,13 @@ HRESULT CameraNode::SetViewTransform(Scene* pScene)
 	}
 
 	if (m_pViewTarget) {
-		Mat4x4 mat = Mat4x4::g_Identity;
-		Vec3 fat = m_pViewTarget->VGet()->ToWorld().GetPosition() - VGet()->ToWorld().GetPosition();
-		mat =BEMath::RotateToFace(fat, Vec3(0, 1, 0));
-		mat.SetPosition(Vec3::g_IdentityVec3);
-		Mat4x4 pos;
-		//pos.SetPosition(VGet()->ToWorld().GetPosition());
-		//pos.BuildYawPitchRoll(VGet()->ToWorld().GetYawPitchRoll());
-		//mat = mat * pos;
-		//pos = VGet()->ToWorld();
-		pos.BuildTranslation(Vec3(0,0,0));
-		//mat.BuildYawPitchRoll(XMConvertToRadians(20), XMConvertToRadians(120), 0.0f);
-		BE_INFO("Result %f, %f, %f", fat.x, fat.y, fat.z);
-		Mat4x4 res = mat * pos;
-		VSetTransform(&res);
+		Mat4x4 pos = Mat4x4::g_Identity;
+		pos.BuildTranslation(VGet()->ToWorld().GetPosition());
+
+		Mat4x4 rot = BEMath::RotateToFace(VGet()->ToWorld().GetPosition(), m_pViewTarget->VGet()->ToWorld().GetPosition(), Vec3(0, 1, 0));
+		
+		Mat4x4 lookAtTransform = rot * pos;
+		VSetTransform(&lookAtTransform);
 	}
 	
 	m_view = VGet()->FromWorld();

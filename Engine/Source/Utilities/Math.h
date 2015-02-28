@@ -40,5 +40,5 @@ private:
 
 namespace BEMath
 {
-	Mat4x4 RotateToFace(Vec3 direction, Vec3 up);
+	Mat4x4 RotateToFace(Vec3 sourcePosition, Vec3 lookAtPosition, Vec3 up);
 };
