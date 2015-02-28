@@ -89,7 +89,7 @@ LRESULT CALLBACK GameSampleHumanView::VOnMsgProc(AppMsg msg)
 		{
 			m_pKeyboardHandler = m_pPlayerController;
 			m_pMouseHandler = m_pPlayerController;
-			m_pCamera->ClearViewTarget();
+			m_pCamera->SetViewTarget(m_pControlledActor);
 			m_pCamera->SetFollowTarget(m_pControlledActor);
 			ReleaseCapture();
 			return 1;

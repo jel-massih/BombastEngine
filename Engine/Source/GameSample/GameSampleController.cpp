@@ -37,14 +37,14 @@ bool GameSampleController::VOnKeyDown(const BYTE c)
 	if (c == 'W' || c == 'S')
 	{
 		const ActorId actorId = m_pObject->VGet()->GetActorId();
-		std::shared_ptr<EvtData_StartForward> pEvent(BE_NEW EvtData_StartForward(actorId, (c == 'W' ? ACTOR_ACCELERATION : (-ACTOR_ACCELERATION))));
+		std::shared_ptr<EvtData_StartForward> pEvent(BE_NEW EvtData_StartForward(actorId, (c == 'W' ? -ACTOR_ACCELERATION : ACTOR_ACCELERATION)));
 		IEventManager::Get()->VQueueEvent(pEvent);
 	}
 
 	if (c == 'A' || c == 'D')
 	{
 		const ActorId actorId = m_pObject->VGet()->GetActorId();
-		std::shared_ptr<EvtData_StartRight> pEvent(BE_NEW EvtData_StartRight(actorId, (c == 'A' ? ACTOR_ACCELERATION : (-ACTOR_ACCELERATION))));
+		std::shared_ptr<EvtData_StartRight> pEvent(BE_NEW EvtData_StartRight(actorId, (c == 'A' ? -ACTOR_ACCELERATION : ACTOR_ACCELERATION)));
 		IEventManager::Get()->VQueueEvent(pEvent);
 	}
 
@@ -58,14 +58,14 @@ bool GameSampleController::VOnKeyDown(const BYTE c)
 	if (c == VK_LEFT || c == VK_RIGHT)
 	{
 		const ActorId actorId = m_pObject->VGet()->GetActorId();
-		std::shared_ptr<EvtData_StartTurnRight> pEvent(BE_NEW EvtData_StartTurnRight(actorId, (c == VK_LEFT ? ACTOR_ACCELERATION * 3 : (-ACTOR_ACCELERATION * 3))));
+		std::shared_ptr<EvtData_StartTurnRight> pEvent(BE_NEW EvtData_StartTurnRight(actorId, (c == VK_LEFT ? -ACTOR_ACCELERATION * 3 : ACTOR_ACCELERATION * 3)));
 		IEventManager::Get()->VQueueEvent(pEvent);
 	}
 
 	if (c == VK_UP || c == VK_DOWN)
 	{
 		const ActorId actorId = m_pObject->VGet()->GetActorId();
-		std::shared_ptr<EvtData_StartTurnUp> pEvent(BE_NEW EvtData_StartTurnUp(actorId, (c == VK_UP ? ACTOR_ACCELERATION * 3 : (-ACTOR_ACCELERATION * 3))));
+		std::shared_ptr<EvtData_StartTurnUp> pEvent(BE_NEW EvtData_StartTurnUp(actorId, (c == VK_UP ? -ACTOR_ACCELERATION * 3 : ACTOR_ACCELERATION * 3)));
 		IEventManager::Get()->VQueueEvent(pEvent);
 	}
 
