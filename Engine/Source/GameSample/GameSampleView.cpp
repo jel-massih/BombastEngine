@@ -182,7 +182,8 @@ void GameSampleHumanView::VSetControlledActor(ActorId actorId)
 	m_pMouseHandler = m_pPlayerController;
 
 	m_pCamera->SetViewTarget(m_pControlledActor);
-	//m_pCamera->SetCameraOffset(Vec4(3, 3, 0, 0));
+	m_pCamera->SetFollowTarget(m_pControlledActor);
+	m_pCamera->SetCameraOffset(Vec4(0, 10, 20, 0));
 }
 
 void GameSampleHumanView::SetControlledActorDelegate(IEventDataPtr pEventData)
