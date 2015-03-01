@@ -112,3 +112,38 @@ float4 PSMain(V2P input) : SV_TARGET
 
 	return finalColor;
 }
+
+struct P2F
+{
+	float4 color: SV_Target0;
+	float4 normal: SV_Target1;
+};
+
+struct V2PDeferred
+{
+	float4 Position : SV_POSITION;
+	float3 Normal : NORMAL;
+	float2 TexCoord : TEXCOORD0;
+};
+
+P2F PSMainDeferred(V2PDeferred input) : SV_TARGET
+{
+	P2F result;
+
+	float4 emissive = Material.Emissive;
+	float4 ambient = Material.Ambient * GlobalAmbient;
+	float4 diffuse = Material.Diffuse;
+
+	float4 texColor = { 1, 1, 1, 1 };
+
+#ifdef USE_ALBEDO_TEXTURE
+	texColor = AlbedoTexture.Sample(PointSampler, input.TexCoord);
+#endif
+
+	result.color = (emissive + ambient + diffuse) * texColor;
+	result.color = saturate(result.color);
+
+	result.normal = float4(input.Normal, 1.0f);
+	
+	return result;
+}

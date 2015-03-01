@@ -490,7 +490,16 @@
     <FxCompile Include="..\Shading\Shaders\StaticMesh\staticmesh_common.fxh">
       <Filter>Shading\Shaders\StaticMesh</Filter>
     </FxCompile>
-    <FxCompile Include="..\Shading\Shaders\StaticMesh\LitTexturedVertexShader.hlsl">
+    <FxCompile Include="..\Shading\Shaders\StaticMesh\staticmesh_deferred_vertex.hlsl">
+      <Filter>Shading\Shaders\StaticMesh</Filter>
+    </FxCompile>
+    <FxCompile Include="..\Shading\Shaders\StaticMesh\staticmesh_vertex.hlsl">
+      <Filter>Shading\Shaders\StaticMesh</Filter>
+    </FxCompile>
+    <FxCompile Include="..\Shading\Shaders\StaticMesh\staticmesh_deferred_colored.hlsl">
+      <Filter>Shading\Shaders\StaticMesh</Filter>
+    </FxCompile>
+    <FxCompile Include="..\Shading\Shaders\StaticMesh\staticmesh_deferred_textured.hlsl">
       <Filter>Shading\Shaders\StaticMesh</Filter>
     </FxCompile>
   </ItemGroup>

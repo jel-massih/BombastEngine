@@ -21,7 +21,7 @@ const char* PixelShaderPrograms[] =
 	"shaders\\staticmesh_lit_textured.cso" //SMP_LIT_TEXTURED
 };
 
-const char* DeferredShaderPrograms[] =
+const char* DeferredPixelShaderPrograms[] =
 {
 	"shaders\\deferred_staticmesh_unlit_colored.cso", //SMP_UNLIT_COLORED
 	"shaders\\deferred_staticmesh_unlit_textured.cso", //SMP_UNLIT_TEXTURED
@@ -31,7 +31,7 @@ const char* DeferredShaderPrograms[] =
 
 //Must be same size of pixelshaderprograms
 static_assert(sizeof(PixelShaderPrograms) / sizeof(char*) == sizeof(PixelProgramIndices) / sizeof(int), "Program Indices count must match Pixel program count");
-static_assert(sizeof(DeferredShaderPrograms) / sizeof(char*) == sizeof(PixelProgramIndices) / sizeof(int), "Program Indices count must match Deferred Pixel program count");
+static_assert(sizeof(DeferredPixelShaderPrograms) / sizeof(char*) == sizeof(PixelProgramIndices) / sizeof(int), "Program Indices count must match Deferred Pixel program count");
 
 class StaticMeshShader::ProgramImpl
 {
