@@ -108,8 +108,6 @@ float4 PSMain(V2P input) : SV_TARGET
 
 	float4 finalColor = (emissive + ambient + diffuse) * texColor;
 
-	finalColor = float4(input.Normal, 1.0f);
-
 	return finalColor;
 }
 
@@ -141,7 +139,6 @@ P2F PSMainDeferred(V2PDeferred input) : SV_TARGET
 #endif
 
 	result.color = (emissive + ambient + diffuse) * texColor;
-	result.color = float4(input.Normal, 1.0f);
 
 	result.normal = float4(input.Normal, 1.0f);
 	
