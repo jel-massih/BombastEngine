@@ -15,8 +15,8 @@ struct A2V
 struct V2P
 {
 	float4 pos : SV_POSITION;
-	float2 uv :  TEXCOORD0;
 	float3 normal : NORMAL;
+	float2 uv :  TEXCOORD0;
 };
 
 V2P VSMain(A2V input)
