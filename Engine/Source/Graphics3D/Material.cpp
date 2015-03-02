@@ -95,7 +95,7 @@ void Material::SetShaderType(std::string shaderName)
 	{
 		m_material.ShaderType = BSHADER_TYPE_FONT;
 	}
-	if (shaderName == "LitTextured")
+	if (shaderName == "Lit")
 	{
 		m_material.ShaderType = BSHADER_TYPE_LIT;
 	}

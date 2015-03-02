@@ -682,11 +682,11 @@ bool D3DMeshNode11::RenderForwardBuffers(ID3D11DeviceContext* deviceContext, Sce
 			deviceContext->IASetVertexBuffers(0, 1, &(*it).pVertexBuffer, &stride, &offset);
 			deviceContext->IASetIndexBuffer((*it).pIndexBuffer, DXGI_FORMAT_R32_UINT, 0);
 			deviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-		}
 
-		if (!g_pApp->GetGraphicsManager()->GetShaderManager()->RenderStaticMesh(this, (*it).material, (*it).indexCount, pScene))
-		{
-			return false;
+			if (!g_pApp->GetGraphicsManager()->GetShaderManager()->RenderStaticMesh(this, (*it).material, (*it).indexCount, pScene))
+			{
+				return false;
+			}
 		}
 	}
 

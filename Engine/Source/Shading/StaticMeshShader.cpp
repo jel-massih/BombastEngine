@@ -21,29 +21,38 @@ const char* PixelShaderPrograms[] =
 	"shaders\\staticmesh_lit_textured.cso" //SMP_LIT_TEXTURED
 };
 
+const int DeferredPixelProgramIndices[] {
+	0, //COLORED
+	1, //TEXTURED
+};
+
 const char* DeferredPixelShaderPrograms[] =
 {
-	"shaders\\deferred_staticmesh_unlit_colored.cso", //SMP_UNLIT_COLORED
-	"shaders\\deferred_staticmesh_unlit_textured.cso", //SMP_UNLIT_TEXTURED
-	"shaders\\deferred_staticmesh_lit_colored.cso", //SMP_LIT_COLORED
-	"shaders\\deferred_staticmesh_lit_textured.cso" //SMP_LIT_TEXTURED
+	"shaders\\staticmesh_deferred_colored.cso", //SMP_LIT_COLORED
+	"shaders\\staticmesh_deferred_textured.cso" //SMP_LIT_TEXTURED
 };
+
+const char* VertexShaderProgram = "shaders\\staticmesh_vertex.cso";
+const char* DeferredVertexShaderProgram = "shaders\\staticmesh_deferred_vertex.cso";
 
 //Must be same size of pixelshaderprograms
 static_assert(sizeof(PixelShaderPrograms) / sizeof(char*) == sizeof(PixelProgramIndices) / sizeof(int), "Program Indices count must match Pixel program count");
-static_assert(sizeof(DeferredPixelShaderPrograms) / sizeof(char*) == sizeof(PixelProgramIndices) / sizeof(int), "Program Indices count must match Deferred Pixel program count");
+static_assert(sizeof(DeferredPixelShaderPrograms) / sizeof(char*) == sizeof(DeferredPixelProgramIndices) / sizeof(int), "Program Indices count must match Deferred Pixel program count");
 
 class StaticMeshShader::ProgramImpl
 {
 public:
 	ID3D11PixelShader* m_loadedPixelPrograms[sizeof(PixelProgramIndices) / sizeof(int)];
+	ID3D11PixelShader* m_loadedDeferredPixelPrograms[sizeof(DeferredPixelProgramIndices) / sizeof(int)];
+	ID3D11VertexShader* m_pForwardVertexProgram;
+	ID3D11VertexShader* m_pDeferredVertexProgram;
 };
 
 StaticMeshShader::StaticMeshShader()
 	:m_pProgramImpl(new ProgramImpl())
 {
-	m_pVertexShader = nullptr;
-	m_pLayout = nullptr;
+	m_pForwardLayout = nullptr;
+	m_pDeferredLayout = nullptr;
 	m_pMatrixBuffer = nullptr;
 	m_pCameraBuffer = nullptr;
 	m_pLightBuffer = nullptr;
@@ -53,13 +62,12 @@ StaticMeshShader::StaticMeshShader()
 StaticMeshShader::~StaticMeshShader()
 {
 	SAFE_RELEASE(m_pSampleState);
-	SAFE_RELEASE(m_pLayout);
+	SAFE_RELEASE(m_pForwardLayout);
+	SAFE_RELEASE(m_pDeferredLayout);
 	SAFE_RELEASE(m_pLightBuffer);
 	SAFE_RELEASE(m_pMaterialBuffer);
 	SAFE_RELEASE(m_pCameraBuffer);
 	SAFE_RELEASE(m_pMatrixBuffer);
-	SAFE_RELEASE(m_pLayout);
-	SAFE_RELEASE(m_pVertexShader);
 
 	SAFE_DELETE(m_pProgramImpl);
 }
@@ -103,17 +111,6 @@ bool StaticMeshShader::InitializeShaders(ID3D11Device* device)
 	D3D11_BUFFER_DESC lightBufferDesc;
 	D3D11_SAMPLER_DESC samplerDesc;
 
-	Resource vertexShaderResource("Shaders\\LitTexturedVertexShader.cso");
-	ResourceHandle* pVertexResHandle = g_pApp->m_pResourceCache->GetHandle(&vertexShaderResource);
-
-	result = device->CreateVertexShader(pVertexResHandle->Buffer(), pVertexResHandle->Size(), nullptr, &m_pVertexShader);
-	if (FAILED(result))
-	{
-		BE_ERROR("Failed to create vertex shader");
-
-		return false;
-	}
-
 	//Load each pixel shader
 	for (int i = 0; i < sizeof(PixelShaderPrograms) / sizeof(char*); i++)
 	{
@@ -156,11 +153,44 @@ bool StaticMeshShader::InitializeShaders(ID3D11Device* device)
 	//Get count of elements in layout
 	numElements = sizeof(polygonLayout) / sizeof(polygonLayout[0]);
 
-	//Create vertex input layout
-	result = device->CreateInputLayout(polygonLayout, numElements, pVertexResHandle->Buffer(), pVertexResHandle->Size(), &m_pLayout);
-	if (FAILED(result))
 	{
-		return false;
+		Resource vertexShaderResource(VertexShaderProgram);
+		ResourceHandle* pVertexResHandle = g_pApp->m_pResourceCache->GetHandle(&vertexShaderResource);
+
+		result = device->CreateVertexShader(pVertexResHandle->Buffer(), pVertexResHandle->Size(), nullptr, &(m_pProgramImpl->m_pForwardVertexProgram));
+		if (FAILED(result))
+		{
+			BE_ERROR("Failed to create vertex shader");
+
+			return false;
+		}
+
+		//Create vertex input layout
+		result = device->CreateInputLayout(polygonLayout, numElements, pVertexResHandle->Buffer(), pVertexResHandle->Size(), &m_pForwardLayout);
+		if (FAILED(result))
+		{
+			return false;
+		}
+	}
+
+	{
+		Resource vertexShaderResource(DeferredVertexShaderProgram);
+		ResourceHandle* pVertexResHandle = g_pApp->m_pResourceCache->GetHandle(&vertexShaderResource);
+
+		result = device->CreateVertexShader(pVertexResHandle->Buffer(), pVertexResHandle->Size(), nullptr, &(m_pProgramImpl->m_pDeferredVertexProgram));
+		if (FAILED(result))
+		{
+			BE_ERROR("Failed to create Deferred vertex shader");
+
+			return false;
+		}
+
+		//Create vertex input layout
+		result = device->CreateInputLayout(polygonLayout, numElements, pVertexResHandle->Buffer(), pVertexResHandle->Size(), &m_pDeferredLayout);
+		if (FAILED(result))
+		{
+			return false;
+		}
 	}
 
 	//Setup the desc of dynamic matrix constant buffer thats in vertex shader
@@ -359,16 +389,17 @@ bool StaticMeshShader::SetShaderParameters(ID3D11DeviceContext* deviceContext, i
 		programIndex += 2;
 	}
 
-	RenderShader(deviceContext, indexCount, m_pProgramImpl->m_loadedPixelPrograms[programIndex]);
+	deviceContext->IASetInputLayout(m_pForwardLayout);
+
+	RenderShader(deviceContext, indexCount, m_pProgramImpl->m_loadedPixelPrograms[programIndex], m_pProgramImpl->m_pForwardVertexProgram);
 
 	return true;
 }
 
-void StaticMeshShader::RenderShader(ID3D11DeviceContext* deviceContext, int indexCount, ID3D11PixelShader* program)
+void StaticMeshShader::RenderShader(ID3D11DeviceContext* deviceContext, int indexCount, ID3D11PixelShader* program, ID3D11VertexShader* vertexProgram)
 {
-	deviceContext->IASetInputLayout(m_pLayout);
 
-	deviceContext->VSSetShader(m_pVertexShader, NULL, 0);
+	deviceContext->VSSetShader(vertexProgram, NULL, 0);
 	deviceContext->PSSetShader(program, NULL, 0);
 
 	deviceContext->PSSetSamplers(0, 1, &m_pSampleState);

@@ -15,11 +15,10 @@ private:
 	bool InitializeShaders(ID3D11Device* device);
 
 	bool SetShaderParameters(ID3D11DeviceContext* deviceContext, int indexCount, const Material* material, const Scene* pScene);
-	void RenderShader(ID3D11DeviceContext* deviceContext, int indexCount, ID3D11PixelShader* program);
+	void RenderShader(ID3D11DeviceContext* deviceContext, int indexCount, ID3D11PixelShader* program, ID3D11VertexShader* vertexProgram);
 
 private:
-	ID3D11VertexShader* m_pVertexShader;
-	ID3D11InputLayout* m_pLayout;
+	ID3D11InputLayout* m_pForwardLayout, *m_pDeferredLayout;
 	ID3D11Buffer* m_pMatrixBuffer;
 	ID3D11Buffer* m_pCameraBuffer;
 	ID3D11Buffer* m_pLightBuffer;
