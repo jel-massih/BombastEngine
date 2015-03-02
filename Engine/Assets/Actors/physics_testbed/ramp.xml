@@ -1,0 +1,10 @@
+<Actor type="ramp" resource="actors\physics_testbed\ramp.xml">
+	<TransformComponent/>
+	<MeshRenderComponent>
+		<Mesh path="meshes\ramp.bmdl"/>
+		<Materials>
+			<Material path="materials\physics_testbed\ramp_mat.bmtl"/>
+			<Material path="materials\physics_testbed\ramp_mat.bmtl"/>
+		</Materials>
+	</MeshRenderComponent>
+</Actor>

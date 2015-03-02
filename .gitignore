@@ -6,7 +6,10 @@ Engine/Source/Msvc/ipch/
 Engine/Assets/Meshes/*
 Engine/Assets/Textures/*
 Engine/Assets/Materials/*
+!Engine/Assets/Materials/physics_testbed
 Engine/Assets/Actors/*
+!Engine/Assets/Actors/physics_testbed
+
 
 Editor/Bin/*
 Editor/Source/Libraries/*

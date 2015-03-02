@@ -1,0 +1,12 @@
+<Actor type="platform" resource="actors\physics_testbed\platform.xml">
+	<TransformComponent>
+		<Scale x="12" y="0.25" z="12"/>
+	</TransformComponent>
+  <MeshRenderComponent>
+    <Mesh path="meshes\cube.bmdl"></Mesh>
+    <Materials>
+			<Material path="materials\physics_testbed\platform_mat.bmtl"/>
+			<Material path="materials\physics_testbed\platform_mat.bmtl"/>
+  	</Materials>
+  </MeshRenderComponent>
+</Actor>
