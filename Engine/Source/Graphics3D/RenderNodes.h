@@ -153,7 +153,7 @@ private:
 	Material* LoadMaterial(std::string filename);
 	HRESULT LoadMesh(std::string meshFilename);
 	HRESULT UpdateBuffers(ID3D11DeviceContext* deviceContext);
-	bool RenderDeferredBuffers(ID3D11DeviceContext* deviceContext);
+	bool RenderDeferredBuffers(ID3D11DeviceContext* deviceContext, Scene* pScene);
 	bool RenderForwardBuffers(ID3D11DeviceContext* deviceContext, Scene* pScene);
 
 private:

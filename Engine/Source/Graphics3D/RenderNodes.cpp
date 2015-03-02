@@ -613,7 +613,7 @@ HRESULT D3DMeshNode11::VDeferredRender(Scene* pScene)
 
 	ID3D11DeviceContext* context = g_pApp->GetGraphicsManager()->GetRenderer()->GetDeviceContext();
 
-	result = RenderDeferredBuffers(context);
+	result = RenderDeferredBuffers(context, pScene);
 	if (!result) {
 		return S_FALSE;
 	}
@@ -621,7 +621,7 @@ HRESULT D3DMeshNode11::VDeferredRender(Scene* pScene)
 	return S_OK;
 }
 
-bool D3DMeshNode11::RenderDeferredBuffers(ID3D11DeviceContext* deviceContext)
+bool D3DMeshNode11::RenderDeferredBuffers(ID3D11DeviceContext* deviceContext, Scene* pScene)
 {
 	unsigned int stride, offset;
 
@@ -636,19 +636,12 @@ bool D3DMeshNode11::RenderDeferredBuffers(ID3D11DeviceContext* deviceContext)
 		}
 
 		deviceContext->IASetVertexBuffers(0, 1, &(*it).pVertexBuffer, &stride, &offset);
-
 		deviceContext->IASetIndexBuffer((*it).pIndexBuffer, DXGI_FORMAT_R32_UINT, 0);
-
 		deviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
-		IRenderer* pRenderer = g_pApp->GetGraphicsManager()->GetRenderer();
-		Mat4x4 worldMatrix, viewMatrix, projectionMatrix;
-		pRenderer->VGetViewMatrix(viewMatrix);
-		pRenderer->VGetWorldMatrix(worldMatrix);
-		pRenderer->VGetProjectionMatrix(projectionMatrix);
-
-		if ((*it).material->GetTextures().size() > 0) {
-			g_pApp->GetGraphicsManager()->GetDeferredRenderingManager()->DrawRenderable(deviceContext, (*it).indexCount, XMLoadFloat4x4(&worldMatrix), XMLoadFloat4x4(&viewMatrix), XMLoadFloat4x4(&projectionMatrix), (*it).material->GetTextures().front()->GetTexture());
+		if (!g_pApp->GetGraphicsManager()->GetShaderManager()->RenderStaticMesh(this, (*it).material, (*it).indexCount, pScene))
+		{
+			return false;
 		}
 	}
 

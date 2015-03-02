@@ -5,7 +5,7 @@ Texture2D normalTexture : register(t1);
 //Sampler for the exact per-pixel data values from render textures
 SamplerState PointSampler : register(s0);
 
-cbuffer LightBuffer
+cbuffer LightBuffer : register(b0)
 {
 	float3 lightDirection;
 	float padding;

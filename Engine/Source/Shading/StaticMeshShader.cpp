@@ -91,7 +91,15 @@ bool StaticMeshShader::Render(ID3D11DeviceContext* deviceContext, int indexCount
 {
 	bool result;
 
-	result = SetShaderParameters(deviceContext, indexCount, material, pScene);
+	if (material->GetShaderType() == BSHADER_TYPE_DEFERRED_LIT)
+	{
+		result = RenderDeferred(deviceContext, indexCount, material, pScene);
+	}
+	else
+	{
+		result = SetShaderParameters(deviceContext, indexCount, material, pScene);
+	}
+
 	if (!result)
 	{
 		return false;
@@ -121,6 +129,20 @@ bool StaticMeshShader::InitializeShaders(ID3D11Device* device)
 		if (FAILED(result))
 		{
 			BE_ERROR("Failed to create Pixel shader");
+
+			return false;
+		}
+	}
+
+	for (int i = 0; i < sizeof(DeferredPixelShaderPrograms) / sizeof(char*); i++)
+	{
+		Resource pixelShaderResource(DeferredPixelShaderPrograms[i]);
+		ResourceHandle* pPixelResHandle = g_pApp->m_pResourceCache->GetHandle(&pixelShaderResource);
+
+		result = device->CreatePixelShader(pPixelResHandle->Buffer(), pPixelResHandle->Size(), nullptr, &(m_pProgramImpl->m_loadedDeferredPixelPrograms[i]));
+		if (FAILED(result))
+		{
+			BE_ERROR("Failed to create Deferred Pixel shader");
 
 			return false;
 		}
@@ -272,6 +294,77 @@ bool StaticMeshShader::InitializeShaders(ID3D11Device* device)
 	return true;
 }
 
+bool StaticMeshShader::RenderDeferred(ID3D11DeviceContext* deviceContext, int indexCount, const Material* material, const Scene* pScene)
+{
+	HRESULT result;
+	D3D11_MAPPED_SUBRESOURCE mappedResource;
+	MatrixBufferType* dataPtr;
+	MaterialBufferType* dataPtr2;
+
+	bool bUseTexture = false;
+
+	result = deviceContext->Map(m_pMatrixBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource);
+	if (FAILED(result))
+	{
+		return false;
+	}
+	 dataPtr = (MatrixBufferType*)mappedResource.pData;
+
+	IRenderer* pRenderer = g_pApp->GetGraphicsManager()->GetRenderer();
+
+	Mat4x4 world, view, projection;
+	pRenderer->VGetViewMatrix(view);
+	pRenderer->VGetWorldMatrix(world);
+	pRenderer->VGetProjectionMatrix(projection);
+
+	dataPtr->world = DirectX::XMMatrixTranspose(DirectX::XMLoadFloat4x4(&world));
+	dataPtr->view = DirectX::XMMatrixTranspose(DirectX::XMLoadFloat4x4(&view));
+	dataPtr->projection = DirectX::XMMatrixTranspose(DirectX::XMLoadFloat4x4(&projection));
+
+	deviceContext->Unmap(m_pMatrixBuffer, 0);
+	deviceContext->VSSetConstantBuffers(0, 1, &m_pMatrixBuffer);
+
+
+	result = deviceContext->Map(m_pMaterialBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource);
+	if (FAILED(result))
+	{
+		return false;
+	}
+
+	dataPtr2 = (MaterialBufferType*)mappedResource.pData;
+
+	dataPtr2->ambient = material->GetAmbient();
+	dataPtr2->diffuse = material->GetDiffuse();
+	dataPtr2->emissive = material->GetEmissive();
+	dataPtr2->padding = XMFLOAT3(0, 0, 0);
+	Vec4 specular;
+	material->GetSpecular(specular, dataPtr2->specularPower);
+	dataPtr2->specular = specular;
+
+	//if material has any textures, then use first one
+	if (material->GetTextures().size() > 0) {
+		bUseTexture = true;
+		ID3D11ShaderResourceView* texture = material->GetTextures().front()->GetTexture();
+		deviceContext->PSSetShaderResources(0, 1, &texture);
+		deviceContext->PSSetSamplers(0, 1, &m_pSampleState);
+	}
+
+	deviceContext->Unmap(m_pMaterialBuffer, 0);
+	deviceContext->PSSetConstantBuffers(0, 1, &m_pMaterialBuffer);
+
+	deviceContext->IASetInputLayout(m_pDeferredLayout);
+
+	int programIndex = 0;
+
+	if (bUseTexture) {
+		programIndex++;
+	}
+
+ 	RenderShader(deviceContext, indexCount, m_pProgramImpl->m_loadedDeferredPixelPrograms[programIndex], m_pProgramImpl->m_pDeferredVertexProgram);
+
+	return true;
+}
+
 bool StaticMeshShader::SetShaderParameters(ID3D11DeviceContext* deviceContext, int indexCount, const Material* material, const Scene* pScene)
 {
 	HRESULT result;
@@ -349,6 +442,7 @@ bool StaticMeshShader::SetShaderParameters(ID3D11DeviceContext* deviceContext, i
 		bUseTexture = true;
 		ID3D11ShaderResourceView* texture = material->GetTextures().front()->GetTexture();
 		deviceContext->PSSetShaderResources(0, 1, &texture);
+		deviceContext->PSSetSamplers(0, 1, &m_pSampleState);
 	}
 
 	deviceContext->Unmap(m_pMaterialBuffer, 0);
@@ -398,11 +492,8 @@ bool StaticMeshShader::SetShaderParameters(ID3D11DeviceContext* deviceContext, i
 
 void StaticMeshShader::RenderShader(ID3D11DeviceContext* deviceContext, int indexCount, ID3D11PixelShader* program, ID3D11VertexShader* vertexProgram)
 {
-
 	deviceContext->VSSetShader(vertexProgram, NULL, 0);
 	deviceContext->PSSetShader(program, NULL, 0);
-
-	deviceContext->PSSetSamplers(0, 1, &m_pSampleState);
 
 	deviceContext->DrawIndexed(indexCount, 0, 0);
 

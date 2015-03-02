@@ -10,6 +10,7 @@ public:
 
 	bool Initialize(ID3D11Device* device);
 	bool Render(ID3D11DeviceContext* deviceContext, int indexCount, const Material* material, const Scene* pScene);
+	bool RenderDeferred(ID3D11DeviceContext* deviceContext, int indexCount, const Material* material, const Scene* pScene);
 
 private:
 	bool InitializeShaders(ID3D11Device* device);
