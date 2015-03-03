@@ -84,6 +84,8 @@ public:
 	inline void SetPosition(Vec3 const &pos);
 	inline void SetScale(Vec3 const &scale);
 
+	inline const XMMATRIX Mat() const { return XMLoadFloat4x4(this); }
+
 	inline Vec3 GetPosition() const;
 	inline Vec3 GetDirection() const;
 	inline Vec3 GetUp() const;

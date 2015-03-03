@@ -14,8 +14,10 @@ private:
 
 	struct LightBufferType
 	{
+		XMMATRIX inverseViewProjection;
 		XMFLOAT3 lightDirection;
-		float padding;
+		XMFLOAT3 camPos;
+		XMFLOAT2 padding;
 	};
 
 public:
@@ -23,12 +25,12 @@ public:
 	~DeferredLightShader();
 
 	bool Initialize(ID3D11Device* device);
-	bool Render(ID3D11DeviceContext* deviceContext, int indexCount, DirectX::XMMATRIX &world, DirectX::XMMATRIX &view, DirectX::XMMATRIX &projection, ID3D11ShaderResourceView* colorTexture, ID3D11ShaderResourceView* normalTexture, const Scene* pScene);
+	bool Render(ID3D11DeviceContext* deviceContext, int indexCount, ID3D11ShaderResourceView* colorTexture, ID3D11ShaderResourceView* normalTexture, ID3D11ShaderResourceView* depthTexture, const Scene* pScene);
 
 private:
 	bool InitializeShader(ID3D11Device* device, std::string vertexShaderPath, std::string pixelShaderPath);
 
-	bool SetShaderParameters(ID3D11DeviceContext* deviceContext, DirectX::XMMATRIX &world, DirectX::XMMATRIX &view, DirectX::XMMATRIX &projection, ID3D11ShaderResourceView* colorTexture, ID3D11ShaderResourceView* normalTexture, const Scene* pScene);
+	bool SetShaderParameters(ID3D11DeviceContext* deviceContext, ID3D11ShaderResourceView* colorTexture, ID3D11ShaderResourceView* normalTexture, ID3D11ShaderResourceView* depthTexture, const Scene* pScene);
 	void RenderShader(ID3D11DeviceContext* deviceContext, int);
 
 private:
@@ -37,5 +39,7 @@ private:
 	ID3D11InputLayout* m_pLayout;
 	ID3D11Buffer* m_pMatrixBuffer;
 	ID3D11Buffer* m_pLightBuffer;
+
 	ID3D11SamplerState* m_pPointSampleState;
+	ID3D11SamplerState* m_pDepthSampleState;
 };

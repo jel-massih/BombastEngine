@@ -10,6 +10,7 @@ DeferredLightShader::DeferredLightShader()
 	m_pMatrixBuffer = nullptr;
 	m_pLightBuffer = nullptr;
 	m_pPointSampleState = nullptr;
+	m_pDepthSampleState = nullptr;
 }
 
 DeferredLightShader::~DeferredLightShader()
@@ -21,6 +22,7 @@ DeferredLightShader::~DeferredLightShader()
 	SAFE_RELEASE(m_pLayout);
 	SAFE_RELEASE(m_pPixelShader);
 	SAFE_RELEASE(m_pVertexShader);
+	SAFE_RELEASE(m_pDepthSampleState);
 }
 
 bool DeferredLightShader::Initialize(ID3D11Device* device)
@@ -36,11 +38,11 @@ bool DeferredLightShader::Initialize(ID3D11Device* device)
 	return true;
 }
 
-bool DeferredLightShader::Render(ID3D11DeviceContext* deviceContext, int indexCount, DirectX::XMMATRIX &world, DirectX::XMMATRIX &view, DirectX::XMMATRIX &projection, ID3D11ShaderResourceView* colorTexture, ID3D11ShaderResourceView* normalTexture, const Scene* pScene)
+bool DeferredLightShader::Render(ID3D11DeviceContext* deviceContext, int indexCount, ID3D11ShaderResourceView* colorTexture, ID3D11ShaderResourceView* normalTexture, ID3D11ShaderResourceView* depthTexture, const Scene* pScene)
 {
 	bool result;
 
-	result = SetShaderParameters(deviceContext, world, view, projection, colorTexture, normalTexture, pScene);
+	result = SetShaderParameters(deviceContext, colorTexture, normalTexture, depthTexture, pScene);
 	if (!result)
 	{
 		return false;
@@ -58,7 +60,6 @@ bool DeferredLightShader::InitializeShader(ID3D11Device* device, std::string ver
 	unsigned int numElements;
 	D3D11_BUFFER_DESC matrixBufferDesc;
 	D3D11_BUFFER_DESC lightBufferDesc;
-	D3D11_SAMPLER_DESC samplerDesc;
 
 	Resource vertexShaderResource(vertexShaderPath.c_str());
 	ResourceHandle* pVertexResHandle = g_pApp->m_pResourceCache->GetHandle(&vertexShaderResource);
@@ -123,24 +124,52 @@ bool DeferredLightShader::InitializeShader(ID3D11Device* device, std::string ver
 		return false;
 	}
 
-	samplerDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_POINT;
-	samplerDesc.AddressU = D3D11_TEXTURE_ADDRESS_CLAMP;
-	samplerDesc.AddressV = D3D11_TEXTURE_ADDRESS_CLAMP;
-	samplerDesc.AddressW = D3D11_TEXTURE_ADDRESS_CLAMP;
-	samplerDesc.MipLODBias = 0.0f;
-	samplerDesc.MaxAnisotropy = 1;
-	samplerDesc.ComparisonFunc = D3D11_COMPARISON_ALWAYS;
-	samplerDesc.BorderColor[0] = 0;
-	samplerDesc.BorderColor[1] = 0;
-	samplerDesc.BorderColor[2] = 0;
-	samplerDesc.BorderColor[3] = 0;
-	samplerDesc.MinLOD = 0;
-	samplerDesc.MaxLOD = D3D11_FLOAT32_MAX;
-
-	result = device->CreateSamplerState(&samplerDesc, &m_pPointSampleState);
-	if (FAILED(result))
 	{
-		return false;
+		D3D11_SAMPLER_DESC samplerDesc;
+
+		samplerDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_POINT;
+		samplerDesc.AddressU = D3D11_TEXTURE_ADDRESS_CLAMP;
+		samplerDesc.AddressV = D3D11_TEXTURE_ADDRESS_CLAMP;
+		samplerDesc.AddressW = D3D11_TEXTURE_ADDRESS_CLAMP;
+		samplerDesc.MipLODBias = 0.0f;
+		samplerDesc.MaxAnisotropy = 1;
+		samplerDesc.ComparisonFunc = D3D11_COMPARISON_ALWAYS;
+		samplerDesc.BorderColor[0] = 0;
+		samplerDesc.BorderColor[1] = 0;
+		samplerDesc.BorderColor[2] = 0;
+		samplerDesc.BorderColor[3] = 0;
+		samplerDesc.MinLOD = 0;
+		samplerDesc.MaxLOD = D3D11_FLOAT32_MAX;
+
+		result = device->CreateSamplerState(&samplerDesc, &m_pPointSampleState);
+		if (FAILED(result))
+		{
+			return false;
+		}
+	}
+
+	{
+		D3D11_SAMPLER_DESC samplerDesc;
+
+		samplerDesc.Filter = D3D11_FILTER_COMPARISON_MIN_MAG_MIP_POINT;
+		samplerDesc.AddressU = D3D11_TEXTURE_ADDRESS_BORDER;
+		samplerDesc.AddressV = D3D11_TEXTURE_ADDRESS_BORDER;
+		samplerDesc.AddressW = D3D11_TEXTURE_ADDRESS_BORDER;
+		samplerDesc.MipLODBias = 0.0f;
+		samplerDesc.MaxAnisotropy = 0;
+		samplerDesc.ComparisonFunc = D3D11_COMPARISON_LESS_EQUAL;
+		samplerDesc.BorderColor[0] = 1.0f;
+		samplerDesc.BorderColor[1] = 1.0f;
+		samplerDesc.BorderColor[2] = 1.0f;
+		samplerDesc.BorderColor[3] = 1.0f;
+		samplerDesc.MinLOD = 0;
+		samplerDesc.MaxLOD = D3D11_FLOAT32_MAX;
+
+		result = device->CreateSamplerState(&samplerDesc, &m_pDepthSampleState);
+		if (FAILED(result))
+		{
+			return false;
+		}
 	}
 
 	lightBufferDesc.Usage = D3D11_USAGE_DYNAMIC;
@@ -159,7 +188,7 @@ bool DeferredLightShader::InitializeShader(ID3D11Device* device, std::string ver
 	return true;
 }
 
-bool DeferredLightShader::SetShaderParameters(ID3D11DeviceContext* deviceContext, DirectX::XMMATRIX &world, DirectX::XMMATRIX &view, DirectX::XMMATRIX &projection, ID3D11ShaderResourceView* colorTexture, ID3D11ShaderResourceView* normalTexture, const Scene* pScene)
+bool DeferredLightShader::SetShaderParameters(ID3D11DeviceContext* deviceContext, ID3D11ShaderResourceView* colorTexture, ID3D11ShaderResourceView* normalTexture, ID3D11ShaderResourceView* depthTexture, const Scene* pScene)
 {
 	HRESULT result;
 	D3D11_MAPPED_SUBRESOURCE mappedResource;
@@ -167,9 +196,16 @@ bool DeferredLightShader::SetShaderParameters(ID3D11DeviceContext* deviceContext
 	LightBufferType* dataPtr2;
 	unsigned int bufferNumber;
 
-	world = DirectX::XMMatrixTranspose(world);
-	view = DirectX::XMMatrixTranspose(view);
-	projection = DirectX::XMMatrixTranspose(projection);
+
+	IRenderer* pRenderer = g_pApp->GetGraphicsManager()->GetRenderer();
+
+	Mat4x4 worldMatrix, orthoMatrix;
+	pRenderer->VGetWorldMatrix(worldMatrix);
+	pRenderer->VGetOrthoMatrix(orthoMatrix);
+
+	XMMATRIX world = DirectX::XMMatrixTranspose(worldMatrix.Mat());
+	XMMATRIX view = DirectX::XMMatrixTranspose(Mat4x4::g_Identity.Mat());
+	XMMATRIX projection = DirectX::XMMatrixTranspose(orthoMatrix.Mat());
 
 	result = deviceContext->Map(m_pMatrixBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource);
 	if (FAILED(result))
@@ -191,6 +227,7 @@ bool DeferredLightShader::SetShaderParameters(ID3D11DeviceContext* deviceContext
 
 	deviceContext->PSSetShaderResources(0, 1, &colorTexture);
 	deviceContext->PSSetShaderResources(1, 1, &normalTexture);
+	deviceContext->PSSetShaderResources(2, 1, &depthTexture);
 
 	const Vec4* dir = pScene->GetLightingManager()->GetLightDirection();
 
@@ -201,8 +238,10 @@ bool DeferredLightShader::SetShaderParameters(ID3D11DeviceContext* deviceContext
 	}
 
 	dataPtr2 = (LightBufferType*)mappedResource.pData;
+	dataPtr2->inverseViewProjection = XMMatrixInverse(nullptr, view * projection);
 	dataPtr2->lightDirection = Vec3(dir->x, dir->y, dir->z);
-	dataPtr2->padding = 0.0f;
+	dataPtr2->camPos = pScene->GetCamera()->GetPosition();
+	dataPtr2->padding = XMFLOAT2(0,0);
 
 	deviceContext->Unmap(m_pLightBuffer, 0);
 	deviceContext->PSSetConstantBuffers(0, 1, &m_pLightBuffer);
@@ -218,6 +257,7 @@ void DeferredLightShader::RenderShader(ID3D11DeviceContext* deviceContext, int i
 	deviceContext->PSSetShader(m_pPixelShader, NULL, 0);
 
 	deviceContext->PSSetSamplers(0, 1, &m_pPointSampleState);
+	deviceContext->PSSetSamplers(1, 1, &m_pDepthSampleState);
 
 	deviceContext->DrawIndexed(indexCount, 0, 0);
 

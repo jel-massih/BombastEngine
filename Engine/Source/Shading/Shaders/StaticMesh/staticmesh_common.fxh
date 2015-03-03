@@ -142,7 +142,7 @@ P2F PSMainDeferred(V2PDeferred input) : SV_TARGET
 	result.color = (emissive + ambient + diffuse) * texColor;
 	result.color = saturate(result.color);
 
-	result.normal = float4(input.Normal, 1.0f);
+	result.normal = float4(input.Normal, Material.SpecularPower);
 	
 	return result;
 }

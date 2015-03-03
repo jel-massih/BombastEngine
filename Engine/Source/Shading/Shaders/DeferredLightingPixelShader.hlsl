@@ -1,20 +1,36 @@
 //Take in 2 Render Targets Textures with Color and Normal Information
 Texture2D colorTexture : register(t0);
 Texture2D normalTexture : register(t1);
+Texture2D depthTexture : register(t2);
 
 //Sampler for the exact per-pixel data values from render textures
 SamplerState PointSampler : register(s0);
 
 cbuffer LightBuffer : register(b0)
 {
+	matrix inverseViewProjection;
 	float3 lightDirection;
-	float padding;
+	float3 camPos;
+	float2 padding;
 };
 
 struct V2P
 {
-	float4 pos: SV_POSITION;
+	float4 position: SV_POSITION;
 	float2 uv: TEXCOORD0;
+};
+
+float4 CalcSpecular(float3 viewDir, float3 lightDir, float intensity, float3 normal, float specPower)
+{
+	float4 result = float4(0, 0, 0, 0);
+	
+	if (intensity > 0.0f) {
+		float3 reflection = normalize(2 * intensity * normal - lightDir);
+		float posDot = saturate(dot(reflection, viewDir));
+		result = pow(posDot, specPower);
+	}
+
+	return result;
 };
 
 float4 DeferredLightingPS(V2P input) : SV_TARGET
@@ -34,7 +50,26 @@ float4 DeferredLightingPS(V2P input) : SV_TARGET
 
 	lightIntensity = saturate(dot(normals.xyz, lightDir));
 
-	outColor = saturate(colors * lightIntensity);
+	uint3 index = uint3(input.position.x, input.position.y, 0);
+	float depth = depthTexture.Load(index).r;
+
+	//Get screenspace position
+	float4 position;
+	position.x = input.uv.x * 2.0f - 1.0f;
+	position.y = -(input.uv.y * 2.0f - 1.0f);
+	position.z = depth;
+	position.w = 1.0f;
+
+	//Convert to world space
+	position = mul(position, inverseViewProjection);
+	position /= position.w;
+
+	float3 reflection = normalize(reflect(lightDir, normals.xyz));
+	float3 dirToCam = normalize(camPos - position);
+	float4 specular = pow(saturate(dot(reflection, dirToCam)), normals.w);
+
+	//outColor = saturate(colors * lightIntensity);
+	outColor = saturate((colors * lightIntensity) + specular);
 
 	return outColor;
 }

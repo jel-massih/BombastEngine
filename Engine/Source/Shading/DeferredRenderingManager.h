@@ -26,6 +26,7 @@ private:
 
 	ID3D11Texture2D* m_pDepthStencilBuffer;
 	ID3D11DepthStencilView* m_pDepthStencilView;
+	ID3D11ShaderResourceView* m_pDepthShaderResourceView;
 
 	DeferredLightShader* m_pDeferredLightShader;
 	PostProcessRenderWindow* m_pPostProcessRenderWindow;

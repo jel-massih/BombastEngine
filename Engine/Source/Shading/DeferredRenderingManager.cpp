@@ -6,7 +6,8 @@ DeferredRenderingManager::DeferredRenderingManager()
 	: m_pDepthStencilBuffer(nullptr),
 	m_pDepthStencilView(nullptr),
 	m_pDeferredLightShader(nullptr),
-	m_pPostProcessRenderWindow(nullptr)
+	m_pPostProcessRenderWindow(nullptr),
+	m_pDepthShaderResourceView(nullptr)
 {
 }
 
@@ -14,6 +15,7 @@ DeferredRenderingManager::~DeferredRenderingManager()
 {
 	SAFE_RELEASE(m_pDepthStencilBuffer);
 	SAFE_RELEASE(m_pDepthStencilView);
+	SAFE_RELEASE(m_pDepthShaderResourceView);
 
 	SAFE_DELETE(m_pDeferredLightShader);
 	SAFE_DELETE(m_pPostProcessRenderWindow);
@@ -37,11 +39,11 @@ bool DeferredRenderingManager::Initialize(ID3D11Device* device, int texWidth, in
 		depthBufferDesc.Height = texHeight;
 		depthBufferDesc.MipLevels = 1;
 		depthBufferDesc.ArraySize = 1;
-		depthBufferDesc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
+		depthBufferDesc.Format = DXGI_FORMAT_R24G8_TYPELESS;
 		depthBufferDesc.SampleDesc.Count = 1;
 		depthBufferDesc.SampleDesc.Quality = 0;
 		depthBufferDesc.Usage = D3D11_USAGE_DEFAULT;
-		depthBufferDesc.BindFlags = D3D11_BIND_DEPTH_STENCIL;
+		depthBufferDesc.BindFlags = D3D11_BIND_DEPTH_STENCIL | D3D11_BIND_SHADER_RESOURCE;
 		depthBufferDesc.CPUAccessFlags = 0;
 		depthBufferDesc.MiscFlags = 0;
 
@@ -63,6 +65,22 @@ bool DeferredRenderingManager::Initialize(ID3D11Device* device, int texWidth, in
 		result = device->CreateDepthStencilView(m_pDepthStencilBuffer, &dsvDesc, &m_pDepthStencilView);
 		if (FAILED(result)) {
 			BE_ERROR("Error: Failed to create Depth Stencil View");
+			return false;
+		}
+	}
+
+	//Create Shader Resource
+	{
+		D3D11_SHADER_RESOURCE_VIEW_DESC srvDesc;
+		ZeroMemory(&srvDesc, sizeof(srvDesc));
+		
+		srvDesc.Format = DXGI_FORMAT_R24_UNORM_X8_TYPELESS;
+		srvDesc.ViewDimension = D3D10_SRV_DIMENSION_TEXTURE2D;
+		srvDesc.Texture2D.MostDetailedMip = 0;
+		srvDesc.Texture2D.MipLevels = 1;
+		result = device->CreateShaderResourceView(m_pDepthStencilBuffer, &srvDesc, &m_pDepthShaderResourceView);
+		if (FAILED(result)) {
+			BE_ERROR("Error: Failed to create Depth Stencil Shader Resource View");
 			return false;
 		}
 	}
@@ -114,12 +132,6 @@ void DeferredRenderingManager::StartRender(ID3D11Device* device, ID3D11DeviceCon
 
 void DeferredRenderingManager::DrawLightPass(ID3D11DeviceContext* context, const Scene* pScene) const
 {
-	IRenderer* pRenderer = g_pApp->GetGraphicsManager()->GetRenderer();
-
-	Mat4x4 worldMatrix, projectionMatrix, orthoMatrix;
-	pRenderer->VGetWorldMatrix(worldMatrix);
-	pRenderer->VGetOrthoMatrix(orthoMatrix);
-
 	m_pPostProcessRenderWindow->Render(context);
-	m_pDeferredLightShader->Render(context, m_pPostProcessRenderWindow->GetIndexCount(), XMLoadFloat4x4(&worldMatrix), XMLoadFloat4x4(&Mat4x4::g_Identity), XMLoadFloat4x4(&orthoMatrix), m_texGBuffer.GetShaderResourceView(), m_texGBuffer2.GetShaderResourceView(), pScene);
+	m_pDeferredLightShader->Render(context, m_pPostProcessRenderWindow->GetIndexCount(), m_texGBuffer.GetShaderResourceView(), m_texGBuffer2.GetShaderResourceView(), m_pDepthShaderResourceView, pScene);
 }
