@@ -240,9 +240,8 @@ bool DeferredLightShader::SetShaderParameters(ID3D11DeviceContext* deviceContext
 
 	dataPtr2 = (LightBufferType*)mappedResource.pData;
 	dataPtr2->inverseViewProjection = XMMatrixInverse(nullptr, view * projection);
-	dataPtr2->lightDirection = Vec3(dir->x, dir->y, dir->z);
-	dataPtr2->camPos = pScene->GetCamera()->GetPosition();
-	dataPtr2->padding = XMFLOAT2(0,0);
+	dataPtr2->lightDirection = Vec4(dir->x, dir->y, dir->z, 1);
+	dataPtr2->camPos = Vec4(pScene->GetCamera()->GetPosition(), 1);
 
 	deviceContext->Unmap(m_pLightBuffer, 0);
 	deviceContext->PSSetConstantBuffers(0, 1, &m_pLightBuffer);

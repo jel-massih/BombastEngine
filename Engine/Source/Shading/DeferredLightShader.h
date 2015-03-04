@@ -15,10 +15,10 @@ private:
 	struct LightBufferType
 	{
 		XMMATRIX inverseViewProjection;
-		XMFLOAT3 lightDirection;
-		XMFLOAT3 camPos;
-		XMFLOAT2 padding;
+		XMFLOAT4 lightDirection;
+		XMFLOAT4 camPos;
 	};
+	static_assert((sizeof(LightBufferType) % 16) == 0, "LightBufferType CB size not padded correctly");
 
 public:
 	DeferredLightShader();

@@ -9,9 +9,8 @@ SamplerState PointSampler : register(s0);
 cbuffer LightBuffer : register(b0)
 {
 	matrix inverseViewProjection;
-	float3 lightDirection;
-	float3 camPos;
-	float2 padding;
+	float4 lightDirection;
+	float4 camPos;
 };
 
 struct V2P
