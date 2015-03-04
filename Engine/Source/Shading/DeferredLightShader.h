@@ -8,15 +8,15 @@ private:
 	struct MatrixBufferType
 	{
 		XMMATRIX world;
-		XMMATRIX view;
-		XMMATRIX projection;
+		XMMATRIX orthoProjection;
+		XMMATRIX InverseViewProjectionMatrix;
 	};
+	static_assert((sizeof(MatrixBufferType) % 16) == 0, "MatrixBufferType CB size not padded correctly");
 
 	struct LightBufferType
 	{
 		XMMATRIX inverseViewProjection;
 		XMFLOAT4 lightDirection;
-		XMFLOAT4 camPos;
 	};
 	static_assert((sizeof(LightBufferType) % 16) == 0, "LightBufferType CB size not padded correctly");
 
@@ -39,6 +39,7 @@ private:
 	ID3D11InputLayout* m_pLayout;
 	ID3D11Buffer* m_pMatrixBuffer;
 	ID3D11Buffer* m_pLightBuffer;
+	ID3D11Buffer* m_pCameraBuffer;
 
 	ID3D11SamplerState* m_pPointSampleState;
 	ID3D11SamplerState* m_pDepthSampleState;

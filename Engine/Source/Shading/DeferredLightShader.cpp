@@ -1,6 +1,8 @@
 #include "DeferredLightShader.h"
 #include "../Graphics3D/Material.h"
 #include "../Graphics3D/Scene.h"
+#include "ShadingCommon.h"
+
 
 DeferredLightShader::DeferredLightShader()
 {
@@ -11,6 +13,7 @@ DeferredLightShader::DeferredLightShader()
 	m_pLightBuffer = nullptr;
 	m_pPointSampleState = nullptr;
 	m_pDepthSampleState = nullptr;
+	m_pCameraBuffer = nullptr;
 }
 
 DeferredLightShader::~DeferredLightShader()
@@ -23,6 +26,7 @@ DeferredLightShader::~DeferredLightShader()
 	SAFE_RELEASE(m_pPixelShader);
 	SAFE_RELEASE(m_pVertexShader);
 	SAFE_RELEASE(m_pDepthSampleState);
+	SAFE_RELEASE(m_pCameraBuffer);
 }
 
 bool DeferredLightShader::Initialize(ID3D11Device* device)
@@ -60,6 +64,7 @@ bool DeferredLightShader::InitializeShader(ID3D11Device* device, std::string ver
 	unsigned int numElements;
 	D3D11_BUFFER_DESC matrixBufferDesc;
 	D3D11_BUFFER_DESC lightBufferDesc;
+	D3D11_BUFFER_DESC cameraBufferDesc;
 
 	Resource vertexShaderResource(vertexShaderPath.c_str());
 	ResourceHandle* pVertexResHandle = g_pApp->m_pResourceCache->GetHandle(&vertexShaderResource);
@@ -172,17 +177,34 @@ bool DeferredLightShader::InitializeShader(ID3D11Device* device, std::string ver
 		}
 	}
 
-	lightBufferDesc.Usage = D3D11_USAGE_DYNAMIC;
-	lightBufferDesc.ByteWidth = sizeof(LightBufferType);
-	lightBufferDesc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
-	lightBufferDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
-	lightBufferDesc.MiscFlags = 0;
-	lightBufferDesc.StructureByteStride = 0;
-
-	result = device->CreateBuffer(&lightBufferDesc, NULL, &m_pLightBuffer);
-	if (FAILED(result))
 	{
-		return false;
+		lightBufferDesc.Usage = D3D11_USAGE_DYNAMIC;
+		lightBufferDesc.ByteWidth = sizeof(LightBufferType);
+		lightBufferDesc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+		lightBufferDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+		lightBufferDesc.MiscFlags = 0;
+		lightBufferDesc.StructureByteStride = 0;
+
+		result = device->CreateBuffer(&lightBufferDesc, NULL, &m_pLightBuffer);
+		if (FAILED(result))
+		{
+			return false;
+		}
+	}
+
+	{
+		cameraBufferDesc.Usage = D3D11_USAGE_DYNAMIC;
+		cameraBufferDesc.ByteWidth = sizeof(beShading::CameraBufferType);
+		cameraBufferDesc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+		cameraBufferDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+		cameraBufferDesc.MiscFlags = 0;
+		cameraBufferDesc.StructureByteStride = 0;
+
+		result = device->CreateBuffer(&cameraBufferDesc, NULL, &m_pCameraBuffer);
+		if (FAILED(result))
+		{
+			return false;
+		}
 	}
 
 	return true;
@@ -194,19 +216,20 @@ bool DeferredLightShader::SetShaderParameters(ID3D11DeviceContext* deviceContext
 	D3D11_MAPPED_SUBRESOURCE mappedResource;
 	MatrixBufferType* dataPtr;
 	LightBufferType* dataPtr2;
+	beShading::CameraBufferType* dataPtr3;
 	unsigned int bufferNumber;
 
 
 	IRenderer* pRenderer = g_pApp->GetGraphicsManager()->GetRenderer();
 
-	Mat4x4 worldMatrix, orthoMatrix, projectionMatrix;
+	Mat4x4 worldMatrix, orthoMatrix, projectionMatrix, viewMatrix;
 	pRenderer->VGetWorldMatrix(worldMatrix);
+	pRenderer->VGetViewMatrix(viewMatrix);
 	pRenderer->VGetProjectionMatrix(projectionMatrix);
 	pRenderer->VGetOrthoMatrix(orthoMatrix);
 
 	XMMATRIX world = DirectX::XMMatrixTranspose(worldMatrix.Mat());
-	XMMATRIX view = DirectX::XMMatrixTranspose(Mat4x4::g_Identity.Mat());
-	XMMATRIX projection = DirectX::XMMatrixTranspose(orthoMatrix.Mat());
+	XMMATRIX orthoProjection = DirectX::XMMatrixTranspose(orthoMatrix.Mat());
 
 	result = deviceContext->Map(m_pMatrixBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource);
 	if (FAILED(result))
@@ -217,8 +240,8 @@ bool DeferredLightShader::SetShaderParameters(ID3D11DeviceContext* deviceContext
 	dataPtr = (MatrixBufferType*)mappedResource.pData;
 
 	dataPtr->world = world;
-	dataPtr->view = view;
-	dataPtr->projection = projection;
+	dataPtr->orthoProjection = orthoProjection;
+	dataPtr->InverseViewProjectionMatrix = XMMatrixInverse(nullptr, (viewMatrix * projectionMatrix).Mat());
 
 	deviceContext->Unmap(m_pMatrixBuffer, 0);
 
@@ -239,12 +262,18 @@ bool DeferredLightShader::SetShaderParameters(ID3D11DeviceContext* deviceContext
 	}
 
 	dataPtr2 = (LightBufferType*)mappedResource.pData;
-	dataPtr2->inverseViewProjection = XMMatrixInverse(nullptr, view * projection);
 	dataPtr2->lightDirection = Vec4(dir->x, dir->y, dir->z, 1);
-	dataPtr2->camPos = Vec4(pScene->GetCamera()->GetPosition(), 1);
 
 	deviceContext->Unmap(m_pLightBuffer, 0);
 	deviceContext->PSSetConstantBuffers(0, 1, &m_pLightBuffer);
+
+	dataPtr3 = (beShading::CameraBufferType*)mappedResource.pData;
+	dataPtr3->cameraPosition = pScene->GetCamera()->GetPosition();
+	dataPtr3->padding = 1;
+
+	deviceContext->Unmap(m_pCameraBuffer, 0);
+	deviceContext->VSSetConstantBuffers(1, 1, &m_pCameraBuffer);
+	deviceContext->PSSetConstantBuffers(1, 1, &m_pCameraBuffer);
 
 	return true;
 }
