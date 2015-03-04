@@ -39,7 +39,7 @@ bool DeferredRenderingManager::Initialize(ID3D11Device* device, int texWidth, in
 		depthBufferDesc.Height = texHeight;
 		depthBufferDesc.MipLevels = 1;
 		depthBufferDesc.ArraySize = 1;
-		depthBufferDesc.Format = DXGI_FORMAT_R24G8_TYPELESS;
+		depthBufferDesc.Format = DXGI_FORMAT_R32_TYPELESS;
 		depthBufferDesc.SampleDesc.Count = 1;
 		depthBufferDesc.SampleDesc.Quality = 0;
 		depthBufferDesc.Usage = D3D11_USAGE_DEFAULT;
@@ -58,7 +58,7 @@ bool DeferredRenderingManager::Initialize(ID3D11Device* device, int texWidth, in
 		D3D11_DEPTH_STENCIL_VIEW_DESC dsvDesc;
 		ZeroMemory(&dsvDesc, sizeof(D3D11_DEPTH_STENCIL_VIEW_DESC));
 
-		dsvDesc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
+		dsvDesc.Format = DXGI_FORMAT_D32_FLOAT;
 		dsvDesc.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
 		dsvDesc.Texture2D.MipSlice = 0;
 
@@ -74,8 +74,8 @@ bool DeferredRenderingManager::Initialize(ID3D11Device* device, int texWidth, in
 		D3D11_SHADER_RESOURCE_VIEW_DESC srvDesc;
 		ZeroMemory(&srvDesc, sizeof(srvDesc));
 		
-		srvDesc.Format = DXGI_FORMAT_R24_UNORM_X8_TYPELESS;
-		srvDesc.ViewDimension = D3D10_SRV_DIMENSION_TEXTURE2D;
+		srvDesc.Format = DXGI_FORMAT_R32_FLOAT;
+		srvDesc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D;
 		srvDesc.Texture2D.MostDetailedMip = 0;
 		srvDesc.Texture2D.MipLevels = 1;
 		result = device->CreateShaderResourceView(m_pDepthStencilBuffer, &srvDesc, &m_pDepthShaderResourceView);
@@ -122,11 +122,11 @@ void DeferredRenderingManager::StartRender(ID3D11Device* device, ID3D11DeviceCon
 	{
 		//Fill G Buffer
 		ID3D11RenderTargetView* pGBufRTV[] = { m_texGBuffer.GetRenderTargetView(), m_texGBuffer2.GetRenderTargetView() };
-		context->OMSetRenderTargets(2, pGBufRTV, pDSV);
+		context->OMSetRenderTargets(2, pGBufRTV, m_pDepthStencilView);
 
 		context->ClearRenderTargetView(pGBufRTV[0], clearBufferColor);
 		context->ClearRenderTargetView(pGBufRTV[1], clearBufferColor);
-		context->ClearDepthStencilView(pDSV, D3D11_CLEAR_DEPTH, 1.0f, 0);
+		context->ClearDepthStencilView(m_pDepthStencilView, D3D11_CLEAR_DEPTH, 1.0f, 0);
 	}
 }
 

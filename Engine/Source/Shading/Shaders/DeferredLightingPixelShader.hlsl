@@ -64,7 +64,10 @@ float4 DeferredLightingPS(V2P input) : SV_TARGET
 	position = mul(position, inverseViewProjection);
 	position /= position.w;
 
-	float3 reflection = normalize(reflect(lightDir, normals.xyz));
+	//pow(0,0) not valid, so make sure power never 0
+	normals.w = max(normals.w, 0.1);
+
+	float3 reflection = normalize(2 * lightIntensity * normals.xyz - lightDir);
 	float3 dirToCam = normalize(camPos - position);
 	float4 specular = pow(saturate(dot(reflection, dirToCam)), normals.w);
 

@@ -199,8 +199,9 @@ bool DeferredLightShader::SetShaderParameters(ID3D11DeviceContext* deviceContext
 
 	IRenderer* pRenderer = g_pApp->GetGraphicsManager()->GetRenderer();
 
-	Mat4x4 worldMatrix, orthoMatrix;
+	Mat4x4 worldMatrix, orthoMatrix, projectionMatrix;
 	pRenderer->VGetWorldMatrix(worldMatrix);
+	pRenderer->VGetProjectionMatrix(projectionMatrix);
 	pRenderer->VGetOrthoMatrix(orthoMatrix);
 
 	XMMATRIX world = DirectX::XMMatrixTranspose(worldMatrix.Mat());
