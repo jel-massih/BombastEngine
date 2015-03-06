@@ -58,14 +58,13 @@ float4 DeferredLightingPS(V2P input) : SV_TARGET
 	uint3 index = uint3(input.position.x, input.position.y, 0);
 	float depth = depthTexture.Load(index).r;
 
-	float3 viewRay = normalize(input.viewDirection);
-	float3 posWS = camPos + viewRay * depth;
+	float3 posWS = camPos + input.viewDirection * depth;
 
 	//pow(0,0) not valid, so make sure power never 0
 	normals.w = max(normals.w, 0.1);
 
 	float3 reflection = normalize(2 * lightIntensity * normals.xyz - lightDir);
-	float4 specular = pow(saturate(dot(reflection, viewRay)), normals.w);
+		float4 specular = pow(saturate(dot(reflection, input.viewDirection)), normals.w);
 
 	outColor = saturate((colors * lightIntensity) + specular);
 

@@ -35,8 +35,8 @@ V2P DeferredLightingVS(A2V input)
 
 	result.uv = input.uv;
 
-	float3 positionWS = mul(input.position, invViewProjMatrix);
-	result.viewDirection = positionWS - camPos;
-
+	float3 positionWS = mul(input.position, worldMatrix);
+	result.viewDirection =  camPos - positionWS.xyz;
+	result.viewDirection = normalize(result.viewDirection);
 	return result;
 }
