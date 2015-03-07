@@ -2,7 +2,7 @@ cbuffer MatrixBuffer : register(b0)
 {
 	matrix worldMatrix;
 	matrix projectionMatrix;
-	matrix invViewProjMatrix;
+	matrix inverseViewProj;
 };
 
 cbuffer CameraBuffer : register(b1)
@@ -35,8 +35,8 @@ V2P DeferredLightingVS(A2V input)
 
 	result.uv = input.uv;
 
-	float3 positionWS = mul(input.position, worldMatrix);
-	result.viewDirection =  camPos - positionWS.xyz;
-	result.viewDirection = normalize(result.viewDirection);
+	float4 posWS = mul(input.position, projectionMatrix);
+	result.viewDirection = normalize(posWS - camPos);
+
 	return result;
 }

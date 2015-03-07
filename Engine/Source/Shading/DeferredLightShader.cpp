@@ -267,6 +267,12 @@ bool DeferredLightShader::SetShaderParameters(ID3D11DeviceContext* deviceContext
 	deviceContext->Unmap(m_pLightBuffer, 0);
 	deviceContext->PSSetConstantBuffers(0, 1, &m_pLightBuffer);
 
+	result = deviceContext->Map(m_pCameraBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource);
+	if (FAILED(result))
+	{
+		return false;
+	}
+
 	dataPtr3 = (beShading::CameraBufferType*)mappedResource.pData;
 	dataPtr3->cameraPosition = pScene->GetCamera()->GetPosition();
 	dataPtr3->padding = 1;
