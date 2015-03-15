@@ -6,16 +6,28 @@
 const float BombastPhysics::Timestep = 1.00f / 60.0f;
 
 BombastPhysics::BombastPhysics()
+	: m_pFoundation(nullptr), m_pPhysicsCore(nullptr)
 {
 }
 
 BombastPhysics::~BombastPhysics()
 {
+	SAFE_DELETE(m_pFoundation);
+	SAFE_DELETE(m_pPhysicsCore);
 }
 
 bool BombastPhysics::VInitialize()
 {
 	VLoadPhysicsConfigXml();
+
+	m_pFoundation = BE_NEW BpFoundation;
+	m_pPhysicsCore = BE_NEW BpPhysicsCore;
+
+	if (!m_pPhysicsCore) 
+	{
+		BE_ERROR("Error Creating Bombast Physics Device");
+		return false;
+	}
 
 	return true;
 }

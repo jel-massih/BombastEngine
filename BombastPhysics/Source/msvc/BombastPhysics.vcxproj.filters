@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="..\BpPhysicsApi.h" />
+    <ClInclude Include="..\BpPhysicsCore.h" />
+    <ClInclude Include="..\Foundation\BpFoundation.h">
+      <Filter>Foundation</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\BpPhysicsCore.cpp" />
+    <ClCompile Include="..\Foundation\BpFoundation.cpp">
+      <Filter>Foundation</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Foundation">
+      <UniqueIdentifier>{8d0f8b48-f9ab-4e78-bfa9-c20fab56ae19}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

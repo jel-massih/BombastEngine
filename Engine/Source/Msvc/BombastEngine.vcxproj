@@ -488,7 +488,7 @@
       <SDLCheck>true</SDLCheck>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
       <ForcedIncludeFiles>stdafx.h</ForcedIncludeFiles>
-      <AdditionalIncludeDirectories>$(SolutionDir)Libraries\zlib128\include;$(SolutionDir)Libraries\lua-5.2.3\include;$(SolutionDir)Libraries\PhysX-3.3.2\include;$(SolutionDir)Msvc</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Libraries\zlib128\include;$(SolutionDir)Libraries\lua-5.2.3\include;$(SolutionDir)Libraries\PhysX-3.3.2\include;$(SolutionDir)Msvc;$(SolutionDir)..\..\BombastPhysics\Source;</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -507,7 +507,7 @@
       <SDLCheck>true</SDLCheck>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
       <ForcedIncludeFiles>stdafx.h</ForcedIncludeFiles>
-      <AdditionalIncludeDirectories>$(SolutionDir)Libraries\zlib128\include;$(SolutionDir)Libraries\lua-5.2.3\include;$(SolutionDir)Libraries\PhysX-3.3.2\include;$(SolutionDir)Msvc</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Libraries\zlib128\include;$(SolutionDir)Libraries\lua-5.2.3\include;$(SolutionDir)Libraries\PhysX-3.3.2\include;$(SolutionDir)Msvc;$(SolutionDir)..\..\BombastPhysics\Source;</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -526,7 +526,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;_WIN32_WINNT=0x0601;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)Libraries\zlib128\include;$(SolutionDir)Libraries\lua-5.2.3\include;$(SolutionDir)Libraries\PhysX-3.3.2\include;$(SolutionDir)Msvc</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Libraries\zlib128\include;$(SolutionDir)Libraries\lua-5.2.3\include;$(SolutionDir)Libraries\PhysX-3.3.2\include;$(SolutionDir)Msvc;$(SolutionDir)..\..\BombastPhysics\Source;</AdditionalIncludeDirectories>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <ForcedIncludeFiles>stdafx.h</ForcedIncludeFiles>
@@ -549,7 +549,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;_WIN32_WINNT=0x0601;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)Libraries\zlib128\include;$(SolutionDir)Libraries\lua-5.2.3\include;$(SolutionDir)Libraries\PhysX-3.3.2\include;$(SolutionDir)Msvc</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Libraries\zlib128\include;$(SolutionDir)Libraries\lua-5.2.3\include;$(SolutionDir)Libraries\PhysX-3.3.2\include;$(SolutionDir)Msvc;$(SolutionDir)..\..\BombastPhysics\Source;</AdditionalIncludeDirectories>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <ForcedIncludeFiles>stdafx.h</ForcedIncludeFiles>

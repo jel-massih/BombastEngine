@@ -1,6 +1,9 @@
 #pragma once
 
 #include "Physics.h"
+#include "BpPhysicsApi.h"
+
+using namespace bPhysics;
 
 class BombastPhysics : public IGamePhysics, BE_NonCopyable
 {
@@ -45,6 +48,9 @@ private:
 
 private:
 	static const float Timestep; //Timestep value
+	
+	BpPhysicsCore* m_pPhysicsCore;
+	BpFoundation* m_pFoundation;
 
 	DensityTable m_densityTable;
 	MaterialTable m_materialTable;
