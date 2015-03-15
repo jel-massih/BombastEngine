@@ -6,5 +6,5 @@
 
   <UVScale x="1" y="1" />
 
-  <Shader type="DeferredLit" />
+  <Shader type="Lit" />
 </Material>
