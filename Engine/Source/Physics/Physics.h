@@ -1,6 +1,17 @@
 #pragma once
 
+#include "../Bombast/interfaces.h"
+#include <map>
+
 extern IGamePhysics* CreateGamePhysics();
+
+enum EPhysicsEngine
+{
+	BE_PHYSICS_BOMBAST,
+	BE_PHYSICS_PHYSX
+};
+
+extern std::map<std::string, EPhysicsEngine> StringToPhysicsEngineType;
 
 struct PhysicsMaterialData
 {

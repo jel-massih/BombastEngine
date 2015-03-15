@@ -13,3 +13,9 @@ IGamePhysics* CreateGamePhysics()
 
 	return gamePhysics;
 }
+
+std::map<std::string, EPhysicsEngine> StringToPhysicsEngineType =
+{
+	{ "physx", EPhysicsEngine::BE_PHYSICS_PHYSX },
+	{ "bombast", EPhysicsEngine::BE_PHYSICS_BOMBAST }
+};

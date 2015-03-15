@@ -3,6 +3,7 @@
 #include "../BombastEngineStd.h"
 #include "rapidxml.hpp"
 #include <string>
+#include "../Physics/Physics.h"
 
 extern bool IsOnlyInstance(LPCTSTR gameTitle);
 extern bool CheckStorage(const DWORDLONG diskSpaceNeeded);
@@ -18,6 +19,8 @@ struct GameOptions
 	Point m_screenPosition;
 	bool m_bFullscreen;
 	bool m_bVsync;
+
+	EPhysicsEngine m_physicsEngine;
 
 	rapidxml::xml_document<> *m_pDoc;
 

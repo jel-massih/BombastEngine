@@ -108,6 +108,8 @@ GameOptions::GameOptions()
 	m_screenSize = Point(SCREEN_WIDTH, SCREEN_HEIGHT);
 	m_screenPosition = Point(SCREEN_X, SCREEN_Y);
 
+	m_physicsEngine = EPhysicsEngine::BE_PHYSICS_BOMBAST;
+
 	m_bDebugConsoleEnabled = false;
 	m_debugConsolePosition = Point(0, 0);	
 
@@ -194,6 +196,24 @@ void GameOptions::Init(const char* xmlFilePath)
 		}
 		else {
 			m_bVsync = true;
+		}
+	}
+
+	pNode = pRoot->first_node("Physics");
+	if (pNode)
+	{
+		std::string attribute;
+		if (pNode->first_attribute("engine")) 
+		{
+			attribute = pNode->first_attribute("engine")->value();
+			if (StringToPhysicsEngineType.count(attribute)) 
+			{
+				m_physicsEngine = StringToPhysicsEngineType[attribute];
+			}
+			else 
+			{
+				BE_ERROR("Bad Physics Engine setting in Physics options.");
+			}
 		}
 	}
 
