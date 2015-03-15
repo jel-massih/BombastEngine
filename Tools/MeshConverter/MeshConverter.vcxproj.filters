@@ -14,15 +14,9 @@
     <ClCompile Include="MeshFormatConverter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AssimpImporter.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BasicMath.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="AssimpImporter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

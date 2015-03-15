@@ -85,11 +85,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AssimpImporter.cpp" />
     <ClCompile Include="MeshFormatConverter.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AssimpImporter.h" />
     <ClInclude Include="BasicMath.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
