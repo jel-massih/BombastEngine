@@ -30,7 +30,7 @@ CoreGameLogic *GameSampleApp::VCreateGameAndView()
 
 GameSampleLogic::GameSampleLogic()
 {
-	m_pGamePhysics = CreateGamePhysics();
+	m_pGamePhysics = CreateGamePhysics(g_pApp->m_options.m_physicsEngine);
 	RegisterAllDelegates();
 }
 

@@ -4,7 +4,7 @@
 
 BombastEditorLogic::BombastEditorLogic()
 {
-	m_pGamePhysics = CreateGamePhysics();
+	m_pGamePhysics = CreateGamePhysics(g_pApp->m_options.m_physicsEngine);
 	m_pActiveHumanView = nullptr;
 }
 

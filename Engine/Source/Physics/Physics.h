@@ -3,13 +3,13 @@
 #include "../Bombast/interfaces.h"
 #include <map>
 
-extern IGamePhysics* CreateGamePhysics();
-
 enum EPhysicsEngine
 {
 	BE_PHYSICS_BOMBAST,
 	BE_PHYSICS_PHYSX
 };
+
+extern IGamePhysics* CreateGamePhysics(EPhysicsEngine engineType);
 
 extern std::map<std::string, EPhysicsEngine> StringToPhysicsEngineType;
 

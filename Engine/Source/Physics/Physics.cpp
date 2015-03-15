@@ -1,10 +1,22 @@
 #include "Physics.h"
 #include "PhysXPhysics.h"
+#include "BombastPhysics.h"
 
-IGamePhysics* CreateGamePhysics()
+IGamePhysics* CreateGamePhysics(EPhysicsEngine engineType)
 {
 	IGamePhysics* gamePhysics;
-	gamePhysics = BE_NEW PhysXPhysics;
+
+	switch (engineType) {
+	case EPhysicsEngine::BE_PHYSICS_PHYSX:
+		gamePhysics = BE_NEW PhysXPhysics;
+		break;
+	case EPhysicsEngine::BE_PHYSICS_BOMBAST:
+		gamePhysics = BE_NEW BombastPhysics;
+		break;
+	default:
+		BE_ERROR("Invalid Physics Engine Type %i used for CreateGamePhysics", engineType);
+		return nullptr;
+	}
 
 	if (gamePhysics && !gamePhysics->VInitialize())
 	{

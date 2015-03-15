@@ -176,6 +176,9 @@
     <ClCompile Include="..\Shading\StaticMeshShader.cpp">
       <Filter>Shading</Filter>
     </ClCompile>
+    <ClCompile Include="..\Physics\BombastPhysics.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Bombast\BombastApp.h">
@@ -395,6 +398,9 @@
     </ClInclude>
     <ClInclude Include="..\Shading\ShadingCommon.h">
       <Filter>Shading</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Physics\BombastPhysics.h">
+      <Filter>Physics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
