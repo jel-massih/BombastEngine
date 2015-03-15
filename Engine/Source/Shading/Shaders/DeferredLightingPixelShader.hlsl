@@ -66,7 +66,7 @@ float4 DeferredLightingPS(V2P input) : SV_TARGET
 	float3 reflection = normalize(2 * lightIntensity * normals.xyz - lightDir);
 	float4 specular = pow(saturate(dot(reflection, input.viewDirection)), normals.w);
 
-	outColor = saturate((colors * lightIntensity) + specular);
+	outColor = saturate((colors * lightIntensity));
 
 	return outColor;
 }
