@@ -52,6 +52,8 @@ private:
 	BpPhysicsCore* m_pPhysicsCore;
 	BpFoundation* m_pFoundation;
 
+	BpScene* m_pScene;
+
 	DensityTable m_densityTable;
 	MaterialTable m_materialTable;
 };

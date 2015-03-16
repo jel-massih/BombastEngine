@@ -6,16 +6,34 @@
     <ClInclude Include="..\Foundation\BpFoundation.h">
       <Filter>Foundation</Filter>
     </ClInclude>
+    <ClInclude Include="..\Scene\BpScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Utils\BpMath.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\BpPhysicsCore.cpp" />
     <ClCompile Include="..\Foundation\BpFoundation.cpp">
       <Filter>Foundation</Filter>
     </ClCompile>
+    <ClCompile Include="..\Scene\BpScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Utils\BpMath.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Foundation">
       <UniqueIdentifier>{8d0f8b48-f9ab-4e78-bfa9-c20fab56ae19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{61883bc1-7e48-4978-85d1-8b16b361bc52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils">
+      <UniqueIdentifier>{f5dd4cd5-b34e-4f8f-a458-32e3877dc490}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

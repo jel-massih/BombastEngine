@@ -5,6 +5,8 @@
 
 const float BombastPhysics::Timestep = 1.00f / 60.0f;
 
+const float BE_PHYSICS_GRAVITY = -9.91f;
+
 BombastPhysics::BombastPhysics()
 	: m_pFoundation(nullptr), m_pPhysicsCore(nullptr)
 {
@@ -28,6 +30,12 @@ bool BombastPhysics::VInitialize()
 		BE_ERROR("Error Creating Bombast Physics Device");
 		return false;
 	}
+
+	BpSceneDesc sceneDesc;
+	sceneDesc.gravity = BpVec3(0.0f, -9.91f, 0.0f);
+	sceneDesc.bounceThresholdVelocity = BE_PHYSICS_GRAVITY * -0.2f;
+
+	m_pScene = m_pPhysicsCore->CreateScene(sceneDesc);
 
 	return true;
 }
