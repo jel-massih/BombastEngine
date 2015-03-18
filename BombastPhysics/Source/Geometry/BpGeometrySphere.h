@@ -1,7 +1,6 @@
 #pragma once
 
 #include "BpGeometry.h"
-#include <cmath>
 
 namespace bPhysics
 {
@@ -18,13 +17,13 @@ namespace bPhysics
 		float radius;
 	};
 
-	inline bool BpGeometrySphere::isValid() const
+	inline bool BpGeometrySphere::IsValid() const
 	{
 		if (m_type != BpGeometryType::SPHERE)
 		{
 			return false;
 		}
-		if (!isfinite(radius))
+		if (!BpIsFinite(radius))
 		{
 			return false;
 		}
