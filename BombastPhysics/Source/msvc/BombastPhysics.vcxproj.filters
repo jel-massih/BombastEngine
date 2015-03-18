@@ -40,6 +40,9 @@
     <ClInclude Include="..\Actors\BpRigidDynamic.h">
       <Filter>Actors</Filter>
     </ClInclude>
+    <ClInclude Include="..\Foundation\BpReporting.h">
+      <Filter>Foundation</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\BpPhysicsCore.cpp" />
