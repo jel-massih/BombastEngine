@@ -9,9 +9,6 @@
     <ClInclude Include="..\Scene\BpScene.h">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="..\Utils\BpMath.h">
-      <Filter>Utils</Filter>
-    </ClInclude>
     <ClInclude Include="..\Geometry\BpGeometry.h">
       <Filter>Geometry</Filter>
     </ClInclude>
@@ -22,6 +19,9 @@
     <ClInclude Include="..\Actors\BpActor.h">
       <Filter>Actors</Filter>
     </ClInclude>
+    <ClInclude Include="..\Foundation\BpMath.h">
+      <Filter>Foundation</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\BpPhysicsCore.cpp" />
@@ -31,10 +31,10 @@
     <ClCompile Include="..\Scene\BpScene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="..\Utils\BpMath.cpp">
-      <Filter>Utils</Filter>
-    </ClCompile>
     <ClCompile Include="..\BpMaterial.cpp" />
+    <ClCompile Include="..\Foundation\BpMath.cpp">
+      <Filter>Foundation</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Foundation">
@@ -42,9 +42,6 @@
     </Filter>
     <Filter Include="Scene">
       <UniqueIdentifier>{61883bc1-7e48-4978-85d1-8b16b361bc52}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Utils">
-      <UniqueIdentifier>{f5dd4cd5-b34e-4f8f-a458-32e3877dc490}</UniqueIdentifier>
     </Filter>
     <Filter Include="Geometry">
       <UniqueIdentifier>{478e4f1a-7e52-4c06-b7e9-76f6bf9fb31d}</UniqueIdentifier>

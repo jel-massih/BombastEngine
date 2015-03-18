@@ -139,17 +139,17 @@
     <ClInclude Include="..\BpPhysicsApi.h" />
     <ClInclude Include="..\BpPhysicsCore.h" />
     <ClInclude Include="..\Foundation\BpFoundation.h" />
+    <ClInclude Include="..\Foundation\BpMath.h" />
     <ClInclude Include="..\Geometry\BpGeometry.h" />
     <ClInclude Include="..\Geometry\BpGeometrySphere.h" />
     <ClInclude Include="..\Scene\BpScene.h" />
-    <ClInclude Include="..\Utils\BpMath.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\BpMaterial.cpp" />
     <ClCompile Include="..\BpPhysicsCore.cpp" />
     <ClCompile Include="..\Foundation\BpFoundation.cpp" />
+    <ClCompile Include="..\Foundation\BpMath.cpp" />
     <ClCompile Include="..\Scene\BpScene.cpp" />
-    <ClCompile Include="..\Utils\BpMath.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

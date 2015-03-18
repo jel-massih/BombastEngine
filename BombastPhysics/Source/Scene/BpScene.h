@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Utils/BpMath.h"
+#include "../Foundation/BpMath.h"
 
 namespace bPhysics
 {
