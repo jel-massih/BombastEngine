@@ -37,6 +37,9 @@
     <ClInclude Include="..\Actors\BpRigidBody.h">
       <Filter>Actors</Filter>
     </ClInclude>
+    <ClInclude Include="..\Actors\BpRigidDynamic.h">
+      <Filter>Actors</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\BpPhysicsCore.cpp" />

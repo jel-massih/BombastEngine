@@ -137,6 +137,7 @@
     <ClInclude Include="..\Actors\BpActor.h" />
     <ClInclude Include="..\Actors\BpRigidActor.h" />
     <ClInclude Include="..\Actors\BpRigidBody.h" />
+    <ClInclude Include="..\Actors\BpRigidDynamic.h" />
     <ClInclude Include="..\BpMaterial.h" />
     <ClInclude Include="..\BpPhysicsApi.h" />
     <ClInclude Include="..\BpPhysicsCore.h" />

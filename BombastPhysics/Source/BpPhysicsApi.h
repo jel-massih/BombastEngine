@@ -18,6 +18,7 @@
 #include "Actors\BpActor.h"
 #include "Actors\BpRigidActor.h"
 #include "Actors\BpRigidBody.h"
+#include "Actors\BpRigidDynamic.h"
 
 //Core
 #include "BpPhysicsCore.h"
