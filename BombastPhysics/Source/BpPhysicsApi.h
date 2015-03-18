@@ -2,9 +2,7 @@
 
 //Foundation
 #include "Foundation\BpFoundation.h"
-
-//Utils
-#include "Utils\BpMath.h"
+#include "Foundation\BpMath.h"
 
 //Scene
 #include "Scene\BpScene.h"
