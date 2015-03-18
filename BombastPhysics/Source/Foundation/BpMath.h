@@ -1,6 +1,12 @@
 #pragma once
+#include <cmath>
+
 namespace bPhysics
 {
+	//====== Misc Helpers ===========
+	inline bool BpIsFinite(float f) { return isfinite(f); }
+
+	//====== BpVec3 ===========
 	class BpVec3
 	{
 	public:
@@ -14,6 +20,10 @@ namespace bPhysics
 			:x(_x), y(_y), z(_z) {}
 
 		inline BpVec3 operator*(float f) const;
+
+		inline bool IsFinite() const {
+			return BpIsFinite(x) && BpIsFinite(y) && BpIsFinite(z);
+		}
 
 		static const BpVec3 g_InvalidBpVec3;
 
@@ -31,6 +41,7 @@ namespace bPhysics
 		return v * f;
 	}
 
+	//====== BpVec4 ===========
 	class BpVec4
 	{
 	public:
@@ -58,10 +69,10 @@ namespace bPhysics
 		return v * f;
 	}
 
+	//====== BpMat4x4 ===========
 	class BpMat4x4
 	{
 	public:
 		BpVec4 col0, col1, col2, col3;
 	};
-
 }
