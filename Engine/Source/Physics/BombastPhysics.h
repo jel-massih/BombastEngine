@@ -46,6 +46,10 @@ private:
 
 	void ConnectPVD();
 
+	void Mat4x4ToBpMat4x4(const Mat4x4& input, BpMat4x4* output);
+	void BpMat4x4ToMat4x4(const BpMat4x4& input, Mat4x4* output);
+	void BpVec3ToVec3(const BpVec3& input, Vec3* output);
+
 private:
 	static const float Timestep; //Timestep value
 	
