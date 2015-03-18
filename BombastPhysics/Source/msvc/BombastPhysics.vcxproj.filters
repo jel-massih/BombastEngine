@@ -19,6 +19,9 @@
       <Filter>Geometry</Filter>
     </ClInclude>
     <ClInclude Include="..\BpMaterial.h" />
+    <ClInclude Include="..\Actors\BpActor.h">
+      <Filter>Actors</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\BpPhysicsCore.cpp" />
@@ -45,6 +48,9 @@
     </Filter>
     <Filter Include="Geometry">
       <UniqueIdentifier>{478e4f1a-7e52-4c06-b7e9-76f6bf9fb31d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actors">
+      <UniqueIdentifier>{45d2cea3-0427-48b8-bb03-8c38fb190cc3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
