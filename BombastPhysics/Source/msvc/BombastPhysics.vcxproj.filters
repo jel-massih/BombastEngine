@@ -19,6 +19,9 @@
     <ClInclude Include="..\Actors\BpActor.h">
       <Filter>Actors</Filter>
     </ClInclude>
+    <ClInclude Include="..\Geometry\BpBounds3.h">
+      <Filter>Geometry</Filter>
+    </ClInclude>
     <ClInclude Include="..\Foundation\BpMath.h">
       <Filter>Foundation</Filter>
     </ClInclude>
