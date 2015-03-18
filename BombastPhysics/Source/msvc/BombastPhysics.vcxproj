@@ -138,6 +138,7 @@
     <ClInclude Include="..\BpMaterial.h" />
     <ClInclude Include="..\BpPhysicsApi.h" />
     <ClInclude Include="..\BpPhysicsCore.h" />
+    <ClInclude Include="..\Foundation\BpAssert.h" />
     <ClInclude Include="..\Foundation\BpFoundation.h" />
     <ClInclude Include="..\Foundation\BpMath.h" />
     <ClInclude Include="..\Foundation\BpTypes.h" />

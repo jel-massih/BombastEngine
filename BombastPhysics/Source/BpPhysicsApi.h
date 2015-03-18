@@ -3,6 +3,7 @@
 //Foundation
 #include "Foundation\BpFoundation.h"
 #include "Foundation\BpTypes.h"
+#include "Foundation\BpAssert.h"
 #include "Foundation\BpMath.h"
 
 //Scene

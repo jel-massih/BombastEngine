@@ -28,6 +28,9 @@
     <ClInclude Include="..\Foundation\BpTypes.h">
       <Filter>Foundation</Filter>
     </ClInclude>
+    <ClInclude Include="..\Foundation\BpAssert.h">
+      <Filter>Foundation</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\BpPhysicsCore.cpp" />
