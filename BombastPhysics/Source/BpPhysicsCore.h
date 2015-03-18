@@ -4,6 +4,7 @@ namespace bPhysics
 {
 	class BpScene;
 	class BpSceneDesc;
+	class BpMaterial;
 
 	class BpPhysicsCore
 	{
@@ -12,6 +13,8 @@ namespace bPhysics
 		~BpPhysicsCore();
 
 		BpScene* CreateScene(const BpSceneDesc& sceneDesc);
+
+		BpMaterial* CreateMaterial(float dynamicFriction, float staticFriction, float restitution);
 
 	private:
 		BpScene* m_pScene;
