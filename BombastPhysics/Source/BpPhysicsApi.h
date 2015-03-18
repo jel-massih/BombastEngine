@@ -12,6 +12,7 @@
 //Geometry
 #include "Geometry\BpGeometry.h"
 #include "Geometry\BpGeometrySphere.h"
+#include "Geometry\BpBounds3.h"
 
 //Core
 #include "BpPhysicsCore.h"
