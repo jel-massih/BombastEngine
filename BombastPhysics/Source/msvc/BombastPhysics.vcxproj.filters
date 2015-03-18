@@ -31,6 +31,7 @@
     <ClCompile Include="..\Utils\BpMath.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
+    <ClCompile Include="..\BpMaterial.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Foundation">

@@ -15,3 +15,4 @@
 
 //Core
 #include "BpPhysicsCore.h"
+#include "BpMaterial.h"

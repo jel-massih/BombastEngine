@@ -2,24 +2,30 @@
 
 namespace bPhysics
 {
+	struct BpMaterialData
+	{
+		float dynamicFriction;
+		float staticFriction;
+		float restitution;
+
+		BpMaterialData()
+			: dynamicFriction(0.0f), staticFriction(0.0f), restitution(0.0f) 
+		{}
+	};
+
 	class BpMaterial
 	{
 	public:
-		virtual void Release() = 0;
+		void SetDynamicFriction(float coefficient);
+		float GetDynamicFriction() const;
 
-		virtual void SetDynamicFriction(float coefficient) = 0;
-		virtual float GetDynamicFriction() const = 0;
+		void SetStaticFriction(float coefficient);
+		float GetStaticFriction() const;
 
-		virtual void SetStaticFriction(float coefficient) = 0;
-		virtual float GetStaticFriction() const = 0;
+		void SetRestitution(float restitution);
+		float GetResititution() const;
 
-		virtual void SetRestitution(float restitution) = 0;
-		virtual float GetResititution() const = 0;
-
-		virtual const char* GetTypeName() const { return "BpMaterial"; }
-
-	protected:
-		inline BpMaterial() {}
-		virtual ~BpMaterial();
+	private:
+		BpMaterialData m_materialData;
 	};
 }
