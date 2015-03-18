@@ -12,6 +12,12 @@
     <ClInclude Include="..\Utils\BpMath.h">
       <Filter>Utils</Filter>
     </ClInclude>
+    <ClInclude Include="..\Geometry\BpGeometry.h">
+      <Filter>Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Geometry\BpGeometrySphere.h">
+      <Filter>Geometry</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\BpPhysicsCore.cpp" />
@@ -34,6 +40,9 @@
     </Filter>
     <Filter Include="Utils">
       <UniqueIdentifier>{f5dd4cd5-b34e-4f8f-a458-32e3877dc490}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Geometry">
+      <UniqueIdentifier>{478e4f1a-7e52-4c06-b7e9-76f6bf9fb31d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

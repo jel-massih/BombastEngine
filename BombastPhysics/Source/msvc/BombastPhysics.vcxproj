@@ -137,6 +137,8 @@
     <ClInclude Include="..\BpPhysicsApi.h" />
     <ClInclude Include="..\BpPhysicsCore.h" />
     <ClInclude Include="..\Foundation\BpFoundation.h" />
+    <ClInclude Include="..\Geometry\BpGeometry.h" />
+    <ClInclude Include="..\Geometry\BpGeometrySphere.h" />
     <ClInclude Include="..\Scene\BpScene.h" />
     <ClInclude Include="..\Utils\BpMath.h" />
   </ItemGroup>
