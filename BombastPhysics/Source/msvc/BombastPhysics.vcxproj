@@ -134,6 +134,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\BpMaterial.h" />
     <ClInclude Include="..\BpPhysicsApi.h" />
     <ClInclude Include="..\BpPhysicsCore.h" />
     <ClInclude Include="..\Foundation\BpFoundation.h" />

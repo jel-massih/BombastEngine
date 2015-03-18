@@ -18,6 +18,7 @@
     <ClInclude Include="..\Geometry\BpGeometrySphere.h">
       <Filter>Geometry</Filter>
     </ClInclude>
+    <ClInclude Include="..\BpMaterial.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\BpPhysicsCore.cpp" />
