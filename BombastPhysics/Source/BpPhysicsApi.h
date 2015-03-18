@@ -14,6 +14,11 @@
 #include "Geometry\BpGeometrySphere.h"
 #include "Geometry\BpBounds3.h"
 
+//Actors
+#include "Actors\BpActor.h"
+#include "Actors\BpRigidActor.h"
+#include "Actors\BpRigidBody.h"
+
 //Core
 #include "BpPhysicsCore.h"
 #include "BpMaterial.h"
