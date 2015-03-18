@@ -101,7 +101,9 @@ void BombastPhysics::VSyncVisibleScene()
 
 void BombastPhysics::VAddSphere(float radius, Actor* gameActor, const std::string& densityStr, const std::string& physicsMaterial, bool gravityEnabled, float linearDamping, float angularDamping)
 {
-	throw "Function not yet implemented.";
+	float density = LookupDensity(densityStr);
+
+	AddShape(gameActor, &BpGeometrySphere(radius), density, physicsMaterial, gravityEnabled, linearDamping, angularDamping);
 }
 
 void BombastPhysics::VRemoveActor(ActorId id)
@@ -171,6 +173,35 @@ Mat4x4 BombastPhysics::VGetTransform(const ActorId id)
 {
 	throw "Function not yet implemented.";
 	return Mat4x4::g_Identity;
+}
+
+void BombastPhysics::AddShape(Actor* pActor, BpGeometry* geometry, float density, const std::string& physicsMaterial, bool gravityEnabled, float linearDamping, float angularDamping)
+{
+	BE_ASSERT(pActor);
+	BE_ASSERT(geometry);
+
+	ActorId actorId = pActor->GetId();
+
+	Mat4x4 transform = Mat4x4::g_Identity;
+	TransformComponent* pTransformComponent = pActor->GetComponent<TransformComponent>(TransformComponent::g_Name);
+
+	if (pTransformComponent)
+	{
+		transform = pTransformComponent->GetTransform();
+	}
+	else
+	{
+		BE_ERROR("BombastPhysics::AddShape Requires a transform");
+		return;
+	}
+
+	BE_LOG_PHYSICS("Adding Shape of type %d to Actor: %d", geometry, actorId);
+
+	PhysicsMaterialData material(LookupMaterialData(physicsMaterial));
+	BpMaterial* material = m_pPhysicsCore->CreateMaterial(material.m_friction, material.m_friction, material.m_restitution);
+
+	BpMat4x4 bpMat;
+	Mat4x4ToBpMat4x4(transform, &bpMat);
 }
 
 void BombastPhysics::Mat4x4ToBpMat4x4(const Mat4x4& input, BpMat4x4* output)

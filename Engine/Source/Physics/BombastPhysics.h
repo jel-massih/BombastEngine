@@ -44,7 +44,7 @@ private:
 	PhysicsMaterialData LookupMaterialData(const std::string& materialString);
 	float LookupDensity(const std::string& densityString);
 
-	void ConnectPVD();
+	void AddShape(Actor* pActor, BpGeometry* geometry, float density, const std::string& physicsMaterial, bool gravityEnabled, float linearDamping, float angularDamping);
 
 	void Mat4x4ToBpMat4x4(const Mat4x4& input, BpMat4x4* output);
 	void BpMat4x4ToMat4x4(const BpMat4x4& input, Mat4x4* output);
