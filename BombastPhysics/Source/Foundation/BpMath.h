@@ -7,6 +7,9 @@ namespace bPhysics
 		BpVec3()
 			:x(0.f), y(0.f), z(0.f) {}
 
+		BpVec3(float f)
+			:x(f), y(f), z(f) {}
+
 		BpVec3(float _x, float _y, float _z)
 			:x(_x), y(_y), z(_z) {}
 
