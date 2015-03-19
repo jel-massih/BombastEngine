@@ -153,6 +153,7 @@
     <ClInclude Include="..\Scene\BpScene.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Actors\BpRigidDynamic.cpp" />
     <ClCompile Include="..\BpMaterial.cpp" />
     <ClCompile Include="..\BpPhysicsCore.cpp" />
     <ClCompile Include="..\Foundation\BpFoundation.cpp" />

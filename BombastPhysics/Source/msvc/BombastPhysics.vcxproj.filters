@@ -62,6 +62,9 @@
     <ClCompile Include="..\Geometry\BpShape.cpp">
       <Filter>Geometry</Filter>
     </ClCompile>
+    <ClCompile Include="..\Actors\BpRigidDynamic.cpp">
+      <Filter>Actors</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Foundation">
