@@ -77,6 +77,11 @@ namespace bPhysics
 	class BpMat4x4
 	{
 	public:
+		inline bool IsValid() const
+		{
+			return col0.IsFinite() && col1.IsFinite() && col2.IsFinite() && col3.IsFinite();
+		}
+
 		BpVec4 col0, col1, col2, col3;
 	};
 }
