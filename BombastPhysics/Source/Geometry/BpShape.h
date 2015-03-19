@@ -9,18 +9,10 @@ namespace bPhysics
 	class BpShape
 	{
 	public:
-		virtual BpGeometryType::Type GetGeometryType() const = 0;
-		virtual void SetGeometry(const BpGeometry& geometry) = 0;
+		BpShape(const BpGeometry& geometry,
+			bool isExclusive);
 
-		virtual bool GetSphereGeometry(BpGeometrySphere& geometry) const = 0;
-
-		virtual BpRigidActor* GetActor() const = 0;
-
-		virtual void SetLocalPose(const BpMat4x4& pose) = 0;
-		virtual BpMat4x4 GetLocalPose() const = 0;
-
-	protected:
-		inline BpShape() {}
-		virtual ~BpShape() {}
+	private:
+		
 	};
 }

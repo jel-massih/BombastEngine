@@ -157,6 +157,7 @@
     <ClCompile Include="..\BpPhysicsCore.cpp" />
     <ClCompile Include="..\Foundation\BpFoundation.cpp" />
     <ClCompile Include="..\Foundation\BpMath.cpp" />
+    <ClCompile Include="..\Geometry\BpShape.cpp" />
     <ClCompile Include="..\Scene\BpScene.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

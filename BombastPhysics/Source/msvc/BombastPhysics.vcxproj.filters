@@ -59,6 +59,9 @@
     <ClCompile Include="..\Foundation\BpMath.cpp">
       <Filter>Foundation</Filter>
     </ClCompile>
+    <ClCompile Include="..\Geometry\BpShape.cpp">
+      <Filter>Geometry</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Foundation">
