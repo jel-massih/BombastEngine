@@ -53,6 +53,10 @@ namespace bPhysics
 
 		inline BpVec4 operator*(float f) const;
 
+		inline bool IsFinite() const {
+			return BpIsFinite(x) && BpIsFinite(y) && BpIsFinite(z) && BpIsFinite(w);
+		}
+
 		static const BpVec4 g_InvalidBpVec4;
 
 	public:
