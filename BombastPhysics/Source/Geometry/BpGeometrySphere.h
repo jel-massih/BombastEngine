@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../Foundation/BpMath.h"
 #include "BpGeometry.h"
 
 namespace bPhysics
