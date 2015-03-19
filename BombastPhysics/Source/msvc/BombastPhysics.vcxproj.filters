@@ -43,6 +43,9 @@
     <ClInclude Include="..\Foundation\BpReporting.h">
       <Filter>Foundation</Filter>
     </ClInclude>
+    <ClInclude Include="..\Geometry\BpShape.h">
+      <Filter>Geometry</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\BpPhysicsCore.cpp" />

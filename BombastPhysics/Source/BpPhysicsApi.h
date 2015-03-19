@@ -14,6 +14,7 @@
 #include "Geometry\BpGeometry.h"
 #include "Geometry\BpGeometrySphere.h"
 #include "Geometry\BpBounds3.h"
+#include "Geometry\BpShape.h"
 
 //Actors
 #include "Actors\BpActor.h"
