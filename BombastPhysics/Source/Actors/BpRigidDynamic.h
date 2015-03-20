@@ -1,16 +1,30 @@
 #pragma once
 
 #include "BpRigidBody.h"
+#include "../Geometry/BpShape.h"
 
 namespace bPhysics
 {
+	class BpShape;
+
 	//BpRigidDynamic represents dynamic rigid simulation
 	//Created by calling BpPhysicsCore::CreateRigidDynamic
 	class BpRigidDynamic : public BpRigidBody
 	{
 	public:
-		BpRigidDynamic();
+		BpRigidDynamic(const BpShape shape);
 		~BpRigidDynamic();
+
+		//Retrieves actors world space transform
+		inline virtual BpMat4x4 GetWorldTransform() const;
+		inline virtual void SetWorldTransform(const BpMat4x4& newTransform, bool autoWake = true);
+
+		virtual BpActorType::Type GetType() const { return BpActorType::RIGID_DYNAMIC; }
+
+		virtual void SetName(const char* name) { m_name = name; }
+		virtual const char* GetName() const { return m_name; }
+
+		virtual BpBounds3 GetWorldBounds(float inflation = 1.01f) const;
 
 		inline virtual void SetLinearDamping(float linearDamping) { m_linearDamping = linearDamping; }
 		inline virtual float GetLinearDamping() const { return m_linearDamping; }
@@ -48,11 +62,17 @@ namespace bPhysics
 	private:
 		BpVec3 m_velocity, m_angularVelocity;
 
+		BpShape m_shape;
+
+		BpScene* m_pScene;
+
 		float m_linearDamping, m_angularDamping, m_maxAngularVelocity;
 
 		float m_sleepThreshold, m_stabilizationThreshold;
 
 		unsigned int m_wakeCounter, m_resetWakeCounterValue;
+
+		const char* m_name;
 
 		bool m_bSleeping;
 	};
