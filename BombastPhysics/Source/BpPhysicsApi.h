@@ -2,6 +2,7 @@
 
 //Foundation
 #include "Foundation\BpFoundation.h"
+#include "Foundation\BpFactory.h"
 #include "Foundation\BpTypes.h"
 #include "Foundation\BpReporting.h"
 #include "Foundation\BpAssert.h"

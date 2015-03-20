@@ -37,6 +37,9 @@
     <ClInclude Include="..\Actors\BpRigidBody.h">
       <Filter>Actors</Filter>
     </ClInclude>
+    <ClInclude Include="..\Foundation\BpFactory.h">
+      <Filter>Foundation</Filter>
+    </ClInclude>
     <ClInclude Include="..\Actors\BpRigidDynamic.h">
       <Filter>Actors</Filter>
     </ClInclude>
@@ -57,6 +60,9 @@
     </ClCompile>
     <ClCompile Include="..\BpMaterial.cpp" />
     <ClCompile Include="..\Foundation\BpMath.cpp">
+      <Filter>Foundation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Foundation\BpFactory.cpp">
       <Filter>Foundation</Filter>
     </ClCompile>
     <ClCompile Include="..\Geometry\BpShape.cpp">
