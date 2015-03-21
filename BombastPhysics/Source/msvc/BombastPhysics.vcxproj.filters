@@ -50,6 +50,9 @@
       <Filter>Geometry</Filter>
     </ClInclude>
     <ClInclude Include="..\BpPhysicsStd.h" />
+    <ClInclude Include="stdafx.h">
+      <Filter>Msvc</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\BpPhysicsCore.cpp" />
@@ -72,6 +75,9 @@
     <ClCompile Include="..\Actors\BpRigidDynamic.cpp">
       <Filter>Actors</Filter>
     </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Msvc</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Foundation">
@@ -85,6 +91,9 @@
     </Filter>
     <Filter Include="Actors">
       <UniqueIdentifier>{45d2cea3-0427-48b8-bb03-8c38fb190cc3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Msvc">
+      <UniqueIdentifier>{0545ab5d-4c3d-431e-83de-433fb418a6c5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
