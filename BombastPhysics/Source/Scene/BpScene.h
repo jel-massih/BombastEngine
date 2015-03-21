@@ -1,9 +1,12 @@
 #pragma once
 
 #include "../Foundation/BpMath.h"
+#include <vector>
 
 namespace bPhysics
 {
+	class BpActor;
+
 	class BpSceneDesc
 	{
 	public:
@@ -23,6 +26,8 @@ namespace bPhysics
 		BpScene();
 		~BpScene();
 
+		void Release();
+
 		void InitFromSceneDesc(const BpSceneDesc& sceneDesc);
 
 		void SetGravity(const BpVec3& vec) { m_gravity = vec; }
@@ -31,9 +36,13 @@ namespace bPhysics
 		void SetBounceThresholdVelocity(const float f) { m_bounceThresholdVelocity = f; }
 		float GetBounceThresholdVelocity() { return m_bounceThresholdVelocity; }
 
+		void AddActor(BpActor* actor);
+
 	private:
 		BpVec3 m_gravity;
 		float m_bounceThresholdVelocity;
+
+		std::vector<BpActor*> m_sceneActors;
 	};
 
 	inline BpSceneDesc::BpSceneDesc()
