@@ -26,3 +26,4 @@
 //Core
 #include "BpPhysicsCore.h"
 #include "BpMaterial.h"
+#include "BpPhysicsStd.h"
