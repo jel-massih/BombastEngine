@@ -10,6 +10,9 @@ class BombastPhysics : public IGamePhysics, BE_NonCopyable
 	typedef std::map<std::string, float> DensityTable;
 	typedef std::map<std::string, PhysicsMaterialData> MaterialTable;
 
+	typedef std::map<ActorId, BpRigidBody*> ActorIdToBPRigidBodyTable;
+	typedef std::map<BpRigidBody const *, ActorId> BPRigidBodyToActorIdTable;
+
 public:
 	BombastPhysics();
 	virtual ~BombastPhysics();
@@ -60,4 +63,6 @@ private:
 
 	DensityTable m_densityTable;
 	MaterialTable m_materialTable;
+	ActorIdToBPRigidBodyTable m_actorRigidBodyMap;
+	BPRigidBodyToActorIdTable m_rigidBodyActorMap;
 };

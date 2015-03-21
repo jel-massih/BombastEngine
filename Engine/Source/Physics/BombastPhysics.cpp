@@ -91,12 +91,35 @@ void BombastPhysics::VLoadPhysicsConfigXml()
 
 void BombastPhysics::VOnUpdate(float const deltaMs)
 {
-	throw "Function not yet implemented.";
+	m_pScene->Simulate(BombastPhysics::Timestep);
 }
 
 void BombastPhysics::VSyncVisibleScene()
 {
-	throw "Function not yet implemented.";
+	for (ActorIdToBPRigidBodyTable::const_iterator it = m_actorRigidBodyMap.begin(); it != m_actorRigidBodyMap.end(); it++)
+	{
+		ActorId const id = it->first;
+
+		BpMat4x4 bpLoc = it->second->GetWorldTransform();
+		Mat4x4 loc;
+		BpMat4x4ToMat4x4(bpLoc, &loc);
+
+		Actor* pActor = g_pApp->m_pGame->VGetActor(id);
+		if (pActor)
+		{
+			TransformComponent* pTransformComponent = pActor->GetComponent<TransformComponent>(TransformComponent::g_Name);
+
+			if (pTransformComponent)
+			{
+				if (pTransformComponent->GetTransform() != loc)
+				{
+					pTransformComponent->SetTransform(loc);
+					IEventDataPtr pEvent(BE_NEW EvtData_Move_Actor(id, loc));
+					IEventManager::Get()->VQueueEvent(pEvent);
+				}
+			}
+		}
+	}
 }
 
 void BombastPhysics::VAddSphere(float radius, Actor* gameActor, const std::string& densityStr, const std::string& physicsMaterial, bool gravityEnabled, float linearDamping, float angularDamping)
@@ -181,6 +204,7 @@ void BombastPhysics::AddShape(Actor* pActor, BpGeometry* geometry, float density
 	BE_ASSERT(geometry);
 
 	ActorId actorId = pActor->GetId();
+	BE_ASSERTf(m_actorRigidBodyMap.find(actorId) == m_actorRigidBodyMap.end(), "Actor with more than one rigidbody");
 
 	Mat4x4 transform = Mat4x4::g_Identity;
 	TransformComponent* pTransformComponent = pActor->GetComponent<TransformComponent>(TransformComponent::g_Name);
@@ -198,10 +222,19 @@ void BombastPhysics::AddShape(Actor* pActor, BpGeometry* geometry, float density
 	BE_LOG_PHYSICS("Adding Shape of type %d to Actor: %d", geometry, actorId);
 
 	PhysicsMaterialData material(LookupMaterialData(physicsMaterial));
-	BpMaterial* material = m_pPhysicsCore->CreateMaterial(material.m_friction, material.m_friction, material.m_restitution);
+	BpMaterial* mat = m_pPhysicsCore->CreateMaterial(material.m_friction, material.m_friction, material.m_restitution);
 
 	BpMat4x4 bpMat;
 	Mat4x4ToBpMat4x4(transform, &bpMat);
+
+	BpRigidDynamic* body = BpCreateDynamic(*m_pPhysicsCore, bpMat, *geometry, *mat, density);
+	//@TODO: Set disable gravity
+	body->SetLinearDamping(linearDamping);
+	body->SetAngularDamping(angularDamping);
+
+	m_pScene->AddActor(body);
+	m_actorRigidBodyMap[actorId] = body;
+	m_rigidBodyActorMap[body] = actorId;
 }
 
 void BombastPhysics::Mat4x4ToBpMat4x4(const Mat4x4& input, BpMat4x4* output)
