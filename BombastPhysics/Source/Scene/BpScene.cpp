@@ -1,5 +1,6 @@
 #include "../msvc/stdafx.h"
 #include "BpScene.h"
+#include "../Actors/BpRigidDynamic.h"
 
 using namespace bPhysics;
 
@@ -15,12 +16,12 @@ BpScene::~BpScene()
 
 void BpScene::Release()
 {
-	for (int i = 0; i < m_sceneActors.size(); i++) 
+	for (unsigned int i = 0; i < m_sceneRigidDynamics.size(); i++) 
 	{
-		 BP_SAFE_DELETE(m_sceneActors[i]);
+		BP_SAFE_DELETE(m_sceneRigidDynamics[i]);
 	}
 
-	m_sceneActors.clear();
+	m_sceneRigidDynamics.clear();
 }
 
 void BpScene::InitFromSceneDesc(const BpSceneDesc& sceneDesc)
@@ -31,5 +32,21 @@ void BpScene::InitFromSceneDesc(const BpSceneDesc& sceneDesc)
 
 void BpScene::AddActor(BpActor* actor)
 {
-	m_sceneActors.push_back(actor);
+	if (actor->GetType() == BpActorType::RIGID_DYNAMIC)
+	{
+		BpRigidDynamic* body = static_cast<BpRigidDynamic*>(actor);
+		m_sceneRigidDynamics.push_back(body);
+		body->SetScene(this);
+	}
+}
+
+void BpScene::Simulate(float timestep)
+{
+	for (auto it = m_sceneRigidDynamics.begin(); it != m_sceneRigidDynamics.end(); it++)
+	{
+		if (!(*it)->IsSleeping())
+		{
+			(*it)->Simulate(timestep);
+		}
+	}
 }

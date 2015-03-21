@@ -5,6 +5,7 @@
 
 namespace bPhysics
 {
+	class BpRigidDynamic;
 	class BpActor;
 
 	class BpSceneDesc
@@ -36,13 +37,17 @@ namespace bPhysics
 		void SetBounceThresholdVelocity(const float f) { m_bounceThresholdVelocity = f; }
 		float GetBounceThresholdVelocity() { return m_bounceThresholdVelocity; }
 
+		//Add Actor to proper store based off type
 		void AddActor(BpActor* actor);
+
+		//Simulate the scene forward by the given timestep
+		void Simulate(float timestep);
 
 	private:
 		BpVec3 m_gravity;
 		float m_bounceThresholdVelocity;
 
-		std::vector<BpActor*> m_sceneActors;
+		std::vector<BpRigidDynamic*> m_sceneRigidDynamics;
 	};
 
 	inline BpSceneDesc::BpSceneDesc()

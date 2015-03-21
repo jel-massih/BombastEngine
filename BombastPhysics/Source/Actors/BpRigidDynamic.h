@@ -59,6 +59,11 @@ namespace bPhysics
 		//Force actor to sleep
 		virtual void ForceSleep();
 
+		inline void SetScene(BpScene* scene) { m_pScene = scene; }
+		inline BpScene const * GetScene() const { return m_pScene; }
+
+		void Simulate(float timestep);
+
 	private:
 		BpVec3 m_velocity, m_angularVelocity;
 

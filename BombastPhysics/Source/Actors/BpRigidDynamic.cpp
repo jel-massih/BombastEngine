@@ -1,4 +1,5 @@
 #include "BpRigidDynamic.h"
+#include "../Scene/BpScene.h"
 
 #define BP_RIGID_DYNAMIC_DEFAULT_LINEAR_DAMPING (0.2f)
 #define BP_RIGID_DYNAMIC_DEFAULT_ANGULAR_DAMPING (0.2f)
@@ -57,4 +58,32 @@ void BpRigidDynamic::ForceSleep()
 	m_velocity = BpVec3(0, 0, 0);
 	m_angularVelocity = BpVec3(0, 0, 0);
 	m_bSleeping = true;
+}
+
+void BpRigidDynamic::Simulate(float timestep)
+{
+	BpVec3 acceleration;
+	//@TODO: add check for if gravity enabled/disabled
+	acceleration = m_pScene->GetGravity();
+
+	m_velocity = m_velocity + (acceleration * timestep);
+
+	if (m_velocity.Length() > m_sleepThreshold || acceleration.Length() > m_sleepThreshold)
+	{
+		WakeUp();
+
+		BpMat4x4 t = m_shape.GetWorldTransform();
+		BpVec3 pos = t.GetPosition();
+		pos += (m_velocity * timestep);
+		t.SetPosition(pos);
+		m_shape.SetWorldTransform(t);
+	}
+	else
+	{
+		m_wakeCounter--;
+
+		if (m_wakeCounter <= 0) {
+			ForceSleep();
+		}
+	}
 }
