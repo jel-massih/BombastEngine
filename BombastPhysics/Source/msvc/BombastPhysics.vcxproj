@@ -141,6 +141,7 @@
     <ClInclude Include="..\BpMaterial.h" />
     <ClInclude Include="..\BpPhysicsApi.h" />
     <ClInclude Include="..\BpPhysicsCore.h" />
+    <ClInclude Include="..\BpPhysicsStd.h" />
     <ClInclude Include="..\Foundation\BpAssert.h" />
     <ClInclude Include="..\Foundation\BpFactory.h" />
     <ClInclude Include="..\Foundation\BpFoundation.h" />
