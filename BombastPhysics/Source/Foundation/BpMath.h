@@ -21,9 +21,14 @@ namespace bPhysics
 
 		inline BpVec3 operator*(float f) const;
 
+		inline BpVec3 operator+(BpVec3 v) const;
+		inline BpVec3& operator+=(const BpVec3& v);
+
 		inline bool IsFinite() const {
 			return BpIsFinite(x) && BpIsFinite(y) && BpIsFinite(z);
 		}
+
+		inline float Length() { return sqrt(x*x + y*y + z*z); }
 
 		static const BpVec3 g_InvalidBpVec3;
 
@@ -39,6 +44,20 @@ namespace bPhysics
 	inline BpVec3 operator *(const float f, const BpVec3 v)
 	{
 		return v * f;
+	}
+
+	inline BpVec3 BpVec3::operator+(BpVec3 v) const
+	{
+		return BpVec3(x + v.x, y + v.y, z + v.z);
+	}
+
+	inline BpVec3& BpVec3::operator+=(const BpVec3& v)
+	{
+		x += v.x;
+		y += v.y;
+		z += v.z;
+
+		return *this;
 	}
 
 	//====== BpVec4 ===========
@@ -82,6 +101,21 @@ namespace bPhysics
 			return col0.IsFinite() && col1.IsFinite() && col2.IsFinite() && col3.IsFinite();
 		}
 
+		inline BpVec3 GetPosition() const;
+		inline void SetPosition(const BpVec3& pos);
+
 		BpVec4 col0, col1, col2, col3;
 	};
+
+	inline BpVec3 BpMat4x4::GetPosition() const
+	{
+		return BpVec3(col3.x, col3.y, col3.z);
+	}
+
+	inline void BpMat4x4::SetPosition(const BpVec3& pos)
+	{
+		col3.x = pos.x;
+		col3.y = pos.y;
+		col3.z = pos.z;
+	}
 }
