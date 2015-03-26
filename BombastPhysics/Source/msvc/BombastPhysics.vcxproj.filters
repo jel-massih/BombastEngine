@@ -53,6 +53,7 @@
     <ClInclude Include="stdafx.h">
       <Filter>Msvc</Filter>
     </ClInclude>
+    <ClInclude Include="..\Debugging\Debugging.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\BpPhysicsCore.cpp" />

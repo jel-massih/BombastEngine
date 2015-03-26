@@ -7,4 +7,13 @@
 			<Material path="materials\physics_testbed\ramp_mat.bmtl"/>
 		</Materials>
 	</MeshRenderComponent>
+
+  <PhysicsComponent>
+    <Shape>Sphere</Shape>
+    <Density>oak</Density>
+    <PhysicsMaterial>Normal</PhysicsMaterial>
+    <GravityEnabled>false</GravityEnabled>
+    <LinearDamping>1</LinearDamping>
+    <AngularDamping>1</AngularDamping>
+  </PhysicsComponent>
 </Actor>

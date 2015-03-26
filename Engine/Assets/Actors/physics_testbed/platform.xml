@@ -2,6 +2,7 @@
 	<TransformComponent>
 		<Scale x="12" y="0.25" z="12"/>
 	</TransformComponent>
+
   <MeshRenderComponent>
     <Mesh path="meshes\cube.bmdl"></Mesh>
     <Materials>

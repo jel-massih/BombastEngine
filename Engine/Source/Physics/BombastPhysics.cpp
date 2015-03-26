@@ -16,6 +16,8 @@ BombastPhysics::~BombastPhysics()
 {
 	SAFE_DELETE(m_pFoundation);
 	SAFE_DELETE(m_pPhysicsCore);
+
+	SAFE_RELEASE(m_pScene);
 }
 
 bool BombastPhysics::VInitialize()
@@ -131,7 +133,12 @@ void BombastPhysics::VAddSphere(float radius, Actor* gameActor, const std::strin
 
 void BombastPhysics::VRemoveActor(ActorId id)
 {
-	throw "Function not yet implemented.";
+	if (BpRigidBody* const body = FindRigidBody(id))
+	{
+		RemovePhysicsObject(body);
+		m_actorRigidBodyMap.erase(id);
+		m_rigidBodyActorMap.erase(body);
+	}
 }
 
 void BombastPhysics::VRenderDiagnostics()
@@ -235,6 +242,35 @@ void BombastPhysics::AddShape(Actor* pActor, BpGeometry* geometry, float density
 	m_pScene->AddActor(body);
 	m_actorRigidBodyMap[actorId] = body;
 	m_rigidBodyActorMap[body] = actorId;
+
+	SAFE_DELETE(mat);
+}
+
+void BombastPhysics::RemovePhysicsObject(BpRigidBody* body)
+{
+	m_pScene->RemoveActor(body);
+}
+
+BpRigidBody* BombastPhysics::FindRigidBody(ActorId actorId)
+{
+	ActorIdToBPRigidBodyTable::const_iterator found = m_actorRigidBodyMap.find(actorId);
+	if (found != m_actorRigidBodyMap.end())
+	{
+		return found->second;
+	}
+
+	return NULL;
+}
+
+ActorId BombastPhysics::FindActorId(BpRigidBody const * const body)
+{
+	BPRigidBodyToActorIdTable::const_iterator found = m_rigidBodyActorMap.find(body);
+	if (found != m_rigidBodyActorMap.end())
+	{
+		return found->second;
+	}
+
+	return ActorId();
 }
 
 void BombastPhysics::Mat4x4ToBpMat4x4(const Mat4x4& input, BpMat4x4* output)

@@ -22,6 +22,8 @@ void BpScene::Release()
 	}
 
 	m_sceneRigidDynamics.clear();
+
+	delete this;
 }
 
 void BpScene::InitFromSceneDesc(const BpSceneDesc& sceneDesc)
@@ -37,6 +39,19 @@ void BpScene::AddActor(BpActor* actor)
 		BpRigidDynamic* body = static_cast<BpRigidDynamic*>(actor);
 		m_sceneRigidDynamics.push_back(body);
 		body->SetScene(this);
+	}
+}
+
+void BpScene::RemoveActor(BpActor* actor)
+{
+	if (actor->GetType() == BpActorType::RIGID_DYNAMIC)
+	{
+		BpRigidDynamic* body = static_cast<BpRigidDynamic*>(actor);
+		auto it = std::find(m_sceneRigidDynamics.begin(), m_sceneRigidDynamics.end(), body);
+		if (it != m_sceneRigidDynamics.end())
+		{
+			m_sceneRigidDynamics.erase(it);
+		}
 	}
 }
 

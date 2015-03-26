@@ -39,6 +39,8 @@ namespace bPhysics
 
 		//Add Actor to proper store based off type
 		void AddActor(BpActor* actor);
+		
+		void RemoveActor(BpActor* actor);
 
 		//Simulate the scene forward by the given timestep
 		void Simulate(float timestep);
