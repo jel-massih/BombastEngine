@@ -2,6 +2,9 @@
 
 #include "../Foundation/BpMath.h"
 #include <vector>
+#include "../Debugging/BpVisualizationParams.h"
+
+class BpVisualizationManager;
 
 namespace bPhysics
 {
@@ -45,11 +48,17 @@ namespace bPhysics
 		//Simulate the scene forward by the given timestep
 		void Simulate(float timestep);
 
+		//Debug Visualization
+		void SetVisualizationParameter(BpVisualizationParams parameter, float newScale);
+		float GetVisualizationParameter(BpVisualizationParams parameter);
+
 	private:
 		BpVec3 m_gravity;
 		float m_bounceThresholdVelocity;
 
 		std::vector<BpRigidDynamic*> m_sceneRigidDynamics;
+
+		BpVisualizationManager* m_pVisualizationManager;
 	};
 
 	inline BpSceneDesc::BpSceneDesc()
