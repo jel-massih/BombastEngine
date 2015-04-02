@@ -6,6 +6,59 @@ namespace bPhysics
 	//====== Misc Helpers ===========
 	inline bool BpIsFinite(float f) { return isfinite(f); }
 
+	//====== BpVec2 ===========
+	class BpVec2
+	{
+	public:
+		BpVec2()
+			:x(0.f), y(0.f) {}
+
+		BpVec2(float f)
+			:x(f), y(f) {}
+
+		BpVec2(float _x, float _y)
+			:x(_x), y(_y) {}
+
+		inline BpVec2 operator*(float f) const;
+
+		inline BpVec2 operator+(BpVec2 v) const;
+		inline BpVec2& operator+=(const BpVec2& v);
+
+		inline bool IsFinite() const {
+			return BpIsFinite(x) && BpIsFinite(y);
+		}
+
+		inline float Length() { return sqrt(x*x + y*y); }
+
+		static const BpVec2 g_InvalidBpVec2;
+
+	public:
+		float x, y;
+	};
+
+	inline BpVec2 BpVec2::operator*(float f) const
+	{
+		return BpVec2(x * f, y * f);
+	}
+
+	inline BpVec2 operator *(const float f, const BpVec2 v)
+	{
+		return v * f;
+	}
+
+	inline BpVec2 BpVec2::operator+(BpVec2 v) const
+	{
+		return BpVec2(x + v.x, y + v.y);
+	}
+
+	inline BpVec2& BpVec2::operator+=(const BpVec2& v)
+	{
+		x += v.x;
+		y += v.y;
+
+		return *this;
+	}
+
 	//====== BpVec3 ===========
 	class BpVec3
 	{
