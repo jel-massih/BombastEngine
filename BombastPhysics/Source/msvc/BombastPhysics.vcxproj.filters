@@ -59,6 +59,9 @@
     <ClInclude Include="..\Debugging\BpVisualizationManager.h">
       <Filter>Debugging</Filter>
     </ClInclude>
+    <ClInclude Include="..\Debugging\BpDebugRenderBuffer.h">
+      <Filter>Debugging</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\BpPhysicsCore.cpp" />
@@ -85,6 +88,9 @@
       <Filter>Msvc</Filter>
     </ClCompile>
     <ClCompile Include="..\Debugging\BpVisualizationManager.cpp">
+      <Filter>Debugging</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Debugging\BpDebugRenderBuffer.cpp">
       <Filter>Debugging</Filter>
     </ClCompile>
   </ItemGroup>

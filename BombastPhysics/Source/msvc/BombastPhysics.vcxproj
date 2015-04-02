@@ -150,6 +150,7 @@
     <ClInclude Include="..\BpPhysicsApi.h" />
     <ClInclude Include="..\BpPhysicsCore.h" />
     <ClInclude Include="..\BpPhysicsStd.h" />
+    <ClInclude Include="..\Debugging\BpDebugRenderBuffer.h" />
     <ClInclude Include="..\Debugging\BpVisualizationManager.h" />
     <ClInclude Include="..\Debugging\BpVisualizationParams.h" />
     <ClInclude Include="..\Foundation\BpAssert.h" />
@@ -169,6 +170,7 @@
     <ClCompile Include="..\Actors\BpRigidDynamic.cpp" />
     <ClCompile Include="..\BpMaterial.cpp" />
     <ClCompile Include="..\BpPhysicsCore.cpp" />
+    <ClCompile Include="..\Debugging\BpDebugRenderBuffer.cpp" />
     <ClCompile Include="..\Debugging\BpVisualizationManager.cpp" />
     <ClCompile Include="..\Foundation\BpFactory.cpp" />
     <ClCompile Include="..\Foundation\BpFoundation.cpp" />
