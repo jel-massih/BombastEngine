@@ -4,12 +4,12 @@
 #include <vector>
 #include "../Debugging/BpVisualizationParams.h"
 
-class BpVisualizationManager;
 
 namespace bPhysics
 {
 	class BpRigidDynamic;
 	class BpActor;
+	class BpVisualizationManager;
 
 	class BpSceneDesc
 	{

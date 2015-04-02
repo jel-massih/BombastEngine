@@ -1,6 +1,8 @@
 #include "BpVisualizationManager.h"
 #include "../Foundation/BpAssert.h"
 
+using namespace bPhysics;
+
 void BpVisualizationManager::SetVisualizationParameter(BpVisualizationParams parameter, float newScale)
 {
 	BP_ASSERT(parameter != BpVisualizationParams::VALUE_COUNT, "Attempting to set Invalid Visualualization Parameter");
