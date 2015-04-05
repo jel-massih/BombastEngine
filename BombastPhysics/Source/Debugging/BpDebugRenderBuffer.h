@@ -27,6 +27,9 @@ namespace bPhysics
 		BpDebugLine* GetLines() { return &m_debugLines.front(); }
 		unsigned int GetLinesCount() { return m_debugLines.size(); }
 
+		BpDebugSphere* GetSpheres() { return &m_debugSpheres.front(); }
+		unsigned int GetSphereCount() { return m_debugSpheres.size(); }
+
 	public:
 		std::vector<BpDebugLine> m_debugLines;
 		std::vector<BpDebugSphere> m_debugSpheres;
