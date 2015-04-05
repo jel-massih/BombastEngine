@@ -8,6 +8,10 @@
 #include "Foundation\BpAssert.h"
 #include "Foundation\BpMath.h"
 
+//Debugging
+#include "Debugging\Debugging.h"
+#include "Debugging\BpDebugRenderBuffer.h"
+
 //Scene
 #include "Scene\BpScene.h"
 
