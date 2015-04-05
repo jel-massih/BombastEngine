@@ -10,6 +10,7 @@ namespace bPhysics
 	class BpRigidDynamic;
 	class BpActor;
 	class BpVisualizationManager;
+	class BpDebugRenderBuffer;
 
 	class BpSceneDesc
 	{
@@ -35,10 +36,10 @@ namespace bPhysics
 		void InitFromSceneDesc(const BpSceneDesc& sceneDesc);
 
 		void SetGravity(const BpVec3& vec) { m_gravity = vec; }
-		inline BpVec3 GetGravity() { return m_gravity; }
+		inline BpVec3 GetGravity() const { return m_gravity; }
 
 		void SetBounceThresholdVelocity(const float f) { m_bounceThresholdVelocity = f; }
-		float GetBounceThresholdVelocity() { return m_bounceThresholdVelocity; }
+		float GetBounceThresholdVelocity() const { return m_bounceThresholdVelocity; }
 
 		//Add Actor to proper store based off type
 		void AddActor(BpActor* actor);
@@ -50,7 +51,9 @@ namespace bPhysics
 
 		//Debug Visualization
 		void SetVisualizationParameter(BpVisualizationParams parameter, float newScale);
-		float GetVisualizationParameter(BpVisualizationParams parameter);
+		float GetVisualizationParameter(BpVisualizationParams parameter) const;
+
+		const BpDebugRenderBuffer& GetRenderBuffer() const;
 
 	private:
 		BpVec3 m_gravity;

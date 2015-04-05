@@ -74,7 +74,12 @@ void BpScene::SetVisualizationParameter(BpVisualizationParams parameter, float n
 	m_pVisualizationManager->SetVisualizationParameter(parameter, newScale);
 }
 
-float BpScene::GetVisualizationParameter(BpVisualizationParams parameter)
+float BpScene::GetVisualizationParameter(BpVisualizationParams parameter) const
 {
 	return m_pVisualizationManager->GetVisualizationParameter(parameter);
+}
+
+const BpDebugRenderBuffer& BpScene::GetRenderBuffer() const
+{
+	return m_pVisualizationManager->GetDebugRenderBuffer();
 }
