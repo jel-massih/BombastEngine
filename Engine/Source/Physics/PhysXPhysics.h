@@ -50,6 +50,8 @@ public:
 
 	virtual Mat4x4 VGetTransform(const ActorId id);
 
+	virtual IDebugPhysicsRenderBuffer* VGetDebugRenderBuffer() override;
+
 private:
 	void AddShape(Actor* pActor, PxGeometry* geometry, float density, const std::string& physicsMaterial, bool gravityEnabled, float linearDamping, float angularDamping);
 	void RemovePhysicsObject(PxRigidBody* body);

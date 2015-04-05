@@ -219,6 +219,19 @@ public:
 	virtual ~ISceneNode() {};
 };
 
+class IDebugPhysicsSphere
+{
+public:
+	virtual Vec3 VGetPosition() = 0;
+	virtual Vec3 VGetColor() = 0;
+};
+
+class IDebugPhysicsRenderBuffer
+{
+public:
+	virtual IDebugPhysicsSphere* VGetDebugSpheres() = 0;
+};
+
 //Generic Physics Interface
 class IGamePhysics
 {
@@ -245,6 +258,8 @@ public:
 
 	virtual void VSetTransform(const ActorId actorId, const Mat4x4& mat) = 0;
 	virtual Mat4x4 VGetTransform(const ActorId actorId) = 0;
+
+	virtual IDebugPhysicsRenderBuffer* VGetDebugRenderBuffer() = 0;
 
 	virtual ~IGamePhysics() {};
 };

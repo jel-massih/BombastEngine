@@ -325,3 +325,21 @@ void BombastPhysics::BpVec3ToVec3(const BpVec3& input, Vec3* output)
 	output->y = input.y;
 	output->z = input.z;
 }
+
+IDebugPhysicsRenderBuffer* BombastPhysics::VGetDebugRenderBuffer()
+{
+	BombastPhysicsDebugRenderBuffer* newBuffer =  BE_NEW BombastPhysicsDebugRenderBuffer;
+	
+	bPhysics::BpDebugRenderBuffer buffer = m_pScene->GetRenderBuffer();
+	bPhysics::BpDebugSphere* spheres = buffer.GetSpheres();
+	for (int i = 0; i < buffer.GetSphereCount(); i++)
+	{
+		Vec3 pos, color;
+		BpVec3ToVec3(spheres[i].center, &pos);
+		BpVec3ToVec3(spheres[i].color, &color);
+		BombastDebugPhysicsSphere* sphere = BE_NEW BombastDebugPhysicsSphere(pos, color, spheres[i].radius);
+		newBuffer->m_spheres.push_back(sphere);
+	}
+
+	return newBuffer;
+}

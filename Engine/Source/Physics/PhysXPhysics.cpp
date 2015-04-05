@@ -374,3 +374,8 @@ Mat4x4 PhysXPhysics::VGetTransform(const ActorId id)
 	throw "Function not yet implemented.";
 	return Mat4x4::g_Identity;
 }
+
+IDebugPhysicsRenderBuffer* PhysXPhysics::VGetDebugRenderBuffer()
+{
+	throw "Function not yet implemented.";
+}

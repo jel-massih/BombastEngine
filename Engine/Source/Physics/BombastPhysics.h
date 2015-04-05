@@ -5,6 +5,28 @@
 
 using namespace bPhysics;
 
+
+class BombastDebugPhysicsSphere : public IDebugPhysicsSphere
+{
+public:
+	BombastDebugPhysicsSphere(Vec3 pos, Vec3 color, float radius) : m_position(pos), m_color(color), m_radius(radius) {}
+
+	virtual Vec3 VGetPosition() { return m_position; }
+	virtual Vec3 VGetColor() { return m_color; }
+	virtual float VGetRadius() { return m_radius; }
+private:
+	Vec3 m_position, m_color;
+	float m_radius;
+};
+
+class BombastPhysicsDebugRenderBuffer : public IDebugPhysicsRenderBuffer
+{
+public:
+	virtual IDebugPhysicsSphere* VGetDebugSpheres() { return m_spheres.front(); }
+	
+	std::vector<IDebugPhysicsSphere*> m_spheres;
+};
+
 class BombastPhysics : public IGamePhysics, BE_NonCopyable
 {
 	typedef std::map<std::string, float> DensityTable;
@@ -40,6 +62,8 @@ public:
 	virtual void VSetTransform(const ActorId id, const Mat4x4& mat) override;
 
 	virtual Mat4x4 VGetTransform(const ActorId id);
+
+	virtual IDebugPhysicsRenderBuffer* VGetDebugRenderBuffer();
 
 private:
 	void VLoadPhysicsConfigXml();
