@@ -179,6 +179,9 @@
     <ClCompile Include="..\Physics\BombastPhysics.cpp">
       <Filter>Physics</Filter>
     </ClCompile>
+    <ClCompile Include="..\Debugging\DebugPhysics.cpp">
+      <Filter>Debugging</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Bombast\BombastApp.h">
@@ -401,6 +404,9 @@
     </ClInclude>
     <ClInclude Include="..\Physics\BombastPhysics.h">
       <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Debugging\DebugPhysics.h">
+      <Filter>Debugging</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

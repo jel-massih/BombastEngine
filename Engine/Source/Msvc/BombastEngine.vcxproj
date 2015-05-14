@@ -32,6 +32,7 @@
     <ClInclude Include="..\Bombast\interfaces.h" />
     <ClInclude Include="..\Constants.h" />
     <ClInclude Include="..\Debugging\DebugManager.h" />
+    <ClInclude Include="..\Debugging\DebugPhysics.h" />
     <ClInclude Include="..\Debugging\DebugText.h" />
     <ClInclude Include="..\Debugging\Logger.h" />
     <ClInclude Include="..\Events\EventManager.h" />
@@ -105,6 +106,7 @@
     <ClCompile Include="..\Bombast\BombastApp.cpp" />
     <ClCompile Include="..\Bombast\CoreGameLogic.cpp" />
     <ClCompile Include="..\Debugging\DebugManager.cpp" />
+    <ClCompile Include="..\Debugging\DebugPhysics.cpp" />
     <ClCompile Include="..\Debugging\DebugText.cpp" />
     <ClCompile Include="..\Debugging\Logger.cpp" />
     <ClCompile Include="..\Events\EventManager.cpp" />
