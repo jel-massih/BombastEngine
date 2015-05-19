@@ -1,3 +1,4 @@
+#include "../msvc/stdafx.h"
 #include "BpFactory.h"
 #include "BpReporting.h"
 #include "../Actors/BpRigidDynamic.h"
@@ -45,6 +46,8 @@ namespace bPhysics
 		}
 
 		BpRigidDynamic* body = BpCreateDynamic(core, transform, *shape, density);
+
+		BP_SAFE_DELETE(shape);
 
 		return body;
 	}

@@ -53,6 +53,7 @@ void BpScene::RemoveActor(BpActor* actor)
 		auto it = std::find(m_sceneRigidDynamics.begin(), m_sceneRigidDynamics.end(), body);
 		if (it != m_sceneRigidDynamics.end())
 		{
+			BP_SAFE_DELETE(*it);
 			m_sceneRigidDynamics.erase(it);
 		}
 	}
