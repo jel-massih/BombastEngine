@@ -182,6 +182,9 @@
     <ClCompile Include="..\Debugging\DebugPhysics.cpp">
       <Filter>Debugging</Filter>
     </ClCompile>
+    <ClCompile Include="..\Shading\DebugShader.cpp">
+      <Filter>Shading</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Bombast\BombastApp.h">
@@ -407,6 +410,9 @@
     </ClInclude>
     <ClInclude Include="..\Debugging\DebugPhysics.h">
       <Filter>Debugging</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Shading\DebugShader.h">
+      <Filter>Shading</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

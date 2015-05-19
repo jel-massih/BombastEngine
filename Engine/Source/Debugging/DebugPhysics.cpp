@@ -1,4 +1,5 @@
 #include "DebugPhysics.h"
+#include "../Shading/DebugShader.h"
 
 DebugPhysics::DebugPhysics()
 {
@@ -10,4 +11,12 @@ DebugPhysics::~DebugPhysics()
 	SAFE_DELETE(m_pDebugShader);
 }
 
-bool DebugPh
+bool DebugPhysics::Initialize()
+{
+	return true;
+}
+
+bool DebugPhysics::Render()
+{
+	return true;
+}

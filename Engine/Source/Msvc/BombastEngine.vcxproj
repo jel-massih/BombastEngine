@@ -74,6 +74,7 @@
     <ClInclude Include="..\Scripting\LuaCoreManager.h" />
     <ClInclude Include="..\Scripting\LuaEvent.h" />
     <ClInclude Include="..\Scripting\LuaExports.h" />
+    <ClInclude Include="..\Shading\DebugShader.h" />
     <ClInclude Include="..\Shading\ShadingCommon.h" />
     <ClInclude Include="..\Shading\DeferredLightShader.h" />
     <ClInclude Include="..\Shading\DeferredRenderingManager.h" />
@@ -143,6 +144,7 @@
     <ClCompile Include="..\Resources\XmlResource.cpp" />
     <ClCompile Include="..\Resources\ZipFile.cpp" />
     <ClCompile Include="..\Scripting\LuaCoreManager.cpp" />
+    <ClCompile Include="..\Shading\DebugShader.cpp" />
     <ClCompile Include="..\Shading\DeferredLightShader.cpp" />
     <ClCompile Include="..\Shading\DeferredRenderingManager.cpp" />
     <ClCompile Include="..\Shading\FontShader.cpp" />
