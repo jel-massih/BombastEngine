@@ -3,6 +3,10 @@
 #define WIN32_LEAN_AND_MEAN //Exclude Rarely used stuff from Windows Headers
 #define __D3D11 (1);
 
+#if defined(_DEBUG)
+	//#define DEBUG_D3D
+#endif
+
 #include <Windows.h>
 #include<windowsx.h>
 

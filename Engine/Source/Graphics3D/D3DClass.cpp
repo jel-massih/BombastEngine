@@ -23,7 +23,7 @@ D3DClass11::~D3DClass11()
 		m_pSwapChain->SetFullscreenState(false, NULL);
 	}
 
-#if defined(_DEBUG)
+#if defined(DEBUG_D3D)
 	ID3D11Debug* pDebug;
 	m_pDevice->QueryInterface(IID_PPV_ARGS(&pDebug));
 #endif
@@ -40,7 +40,7 @@ D3DClass11::~D3DClass11()
 	SAFE_RELEASE(m_pDevice);
 	SAFE_RELEASE(m_pSwapChain);
 
-#if defined(_DEBUG)
+#if defined(DEBUG_D3D)
 	if (pDebug != nullptr) {
 		pDebug->ReportLiveDeviceObjects(D3D11_RLDO_DETAIL);
 		SAFE_RELEASE(pDebug);
@@ -200,7 +200,7 @@ bool D3DClass11::VInitialize(int screenWidth, int screenHeight, bool vsync, HWND
 
 	UINT creationFlags = 0;
 
-	#if defined(_DEBUG)
+	#if defined(DEBUG_D3D)
 		creationFlags |= D3D11_CREATE_DEVICE_DEBUG;
 	#endif
 
