@@ -120,6 +120,9 @@ bool DeferredRenderingManager::Initialize(ID3D11Device* device, int texWidth, in
 void DeferredRenderingManager::StartRender(ID3D11Device* device, ID3D11DeviceContext* context, ID3D11RenderTargetView* pRTV, ID3D11DepthStencilView* pDSV, const float* clearBufferColor) const
 {
 	{
+		ID3D11ShaderResourceView *const pSRV[2] = { NULL, NULL };
+		context->PSSetShaderResources(1, 2, pSRV);
+
 		//Fill G Buffer
 		ID3D11RenderTargetView* pGBufRTV[] = { m_texGBuffer.GetRenderTargetView(), m_texGBuffer2.GetRenderTargetView() };
 		context->OMSetRenderTargets(2, pGBufRTV, m_pDepthStencilView);
