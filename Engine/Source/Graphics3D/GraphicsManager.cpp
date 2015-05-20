@@ -11,9 +11,9 @@ GraphicsManager::GraphicsManager()
 
 GraphicsManager::~GraphicsManager()
 {
-	SAFE_DELETE(m_pRenderer);
-	SAFE_DELETE(m_pShaderManager);
 	SAFE_DELETE(m_pDeferredRenderingManager);
+	SAFE_DELETE(m_pShaderManager);
+	SAFE_DELETE(m_pRenderer);
 }
 
 bool GraphicsManager::Initialize(HWND hwnd)
