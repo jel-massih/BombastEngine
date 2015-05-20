@@ -23,6 +23,11 @@ D3DClass11::~D3DClass11()
 		m_pSwapChain->SetFullscreenState(false, NULL);
 	}
 
+#if defined(_DEBUG)
+	ID3D11Debug* pDebug;
+	m_pDevice->QueryInterface(IID_PPV_ARGS(&pDebug));
+#endif
+
 	SAFE_RELEASE(m_pAlphaEnableBlendingState);
 	SAFE_RELEASE(m_pAlphaDisabledBlendingState);
 	SAFE_RELEASE(m_pRasterState);
@@ -34,6 +39,13 @@ D3DClass11::~D3DClass11()
 	SAFE_RELEASE(m_pDeviceContext);
 	SAFE_RELEASE(m_pDevice);
 	SAFE_RELEASE(m_pSwapChain);
+
+#if defined(_DEBUG)
+	if (pDebug != nullptr) {
+		pDebug->ReportLiveDeviceObjects(D3D11_RLDO_DETAIL);
+		SAFE_RELEASE(pDebug);
+	}
+#endif
 }
 
 bool D3DClass11::VInitialize(int screenWidth, int screenHeight, bool vsync, HWND hwnd, bool fullscreen, float screenDepth, float screenNear)
@@ -186,7 +198,13 @@ bool D3DClass11::VInitialize(int screenWidth, int screenHeight, bool vsync, HWND
 
 	featureLevel = D3D_FEATURE_LEVEL_11_0;
 
-	result = D3D11CreateDeviceAndSwapChain(NULL, D3D_DRIVER_TYPE_HARDWARE, NULL, 0, &featureLevel, 1, 
+	UINT creationFlags = 0;
+
+	#if defined(_DEBUG)
+		creationFlags |= D3D11_CREATE_DEVICE_DEBUG;
+	#endif
+
+	result = D3D11CreateDeviceAndSwapChain(NULL, D3D_DRIVER_TYPE_HARDWARE, NULL, creationFlags, &featureLevel, 1, 
 		D3D11_SDK_VERSION, &swapChainDesc, &m_pSwapChain, &m_pDevice, NULL, &m_pDeviceContext);
 	if(FAILED(result))
 	{
