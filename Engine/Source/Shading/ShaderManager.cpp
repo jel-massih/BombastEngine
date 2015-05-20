@@ -22,6 +22,8 @@ bool ShaderManager::Initialize(IRenderer* renderer)
 		BE_ERROR("Could not initialize the StaticMeshShader Object!");
 		return false;
 	}
+
+	return true;
 }
 
 bool ShaderManager::RenderStaticMesh(SceneNode* pRenderableNode, Material* pMaterial, int indexCount, const Scene* pScene) const

@@ -332,7 +332,7 @@ IDebugPhysicsRenderBuffer* BombastPhysics::VGetDebugRenderBuffer()
 	
 	bPhysics::BpDebugRenderBuffer buffer = m_pScene->GetRenderBuffer();
 	bPhysics::BpDebugSphere* spheres = buffer.GetSpheres();
-	for (int i = 0; i < buffer.GetSphereCount(); i++)
+	for (unsigned int i = 0; i < buffer.GetSphereCount(); i++)
 	{
 		Vec3 pos, color;
 		BpVec3ToVec3(spheres[i].center, &pos);
