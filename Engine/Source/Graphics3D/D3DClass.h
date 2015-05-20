@@ -30,7 +30,7 @@ class D3DClass11 : public IRenderer
 {
 public:
 	D3DClass11();
-	~D3DClass11();
+	virtual ~D3DClass11();
 
 	bool VInitialize(int screenWidth, int screenHeight, bool vsync, HWND hwnd, bool bFullscreen, float screenDepth, float screenNear);
 	
