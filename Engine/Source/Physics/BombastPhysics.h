@@ -22,7 +22,7 @@ private:
 class BombastPhysicsDebugRenderBuffer : public IDebugPhysicsRenderBuffer
 {
 public:
-	virtual IDebugPhysicsSphere* VGetDebugSpheres() { return m_spheres.front(); }
+	virtual std::vector<IDebugPhysicsSphere*> VGetDebugSpheres() { return m_spheres; }
 	
 	std::vector<IDebugPhysicsSphere*> m_spheres;
 };

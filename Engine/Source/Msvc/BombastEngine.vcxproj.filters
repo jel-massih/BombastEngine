@@ -41,16 +41,16 @@
       <Filter>Msvc</Filter>
     </ClCompile>
     <ClCompile Include="..\Resources\ResourceCache.cpp">
-      <Filter>Resources</Filter>
+      <Filter>Physics\Resources</Filter>
     </ClCompile>
     <ClCompile Include="..\Resources\ZipFile.cpp">
-      <Filter>Resources</Filter>
+      <Filter>Physics\Resources</Filter>
     </ClCompile>
     <ClCompile Include="..\Actor\ActorFactory.cpp">
       <Filter>Actor</Filter>
     </ClCompile>
     <ClCompile Include="..\Resources\XmlResource.cpp">
-      <Filter>Resources</Filter>
+      <Filter>Physics\Resources</Filter>
     </ClCompile>
     <ClCompile Include="..\Graphics3D\Geometry.cpp">
       <Filter>Graphics3D</Filter>
@@ -72,13 +72,13 @@
       <Filter>Graphics3D</Filter>
     </ClCompile>
     <ClCompile Include="..\Resources\TextureResource.cpp">
-      <Filter>Resources</Filter>
+      <Filter>Physics\Resources</Filter>
     </ClCompile>
     <ClCompile Include="..\Scripting\LuaCoreManager.cpp">
       <Filter>Scripting</Filter>
     </ClCompile>
     <ClCompile Include="..\Resources\LuaResource.cpp">
-      <Filter>Resources</Filter>
+      <Filter>Physics\Resources</Filter>
     </ClCompile>
     <ClCompile Include="..\Utilities\Math.cpp">
       <Filter>Utilities</Filter>
@@ -135,7 +135,7 @@
       <Filter>Debugging</Filter>
     </ClCompile>
     <ClCompile Include="..\Resources\ModelResource.cpp">
-      <Filter>Resources</Filter>
+      <Filter>Physics\Resources</Filter>
     </ClCompile>
     <ClCompile Include="..\Utilities\SystemResourceMonitor.cpp">
       <Filter>Utilities</Filter>
@@ -150,10 +150,10 @@
       <Filter>Graphics3D</Filter>
     </ClCompile>
     <ClCompile Include="..\Resources\MaterialResource.cpp">
-      <Filter>Resources</Filter>
+      <Filter>Physics\Resources</Filter>
     </ClCompile>
     <ClCompile Include="..\Resources\ShaderResource.cpp">
-      <Filter>Resources</Filter>
+      <Filter>Physics\Resources</Filter>
     </ClCompile>
     <ClCompile Include="..\Shading\ShaderManager.cpp">
       <Filter>Shading</Filter>
@@ -244,10 +244,10 @@
       <Filter>Msvc</Filter>
     </ClInclude>
     <ClInclude Include="..\Resources\ResourceCache.h">
-      <Filter>Resources</Filter>
+      <Filter>Physics\Resources</Filter>
     </ClInclude>
     <ClInclude Include="..\Resources\ZipFile.h">
-      <Filter>Resources</Filter>
+      <Filter>Physics\Resources</Filter>
     </ClInclude>
     <ClInclude Include="..\Actor\ActorFactory.h">
       <Filter>Actor</Filter>
@@ -256,7 +256,7 @@
       <Filter>Utilities</Filter>
     </ClInclude>
     <ClInclude Include="..\Resources\XmlResource.h">
-      <Filter>Resources</Filter>
+      <Filter>Physics\Resources</Filter>
     </ClInclude>
     <ClInclude Include="..\Actor\TransformComponent.h">
       <Filter>Actor</Filter>
@@ -280,13 +280,13 @@
       <Filter>Graphics3D</Filter>
     </ClInclude>
     <ClInclude Include="..\Resources\TextureResource.h">
-      <Filter>Resources</Filter>
+      <Filter>Physics\Resources</Filter>
     </ClInclude>
     <ClInclude Include="..\Scripting\LuaCoreManager.h">
       <Filter>Scripting</Filter>
     </ClInclude>
     <ClInclude Include="..\Resources\LuaResource.h">
-      <Filter>Resources</Filter>
+      <Filter>Physics\Resources</Filter>
     </ClInclude>
     <ClInclude Include="..\Scripting\LuaExports.h">
       <Filter>Scripting</Filter>
@@ -358,7 +358,7 @@
       <Filter>Graphics3D</Filter>
     </ClInclude>
     <ClInclude Include="..\Resources\ModelResource.h">
-      <Filter>Resources</Filter>
+      <Filter>Physics\Resources</Filter>
     </ClInclude>
     <ClInclude Include="..\Utilities\SystemResourceMonitor.h">
       <Filter>Utilities</Filter>
@@ -373,10 +373,10 @@
       <Filter>Graphics3D</Filter>
     </ClInclude>
     <ClInclude Include="..\Resources\MaterialResource.h">
-      <Filter>Resources</Filter>
+      <Filter>Physics\Resources</Filter>
     </ClInclude>
     <ClInclude Include="..\Resources\ShaderResource.h">
-      <Filter>Resources</Filter>
+      <Filter>Physics\Resources</Filter>
     </ClInclude>
     <ClInclude Include="..\Shading\ShaderManager.h">
       <Filter>Shading</Filter>
@@ -443,9 +443,6 @@
     <Filter Include="Msvc">
       <UniqueIdentifier>{b38645cb-2245-43f5-9758-e4c7058fb821}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resources">
-      <UniqueIdentifier>{272b0025-58a5-4835-ad03-459b326eaa4c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Scripting">
       <UniqueIdentifier>{35f1d86d-a168-4c6a-a6a6-0ec14ed7de3b}</UniqueIdentifier>
     </Filter>
@@ -472,6 +469,9 @@
     </Filter>
     <Filter Include="Shading\Shaders\StaticMesh">
       <UniqueIdentifier>{f856e645-1420-47d6-8e4c-d76a5757cb28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Physics\Resources">
+      <UniqueIdentifier>{272b0025-58a5-4835-ad03-459b326eaa4c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

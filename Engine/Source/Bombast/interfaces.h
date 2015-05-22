@@ -230,7 +230,7 @@ public:
 class IDebugPhysicsRenderBuffer
 {
 public:
-	virtual IDebugPhysicsSphere* VGetDebugSpheres() = 0;
+	virtual std::vector<IDebugPhysicsSphere*> VGetDebugSpheres() = 0;
 };
 
 //Generic Physics Interface
