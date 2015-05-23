@@ -35,6 +35,9 @@ namespace bPhysics
 		inline virtual void SetMaxAngularVelocity(float maxAngularVel) { m_maxAngularVelocity = maxAngularVel; }
 		inline virtual float GetMaxAngularVelocity() const { return m_maxAngularVelocity; }
 
+		inline virtual void SetGravityEnabled(bool gravityEnabled) { m_gravityEnabled = gravityEnabled; }
+		inline virtual float GetGravityEnabled() const { return m_gravityEnabled; }
+
 		//True if body sleeping.
 		//When not moving for period of time, body no longer simulated [enters sleep]
 		//Gauranteed to be awake if: Wake Counter Positive, velocity non-zero, nonzero force applied
@@ -72,6 +75,8 @@ namespace bPhysics
 		BpScene* m_pScene;
 
 		float m_linearDamping, m_angularDamping, m_maxAngularVelocity;
+
+		bool m_gravityEnabled;
 
 		float m_sleepThreshold, m_stabilizationThreshold;
 

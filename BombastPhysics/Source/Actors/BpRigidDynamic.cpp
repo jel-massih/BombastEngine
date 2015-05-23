@@ -63,8 +63,11 @@ void BpRigidDynamic::ForceSleep()
 void BpRigidDynamic::Simulate(float timestep)
 {
 	BpVec3 acceleration;
-	//@TODO: add check for if gravity enabled/disabled
-	acceleration = m_pScene->GetGravity();
+
+	if (m_gravityEnabled)
+	{
+		acceleration = m_pScene->GetGravity();
+	}
 
 	m_velocity = m_velocity + (acceleration * timestep);
 

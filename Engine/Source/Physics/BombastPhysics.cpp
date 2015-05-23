@@ -235,9 +235,10 @@ void BombastPhysics::AddShape(Actor* pActor, BpGeometry* geometry, float density
 	Mat4x4ToBpMat4x4(transform, &bpMat);
 
 	BpRigidDynamic* body = BpCreateDynamic(*m_pPhysicsCore, bpMat, *geometry, *mat, density);
-	//@TODO: Set disable gravity
+	
 	body->SetLinearDamping(linearDamping);
 	body->SetAngularDamping(angularDamping);
+	body->SetGravityEnabled(gravityEnabled);
 
 	m_pScene->AddActor(body);
 	m_actorRigidBodyMap[actorId] = body;

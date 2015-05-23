@@ -12,7 +12,7 @@
     <Shape>Sphere</Shape>
     <Density>oak</Density>
     <PhysicsMaterial>Normal</PhysicsMaterial>
-    <GravityEnabled>false</GravityEnabled>
+    <GravityEnabled>true</GravityEnabled>
     <LinearDamping>1</LinearDamping>
     <AngularDamping>1</AngularDamping>
   </PhysicsComponent>
