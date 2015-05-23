@@ -60,7 +60,7 @@ namespace bPhysics
 
 		std::vector<BpRigidDynamic*> m_sceneRigidDynamics;
 
-		BpVisualizationManager m_pVisualizationManager;
+		BpVisualizationManager m_visualizationManager;
 	};
 
 	inline BpSceneDesc::BpSceneDesc()

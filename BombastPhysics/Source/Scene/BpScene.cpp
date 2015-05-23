@@ -39,6 +39,9 @@ void BpScene::AddActor(BpActor* actor)
 		BpRigidDynamic* body = static_cast<BpRigidDynamic*>(actor);
 		m_sceneRigidDynamics.push_back(body);
 		body->SetScene(this);
+
+		//Add to visualization
+		m_visualizationManager.AddDebugSphere(body->GetWorldTransform().GetPosition(), 50);
 	}
 }
 
@@ -69,15 +72,15 @@ void BpScene::Simulate(float timestep)
 
 void BpScene::SetVisualizationParameter(BpVisualizationParams parameter, float newScale)
 {
-	m_pVisualizationManager.SetVisualizationParameter(parameter, newScale);
+	m_visualizationManager.SetVisualizationParameter(parameter, newScale);
 }
 
 float BpScene::GetVisualizationParameter(BpVisualizationParams parameter) const
 {
-	return m_pVisualizationManager.GetVisualizationParameter(parameter);
+	return m_visualizationManager.GetVisualizationParameter(parameter);
 }
 
 const BpDebugRenderBuffer& BpScene::GetRenderBuffer() const
 {
-	return m_pVisualizationManager.GetDebugRenderBuffer();
+	return m_visualizationManager.GetDebugRenderBuffer();
 }
