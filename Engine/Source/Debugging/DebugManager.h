@@ -1,6 +1,7 @@
 #pragma once
 
 class DebugText;
+class DebugPhysics;
 
 class HumanView;
 
@@ -16,9 +17,11 @@ public:
 	void Render();
 
 	DebugText* GetDebugText() const { return m_pDebugText; }
+	DebugPhysics* GetDebugPhysics() const { return m_pDebugPhysics; }
 
 private:
 	DebugText* m_pDebugText;
+	DebugPhysics* m_pDebugPhysics;
 	SystemResourceMonitor* m_pSystemResourceMonitor;
 
 	HumanView* m_pOwner;

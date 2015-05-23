@@ -1,5 +1,6 @@
 #include "DebugManager.h"
 #include "DebugText.h"
+#include "DebugPhysics.h"
 #include "../Bombast/BombastApp.h"
 
 #include "../Game/HumanView.h"
@@ -9,13 +10,14 @@ DebugManager::DebugManager()
 {
 	m_pSystemResourceMonitor = 0;
 	m_pDebugText = 0;
+	m_pDebugPhysics = 0;
 	m_pOwner = 0;
 }
 
 DebugManager::~DebugManager()
 {
+	SAFE_DELETE(m_pDebugPhysics);
 	SAFE_DELETE(m_pDebugText);
-
 	SAFE_DELETE(m_pSystemResourceMonitor);
 }
 
@@ -38,6 +40,18 @@ bool DebugManager::Initialize(HumanView* owner)
 	}
 
 	result = m_pDebugText->Initialize();
+	if (!result)
+	{
+		return false;
+	}
+
+	m_pDebugPhysics = BE_NEW DebugPhysics();
+	if (!m_pDebugPhysics)
+	{
+		return false;
+	}
+
+	result = m_pDebugPhysics->Initialize();
 	if (!result)
 	{
 		return false;
@@ -80,5 +94,10 @@ void DebugManager::Render()
 	if (m_pDebugText)
 	{
 		m_pDebugText->Render();
+	}
+
+	if (m_pDebugPhysics)
+	{
+		m_pDebugPhysics->Render();
 	}
 }

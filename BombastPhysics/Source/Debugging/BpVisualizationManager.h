@@ -10,9 +10,9 @@ namespace bPhysics
 	{
 	public:
 		void SetVisualizationParameter(BpVisualizationParams parameter, float newScale);
-		float GetVisualizationParameter(BpVisualizationParams parameter);
+		float GetVisualizationParameter(BpVisualizationParams parameter) const;
 
-		BpDebugRenderBuffer& GetDebugRenderBuffer() { return m_renderBuffer; }
+		const BpDebugRenderBuffer& GetDebugRenderBuffer() const { return m_renderBuffer; }
 
 	private:
 		float m_visualizationParams[BpVisualizationParams::VALUE_COUNT];

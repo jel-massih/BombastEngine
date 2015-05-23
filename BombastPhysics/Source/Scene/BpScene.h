@@ -2,8 +2,7 @@
 
 #include "../Foundation/BpMath.h"
 #include <vector>
-#include "../Debugging/BpVisualizationParams.h"
-
+#include "../Debugging/BpVisualizationManager.h"
 
 namespace bPhysics
 {
@@ -61,7 +60,7 @@ namespace bPhysics
 
 		std::vector<BpRigidDynamic*> m_sceneRigidDynamics;
 
-		BpVisualizationManager* m_pVisualizationManager;
+		BpVisualizationManager m_pVisualizationManager;
 	};
 
 	inline BpSceneDesc::BpSceneDesc()

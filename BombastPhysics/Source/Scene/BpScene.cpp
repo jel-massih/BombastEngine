@@ -1,20 +1,17 @@
 #include "../msvc/stdafx.h"
 #include "BpScene.h"
 #include "../Actors/BpRigidDynamic.h"
-#include "../Debugging/BpVisualizationManager.h"
 
 using namespace bPhysics;
 
 BpScene::BpScene()
 	: m_gravity(BpVec3::g_InvalidBpVec3),
-	m_bounceThresholdVelocity(0),
-	m_pVisualizationManager(nullptr)
+	m_bounceThresholdVelocity(0)
 {
 }
 
 BpScene::~BpScene()
 {
-	BP_SAFE_DELETE(m_pVisualizationManager);
 }
 
 void BpScene::Release()
@@ -72,15 +69,15 @@ void BpScene::Simulate(float timestep)
 
 void BpScene::SetVisualizationParameter(BpVisualizationParams parameter, float newScale)
 {
-	m_pVisualizationManager->SetVisualizationParameter(parameter, newScale);
+	m_pVisualizationManager.SetVisualizationParameter(parameter, newScale);
 }
 
 float BpScene::GetVisualizationParameter(BpVisualizationParams parameter) const
 {
-	return m_pVisualizationManager->GetVisualizationParameter(parameter);
+	return m_pVisualizationManager.GetVisualizationParameter(parameter);
 }
 
 const BpDebugRenderBuffer& BpScene::GetRenderBuffer() const
 {
-	return m_pVisualizationManager->GetDebugRenderBuffer();
+	return m_pVisualizationManager.GetDebugRenderBuffer();
 }

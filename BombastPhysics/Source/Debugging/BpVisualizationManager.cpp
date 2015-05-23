@@ -10,7 +10,7 @@ void BpVisualizationManager::SetVisualizationParameter(BpVisualizationParams par
 	m_visualizationParams[parameter] = newScale;
 }
 
-float BpVisualizationManager::GetVisualizationParameter(BpVisualizationParams parameter)
+float BpVisualizationManager::GetVisualizationParameter(BpVisualizationParams parameter) const
 {
 	BP_ASSERTf(parameter != BpVisualizationParams::VALUE_COUNT, "Attempting to Get Invalid Visualualization Parameter");
 

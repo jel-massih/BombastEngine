@@ -271,7 +271,7 @@ bool DebugText::AddString(const char* stringId)
 
 	tempStrings = m_pStrings;
 
-	m_pStrings = new SentenceType*[m_stringCount + 1];
+	m_pStrings = BE_NEW SentenceType*[m_stringCount + 1];
 	if (!m_pStrings)
 	{
 		return false;
@@ -306,6 +306,7 @@ bool DebugText::AddString(char* stringId, char* text, int posX, int posY, float 
 }
 
 bool DebugText::UpdateString(const char* stringId, const char* text)
+
 {
 	bool result;
 	int index;

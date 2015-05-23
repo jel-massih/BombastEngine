@@ -514,5 +514,11 @@
     <FxCompile Include="..\Shading\Shaders\StaticMesh\staticmesh_deferred_textured.hlsl">
       <Filter>Shading\Shaders\StaticMesh</Filter>
     </FxCompile>
+    <FxCompile Include="..\Shading\Shaders\DebugVertexShader.hlsl">
+      <Filter>Shading\Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="..\Shading\Shaders\DebugPixelShader.hlsl">
+      <Filter>Shading\Shaders</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>
