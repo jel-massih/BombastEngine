@@ -58,13 +58,9 @@ bool DebugPhysics::Render()
 	g_pApp->GetGraphicsManager()->GetRenderer()->VGetWorldMatrix(worldMatrix);
 	g_pApp->GetGraphicsManager()->GetRenderer()->VGetOrthoMatrix(orthoMatrix);
 
-	IDebugPhysicsRenderBuffer* buffer = g_pApp->m_pGame->VGetGamePhysics()->VGetDebugRenderBuffer();
-
-	std::vector<IDebugPhysicsSphere*> spheres = buffer->VGetDebugSpheres();
-
-	for (unsigned int i = 0; i < spheres.size(); i++)
+	for (unsigned int i = 0; i < m_shapeCount; i++)
 	{
-		//result = RenderSphere(deviceContext, spheres[i], worldMatrix, orthoMatrix);
+		result = RenderShape(deviceContext, m_pShapes[i], worldMatrix, orthoMatrix);
 		if (!result)
 		{
 			return false;
