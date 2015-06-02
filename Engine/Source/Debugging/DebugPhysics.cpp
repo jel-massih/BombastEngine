@@ -55,6 +55,14 @@ bool DebugPhysics::Render()
 
 	Mat4x4 worldMatrix, orthoMatrix;
 
+	IDebugPhysicsRenderBuffer* buffer = g_pApp->GetGameLogic()->VGetGamePhysics()->VGetDebugRenderBuffer();
+
+	std::vector<IDebugPhysicsSphere*> spheres = buffer->VGetDebugSpheres();
+	for (auto i = spheres.begin(); i != spheres.end(); i++)
+	{
+		AddShape("TestShape", *i);
+	}
+
 	g_pApp->GetGraphicsManager()->GetRenderer()->VGetWorldMatrix(worldMatrix);
 	g_pApp->GetGraphicsManager()->GetRenderer()->VGetOrthoMatrix(orthoMatrix);
 
