@@ -170,7 +170,6 @@
     <ClCompile Include="..\Actors\BpRigidDynamic.cpp" />
     <ClCompile Include="..\BpMaterial.cpp" />
     <ClCompile Include="..\BpPhysicsCore.cpp" />
-    <ClCompile Include="..\Debugging\BpDebugRenderBuffer.cpp" />
     <ClCompile Include="..\Debugging\BpVisualizationManager.cpp" />
     <ClCompile Include="..\Foundation\BpFactory.cpp" />
     <ClCompile Include="..\Foundation\BpFoundation.cpp" />

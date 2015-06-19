@@ -40,8 +40,9 @@ void BpScene::AddActor(BpActor* actor)
 		m_sceneRigidDynamics.push_back(body);
 		body->SetScene(this);
 
+		//Add Behind Check for debug?
 		//Add to visualization
-		m_visualizationManager.AddDebugSphere(body->GetWorldTransform().GetPosition(), 50);
+		body->SetupBodyDebugging(m_visualizationManager);
 	}
 }
 

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../BpPhysicsStd.h"
 #include "../Foundation/BpMath.h"
 #include <vector>
 
@@ -30,16 +31,23 @@ namespace bPhysics
 	class BpDebugRenderBuffer
 	{
 	public:
-		bool AddDebugSphere(BpVec3 center, float radius, BpVec3 color = BpVec3(0, 255, 0));
+		~BpDebugRenderBuffer()
+		{
+			for (std::vector<BpDebugSphere*>::iterator it = m_debugSpheres.begin(); it != m_debugSpheres.end(); it++)
+			{
+				BP_SAFE_DELETE(*it);
+			}
+			m_debugSpheres.clear();
+		}
 
 		BpDebugLine* GetLines() { return &m_debugLines.front(); }
 		unsigned int GetLinesCount() { return m_debugLines.size(); }
 
-		const BpDebugSphere* GetSpheres() const { return m_debugSpheres.size() > 0 ? &m_debugSpheres.front() : nullptr; }
+		const BpDebugSphere* GetSpheres() const { return m_debugSpheres.size() > 0 ? m_debugSpheres.front() : nullptr; }
 		const unsigned int GetSphereCount() const { return m_debugSpheres.size(); }
 
 	public:
 		std::vector<BpDebugLine> m_debugLines;
-		std::vector<BpDebugSphere> m_debugSpheres;
+		std::vector<BpDebugSphere*> m_debugSpheres;
 	};
 }

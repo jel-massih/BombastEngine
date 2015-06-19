@@ -1,3 +1,4 @@
+#include "../msvc/stdafx.h"
 #include "BpVisualizationManager.h"
 #include "../Foundation/BpAssert.h"
 
@@ -15,4 +16,12 @@ float BpVisualizationManager::GetVisualizationParameter(BpVisualizationParams pa
 	BP_ASSERTf(parameter != BpVisualizationParams::VALUE_COUNT, "Attempting to Get Invalid Visualualization Parameter");
 
 	return m_visualizationParams[parameter];
+}
+
+BpDebugSphere* BpVisualizationManager::AddDebugSphere(BpVec3 center, float radius, BpVec3 color)
+{
+	BpDebugSphere* pSphere = BP_NEW BpDebugSphere(center, radius, color);
+	m_renderBuffer.m_debugSpheres.push_back(pSphere);
+	
+	return pSphere;
 }

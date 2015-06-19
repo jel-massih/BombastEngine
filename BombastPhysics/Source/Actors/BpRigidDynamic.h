@@ -1,6 +1,7 @@
 #pragma once
 
 #include "BpRigidBody.h"
+#include "../Debugging/BpVisualizationManager.h"
 #include "../Geometry/BpShape.h"
 
 namespace bPhysics
@@ -67,12 +68,16 @@ namespace bPhysics
 
 		void Simulate(float timestep);
 
+		bool SetupBodyDebugging(BpVisualizationManager& visualizationManager);
+
 	private:
 		BpVec3 m_velocity, m_angularVelocity;
 
 		BpShape m_shape;
 
 		BpScene* m_pScene;
+
+		BpDebugSphere* m_pDebugSphere;
 
 		float m_linearDamping, m_angularDamping, m_maxAngularVelocity;
 
