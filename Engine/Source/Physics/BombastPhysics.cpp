@@ -343,3 +343,12 @@ IDebugPhysicsRenderBuffer* BombastPhysics::VGetDebugRenderBuffer()
 
 	return newBuffer;
 }
+
+BombastPhysicsDebugRenderBuffer::~BombastPhysicsDebugRenderBuffer()
+{
+	for (std::vector<IDebugPhysicsSphere*>::iterator it = m_spheres.begin(); it != m_spheres.end(); it++)
+	{
+		SAFE_DELETE(*it);
+	}
+	m_spheres.clear();
+}

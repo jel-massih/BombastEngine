@@ -10,15 +10,7 @@ DebugPhysics::DebugPhysics()
 
 DebugPhysics::~DebugPhysics()
 {
-	if (m_pShapes)
-	{
-		for (int i = 0; i < m_shapeCount; i++)
-		{
-			ReleaseShape(&m_pShapes[i]);
-		}
-
-		SAFE_DELETE(m_pShapes);
-	}
+	ReleaseAllShapes();
 
 	SAFE_DELETE(m_pDebugShader);
 }
@@ -29,8 +21,6 @@ bool DebugPhysics::Initialize()
 	bool result;
 
 	device = g_pApp->GetGraphicsManager()->GetRenderer()->GetDevice();
-
-	g_pApp->GetGraphicsManager()->GetRenderer()->VGetViewMatrix(m_baseViewMatrix);
 
 	m_pDebugShader = BE_NEW DebugShader;
 	if (!m_pDebugShader)
@@ -50,12 +40,22 @@ bool DebugPhysics::Initialize()
 
 bool DebugPhysics::Render()
 {
+	ID3D11RasterizerState* rState;
+	D3D11_RASTERIZER_DESC rDesc;
+
 	bool result = false;
 	ID3D11DeviceContext* deviceContext = g_pApp->GetGraphicsManager()->GetRenderer()->GetDeviceContext();
 
-	Mat4x4 worldMatrix, orthoMatrix;
-
 	IDebugPhysicsRenderBuffer* buffer = g_pApp->GetGameLogic()->VGetGamePhysics()->VGetDebugRenderBuffer();
+
+	//Set Fill Mode to wireframe for spheres
+	deviceContext->RSGetState(&rState);
+	rState->GetDesc(&rDesc);
+	rDesc.FillMode =  D3D11_FILL_WIREFRAME;
+	g_pApp->GetGraphicsManager()->GetRenderer()->GetDevice()->CreateRasterizerState(&rDesc, &rState);
+	deviceContext->RSSetState(rState);
+
+	ReleaseAllShapes();
 
 	std::vector<IDebugPhysicsSphere*> spheres = buffer->VGetDebugSpheres();
 	for (auto i = spheres.begin(); i != spheres.end(); i++)
@@ -63,17 +63,21 @@ bool DebugPhysics::Render()
 		AddShape("TestShape", *i);
 	}
 
-	g_pApp->GetGraphicsManager()->GetRenderer()->VGetWorldMatrix(worldMatrix);
-	g_pApp->GetGraphicsManager()->GetRenderer()->VGetOrthoMatrix(orthoMatrix);
-
 	for (unsigned int i = 0; i < m_shapeCount; i++)
 	{
-		result = RenderShape(deviceContext, m_pShapes[i], worldMatrix, orthoMatrix);
+		result = RenderShape(deviceContext, m_pShapes[i]);
 		if (!result)
 		{
 			return false;
 		}
 	}
+
+	rDesc.FillMode = D3D11_FILL_SOLID;
+	g_pApp->GetGraphicsManager()->GetRenderer()->GetDevice()->CreateRasterizerState(&rDesc, &rState);
+	deviceContext->RSSetState(rState);
+
+	//Cleanup Buffer
+	SAFE_DELETE(buffer);
 
 	return true;
 }
@@ -104,6 +108,14 @@ bool DebugPhysics::AddShape(const char* shapeId, IDebugPhysicsSphere* shape)
 	}
 
 	m_shapeCount++;
+
+	Vec3 color = shape->VGetColor();
+	Vec3 pos = shape->VGetPosition();
+
+	m_pShapes[m_shapeCount - 1]->red = color.x;
+	m_pShapes[m_shapeCount - 1]->green = color.y;
+	m_pShapes[m_shapeCount - 1]->blue = color.z;
+	m_pShapes[m_shapeCount - 1]->transformMatrix.SetPosition(pos);
 
 	SAFE_DELETE(tempShapes);
 
@@ -145,10 +157,14 @@ bool DebugPhysics::InitializeShape(DebugShapeType** shape, const char* shapeId, 
 		return false;
 	}
 
+	int lines = 10;
+	int sphereFaceCount = ((lines - 3) * lines * 2) + (lines * 2);
+
+	(*shape)->transformMatrix = Mat4x4::g_Identity;
 	(*shape)->vertexBuffer = 0;
 	(*shape)->indexBuffer = 0;
-	(*shape)->vertexCount = 0;
-	(*shape)->indexCount = (*shape)->vertexCount;
+	(*shape)->vertexCount = ((lines - 2) * lines) + 2;
+	(*shape)->indexCount = sphereFaceCount * 3;
 	(*shape)->shapeId = shapeId;
 
 	vertices = BE_NEW VertexType[(*shape)->vertexCount];
@@ -163,23 +179,44 @@ bool DebugPhysics::InitializeShape(DebugShapeType** shape, const char* shapeId, 
 		return false;
 	}
 
-	memset(vertices, 0, sizeof(VertexType) * (*shape)->vertexCount);
+	float sphereYaw = 0.0f;
+	float spherePitch = 0.0f;
 
-	for (int i = 0; i < (*shape)->indexCount; i++)
+	XMVECTOR curVertPos = XMVectorSet(0.0f, 0.0f, 1.0f, 0.0f);
+	vertices[0].position.x = 0.0f;
+	vertices[0].position.y = 0.0f;
+	vertices[0].position.z = 1.0f;
+
+	for (int i = 0; i < lines - 2; i++)
 	{
-		indices[i] = i;
+		spherePitch = (i + 1) * (3.14 / (lines - 1));
+		XMMATRIX rotationx = XMMatrixRotationX(spherePitch);
+		for (int j = 0; j < lines; j++)
+		{
+			sphereYaw = j * (6.28 / lines);
+			XMMATRIX rotationy = XMMatrixRotationZ(sphereYaw);
+			curVertPos = XMVector3TransformNormal(XMVectorSet(0.0f, 0.0f, 1.0f, 0.0f), (rotationx * rotationy));
+			curVertPos = XMVector3Normalize(curVertPos);
+			vertices[i*lines + j + 1].position.x = XMVectorGetX(curVertPos);
+			vertices[i*lines + j + 1].position.y = XMVectorGetY(curVertPos);
+			vertices[i*lines + j + 1].position.z = XMVectorGetZ(curVertPos);
+		}
 	}
 
-	vertexBufferDesc.Usage = D3D11_USAGE_DYNAMIC;
+	vertices[(*shape)->vertexCount - 1].position.x = 0.0f;
+	vertices[(*shape)->vertexCount - 1].position.y = 0.0f;
+	vertices[(*shape)->vertexCount - 1].position.z = -1.0f;
+
+	ZeroMemory(&vertexBufferDesc, sizeof(vertexBufferDesc));
+	vertexBufferDesc.Usage = D3D11_USAGE_DEFAULT;
 	vertexBufferDesc.ByteWidth = sizeof(VertexType) * (*shape)->vertexCount;
 	vertexBufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
-	vertexBufferDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+	vertexBufferDesc.CPUAccessFlags = 0;
 	vertexBufferDesc.MiscFlags = 0;
 	vertexBufferDesc.StructureByteStride = 0;
 
-	vertexData.pSysMem = vertices;
-	vertexData.SysMemPitch = 0;
-	vertexData.SysMemSlicePitch = 0;
+	ZeroMemory(&vertexData, sizeof(vertexData));
+	vertexData.pSysMem = &vertices[0];
 
 	result = device->CreateBuffer(&vertexBufferDesc, &vertexData, &(*shape)->vertexBuffer);
 	if (FAILED(result))
@@ -187,14 +224,69 @@ bool DebugPhysics::InitializeShape(DebugShapeType** shape, const char* shapeId, 
 		return false;
 	}
 
+	int k = 0;
+	for (int i = 0; i < lines - 1; i++)
+	{
+		indices[k] = 0;
+		indices[k + 1] = i + 1;
+		indices[k + 2] = i + 2;
+		k += 3;
+	}
+
+	indices[k] = 0;
+	indices[k + 1] = lines;
+	indices[k + 2] = 1;
+	k += 3;
+
+	for (int i = 0; i < lines - 3; i++)
+	{
+		for (int j = 0; j < lines - 1; j++)
+		{
+			indices[k] = i*lines + j + 1;
+			indices[k+1] = i*lines + j + 2;
+			indices[k+2] = (i+1)*lines + j + 1;
+
+			indices[k + 3] = (i + 1)*lines + j + 1;
+			indices[k + 4] = i*lines + j + 2;
+			indices[k + 5] = (i + 1)*lines + j + 2;
+
+			k += 6; //next quad
+		}
+
+		indices[k] = (i * lines) + lines;
+		indices[k + 1] = (i * lines) + 1;
+		indices[k + 2] = ((i+1) * lines) + lines;
+
+		indices[k + 3] = ((i + 1) * lines) + lines;
+		indices[k + 4] = (i * lines) + 1;
+		indices[k + 5] = ((i + 1) * lines) + 1;
+
+		k += 6;
+	}
+
+	for (int i = 0; i < lines - 1; i++)
+	{
+		indices[k] = (*shape)->vertexCount - 1;
+		indices[k] = ((*shape)->vertexCount - 1) - (i + 1);
+		indices[k] = ((*shape)->vertexCount - 1) - (i + 2);
+
+		k += 3;
+	}
+
+	indices[k] = (*shape)->vertexCount-1;
+	indices[k + 1] = ((*shape)->vertexCount - 1) - lines;
+	indices[k + 2] = (*shape)->vertexCount - 2;
+
+	ZeroMemory(&indexBufferDesc, sizeof(indexBufferDesc));
 	indexBufferDesc.Usage = D3D11_USAGE_DEFAULT;
-	indexBufferDesc.ByteWidth = sizeof(unsigned long) * (*shape)->indexCount;
+	indexBufferDesc.ByteWidth = sizeof(unsigned long) * sphereFaceCount * 3;
 	indexBufferDesc.BindFlags = D3D11_BIND_INDEX_BUFFER;
 	indexBufferDesc.CPUAccessFlags = 0;
 	indexBufferDesc.MiscFlags = 0;
 	indexBufferDesc.StructureByteStride = 0;
 
-	indexData.pSysMem = indices;
+	ZeroMemory(&indexData, sizeof(indexData));
+	indexData.pSysMem = &indices[0];
 	indexData.SysMemPitch = 0;
 	indexData.SysMemSlicePitch = 0;
 
@@ -215,6 +307,20 @@ bool DebugPhysics::UpdateShape(DebugShapeType* shape, ID3D11DeviceContext* conte
 	return false;
 }
 
+void DebugPhysics::ReleaseAllShapes()
+{
+	if (m_pShapes)
+	{
+		for (int i = 0; i < m_shapeCount; i++)
+		{
+			ReleaseShape(&m_pShapes[i]);
+		}
+
+		SAFE_DELETE(m_pShapes);
+		m_shapeCount = 0;
+	}
+}
+
 void DebugPhysics::ReleaseShape(DebugShapeType** shape)
 {
 	if (*shape)
@@ -226,11 +332,17 @@ void DebugPhysics::ReleaseShape(DebugShapeType** shape)
 	}
 }
 
-bool DebugPhysics::RenderShape(ID3D11DeviceContext* deviceContext, DebugShapeType* shape, Mat4x4& worldMatrix, Mat4x4& orthoMatrix)
+bool DebugPhysics::RenderShape(ID3D11DeviceContext* deviceContext, DebugShapeType* shape)
 {
 	unsigned int stride, offset;
 	XMFLOAT4 pixelColor;
 	bool result;
+
+	IRenderer* pRenderer = g_pApp->GetGraphicsManager()->GetRenderer();
+
+	Mat4x4 view, projection;
+	pRenderer->VGetViewMatrix(view);
+	pRenderer->VGetProjectionMatrix(projection);
 
 	stride = sizeof(VertexType);
 	offset = 0;
@@ -241,7 +353,7 @@ bool DebugPhysics::RenderShape(ID3D11DeviceContext* deviceContext, DebugShapeTyp
 
 	pixelColor = XMFLOAT4(shape->red, shape->green, shape->blue, 1.0f);
 
-	result = m_pDebugShader->Render(deviceContext, shape->indexCount, XMLoadFloat4x4(&worldMatrix), XMLoadFloat4x4(&m_baseViewMatrix), XMLoadFloat4x4(&orthoMatrix), pixelColor);
+	result = m_pDebugShader->Render(deviceContext, shape->indexCount, XMLoadFloat4x4(&shape->transformMatrix), XMLoadFloat4x4(&view), XMLoadFloat4x4(&projection), pixelColor);
 	if (!result)
 	{
 		return false;

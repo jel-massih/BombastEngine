@@ -11,6 +11,7 @@ private:
 		ID3D11Buffer* vertexBuffer, *indexBuffer;
 		int vertexCount, indexCount;
 		float red, green, blue;
+		Mat4x4 transformMatrix;
 	};
 
 	struct VertexType
@@ -33,11 +34,12 @@ private:
 	bool InitializeShape(DebugShapeType** shape, const char* shapeId, ID3D11Device* device);
 	bool UpdateShape(DebugShapeType* shape, ID3D11DeviceContext* context);
 	void ReleaseShape(DebugShapeType** shape);
-	bool RenderShape(ID3D11DeviceContext* deviceContext, DebugShapeType* sphere, Mat4x4& worldMatrix, Mat4x4& orthoMatrix);
+	bool RenderShape(ID3D11DeviceContext* deviceContext, DebugShapeType* sphere);
+
+	void ReleaseAllShapes();
 
 private:
 	DebugShader* m_pDebugShader;
-	Mat4x4 m_baseViewMatrix;
 
 	DebugShapeType** m_pShapes;
 	int m_shapeCount;

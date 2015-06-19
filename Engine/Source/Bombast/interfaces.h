@@ -230,6 +230,7 @@ public:
 class IDebugPhysicsRenderBuffer
 {
 public:
+	virtual ~IDebugPhysicsRenderBuffer() {}
 	virtual std::vector<IDebugPhysicsSphere*> VGetDebugSpheres() = 0;
 };
 
