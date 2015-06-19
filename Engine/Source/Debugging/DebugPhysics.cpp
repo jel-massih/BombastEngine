@@ -179,33 +179,7 @@ bool DebugPhysics::InitializeShape(DebugShapeType** shape, const char* shapeId, 
 		return false;
 	}
 
-	float sphereYaw = 0.0f;
-	float spherePitch = 0.0f;
-
-	XMVECTOR curVertPos = XMVectorSet(0.0f, 0.0f, 1.0f, 0.0f);
-	vertices[0].position.x = 0.0f;
-	vertices[0].position.y = 0.0f;
-	vertices[0].position.z = 1.0f;
-
-	for (int i = 0; i < lines - 2; i++)
-	{
-		spherePitch = (i + 1) * (3.14 / (lines - 1));
-		XMMATRIX rotationx = XMMatrixRotationX(spherePitch);
-		for (int j = 0; j < lines; j++)
-		{
-			sphereYaw = j * (6.28 / lines);
-			XMMATRIX rotationy = XMMatrixRotationZ(sphereYaw);
-			curVertPos = XMVector3TransformNormal(XMVectorSet(0.0f, 0.0f, 1.0f, 0.0f), (rotationx * rotationy));
-			curVertPos = XMVector3Normalize(curVertPos);
-			vertices[i*lines + j + 1].position.x = XMVectorGetX(curVertPos);
-			vertices[i*lines + j + 1].position.y = XMVectorGetY(curVertPos);
-			vertices[i*lines + j + 1].position.z = XMVectorGetZ(curVertPos);
-		}
-	}
-
-	vertices[(*shape)->vertexCount - 1].position.x = 0.0f;
-	vertices[(*shape)->vertexCount - 1].position.y = 0.0f;
-	vertices[(*shape)->vertexCount - 1].position.z = -1.0f;
+	CreateSphere(vertices, indices, lines, (*shape)->vertexCount);
 
 	ZeroMemory(&vertexBufferDesc, sizeof(vertexBufferDesc));
 	vertexBufferDesc.Usage = D3D11_USAGE_DEFAULT;
@@ -223,59 +197,6 @@ bool DebugPhysics::InitializeShape(DebugShapeType** shape, const char* shapeId, 
 	{
 		return false;
 	}
-
-	int k = 0;
-	for (int i = 0; i < lines - 1; i++)
-	{
-		indices[k] = 0;
-		indices[k + 1] = i + 1;
-		indices[k + 2] = i + 2;
-		k += 3;
-	}
-
-	indices[k] = 0;
-	indices[k + 1] = lines;
-	indices[k + 2] = 1;
-	k += 3;
-
-	for (int i = 0; i < lines - 3; i++)
-	{
-		for (int j = 0; j < lines - 1; j++)
-		{
-			indices[k] = i*lines + j + 1;
-			indices[k+1] = i*lines + j + 2;
-			indices[k+2] = (i+1)*lines + j + 1;
-
-			indices[k + 3] = (i + 1)*lines + j + 1;
-			indices[k + 4] = i*lines + j + 2;
-			indices[k + 5] = (i + 1)*lines + j + 2;
-
-			k += 6; //next quad
-		}
-
-		indices[k] = (i * lines) + lines;
-		indices[k + 1] = (i * lines) + 1;
-		indices[k + 2] = ((i+1) * lines) + lines;
-
-		indices[k + 3] = ((i + 1) * lines) + lines;
-		indices[k + 4] = (i * lines) + 1;
-		indices[k + 5] = ((i + 1) * lines) + 1;
-
-		k += 6;
-	}
-
-	for (int i = 0; i < lines - 1; i++)
-	{
-		indices[k] = (*shape)->vertexCount - 1;
-		indices[k] = ((*shape)->vertexCount - 1) - (i + 1);
-		indices[k] = ((*shape)->vertexCount - 1) - (i + 2);
-
-		k += 3;
-	}
-
-	indices[k] = (*shape)->vertexCount-1;
-	indices[k + 1] = ((*shape)->vertexCount - 1) - lines;
-	indices[k + 2] = (*shape)->vertexCount - 2;
 
 	ZeroMemory(&indexBufferDesc, sizeof(indexBufferDesc));
 	indexBufferDesc.Usage = D3D11_USAGE_DEFAULT;
@@ -300,6 +221,90 @@ bool DebugPhysics::InitializeShape(DebugShapeType** shape, const char* shapeId, 
 	SAFE_DELETE_ARRAY(indices);
 
 	return true;
+}
+
+void DebugPhysics::CreateSphere(VertexType* vertices, unsigned long* indices, int lines, int vertexCount)
+{
+	float sphereYaw = 0.0f;
+	float spherePitch = 0.0f;
+
+	XMVECTOR curVertPos = XMVectorSet(0.0f, 0.0f, 1.0f, 0.0f);
+	vertices[0].position.x = 0.0f;
+	vertices[0].position.y = 0.0f;
+	vertices[0].position.z = 1.0f;
+
+	for (int i = 0; i < lines - 2; i++)
+	{
+		spherePitch = (i + 1) * (3.14 / (lines - 1));
+		XMMATRIX rotationx = XMMatrixRotationX(spherePitch);
+		for (int j = 0; j < lines; j++)
+		{
+			sphereYaw = j * (6.28 / lines);
+			XMMATRIX rotationy = XMMatrixRotationZ(sphereYaw);
+			curVertPos = XMVector3TransformNormal(XMVectorSet(0.0f, 0.0f, 1.0f, 0.0f), (rotationx * rotationy));
+			curVertPos = XMVector3Normalize(curVertPos);
+			vertices[i*lines + j + 1].position.x = XMVectorGetX(curVertPos);
+			vertices[i*lines + j + 1].position.y = XMVectorGetY(curVertPos);
+			vertices[i*lines + j + 1].position.z = XMVectorGetZ(curVertPos);
+		}
+	}
+
+	vertices[vertexCount - 1].position.x = 0.0f;
+	vertices[vertexCount - 1].position.y = 0.0f;
+	vertices[vertexCount - 1].position.z = -1.0f;
+
+	int k = 0;
+	for (int i = 0; i < lines - 1; i++)
+	{
+		indices[k] = 0;
+		indices[k + 1] = i + 1;
+		indices[k + 2] = i + 2;
+		k += 3;
+	}
+
+	indices[k] = 0;
+	indices[k + 1] = lines;
+	indices[k + 2] = 1;
+	k += 3;
+
+	for (int i = 0; i < lines - 3; i++)
+	{
+		for (int j = 0; j < lines - 1; j++)
+		{
+			indices[k] = i*lines + j + 1;
+			indices[k + 1] = i*lines + j + 2;
+			indices[k + 2] = (i + 1)*lines + j + 1;
+
+			indices[k + 3] = (i + 1)*lines + j + 1;
+			indices[k + 4] = i*lines + j + 2;
+			indices[k + 5] = (i + 1)*lines + j + 2;
+
+			k += 6; //next quad
+		}
+
+		indices[k] = (i * lines) + lines;
+		indices[k + 1] = (i * lines) + 1;
+		indices[k + 2] = ((i + 1) * lines) + lines;
+
+		indices[k + 3] = ((i + 1) * lines) + lines;
+		indices[k + 4] = (i * lines) + 1;
+		indices[k + 5] = ((i + 1) * lines) + 1;
+
+		k += 6;
+	}
+
+	for (int i = 0; i < lines - 1; i++)
+	{
+		indices[k] = vertexCount - 1;
+		indices[k] = (vertexCount - 1) - (i + 1);
+		indices[k] = (vertexCount - 1) - (i + 2);
+
+		k += 3;
+	}
+
+	indices[k] = vertexCount - 1;
+	indices[k + 1] = (vertexCount - 1) - lines;
+	indices[k + 2] = vertexCount - 2;
 }
 
 bool DebugPhysics::UpdateShape(DebugShapeType* shape, ID3D11DeviceContext* context)
