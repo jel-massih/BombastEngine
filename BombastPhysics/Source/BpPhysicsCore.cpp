@@ -3,6 +3,7 @@
 #include "Scene\BpScene.h"
 #include "Foundation\BpReporting.h"
 #include "Geometry\BpGeometrySphere.h"
+#include "Geometry\BpGeometryBox.h"
 #include "Geometry\BpShape.h"
 
 using namespace bPhysics;
@@ -56,6 +57,13 @@ BpShape* BpPhysicsCore::CreateShape(const BpGeometry& geometry, BpMaterial* cons
 	{
 	case BpGeometryType::SPHERE:
 		if (!static_cast<const BpGeometrySphere&>(geometry).IsValid())
+		{
+			BP_ERROR("CreateShape: Supplied BpGeometry is not valid");
+			return nullptr;
+		}
+		break;
+	case BpGeometryType::BOX:
+		if (!static_cast<const BpGeometryBox&>(geometry).IsValid())
 		{
 			BP_ERROR("CreateShape: Supplied BpGeometry is not valid");
 			return nullptr;

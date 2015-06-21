@@ -32,7 +32,7 @@ inline void BpRigidDynamic::SetWorldTransform(const BpMat4x4& newTransform, bool
 	m_shape.SetWorldTransform(newTransform);
 
 	if (m_pDebugSphere) {
-		m_pDebugSphere->center = newTransform.GetPosition();
+		//m_pDebugSphere->center = newTransform.GetPosition();
 	}
 
 	if (autoWake)

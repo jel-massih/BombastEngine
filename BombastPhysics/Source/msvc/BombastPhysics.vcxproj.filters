@@ -62,6 +62,9 @@
     <ClInclude Include="..\Debugging\BpDebugRenderBuffer.h">
       <Filter>Debugging</Filter>
     </ClInclude>
+    <ClInclude Include="..\Geometry\BpGeometryBox.h">
+      <Filter>Geometry</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\BpPhysicsCore.cpp" />

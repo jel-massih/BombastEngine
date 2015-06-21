@@ -131,6 +131,13 @@ void BombastPhysics::VAddSphere(float radius, Actor* gameActor, const std::strin
 	AddShape(gameActor, &BpGeometrySphere(radius), density, physicsMaterial, gravityEnabled, linearDamping, angularDamping);
 }
 
+void BombastPhysics::VAddBox(Vec3 scale, Actor* gameActor, const std::string& densityStr, const std::string& physicsMaterial, bool gravityEnabled, float linearDamping, float angularDamping)
+{
+	float density = LookupDensity(densityStr);
+
+	AddShape(gameActor, &BpGeometryBox(scale.x, scale.y, scale.z), density, physicsMaterial, gravityEnabled, linearDamping, angularDamping);
+}
+
 void BombastPhysics::VRemoveActor(ActorId id)
 {
 	if (BpRigidBody* const body = FindRigidBody(id))
@@ -235,6 +242,12 @@ void BombastPhysics::AddShape(Actor* pActor, BpGeometry* geometry, float density
 	Mat4x4ToBpMat4x4(transform, &bpMat);
 
 	BpRigidDynamic* body = BpCreateDynamic(*m_pPhysicsCore, bpMat, *geometry, *mat, density);
+
+	if (!body)
+	{
+		BE_ERROR("BombastPhysics::AddShape Failed to create Dynamic RigidBody");
+		return;
+	}
 	
 	body->SetLinearDamping(linearDamping);
 	body->SetAngularDamping(angularDamping);
@@ -331,13 +344,13 @@ IDebugPhysicsRenderBuffer* BombastPhysics::VGetDebugRenderBuffer()
 {
 	BombastPhysicsDebugRenderBuffer* newBuffer =  BE_NEW BombastPhysicsDebugRenderBuffer;
 	
-	const bPhysics::BpDebugSphere* spheres = m_pScene->GetRenderBuffer().GetSpheres();
-	for (unsigned int i = 0; i < m_pScene->GetRenderBuffer().GetSphereCount(); i++)
+	std::vector<BpDebugShape*> shapes = m_pScene->GetRenderBuffer().m_debugShapes;
+	for (std::vector<BpDebugShape*>::iterator it = shapes.begin(); it != shapes.end(); it++)
 	{
 		Vec3 pos, color;
-		BpVec3ToVec3(spheres[i].center, &pos);
-		BpVec3ToVec3(spheres[i].color, &color);
-		BombastDebugPhysicsSphere* sphere = BE_NEW BombastDebugPhysicsSphere(pos, color, spheres[i].radius);
+		BpVec3ToVec3((*it)->position, &pos);
+		BpVec3ToVec3((*it)->color, &color);
+		BombastDebugPhysicsSphere* sphere = BE_NEW BombastDebugPhysicsSphere(pos, color, (*it)->radius);
 		newBuffer->m_spheres.push_back(sphere);
 	}
 

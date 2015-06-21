@@ -2,6 +2,7 @@
 
 #include "BpGeometry.h"
 #include "BpGeometrySphere.h"
+#include "BpGeometryBox.h"
 #include "../Actors/BpRigidActor.h"
 
 namespace bPhysics

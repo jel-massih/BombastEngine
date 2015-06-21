@@ -8,7 +8,8 @@ namespace bPhysics
 	{
 		enum Type
 		{
-			SPHERE
+			SPHERE,
+			BOX
 		};
 	};
 

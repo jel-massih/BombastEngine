@@ -8,7 +8,8 @@ namespace bPhysics
 
 	bool isDynamicGeometry(BpGeometryType::Type type)
 	{
-		return type == BpGeometryType::SPHERE;
+		return type == BpGeometryType::SPHERE || 
+			type == BpGeometryType::BOX;
 	}
 
 	BpRigidDynamic* BpCreateDynamic(BpPhysicsCore& core, const BpMat4x4& transform, const BpShape& shape, float density)

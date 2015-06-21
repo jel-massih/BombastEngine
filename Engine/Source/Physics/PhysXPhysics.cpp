@@ -282,6 +282,13 @@ void PhysXPhysics::VAddSphere(float radius, Actor* gameActor, const std::string&
 	AddShape(gameActor, &PxSphereGeometry(radius), density, physicsMaterial, gravityEnabled, linearDamping, angularDamping);
 }
 
+void PhysXPhysics::VAddBox(Vec3 scale, Actor* gameActor, const std::string& densityStr, const std::string& physicsMaterial, bool gravityEnabled, float linearDamping, float angularDamping)
+{
+	float density = LookupDensity(densityStr);
+
+	AddShape(gameActor, &PxBoxGeometry(scale.x, scale.y, scale.z), density, physicsMaterial, gravityEnabled, linearDamping, angularDamping);
+}
+
 void PhysXPhysics::VRemoveActor(ActorId id)
 {
 	if (PxRigidBody* const body = FindRigidBody(id))

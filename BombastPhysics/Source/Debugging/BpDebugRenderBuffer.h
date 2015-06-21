@@ -6,26 +6,49 @@
 
 namespace bPhysics
 {
-	class BpDebugLine
+	enum DebugShapeType
+	{
+		LINE,
+		SPHERE,
+		BOX
+	};
+
+	class BpDebugShape
+	{
+	public:
+		BpDebugShape() {}
+		BpDebugShape(DebugShapeType shapeType, BpVec3 position, BpVec3 color = BpVec3(255, 0, 0)) : shapeType(shapeType), position(position), color(color) {}
+
+		BpVec3 position;
+		BpVec3 color;
+		DebugShapeType shapeType;
+	};
+
+	class BpDebugLine : public BpDebugShape
 	{
 	public:
 		BpDebugLine() {}
-		BpDebugLine(BpVec3 point1, BpVec3 point2, BpVec3 color = BpVec3(0, 255, 0)) : point1(point1), point2(point2), color(color) {}
+		BpDebugLine(BpVec3 position, BpVec3 extent, BpVec3 color = BpVec3(255, 0, 0)) : BpDebugShape(DebugShapeType::LINE, position, color), extent(extent) {}
 
-		BpVec3 point1;
-		BpVec3 point2;
-		BpVec3 color;
+		BpVec3 extent;
 	};
 
-	class BpDebugSphere
+	class BpDebugSphere : public BpDebugShape
 	{
 	public:
 		BpDebugSphere() {}
-		BpDebugSphere(BpVec3 center, float radius, BpVec3 color) : center(center), radius(radius), color(color)  {}
+		BpDebugSphere(BpVec3 center, float radius, BpVec3 color = BpVec3(255, 0, 0)) : BpDebugShape(DebugShapeType::SPHERE, center, color), radius(radius)  {}
 
-		BpVec3 center;
 		float radius;
-		BpVec3 color;
+	};
+
+	class BpDebugBox : public BpDebugShape
+	{
+	public:
+		BpDebugBox() {}
+		BpDebugBox(BpVec3 center, BpVec3 extent, BpVec3 color = BpVec3(255, 0, 0)) : BpDebugShape(DebugShapeType::BOX, center, color), extent(extent) {}
+
+		BpVec3 extent;
 	};
 
 	class BpDebugRenderBuffer
@@ -33,21 +56,14 @@ namespace bPhysics
 	public:
 		~BpDebugRenderBuffer()
 		{
-			for (std::vector<BpDebugSphere*>::iterator it = m_debugSpheres.begin(); it != m_debugSpheres.end(); it++)
+			for (std::vector<BpDebugShape*>::iterator it = m_debugShapes.begin(); it != m_debugShapes.end(); it++)
 			{
 				BP_SAFE_DELETE(*it);
 			}
-			m_debugSpheres.clear();
+			m_debugShapes.clear();
 		}
 
-		BpDebugLine* GetLines() { return &m_debugLines.front(); }
-		unsigned int GetLinesCount() { return m_debugLines.size(); }
-
-		const BpDebugSphere* GetSpheres() const { return m_debugSpheres.size() > 0 ? m_debugSpheres.front() : nullptr; }
-		const unsigned int GetSphereCount() const { return m_debugSpheres.size(); }
-
 	public:
-		std::vector<BpDebugLine> m_debugLines;
-		std::vector<BpDebugSphere*> m_debugSpheres;
+		std::vector<BpDebugShape*> m_debugShapes;
 	};
 }

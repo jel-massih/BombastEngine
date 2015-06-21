@@ -14,7 +14,9 @@ namespace bPhysics
 
 		const BpDebugRenderBuffer& GetDebugRenderBuffer() const { return m_renderBuffer; }
 
-		BpDebugSphere* AddDebugSphere(BpVec3 center, float radius, BpVec3 color = BpVec3(0, 255, 0));
+		BpDebugLine* AddDebugLine(BpVec3 position, BpVec3 extent, BpVec3 color = BpVec3(255, 0, 0));
+		BpDebugSphere* AddDebugSphere(BpVec3 center, float radius, BpVec3 color = BpVec3(255, 0, 0));
+		BpDebugBox* AddDebugBox(BpVec3 center, BpVec3 extent, BpVec3 color = BpVec3(255, 0, 0));
 
 	private:
 		float m_visualizationParams[BpVisualizationParams::VALUE_COUNT];
