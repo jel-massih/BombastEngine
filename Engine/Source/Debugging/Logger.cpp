@@ -94,7 +94,7 @@ void LoggingManager::Log(const char* tag, const char* message, const char* func,
 		sprintf_s(formattedMsg, sizeof(formattedMsg), "[%s] %s", tag, message);
 	}
 
-	WriteToLog(message);
+	WriteToLog(formattedMsg);
 }
 
 void LoggingManager::WriteToLog(const char* message)
