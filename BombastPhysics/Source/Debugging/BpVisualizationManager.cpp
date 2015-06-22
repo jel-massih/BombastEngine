@@ -18,7 +18,7 @@ float BpVisualizationManager::GetVisualizationParameter(BpVisualizationParams pa
 	return m_visualizationParams[parameter];
 }
 
-BpDebugLine* BpVisualizationManager::AddDebugLine(BpVec3 position, BpVec3 extent, BpVec3 color = BpVec3(255, 0, 0))
+BpDebugLine* BpVisualizationManager::AddDebugLine(BpVec3 position, BpVec3 extent, BpVec3 color)
 {
 	BpDebugLine* pLine = BP_NEW BpDebugLine(position, extent, color);
 	m_renderBuffer.m_debugShapes.push_back(pLine);
@@ -34,7 +34,7 @@ BpDebugSphere* BpVisualizationManager::AddDebugSphere(BpVec3 center, float radiu
 	return pSphere;
 }
 
-BpDebugBox* BpVisualizationManager::AddDebugBox(BpVec3 center, BpVec3 extent, BpVec3 color = BpVec3(255, 0, 0))
+BpDebugBox* BpVisualizationManager::AddDebugBox(BpVec3 center, BpVec3 extent, BpVec3 color)
 {
 	BpDebugBox* pBox = BP_NEW BpDebugBox(center, extent, color);
 	m_renderBuffer.m_debugShapes.push_back(pBox);
