@@ -6,17 +6,31 @@
 using namespace bPhysics;
 
 
-class BombastDebugPhysicsSphere : public IDebugPhysicsSphere
+class BombastDebugPhysicsSphere : public IDebugPhysicsShape
 {
 public:
 	BombastDebugPhysicsSphere(Vec3 pos, Vec3 color, float radius) : m_position(pos), m_color(color), m_radius(radius) {}
 
 	virtual Vec3 VGetPosition() { return m_position; }
 	virtual Vec3 VGetColor() { return m_color; }
+	virtual DebugPhysicsShapeType VGetShapeType() { return DebugPhysicsShapeType::SPHERE; }
 	virtual float VGetRadius() { return m_radius; }
 private:
 	Vec3 m_position, m_color;
 	float m_radius;
+};
+
+class BombastDebugPhysicsBox : public IDebugPhysicsShape
+{
+public:
+	BombastDebugPhysicsBox(Vec3 pos, Vec3 color, Vec3 extent) : m_position(pos), m_color(color), m_extent(extent) {}
+
+	virtual Vec3 VGetPosition() { return m_position; }
+	virtual Vec3 VGetColor() { return m_color; }
+	virtual DebugPhysicsShapeType VGetShapeType() { return DebugPhysicsShapeType::BOX; }
+	virtual Vec3 VGetExtent() { return m_extent; }
+private:
+	Vec3 m_position, m_color, m_extent;
 };
 
 class BombastPhysicsDebugRenderBuffer : public IDebugPhysicsRenderBuffer
@@ -24,9 +38,9 @@ class BombastPhysicsDebugRenderBuffer : public IDebugPhysicsRenderBuffer
 public:
 	~BombastPhysicsDebugRenderBuffer();
 
-	virtual std::vector<IDebugPhysicsSphere*> VGetDebugSpheres() { return m_spheres; }
+	virtual std::vector<IDebugPhysicsShape*> VGetDebugShapes() { return m_shapes; }
 	
-	std::vector<IDebugPhysicsSphere*> m_spheres;
+	std::vector<IDebugPhysicsShape*> m_shapes;
 };
 
 class BombastPhysics : public IGamePhysics, BE_NonCopyable
@@ -84,6 +98,8 @@ private:
 	void Mat4x4ToBpMat4x4(const Mat4x4& input, BpMat4x4* output);
 	void BpMat4x4ToMat4x4(const BpMat4x4& input, Mat4x4* output);
 	void BpVec3ToVec3(const BpVec3& input, Vec3* output);
+
+	IDebugPhysicsShape* ConvertPhysicsDebugShape(BpDebugShape* shape);
 
 private:
 	static const float Timestep; //Timestep value

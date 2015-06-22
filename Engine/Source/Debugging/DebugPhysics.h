@@ -26,13 +26,13 @@ public:
 	bool Initialize();
 	bool Render();
 
-	bool AddShape(const char* shapeId, IDebugPhysicsSphere* shape);
-	bool UpdateShape(const char* shapeId, IDebugPhysicsSphere* shape);
+	bool AddShape(const char* shapeId, IDebugPhysicsShape* shape);
+	bool UpdateShape(const char* shapeId, IDebugPhysicsShape* shape);
 
 private:
 	
-	bool InitializeShape(DebugShapeType** shape, const char* shapeId, ID3D11Device* device);
-	void CreateSphere(VertexType* vertices, unsigned long* indices, int lines, int vertexCount);
+	bool InitializeShape(DebugShapeType** shape, const char* shapeId, DebugPhysicsShapeType shapeType, ID3D11Device* device);
+	bool CreateSphere(VertexType** vertices, unsigned long** indices, DebugShapeType* shape);
 	
 	bool UpdateShape(DebugShapeType* shape, ID3D11DeviceContext* context);
 	void ReleaseShape(DebugShapeType** shape);

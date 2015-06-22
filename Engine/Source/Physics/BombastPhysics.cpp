@@ -340,6 +340,31 @@ void BombastPhysics::BpVec3ToVec3(const BpVec3& input, Vec3* output)
 	output->z = input.z;
 }
 
+//Takes in BombastPhysics library shape and converts to BombastEngine base debug shape
+IDebugPhysicsShape* BombastPhysics::ConvertPhysicsDebugShape(BpDebugShape* shape)
+{
+	Vec3 pos, color;
+	BpVec3ToVec3(shape->position, &pos);
+	BpVec3ToVec3(shape->color, &color);
+
+	switch (shape->shapeType) {
+		case DebugShapeType::SPHERE:
+		{
+			BpDebugSphere* sphere = static_cast<BpDebugSphere*>(shape);
+			return BE_NEW BombastDebugPhysicsSphere(pos, color, sphere->radius);
+		}
+		case DebugShapeType::BOX:
+		{
+			BpDebugBox* box = static_cast<BpDebugBox*>(shape);
+			Vec3 extent;
+			BpVec3ToVec3(box->extent, &extent);
+			return BE_NEW BombastDebugPhysicsBox(pos, color, extent);
+		}
+	}
+
+	return nullptr;
+}
+
 IDebugPhysicsRenderBuffer* BombastPhysics::VGetDebugRenderBuffer()
 {
 	BombastPhysicsDebugRenderBuffer* newBuffer =  BE_NEW BombastPhysicsDebugRenderBuffer;
@@ -347,11 +372,15 @@ IDebugPhysicsRenderBuffer* BombastPhysics::VGetDebugRenderBuffer()
 	std::vector<BpDebugShape*> shapes = m_pScene->GetRenderBuffer().m_debugShapes;
 	for (std::vector<BpDebugShape*>::iterator it = shapes.begin(); it != shapes.end(); it++)
 	{
-		Vec3 pos, color;
-		BpVec3ToVec3((*it)->position, &pos);
-		BpVec3ToVec3((*it)->color, &color);
-		BombastDebugPhysicsSphere* sphere = BE_NEW BombastDebugPhysicsSphere(pos, color, (*it)->radius);
-		newBuffer->m_spheres.push_back(sphere);
+		IDebugPhysicsShape* newShape = ConvertPhysicsDebugShape(*it);
+		if (newShape == nullptr) 
+		{
+			BE_ERROR("Failed to Convert Debug Physics Shape for Type %s. Skipping", (*it)->shapeType);
+		}
+		else 
+		{
+			newBuffer->m_shapes.push_back(newShape);
+		}
 	}
 
 	return newBuffer;
@@ -359,9 +388,9 @@ IDebugPhysicsRenderBuffer* BombastPhysics::VGetDebugRenderBuffer()
 
 BombastPhysicsDebugRenderBuffer::~BombastPhysicsDebugRenderBuffer()
 {
-	for (std::vector<IDebugPhysicsSphere*>::iterator it = m_spheres.begin(); it != m_spheres.end(); it++)
+	for (std::vector<IDebugPhysicsShape*>::iterator it = m_shapes.begin(); it != m_shapes.end(); it++)
 	{
 		SAFE_DELETE(*it);
 	}
-	m_spheres.clear();
+	m_shapes.clear();
 }

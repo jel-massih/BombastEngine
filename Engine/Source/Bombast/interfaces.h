@@ -220,18 +220,26 @@ public:
 	virtual ~ISceneNode() {};
 };
 
-class IDebugPhysicsSphere
+enum DebugPhysicsShapeType
+{
+	LINE,
+	SPHERE,
+	BOX
+};
+
+class IDebugPhysicsShape
 {
 public:
 	virtual Vec3 VGetPosition() = 0;
 	virtual Vec3 VGetColor() = 0;
+	virtual DebugPhysicsShapeType VGetShapeType() = 0;
 };
 
 class IDebugPhysicsRenderBuffer
 {
 public:
 	virtual ~IDebugPhysicsRenderBuffer() {}
-	virtual std::vector<IDebugPhysicsSphere*> VGetDebugSpheres() = 0;
+	virtual std::vector<IDebugPhysicsShape*> VGetDebugShapes() = 0;
 };
 
 //Generic Physics Interface

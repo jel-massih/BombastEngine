@@ -57,13 +57,13 @@ bool DebugPhysics::Render()
 
 	ReleaseAllShapes();
 
-	std::vector<IDebugPhysicsSphere*> spheres = buffer->VGetDebugSpheres();
-	for (auto i = spheres.begin(); i != spheres.end(); i++)
+	std::vector<IDebugPhysicsShape*> shapes = buffer->VGetDebugShapes();
+	for (auto i = shapes.begin(); i != shapes.end(); i++)
 	{
 		AddShape("TestShape", *i);
 	}
 
-	for (unsigned int i = 0; i < m_shapeCount; i++)
+	for (int i = 0; i < m_shapeCount; i++)
 	{
 		result = RenderShape(deviceContext, m_pShapes[i]);
 		if (!result)
@@ -82,7 +82,7 @@ bool DebugPhysics::Render()
 	return true;
 }
 
-bool DebugPhysics::AddShape(const char* shapeId, IDebugPhysicsSphere* shape)
+bool DebugPhysics::AddShape(const char* shapeId, IDebugPhysicsShape* shape)
 {
 	bool result;
 	DebugShapeType** tempShapes;
@@ -101,7 +101,7 @@ bool DebugPhysics::AddShape(const char* shapeId, IDebugPhysicsSphere* shape)
 		m_pShapes[i] = tempShapes[i];
 	}
 
-	result = InitializeShape(&m_pShapes[m_shapeCount], shapeId, device);
+	result = InitializeShape(&m_pShapes[m_shapeCount], shapeId, shape->VGetShapeType(), device);
 	if (!result)
 	{
 		return false;
@@ -122,7 +122,7 @@ bool DebugPhysics::AddShape(const char* shapeId, IDebugPhysicsSphere* shape)
 	return true;
 }
 
-bool DebugPhysics::UpdateShape(const char* shapeId, IDebugPhysicsSphere* shape)
+bool DebugPhysics::UpdateShape(const char* shapeId, IDebugPhysicsShape* shape)
 {
 	bool result;
 
@@ -143,7 +143,7 @@ bool DebugPhysics::UpdateShape(const char* shapeId, IDebugPhysicsSphere* shape)
 	return true;
 }
 
-bool DebugPhysics::InitializeShape(DebugShapeType** shape, const char* shapeId, ID3D11Device* device)
+bool DebugPhysics::InitializeShape(DebugShapeType** shape, const char* shapeId, DebugPhysicsShapeType shapeType, ID3D11Device* device)
 {
 	VertexType* vertices;
 	unsigned long* indices;
@@ -157,29 +157,26 @@ bool DebugPhysics::InitializeShape(DebugShapeType** shape, const char* shapeId, 
 		return false;
 	}
 
-	int lines = 10;
-	int sphereFaceCount = ((lines - 3) * lines * 2) + (lines * 2);
-
 	(*shape)->transformMatrix = Mat4x4::g_Identity;
-	(*shape)->vertexBuffer = 0;
-	(*shape)->indexBuffer = 0;
-	(*shape)->vertexCount = ((lines - 2) * lines) + 2;
-	(*shape)->indexCount = sphereFaceCount * 3;
+	(*shape)->vertexBuffer = nullptr;
+	(*shape)->indexBuffer = nullptr;
 	(*shape)->shapeId = shapeId;
 
-	vertices = BE_NEW VertexType[(*shape)->vertexCount];
-	if (!vertices)
+	bool createResult = false;
+	switch (shapeType)
 	{
-		return false;
+	case DebugPhysicsShapeType::SPHERE:
+		createResult = CreateSphere(&vertices, &indices, *shape);
+		break;
+	case DebugPhysicsShapeType::BOX:
+		break;
 	}
 
-	indices = BE_NEW unsigned long[(*shape)->indexCount];
-	if (!indices)
+	if (!createResult)
 	{
+		BE_ERROR("Failed to Create Debug Physics SHape Buffers");
 		return false;
 	}
-
-	CreateSphere(vertices, indices, lines, (*shape)->vertexCount);
 
 	ZeroMemory(&vertexBufferDesc, sizeof(vertexBufferDesc));
 	vertexBufferDesc.Usage = D3D11_USAGE_DEFAULT;
@@ -200,7 +197,7 @@ bool DebugPhysics::InitializeShape(DebugShapeType** shape, const char* shapeId, 
 
 	ZeroMemory(&indexBufferDesc, sizeof(indexBufferDesc));
 	indexBufferDesc.Usage = D3D11_USAGE_DEFAULT;
-	indexBufferDesc.ByteWidth = sizeof(unsigned long) * sphereFaceCount * 3;
+	indexBufferDesc.ByteWidth = sizeof(unsigned long) * (*shape)->indexCount;
 	indexBufferDesc.BindFlags = D3D11_BIND_INDEX_BUFFER;
 	indexBufferDesc.CPUAccessFlags = 0;
 	indexBufferDesc.MiscFlags = 0;
@@ -223,88 +220,108 @@ bool DebugPhysics::InitializeShape(DebugShapeType** shape, const char* shapeId, 
 	return true;
 }
 
-void DebugPhysics::CreateSphere(VertexType* vertices, unsigned long* indices, int lines, int vertexCount)
+bool DebugPhysics::CreateSphere(VertexType** vertices, unsigned long** indices, DebugShapeType* shape)
 {
+	int lines = 10;
+	int sphereFaceCount = ((lines - 3) * lines * 2) + (lines * 2);
+
+	shape->vertexCount = ((lines - 2) * lines) + 2;
+	shape->indexCount = sphereFaceCount * 3;
+
+	*vertices = BE_NEW VertexType[shape->vertexCount];
+	if (!*vertices)
+	{
+		return false;
+	}
+
+	*indices = BE_NEW unsigned long[shape->indexCount];
+	if (!*indices)
+	{
+		return false;
+	}
+
 	float sphereYaw = 0.0f;
 	float spherePitch = 0.0f;
 
 	XMVECTOR curVertPos = XMVectorSet(0.0f, 0.0f, 1.0f, 0.0f);
-	vertices[0].position.x = 0.0f;
-	vertices[0].position.y = 0.0f;
-	vertices[0].position.z = 1.0f;
+	(*vertices)[0].position.x = 0.0f;
+	(*vertices)[0].position.y = 0.0f;
+	(*vertices)[0].position.z = 1.0f;
 
 	for (int i = 0; i < lines - 2; i++)
 	{
-		spherePitch = (i + 1) * (3.14 / (lines - 1));
+		spherePitch = (float)((i + 1) * (3.14 / (lines - 1)));
 		XMMATRIX rotationx = XMMatrixRotationX(spherePitch);
 		for (int j = 0; j < lines; j++)
 		{
-			sphereYaw = j * (6.28 / lines);
+			sphereYaw = (float)(j * (6.28 / lines));
 			XMMATRIX rotationy = XMMatrixRotationZ(sphereYaw);
 			curVertPos = XMVector3TransformNormal(XMVectorSet(0.0f, 0.0f, 1.0f, 0.0f), (rotationx * rotationy));
 			curVertPos = XMVector3Normalize(curVertPos);
-			vertices[i*lines + j + 1].position.x = XMVectorGetX(curVertPos);
-			vertices[i*lines + j + 1].position.y = XMVectorGetY(curVertPos);
-			vertices[i*lines + j + 1].position.z = XMVectorGetZ(curVertPos);
+			(*vertices)[i*lines + j + 1].position.x = XMVectorGetX(curVertPos);
+			(*vertices)[i*lines + j + 1].position.y = XMVectorGetY(curVertPos);
+			(*vertices)[i*lines + j + 1].position.z = XMVectorGetZ(curVertPos);
 		}
 	}
 
-	vertices[vertexCount - 1].position.x = 0.0f;
-	vertices[vertexCount - 1].position.y = 0.0f;
-	vertices[vertexCount - 1].position.z = -1.0f;
+	(*vertices)[shape->vertexCount - 1].position.x = 0.0f;
+	(*vertices)[shape->vertexCount - 1].position.y = 0.0f;
+	(*vertices)[shape->vertexCount - 1].position.z = -1.0f;
 
 	int k = 0;
 	for (int i = 0; i < lines - 1; i++)
 	{
-		indices[k] = 0;
-		indices[k + 1] = i + 1;
-		indices[k + 2] = i + 2;
+		(*indices)[k] = 0;
+		(*indices)[k + 1] = i + 1;
+		(*indices)[k + 2] = i + 2;
 		k += 3;
 	}
 
-	indices[k] = 0;
-	indices[k + 1] = lines;
-	indices[k + 2] = 1;
+	(*indices)[k] = 0;
+	(*indices)[k + 1] = lines;
+	(*indices)[k + 2] = 1;
 	k += 3;
 
 	for (int i = 0; i < lines - 3; i++)
 	{
 		for (int j = 0; j < lines - 1; j++)
 		{
-			indices[k] = i*lines + j + 1;
-			indices[k + 1] = i*lines + j + 2;
-			indices[k + 2] = (i + 1)*lines + j + 1;
+			(*indices)[k] = i*lines + j + 1;
+			(*indices)[k + 1] = i*lines + j + 2;
+			(*indices)[k + 2] = (i + 1)*lines + j + 1;
 
-			indices[k + 3] = (i + 1)*lines + j + 1;
-			indices[k + 4] = i*lines + j + 2;
-			indices[k + 5] = (i + 1)*lines + j + 2;
+			(*indices)[k + 3] = (i + 1)*lines + j + 1;
+			(*indices)[k + 4] = i*lines + j + 2;
+			(*indices)[k + 5] = (i + 1)*lines + j + 2;
 
 			k += 6; //next quad
 		}
 
-		indices[k] = (i * lines) + lines;
-		indices[k + 1] = (i * lines) + 1;
-		indices[k + 2] = ((i + 1) * lines) + lines;
+		(*indices)[k] = (i * lines) + lines;
+		(*indices)[k + 1] = (i * lines) + 1;
+		(*indices)[k + 2] = ((i + 1) * lines) + lines;
 
-		indices[k + 3] = ((i + 1) * lines) + lines;
-		indices[k + 4] = (i * lines) + 1;
-		indices[k + 5] = ((i + 1) * lines) + 1;
+		(*indices)[k + 3] = ((i + 1) * lines) + lines;
+		(*indices)[k + 4] = (i * lines) + 1;
+		(*indices)[k + 5] = ((i + 1) * lines) + 1;
 
 		k += 6;
 	}
 
 	for (int i = 0; i < lines - 1; i++)
 	{
-		indices[k] = vertexCount - 1;
-		indices[k] = (vertexCount - 1) - (i + 1);
-		indices[k] = (vertexCount - 1) - (i + 2);
+		(*indices)[k] = shape->vertexCount - 1;
+		(*indices)[k] = (shape->vertexCount - 1) - (i + 1);
+		(*indices)[k] = (shape->vertexCount - 1) - (i + 2);
 
 		k += 3;
 	}
 
-	indices[k] = vertexCount - 1;
-	indices[k + 1] = (vertexCount - 1) - lines;
-	indices[k + 2] = vertexCount - 2;
+	(*indices)[k] = shape->vertexCount - 1;
+	(*indices)[k + 1] = (shape->vertexCount - 1) - lines;
+	(*indices)[k + 2] = shape->vertexCount - 2;
+
+	return true;
 }
 
 bool DebugPhysics::UpdateShape(DebugShapeType* shape, ID3D11DeviceContext* context)
