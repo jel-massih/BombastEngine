@@ -375,7 +375,7 @@ IDebugPhysicsRenderBuffer* BombastPhysics::VGetDebugRenderBuffer()
 		IDebugPhysicsShape* newShape = ConvertPhysicsDebugShape(*it);
 		if (newShape == nullptr) 
 		{
-			BE_ERROR("Failed to Convert Debug Physics Shape for Type %s. Skipping", (*it)->shapeType);
+			BE_ERROR("Failed to Convert Debug Physics Shape. Skipping");
 		}
 		else 
 		{

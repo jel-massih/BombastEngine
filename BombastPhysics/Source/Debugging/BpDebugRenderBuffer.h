@@ -16,7 +16,7 @@ namespace bPhysics
 	class BpDebugShape
 	{
 	public:
-		BpDebugShape() {}
+		BpDebugShape(DebugShapeType shapeType) : shapeType(shapeType), color(BpVec3(0, 255, 0)) {}
 		BpDebugShape(DebugShapeType shapeType, BpVec3 position, BpVec3 color = BpVec3(255, 0, 0)) : shapeType(shapeType), position(position), color(color) {}
 
 		BpVec3 position;
@@ -27,7 +27,7 @@ namespace bPhysics
 	class BpDebugLine : public BpDebugShape
 	{
 	public:
-		BpDebugLine() {}
+		BpDebugLine() : BpDebugShape(DebugShapeType::LINE) {}
 		BpDebugLine(BpVec3 position, BpVec3 extent, BpVec3 color = BpVec3(255, 0, 0)) : BpDebugShape(DebugShapeType::LINE, position, color), extent(extent) {}
 
 		BpVec3 extent;
@@ -36,7 +36,7 @@ namespace bPhysics
 	class BpDebugSphere : public BpDebugShape
 	{
 	public:
-		BpDebugSphere() {}
+		BpDebugSphere() : BpDebugShape(DebugShapeType::SPHERE) {}
 		BpDebugSphere(BpVec3 center, float radius, BpVec3 color = BpVec3(255, 0, 0)) : BpDebugShape(DebugShapeType::SPHERE, center, color), radius(radius)  {}
 
 		float radius;
@@ -45,7 +45,7 @@ namespace bPhysics
 	class BpDebugBox : public BpDebugShape
 	{
 	public:
-		BpDebugBox() {}
+		BpDebugBox() : BpDebugShape(DebugShapeType::BOX) {}
 		BpDebugBox(BpVec3 center, BpVec3 extent, BpVec3 color = BpVec3(255, 0, 0)) : BpDebugShape(DebugShapeType::BOX, center, color), extent(extent) {}
 
 		BpVec3 extent;
