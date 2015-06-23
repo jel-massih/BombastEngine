@@ -128,14 +128,14 @@ void BombastPhysics::VAddSphere(float radius, Actor* gameActor, const std::strin
 {
 	float density = LookupDensity(densityStr);
 
-	AddShape(gameActor, &BpGeometrySphere(radius), density, physicsMaterial, gravityEnabled, linearDamping, angularDamping);
+	AddShape(gameActor, BP_NEW BpGeometrySphere(radius), density, physicsMaterial, gravityEnabled, linearDamping, angularDamping);
 }
 
 void BombastPhysics::VAddBox(Vec3 scale, Actor* gameActor, const std::string& densityStr, const std::string& physicsMaterial, bool gravityEnabled, float linearDamping, float angularDamping)
 {
 	float density = LookupDensity(densityStr);
 
-	AddShape(gameActor, &BpGeometryBox(scale.x, scale.y, scale.z), density, physicsMaterial, gravityEnabled, linearDamping, angularDamping);
+	AddShape(gameActor, BP_NEW BpGeometryBox(scale.x, scale.y, scale.z), density, physicsMaterial, gravityEnabled, linearDamping, angularDamping);
 }
 
 void BombastPhysics::VRemoveActor(ActorId id)
@@ -241,7 +241,7 @@ void BombastPhysics::AddShape(Actor* pActor, BpGeometry* geometry, float density
 	BpMat4x4 bpMat;
 	Mat4x4ToBpMat4x4(transform, &bpMat);
 
-	BpRigidDynamic* body = BpCreateDynamic(*m_pPhysicsCore, bpMat, *geometry, *mat, density);
+	BpRigidDynamic* body = BpCreateDynamic(*m_pPhysicsCore, bpMat, geometry, *mat, density);
 
 	if (!body)
 	{

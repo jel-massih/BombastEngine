@@ -77,7 +77,7 @@ namespace bPhysics
 
 		BpScene* m_pScene;
 
-		BpDebugSphere* m_pDebugSphere;
+		BpDebugShape* m_pDebugShape;
 
 		float m_linearDamping, m_angularDamping, m_maxAngularVelocity;
 

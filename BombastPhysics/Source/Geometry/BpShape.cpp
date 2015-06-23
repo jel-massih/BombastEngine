@@ -2,6 +2,7 @@
 
 using namespace bPhysics;
 
-BpShape::BpShape(const BpGeometry& geometry, bool isExclusive)
+BpShape::BpShape(BpGeometry* geometry, bool isExclusive)
 {
+	m_geometry = geometry;
 }
