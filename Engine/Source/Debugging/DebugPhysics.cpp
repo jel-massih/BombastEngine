@@ -169,6 +169,7 @@ bool DebugPhysics::InitializeShape(DebugShapeType** shape, const char* shapeId, 
 		createResult = CreateSphere(&vertices, &indices, *shape);
 		break;
 	case DebugPhysicsShapeType::BOX:
+		createResult = CreateBox(&vertices, &indices, *shape);
 		break;
 	}
 
@@ -320,6 +321,68 @@ bool DebugPhysics::CreateSphere(VertexType** vertices, unsigned long** indices, 
 	(*indices)[k] = shape->vertexCount - 1;
 	(*indices)[k + 1] = (shape->vertexCount - 1) - lines;
 	(*indices)[k + 2] = shape->vertexCount - 2;
+
+	return true;
+}
+
+bool DebugPhysics::CreateBox(VertexType** vertices, unsigned long** indices, DebugShapeType* shape)
+{
+	shape->vertexCount = 16;
+	shape->indexCount = 36;
+
+	*vertices = BE_NEW VertexType[shape->vertexCount]
+	{
+		// face vertices
+		{ XMFLOAT3(-1.0f, -1.0f, -1.0f) },
+		{ XMFLOAT3(-1.0f, 1.0f, -1.0f) },
+		{ XMFLOAT3(1.0f, 1.0f, -1.0f) },
+		{ XMFLOAT3(1.0f, -1.0f, -1.0f) },
+		{ XMFLOAT3(-1.0f, -1.0f, 1.0f) },
+		{ XMFLOAT3(-1.0f, 1.0f, 1.0f) },
+		{ XMFLOAT3(1.0f, 1.0f, 1.0f) },
+		{ XMFLOAT3(1.0f, -1.0f, 1.0f) },
+		// edge vertices
+		{ XMFLOAT3(-1.0f, -1.0f, -1.0f)},
+		{ XMFLOAT3(-1.0f, 1.0f, -1.0f) },
+		{ XMFLOAT3(1.0f, 1.0f, -1.0f) },
+		{ XMFLOAT3(1.0f, -1.0f, -1.0f) },
+		{ XMFLOAT3(-1.0f, -1.0f, 1.0f)},
+		{ XMFLOAT3(-1.0f, 1.0f, 1.0f)},
+		{ XMFLOAT3(1.0f, 1.0f, 1.0f)},
+		{ XMFLOAT3(1.0f, -1.0f, 1.0f)}
+	};
+
+	if (!*vertices)
+	{
+		return false;
+	}
+
+	*indices = BE_NEW unsigned long[shape->indexCount]
+	{
+		// Front face
+		0, 1, 2,
+		0, 2, 3,
+		// Back face
+		4, 6, 5,
+		4, 7, 6,
+		// Left face
+		4, 5, 1,
+		4, 1, 0,
+		// Right face
+		3, 2, 6,
+		3, 6, 7,
+		// Top face
+		1, 5, 6,
+		1, 6, 2,
+		// Bottom face
+		4, 0, 3,
+		4, 3, 7
+	};
+
+	if (!*indices)
+	{
+		return false;
+	}
 
 	return true;
 }

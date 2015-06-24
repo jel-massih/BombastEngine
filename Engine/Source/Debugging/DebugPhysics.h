@@ -33,7 +33,8 @@ private:
 	
 	bool InitializeShape(DebugShapeType** shape, const char* shapeId, DebugPhysicsShapeType shapeType, ID3D11Device* device);
 	bool CreateSphere(VertexType** vertices, unsigned long** indices, DebugShapeType* shape);
-	
+	bool CreateBox(VertexType** vertices, unsigned long** indices, DebugShapeType* shape);
+
 	bool UpdateShape(DebugShapeType* shape, ID3D11DeviceContext* context);
 	void ReleaseShape(DebugShapeType** shape);
 	bool RenderShape(ID3D11DeviceContext* deviceContext, DebugShapeType* sphere);
