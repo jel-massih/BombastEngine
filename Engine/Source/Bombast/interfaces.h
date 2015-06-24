@@ -232,6 +232,7 @@ class IDebugPhysicsShape
 public:
 	virtual Vec3 VGetPosition() = 0;
 	virtual Vec3 VGetColor() = 0;
+	virtual Mat4x4 VGetTransform() = 0;
 	virtual DebugPhysicsShapeType VGetShapeType() = 0;
 };
 

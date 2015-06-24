@@ -15,6 +15,9 @@ public:
 	virtual Vec3 VGetColor() { return m_color; }
 	virtual DebugPhysicsShapeType VGetShapeType() { return DebugPhysicsShapeType::SPHERE; }
 	virtual float VGetRadius() { return m_radius; }
+
+	virtual Mat4x4 VGetTransform() override;
+
 private:
 	Vec3 m_position, m_color;
 	float m_radius;
@@ -29,6 +32,9 @@ public:
 	virtual Vec3 VGetColor() { return m_color; }
 	virtual DebugPhysicsShapeType VGetShapeType() { return DebugPhysicsShapeType::BOX; }
 	virtual Vec3 VGetExtent() { return m_extent; }
+
+	virtual Mat4x4 VGetTransform() override;
+
 private:
 	Vec3 m_position, m_color, m_extent;
 };

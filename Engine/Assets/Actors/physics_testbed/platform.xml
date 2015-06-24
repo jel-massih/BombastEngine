@@ -1,12 +1,13 @@
 <Actor type="platform" resource="actors\physics_testbed\platform.xml">
 	<TransformComponent>
-		<Scale x="12" y="0.25" z="12"/>
+        <Scale x="12" y="0.25" z="12"/>
 	</TransformComponent>
 
     <PhysicsComponent>
         <Shape>Box</Shape>
         <RigidBodyTransform>
-            <Scale x="12" y="0.25" z="12"/>
+            <Scale x="1" y="1" z="2"/>
+            <Position x="5" y="5" z="5"/>
         </RigidBodyTransform    >
         <Density>oak</Density>
         <PhysicsMaterial>Normal</PhysicsMaterial>

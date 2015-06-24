@@ -115,7 +115,7 @@ bool DebugPhysics::AddShape(const char* shapeId, IDebugPhysicsShape* shape)
 	m_pShapes[m_shapeCount - 1]->red = color.x;
 	m_pShapes[m_shapeCount - 1]->green = color.y;
 	m_pShapes[m_shapeCount - 1]->blue = color.z;
-	m_pShapes[m_shapeCount - 1]->transformMatrix.SetPosition(pos);
+	m_pShapes[m_shapeCount - 1]->transformMatrix = shape->VGetTransform();
 
 	SAFE_DELETE(tempShapes);
 

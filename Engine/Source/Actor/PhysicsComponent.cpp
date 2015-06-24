@@ -147,7 +147,7 @@ void PhysicsComponent::BuildTransform(rapidxml::xml_node<>* pTransformElement)
 	}
 
 	rapidxml::xml_node<>* pOrientation = pTransformElement->first_node("Orientation");
-	if (pPosition)
+	if (pOrientation)
 	{
 		m_orientation.x = (float)atof(pOrientation->first_attribute("x")->value());
 		m_orientation.y = (float)atof(pOrientation->first_attribute("y")->value());
@@ -155,7 +155,7 @@ void PhysicsComponent::BuildTransform(rapidxml::xml_node<>* pTransformElement)
 	}
 
 	rapidxml::xml_node<>* pScale = pTransformElement->first_node("Scale");
-	if (pPosition)
+	if (pScale)
 	{
 		m_scale.x = (float)atof(pScale->first_attribute("x")->value());
 		m_scale.y = (float)atof(pScale->first_attribute("y")->value());
@@ -216,7 +216,7 @@ void PhysicsComponent::SetPosition(float x, float y, float z)
 	{
 		Mat4x4 transform = pTransformComponent->GetTransform();
 		Vec3 position = Vec3(x, y, z);
-		transform.SetPosition(position);
+		transform.SetPosition(position + m_location);
 		
 		KMove(transform);
 	}
