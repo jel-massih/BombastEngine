@@ -28,14 +28,14 @@ namespace bPhysics
 		return body;
 	}
 
-	BpRigidDynamic* BpCreateDynamic(BpPhysicsCore& core, const BpMat4x4& transform, BpGeometry* geometry, BpMaterial& material, float density)
+	BpRigidDynamic* BpCreateDynamic(BpPhysicsCore& core, const BpMat4x4& transform, const BpGeometry& geometry, BpMaterial& material, float density)
 	{
 		if (!transform.IsValid())
 		{
 			BP_ERROR("BpCreateDynamic: Transform is not Valid");
 		}
 
-		if (!isDynamicGeometry(geometry->GetType()))
+		if (!isDynamicGeometry(geometry.GetType()))
 		{
 			return nullptr;
 		}

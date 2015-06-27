@@ -11,8 +11,6 @@ namespace bPhysics
 		inline BpGeometrySphere() : BpGeometry(BpGeometryType::SPHERE), radius(0) {}
 		inline BpGeometrySphere(float r) : BpGeometry(BpGeometryType::SPHERE), radius(r) {}
 
-		BpDebugShape* CreateDebugShape() const override;
-
 		//Returns True if Geometry is Valid. A valid sphere has radius > 0
 		inline bool IsValid() const;
 

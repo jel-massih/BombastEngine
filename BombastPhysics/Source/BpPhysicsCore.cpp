@@ -39,7 +39,7 @@ BpMaterial* BpPhysicsCore::CreateMaterial(float dynamicFriction, float staticFri
 	return material;
 }
 
-BpShape* BpPhysicsCore::CreateShape(BpGeometry* geometry, BpMaterial* const * materials, unsigned short materialCount, bool isExclusive)
+BpShape* BpPhysicsCore::CreateShape(const BpGeometry& geometry, BpMaterial* const * materials, unsigned short materialCount, bool isExclusive)
 {
 	if (!materials)
 	{
@@ -53,17 +53,17 @@ BpShape* BpPhysicsCore::CreateShape(BpGeometry* geometry, BpMaterial* const * ma
 		return nullptr;
 	}
 
-	switch (geometry->GetType())
+	switch (geometry.GetType())
 	{
 	case BpGeometryType::SPHERE:
-		if (!static_cast<BpGeometrySphere*>(geometry)->IsValid())
+		if (!static_cast<const BpGeometrySphere&>(geometry).IsValid())
 		{
 			BP_ERROR("CreateShape: Supplied BpGeometry is not valid");
 			return nullptr;
 		}
 		break;
 	case BpGeometryType::BOX:
-		if (!static_cast<BpGeometryBox*>(geometry)->IsValid())
+		if (!static_cast<const BpGeometryBox&>(geometry).IsValid())
 		{
 			BP_ERROR("CreateShape: Supplied BpGeometry is not valid");
 			return nullptr;

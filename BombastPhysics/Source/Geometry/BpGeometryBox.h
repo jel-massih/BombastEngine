@@ -11,8 +11,6 @@ namespace bPhysics
 		inline BpGeometryBox() : BpGeometry(BpGeometryType::BOX), eX(0), eY(0), eZ(0) {}
 		inline BpGeometryBox(float extentX, float extentY, float extentZ) : BpGeometry(BpGeometryType::BOX), eX(extentX), eY(extentY), eZ(extentZ) {}
 
-		BpDebugShape* CreateDebugShape() const override;
-
 		//Returns True if Geometry is Valid. A valid Box has ex, ey and ez > 0
 		inline bool IsValid() const;
 
