@@ -65,6 +65,9 @@
     <ClInclude Include="..\Geometry\BpGeometryBox.h">
       <Filter>Geometry</Filter>
     </ClInclude>
+    <ClInclude Include="..\Geometry\BpGeometryCapsule.h">
+      <Filter>Geometry</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\BpPhysicsCore.cpp" />

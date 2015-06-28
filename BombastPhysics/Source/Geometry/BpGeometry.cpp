@@ -28,6 +28,12 @@ void BpGeometryHolder::SetGeometry(const BpGeometry& geometry)
 			m_pGeometry = BP_NEW BpGeometryBox(box);
 			break;
 		}
+		case BpGeometryType::CAPSULE:
+		{
+			BpGeometryCapsule capsule = static_cast<const BpGeometryCapsule&>(geometry);
+			m_pGeometry = BP_NEW BpGeometryCapsule(capsule);
+			break;
+		}
 		default:
 			break;
 	}

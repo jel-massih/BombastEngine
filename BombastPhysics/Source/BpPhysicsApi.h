@@ -19,6 +19,7 @@
 #include "Geometry\BpGeometry.h"
 #include "Geometry\BpGeometrySphere.h"
 #include "Geometry\BpGeometryBox.h"
+#include "Geometry\BpGeometryCapsule.h"
 #include "Geometry\BpBounds3.h"
 #include "Geometry\BpShape.h"
 

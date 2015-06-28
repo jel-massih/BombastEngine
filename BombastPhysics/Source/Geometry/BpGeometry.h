@@ -10,7 +10,8 @@ namespace bPhysics
 		enum Type
 		{
 			SPHERE,
-			BOX
+			BOX,
+			CAPSULE
 		};
 	};
 

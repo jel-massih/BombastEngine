@@ -162,6 +162,7 @@
     <ClInclude Include="..\Geometry\BpBounds3.h" />
     <ClInclude Include="..\Geometry\BpGeometry.h" />
     <ClInclude Include="..\Geometry\BpGeometryBox.h" />
+    <ClInclude Include="..\Geometry\BpGeometryCapsule.h" />
     <ClInclude Include="..\Geometry\BpGeometrySphere.h" />
     <ClInclude Include="..\Geometry\BpShape.h" />
     <ClInclude Include="..\Scene\BpScene.h" />

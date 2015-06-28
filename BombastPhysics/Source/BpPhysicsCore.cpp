@@ -4,6 +4,7 @@
 #include "Foundation\BpReporting.h"
 #include "Geometry\BpGeometrySphere.h"
 #include "Geometry\BpGeometryBox.h"
+#include "Geometry\BpGeometryCapsule.h"
 #include "Geometry\BpShape.h"
 
 using namespace bPhysics;
@@ -58,14 +59,21 @@ BpShape* BpPhysicsCore::CreateShape(const BpGeometry& geometry, BpMaterial* cons
 	case BpGeometryType::SPHERE:
 		if (!static_cast<const BpGeometrySphere&>(geometry).IsValid())
 		{
-			BP_ERROR("CreateShape: Supplied BpGeometry is not valid");
+			BP_ERROR("CreateShape: Supplied BpGeometry is not valid Sphere");
 			return nullptr;
 		}
 		break;
 	case BpGeometryType::BOX:
 		if (!static_cast<const BpGeometryBox&>(geometry).IsValid())
 		{
-			BP_ERROR("CreateShape: Supplied BpGeometry is not valid");
+			BP_ERROR("CreateShape: Supplied BpGeometry is not valid Box");
+			return nullptr;
+		}
+		break;
+	case BpGeometryType::CAPSULE:
+		if (!static_cast<const BpGeometryCapsule&>(geometry).IsValid())
+		{
+			BP_ERROR("CreateShape: Supplied BpGeometry is not valid Capsule");
 			return nullptr;
 		}
 		break;

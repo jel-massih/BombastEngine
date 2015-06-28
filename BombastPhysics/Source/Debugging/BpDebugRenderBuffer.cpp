@@ -14,4 +14,11 @@ namespace bPhysics {
 
 		return out;
 	}
+
+	BpDebugRenderBuffer& operator<<(BpDebugRenderBuffer& out, const BpDebugCapsule& capsule)
+	{
+		out.m_debugShapes.push_back(BP_NEW BpDebugCapsule(capsule));
+
+		return out;
+	}
 }

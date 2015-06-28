@@ -2,6 +2,7 @@
 
 #include "BpGeometrySphere.h"
 #include "BpGeometryBox.h"
+#include "BpGeometryCapsule.h"
 #include "../Debugging/BpDebugRenderBuffer.h"
 #include "../Actors/BpRigidActor.h"
 
@@ -22,6 +23,7 @@ namespace bPhysics
 
 		bool GetSphereGeometry(BpGeometrySphere& sphere) const;
 		bool GetBoxGeometry(BpGeometryBox& box) const;
+		bool GetCapsuleGeometry(BpGeometryCapsule& box) const;
 		
 		void DebugVisualize(BpDebugRenderBuffer& outBuffer, const BpRigidActor& owner) const;
 	private:

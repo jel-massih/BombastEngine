@@ -10,7 +10,8 @@ namespace bPhysics
 	{
 		LINE,
 		SPHERE,
-		BOX
+		BOX,
+		CAPSULE
 	};
 
 	class BpDebugShape
@@ -51,6 +52,16 @@ namespace bPhysics
 		BpVec3 extent;
 	};
 
+	class BpDebugCapsule : public BpDebugShape
+	{
+	public:
+		BpDebugCapsule() : BpDebugShape(DebugShapeType::CAPSULE) {}
+		BpDebugCapsule(BpVec3 center, float radius, float halfHeight, BpVec3 color = BpVec3(255, 0, 0)) : BpDebugShape(DebugShapeType::CAPSULE, center, color), radius(radius), halfHeight(halfHeight) {}
+
+		float radius;
+		float halfHeight;
+	};
+
 	class BpDebugRenderBuffer
 	{
 	public:
@@ -70,4 +81,5 @@ namespace bPhysics
 
 	BpDebugRenderBuffer& operator<<(BpDebugRenderBuffer& out, const BpDebugSphere& sphere);
 	BpDebugRenderBuffer& operator<<(BpDebugRenderBuffer& out, const BpDebugBox& box);
+	BpDebugRenderBuffer& operator<<(BpDebugRenderBuffer& out, const BpDebugCapsule& capsule);
 }

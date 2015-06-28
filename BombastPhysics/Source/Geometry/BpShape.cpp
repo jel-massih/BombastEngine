@@ -36,6 +36,17 @@ bool BpShape::GetBoxGeometry(BpGeometryBox& box) const
 	return true;
 }
 
+bool BpShape::GetCapsuleGeometry(BpGeometryCapsule& box) const
+{
+	if (GetGeometryType() != BpGeometryType::CAPSULE)
+	{
+		return false;
+	}
+
+	box = static_cast<const BpGeometryCapsule&>(m_geometryHolder.GetGeometry());
+	return true;
+}
+
 void BpShape::DebugVisualize(BpDebugRenderBuffer& outBuffer, const BpRigidActor& owner) const
 {
 	BpScene* scene = owner.GetScene();
@@ -62,6 +73,13 @@ void BpShape::DebugVisualize(BpDebugRenderBuffer& outBuffer, const BpRigidActor&
 			BpGeometryBox box;
 			GetBoxGeometry(box);
 			outBuffer << BpDebugBox(owner.GetWorldTransform().GetPosition(), BpVec3(box.eX, box.eY, box.eZ));
+			break;
+		}
+		case BpGeometryType::CAPSULE:
+		{
+			BpGeometryCapsule capsule;
+			GetCapsuleGeometry(capsule);
+			outBuffer << BpDebugCapsule(owner.GetWorldTransform().GetPosition(), capsule.radius, capsule.halfHeight);
 			break;
 		}
 		default:
