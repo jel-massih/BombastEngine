@@ -6,9 +6,9 @@
     <PhysicsComponent>
         <Shape>Box</Shape>
         <RigidBodyTransform>
-            <Scale x="1" y="1" z="2"/>
+            <Scale x="12" y="0.25" z="12"/>
             <Position x="5" y="5" z="5"/>
-        </RigidBodyTransform    >
+        </RigidBodyTransform>
         <Density>oak</Density>
         <PhysicsMaterial>Normal</PhysicsMaterial>
         <GravityEnabled>false</GravityEnabled>

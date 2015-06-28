@@ -408,16 +408,16 @@ BombastPhysicsDebugRenderBuffer::~BombastPhysicsDebugRenderBuffer()
 
 Mat4x4 BombastDebugPhysicsSphere::VGetTransform()
 {
-	Mat4x4 result = Mat4x4::g_Identity;
-	result.SetPosition(m_position);
-	result.SetScale(Vec3(m_radius, m_radius, m_radius));
-	return result;
+	Mat4x4 translation, scale;
+	translation.BuildTranslation(m_position);
+	scale.BuildScale(Vec3(m_radius, m_radius, m_radius));
+	return scale * translation;
 }
 
 Mat4x4 BombastDebugPhysicsBox::VGetTransform()
 {
-	Mat4x4 result = Mat4x4::g_Identity;
-	result.SetPosition(m_position);
-	result.SetScale(m_extent);
-	return result;
+	Mat4x4 translation, scale;
+	translation.BuildTranslation(m_position);
+	scale.BuildScale(m_extent);
+	return scale * translation;
 }
