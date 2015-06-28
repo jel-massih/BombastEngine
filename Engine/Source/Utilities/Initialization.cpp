@@ -215,6 +215,16 @@ void GameOptions::Init(const char* xmlFilePath)
 				BE_ERROR("Bad Physics Engine setting in Physics options.");
 			}
 		}
+
+		if (pNode->first_attribute("visualize"))
+		{
+			std::string val = pNode->first_attribute("visualize")->value();
+			std::transform(val.begin(), val.end(), val.begin(), ::tolower); //Convert to lower for equality check
+			m_bVisualizeDebugPhysics = val != "false";
+		}
+		else {
+			m_bVisualizeDebugPhysics = false;
+		}
 	}
 
 	pNode = pRoot->first_node("World");

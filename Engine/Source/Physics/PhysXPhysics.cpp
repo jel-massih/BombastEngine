@@ -300,6 +300,11 @@ void PhysXPhysics::VRemoveActor(ActorId id)
 	}
 }
 
+void PhysXPhysics::VSetDebugVisualizationEnabled(bool enabled)
+{
+	throw "Function not yet implemented.";
+}
+
 void PhysXPhysics::VRenderDiagnostics()
 {
 	throw "Function not yet implemented.";

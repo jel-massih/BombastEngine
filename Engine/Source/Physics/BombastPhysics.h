@@ -69,6 +69,7 @@ public:
 	virtual void VAddBox(Vec3 scale, Actor* gameActor, const std::string& densityStr, const std::string& physicsMaterial, bool gravityEnabled, float linearDamping, float angularDamping) override;
 	virtual void VRemoveActor(ActorId id) override;
 
+	virtual void VSetDebugVisualizationEnabled(bool bEnabled) override;
 	virtual void VRenderDiagnostics() override;
 
 	virtual void VApplyForce(const Vec3 &dir, float newtons, ActorId actor) override;

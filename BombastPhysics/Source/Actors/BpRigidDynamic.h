@@ -64,7 +64,7 @@ namespace bPhysics
 		virtual void ForceSleep();
 
 		inline void SetScene(BpScene* scene) { m_pScene = scene; }
-		inline BpScene const * GetScene() const { return m_pScene; }
+		inline BpScene * GetScene() const { return m_pScene; }
 
 		void Simulate(float timestep);
 

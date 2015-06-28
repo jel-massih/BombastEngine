@@ -31,6 +31,7 @@ CoreGameLogic *GameSampleApp::VCreateGameAndView()
 GameSampleLogic::GameSampleLogic()
 {
 	m_pGamePhysics = CreateGamePhysics(g_pApp->m_options.m_physicsEngine);
+	m_pGamePhysics->VSetDebugVisualizationEnabled(g_pApp->m_options.m_bVisualizeDebugPhysics);
 	RegisterAllDelegates();
 }
 

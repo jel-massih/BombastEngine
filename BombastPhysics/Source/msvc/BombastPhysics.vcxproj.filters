@@ -93,6 +93,9 @@
     <ClCompile Include="..\Debugging\BpVisualizationManager.cpp">
       <Filter>Debugging</Filter>
     </ClCompile>
+    <ClCompile Include="..\Debugging\BpDebugRenderBuffer.cpp">
+      <Filter>Debugging</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Foundation">

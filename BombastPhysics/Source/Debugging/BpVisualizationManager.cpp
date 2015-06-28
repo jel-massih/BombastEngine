@@ -1,4 +1,3 @@
-#include "../msvc/stdafx.h"
 #include "BpVisualizationManager.h"
 #include "../Foundation/BpAssert.h"
 
@@ -18,26 +17,7 @@ float BpVisualizationManager::GetVisualizationParameter(BpVisualizationParams pa
 	return m_visualizationParams[parameter];
 }
 
-BpDebugLine* BpVisualizationManager::AddDebugLine(BpVec3 position, BpVec3 extent, BpVec3 color)
+void BpVisualizationManager::VisualizeShape(const BpShape& shape, const BpRigidActor& owner)
 {
-	BpDebugLine* pLine = BP_NEW BpDebugLine(position, extent, color);
-	m_renderBuffer.m_debugShapes.push_back(pLine);
-
-	return pLine;
-}
-
-BpDebugSphere* BpVisualizationManager::AddDebugSphere(BpVec3 center, float radius, BpVec3 color)
-{
-	BpDebugSphere* pSphere = BP_NEW BpDebugSphere(center, radius, color);
-	m_renderBuffer.m_debugShapes.push_back(pSphere);
-	
-	return pSphere;
-}
-
-BpDebugBox* BpVisualizationManager::AddDebugBox(BpVec3 center, BpVec3 extent, BpVec3 color)
-{
-	BpDebugBox* pBox = BP_NEW BpDebugBox(center, extent, color);
-	m_renderBuffer.m_debugShapes.push_back(pBox);
-
-	return pBox;
+	shape.DebugVisualize(m_renderBuffer, owner);
 }

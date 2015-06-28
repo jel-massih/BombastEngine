@@ -148,6 +148,17 @@ void BombastPhysics::VRemoveActor(ActorId id)
 	}
 }
 
+void BombastPhysics::VSetDebugVisualizationEnabled(bool enabled)
+{
+	if (enabled) {
+		m_pScene->SetVisualizationParameter(bPhysics::BpVisualizationParams::BASE_SCALE, 1);
+		m_pScene->SetVisualizationParameter(bPhysics::BpVisualizationParams::COLLISION_SHAPES, 1);
+	}
+	else {
+		m_pScene->SetVisualizationParameter(bPhysics::BpVisualizationParams::BASE_SCALE, 0);
+	}
+}
+
 void BombastPhysics::VRenderDiagnostics()
 {
 	throw "Function not yet implemented.";

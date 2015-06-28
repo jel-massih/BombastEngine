@@ -255,6 +255,7 @@ public:
 	virtual void VAddBox(Vec3 scale, Actor* gameActor, const std::string& densityStr, const std::string& physicsMaterial, bool gravityEnabled, float linearDamping, float angularDamping) = 0;
 	virtual void VRemoveActor(ActorId actor) = 0;
 
+	virtual void VSetDebugVisualizationEnabled(bool bEnabled) = 0;
 	virtual void VRenderDiagnostics() = 0;
 
 	virtual void VApplyForce(const Vec3& dir, float newtons, ActorId actor) = 0;

@@ -63,7 +63,11 @@ namespace bPhysics
 			m_debugShapes.clear();
 		}
 
+
 	public:
 		std::vector<BpDebugShape*> m_debugShapes;
 	};
+
+	BpDebugRenderBuffer& operator<<(BpDebugRenderBuffer& out, const BpDebugSphere& sphere);
+	BpDebugRenderBuffer& operator<<(BpDebugRenderBuffer& out, const BpDebugBox& box);
 }

@@ -21,6 +21,7 @@ struct GameOptions
 	bool m_bVsync;
 
 	EPhysicsEngine m_physicsEngine;
+	bool m_bVisualizeDebugPhysics;
 
 	rapidxml::xml_document<> *m_pDoc;
 

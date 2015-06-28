@@ -97,10 +97,7 @@ void BpRigidDynamic::Simulate(float timestep)
 
 bool BpRigidDynamic::SetupBodyDebugging(BpVisualizationManager& visualizationManager)
 {
-	//m_pDebugShape = m_shape.GetGeometry().CreateDebugShape();
-	//m_pDebugShape->position = GetWorldTransform().GetPosition();
-
-	//visualizationManager.AddDebugShape(m_pDebugShape);
+	visualizationManager.VisualizeShape(m_shape, *this);
 
 	return true;
 }
