@@ -97,6 +97,10 @@ void PhysicsComponent::VPostInit()
 		{
 			m_pGamePhysics->VAddBox(m_scale, m_pOwner, m_density, m_material, m_bGravityEnabled, m_linearDamping, m_angularDamping);
 		}
+		else if (m_shape == "Capsule")
+		{
+			m_pGamePhysics->VAddCapsule(m_scale.x, m_scale.y, m_pOwner, m_density, m_material, m_bGravityEnabled, m_linearDamping, m_angularDamping);
+		}
 		else 
 		{
 			BE_ERROR("Shape not supported: %s", m_shape);

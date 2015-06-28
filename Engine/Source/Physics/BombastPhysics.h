@@ -39,6 +39,24 @@ private:
 	Vec3 m_position, m_color, m_extent;
 };
 
+class BombastDebugPhysicsCapsule : public IDebugPhysicsShape
+{
+public:
+	BombastDebugPhysicsCapsule(Vec3 pos, Vec3 color, float radius, float halfHeight) : m_position(pos), m_color(color), m_radius(radius), m_halfHeight(halfHeight) {}
+
+	virtual Vec3 VGetPosition() { return m_position; }
+	virtual Vec3 VGetColor() { return m_color; }
+	virtual DebugPhysicsShapeType VGetShapeType() { return DebugPhysicsShapeType::CAPSULE; }
+	float VGetRadius() { return m_radius; }
+	float VGetHalfHeight() { return m_halfHeight; }
+
+	virtual Mat4x4 VGetTransform() override;
+
+private:
+	Vec3 m_position, m_color;
+	float m_radius, m_halfHeight;
+};
+
 class BombastPhysicsDebugRenderBuffer : public IDebugPhysicsRenderBuffer
 {
 public:
@@ -67,6 +85,7 @@ public:
 
 	virtual void VAddSphere(float radius, Actor* gameActor, const std::string& densityStr, const std::string& physicsMaterial, bool gravityEnabled, float linearDamping, float angularDamping) override;
 	virtual void VAddBox(Vec3 scale, Actor* gameActor, const std::string& densityStr, const std::string& physicsMaterial, bool gravityEnabled, float linearDamping, float angularDamping) override;
+	virtual void VAddCapsule(float radius, float halfHeight, Actor* gameActor, const std::string& densityStr, const std::string& physicsMaterial, bool gravityEnabled, float linearDamping, float angularDamping) override;
 	virtual void VRemoveActor(ActorId id) override;
 
 	virtual void VSetDebugVisualizationEnabled(bool bEnabled) override;

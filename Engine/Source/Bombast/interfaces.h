@@ -224,7 +224,8 @@ enum DebugPhysicsShapeType
 {
 	LINE,
 	SPHERE,
-	BOX
+	BOX,
+	CAPSULE
 };
 
 class IDebugPhysicsShape
@@ -252,7 +253,8 @@ public:
 	virtual void VOnUpdate(float deltaMs) = 0;
 
 	virtual void VAddSphere(float radius, Actor* gameActor, const std::string& densityStr, const std::string& physicsMaterial, bool gravityEnabled, float linearDamping, float angularDamping) = 0;
-	virtual void VAddBox(Vec3 scale, Actor* gameActor, const std::string& densityStr, const std::string& physicsMaterial, bool gravityEnabled, float linearDamping, float angularDamping) = 0;
+	virtual void VAddBox(Vec3 extent, Actor* gameActor, const std::string& densityStr, const std::string& physicsMaterial, bool gravityEnabled, float linearDamping, float angularDamping) = 0;
+	virtual void VAddCapsule(float radius, float halfHeight, Actor* gameActor, const std::string& densityStr, const std::string& physicsMaterial, bool gravityEnabled, float linearDamping, float angularDamping) = 0;
 	virtual void VRemoveActor(ActorId actor) = 0;
 
 	virtual void VSetDebugVisualizationEnabled(bool bEnabled) = 0;
