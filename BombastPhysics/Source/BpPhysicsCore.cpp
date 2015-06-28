@@ -39,7 +39,7 @@ BpMaterial* BpPhysicsCore::CreateMaterial(float dynamicFriction, float staticFri
 	return material;
 }
 
-BpShape* BpPhysicsCore::CreateShape(const BpGeometry& geometry, BpMaterial* const * materials, unsigned short materialCount, bool isExclusive)
+BpShape* BpPhysicsCore::CreateShape(const BpGeometry& geometry, BpMaterial* const * materials, unsigned short materialCount)
 {
 	if (!materials)
 	{
@@ -80,7 +80,7 @@ BpShape* BpPhysicsCore::CreateShape(const BpGeometry& geometry, BpMaterial* cons
 		return nullptr;
 	}
 
-	BpShape* bpShape = new BpShape(geometry, isExclusive);
+	BpShape* bpShape = new BpShape(geometry);
 
 	if (!bpShape)
 	{

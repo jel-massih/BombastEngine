@@ -96,6 +96,9 @@
     <ClCompile Include="..\Debugging\BpDebugRenderBuffer.cpp">
       <Filter>Debugging</Filter>
     </ClCompile>
+    <ClCompile Include="..\Geometry\BpGeometry.cpp">
+      <Filter>Geometry</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Foundation">

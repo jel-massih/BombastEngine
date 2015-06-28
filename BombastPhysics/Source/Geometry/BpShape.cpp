@@ -4,14 +4,24 @@
 
 using namespace bPhysics;
 
-bool BpShape::GetSphereGeometry(BpGeometrySphere& box) const
+BpShape::BpShape(const BpShape& other) : m_transform(other.m_transform)
+{
+	m_geometryHolder.SetGeometry(other.m_geometryHolder.GetGeometry());
+}
+
+BpShape::BpShape(const BpGeometry& geometry)
+{
+	m_geometryHolder.SetGeometry(geometry);
+}
+
+bool BpShape::GetSphereGeometry(BpGeometrySphere& sphere) const
 {
 	if (GetGeometryType() != BpGeometryType::SPHERE)
 	{
 		return false;
 	}
 
-	box = static_cast<const BpGeometrySphere&>(m_geometry);
+	sphere = static_cast<const BpGeometrySphere&>(m_geometryHolder.GetGeometry());
 	return true;
 }
 
@@ -22,7 +32,7 @@ bool BpShape::GetBoxGeometry(BpGeometryBox& box) const
 		return false;
 	}
 
-	box = static_cast<const BpGeometryBox&>(m_geometry);
+	box = static_cast<const BpGeometryBox&>(m_geometryHolder.GetGeometry());
 	return true;
 }
 

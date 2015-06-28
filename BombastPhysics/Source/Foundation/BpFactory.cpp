@@ -40,7 +40,7 @@ namespace bPhysics
 			return nullptr;
 		}
 
-		BpShape* shape = core.CreateShape(geometry, material, true);
+		BpShape* shape = core.CreateShape(geometry, material);
 		if (!shape)
 		{
 			return nullptr;

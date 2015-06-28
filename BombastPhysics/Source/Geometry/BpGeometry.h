@@ -24,4 +24,18 @@ namespace bPhysics
 		BpGeometryType::Type m_type;
 	};
 
+	class BpGeometryHolder
+	{
+	public:
+		BpGeometryHolder() : m_pGeometry(nullptr) {}
+		~BpGeometryHolder();
+
+		inline BpGeometry& GetGeometry() const { return *m_pGeometry; }
+
+		void SetGeometry(const BpGeometry& geometry);
+
+	private:
+		BpGeometry* m_pGeometry;
+	};
+
 }

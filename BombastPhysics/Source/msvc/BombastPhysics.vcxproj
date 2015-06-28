@@ -176,6 +176,7 @@
     <ClCompile Include="..\Foundation\BpFactory.cpp" />
     <ClCompile Include="..\Foundation\BpFoundation.cpp" />
     <ClCompile Include="..\Foundation\BpMath.cpp" />
+    <ClCompile Include="..\Geometry\BpGeometry.cpp" />
     <ClCompile Include="..\Geometry\BpShape.cpp" />
     <ClCompile Include="..\Scene\BpScene.cpp" />
     <ClCompile Include="stdafx.cpp">
