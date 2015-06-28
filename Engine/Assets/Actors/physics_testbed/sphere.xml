@@ -2,11 +2,22 @@
 	<TransformComponent>
 		<Scale x="0.25" y="0.25" z="0.25"/>
 	</TransformComponent>
-  <MeshRenderComponent>
-    <Mesh path="meshes\sphere.bmdl"></Mesh>
-    <Materials>
-			<Material path="materials\physics_testbed\sphere_colored.bmtl"/>
-			<Material path="materials\physics_testbed\sphere_colored.bmtl"/>
-  	</Materials>
-  </MeshRenderComponent>
+    <PhysicsComponent>
+        <Shape>Sphere</Shape>
+        <RigidBodyTransform>
+            <Scale x="0.25" y="0.25" z="0.25"/>
+        </RigidBodyTransform>
+        <Density>oak</Density>
+        <PhysicsMaterial>Normal</PhysicsMaterial>
+        <GravityEnabled>false</GravityEnabled>
+        <LinearDamping>1</LinearDamping>
+        <AngularDamping>1</AngularDamping>
+    </PhysicsComponent>
+    <MeshRenderComponent>
+        <Mesh path="meshes\sphere.bmdl"></Mesh>
+        <Materials>
+    		<Material path="materials\physics_testbed\sphere_colored.bmtl"/>
+    		<Material path="materials\physics_testbed\sphere_colored.bmtl"/>
+    	</Materials>
+    </MeshRenderComponent>
 </Actor>
