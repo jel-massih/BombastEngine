@@ -224,10 +224,9 @@ bool DebugPhysics::InitializeShape(DebugShapeType** shape, const char* shapeId, 
 bool DebugPhysics::CreateSphere(VertexType** vertices, unsigned long** indices, DebugShapeType* shape)
 {
 	int lines = 10;
-	int sphereFaceCount = ((lines - 3) * lines * 2) + (lines * 2);
 
-	shape->vertexCount = ((lines - 2) * lines) + 2;
-	shape->indexCount = sphereFaceCount * 3;
+	shape->vertexCount = (lines * lines) * 6;
+	shape->indexCount = shape->vertexCount;
 
 	*vertices = BE_NEW VertexType[shape->vertexCount];
 	if (!*vertices)
@@ -241,86 +240,48 @@ bool DebugPhysics::CreateSphere(VertexType** vertices, unsigned long** indices, 
 		return false;
 	}
 
-	float sphereYaw = 0.0f;
-	float spherePitch = 0.0f;
+	float X1, Y1, X2, Y2, Z1, Z2;
+	float inc1, inc2, inc3, inc4, inc5, Radius1, Radius2;
 
-	XMVECTOR curVertPos = XMVectorSet(0.0f, 0.0f, 1.0f, 0.0f);
-	(*vertices)[0].position.x = 0.0f;
-	(*vertices)[0].position.y = 0.0f;
-	(*vertices)[0].position.z = 1.0f;
+	int index = 0;
 
-	for (int i = 0; i < lines - 2; i++)
+	for (int i = 0; i < lines; i++)
 	{
-		spherePitch = (float)((i + 1) * (3.14 / (lines - 1)));
-		XMMATRIX rotationx = XMMatrixRotationX(spherePitch);
-		for (int j = 0; j < lines; j++)
+		for (int j = (-lines / 2); j < (lines / 2); j++) 
 		{
-			sphereYaw = (float)(j * (6.28 / lines));
-			XMMATRIX rotationy = XMMatrixRotationZ(sphereYaw);
-			curVertPos = XMVector3TransformNormal(XMVectorSet(0.0f, 0.0f, 1.0f, 0.0f), (rotationx * rotationy));
-			curVertPos = XMVector3Normalize(curVertPos);
-			(*vertices)[i*lines + j + 1].position.x = XMVectorGetX(curVertPos);
-			(*vertices)[i*lines + j + 1].position.y = XMVectorGetY(curVertPos);
-			(*vertices)[i*lines + j + 1].position.z = XMVectorGetZ(curVertPos);
+			inc1 = (i / (float)lines) * 2 * BE_PI;
+			inc2 = ((i + 1) / (float)lines) * 2 * BE_PI;
+			
+			inc3 = (j / (float)lines)*BE_PI;
+			inc4 = ((j + 1) / (float)lines)*BE_PI;
+
+			X1 = sin(inc1);
+			Y1 = cos(inc1);
+			X2 = sin(inc2);
+			Y2 = cos(inc2);
+
+			Radius1 = cos(inc3);
+			Radius2 = cos(inc4);
+
+			Z1 = sin(inc3);
+			Z2 = sin(inc4);
+
+			(*vertices)[index].position = Vec3(Radius1 * X1, Z1, Radius1 * Y1);
+			(*vertices)[index + 1].position = Vec3(Radius1*X2, Z1, Radius1*Y2);
+			(*vertices)[index + 2].position = Vec3(Radius2*X2, Z2, Radius2*Y2);
+			index += 3;
+
+			(*vertices)[index].position = Vec3(Radius1 * X1, Z1, Radius1 * Y1);
+			(*vertices)[index + 1].position = Vec3(Radius2*X2, Z2, Radius2*Y2);
+			(*vertices)[index + 2].position = Vec3(Radius2*X1, Z2, Radius2*Y1);
+			index += 3;
 		}
 	}
 
-	(*vertices)[shape->vertexCount - 1].position.x = 0.0f;
-	(*vertices)[shape->vertexCount - 1].position.y = 0.0f;
-	(*vertices)[shape->vertexCount - 1].position.z = -1.0f;
-
-	int k = 0;
-	for (int i = 0; i < lines - 1; i++)
+	for (unsigned long i = 0; i < index; i++)
 	{
-		(*indices)[k] = 0;
-		(*indices)[k + 1] = i + 1;
-		(*indices)[k + 2] = i + 2;
-		k += 3;
+		(*indices)[i] = i;
 	}
-
-	(*indices)[k] = 0;
-	(*indices)[k + 1] = lines;
-	(*indices)[k + 2] = 1;
-	k += 3;
-
-	for (int i = 0; i < lines - 3; i++)
-	{
-		for (int j = 0; j < lines - 1; j++)
-		{
-			(*indices)[k] = i*lines + j + 1;
-			(*indices)[k + 1] = i*lines + j + 2;
-			(*indices)[k + 2] = (i + 1)*lines + j + 1;
-
-			(*indices)[k + 3] = (i + 1)*lines + j + 1;
-			(*indices)[k + 4] = i*lines + j + 2;
-			(*indices)[k + 5] = (i + 1)*lines + j + 2;
-
-			k += 6; //next quad
-		}
-
-		(*indices)[k] = (i * lines) + lines;
-		(*indices)[k + 1] = (i * lines) + 1;
-		(*indices)[k + 2] = ((i + 1) * lines) + lines;
-
-		(*indices)[k + 3] = ((i + 1) * lines) + lines;
-		(*indices)[k + 4] = (i * lines) + 1;
-		(*indices)[k + 5] = ((i + 1) * lines) + 1;
-
-		k += 6;
-	}
-
-	for (int i = 0; i < lines - 1; i++)
-	{
-		(*indices)[k] = shape->vertexCount - 1;
-		(*indices)[k] = (shape->vertexCount - 1) - (i + 1);
-		(*indices)[k] = (shape->vertexCount - 1) - (i + 2);
-
-		k += 3;
-	}
-
-	(*indices)[k] = shape->vertexCount - 1;
-	(*indices)[k + 1] = (shape->vertexCount - 1) - lines;
-	(*indices)[k + 2] = shape->vertexCount - 2;
 
 	return true;
 }
