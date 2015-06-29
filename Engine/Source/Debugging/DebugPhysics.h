@@ -1,6 +1,7 @@
 #pragma once
 
 class DebugShader;
+class BombastDebugPhysicsCapsule;
 
 class DebugPhysics
 {
@@ -31,9 +32,10 @@ public:
 
 private:
 	
-	bool InitializeShape(DebugShapeType** shape, const char* shapeId, DebugPhysicsShapeType shapeType, ID3D11Device* device);
+	bool InitializeShape(DebugShapeType** shape, const char* shapeId, IDebugPhysicsShape* sourceShape, ID3D11Device* device);
 	bool CreateSphere(VertexType** vertices, unsigned long** indices, DebugShapeType* shape);
 	bool CreateBox(VertexType** vertices, unsigned long** indices, DebugShapeType* shape);
+	bool CreateCapsule(VertexType** vertices, unsigned long** indices, DebugShapeType* shape, BombastDebugPhysicsCapsule* capsule);
 
 	bool UpdateShape(DebugShapeType* shape, ID3D11DeviceContext* context);
 	void ReleaseShape(DebugShapeType** shape);
