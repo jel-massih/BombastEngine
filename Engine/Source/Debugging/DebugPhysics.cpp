@@ -111,7 +111,6 @@ bool DebugPhysics::AddShape(const char* shapeId, IDebugPhysicsShape* shape)
 	m_shapeCount++;
 
 	Vec3 color = shape->VGetColor();
-	Vec3 pos = shape->VGetPosition();
 
 	m_pShapes[m_shapeCount - 1]->red = color.x;
 	m_pShapes[m_shapeCount - 1]->green = color.y;

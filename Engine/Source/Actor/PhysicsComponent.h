@@ -33,6 +33,8 @@ public:
 	void SetPosition(float x, float y, float z);
 	void Stop();
 
+	Mat4x4 GetRelativeTransform();
+
 protected:
 	void CreateShape();
 	void BuildTransform(rapidxml::xml_node<>* pTransformElement);

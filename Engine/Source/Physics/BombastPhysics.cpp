@@ -124,25 +124,25 @@ void BombastPhysics::VSyncVisibleScene()
 	}
 }
 
-void BombastPhysics::VAddSphere(float radius, Actor* gameActor, const std::string& densityStr, const std::string& physicsMaterial, bool gravityEnabled, float linearDamping, float angularDamping)
+void BombastPhysics::VAddSphere(float radius, Actor* gameActor, const std::string& densityStr, const std::string& physicsMaterial, bool gravityEnabled, float linearDamping, float angularDamping, Mat4x4 relativeTransform)
 {
 	float density = LookupDensity(densityStr);
 
-	AddShape(gameActor, &BpGeometrySphere(radius), density, physicsMaterial, gravityEnabled, linearDamping, angularDamping);
+	AddShape(gameActor, &BpGeometrySphere(radius), density, physicsMaterial, gravityEnabled, linearDamping, angularDamping, relativeTransform);
 }
 
-void BombastPhysics::VAddBox(Vec3 scale, Actor* gameActor, const std::string& densityStr, const std::string& physicsMaterial, bool gravityEnabled, float linearDamping, float angularDamping)
+void BombastPhysics::VAddBox(Vec3 scale, Actor* gameActor, const std::string& densityStr, const std::string& physicsMaterial, bool gravityEnabled, float linearDamping, float angularDamping, Mat4x4 relativeTransform)
 {
 	float density = LookupDensity(densityStr);
 
-	AddShape(gameActor, &BpGeometryBox(scale.x, scale.y, scale.z), density, physicsMaterial, gravityEnabled, linearDamping, angularDamping);
+	AddShape(gameActor, &BpGeometryBox(scale.x, scale.y, scale.z), density, physicsMaterial, gravityEnabled, linearDamping, angularDamping, relativeTransform);
 }
 
-void BombastPhysics::VAddCapsule(float radius, float halfHeight, Actor* gameActor, const std::string& densityStr, const std::string& physicsMaterial, bool gravityEnabled, float linearDamping, float angularDamping)
+void BombastPhysics::VAddCapsule(float radius, float halfHeight, Actor* gameActor, const std::string& densityStr, const std::string& physicsMaterial, bool gravityEnabled, float linearDamping, float angularDamping, Mat4x4 relativeTransform)
 {
 	float density = LookupDensity(densityStr);
 
-	AddShape(gameActor, &BpGeometryCapsule(radius, halfHeight), density, physicsMaterial, gravityEnabled, linearDamping, angularDamping);
+	AddShape(gameActor, &BpGeometryCapsule(radius, halfHeight), density, physicsMaterial, gravityEnabled, linearDamping, angularDamping, relativeTransform);
 }
 
 void BombastPhysics::VRemoveActor(ActorId id)
@@ -230,7 +230,7 @@ Mat4x4 BombastPhysics::VGetTransform(const ActorId id)
 	return Mat4x4::g_Identity;
 }
 
-void BombastPhysics::AddShape(Actor* pActor, BpGeometry* geometry, float density, const std::string& physicsMaterial, bool gravityEnabled, float linearDamping, float angularDamping)
+void BombastPhysics::AddShape(Actor* pActor, BpGeometry* geometry, float density, const std::string& physicsMaterial, bool gravityEnabled, float linearDamping, float angularDamping, Mat4x4 relativeTransform)
 {
 	BE_ASSERT(pActor);
 	BE_ASSERT(geometry);
@@ -256,10 +256,15 @@ void BombastPhysics::AddShape(Actor* pActor, BpGeometry* geometry, float density
 	PhysicsMaterialData material(LookupMaterialData(physicsMaterial));
 	BpMaterial* mat = m_pPhysicsCore->CreateMaterial(material.m_friction, material.m_friction, material.m_restitution);
 
+	transform = transform;
+
 	BpMat4x4 bpMat;
 	Mat4x4ToBpMat4x4(transform, &bpMat);
 
-	BpRigidDynamic* body = BpCreateDynamic(*m_pPhysicsCore, bpMat, *geometry, *mat, density);
+	BpMat4x4 bpRelativeMat;
+	Mat4x4ToBpMat4x4(relativeTransform, &bpRelativeMat);
+
+	BpRigidDynamic* body = BpCreateDynamic(*m_pPhysicsCore, bpMat, bpRelativeMat, *geometry, *mat, density);
 
 	if (!body)
 	{
@@ -361,27 +366,28 @@ void BombastPhysics::BpVec3ToVec3(const BpVec3& input, Vec3* output)
 //Takes in BombastPhysics library shape and converts to BombastEngine base debug shape
 IDebugPhysicsShape* BombastPhysics::ConvertPhysicsDebugShape(BpDebugShape* shape)
 {
-	Vec3 pos, color;
-	BpVec3ToVec3(shape->position, &pos);
+	Vec3 color;
+	Mat4x4 transform;
+	BpMat4x4ToMat4x4(shape->transform, &transform);
 	BpVec3ToVec3(shape->color, &color);
 
 	switch (shape->shapeType) {
 		case DebugShapeType::SPHERE:
 		{
 			BpDebugSphere* sphere = static_cast<BpDebugSphere*>(shape);
-			return BE_NEW BombastDebugPhysicsSphere(pos, color, sphere->radius);
+			return BE_NEW BombastDebugPhysicsSphere(transform, color, sphere->radius);
 		}
 		case DebugShapeType::BOX:
 		{
 			BpDebugBox* box = static_cast<BpDebugBox*>(shape);
 			Vec3 extent;
 			BpVec3ToVec3(box->extent, &extent);
-			return BE_NEW BombastDebugPhysicsBox(pos, color, extent);
+			return BE_NEW BombastDebugPhysicsBox(transform, color, extent);
 		}
 		case DebugShapeType::CAPSULE:
 		{
 			BpDebugCapsule* capsule = static_cast<BpDebugCapsule*>(shape);
-			return BE_NEW BombastDebugPhysicsCapsule(pos, color, capsule->radius, capsule->halfHeight);
+			return BE_NEW BombastDebugPhysicsCapsule(transform, color, capsule->radius, capsule->halfHeight);
 		}
 	}
 	
@@ -416,27 +422,4 @@ BombastPhysicsDebugRenderBuffer::~BombastPhysicsDebugRenderBuffer()
 		SAFE_DELETE(*it);
 	}
 	m_shapes.clear();
-}
-
-Mat4x4 BombastDebugPhysicsSphere::VGetTransform()
-{
-	Mat4x4 translation, scale;
-	translation.BuildTranslation(m_position);
-	scale.BuildScale(Vec3(m_radius, m_radius, m_radius));
-	return scale * translation;
-}
-
-Mat4x4 BombastDebugPhysicsBox::VGetTransform()
-{
-	Mat4x4 translation, scale;
-	translation.BuildTranslation(m_position);
-	scale.BuildScale(m_extent);
-	return scale * translation;
-}
-
-Mat4x4 BombastDebugPhysicsCapsule::VGetTransform()
-{
-	Mat4x4 translation;
-	translation.BuildTranslation(m_position);
-	return translation;
 }

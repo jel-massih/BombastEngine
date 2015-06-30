@@ -73,6 +73,8 @@ namespace bPhysics
 	private:
 		BpVec3 m_velocity, m_angularVelocity;
 
+		BpMat4x4 m_transform;
+
 		BpShape m_shape;
 
 		BpScene* m_pScene;

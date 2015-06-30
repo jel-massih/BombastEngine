@@ -65,21 +65,21 @@ void BpShape::DebugVisualize(BpDebugRenderBuffer& outBuffer, const BpRigidActor&
 		{
 			BpGeometrySphere sphere;
 			GetSphereGeometry(sphere);
-			outBuffer << BpDebugSphere(owner.GetWorldTransform().GetPosition(), sphere.radius);
+			outBuffer << BpDebugSphere(owner.GetWorldTransform(), sphere.radius);
 			break;
 		}
 		case BpGeometryType::BOX:
 		{
 			BpGeometryBox box;
 			GetBoxGeometry(box);
-			outBuffer << BpDebugBox(owner.GetWorldTransform().GetPosition(), BpVec3(box.eX, box.eY, box.eZ));
+			outBuffer << BpDebugBox(owner.GetWorldTransform(), BpVec3(box.eX, box.eY, box.eZ));
 			break;
 		}
 		case BpGeometryType::CAPSULE:
 		{
 			BpGeometryCapsule capsule;
 			GetCapsuleGeometry(capsule);
-			outBuffer << BpDebugCapsule(owner.GetWorldTransform().GetPosition(), capsule.radius, capsule.halfHeight);
+			outBuffer << BpDebugCapsule(owner.GetWorldTransform(), capsule.radius, capsule.halfHeight);
 			break;
 		}
 		default:

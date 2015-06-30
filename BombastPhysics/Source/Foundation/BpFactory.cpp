@@ -29,11 +29,16 @@ namespace bPhysics
 		return body;
 	}
 
-	BpRigidDynamic* BpCreateDynamic(BpPhysicsCore& core, const BpMat4x4& transform, const BpGeometry& geometry, BpMaterial& material, float density)
+	BpRigidDynamic* BpCreateDynamic(BpPhysicsCore& core, const BpMat4x4& transform, const BpMat4x4& relativeTransform, const BpGeometry& geometry, BpMaterial& material, float density)
 	{
 		if (!transform.IsValid())
 		{
 			BP_ERROR("BpCreateDynamic: Transform is not Valid");
+		}
+
+		if (!relativeTransform.IsValid())
+		{
+			BP_ERROR("BpCreateDynamic: Realtive Transform is not Valid");
 		}
 
 		if (!isDynamicGeometry(geometry.GetType()))
@@ -46,6 +51,8 @@ namespace bPhysics
 		{
 			return nullptr;
 		}
+
+		shape->SetLocalPose(relativeTransform);
 
 		BpRigidDynamic* body = BpCreateDynamic(core, transform, *shape, density);
 

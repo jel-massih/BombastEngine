@@ -19,6 +19,9 @@ namespace bPhysics
 		inline const BpMat4x4& GetWorldTransform() const { return m_transform; }
 		inline void SetWorldTransform(const BpMat4x4& t) { m_transform = t; }
 
+		inline const BpMat4x4& GetLocalPose() const { return m_localPose; }
+		inline void SetLocalPose(const BpMat4x4& pose) { m_localPose = pose; }
+
 		inline const BpGeometryType::Type GetGeometryType() const { return m_geometryHolder.GetGeometry().GetType(); }
 
 		bool GetSphereGeometry(BpGeometrySphere& sphere) const;
@@ -27,7 +30,7 @@ namespace bPhysics
 		
 		void DebugVisualize(BpDebugRenderBuffer& outBuffer, const BpRigidActor& owner) const;
 	private:
-		BpMat4x4 m_transform;
+		BpMat4x4 m_transform, m_localPose;
 		BpGeometryHolder m_geometryHolder;
 	};
 }

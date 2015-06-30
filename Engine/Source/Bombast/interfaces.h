@@ -231,7 +231,6 @@ enum DebugPhysicsShapeType
 class IDebugPhysicsShape
 {
 public:
-	virtual Vec3 VGetPosition() = 0;
 	virtual Vec3 VGetColor() = 0;
 	virtual Mat4x4 VGetTransform() = 0;
 	virtual DebugPhysicsShapeType VGetShapeType() = 0;
@@ -252,9 +251,9 @@ public:
 	virtual void VSyncVisibleScene() = 0;
 	virtual void VOnUpdate(float deltaMs) = 0;
 
-	virtual void VAddSphere(float radius, Actor* gameActor, const std::string& densityStr, const std::string& physicsMaterial, bool gravityEnabled, float linearDamping, float angularDamping) = 0;
-	virtual void VAddBox(Vec3 extent, Actor* gameActor, const std::string& densityStr, const std::string& physicsMaterial, bool gravityEnabled, float linearDamping, float angularDamping) = 0;
-	virtual void VAddCapsule(float radius, float halfHeight, Actor* gameActor, const std::string& densityStr, const std::string& physicsMaterial, bool gravityEnabled, float linearDamping, float angularDamping) = 0;
+	virtual void VAddSphere(float radius, Actor* gameActor, const std::string& densityStr, const std::string& physicsMaterial, bool gravityEnabled, float linearDamping, float angularDamping, Mat4x4 relativeTransform) = 0;
+	virtual void VAddBox(Vec3 extent, Actor* gameActor, const std::string& densityStr, const std::string& physicsMaterial, bool gravityEnabled, float linearDamping, float angularDamping, Mat4x4 relativeTransform) = 0;
+	virtual void VAddCapsule(float radius, float halfHeight, Actor* gameActor, const std::string& densityStr, const std::string& physicsMaterial, bool gravityEnabled, float linearDamping, float angularDamping, Mat4x4 relativeTransform) = 0;
 	virtual void VRemoveActor(ActorId actor) = 0;
 
 	virtual void VSetDebugVisualizationEnabled(bool bEnabled) = 0;

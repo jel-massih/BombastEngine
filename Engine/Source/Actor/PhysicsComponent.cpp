@@ -87,19 +87,21 @@ bool PhysicsComponent::VInitialize(rapidxml::xml_node<>* pData)
 
 void PhysicsComponent::VPostInit()
 {
+	Mat4x4 relativeTransform = GetRelativeTransform();
+
 	if (m_pOwner)
 	{
 		if (m_shape == "Sphere")
 		{
-			m_pGamePhysics->VAddSphere((float)m_scale.x, m_pOwner, m_density, m_material, m_bGravityEnabled, m_linearDamping, m_angularDamping);
+			m_pGamePhysics->VAddSphere(1.0f, m_pOwner, m_density, m_material, m_bGravityEnabled, m_linearDamping, m_angularDamping, relativeTransform);
 		}
 		else if (m_shape == "Box")
 		{
-			m_pGamePhysics->VAddBox(m_scale, m_pOwner, m_density, m_material, m_bGravityEnabled, m_linearDamping, m_angularDamping);
+			m_pGamePhysics->VAddBox(Vec3(1,1,1), m_pOwner, m_density, m_material, m_bGravityEnabled, m_linearDamping, m_angularDamping, relativeTransform);
 		}
 		else if (m_shape == "Capsule")
 		{
-			m_pGamePhysics->VAddCapsule(m_scale.x, m_scale.y, m_pOwner, m_density, m_material, m_bGravityEnabled, m_linearDamping, m_angularDamping);
+			m_pGamePhysics->VAddCapsule(0.25f, 0.5f, m_pOwner, m_density, m_material, m_bGravityEnabled, m_linearDamping, m_angularDamping, relativeTransform);
 		}
 		else 
 		{
@@ -233,4 +235,14 @@ void PhysicsComponent::SetPosition(float x, float y, float z)
 void PhysicsComponent::Stop()
 {
 	m_pGamePhysics->VStopActor(m_pOwner->GetId());
+}
+
+Mat4x4 PhysicsComponent::GetRelativeTransform()
+{
+	Mat4x4 translation, scale, orientation;
+	translation.BuildTranslation(m_location);
+	orientation.BuildYawPitchRoll(m_orientation);
+	translation.BuildScale(m_scale);
+
+	return scale * orientation * translation;
 }

@@ -9,52 +9,52 @@ using namespace bPhysics;
 class BombastDebugPhysicsSphere : public IDebugPhysicsShape
 {
 public:
-	BombastDebugPhysicsSphere(Vec3 pos, Vec3 color, float radius) : m_position(pos), m_color(color), m_radius(radius) {}
+	BombastDebugPhysicsSphere(Mat4x4 transform, Vec3 color, float radius) : m_transform(transform), m_color(color), m_radius(radius) {}
 
-	virtual Vec3 VGetPosition() { return m_position; }
 	virtual Vec3 VGetColor() { return m_color; }
 	virtual DebugPhysicsShapeType VGetShapeType() { return DebugPhysicsShapeType::SPHERE; }
 	float VGetRadius() { return m_radius; }
 
-	virtual Mat4x4 VGetTransform() override;
+	virtual Mat4x4 VGetTransform() override { return m_transform; }
 
 private:
-	Vec3 m_position, m_color;
+	Vec3 m_color;
 	float m_radius;
+	Mat4x4 m_transform;
 };
 
 class BombastDebugPhysicsBox : public IDebugPhysicsShape
 {
 public:
-	BombastDebugPhysicsBox(Vec3 pos, Vec3 color, Vec3 extent) : m_position(pos), m_color(color), m_extent(extent) {}
+	BombastDebugPhysicsBox(Mat4x4 transform, Vec3 color, Vec3 extent) : m_transform(transform), m_color(color), m_extent(extent) {}
 
-	virtual Vec3 VGetPosition() { return m_position; }
 	virtual Vec3 VGetColor() { return m_color; }
 	virtual DebugPhysicsShapeType VGetShapeType() { return DebugPhysicsShapeType::BOX; }
 	Vec3 VGetExtent() { return m_extent; }
 
-	virtual Mat4x4 VGetTransform() override;
+	virtual Mat4x4 VGetTransform() override { return m_transform; }
 
 private:
-	Vec3 m_position, m_color, m_extent;
+	Vec3 m_color, m_extent;
+	Mat4x4 m_transform;
 };
 
 class BombastDebugPhysicsCapsule : public IDebugPhysicsShape
 {
 public:
-	BombastDebugPhysicsCapsule(Vec3 pos, Vec3 color, float radius, float halfHeight) : m_position(pos), m_color(color), m_radius(radius), m_halfHeight(halfHeight) {}
+	BombastDebugPhysicsCapsule(Mat4x4 transform, Vec3 color, float radius, float halfHeight) : m_transform(transform), m_color(color), m_radius(radius), m_halfHeight(halfHeight) {}
 
-	virtual Vec3 VGetPosition() { return m_position; }
 	virtual Vec3 VGetColor() { return m_color; }
 	virtual DebugPhysicsShapeType VGetShapeType() { return DebugPhysicsShapeType::CAPSULE; }
 	float VGetRadius() { return m_radius; }
 	float VGetHalfHeight() { return m_halfHeight; }
 
-	virtual Mat4x4 VGetTransform() override;
+	virtual Mat4x4 VGetTransform() override { return m_transform; }
 
 private:
-	Vec3 m_position, m_color;
+	Vec3 m_color;
 	float m_radius, m_halfHeight;
+	Mat4x4 m_transform;
 };
 
 class BombastPhysicsDebugRenderBuffer : public IDebugPhysicsRenderBuffer
@@ -83,9 +83,9 @@ public:
 	virtual void VSyncVisibleScene() override;
 	virtual void VOnUpdate(float deltaMs) override;
 
-	virtual void VAddSphere(float radius, Actor* gameActor, const std::string& densityStr, const std::string& physicsMaterial, bool gravityEnabled, float linearDamping, float angularDamping) override;
-	virtual void VAddBox(Vec3 scale, Actor* gameActor, const std::string& densityStr, const std::string& physicsMaterial, bool gravityEnabled, float linearDamping, float angularDamping) override;
-	virtual void VAddCapsule(float radius, float halfHeight, Actor* gameActor, const std::string& densityStr, const std::string& physicsMaterial, bool gravityEnabled, float linearDamping, float angularDamping) override;
+	virtual void VAddSphere(float radius, Actor* gameActor, const std::string& densityStr, const std::string& physicsMaterial, bool gravityEnabled, float linearDamping, float angularDamping, Mat4x4 relativeTransform) override;
+	virtual void VAddBox(Vec3 scale, Actor* gameActor, const std::string& densityStr, const std::string& physicsMaterial, bool gravityEnabled, float linearDamping, float angularDamping, Mat4x4 relativeTransform) override;
+	virtual void VAddCapsule(float radius, float halfHeight, Actor* gameActor, const std::string& densityStr, const std::string& physicsMaterial, bool gravityEnabled, float linearDamping, float angularDamping, Mat4x4 relativeTransform) override;
 	virtual void VRemoveActor(ActorId id) override;
 
 	virtual void VSetDebugVisualizationEnabled(bool bEnabled) override;
@@ -114,7 +114,7 @@ private:
 	PhysicsMaterialData LookupMaterialData(const std::string& materialString);
 	float LookupDensity(const std::string& densityString);
 
-	void AddShape(Actor* pActor, BpGeometry* geometry, float density, const std::string& physicsMaterial, bool gravityEnabled, float linearDamping, float angularDamping);
+	void AddShape(Actor* pActor, BpGeometry* geometry, float density, const std::string& physicsMaterial, bool gravityEnabled, float linearDamping, float angularDamping, Mat4x4 relativeTransform);
 
 	void RemovePhysicsObject(BpRigidBody* body);
 

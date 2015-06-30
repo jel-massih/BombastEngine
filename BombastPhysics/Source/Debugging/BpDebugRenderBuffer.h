@@ -18,9 +18,9 @@ namespace bPhysics
 	{
 	public:
 		BpDebugShape(DebugShapeType shapeType) : shapeType(shapeType), color(BpVec3(0, 255, 0)) {}
-		BpDebugShape(DebugShapeType shapeType, BpVec3 position, BpVec3 color = BpVec3(255, 0, 0)) : shapeType(shapeType), position(position), color(color) {}
+		BpDebugShape(DebugShapeType shapeType, BpMat4x4 transform, BpVec3 color = BpVec3(255, 0, 0)) : shapeType(shapeType), transform(transform), color(color) {}
 
-		BpVec3 position;
+		BpMat4x4 transform;
 		BpVec3 color;
 		DebugShapeType shapeType;
 	};
@@ -29,7 +29,7 @@ namespace bPhysics
 	{
 	public:
 		BpDebugLine() : BpDebugShape(DebugShapeType::LINE) {}
-		BpDebugLine(BpVec3 position, BpVec3 extent, BpVec3 color = BpVec3(255, 0, 0)) : BpDebugShape(DebugShapeType::LINE, position, color), extent(extent) {}
+		BpDebugLine(BpMat4x4 transform, BpVec3 extent, BpVec3 color = BpVec3(255, 0, 0)) : BpDebugShape(DebugShapeType::LINE, transform, color), extent(extent) {}
 
 		BpVec3 extent;
 	};
@@ -38,7 +38,7 @@ namespace bPhysics
 	{
 	public:
 		BpDebugSphere() : BpDebugShape(DebugShapeType::SPHERE) {}
-		BpDebugSphere(BpVec3 center, float radius, BpVec3 color = BpVec3(255, 0, 0)) : BpDebugShape(DebugShapeType::SPHERE, center, color), radius(radius)  {}
+		BpDebugSphere(BpMat4x4 transform, float radius, BpVec3 color = BpVec3(255, 0, 0)) : BpDebugShape(DebugShapeType::SPHERE, transform, color), radius(radius)  {}
 
 		float radius;
 	};
@@ -47,7 +47,7 @@ namespace bPhysics
 	{
 	public:
 		BpDebugBox() : BpDebugShape(DebugShapeType::BOX) {}
-		BpDebugBox(BpVec3 center, BpVec3 extent, BpVec3 color = BpVec3(255, 0, 0)) : BpDebugShape(DebugShapeType::BOX, center, color), extent(extent) {}
+		BpDebugBox(BpMat4x4 transform, BpVec3 extent, BpVec3 color = BpVec3(255, 0, 0)) : BpDebugShape(DebugShapeType::BOX, transform, color), extent(extent) {}
 
 		BpVec3 extent;
 	};
@@ -56,7 +56,7 @@ namespace bPhysics
 	{
 	public:
 		BpDebugCapsule() : BpDebugShape(DebugShapeType::CAPSULE) {}
-		BpDebugCapsule(BpVec3 center, float radius, float halfHeight, BpVec3 color = BpVec3(255, 0, 0)) : BpDebugShape(DebugShapeType::CAPSULE, center, color), radius(radius), halfHeight(halfHeight) {}
+		BpDebugCapsule(BpMat4x4 transform, float radius, float halfHeight, BpVec3 color = BpVec3(255, 0, 0)) : BpDebugShape(DebugShapeType::CAPSULE, transform, color), radius(radius), halfHeight(halfHeight) {}
 
 		float radius;
 		float halfHeight;
