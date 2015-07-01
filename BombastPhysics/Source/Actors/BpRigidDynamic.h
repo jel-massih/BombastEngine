@@ -79,8 +79,6 @@ namespace bPhysics
 
 		BpScene* m_pScene;
 
-		BpDebugShape* m_pDebugShape;
-
 		float m_linearDamping, m_angularDamping, m_maxAngularVelocity;
 
 		bool m_gravityEnabled;

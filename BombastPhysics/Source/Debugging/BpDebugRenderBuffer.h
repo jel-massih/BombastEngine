@@ -6,6 +6,9 @@
 
 namespace bPhysics
 {
+	class BpShape;
+	class BpRigidActor;
+
 	enum DebugShapeType
 	{
 		LINE,
@@ -18,18 +21,23 @@ namespace bPhysics
 	{
 	public:
 		BpDebugShape(DebugShapeType shapeType) : shapeType(shapeType), color(BpVec3(0, 255, 0)) {}
-		BpDebugShape(DebugShapeType shapeType, BpMat4x4 transform, BpVec3 color = BpVec3(255, 0, 0)) : shapeType(shapeType), transform(transform), color(color) {}
+		BpDebugShape(DebugShapeType shapeType, const BpShape* pShape, const BpRigidActor* pOwner, BpVec3 color = BpVec3(255, 0, 0)) : shapeType(shapeType), m_pOwner(pOwner), m_pShape(pShape), color(color) {}
 
-		BpMat4x4 transform;
+		BpMat4x4 GetTransform() const;
+
 		BpVec3 color;
 		DebugShapeType shapeType;
+
+	private:
+		const BpShape* m_pShape;
+		const BpRigidActor* m_pOwner;
 	};
 
 	class BpDebugLine : public BpDebugShape
 	{
 	public:
 		BpDebugLine() : BpDebugShape(DebugShapeType::LINE) {}
-		BpDebugLine(BpMat4x4 transform, BpVec3 extent, BpVec3 color = BpVec3(255, 0, 0)) : BpDebugShape(DebugShapeType::LINE, transform, color), extent(extent) {}
+		BpDebugLine(BpVec3 extent, const BpShape* pShape, const BpRigidActor* pOwner, BpVec3 color = BpVec3(255, 0, 0)) : BpDebugShape(DebugShapeType::LINE, pShape, pOwner, color), extent(extent) {}
 
 		BpVec3 extent;
 	};
@@ -38,7 +46,7 @@ namespace bPhysics
 	{
 	public:
 		BpDebugSphere() : BpDebugShape(DebugShapeType::SPHERE) {}
-		BpDebugSphere(BpMat4x4 transform, float radius, BpVec3 color = BpVec3(255, 0, 0)) : BpDebugShape(DebugShapeType::SPHERE, transform, color), radius(radius)  {}
+		BpDebugSphere(float radius, const BpShape* pShape, const BpRigidActor* pOwner, BpVec3 color = BpVec3(255, 0, 0)) : BpDebugShape(DebugShapeType::SPHERE, pShape, pOwner, color), radius(radius)  {}
 
 		float radius;
 	};
@@ -47,7 +55,7 @@ namespace bPhysics
 	{
 	public:
 		BpDebugBox() : BpDebugShape(DebugShapeType::BOX) {}
-		BpDebugBox(BpMat4x4 transform, BpVec3 extent, BpVec3 color = BpVec3(255, 0, 0)) : BpDebugShape(DebugShapeType::BOX, transform, color), extent(extent) {}
+		BpDebugBox(BpVec3 extent, const BpShape* pShape, const BpRigidActor* pOwner, BpVec3 color = BpVec3(255, 0, 0)) : BpDebugShape(DebugShapeType::BOX, pShape, pOwner, color), extent(extent) {}
 
 		BpVec3 extent;
 	};
@@ -56,7 +64,7 @@ namespace bPhysics
 	{
 	public:
 		BpDebugCapsule() : BpDebugShape(DebugShapeType::CAPSULE) {}
-		BpDebugCapsule(BpMat4x4 transform, float radius, float halfHeight, BpVec3 color = BpVec3(255, 0, 0)) : BpDebugShape(DebugShapeType::CAPSULE, transform, color), radius(radius), halfHeight(halfHeight) {}
+		BpDebugCapsule(float radius, float halfHeight, const BpShape* pShape, const BpRigidActor* pOwner, BpVec3 color = BpVec3(255, 0, 0)) : BpDebugShape(DebugShapeType::CAPSULE, pShape, pOwner, color), radius(radius), halfHeight(halfHeight) {}
 
 		float radius;
 		float halfHeight;

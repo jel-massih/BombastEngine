@@ -16,9 +16,6 @@ namespace bPhysics
 
 		BpShape(const BpGeometry& geometry);
 
-		inline const BpMat4x4& GetWorldTransform() const { return m_transform; }
-		inline void SetWorldTransform(const BpMat4x4& t) { m_transform = t; }
-
 		inline const BpMat4x4& GetLocalPose() const { return m_localPose; }
 		inline void SetLocalPose(const BpMat4x4& pose) { m_localPose = pose; }
 
@@ -30,7 +27,7 @@ namespace bPhysics
 		
 		void DebugVisualize(BpDebugRenderBuffer& outBuffer, const BpRigidActor& owner) const;
 	private:
-		BpMat4x4 m_transform, m_localPose;
+		BpMat4x4 m_localPose;
 		BpGeometryHolder m_geometryHolder;
 	};
 }

@@ -14,7 +14,7 @@ BpRigidDynamic::BpRigidDynamic(const BpShape shape)
 	: m_linearDamping(BP_RIGID_DYNAMIC_DEFAULT_LINEAR_DAMPING), m_angularDamping(BP_RIGID_DYNAMIC_DEFAULT_ANGULAR_DAMPING), m_maxAngularVelocity(BP_RIGID_DYNAMIC_DEFAULT_MAX_ANGULAR_VELOCITY),
 	m_bSleeping(true), m_wakeCounter(0), m_resetWakeCounterValue(BP_RIGID_DYNAMIC_DEFAULT_RESET_WAKE_COUNTER_VALUE),
 	m_stabilizationThreshold(BP_RIGID_DYNAMIC_DEFAULT_STABILIZATION_THRESHOLD), m_sleepThreshold(BP_RIGID_DYNAMIC_DEFAULT_SLEEP_THRESHOLD),
-	m_shape(shape), m_pDebugShape(nullptr)
+	m_shape(shape)
 {
 }
 

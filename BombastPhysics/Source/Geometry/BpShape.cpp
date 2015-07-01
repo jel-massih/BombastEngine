@@ -4,7 +4,7 @@
 
 using namespace bPhysics;
 
-BpShape::BpShape(const BpShape& other) : m_transform(other.m_transform)
+BpShape::BpShape(const BpShape& other) : m_localPose(other.m_localPose)
 {
 	m_geometryHolder.SetGeometry(other.m_geometryHolder.GetGeometry());
 }
@@ -65,21 +65,21 @@ void BpShape::DebugVisualize(BpDebugRenderBuffer& outBuffer, const BpRigidActor&
 		{
 			BpGeometrySphere sphere;
 			GetSphereGeometry(sphere);
-			outBuffer << BpDebugSphere(owner.GetWorldTransform(), sphere.radius);
+			outBuffer << BpDebugSphere(sphere.radius, this, &owner);
 			break;
 		}
 		case BpGeometryType::BOX:
 		{
 			BpGeometryBox box;
 			GetBoxGeometry(box);
-			outBuffer << BpDebugBox(owner.GetWorldTransform(), BpVec3(box.eX, box.eY, box.eZ));
+			outBuffer << BpDebugBox(BpVec3(box.eX, box.eY, box.eZ), this, &owner);
 			break;
 		}
 		case BpGeometryType::CAPSULE:
 		{
 			BpGeometryCapsule capsule;
 			GetCapsuleGeometry(capsule);
-			outBuffer << BpDebugCapsule(owner.GetWorldTransform(), capsule.radius, capsule.halfHeight);
+			outBuffer << BpDebugCapsule(capsule.radius, capsule.halfHeight, this, &owner);
 			break;
 		}
 		default:

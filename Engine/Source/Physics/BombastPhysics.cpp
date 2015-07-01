@@ -368,7 +368,7 @@ IDebugPhysicsShape* BombastPhysics::ConvertPhysicsDebugShape(BpDebugShape* shape
 {
 	Vec3 color;
 	Mat4x4 transform;
-	BpMat4x4ToMat4x4(shape->transform, &transform);
+	BpMat4x4ToMat4x4(shape->GetTransform(), &transform);
 	BpVec3ToVec3(shape->color, &color);
 
 	switch (shape->shapeType) {
