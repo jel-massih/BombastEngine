@@ -3,6 +3,12 @@
 
 namespace bPhysics
 {
+	const float  BP_PI = 3.14159265358979f;
+
+	//====== Unit Conversions =========
+	inline float BPConvertToRadians(float fDegrees) { return fDegrees * (BP_PI / 180.0f); }
+	inline float BPConvertToDegrees(float fRadians) { return fRadians * (180.0f / BP_PI); }
+
 	//====== Misc Helpers ===========
 	inline bool BpIsFinite(float f) { return isfinite(f); }
 
@@ -169,23 +175,24 @@ namespace bPhysics
 		inline BpVec3 GetPosition() const;
 		inline void SetPosition(const BpVec3& pos);
 
+		inline BpVec3 GetYawPitchRoll() const;
+
 		inline BpVec3 GetScale() const;
 		inline void SetScale(const BpVec3& scale);
 		inline void SetScale(const float x, const float y, const float z);
 
 		inline void BuildScale(const float x, const float y, const float z);
 		inline void BuildScale(const BpVec3& scale);
+		
+		inline void BuildYawPitchRoll(const float radiansX, const float radiansY, const float radiansZ);
+		inline void BuildYawPitchRoll(const BpVec3& rotationRadians);
+		inline void BuildTranslation(const BpVec3& pos);
 
 		static const BpMat4x4 g_InvalidBpMat4x4;
 		static const BpMat4x4 g_Identity;
 
 		BpVec4 col0, col1, col2, col3;
 	};
-
-	inline BpVec3 BpMat4x4::GetPosition() const
-	{
-		return BpVec3(col3.x, col3.y, col3.z);
-	}
 
 	inline BpMat4x4 operator * (const BpMat4x4& a, const BpMat4x4& b)
 	{
@@ -214,11 +221,22 @@ namespace bPhysics
 		return out;
 	}
 
+	inline BpVec3 BpMat4x4::GetPosition() const
+	{
+		return BpVec3(col0.w, col1.w, col2.w);
+	}
+
 	inline void BpMat4x4::SetPosition(const BpVec3& pos)
 	{
-		col3.x = pos.x;
-		col3.y = pos.y;
-		col3.z = pos.z;
+		col0.w = pos.x;
+		col1.w = pos.y;
+		col2.w = pos.z;
+	}
+
+	inline void BpMat4x4::BuildTranslation(const BpVec3& pos)
+	{
+		*this = BpMat4x4::g_Identity;
+		SetPosition(pos);
 	}
 
 	inline void BpMat4x4::BuildScale(const float x, const float y, const float z)
@@ -250,5 +268,58 @@ namespace bPhysics
 	inline BpVec3 BpMat4x4::GetScale() const
 	{
 		return BpVec3(col0.x, col1.y, col2.z);
+	}
+
+	inline BpVec3 BpMat4x4::GetYawPitchRoll() const
+	{
+		float yaw, pitch, roll;
+
+		pitch = asin(-col1.z);
+
+		double threshold = 0.001; //UGLY HARDCODE MAGIC NUMBER
+		double test = cos(pitch);
+
+		if (test > threshold)
+		{
+			roll = atan2(col1.x, col1.y);
+			yaw = atan2(col0.z, col2.z);
+		}
+		else
+		{
+			roll = atan2(-col0.y, col0.x);
+			yaw = 0.0;
+		}
+
+		return BpVec3(yaw, pitch, roll);
+	}
+
+	inline void BpMat4x4::BuildYawPitchRoll(const float radiansX, const float radiansY, const float radiansZ)
+	{
+		*this = BpMat4x4::g_Identity;
+
+		float cx = cos(radiansX);
+		float cy = cos(radiansY);
+		float cz = cos(radiansZ);
+
+		float sx = sin(radiansX);
+		float sy = sin(radiansY);
+		float sz = sin(radiansZ);
+
+		col0.x = cy * cx;
+		col0.y = -1 * cy * sx;
+		col0.z = sy;
+
+		col1.x = (cz * sx) + (sz * sy * cx);
+		col1.y = (cz * cx) - (sz * sy * sx);
+		col1.z = -1 * sz * cy;
+
+		col2.x = (sz * sx) - (cz * sy * cx);
+		col2.y = (sz * cx) + (cz * sy * sx);
+		col2.z = cz * cy;
+	}
+
+	inline void BpMat4x4::BuildYawPitchRoll(const BpVec3& rotationRadians)
+	{
+		BuildYawPitchRoll(rotationRadians.x, rotationRadians.y, rotationRadians.z);
 	}
 }

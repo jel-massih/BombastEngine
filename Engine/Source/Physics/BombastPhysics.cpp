@@ -313,46 +313,46 @@ ActorId BombastPhysics::FindActorId(BpRigidBody const * const body)
 void BombastPhysics::Mat4x4ToBpMat4x4(const Mat4x4& input, BpMat4x4* output)
 {
 	output->col0.x = input._11;
-	output->col0.y = input._12;
-	output->col0.z = input._13;
-	output->col0.w = input._14;
+	output->col0.y = input._21;
+	output->col0.z = input._31;
+	output->col0.w = input._41;
 
-	output->col1.x = input._21;
+	output->col1.x = input._12;
 	output->col1.y = input._22;
-	output->col1.z = input._23;
-	output->col1.w = input._24;
+	output->col1.z = input._32;
+	output->col1.w = input._42;
 
-	output->col2.x = input._31;
-	output->col2.y = input._32;
+	output->col2.x = input._13;
+	output->col2.y = input._23;
 	output->col2.z = input._33;
-	output->col2.w = input._34;
+	output->col2.w = input._43;
 
-	output->col3.x = input._41;
-	output->col3.y = input._42;
-	output->col3.z = input._43;
+	output->col3.x = input._14;
+	output->col3.y = input._24;
+	output->col3.z = input._34;
 	output->col3.w = input._44;
 }
 
 void BombastPhysics::BpMat4x4ToMat4x4(const BpMat4x4& input, Mat4x4* output)
 {
 	output->_11 = input.col0.x;
-	output->_12 = input.col0.y;
-	output->_13 = input.col0.z;
-	output->_14 = input.col0.w;
+	output->_12 = input.col1.x;
+	output->_13 = input.col2.x;
+	output->_14 = input.col3.x;
 
-	output->_21 = input.col1.x;
+	output->_21 = input.col0.y;
 	output->_22 = input.col1.y;
-	output->_23 = input.col1.z;
-	output->_24 = input.col1.w;
+	output->_23 = input.col2.y;
+	output->_24 = input.col3.y;
 	
-	output->_31 = input.col2.x;
-	output->_32 = input.col2.y;
+	output->_31 = input.col0.z;
+	output->_32 = input.col1.z;
 	output->_33 = input.col2.z;
-	output->_34 = input.col2.w;
+	output->_34 = input.col3.z;
 	
-	output->_41 = input.col3.x;
-	output->_42 = input.col3.y;
-	output->_43 = input.col3.z;
+	output->_41 = input.col0.w;
+	output->_42 = input.col1.w;
+	output->_43 = input.col2.w;
 	output->_44 = input.col3.w;
 }
 
