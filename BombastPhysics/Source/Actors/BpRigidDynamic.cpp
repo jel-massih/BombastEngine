@@ -24,16 +24,12 @@ BpRigidDynamic::~BpRigidDynamic()
 
 inline BpMat4x4 BpRigidDynamic::GetWorldTransform() const
 {
-	return m_shape.GetWorldTransform() * m_shape.GetLocalPose();
+	return m_transform;
 }
 
 inline void BpRigidDynamic::SetWorldTransform(const BpMat4x4& newTransform, bool autoWake)
 {
-	m_shape.SetWorldTransform(newTransform);
-
-	if (m_pDebugShape) {
-		m_pDebugShape->transform = newTransform;
-	}
+	m_transform = newTransform;
 
 	if (autoWake)
 	{
@@ -79,12 +75,9 @@ void BpRigidDynamic::Simulate(float timestep)
 	{
 		WakeUp();
 
-		BpMat4x4 t = m_shape.GetLocalPose();
-		t =  m_transform * t;
-		BpVec3 pos = t.GetPosition();
+		BpVec3 pos = m_transform.GetPosition();
 		pos += (m_velocity * timestep);
-		t.SetPosition(pos);
-		SetWorldTransform(t, false);
+		m_transform.SetPosition(pos);
 	}
 	else
 	{
