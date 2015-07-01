@@ -199,23 +199,23 @@ namespace bPhysics
 		BpMat4x4 out;
 
 		out.col0.x = (a.col0.x * b.col0.x) + (a.col1.x * b.col0.y) + (a.col2.x * b.col0.z) + (a.col3.x * b.col0.w);
-		out.col0.y = (a.col0.x * b.col1.x) + (a.col1.x * b.col1.y) + (a.col2.x * b.col1.z) + (a.col3.x * b.col1.w);
-		out.col0.z = (a.col0.x * b.col2.x) + (a.col1.x * b.col2.y) + (a.col2.x * b.col2.z) + (a.col3.x * b.col2.w);
-		out.col0.w = (a.col0.x * b.col3.x) + (a.col1.x * b.col3.y) + (a.col2.x * b.col3.z) + (a.col3.x * b.col3.w);
+		out.col0.y = (a.col0.y * b.col0.x) + (a.col1.y * b.col0.y) + (a.col2.y * b.col0.z) + (a.col3.y * b.col0.w);
+		out.col0.z = (a.col0.z * b.col0.x) + (a.col1.z * b.col0.y) + (a.col2.z * b.col0.z) + (a.col3.z * b.col0.w);
+		out.col0.w = (a.col0.w * b.col0.x) + (a.col1.w * b.col0.y) + (a.col2.w * b.col0.z) + (a.col3.w * b.col0.w);
 
-		out.col1.x = (a.col0.y * b.col0.x) + (a.col1.y * b.col0.y) + (a.col2.y * b.col0.z) + (a.col3.y * b.col0.w);
+		out.col1.x = (a.col0.x * b.col1.x) + (a.col1.x * b.col1.y) + (a.col2.x * b.col1.z) + (a.col3.x * b.col1.w);
 		out.col1.y = (a.col0.y * b.col1.x) + (a.col1.y * b.col1.y) + (a.col2.y * b.col1.z) + (a.col3.y * b.col1.w);
-		out.col1.z = (a.col0.y * b.col2.x) + (a.col1.y * b.col2.y) + (a.col2.y * b.col2.z) + (a.col3.y * b.col2.w);
-		out.col1.w = (a.col0.y * b.col3.x) + (a.col1.y * b.col3.y) + (a.col2.y * b.col3.z) + (a.col3.y * b.col3.w);
+		out.col1.z = (a.col0.z * b.col1.x) + (a.col1.z * b.col1.y) + (a.col2.z * b.col1.z) + (a.col3.z * b.col1.w);
+		out.col1.w = (a.col0.w * b.col1.x) + (a.col1.w * b.col1.y) + (a.col2.w * b.col1.z) + (a.col3.w * b.col1.w);
 
-		out.col2.x = (a.col0.z * b.col0.x) + (a.col1.z * b.col0.y) + (a.col2.z * b.col0.z) + (a.col3.z * b.col0.w);
-		out.col2.y = (a.col0.z * b.col1.x) + (a.col1.z * b.col1.y) + (a.col2.z * b.col1.z) + (a.col3.z * b.col1.w);
+		out.col2.x = (a.col0.x * b.col2.x) + (a.col1.x * b.col2.y) + (a.col2.x * b.col2.z) + (a.col3.x * b.col2.w);
+		out.col2.y = (a.col0.y * b.col2.x) + (a.col1.y * b.col2.y) + (a.col2.y * b.col2.z) + (a.col3.y * b.col2.w);
 		out.col2.z = (a.col0.z * b.col2.x) + (a.col1.z * b.col2.y) + (a.col2.z * b.col2.z) + (a.col3.z * b.col2.w);
-		out.col2.w = (a.col0.z * b.col3.x) + (a.col1.z * b.col3.y) + (a.col2.z * b.col3.z) + (a.col3.z * b.col3.w);
+		out.col2.w = (a.col0.w * b.col2.x) + (a.col1.w * b.col2.y) + (a.col2.w * b.col2.z) + (a.col3.w * b.col2.w);
 
-		out.col3.x = (a.col0.w * b.col0.x) + (a.col1.w * b.col0.y) + (a.col2.w * b.col0.z) + (a.col3.w * b.col0.w);
-		out.col3.y = (a.col0.w * b.col1.x) + (a.col1.w * b.col1.y) + (a.col2.w * b.col1.z) + (a.col3.w * b.col1.w);
-		out.col3.z = (a.col0.w * b.col2.x) + (a.col1.w * b.col2.y) + (a.col2.w * b.col2.z) + (a.col3.w * b.col2.w);
+		out.col3.x = (a.col0.x * b.col3.x) + (a.col1.x * b.col3.y) + (a.col2.x * b.col3.z) + (a.col3.x * b.col3.w);
+		out.col3.y = (a.col0.y * b.col3.x) + (a.col1.y * b.col3.y) + (a.col2.y * b.col3.z) + (a.col3.y * b.col3.w);
+		out.col3.z = (a.col0.z * b.col3.x) + (a.col1.z * b.col3.y) + (a.col2.z * b.col3.z) + (a.col3.z * b.col3.w);
 		out.col3.w = (a.col0.w * b.col3.x) + (a.col1.w * b.col3.y) + (a.col2.w * b.col3.z) + (a.col3.w * b.col3.w);
 
 		return out;
