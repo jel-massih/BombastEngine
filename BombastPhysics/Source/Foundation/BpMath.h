@@ -29,7 +29,7 @@ namespace bPhysics
 		}
 
 		inline float Length() { return sqrt(x*x + y*y); }
-
+		
 		static const BpVec2 g_InvalidBpVec2;
 
 	public:
@@ -149,6 +149,13 @@ namespace bPhysics
 	class BpMat4x4
 	{
 	public:
+		BpMat4x4(){}
+		BpMat4x4(float _00, float _01, float _02, float _03,
+			float _10, float _11, float _12, float _13,
+			float _20, float _21, float _22, float _23,
+			float _30, float _31, float _32, float _33) : col0(_00, _01, _02, _03), col1(_10, _11, _12, _13), col2(_20, _21, _22, _23), col3(_30, _31, _32, _33) {}
+		BpMat4x4(BpVec4 col0, BpVec4 col1, BpVec4 col2, BpVec4 cole3) : col0(col0), col1(col1), col2(col2), col3(col3) {}
+
 		inline bool IsValid() const
 		{
 			return col0.IsFinite() && col1.IsFinite() && col2.IsFinite() && col3.IsFinite();
@@ -156,6 +163,11 @@ namespace bPhysics
 
 		inline BpVec3 GetPosition() const;
 		inline void SetPosition(const BpVec3& pos);
+
+		inline void BuildScale(const float x, const float y, const float z);
+
+		static const BpMat4x4 g_InvalidBpMat4x4;
+		static const BpMat4x4 g_Identity;
 
 		BpVec4 col0, col1, col2, col3;
 	};
@@ -197,5 +209,13 @@ namespace bPhysics
 		col3.x = pos.x;
 		col3.y = pos.y;
 		col3.z = pos.z;
+	}
+
+	inline void BpMat4x4::BuildScale(const float x, const float y, const float z)
+	{
+		*this = BpMat4x4::g_Identity;
+		col0.x = x;
+		col1.y = y;
+		col2.z = z;
 	}
 }
