@@ -245,7 +245,7 @@ bool DebugPhysics::CreateSphere(VertexType** vertices, unsigned long** indices, 
 	}
 
 	float X1, Y1, X2, Y2, Z1, Z2;
-	float inc1, inc2, inc3, inc4, inc5, Radius1, Radius2;
+	float inc1, inc2, inc3, inc4, Radius1, Radius2;
 
 	int index = 0;
 
@@ -282,7 +282,7 @@ bool DebugPhysics::CreateSphere(VertexType** vertices, unsigned long** indices, 
 		}
 	}
 
-	for (unsigned long i = 0; i < index; i++)
+	for (int i = 0; i < index; i++)
 	{
 		(*indices)[i] = i;
 	}
@@ -390,7 +390,7 @@ bool DebugPhysics::CreateCapsule(VertexType** vertices, unsigned long** indices,
 		
 		float angle = 0.0f;
 
-		for (unsigned int i = 0; i < segments; i++, angle += angleDelta)
+		for (int i = 0; i < segments; i++, angle += angleDelta)
 		{
 			float c = cos(angle);
 			float s = sin(angle);
@@ -424,7 +424,7 @@ bool DebugPhysics::CreateCapsule(VertexType** vertices, unsigned long** indices,
 	for (int num = 0; num < 2; num++)
 	{
 		float X1, Y1, X2, Y2, Z1, Z2;
-		float inc1, inc2, inc3, inc4, inc5, Radius1, Radius2;
+		float inc1, inc2, inc3, inc4, Radius1, Radius2;
 
 		int jval = (num == 0 ? 0 : -(rows / 2));
 		int jlim = (num == 0 ? (rows / 2) : 0);
