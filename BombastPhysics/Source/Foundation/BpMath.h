@@ -164,6 +164,7 @@ namespace bPhysics
 		inline BpVec3 GetPosition() const;
 		inline void SetPosition(const BpVec3& pos);
 
+		inline BpVec3 GetScale() const;
 		inline void BuildScale(const float x, const float y, const float z);
 
 		static const BpMat4x4 g_InvalidBpMat4x4;
@@ -217,5 +218,10 @@ namespace bPhysics
 		col0.x = x;
 		col1.y = y;
 		col2.z = z;
+	}
+	
+	inline BpVec3 BpMat4x4::GetScale() const
+	{
+		return BpVec3(col0.x, col1.y, col2.z);
 	}
 }

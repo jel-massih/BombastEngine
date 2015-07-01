@@ -16,6 +16,7 @@ BpRigidDynamic::BpRigidDynamic(const BpShape shape)
 	m_stabilizationThreshold(BP_RIGID_DYNAMIC_DEFAULT_STABILIZATION_THRESHOLD), m_sleepThreshold(BP_RIGID_DYNAMIC_DEFAULT_SLEEP_THRESHOLD),
 	m_shape(shape)
 {
+	m_shape.SetOwner(this);
 }
 
 BpRigidDynamic::~BpRigidDynamic()

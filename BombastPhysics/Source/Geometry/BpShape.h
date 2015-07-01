@@ -16,6 +16,10 @@ namespace bPhysics
 
 		BpShape(const BpGeometry& geometry);
 
+		BpMat4x4 GetWorldTransform() const;
+
+		inline void SetOwner(const BpRigidActor* owner) { m_pOwner = owner; }
+
 		inline const BpMat4x4& GetLocalPose() const { return m_localPose; }
 		inline void SetLocalPose(const BpMat4x4& pose) { m_localPose = pose; }
 
@@ -29,5 +33,6 @@ namespace bPhysics
 	private:
 		BpMat4x4 m_localPose;
 		BpGeometryHolder m_geometryHolder;
+		const BpRigidActor* m_pOwner;
 	};
 }

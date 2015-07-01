@@ -1,12 +1,11 @@
 #include "BpDebugRenderBuffer.h"
-#include "../Actors/BpRigidActor.h"
 #include "../Geometry/BpShape.h"
 
 
 namespace bPhysics {
 	BpMat4x4 BpDebugShape::GetTransform() const
 	{
-		return m_pOwner->GetWorldTransform();// *m_pShape->GetLocalPose();
+		return m_pShape->GetWorldTransform();
 	}
 
 	BpDebugRenderBuffer& operator<<(BpDebugRenderBuffer& out, const BpDebugSphere& sphere)
