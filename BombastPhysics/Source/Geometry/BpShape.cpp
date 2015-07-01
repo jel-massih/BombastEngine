@@ -23,6 +23,9 @@ BpMat4x4 BpShape::GetWorldTransform() const
 	BpVec3 pos = t.GetPosition();
 	pos += m_localPose.GetPosition();
 	t.SetPosition(pos);
+
+	//scale
+	t.SetScale(m_localPose.GetScale() * t.GetScale());
 	
 	return t;
 }
