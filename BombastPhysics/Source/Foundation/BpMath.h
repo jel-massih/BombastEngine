@@ -99,6 +99,11 @@ namespace bPhysics
 		return v * f;
 	}
 
+	inline BpVec3 operator *(const BpVec3 v1, const BpVec3 v2)
+	{
+		return BpVec3(v1.x * v2.x, v1.y * v2.y, v1.z * v2.z);
+	}
+
 	inline BpVec3 BpVec3::operator+(BpVec3 v) const
 	{
 		return BpVec3(x + v.x, y + v.y, z + v.z);
@@ -165,7 +170,11 @@ namespace bPhysics
 		inline void SetPosition(const BpVec3& pos);
 
 		inline BpVec3 GetScale() const;
+		inline void SetScale(const BpVec3& scale);
+		inline void SetScale(const float x, const float y, const float z);
+
 		inline void BuildScale(const float x, const float y, const float z);
+		inline void BuildScale(const BpVec3& scale);
 
 		static const BpMat4x4 g_InvalidBpMat4x4;
 		static const BpMat4x4 g_Identity;
@@ -215,6 +224,24 @@ namespace bPhysics
 	inline void BpMat4x4::BuildScale(const float x, const float y, const float z)
 	{
 		*this = BpMat4x4::g_Identity;
+		SetScale(x, y, z);
+	}
+
+	inline void BpMat4x4::BuildScale(const BpVec3& scale)
+	{
+		*this = BpMat4x4::g_Identity;
+		SetScale(scale);
+	}
+
+	inline void BpMat4x4::SetScale(const BpVec3& scale)
+	{
+		col0.x = scale.x;
+		col1.y = scale.y;
+		col2.z = scale.z;
+	}
+
+	inline void BpMat4x4::SetScale(const float x, const float y, const float z)
+	{
 		col0.x = x;
 		col1.y = y;
 		col2.z = z;
