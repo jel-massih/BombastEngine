@@ -19,15 +19,20 @@ BpMat4x4 BpShape::GetWorldTransform() const
 {
 	BpMat4x4 t = m_pOwner->GetWorldTransform();
 	
-	//Pos
-	BpVec3 pos = t.GetPosition();
-	pos += m_localPose.GetPosition();
-	t.SetPosition(pos);
+	BpMat4x4 translation;
+	translation.BuildTranslation(t.GetPosition() + m_localPose.GetPosition());
 
-	//scale
-	t.SetScale(m_localPose.GetScale() * t.GetScale());
-	
-	return t;
+	BpMat4x4 rotation;
+	BpVec3 rot1 = t.GetYawPitchRoll();
+	BpVec3 rot2 = t.GetYawPitchRoll();
+	rotation.BuildYawPitchRoll(rot1);
+	//rotation.BuildYawPitchRoll(rot1.x + rot2.x, rot1.y + rot2.y, rot1.z + rot2.z);
+
+	BpMat4x4 scale;
+	scale.BuildScale(m_localPose.GetScale() * t.GetScale());
+
+	BpMat4x4 result = scale * rotation * translation;
+	return result;
 }
 
 bool BpShape::GetSphereGeometry(BpGeometrySphere& sphere) const
