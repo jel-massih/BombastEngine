@@ -18,7 +18,12 @@ BpShape::BpShape(const BpGeometry& geometry)
 BpMat4x4 BpShape::GetWorldTransform() const
 {
 	BpMat4x4 t = m_pOwner->GetWorldTransform();
-
+	
+	//Pos
+	BpVec3 pos = t.GetPosition();
+	pos += m_localPose.GetPosition();
+	t.SetPosition(pos);
+	
 	return t;
 }
 
