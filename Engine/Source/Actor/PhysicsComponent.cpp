@@ -241,7 +241,7 @@ Mat4x4 PhysicsComponent::GetRelativeTransform()
 {
 	Mat4x4 translation, scale, orientation;
 	translation.BuildTranslation(m_location);
-	orientation.BuildYawPitchRoll(m_orientation);
+	orientation.BuildYawPitchRoll(XMConvertToRadians(m_orientation.x), XMConvertToRadians(m_orientation.y), XMConvertToRadians(m_orientation.z));
 	scale.BuildScale(m_scale);
 
 	return scale * orientation * translation;
