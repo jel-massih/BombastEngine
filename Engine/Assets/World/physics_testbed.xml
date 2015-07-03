@@ -11,17 +11,5 @@
           <Position x="0" y="0" z="0"/>
         </TransformComponent>
       </Actor>
-
-      <Actor resource="actors\physics_testbed\sphere.xml">
-        <TransformComponent>
-          <Position x="3" y="1" z="-8"/>
-        </TransformComponent>
-      </Actor>
-
-      <Actor resource="actors\physics_testbed\ring.xml">
-        <TransformComponent>
-          <Position x="0" y="7" z="0"/>
-        </TransformComponent>
-      </Actor>
     </StaticActors>
 </World>

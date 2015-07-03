@@ -183,7 +183,7 @@ void GameSampleHumanView::VSetControlledActor(ActorId actorId)
 
 	m_pCamera->SetViewTarget(m_pControlledActor);
 	m_pCamera->SetFollowTarget(m_pControlledActor);
-	m_pCamera->SetCameraOffset(Vec4(0, 4, 8, 0));
+	m_pCamera->SetCameraOffset(Vec4(0, 50, 8, 0));
 }
 
 void GameSampleHumanView::SetControlledActorDelegate(IEventDataPtr pEventData)
