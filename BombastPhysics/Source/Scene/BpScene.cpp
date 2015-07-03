@@ -60,14 +60,45 @@ void BpScene::RemoveActor(BpActor* actor)
 	}
 }
 
+//1. Apply Forces
+//2. Check Existing Contacts
+//3. Find New COntacts
+//4. Resolve Collisions via impulses
+//5. Satisfy Constaraints
 void BpScene::Simulate(float timestep)
 {
 	for (auto it = m_sceneRigidDynamics.begin(); it != m_sceneRigidDynamics.end(); it++)
 	{
+		//Clear island Bit
+		(*it)->SetInIsland(false);
+
 		if (!(*it)->IsSleeping())
 		{
 			(*it)->Simulate(timestep);
 		}
+	}
+
+	m_contactManager.ClearContactIslandFlags();
+
+	BuildIslands();
+}
+
+void BpScene::BuildIslands()
+{
+	//Build Islands & solve
+	for (auto it = m_sceneRigidDynamics.begin(); it != m_sceneRigidDynamics.end(); it++)
+	{
+		//Must be in Island
+		if ((*it)->IsInIsland()) {
+			continue;
+		}
+
+		//Must not be sleeping
+		if ((*it)->IsSleeping()) {
+			continue;
+		}
+
+
 	}
 }
 
