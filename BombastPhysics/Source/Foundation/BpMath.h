@@ -305,16 +305,16 @@ namespace bPhysics
 		float sy = sin(radiansY);
 		float sz = sin(radiansZ);
 
-		col0.x = cy * cx;
-		col0.y = -1 * cy * sx;
-		col0.z = sy;
+		col0.x = (cz * cx) + (sz * sy * sx);
+		col0.y = (-1 * cz * sx) + (sz * sy * cx);
+		col0.z = sz * cy;
 
-		col1.x = (cz * sx) + (sz * sy * cx);
-		col1.y = (cz * cx) - (sz * sy * sx);
-		col1.z = -1 * sz * cy;
+		col1.x = sx * cy;
+		col1.y = cx * cy;
+		col1.z = -1 * sy;
 
-		col2.x = (sz * sx) - (cz * sy * cx);
-		col2.y = (sz * cx) + (cz * sy * sx);
+		col2.x = (-1 * sz * cx) + (cz * sy * sx);
+		col2.y = (sx * sz) + (cz * sy * cx);
 		col2.z = cz * cy;
 	}
 
