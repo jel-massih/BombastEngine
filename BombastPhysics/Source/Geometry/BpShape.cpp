@@ -24,15 +24,13 @@ BpMat4x4 BpShape::GetWorldTransform() const
 
 	BpMat4x4 rotation;
 	BpVec3 rot1 = t.GetYawPitchRoll();
-	BpVec3 rot2 = t.GetYawPitchRoll();
-	rotation.BuildYawPitchRoll(rot1);
-	//rotation.BuildYawPitchRoll(rot1.x + rot2.x, rot1.y + rot2.y, rot1.z + rot2.z);
+	BpVec3 rot2 = m_localPose.GetYawPitchRoll();
+	rotation.BuildYawPitchRoll(rot1.x + rot2.x, rot1.y + rot2.y, rot1.z + rot2.z);
 
 	BpMat4x4 scale;
 	scale.BuildScale(m_localPose.GetScale() * t.GetScale());
 
-	BpMat4x4 result = scale * rotation * translation;
-	return result;
+	return scale * rotation * translation;
 }
 
 bool BpShape::GetSphereGeometry(BpGeometrySphere& sphere) const
