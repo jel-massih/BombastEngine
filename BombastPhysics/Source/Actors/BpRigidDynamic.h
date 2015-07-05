@@ -70,6 +70,10 @@ namespace bPhysics
 
 		bool SetupBodyDebugging(BpVisualizationManager& visualizationManager);
 
+		inline BpShape* GetShape() { return &m_shape; }
+
+		void AddContact(BpContactEdge* contact) { m_contacts.push_back(contact); }
+
 	private:
 		BpVec3 m_velocity, m_angularVelocity;
 
@@ -78,6 +82,8 @@ namespace bPhysics
 		BpShape m_shape;
 
 		BpScene* m_pScene;
+
+		std::vector<BpContactEdge*> m_contacts;
 
 		float m_linearDamping, m_angularDamping, m_maxAngularVelocity;
 
