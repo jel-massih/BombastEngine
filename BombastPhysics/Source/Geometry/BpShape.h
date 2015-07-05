@@ -9,6 +9,8 @@
 
 namespace bPhysics
 {
+	class BpContactEdge;
+
 	class BpShape
 	{
 	public:
@@ -30,9 +32,14 @@ namespace bPhysics
 		bool GetCapsuleGeometry(BpGeometryCapsule& box) const;
 		
 		void DebugVisualize(BpDebugRenderBuffer& outBuffer, const BpRigidActor& owner) const;
+
+		std::vector<BpContactEdge*> GetContacts();
+
 	private:
 		BpMat4x4 m_localPose;
 		BpGeometryHolder m_geometryHolder;
 		const BpRigidActor* m_pOwner;
+
+		std::vector<BpContactEdge*> m_contacts;
 	};
 }

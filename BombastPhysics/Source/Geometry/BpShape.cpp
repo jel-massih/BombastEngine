@@ -106,3 +106,8 @@ void BpShape::DebugVisualize(BpDebugRenderBuffer& outBuffer, const BpRigidActor&
 		}
 	}
 }
+
+std::vector<BpContactEdge*> BpShape::GetContacts()
+{
+	return m_contacts;
+}

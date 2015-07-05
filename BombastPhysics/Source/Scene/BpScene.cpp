@@ -1,6 +1,9 @@
 #include "../msvc/stdafx.h"
 #include "BpScene.h"
 #include "../Actors/BpRigidDynamic.h"
+#include "../Constraints/BpIsland.h"
+#include "../Constraints/BpContact.h"
+#include <stack>
 
 using namespace bPhysics;
 
@@ -85,11 +88,15 @@ void BpScene::Simulate(float timestep)
 
 void BpScene::BuildIslands()
 {
+	//Make Island Worst Case Scenario
+	BpIsland island;
+
 	//Build Islands & solve
 	for (auto it = m_sceneRigidDynamics.begin(); it != m_sceneRigidDynamics.end(); it++)
 	{
+		BpRigidDynamic* seed = (*it);
 		//Must be in Island
-		if ((*it)->IsInIsland()) {
+		if (seed->IsInIsland()) {
 			continue;
 		}
 
@@ -98,8 +105,54 @@ void BpScene::BuildIslands()
 			continue;
 		}
 
+		seed->SetInIsland(true);
 
+		std::stack<BpRigidDynamic*> targetBodies;
+		targetBodies.push(*it);
+
+		//perform DFS on constraint graph
+		while (!targetBodies.empty())
+		{
+			BpRigidDynamic* body = targetBodies.top();
+			targetBodies.pop();
+
+			island.Add(body->GetShape());
+
+			body->WakeUp();
+
+			for (auto contactIt = body->GetShape()->GetContacts().begin(); it != body->GetShape()->GetContacts().end; it++)
+			{
+				BpContactConstraint* contact = (*contactIt)->constraint;
+
+				if (contact->bInIsland || !contact->bColliding) {
+					continue;
+				}
+
+				contact->bInIsland = true;
+				island.Add(contact);
+
+				BpRigidDynamic* other = (*contactIt)->other;
+				if (other->IsInIsland()) {
+					continue;
+				}
+
+				other->SetInIsland(true);
+				targetBodies.push(other);
+			}
+		}
+
+		assert(island.m_shapes.size() != 0);
+
+		island.Initialize();
+		island.Solve();
 	}
+
+	//TODO: Update broadphase AABB
+
+	//Find New Contacts
+	m_contactManager.FindContacts();
+
+	//TODO: CLear FOrces
 }
 
 void BpScene::SetVisualizationParameter(BpVisualizationParams parameter, float newScale)

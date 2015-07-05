@@ -5,21 +5,21 @@
 namespace bPhysics
 {
 	class BpContactConstraint;
-	class BpShape;
+	class BpRigidDynamic;
 
 	class BpContactManager
 	{
 	public:
 		BpContactManager();
 
-		void AddContact(BpShape* shape1, BpShape* shape2);
+		void AddContact(BpRigidDynamic* body1, BpRigidDynamic* body2);
 
 		//Find Contacts Via. Broadphase
 		void FindContacts();
 
 		void RemoveContact(BpContactConstraint* contact);
 
-		void RemoveContactsFromShape(BpShape* shape);
+		void RemoveContactsFromBody(BpRigidDynamic* body);
 
 		//Remove Previous Collisions outside broadphase
 		void CheckCollisions();
@@ -30,6 +30,8 @@ namespace bPhysics
 
 	private:
 		std::vector<BpContactConstraint*> m_contacts;
+
+		BpBroadPhase m_broadphase;
 	};
 
 }
