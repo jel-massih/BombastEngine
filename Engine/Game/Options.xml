@@ -1,5 +1,5 @@
 <Options>
-  <Graphics renderer="Direct3D 11" fullscreen="false" x="200" y="300" width="800" height="600" vsync="true" />
+  <Graphics renderer="Direct3D 11" fullscreen="false" x="2000" y="300" width="800" height="600" vsync="true" />
   <Physics engine="bombast" visualize="true" />
   <World level="World\physics_testbed.xml" />
   <Debugging>

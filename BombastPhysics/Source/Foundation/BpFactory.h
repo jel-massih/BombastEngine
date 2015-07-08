@@ -8,6 +8,6 @@ namespace bPhysics
 {
 	class BpRigidDynamic;
 
-	BpRigidDynamic* BpCreateDynamic(BpPhysicsCore& core, const BpMat4x4& transform, const BpShape& shape, float density);
-	BpRigidDynamic* BpCreateDynamic(BpPhysicsCore& core, const BpMat4x4& transform, const BpMat4x4& relativeTransform, const BpGeometry& geometry, BpMaterial& material, float density);
+	BpRigidDynamic* BpCreateDynamic(BpPhysicsCore& core, const BpMat4x4& transform, const BpShape& shape, f32 density);
+	BpRigidDynamic* BpCreateDynamic(BpPhysicsCore& core, const BpMat4x4& transform, const BpMat4x4& relativeTransform, const BpGeometry& geometry, BpMaterial& material, f32 density);
 }

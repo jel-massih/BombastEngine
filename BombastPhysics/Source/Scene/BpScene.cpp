@@ -65,7 +65,7 @@ void BpScene::RemoveActor(BpActor* actor)
 //3. Find New COntacts
 //4. Resolve Collisions via impulses
 //5. Satisfy Constaraints
-void BpScene::Simulate(float timestep)
+void BpScene::Simulate(f32 timestep)
 {
 	for (auto it = m_sceneRigidDynamics.begin(); it != m_sceneRigidDynamics.end(); it++)
 	{
@@ -79,12 +79,12 @@ void BpScene::Simulate(float timestep)
 	}
 }
 
-void BpScene::SetVisualizationParameter(BpVisualizationParams parameter, float newScale)
+void BpScene::SetVisualizationParameter(BpVisualizationParams parameter, f32 newScale)
 {
 	m_visualizationManager.SetVisualizationParameter(parameter, newScale);
 }
 
-float BpScene::GetVisualizationParameter(BpVisualizationParams parameter) const
+f32 BpScene::GetVisualizationParameter(BpVisualizationParams parameter) const
 {
 	return m_visualizationManager.GetVisualizationParameter(parameter);
 }

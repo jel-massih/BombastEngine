@@ -9,13 +9,13 @@ namespace bPhysics
 	{
 	public:
 		inline BpGeometryCapsule() : BpGeometry(BpGeometryType::CAPSULE), radius(0), halfHeight(0) {}
-		inline BpGeometryCapsule(float radius, float halfHeight) : BpGeometry(BpGeometryType::CAPSULE), radius(radius), halfHeight(halfHeight) {}
+		inline BpGeometryCapsule(f32 radius, f32 halfHeight) : BpGeometry(BpGeometryType::CAPSULE), radius(radius), halfHeight(halfHeight) {}
 
 		//Returns True if Geometry is Valid. A valid capsule is radius > 0 and halfHeight > 0
 		inline bool IsValid() const;
 
 	public:
-		float radius, halfHeight;
+		f32 radius, halfHeight;
 	};
 
 	inline bool BpGeometryCapsule::IsValid() const

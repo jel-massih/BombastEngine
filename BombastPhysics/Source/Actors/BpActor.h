@@ -24,7 +24,7 @@ namespace bPhysics
 
 		inline virtual BpScene* GetScene() const = 0;
 
-		virtual BpBounds3 GetWorldBounds(float inflation = 1.01f) const = 0;
+		virtual BpBounds3 GetWorldBounds(f32 inflation = 1.01f) const = 0;
 
 	protected:
 		BpActor() {}

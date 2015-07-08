@@ -4,9 +4,9 @@ namespace bPhysics
 {
 	struct BpMaterialData
 	{
-		float dynamicFriction;
-		float staticFriction;
-		float restitution;
+		f32 dynamicFriction;
+		f32 staticFriction;
+		f32 restitution;
 
 		BpMaterialData()
 			: dynamicFriction(0.0f), staticFriction(0.0f), restitution(0.0f) 
@@ -16,14 +16,14 @@ namespace bPhysics
 	class BpMaterial
 	{
 	public:
-		void SetDynamicFriction(float coefficient);
-		float GetDynamicFriction() const;
+		void SetDynamicFriction(f32 coefficient);
+		f32 GetDynamicFriction() const;
 
-		void SetStaticFriction(float coefficient);
-		float GetStaticFriction() const;
+		void SetStaticFriction(f32 coefficient);
+		f32 GetStaticFriction() const;
 
-		void SetRestitution(float restitution);
-		float GetResititution() const;
+		void SetRestitution(f32 restitution);
+		f32 GetResititution() const;
 
 	private:
 		BpMaterialData m_materialData;

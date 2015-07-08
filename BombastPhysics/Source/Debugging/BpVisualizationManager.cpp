@@ -3,14 +3,14 @@
 
 using namespace bPhysics;
 
-void BpVisualizationManager::SetVisualizationParameter(BpVisualizationParams parameter, float newScale)
+void BpVisualizationManager::SetVisualizationParameter(BpVisualizationParams parameter, f32 newScale)
 {
 	BP_ASSERTf(parameter != BpVisualizationParams::VALUE_COUNT, "Attempting to set Invalid Visualualization Parameter");
 
 	m_visualizationParams[parameter] = newScale;
 }
 
-float BpVisualizationManager::GetVisualizationParameter(BpVisualizationParams parameter) const
+f32 BpVisualizationManager::GetVisualizationParameter(BpVisualizationParams parameter) const
 {
 	BP_ASSERTf(parameter != BpVisualizationParams::VALUE_COUNT, "Attempting to Get Invalid Visualualization Parameter");
 

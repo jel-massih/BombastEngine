@@ -44,14 +44,14 @@ namespace bPhysics
 	class BpRaycastData
 	{
 	public:
-		BpRaycastData(const BpVec3& startPos, const BpVec3& dir, float endPointTime);
+		BpRaycastData(const BpVec3& startPos, const BpVec3& dir, f32 endPointTime);
 		const BpVec3 GetImpactPoint() const;
 
 		BpVec3 start;
 		BpVec3 dir;
-		float time;
+		f32 time;
 
-		float timeToImpact;
+		f32 timeToImpact;
 		BpVec3 normal;
 	};
 
@@ -69,7 +69,7 @@ namespace bPhysics
 
 		inline bool Contains(const BpAABB& other) const;
 		inline bool Contains(const BpVec3& point) const;
-		inline float GetSurfaceArea() const;
+		inline f32 GetSurfaceArea() const;
 	private:
 		BpVec3 m_min, m_max;
 	};
@@ -117,11 +117,11 @@ namespace bPhysics
 			m_max.z >= pos.z;
 	}
 
-	inline float BpAABB::GetSurfaceArea() const
+	inline f32 BpAABB::GetSurfaceArea() const
 	{
-		float x = m_max.x - m_min.x;
-		float y = m_max.y - m_min.y;
-		float z = m_max.z - m_min.z;
+		f32 x = m_max.x - m_min.x;
+		f32 y = m_max.y - m_min.y;
+		f32 z = m_max.z - m_min.z;
 		
 		return 2.0f * ((x * y) + (x * z) + (y * z));
 	}

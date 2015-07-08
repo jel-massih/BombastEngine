@@ -71,7 +71,7 @@ void BpShape::DebugVisualize(BpDebugRenderBuffer& outBuffer, const BpRigidActor&
 	BpScene* scene = owner.GetScene();
 	BP_ASSERT(scene);
 
-	float scale = scene->GetVisualizationParameter(BpVisualizationParams::BASE_SCALE);
+	f32 scale = scene->GetVisualizationParameter(BpVisualizationParams::BASE_SCALE);
 	if (!scale) { return; }
 
 	if (scene->GetVisualizationParameter(BpVisualizationParams::COLLISION_SHAPES))

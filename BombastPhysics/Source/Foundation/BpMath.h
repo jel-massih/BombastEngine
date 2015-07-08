@@ -1,16 +1,17 @@
 #pragma once
 #include <cmath>
+#include "BpSimpleTypes.h"
 
 namespace bPhysics
 {
-	const float  BP_PI = 3.14159265358979f;
+	const f32  BP_PI = 3.14159265358979f;
 
 	//====== Unit Conversions =========
-	inline float BPConvertToRadians(float fDegrees) { return fDegrees * (BP_PI / 180.0f); }
-	inline float BPConvertToDegrees(float fRadians) { return fRadians * (180.0f / BP_PI); }
+	inline f32 BPConvertToRadians(f32 fDegrees) { return fDegrees * (BP_PI / 180.0f); }
+	inline f32 BPConvertToDegrees(f32 fRadians) { return fRadians * (180.0f / BP_PI); }
 
 	//====== Misc Helpers ===========
-	inline bool BpIsFinite(float f) { return isfinite(f); }
+	inline bool BpIsFinite(f32 f) { return isfinite(f); }
 
 	//====== BpVec2 ===========
 	class BpVec2
@@ -19,13 +20,13 @@ namespace bPhysics
 		BpVec2()
 			:x(0.f), y(0.f) {}
 
-		BpVec2(float f)
+		BpVec2(f32 f)
 			:x(f), y(f) {}
 
-		BpVec2(float _x, float _y)
+		BpVec2(f32 _x, f32 _y)
 			:x(_x), y(_y) {}
 
-		inline BpVec2 operator*(float f) const;
+		inline BpVec2 operator*(f32 f) const;
 
 		inline BpVec2 operator+(BpVec2 v) const;
 		inline BpVec2& operator+=(const BpVec2& v);
@@ -34,20 +35,20 @@ namespace bPhysics
 			return BpIsFinite(x) && BpIsFinite(y);
 		}
 
-		inline float Length() { return sqrt(x*x + y*y); }
+		inline f32 Length() { return sqrt(x*x + y*y); }
 		
 		static const BpVec2 g_InvalidBpVec2;
 
 	public:
-		float x, y;
+		f32 x, y;
 	};
 
-	inline BpVec2 BpVec2::operator*(float f) const
+	inline BpVec2 BpVec2::operator*(f32 f) const
 	{
 		return BpVec2(x * f, y * f);
 	}
 
-	inline BpVec2 operator *(const float f, const BpVec2 v)
+	inline BpVec2 operator *(const f32 f, const BpVec2 v)
 	{
 		return v * f;
 	}
@@ -72,13 +73,13 @@ namespace bPhysics
 		BpVec3()
 			:x(0.f), y(0.f), z(0.f) {}
 
-		BpVec3(float f)
+		BpVec3(f32 f)
 			:x(f), y(f), z(f) {}
 
-		BpVec3(float _x, float _y, float _z)
+		BpVec3(f32 _x, f32 _y, f32 _z)
 			:x(_x), y(_y), z(_z) {}
 
-		inline BpVec3 operator*(float f) const;
+		inline BpVec3 operator*(f32 f) const;
 
 		inline BpVec3 operator+(BpVec3 v) const;
 		inline BpVec3& operator+=(const BpVec3& v);
@@ -87,20 +88,20 @@ namespace bPhysics
 			return BpIsFinite(x) && BpIsFinite(y) && BpIsFinite(z);
 		}
 
-		inline float Length() { return sqrt(x*x + y*y + z*z); }
+		inline f32 Length() { return sqrt(x*x + y*y + z*z); }
 
 		static const BpVec3 g_InvalidBpVec3;
 
 	public:
-		float x, y, z;
+		f32 x, y, z;
 	};
 
-	inline BpVec3 BpVec3::operator*(float f) const
+	inline BpVec3 BpVec3::operator*(f32 f) const
 	{
 		return BpVec3(x * f, y * f, z * f);
 	}
 
-	inline BpVec3 operator *(const float f, const BpVec3 v)
+	inline BpVec3 operator *(const f32 f, const BpVec3 v)
 	{
 		return v * f;
 	}
@@ -136,10 +137,10 @@ namespace bPhysics
 		BpVec4()
 			:x(0.f), y(0.f), z(0.f), w(0.f) {}
 
-		BpVec4(float _x, float _y, float _z, float _w)
+		BpVec4(f32 _x, f32 _y, f32 _z, f32 _w)
 			:x(_x), y(_y), z(_z), w(_w) {}
 
-		inline BpVec4 operator*(float f) const;
+		inline BpVec4 operator*(f32 f) const;
 
 		inline bool IsFinite() const {
 			return BpIsFinite(x) && BpIsFinite(y) && BpIsFinite(z) && BpIsFinite(w);
@@ -148,15 +149,15 @@ namespace bPhysics
 		static const BpVec4 g_InvalidBpVec4;
 
 	public:
-		float x, y, z, w;
+		f32 x, y, z, w;
 	};
 
-	inline BpVec4 BpVec4::operator*(float f) const
+	inline BpVec4 BpVec4::operator*(f32 f) const
 	{
 		return BpVec4(x * f, y * f, z * f, w * f);
 	}
 
-	inline BpVec4 operator *(const float f, const BpVec4 v)
+	inline BpVec4 operator *(const f32 f, const BpVec4 v)
 	{
 		return v * f;
 	}
@@ -166,10 +167,10 @@ namespace bPhysics
 	{
 	public:
 		BpMat4x4(){}
-		BpMat4x4(float _00, float _01, float _02, float _03,
-			float _10, float _11, float _12, float _13,
-			float _20, float _21, float _22, float _23,
-			float _30, float _31, float _32, float _33) : col0(_00, _01, _02, _03), col1(_10, _11, _12, _13), col2(_20, _21, _22, _23), col3(_30, _31, _32, _33) {}
+		BpMat4x4(f32 _00, f32 _01, f32 _02, f32 _03,
+			f32 _10, f32 _11, f32 _12, f32 _13,
+			f32 _20, f32 _21, f32 _22, f32 _23,
+			f32 _30, f32 _31, f32 _32, f32 _33) : col0(_00, _01, _02, _03), col1(_10, _11, _12, _13), col2(_20, _21, _22, _23), col3(_30, _31, _32, _33) {}
 		BpMat4x4(BpVec4 col0, BpVec4 col1, BpVec4 col2, BpVec4 cole3) : col0(col0), col1(col1), col2(col2), col3(col3) {}
 
 		inline bool IsValid() const
@@ -184,12 +185,12 @@ namespace bPhysics
 
 		inline BpVec3 GetScale() const;
 		inline void SetScale(const BpVec3& scale);
-		inline void SetScale(const float x, const float y, const float z);
+		inline void SetScale(const f32 x, const f32 y, const f32 z);
 
-		inline void BuildScale(const float x, const float y, const float z);
+		inline void BuildScale(const f32 x, const f32 y, const f32 z);
 		inline void BuildScale(const BpVec3& scale);
 		
-		inline void BuildYawPitchRoll(const float radiansX, const float radiansY, const float radiansZ);
+		inline void BuildYawPitchRoll(const f32 radiansX, const f32 radiansY, const f32 radiansZ);
 		inline void BuildYawPitchRoll(const BpVec3& rotationRadians);
 		inline void BuildTranslation(const BpVec3& pos);
 
@@ -244,7 +245,7 @@ namespace bPhysics
 		SetPosition(pos);
 	}
 
-	inline void BpMat4x4::BuildScale(const float x, const float y, const float z)
+	inline void BpMat4x4::BuildScale(const f32 x, const f32 y, const f32 z)
 	{
 		*this = BpMat4x4::g_Identity;
 		SetScale(x, y, z);
@@ -263,7 +264,7 @@ namespace bPhysics
 		col2.z = scale.z;
 	}
 
-	inline void BpMat4x4::SetScale(const float x, const float y, const float z)
+	inline void BpMat4x4::SetScale(const f32 x, const f32 y, const f32 z)
 	{
 		col0.x = x;
 		col1.y = y;
@@ -277,12 +278,12 @@ namespace bPhysics
 
 	inline BpVec3 BpMat4x4::GetYawPitchRoll() const
 	{
-		float yaw, pitch, roll;
+		f32 yaw, pitch, roll;
 
 		pitch = asin(-col1.z);
 
-		double threshold = 0.001; //UGLY HARDCODE MAGIC NUMBER
-		double test = cos(pitch);
+		f32 threshold = 0.001; //UGLY HARDCODE MAGIC NUMBER
+		f64 test = cos(pitch);
 
 		if (test > threshold)
 		{
@@ -298,17 +299,17 @@ namespace bPhysics
 		return BpVec3(yaw, pitch, roll);
 	}
 
-	inline void BpMat4x4::BuildYawPitchRoll(const float radiansX, const float radiansY, const float radiansZ)
+	inline void BpMat4x4::BuildYawPitchRoll(const f32 radiansX, const f32 radiansY, const f32 radiansZ)
 	{
 		*this = BpMat4x4::g_Identity;
 
-		float cx = cos(radiansX);
-		float cy = cos(radiansY);
-		float cz = cos(radiansZ);
+		f32 cx = cos(radiansX);
+		f32 cy = cos(radiansY);
+		f32 cz = cos(radiansZ);
 
-		float sx = sin(radiansX);
-		float sy = sin(radiansY);
-		float sz = sin(radiansZ);
+		f32 sx = sin(radiansX);
+		f32 sy = sin(radiansY);
+		f32 sz = sin(radiansZ);
 
 		col0.x = (cz * cx) + (sz * sy * sx);
 		col0.y = (-1 * cz * sx) + (sz * sy * cx);

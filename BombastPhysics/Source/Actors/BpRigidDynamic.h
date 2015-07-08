@@ -24,20 +24,20 @@ namespace bPhysics
 
 		virtual void SetName(const char* name) { m_name = name; }
 		virtual const char* GetName() const { return m_name; }
+		
+		virtual BpBounds3 GetWorldBounds(f32 inflation = 1.01f) const;
 
-		virtual BpBounds3 GetWorldBounds(float inflation = 1.01f) const;
+		inline virtual void SetLinearDamping(f32 linearDamping) { m_linearDamping = linearDamping; }
+		inline virtual f32 GetLinearDamping() const { return m_linearDamping; }
 
-		inline virtual void SetLinearDamping(float linearDamping) { m_linearDamping = linearDamping; }
-		inline virtual float GetLinearDamping() const { return m_linearDamping; }
+		inline virtual void SetAngularDamping(f32 angularDamping) { m_angularDamping = angularDamping; }
+		inline virtual f32 GetAngularDamping() const { return m_angularDamping; }
 
-		inline virtual void SetAngularDamping(float angularDamping) { m_angularDamping = angularDamping; }
-		inline virtual float GetAngularDamping() const { return m_angularDamping; }
-
-		inline virtual void SetMaxAngularVelocity(float maxAngularVel) { m_maxAngularVelocity = maxAngularVel; }
-		inline virtual float GetMaxAngularVelocity() const { return m_maxAngularVelocity; }
+		inline virtual void SetMaxAngularVelocity(f32 maxAngularVel) { m_maxAngularVelocity = maxAngularVel; }
+		inline virtual f32 GetMaxAngularVelocity() const { return m_maxAngularVelocity; }
 
 		inline virtual void SetGravityEnabled(bool gravityEnabled) { m_gravityEnabled = gravityEnabled; }
-		inline virtual float GetGravityEnabled() const { return m_gravityEnabled; }
+		inline virtual f32 GetGravityEnabled() const { return m_gravityEnabled; }
 
 		//True if body sleeping.
 		//When not moving for period of time, body no longer simulated [enters sleep]
@@ -46,12 +46,12 @@ namespace bPhysics
 		inline virtual bool IsSleeping() const { return m_bSleeping; }
 
 		//Mass-normalized kinetic energy threshold below which actor may be asleep
-		inline virtual void SetSleepThreshold(float threshold) { m_sleepThreshold = threshold; }
-		inline virtual float GetSleepThreshold() const { return m_sleepThreshold; }
+		inline virtual void SetSleepThreshold(f32 threshold) { m_sleepThreshold = threshold; }
+		inline virtual f32 GetSleepThreshold() const { return m_sleepThreshold; }
 
 		//Mass-Normalized Kenetic Energey threshold below which actor may be stabilized
-		inline virtual void SetStabilizationThreshold(float threshold) { m_stabilizationThreshold = threshold; }
-		inline virtual float GetStabilizationThreshold() const { return m_stabilizationThreshold; }
+		inline virtual void SetStabilizationThreshold(f32 threshold) { m_stabilizationThreshold = threshold; }
+		inline virtual f32 GetStabilizationThreshold() const { return m_stabilizationThreshold; }
 
 		//Minimum amount of time until body can be put to sleep
 		inline virtual void SetWakeCounter(u32 val) { m_wakeCounter = val; }
@@ -66,7 +66,7 @@ namespace bPhysics
 		inline void SetScene(BpScene* scene) { m_pScene = scene; }
 		inline BpScene * GetScene() const { return m_pScene; }
 
-		void Simulate(float timestep);
+		void Simulate(f32 timestep);
 
 		bool SetupBodyDebugging(BpVisualizationManager& visualizationManager);
 

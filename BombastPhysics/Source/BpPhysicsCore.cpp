@@ -29,7 +29,7 @@ BpScene* BpPhysicsCore::CreateScene(const BpSceneDesc& sceneDesc)
 	return m_pScene;
 }
 
-BpMaterial* BpPhysicsCore::CreateMaterial(float dynamicFriction, float staticFriction, float restitution)
+BpMaterial* BpPhysicsCore::CreateMaterial(f32 dynamicFriction, f32 staticFriction, f32 restitution)
 {
 	BpMaterial* material = new BpMaterial;
 

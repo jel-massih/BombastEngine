@@ -19,7 +19,7 @@ namespace bPhysics
 
 		BpScene* CreateScene(const BpSceneDesc& sceneDesc);
 
-		BpMaterial* CreateMaterial(float dynamicFriction, float staticFriction, float restitution);
+		BpMaterial* CreateMaterial(f32 dynamicFriction, f32 staticFriction, f32 restitution);
 
 		inline BpShape* CreateShape(const BpGeometry& geometry, const BpMaterial& material)
 		{

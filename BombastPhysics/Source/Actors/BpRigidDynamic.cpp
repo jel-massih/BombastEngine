@@ -38,7 +38,7 @@ inline void BpRigidDynamic::SetWorldTransform(const BpMat4x4& newTransform, bool
 	}
 }
 
-BpBounds3 BpRigidDynamic::GetWorldBounds(float inflation) const
+BpBounds3 BpRigidDynamic::GetWorldBounds(f32 inflation) const
 {
 	throw "Not Implemented Exception";
 	BpBounds3 bounds;
@@ -61,7 +61,7 @@ void BpRigidDynamic::ForceSleep()
 	m_bSleeping = true;
 }
 
-void BpRigidDynamic::Simulate(float timestep)
+void BpRigidDynamic::Simulate(f32 timestep)
 {
 	BpVec3 acceleration;
 

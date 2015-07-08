@@ -44,9 +44,9 @@ namespace bPhysics
 	{
 	public:
 		BpDebugSphere() : BpDebugShape(DebugShapeType::SPHERE) {}
-		BpDebugSphere(float radius, const BpShape* pShape, BpVec3 color = BpVec3(255, 0, 0)) : BpDebugShape(DebugShapeType::SPHERE, pShape, color), radius(radius)  {}
+		BpDebugSphere(f32 radius, const BpShape* pShape, BpVec3 color = BpVec3(255, 0, 0)) : BpDebugShape(DebugShapeType::SPHERE, pShape, color), radius(radius)  {}
 
-		float radius;
+		f32 radius;
 	};
 
 	class BpDebugBox : public BpDebugShape
@@ -62,10 +62,10 @@ namespace bPhysics
 	{
 	public:
 		BpDebugCapsule() : BpDebugShape(DebugShapeType::CAPSULE) {}
-		BpDebugCapsule(float radius, float halfHeight, const BpShape* pShape, BpVec3 color = BpVec3(255, 0, 0)) : BpDebugShape(DebugShapeType::CAPSULE, pShape, color), radius(radius), halfHeight(halfHeight) {}
+		BpDebugCapsule(f32 radius, f32 halfHeight, const BpShape* pShape, BpVec3 color = BpVec3(255, 0, 0)) : BpDebugShape(DebugShapeType::CAPSULE, pShape, color), radius(radius), halfHeight(halfHeight) {}
 
-		float radius;
-		float halfHeight;
+		f32 radius;
+		f32 halfHeight;
 	};
 
 	class BpDebugRenderBuffer

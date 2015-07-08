@@ -9,13 +9,13 @@ namespace bPhysics
 	{
 	public:
 		inline BpGeometrySphere() : BpGeometry(BpGeometryType::SPHERE), radius(0) {}
-		inline BpGeometrySphere(float r) : BpGeometry(BpGeometryType::SPHERE), radius(r) {}
+		inline BpGeometrySphere(f32 r) : BpGeometry(BpGeometryType::SPHERE), radius(r) {}
 
 		//Returns True if Geometry is Valid. A valid sphere has radius > 0
 		inline bool IsValid() const;
 
 	public:
-		float radius;
+		f32 radius;
 	};
 
 	inline bool BpGeometrySphere::IsValid() const
