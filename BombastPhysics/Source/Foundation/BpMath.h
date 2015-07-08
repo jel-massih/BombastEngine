@@ -17,4 +17,6 @@ namespace bPhysics
 
 	//====== Misc Helpers ===========
 	inline bool BpIsFinite(f32 f) { return isfinite(f); }
+
+	inline f32 BpPow(f32 x, f32 y) { return ::powf(x, y); }
 }
