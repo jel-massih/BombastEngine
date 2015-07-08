@@ -74,6 +74,7 @@ namespace bPhysics
 			:x(-FLT_MAX), y(-FLT_MAX), z(-FLT_MAX) {}
 
 		inline BpVec3 operator*(f32 f) const;
+		inline BpVec3& operator*=(const f32 f);
 
 		inline BpVec3 operator+(BpVec3 v) const;
 		inline BpVec3& operator+=(const BpVec3& v);
@@ -91,6 +92,15 @@ namespace bPhysics
 	inline BpVec3 BpVec3::operator*(f32 f) const
 	{
 		return BpVec3(x * f, y * f, z * f);
+	}
+
+	inline BpVec3& BpVec3::operator*=(const f32 f)
+	{
+		x *= f;
+		y *= f;
+		z *= f;
+
+		return *this;
 	}
 
 	inline BpVec3 operator *(const f32 f, const BpVec3 v)
