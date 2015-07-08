@@ -150,9 +150,6 @@
     <ClInclude Include="..\BpPhysicsApi.h" />
     <ClInclude Include="..\BpPhysicsCore.h" />
     <ClInclude Include="..\BpPhysicsStd.h" />
-    <ClInclude Include="..\Constraints\BpContact.h" />
-    <ClInclude Include="..\Constraints\BpContactManager.h" />
-    <ClInclude Include="..\Constraints\BpIsland.h" />
     <ClInclude Include="..\Debugging\BpDebugRenderBuffer.h" />
     <ClInclude Include="..\Debugging\BpVisualizationManager.h" />
     <ClInclude Include="..\Debugging\BpVisualizationParams.h" />
@@ -160,7 +157,9 @@
     <ClInclude Include="..\Foundation\BpFactory.h" />
     <ClInclude Include="..\Foundation\BpFoundation.h" />
     <ClInclude Include="..\Foundation\BpMath.h" />
+    <ClInclude Include="..\Foundation\BpPreprocessor.h" />
     <ClInclude Include="..\Foundation\BpReporting.h" />
+    <ClInclude Include="..\Foundation\BpSimpleTypes.h" />
     <ClInclude Include="..\Foundation\BpTypes.h" />
     <ClInclude Include="..\Geometry\BpBounds3.h" />
     <ClInclude Include="..\Geometry\BpGeometry.h" />

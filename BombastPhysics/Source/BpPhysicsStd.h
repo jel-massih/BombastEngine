@@ -1,5 +1,7 @@
 #pragma once
 
+#include <crtdbg.h>
+
 #if defined(_DEBUG)
 #define BP_NEW new(_NORMAL_BLOCK,__FILE__, __LINE__)
 #else

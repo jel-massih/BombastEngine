@@ -7,6 +7,8 @@
 #include "Foundation\BpReporting.h"
 #include "Foundation\BpAssert.h"
 #include "Foundation\BpMath.h"
+#include "Foundation\BpPreprocessor.h"
+#include "Foundation\BpSimpleTypes.h"
 
 //Debugging
 #include "Debugging\Debugging.h"

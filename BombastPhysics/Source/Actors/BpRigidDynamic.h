@@ -54,8 +54,8 @@ namespace bPhysics
 		inline virtual float GetStabilizationThreshold() const { return m_stabilizationThreshold; }
 
 		//Minimum amount of time until body can be put to sleep
-		inline virtual void SetWakeCounter(unsigned int val) { m_wakeCounter = val; }
-		inline virtual unsigned int GetWakeCounter() const { return m_wakeCounter; }
+		inline virtual void SetWakeCounter(u32 val) { m_wakeCounter = val; }
+		inline virtual u32 GetWakeCounter() const { return m_wakeCounter; }
 
 		//Wake actor if sleeping
 		virtual void WakeUp();
@@ -85,13 +85,13 @@ namespace bPhysics
 
 		std::vector<BpContactEdge*> m_contacts;
 
-		float m_linearDamping, m_angularDamping, m_maxAngularVelocity;
+		f32 m_linearDamping, m_angularDamping, m_maxAngularVelocity;
 
 		bool m_gravityEnabled;
 
-		float m_sleepThreshold, m_stabilizationThreshold;
+		f32 m_sleepThreshold, m_stabilizationThreshold;
 
-		unsigned int m_wakeCounter, m_resetWakeCounterValue;
+		u32 m_wakeCounter, m_resetWakeCounterValue;
 
 		const char* m_name;
 

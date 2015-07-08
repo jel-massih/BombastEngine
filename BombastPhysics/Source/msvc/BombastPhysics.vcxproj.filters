@@ -68,14 +68,11 @@
     <ClInclude Include="..\Geometry\BpGeometryCapsule.h">
       <Filter>Geometry</Filter>
     </ClInclude>
-    <ClInclude Include="..\Constraints\BpContactManager.h">
-      <Filter>Constraints</Filter>
+    <ClInclude Include="..\Foundation\BpPreprocessor.h">
+      <Filter>Foundation</Filter>
     </ClInclude>
-    <ClInclude Include="..\Constraints\BpContact.h">
-      <Filter>Constraints</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Constraints\BpIsland.h">
-      <Filter>Constraints</Filter>
+    <ClInclude Include="..\Foundation\BpSimpleTypes.h">
+      <Filter>Foundation</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -130,9 +127,6 @@
     </Filter>
     <Filter Include="Debugging">
       <UniqueIdentifier>{e03c152d-bb66-4baa-80d5-71a15a2805eb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Constraints">
-      <UniqueIdentifier>{ca216fb4-207f-495c-b0b1-c12e683edb7d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

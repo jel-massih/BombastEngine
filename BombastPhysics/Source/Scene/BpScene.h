@@ -3,7 +3,6 @@
 #include "../Foundation/BpMath.h"
 #include <vector>
 #include "../Debugging/BpVisualizationManager.h"
-#include "../Constraints/BpContactManager.h"
 
 namespace bPhysics
 {
@@ -56,17 +55,12 @@ namespace bPhysics
 		const BpDebugRenderBuffer& GetRenderBuffer() const;
 
 	private:
-		void BuildIslands();
-
-	private:
 		BpVec3 m_gravity;
 		float m_bounceThresholdVelocity;
 
 		std::vector<BpRigidDynamic*> m_sceneRigidDynamics;
 
 		BpVisualizationManager m_visualizationManager;
-
-		BpContactManager m_contactManager;
 	};
 
 	inline BpSceneDesc::BpSceneDesc()

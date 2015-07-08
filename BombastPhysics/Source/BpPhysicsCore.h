@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Foundation\BpSimpleTypes.h"
 #include "Geometry\BpGeometry.h"
 #include "BpMaterial.h"
 
@@ -26,7 +27,7 @@ namespace bPhysics
 			return CreateShape(geometry, &mat, 1);
 		}
 
-		virtual BpShape* CreateShape(const BpGeometry& geometry, BpMaterial* const * materials, unsigned short materialCount);
+		virtual BpShape* CreateShape(const BpGeometry& geometry, BpMaterial* const * materials, u16 materialCount);
 
 	private:
 		BpScene* m_pScene;

@@ -64,6 +64,9 @@ namespace bPhysics
 		BpVec3 GetMin() const;
 		BpVec3 GetMax() const;
 
+		void SetMin(BpVec3& vec) { m_min = vec; }
+		void SetMax(BpVec3& vec) { m_max = vec; }
+
 		inline bool Contains(const BpAABB& other) const;
 		inline bool Contains(const BpVec3& point) const;
 		inline float GetSurfaceArea() const;

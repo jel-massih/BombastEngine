@@ -124,6 +124,11 @@ namespace bPhysics
 		return *this;
 	}
 
+	inline BpVec3 operator -(const BpVec3 v1, const BpVec3 v2)
+	{
+		return BpVec3(v1.x - v2.x, v1.y - v2.y, v1.z - v2.z);
+	}
+
 	//====== BpVec4 ===========
 	class BpVec4
 	{
