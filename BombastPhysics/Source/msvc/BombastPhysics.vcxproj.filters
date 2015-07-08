@@ -74,6 +74,15 @@
     <ClInclude Include="..\Foundation\BpSimpleTypes.h">
       <Filter>Foundation</Filter>
     </ClInclude>
+    <ClInclude Include="..\Particles\BpParticle.h">
+      <Filter>Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Foundation\BpVec.h">
+      <Filter>Foundation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Foundation\BpMat.h">
+      <Filter>Foundation</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\BpPhysicsCore.cpp" />
@@ -84,9 +93,6 @@
       <Filter>Scene</Filter>
     </ClCompile>
     <ClCompile Include="..\BpMaterial.cpp" />
-    <ClCompile Include="..\Foundation\BpMath.cpp">
-      <Filter>Foundation</Filter>
-    </ClCompile>
     <ClCompile Include="..\Foundation\BpFactory.cpp">
       <Filter>Foundation</Filter>
     </ClCompile>
@@ -108,6 +114,9 @@
     <ClCompile Include="..\Geometry\BpGeometry.cpp">
       <Filter>Geometry</Filter>
     </ClCompile>
+    <ClCompile Include="..\Particles\BpParticle.cpp">
+      <Filter>Particles</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Foundation">
@@ -127,6 +136,9 @@
     </Filter>
     <Filter Include="Debugging">
       <UniqueIdentifier>{e03c152d-bb66-4baa-80d5-71a15a2805eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Particles">
+      <UniqueIdentifier>{f42e16f0-9a91-4e14-91d3-cf4d4455dc63}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

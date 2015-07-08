@@ -1,7 +1,8 @@
 #pragma once
 
 #include "../BpPhysicsStd.h"
-#include "../Foundation/BpMath.h"
+#include "../Foundation/BpVec.h"
+#include "../Foundation/BpMat.h"
 #include <vector>
 
 namespace bPhysics

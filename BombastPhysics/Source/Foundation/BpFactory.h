@@ -1,8 +1,8 @@
 #pragma once
 
-#include "BpMath.h"
 #include "../BpPhysicsCore.h"
 #include "../Geometry/BpGeometry.h"
+#include "BpMat.h"
 
 namespace bPhysics
 {

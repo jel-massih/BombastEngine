@@ -1,6 +1,7 @@
 #pragma once
 
 #include "BpActor.h"
+#include "../Foundation/BpMat.h"
 
 namespace bPhysics
 {

@@ -5,7 +5,7 @@
 using namespace bPhysics;
 
 BpScene::BpScene()
-	: m_gravity(BpVec3::g_InvalidBpVec3),
+	: m_gravity(BpVec3(BpInvalid)),
 	m_bounceThresholdVelocity(0)
 {
 }

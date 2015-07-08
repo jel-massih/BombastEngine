@@ -156,17 +156,20 @@
     <ClInclude Include="..\Foundation\BpAssert.h" />
     <ClInclude Include="..\Foundation\BpFactory.h" />
     <ClInclude Include="..\Foundation\BpFoundation.h" />
+    <ClInclude Include="..\Foundation\BpMat.h" />
     <ClInclude Include="..\Foundation\BpMath.h" />
     <ClInclude Include="..\Foundation\BpPreprocessor.h" />
     <ClInclude Include="..\Foundation\BpReporting.h" />
     <ClInclude Include="..\Foundation\BpSimpleTypes.h" />
     <ClInclude Include="..\Foundation\BpTypes.h" />
     <ClInclude Include="..\Geometry\BpBounds3.h" />
+    <ClInclude Include="..\Foundation\BpVec.h" />
     <ClInclude Include="..\Geometry\BpGeometry.h" />
     <ClInclude Include="..\Geometry\BpGeometryBox.h" />
     <ClInclude Include="..\Geometry\BpGeometryCapsule.h" />
     <ClInclude Include="..\Geometry\BpGeometrySphere.h" />
     <ClInclude Include="..\Geometry\BpShape.h" />
+    <ClInclude Include="..\Particles\BpParticle.h" />
     <ClInclude Include="..\Scene\BpScene.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
@@ -178,9 +181,9 @@
     <ClCompile Include="..\Debugging\BpVisualizationManager.cpp" />
     <ClCompile Include="..\Foundation\BpFactory.cpp" />
     <ClCompile Include="..\Foundation\BpFoundation.cpp" />
-    <ClCompile Include="..\Foundation\BpMath.cpp" />
     <ClCompile Include="..\Geometry\BpGeometry.cpp" />
     <ClCompile Include="..\Geometry\BpShape.cpp" />
+    <ClCompile Include="..\Particles\BpParticle.cpp" />
     <ClCompile Include="..\Scene\BpScene.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

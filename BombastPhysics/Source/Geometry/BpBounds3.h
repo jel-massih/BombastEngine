@@ -2,7 +2,7 @@
 
 #include "../Foundation/BpTypes.h"
 #include "../Foundation/BpAssert.h"
-#include "../Foundation/BpMath.h"
+#include "../Foundation/BpVec.h"
 
 //Max extents defined so that floating point exceptions are avoided for most use cases
 #define BP_MAX_BOUNDS_EXTENTS (BP_MAX_REAL * 0.25f)

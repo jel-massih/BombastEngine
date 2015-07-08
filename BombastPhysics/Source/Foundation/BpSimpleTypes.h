@@ -18,6 +18,7 @@ namespace bPhysics
 
 	typedef float				f32;
 	typedef double				f64;
+
 #else
 #	error Unknown platform!
 #endif
