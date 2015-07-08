@@ -85,6 +85,8 @@ namespace bPhysics
 
 		inline f32 Length() { return sqrt(x*x + y*y + z*z); }
 
+		inline void Zero() { x = y = z = 0; }
+
 	public:
 		f32 x, y, z;
 	};
