@@ -21,28 +21,24 @@ namespace BELogger
         } else { \
             OutputDebugString(wideMsg); \
 		} \
-	   } while(0) \
+	} while(0) \
 
 
 #define BE_ASSERT(expr) \
 	do { \
 		if (!(expr)) \
-				{ \
+		{ \
 			assert(expr); \
-				} \
-		} while (0) \
+		} \
+	} while (0) \
 
-#define BE_ASSERTf(expr, message, ...) \
+#define BE_ASSERTf(expr, message) \
 	do { \
 		if (!(expr)) \
-					{ \
-			char formattedMsg[1024]; \
-			va_list args; \
-			va_start(args, message); \
-			vsprintf_s(formattedMsg, sizeof(formattedMsg), message, args); \
-			assert(expr && formattedMsg); \
-					} \
-		} while (0) \
+		{ \
+			assert(expr && message); \
+		} \
+	} while (0) \
 
 #define BE_WARNING(str, ...) BELogger::Log("WARNING", str, __FUNCTION__, __FILE__, __LINE__, ##__VA_ARGS__)
 

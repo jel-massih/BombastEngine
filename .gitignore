@@ -37,3 +37,4 @@ Tools/ShaderGenerator/obj/*
 *.opensdf
 *.nvuser
 *.exp
+*.opendb
