@@ -1,6 +1,6 @@
 <World>
     <WorldProperties>
-      <BackgroundColor r="0" g="0" b="0" a="0"/>
+      <BackgroundColor r="0.537" g="0.812" b="0.941" a="1"/>
     </WorldProperties>
 
     <StaticActors>
