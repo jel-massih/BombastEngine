@@ -70,9 +70,9 @@ HRESULT Scene::OnForwardRender()
 	g_pApp->GetGraphicsManager()->GetRenderer()->VPrepForwardRendering();
 
 	//Draw the Deferred Render Buffer first
-	g_pApp->GetGraphicsManager()->GetRenderer()->VEnableZBuffer(false);
+	/*g_pApp->GetGraphicsManager()->GetRenderer()->VEnableZBuffer(false);
 	g_pApp->GetGraphicsManager()->GetDeferredRenderingManager()->DrawLightPass(g_pApp->GetGraphicsManager()->GetRenderer()->GetDeviceContext(), this);
-	g_pApp->GetGraphicsManager()->GetRenderer()->VEnableZBuffer(true);
+	g_pApp->GetGraphicsManager()->GetRenderer()->VEnableZBuffer(true);*/
 
 	m_pRoot->VForwardRender(this);
 	m_pRoot->VForwardRenderChildren(this);
