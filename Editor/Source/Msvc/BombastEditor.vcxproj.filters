@@ -72,9 +72,6 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Msvc\BombastEditorStd.h">
-      <Filter>Application</Filter>
-    </ClInclude>
     <ClInclude Include="GeneratedFiles\ui_bombasteditormain.h">
       <Filter>Application\Generated Files</Filter>
     </ClInclude>
@@ -87,5 +84,6 @@
     <ClInclude Include="..\BombastEditor\BombastEditorView.h">
       <Filter>BombastEditor</Filter>
     </ClInclude>
+    <ClInclude Include="..\Msvc\BombastEditorStd.h" />
   </ItemGroup>
 </Project>

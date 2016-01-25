@@ -20,6 +20,8 @@ INT WINAPI wWinMain(HINSTANCE hInstance,
 	return BombastEngine(hInstance, hPrevInstance, NULL);
 }
 
+std::string ROOT_GAME_PATH = "../../";
+
 CoreGameLogic *GameSampleApp::VCreateGameAndView()
 {
 	m_pGame = BE_NEW GameSampleLogic();

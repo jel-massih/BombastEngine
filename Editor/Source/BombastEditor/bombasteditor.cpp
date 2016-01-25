@@ -9,6 +9,8 @@
 
 BombastEditorApp g_BombastEditorApp;
 
+std::string ROOT_GAME_PATH = "../../../../Engine/Game/";
+
 int main(int argc, char *argv[])
 {
 	QApplication a(argc, argv);
@@ -59,7 +61,7 @@ void BombastEditorApp::InitEditorWindow()
 	m_mainEditor = BE_NEW BombastEditorMain;
 	m_mainEditor->show();
 
-	m_messageHandler.Init(this);
+	//m_messageHandler.Init(this);
 }
 
 void BombastEditorApp::OnViewportKeyDown(BYTE keyCode)

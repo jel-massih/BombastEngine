@@ -21,18 +21,18 @@ BombastEditorMain::~BombastEditorMain()
 
 void BombastEditorMain::InitEngine()
 {
-	HINSTANCE hInstance = qWinAppInst();
-	HINSTANCE hPrevInstance = qWinAppPrevInst();
-	HWND hWnd = (HWND)ui.bombastViewport->winId();
+	//HINSTANCE hInstance = qWinAppInst();
+	//HINSTANCE hPrevInstance = qWinAppPrevInst();
+	//HWND hWnd = (HWND)ui.bombastViewport->winId();
 
-	EditorMain(hInstance, hPrevInstance, hWnd);
+	//EditorMain(hInstance, hPrevInstance, hWnd);
 }
 
 void BombastEditorMain::SetupContentTree()
 {
 	QFileSystemModel *model = new QFileSystemModel;
 	ui.contentTree->setModel(model);
-	ui.contentTree->setRootIndex(model->setRootPath("C:/Users/jel-massih/Documents/BombastEngine/Engine/Assets"));
+	ui.contentTree->setRootIndex(model->setRootPath("D:/Projects/BombastEngine/Engine/Assets"));
 }
 
 void BombastEditorMain::keyPressEvent(QKeyEvent* event)

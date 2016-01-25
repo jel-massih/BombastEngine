@@ -31,7 +31,7 @@ protected:
 public:
 	BombastApp();
 
-	virtual TCHAR *VGetGameTitle() { return _T("Bombast Engine"); }
+        virtual TCHAR *VGetGameTitle() { return _TEXT("Bombast Engine"); }
 
 	HWND GetHwnd() { return m_hWnd; }
 	HINSTANCE GetInstance() { return m_hInstance; }
