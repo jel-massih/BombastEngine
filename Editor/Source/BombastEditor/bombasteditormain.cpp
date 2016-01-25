@@ -10,9 +10,11 @@ BombastEditorMain::BombastEditorMain(QWidget *parent)
 	: QMainWindow(parent)
 {
 	ui.setupUi(this);
+	this->show();
 
 	InitEngine();
 	SetupContentTree();
+
 }
 
 BombastEditorMain::~BombastEditorMain()
@@ -21,9 +23,8 @@ BombastEditorMain::~BombastEditorMain()
 
 void BombastEditorMain::InitEngine()
 {
-	//HINSTANCE hInstance = qWinAppInst();
-	//HINSTANCE hPrevInstance = qWinAppPrevInst();
-	//HWND hWnd = (HWND)ui.bombastViewport->winId();
+	HINSTANCE hInstance = qWinAppInst();
+	HINSTANCE hPrevInstance = qWinAppPrevInst();
 
 	//EditorMain(hInstance, hPrevInstance, hWnd);
 }
@@ -37,8 +38,9 @@ void BombastEditorMain::SetupContentTree()
 
 void BombastEditorMain::keyPressEvent(QKeyEvent* event)
 {
+	HWND hWnd = (HWND)ui.bombastViewport->winId();
 	int qKey = event->nativeVirtualKey();
-	g_BombastEditorApp.OnViewportKeyDown((BYTE)qKey);
+	//g_BombastEditorApp.OnViewportKeyDown((BYTE)qKey);
 }
 
 void BombastEditorMain::keyReleaseEvent(QKeyEvent* event)
