@@ -15,10 +15,11 @@ int main(int argc, char *argv[])
 {
 	QApplication a(argc, argv);
 	BombastEditorMain editor;
+	g_BombastEditorApp.SetEditor(&editor);
+
 	editor.show();
 	editor.InitializeEditor();
 
-	g_BombastEditorApp.SetEditor(&editor);
 
 	return a.exec();
 }
@@ -39,7 +40,7 @@ INT EditorMain(HINSTANCE hInstance,
 
 	BELogger::Init(g_pApp->m_options.m_bDebugConsoleEnabled, g_pApp->m_options.m_debugLogPath.c_str(), g_pApp->m_options.m_debugLogName.c_str());
 
-	if (!g_pApp->InitInstance(hInstance, hWnd))
+	if (!g_pApp->InitInstance(hInstance, hWnd, g_BombastEditorApp.GetViewportWidth(), g_BombastEditorApp.GetViewportHeight()))
 	{
 		return FALSE;
 	}
@@ -102,4 +103,14 @@ void BombastEditorApp::EditorQuit()
 	ShutDown();
 
 	BELogger::Destroy();
+}
+
+int BombastEditorApp::GetViewportWidth()
+{
+	return m_mainEditor->GetBombastViewportWidth();
+}
+
+int BombastEditorApp::GetViewportHeight()
+{
+	return m_mainEditor->GetBombastViewportHeight();
 }

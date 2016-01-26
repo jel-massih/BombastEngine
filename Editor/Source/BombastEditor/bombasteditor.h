@@ -23,6 +23,9 @@ public:
 
 	void EditorQuit();
 
+	int GetViewportWidth();
+	int GetViewportHeight();
+
 public:
 	virtual TCHAR *VGetGameTitle() { return _T("Bombast Editor"); }
 

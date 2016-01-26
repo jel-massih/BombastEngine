@@ -22,6 +22,16 @@ void BombastEditorMain::InitializeEditor()
 	InitEngine();
 }
 
+int BombastEditorMain::GetBombastViewportHeight()
+{
+	return ui->bombastViewport->height();
+}
+
+int BombastEditorMain::GetBombastViewportWidth()
+{
+	return ui->bombastViewport->width();
+}
+
 void BombastEditorMain::InitEngine()
 {
 	HINSTANCE hInstance = qWinAppInst();
