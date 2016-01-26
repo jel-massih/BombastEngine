@@ -24,10 +24,10 @@ void BombastEditorLogic::VChangeState(CoreGameState newState)
 
 		for (int i = 0; i < m_expectedPlayers; i++)
 		{
-/*			IGameView* playerView = BE_NEW BombastEditorHumanView(g_pApp->GetGraphicsManager()->GetRenderer());
+			IGameView* playerView = BE_NEW BombastEditorHumanView(g_pApp->GetGraphicsManager()->GetRenderer());
 			VAddView(playerView);
 			m_pActiveHumanView = (BombastEditorHumanView*)playerView;
-			m_humanPlayersAttached++;*/
+			m_humanPlayersAttached++;
 		}
 
 		break;
@@ -54,10 +54,20 @@ void BombastEditorLogic::VChangeState(CoreGameState newState)
 
 void BombastEditorLogic::OnKeyDown(BYTE keyCode)
 {
-	//m_pActiveHumanView->m_pKeyboardHandler->VOnKeyDown(keyCode);
+	m_pActiveHumanView->m_pKeyboardHandler->VOnKeyDown(keyCode);
 }
 
 void BombastEditorLogic::OnKeyUp(BYTE keyCode)
 {
-	//m_pActiveHumanView->m_pKeyboardHandler->VOnKeyUp(keyCode);
+	m_pActiveHumanView->m_pKeyboardHandler->VOnKeyUp(keyCode);
+}
+
+void BombastEditorLogic::OnMouseDown(const Point& pos, const std::string& keyName)
+{
+	m_pActiveHumanView->m_pMouseHandler->VOnMouseDown(pos, 1, keyName);
+}
+
+void BombastEditorLogic::OnMouseUp(const Point & pos, const std::string & keyName)
+{
+	m_pActiveHumanView->m_pMouseHandler->VOnMouseUp(pos, 1, keyName);
 }

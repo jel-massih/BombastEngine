@@ -14,8 +14,11 @@ std::string ROOT_GAME_PATH = "../../../../Engine/Game/";
 int main(int argc, char *argv[])
 {
 	QApplication a(argc, argv);
+	BombastEditorMain editor;
+	editor.show();
+	editor.InitializeEditor();
 
-	g_BombastEditorApp.InitEditorWindow();
+	g_BombastEditorApp.SetEditor(&editor);
 
 	return a.exec();
 }
@@ -24,22 +27,22 @@ INT EditorMain(HINSTANCE hInstance,
 	HINSTANCE hPrevInstance,
 	HWND hWnd)
 {
-	//bool bConsoleEnabled = false;
+	bool bConsoleEnabled = false;
 
-	//int tmpDbgFlag = _CrtSetDbgFlag(_CRTDBG_REPORT_FLAG);
+	int tmpDbgFlag = _CrtSetDbgFlag(_CRTDBG_REPORT_FLAG);
 
-	//tmpDbgFlag |= _CRTDBG_LEAK_CHECK_DF;
+	tmpDbgFlag |= _CRTDBG_LEAK_CHECK_DF;
 
-	//_CrtSetDbgFlag(tmpDbgFlag);
+	_CrtSetDbgFlag(tmpDbgFlag);
 
-	//g_pApp->m_options.Init((ROOT_GAME_PATH + "Options.xml").c_str());
+	g_pApp->m_options.Init((ROOT_GAME_PATH + "Options.xml").c_str());
 
-	//BELogger::Init(g_pApp->m_options.m_bDebugConsoleEnabled, g_pApp->m_options.m_debugLogPath.c_str(), g_pApp->m_options.m_debugLogName.c_str());
+	BELogger::Init(g_pApp->m_options.m_bDebugConsoleEnabled, g_pApp->m_options.m_debugLogPath.c_str(), g_pApp->m_options.m_debugLogName.c_str());
 
-	/*if (!g_pApp->InitInstance(hInstance, hWnd, g_pApp->m_options.m_screenSize.x, g_pApp->m_options.m_screenSize.y, g_pApp->m_options.m_screenPosition.x, g_pApp->m_options.m_screenPosition.y))
+	if (!g_pApp->InitInstance(hInstance, hWnd))
 	{
 		return FALSE;
-	}*/
+	}
 
 	return TRUE;
 }
@@ -56,11 +59,11 @@ void BombastEditorApp::OnIdleThread()
 	UpdateGame(m_pTimer->GetFrameTime(), m_pTimer->GetTime());
 }
 
-void BombastEditorApp::InitEditorWindow()
+void BombastEditorApp::SetEditor(BombastEditorMain* pEditor)
 {
-	m_mainEditor = BE_NEW BombastEditorMain;
+	m_mainEditor = pEditor;
 
-	//m_messageHandler.Init(this);
+	m_messageHandler.Init(this);
 }
 
 void BombastEditorApp::OnViewportKeyDown(BYTE keyCode)
@@ -71,6 +74,16 @@ void BombastEditorApp::OnViewportKeyDown(BYTE keyCode)
 void BombastEditorApp::OnViewportKeyUp(BYTE keyCode)
 {
 	static_cast<BombastEditorLogic*>(m_pGame)->OnKeyUp(keyCode);
+}
+
+void BombastEditorApp::OnViewportMouseDown(const int posX, const int posY, const std::string& keyName)
+{
+	static_cast<BombastEditorLogic*>(m_pGame)->OnMouseDown(Point(posX, posY), keyName);
+}
+
+void BombastEditorApp::OnViewportMouseUp(const int posX, const int posY, const std::string& keyName)
+{
+	static_cast<BombastEditorLogic*>(m_pGame)->OnMouseUp(Point(posX, posY), keyName);
 }
 
 CoreGameLogic *BombastEditorApp::VCreateGameAndView()
