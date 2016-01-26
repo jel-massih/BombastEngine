@@ -17,7 +17,7 @@ INT WINAPI wWinMain(HINSTANCE hInstance,
 	LPWSTR    lpCmdLine,
 	int       nCmdShow)
 {
-	return BombastEngine(hInstance, hPrevInstance, NULL);
+	return BombastEngine(hInstance, hPrevInstance, NULL, lpCmdLine);
 }
 
 std::string ROOT_GAME_PATH = "../../";

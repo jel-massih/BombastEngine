@@ -76,7 +76,8 @@ extern const int iTRANSPARENT;
 
 extern INT WINAPI BombastEngine(HINSTANCE hInstance,
 	HINSTANCE hPrevInstance,
-	HWND hWnd = NULL);
+	HWND hWnd = NULL,
+	LPWSTR lpCmdLine = NULL);
 
 struct AppMsg
 {
