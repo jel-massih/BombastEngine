@@ -1,0 +1,15 @@
+<World>
+    <WorldProperties>
+      <BackgroundColor r="0.537" g="0.812" b="0.941" a="1"/>
+    </WorldProperties>
+
+    <StaticActors>
+      <Actor resource="actors\directionalLight.xml"/>
+
+      <Actor resource="actors\cube.xml">
+        <TransformComponent>
+          <Position x="0" y="0" z="0"/>
+        </TransformComponent>
+      </Actor>
+    </StaticActors>
+</World>

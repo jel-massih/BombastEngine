@@ -36,7 +36,7 @@ INT EditorMain(HINSTANCE hInstance,
 
 	_CrtSetDbgFlag(tmpDbgFlag);
 
-	g_pApp->m_options.Init((ROOT_GAME_PATH + "Options.xml").c_str());
+	g_pApp->m_options.Init((ROOT_GAME_PATH + "EditorOptions.xml").c_str());
 
 	BELogger::Init(g_pApp->m_options.m_bDebugConsoleEnabled, g_pApp->m_options.m_debugLogPath.c_str(), g_pApp->m_options.m_debugLogName.c_str());
 
