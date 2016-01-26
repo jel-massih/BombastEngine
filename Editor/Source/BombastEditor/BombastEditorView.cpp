@@ -45,7 +45,6 @@ bool BombastEditorHumanView::VLoadGameDelegate(rapidxml::xml_node<>* pLevelData)
 	m_pMouseHandler = m_pFreeCameraController;
 	m_pCamera->ClearViewTarget();
 	m_pCamera->ClearFollowTarget();
-	SetCapture(g_pApp->GetHwnd());
 
 	m_pGrid = BE_NEW D3D11GridNode(INVALID_ACTOR_ID, nullptr, &Mat4x4::g_Identity);
 	m_pScene->AddChild(INVALID_ACTOR_ID, m_pGrid);
