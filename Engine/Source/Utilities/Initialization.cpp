@@ -287,27 +287,36 @@ void GameOptions::Init(const char* xmlFilePath, LPWSTR lpCmdLine)
 	}
 }
 
-char* GetCmdOption(const std::vector<char*>& args, const std::string& option)
+std::string GetCmdOption(const std::vector<std::string>& args, const std::string& option)
 {
 	auto itr = std::find(args.begin(), args.end(), option);
 	if (itr != args.end() && ++itr != args.end())
 	{
 		return *itr;
 	}
-	return nullptr;
+	return "";
 }
 
-bool CmdOptionExists(const std::vector<char*>& args, const std::string& option)
+bool CmdOptionExists(const std::vector<std::string>& args, const std::string& option)
 {
 	return std::find(args.begin(), args.end(), option) != args.end();
 }
 
 void GameOptions::ProcessCommandLineArguments(LPWSTR lpCmdLine)
 {
-	/*std::stringstream ss(ws2s(lpCmdLine));
-	std::istream_iterator<char*> begin(ss);
-	std::istream_iterator<char*> end;
-	std::vector<char*> vArgs(begin, end);
+	std::istringstream iss(ws2s(lpCmdLine));
+	std::vector<std::string> vArgs{ std::istream_iterator<std::string>{iss},
+							 std::istream_iterator<std::string>{} };
 
-	char* resX = GetCmdOption(vArgs, "-ResX");*/
+	std::string resX = GetCmdOption(vArgs, "-ResX");
+	if (resX != "")
+	{
+		m_screenSize.x = atoi(resX.c_str());
+	}
+
+	std::string resY = GetCmdOption(vArgs, "-ResY");
+	if (resY != "")
+	{
+		m_screenSize.y = atoi(resY.c_str());
+	}
 }
