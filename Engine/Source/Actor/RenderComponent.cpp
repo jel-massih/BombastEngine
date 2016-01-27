@@ -1,7 +1,7 @@
 #include "RenderComponent.h"
 #include "../Bombast/BombastApp.h"
 #include "TransformComponent.h"
-#include "..\Events\Events.h"
+#include "../Events/Events.h"
 #include "../Graphics3D/RenderNodes.h"
 #include "../Graphics3D/Lighting.h"
 
