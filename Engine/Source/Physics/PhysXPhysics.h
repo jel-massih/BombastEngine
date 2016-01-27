@@ -1,4 +1,10 @@
 #pragma once
+#ifdef USE_PHYSX
+
+#pragma comment(lib, "PhysX3DEBUG_x86.lib")
+#pragma comment(lib, "PhysX3CommonDEBUG_x86.lib")
+#pragma comment(lib, "PhysX3ExtensionsDEBUG.lib")
+#pragma comment(lib, "PhysXVisualDebuggerSDKDEBUG.lib")
 
 #include "Physics.h"
 #include <PxPhysicsAPI.h>
@@ -89,3 +95,4 @@ private:
 	ActorIdToPysXRigidBodyTable m_actorRigidBodyMap;
 	PysXRigidBodyToActorIdTable m_rigidBodyActorMap;
 };
+#endif

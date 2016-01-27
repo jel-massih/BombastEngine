@@ -1,3 +1,4 @@
+#ifdef USE_PHYSX
 #include "PhysXPhysics.h"
 #include "../Actor/TransformComponent.h"
 #include "../Resources/XmlResource.h"
@@ -398,3 +399,5 @@ IDebugPhysicsRenderBuffer* PhysXPhysics::VGetDebugRenderBuffer()
 {
 	throw "Function not yet implemented.";
 }
+
+#endif

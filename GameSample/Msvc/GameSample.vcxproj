@@ -100,7 +100,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)Libraries\zlib128\lib\;$(SolutionDir)Libraries\lua-5.2.3\lib\$(PlatformName)\;$(SolutionDir)Libraries\PhysX-3.3.2\lib\$(PlatformName)\;$(SolutionDir)..\Game\Lib\$(PlatformName)\$(Configuration)\</AdditionalLibraryDirectories>
-      <AdditionalDependencies>lua52.lib;zdll.lib;d3d11.lib;dxgi.lib;D3dcompiler.lib;dxguid.lib;dinput8.lib;pdh.lib;BombastEngine.lib;BombastPhysics.lib;winmm.lib;PhysX3DEBUG_x86.lib;PhysX3CommonDEBUG_x86.lib;PhysX3ExtensionsDEBUG.lib;PhysXVisualDebuggerSDKDEBUG.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>lua52.lib;zdll.lib;d3d11.lib;dxgi.lib;D3dcompiler.lib;dxguid.lib;dinput8.lib;pdh.lib;BombastEngine.lib;BombastPhysics.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">

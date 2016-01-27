@@ -7,9 +7,11 @@ IGamePhysics* CreateGamePhysics(EPhysicsEngine engineType)
 	IGamePhysics* gamePhysics;
 
 	switch (engineType) {
+#ifdef USE_PHYSX
 	case EPhysicsEngine::BE_PHYSICS_PHYSX:
 		gamePhysics = BE_NEW PhysXPhysics;
 		break;
+#endif
 	case EPhysicsEngine::BE_PHYSICS_BOMBAST:
 		gamePhysics = BE_NEW BombastPhysics;
 		break;
