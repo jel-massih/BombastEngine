@@ -11,7 +11,7 @@ class EvtData_New_Actor : public BaseEventData
 	GameViewId m_viewId;
 
 public:
-	static const EventType sk_EventType;
+	static const EventType sEventType;
 
 	EvtData_New_Actor()
 		:m_actorId(INVALID_ACTOR_ID),
@@ -39,7 +39,7 @@ public:
 
 	virtual const EventType& VGetEventType() const
 	{
-		return sk_EventType;
+		return sEventType;
 	}
 
 	virtual EventDataPtr VCopy() const
@@ -70,7 +70,7 @@ class EvtData_New_Render_Component : public BaseEventData
 	SceneNode* m_pSceneNode;
 
 public:
-	static const EventType sk_EventType;
+	static const EventType sEventType;
 
 	EvtData_New_Render_Component()
 	{
@@ -95,7 +95,7 @@ public:
 
 	virtual const EventType& VGetEventType() const
 	{
-		return sk_EventType;
+		return sEventType;
 	}
 
 	virtual EventDataPtr VCopy() const
@@ -122,13 +122,13 @@ public:
 class EvtData_Request_Start_Game : public BaseEventData
 {
 public:
-	static const EventType sk_EventType;
+	static const EventType sEventType;
 
 	EvtData_Request_Start_Game() {}
 
 	virtual const EventType& VGetEventType() const
 	{
-		return sk_EventType;
+		return sEventType;
 	}
 
 	virtual EventDataPtr VCopy() const
@@ -148,7 +148,7 @@ class EvtData_Move_Actor : public BaseEventData
 	Mat4x4 m_matrix;
 
 public:
-	static const EventType sk_EventType;
+	static const EventType sEventType;
 
 	EvtData_Move_Actor() 
 		: m_id(INVALID_ACTOR_ID)
@@ -161,7 +161,7 @@ public:
 
 	virtual const EventType& VGetEventType() const
 	{
-		return sk_EventType;
+		return sEventType;
 	}
 
 	virtual EventDataPtr VCopy() const

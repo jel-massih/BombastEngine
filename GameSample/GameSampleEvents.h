@@ -10,10 +10,10 @@ class EvtData_Fire_Weapon : public BaseEventData
 	ActorId m_id;
 
 public:
-	static const EventType sk_EventType;
+	static const EventType sEventType;
 	virtual const EventType& VGetEventType() const
 	{
-		return sk_EventType;
+		return sEventType;
 	}
 
 	EvtData_Fire_Weapon()
@@ -141,10 +141,10 @@ public:
 class EvtData_StartUp : public BaseMovementStartEvent
 {
 public:
-	static const EventType sk_EventType;
+	static const EventType sEventType;
 	virtual const EventType & VGetEventType(void) const
 	{
-		return sk_EventType;
+		return sEventType;
 	}
 
 	EvtData_StartUp(ActorId actorId, float acceleration) :
@@ -166,10 +166,10 @@ public:
 class EvtData_EndUp : public BaseMovementEndEvent
 {
 public:
-	static const EventType sk_EventType;
+	static const EventType sEventType;
 	virtual const EventType & VGetEventType(void) const
 	{
-		return sk_EventType;
+		return sEventType;
 	}
 
 	EvtData_EndUp(ActorId actorId) :
@@ -190,10 +190,10 @@ public:
 class EvtData_StartRight : public BaseMovementStartEvent
 {
 public:
-	static const EventType sk_EventType;
+	static const EventType sEventType;
 	virtual const EventType & VGetEventType(void) const
 	{
-		return sk_EventType;
+		return sEventType;
 	}
 
 	EvtData_StartRight(ActorId actorId, float acceleration) :
@@ -215,10 +215,10 @@ public:
 class EvtData_EndRight : public BaseMovementEndEvent
 {
 public:
-	static const EventType sk_EventType;
+	static const EventType sEventType;
 	virtual const EventType & VGetEventType(void) const
 	{
-		return sk_EventType;
+		return sEventType;
 	}
 
 	EvtData_EndRight(ActorId actorId) :
@@ -239,10 +239,10 @@ public:
 class EvtData_StartForward : public BaseMovementStartEvent
 {
 public:
-	static const EventType sk_EventType;
+	static const EventType sEventType;
 	virtual const EventType & VGetEventType(void) const
 	{
-		return sk_EventType;
+		return sEventType;
 	}
 
 	EvtData_StartForward(ActorId actorId, float acceleration) :
@@ -264,10 +264,10 @@ public:
 class EvtData_EndForward : public BaseMovementEndEvent
 {
 public:
-	static const EventType sk_EventType;
+	static const EventType sEventType;
 	virtual const EventType & VGetEventType(void) const
 	{
-		return sk_EventType;
+		return sEventType;
 	}
 
 	EvtData_EndForward(ActorId actorId) :
@@ -288,10 +288,10 @@ public:
 class EvtData_StartTurnRight : public BaseMovementStartEvent
 {
 public:
-	static const EventType sk_EventType;
+	static const EventType sEventType;
 	virtual const EventType & VGetEventType(void) const
 	{
-		return sk_EventType;
+		return sEventType;
 	}
 
 	EvtData_StartTurnRight(ActorId actorId, float acceleration) :
@@ -313,10 +313,10 @@ public:
 class EvtData_EndTurnRight : public BaseMovementEndEvent
 {
 public:
-	static const EventType sk_EventType;
+	static const EventType sEventType;
 	virtual const EventType & VGetEventType(void) const
 	{
-		return sk_EventType;
+		return sEventType;
 	}
 
 	EvtData_EndTurnRight(ActorId actorId) :
@@ -337,10 +337,10 @@ public:
 class EvtData_StartTurnUp : public BaseMovementStartEvent
 {
 public:
-	static const EventType sk_EventType;
+	static const EventType sEventType;
 	virtual const EventType & VGetEventType(void) const
 	{
-		return sk_EventType;
+		return sEventType;
 	}
 
 	EvtData_StartTurnUp(ActorId actorId, float acceleration) :
@@ -362,10 +362,10 @@ public:
 class EvtData_EndTurnUp : public BaseMovementEndEvent
 {
 public:
-	static const EventType sk_EventType;
+	static const EventType sEventType;
 	virtual const EventType & VGetEventType(void) const
 	{
-		return sk_EventType;
+		return sEventType;
 	}
 
 	EvtData_EndTurnUp(ActorId actorId) :
@@ -388,7 +388,7 @@ class EvtData_Set_Controlled_Actor : public BaseEventData
 	ActorId m_id;
 
 public:
-	static const EventType sk_EventType;
+	static const EventType sEventType;
 
 	EvtData_Set_Controlled_Actor(void) { }
 	EvtData_Set_Controlled_Actor(ActorId actorId)
@@ -398,7 +398,7 @@ public:
 
 	virtual const EventType& VGetEventType(void) const
 	{
-		return sk_EventType;
+		return sEventType;
 	}
 
 	virtual EventDataPtr VCopy() const
@@ -433,7 +433,7 @@ class EvtData_SpawnPlayer : public BaseEventData
 	GameViewId m_viewId;
 
 public:
-	static const EventType sk_EventType;
+	static const EventType sEventType;
 
 	EvtData_SpawnPlayer(void) { }
 	EvtData_SpawnPlayer(ActorId actorId, GameViewId viewId)
@@ -443,7 +443,7 @@ public:
 
 	virtual const EventType& VGetEventType(void) const
 	{
-		return sk_EventType;
+		return sEventType;
 	}
 
 	virtual EventDataPtr VCopy() const

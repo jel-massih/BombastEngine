@@ -195,15 +195,15 @@ void GameSampleHumanView::SetControlledActorDelegate(EventDataPtr pEventData)
 void GameSampleHumanView::RegisterAllDelegates()
 {
 	IEventManager* pEventManager = IEventManager::Get();
-	pEventManager->VAddListener(fastdelegate::MakeDelegate(this, &GameSampleHumanView::SetControlledActorDelegate), EvtData_Set_Controlled_Actor::sk_EventType);
-	pEventManager->VAddListener(fastdelegate::MakeDelegate(this, &GameSampleHumanView::NewPlayerSpawnedDelegate), EvtData_SpawnPlayer::sk_EventType);
+	pEventManager->VAddListener(fastdelegate::MakeDelegate(this, &GameSampleHumanView::SetControlledActorDelegate), EvtData_Set_Controlled_Actor::sEventType);
+	pEventManager->VAddListener(fastdelegate::MakeDelegate(this, &GameSampleHumanView::NewPlayerSpawnedDelegate), EvtData_SpawnPlayer::sEventType);
 }
 
 void GameSampleHumanView::RemoveAllDelegates()
 {
 	IEventManager* pEventManager = IEventManager::Get();
 
-	pEventManager->VRemoveListener(fastdelegate::MakeDelegate(this, &GameSampleHumanView::SetControlledActorDelegate), EvtData_Set_Controlled_Actor::sk_EventType);
+	pEventManager->VRemoveListener(fastdelegate::MakeDelegate(this, &GameSampleHumanView::SetControlledActorDelegate), EvtData_Set_Controlled_Actor::sEventType);
 }
 
 void GameSampleHumanView::NewPlayerSpawnedDelegate(EventDataPtr pEventData)

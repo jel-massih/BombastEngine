@@ -103,33 +103,33 @@ bool GameSampleLogic::VLoadGameDelegate(rapidxml::xml_node<>* pLevelData)
 void GameSampleLogic::RegisterAllDelegates()
 {
 	IEventManager* pEventManager = IEventManager::Get();
-	pEventManager->VAddListener(fastdelegate::MakeDelegate(this, &GameSampleLogic::RequestStartGameDelegate), EvtData_Request_Start_Game::sk_EventType);
-	pEventManager->VAddListener(fastdelegate::MakeDelegate(this, &GameSampleLogic::StartMoveUpDelegate), EvtData_StartUp::sk_EventType);
-	pEventManager->VAddListener(fastdelegate::MakeDelegate(this, &GameSampleLogic::EndMoveUpDelegate), EvtData_EndUp::sk_EventType);
-	pEventManager->VAddListener(fastdelegate::MakeDelegate(this, &GameSampleLogic::StartMoveRightDelegate), EvtData_StartRight::sk_EventType);
-	pEventManager->VAddListener(fastdelegate::MakeDelegate(this, &GameSampleLogic::EndMoveRightDelegate), EvtData_EndRight::sk_EventType);
-	pEventManager->VAddListener(fastdelegate::MakeDelegate(this, &GameSampleLogic::StartMoveForwardDelegate), EvtData_StartForward::sk_EventType);
-	pEventManager->VAddListener(fastdelegate::MakeDelegate(this, &GameSampleLogic::EndMoveForwardDelegate), EvtData_EndForward::sk_EventType);
-	pEventManager->VAddListener(fastdelegate::MakeDelegate(this, &GameSampleLogic::StartTurnUpDelegate), EvtData_StartTurnUp::sk_EventType);
-	pEventManager->VAddListener(fastdelegate::MakeDelegate(this, &GameSampleLogic::EndTurnUpDelegate), EvtData_EndTurnUp::sk_EventType);
-	pEventManager->VAddListener(fastdelegate::MakeDelegate(this, &GameSampleLogic::StartTurnRightDelegate), EvtData_StartTurnRight::sk_EventType);
-	pEventManager->VAddListener(fastdelegate::MakeDelegate(this, &GameSampleLogic::EndTurnRightDelegate), EvtData_EndTurnRight::sk_EventType);
+	pEventManager->VAddListener(fastdelegate::MakeDelegate(this, &GameSampleLogic::RequestStartGameDelegate), EvtData_Request_Start_Game::sEventType);
+	pEventManager->VAddListener(fastdelegate::MakeDelegate(this, &GameSampleLogic::StartMoveUpDelegate), EvtData_StartUp::sEventType);
+	pEventManager->VAddListener(fastdelegate::MakeDelegate(this, &GameSampleLogic::EndMoveUpDelegate), EvtData_EndUp::sEventType);
+	pEventManager->VAddListener(fastdelegate::MakeDelegate(this, &GameSampleLogic::StartMoveRightDelegate), EvtData_StartRight::sEventType);
+	pEventManager->VAddListener(fastdelegate::MakeDelegate(this, &GameSampleLogic::EndMoveRightDelegate), EvtData_EndRight::sEventType);
+	pEventManager->VAddListener(fastdelegate::MakeDelegate(this, &GameSampleLogic::StartMoveForwardDelegate), EvtData_StartForward::sEventType);
+	pEventManager->VAddListener(fastdelegate::MakeDelegate(this, &GameSampleLogic::EndMoveForwardDelegate), EvtData_EndForward::sEventType);
+	pEventManager->VAddListener(fastdelegate::MakeDelegate(this, &GameSampleLogic::StartTurnUpDelegate), EvtData_StartTurnUp::sEventType);
+	pEventManager->VAddListener(fastdelegate::MakeDelegate(this, &GameSampleLogic::EndTurnUpDelegate), EvtData_EndTurnUp::sEventType);
+	pEventManager->VAddListener(fastdelegate::MakeDelegate(this, &GameSampleLogic::StartTurnRightDelegate), EvtData_StartTurnRight::sEventType);
+	pEventManager->VAddListener(fastdelegate::MakeDelegate(this, &GameSampleLogic::EndTurnRightDelegate), EvtData_EndTurnRight::sEventType);
 }
 
 void GameSampleLogic::RemoveAllDelegates()
 {
 	IEventManager* pEventManager = IEventManager::Get();
-	pEventManager->VRemoveListener(fastdelegate::MakeDelegate(this, &GameSampleLogic::RequestStartGameDelegate), EvtData_Request_Start_Game::sk_EventType);
-	pEventManager->VRemoveListener(fastdelegate::MakeDelegate(this, &GameSampleLogic::StartMoveUpDelegate), EvtData_StartUp::sk_EventType);
-	pEventManager->VRemoveListener(fastdelegate::MakeDelegate(this, &GameSampleLogic::EndMoveUpDelegate), EvtData_EndUp::sk_EventType);
-	pEventManager->VRemoveListener(fastdelegate::MakeDelegate(this, &GameSampleLogic::StartMoveRightDelegate), EvtData_StartRight::sk_EventType);
-	pEventManager->VRemoveListener(fastdelegate::MakeDelegate(this, &GameSampleLogic::EndMoveRightDelegate), EvtData_EndRight::sk_EventType);
-	pEventManager->VRemoveListener(fastdelegate::MakeDelegate(this, &GameSampleLogic::StartMoveForwardDelegate), EvtData_StartForward::sk_EventType);
-	pEventManager->VRemoveListener(fastdelegate::MakeDelegate(this, &GameSampleLogic::EndMoveForwardDelegate), EvtData_EndForward::sk_EventType);
-	pEventManager->VRemoveListener(fastdelegate::MakeDelegate(this, &GameSampleLogic::StartTurnUpDelegate), EvtData_StartTurnUp::sk_EventType);
-	pEventManager->VRemoveListener(fastdelegate::MakeDelegate(this, &GameSampleLogic::EndTurnUpDelegate), EvtData_EndTurnUp::sk_EventType);
-	pEventManager->VRemoveListener(fastdelegate::MakeDelegate(this, &GameSampleLogic::StartTurnRightDelegate), EvtData_StartTurnRight::sk_EventType);
-	pEventManager->VRemoveListener(fastdelegate::MakeDelegate(this, &GameSampleLogic::EndTurnRightDelegate), EvtData_EndTurnRight::sk_EventType);
+	pEventManager->VRemoveListener(fastdelegate::MakeDelegate(this, &GameSampleLogic::RequestStartGameDelegate), EvtData_Request_Start_Game::sEventType);
+	pEventManager->VRemoveListener(fastdelegate::MakeDelegate(this, &GameSampleLogic::StartMoveUpDelegate), EvtData_StartUp::sEventType);
+	pEventManager->VRemoveListener(fastdelegate::MakeDelegate(this, &GameSampleLogic::EndMoveUpDelegate), EvtData_EndUp::sEventType);
+	pEventManager->VRemoveListener(fastdelegate::MakeDelegate(this, &GameSampleLogic::StartMoveRightDelegate), EvtData_StartRight::sEventType);
+	pEventManager->VRemoveListener(fastdelegate::MakeDelegate(this, &GameSampleLogic::EndMoveRightDelegate), EvtData_EndRight::sEventType);
+	pEventManager->VRemoveListener(fastdelegate::MakeDelegate(this, &GameSampleLogic::StartMoveForwardDelegate), EvtData_StartForward::sEventType);
+	pEventManager->VRemoveListener(fastdelegate::MakeDelegate(this, &GameSampleLogic::EndMoveForwardDelegate), EvtData_EndForward::sEventType);
+	pEventManager->VRemoveListener(fastdelegate::MakeDelegate(this, &GameSampleLogic::StartTurnUpDelegate), EvtData_StartTurnUp::sEventType);
+	pEventManager->VRemoveListener(fastdelegate::MakeDelegate(this, &GameSampleLogic::EndTurnUpDelegate), EvtData_EndTurnUp::sEventType);
+	pEventManager->VRemoveListener(fastdelegate::MakeDelegate(this, &GameSampleLogic::StartTurnRightDelegate), EvtData_StartTurnRight::sEventType);
+	pEventManager->VRemoveListener(fastdelegate::MakeDelegate(this, &GameSampleLogic::EndTurnRightDelegate), EvtData_EndTurnRight::sEventType);
 } 
 
 void GameSampleLogic::VMoveActor(const ActorId id, Mat4x4 const &mat)
