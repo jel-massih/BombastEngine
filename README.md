@@ -13,7 +13,7 @@ C++ 3D Game Engine (DirectX) (WIP)
 * lua-5.2.3
 
 <b>Optional Engine Dependencies:</b>
-* PhysX 3.3.2 (behind USE_PHYSX Preprocessor Flag. Disabled by default.)
+* PhysX 3.3.2 (Required to use PhysX as Physics Library. By Deafult PhysX is disabled, with BombastPhysics library enabled.)
 
 <b>Editor Dependencies</b>
 * Qt 5.6 Beta
