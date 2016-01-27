@@ -3,7 +3,9 @@ Engine/Temp/
 Engine/Source/Msvc/ipch/
 
 Engine/Assets/Meshes/*
+!Engine/Assets/Meshes/engine
 Engine/Assets/Textures/*
+!Engine/Assets/Textures/engine
 Engine/Assets/Materials/*
 !Engine/Assets/Materials/physics_testbed
 Engine/Assets/Actors/*
