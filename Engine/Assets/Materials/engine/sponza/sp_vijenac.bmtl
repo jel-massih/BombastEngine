@@ -1,0 +1,9 @@
+<Material name="sp_vijenac">
+	<Ambient r="0" g="0" b="0" a="1"/>
+	<Diffuse r="0.713726" g="0.705882" b="0.658824" a="1"/>
+	<Specular r="0" g="0" b="0" a="1" power="200" />
+	<Emmisive r="0" g="0" b="0" a="1"/>
+	<Textures>
+		<Texture path="textures\sponza\00_SKAP.JPG"/>	</Textures>
+	<Shader type="DeferredLit"/>
+</Material>

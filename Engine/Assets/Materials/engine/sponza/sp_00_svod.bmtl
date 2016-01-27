@@ -1,0 +1,9 @@
+<Material name="sp_00_svod">
+	<Ambient r="0.145098" g="0.145098" b="0.145098" a="1"/>
+	<Diffuse r="0.941177" g="0.866667" b="0.737255" a="1"/>
+	<Specular r="0.034039" g="0.032314" b="0.029333" a="1" power="4" />
+	<Emmisive r="0" g="0" b="0" a="1"/>
+	<Textures>
+		<Texture path="textures\sponza\KAMEN-stup.JPG"/>	</Textures>
+	<Shader type="DeferredLit"/>
+</Material>

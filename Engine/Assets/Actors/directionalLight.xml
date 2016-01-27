@@ -1,6 +1,6 @@
 <Actor type="DirectionalLight" resource="actors\directionalLight.xml">
 	<TransformComponent>
-		<YawPitchRoll x="45" y="45" z="0"/>
+		<YawPitchRoll x="45" y="200" z="0"/>
 	</TransformComponent>
 
   <LightRenderComponent>
