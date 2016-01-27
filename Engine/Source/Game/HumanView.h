@@ -41,7 +41,7 @@ public:
 
 	virtual void VSetControlledActor(ActorId actorId) { m_actorId = actorId; }
 
-	void PlaySoundDelegate(IEventDataPtr pEventData);
+	void PlaySoundDelegate(EventDataPtr pEventData);
 
 protected:
 	virtual bool VLoadGameDelegate(rapidxml::xml_node<>* pLevelData) { VPushElement(m_pScene); return true; }

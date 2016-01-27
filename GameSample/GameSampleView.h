@@ -34,6 +34,6 @@ private:
 	void RegisterAllDelegates();
 	void RemoveAllDelegates();
 
-	void SetControlledActorDelegate(IEventDataPtr pEventData);
-	void NewPlayerSpawnedDelegate(IEventDataPtr pEventData);
+	void SetControlledActorDelegate(EventDataPtr pEventData);
+	void NewPlayerSpawnedDelegate(EventDataPtr pEventData);
 };

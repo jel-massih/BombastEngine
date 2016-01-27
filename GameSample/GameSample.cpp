@@ -137,12 +137,12 @@ void GameSampleLogic::VMoveActor(const ActorId id, Mat4x4 const &mat)
 	//CoreGameLogic::VMoveActor(id, mat);
 }
 
-void GameSampleLogic::RequestStartGameDelegate(IEventDataPtr pEventData)
+void GameSampleLogic::RequestStartGameDelegate(EventDataPtr pEventData)
 {
 	VChangeState(CGS_WaitingForPlayers);
 }
 
-void GameSampleLogic::StartMoveUpDelegate(IEventDataPtr pEventData)
+void GameSampleLogic::StartMoveUpDelegate(EventDataPtr pEventData)
 {
 	std::shared_ptr<EvtData_StartUp> pStartUpData = std::static_pointer_cast<EvtData_StartUp>(pEventData);
 	Actor* pTarget = VGetActor(pStartUpData->GetActorId());
@@ -153,13 +153,13 @@ void GameSampleLogic::StartMoveUpDelegate(IEventDataPtr pEventData)
 	}
 }
 
-void GameSampleLogic::EndMoveUpDelegate(IEventDataPtr pEventData)
+void GameSampleLogic::EndMoveUpDelegate(EventDataPtr pEventData)
 {
 	std::shared_ptr<EvtData_EndUp> pEndUpData = std::static_pointer_cast<EvtData_EndUp>(pEventData);
 
 }
 
-void GameSampleLogic::StartMoveRightDelegate(IEventDataPtr pEventData)
+void GameSampleLogic::StartMoveRightDelegate(EventDataPtr pEventData)
 {
 	std::shared_ptr<EvtData_StartRight> pStartRightData = std::static_pointer_cast<EvtData_StartRight>(pEventData);
 	Actor* pTarget = VGetActor(pStartRightData->GetActorId());
@@ -170,12 +170,12 @@ void GameSampleLogic::StartMoveRightDelegate(IEventDataPtr pEventData)
 	}
 }
 
-void GameSampleLogic::EndMoveRightDelegate(IEventDataPtr pEventData)
+void GameSampleLogic::EndMoveRightDelegate(EventDataPtr pEventData)
 {
 	std::shared_ptr<EvtData_EndRight> pEndRightData = std::static_pointer_cast<EvtData_EndRight>(pEventData);
 }
 
-void GameSampleLogic::StartMoveForwardDelegate(IEventDataPtr pEventData)
+void GameSampleLogic::StartMoveForwardDelegate(EventDataPtr pEventData)
 {
 	std::shared_ptr<EvtData_StartForward> pStartForwardData = std::static_pointer_cast<EvtData_StartForward>(pEventData);
 	Actor* pTarget = VGetActor(pStartForwardData->GetActorId());
@@ -186,7 +186,7 @@ void GameSampleLogic::StartMoveForwardDelegate(IEventDataPtr pEventData)
 	}
 }
 
-void GameSampleLogic::EndMoveForwardDelegate(IEventDataPtr pEventData)
+void GameSampleLogic::EndMoveForwardDelegate(EventDataPtr pEventData)
 {
 	std::shared_ptr<EvtData_EndForward> pEndForwardData = std::static_pointer_cast<EvtData_EndForward>(pEventData);
 	Actor* pTarget = VGetActor(pEndForwardData->GetActorId());
@@ -200,7 +200,7 @@ void GameSampleLogic::EndMoveForwardDelegate(IEventDataPtr pEventData)
 	}
 }
 
-void GameSampleLogic::StartTurnUpDelegate(IEventDataPtr pEventData)
+void GameSampleLogic::StartTurnUpDelegate(EventDataPtr pEventData)
 {
 	std::shared_ptr<EvtData_StartTurnUp> pStartUpData = std::static_pointer_cast<EvtData_StartTurnUp>(pEventData);
 	Actor* pTarget = VGetActor(pStartUpData->GetActorId());
@@ -211,12 +211,12 @@ void GameSampleLogic::StartTurnUpDelegate(IEventDataPtr pEventData)
 	}
 }
 
-void GameSampleLogic::EndTurnUpDelegate(IEventDataPtr pEventData)
+void GameSampleLogic::EndTurnUpDelegate(EventDataPtr pEventData)
 {
 	std::shared_ptr<EvtData_EndTurnUp> pEndUpData = std::static_pointer_cast<EvtData_EndTurnUp>(pEventData);
 }
 
-void GameSampleLogic::StartTurnRightDelegate(IEventDataPtr pEventData)
+void GameSampleLogic::StartTurnRightDelegate(EventDataPtr pEventData)
 {
 	std::shared_ptr<EvtData_StartTurnRight> pStartRightData = std::static_pointer_cast<EvtData_StartTurnRight>(pEventData);
 	Actor* pTarget = VGetActor(pStartRightData->GetActorId());
@@ -227,7 +227,7 @@ void GameSampleLogic::StartTurnRightDelegate(IEventDataPtr pEventData)
 	}
 }
 
-void GameSampleLogic::EndTurnRightDelegate(IEventDataPtr pEventData)
+void GameSampleLogic::EndTurnRightDelegate(EventDataPtr pEventData)
 {
 	std::shared_ptr<EvtData_EndTurnRight> pEndRightData = std::static_pointer_cast<EvtData_EndTurnRight>(pEventData);
 	Actor* pTarget = VGetActor(pEndRightData->GetActorId());

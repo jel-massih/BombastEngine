@@ -26,9 +26,9 @@ public:
 	{
 	}
 
-	virtual IEventDataPtr VCopy() const
+	virtual EventDataPtr VCopy() const
 	{
-		return IEventDataPtr(BE_NEW EvtData_Fire_Weapon(m_id));
+		return EventDataPtr(BE_NEW EvtData_Fire_Weapon(m_id));
 	}
 
 	virtual void VSerialize(std::ostrstream& out) const
@@ -152,9 +152,9 @@ public:
 	{
 	}
 
-	virtual IEventDataPtr VCopy() const
+	virtual EventDataPtr VCopy() const
 	{
-		return IEventDataPtr(BE_NEW EvtData_StartUp(m_id, m_acceleration));
+		return EventDataPtr(BE_NEW EvtData_StartUp(m_id, m_acceleration));
 	}
 
 	virtual const char* GetName() const
@@ -177,9 +177,9 @@ public:
 	{
 	}
 
-	virtual IEventDataPtr VCopy() const
+	virtual EventDataPtr VCopy() const
 	{
-		return IEventDataPtr(BE_NEW EvtData_EndUp(m_id));
+		return EventDataPtr(BE_NEW EvtData_EndUp(m_id));
 	}
 	virtual const char* GetName(void) const
 	{
@@ -201,9 +201,9 @@ public:
 	{
 	}
 
-	virtual IEventDataPtr VCopy() const
+	virtual EventDataPtr VCopy() const
 	{
-		return IEventDataPtr(BE_NEW EvtData_StartRight(m_id, m_acceleration));
+		return EventDataPtr(BE_NEW EvtData_StartRight(m_id, m_acceleration));
 	}
 
 	virtual const char* GetName() const
@@ -226,9 +226,9 @@ public:
 	{
 	}
 
-	virtual IEventDataPtr VCopy() const
+	virtual EventDataPtr VCopy() const
 	{
-		return IEventDataPtr(BE_NEW EvtData_EndRight(m_id));
+		return EventDataPtr(BE_NEW EvtData_EndRight(m_id));
 	}
 	virtual const char* GetName(void) const
 	{
@@ -250,9 +250,9 @@ public:
 	{
 	}
 
-	virtual IEventDataPtr VCopy() const
+	virtual EventDataPtr VCopy() const
 	{
-		return IEventDataPtr(BE_NEW EvtData_StartForward(m_id, m_acceleration));
+		return EventDataPtr(BE_NEW EvtData_StartForward(m_id, m_acceleration));
 	}
 
 	virtual const char* GetName() const
@@ -275,9 +275,9 @@ public:
 	{
 	}
 
-	virtual IEventDataPtr VCopy() const
+	virtual EventDataPtr VCopy() const
 	{
-		return IEventDataPtr(BE_NEW EvtData_EndForward(m_id));
+		return EventDataPtr(BE_NEW EvtData_EndForward(m_id));
 	}
 	virtual const char* GetName(void) const
 	{
@@ -299,9 +299,9 @@ public:
 	{
 	}
 
-	virtual IEventDataPtr VCopy() const
+	virtual EventDataPtr VCopy() const
 	{
-		return IEventDataPtr(BE_NEW EvtData_StartTurnRight(m_id, m_acceleration));
+		return EventDataPtr(BE_NEW EvtData_StartTurnRight(m_id, m_acceleration));
 	}
 
 	virtual const char* GetName() const
@@ -324,9 +324,9 @@ public:
 	{
 	}
 
-	virtual IEventDataPtr VCopy() const
+	virtual EventDataPtr VCopy() const
 	{
-		return IEventDataPtr(BE_NEW EvtData_EndTurnRight(m_id));
+		return EventDataPtr(BE_NEW EvtData_EndTurnRight(m_id));
 	}
 	virtual const char* GetName(void) const
 	{
@@ -348,9 +348,9 @@ public:
 	{
 	}
 
-	virtual IEventDataPtr VCopy() const
+	virtual EventDataPtr VCopy() const
 	{
-		return IEventDataPtr(BE_NEW EvtData_StartTurnUp(m_id, m_acceleration));
+		return EventDataPtr(BE_NEW EvtData_StartTurnUp(m_id, m_acceleration));
 	}
 
 	virtual const char* GetName() const
@@ -373,9 +373,9 @@ public:
 	{
 	}
 
-	virtual IEventDataPtr VCopy() const
+	virtual EventDataPtr VCopy() const
 	{
-		return IEventDataPtr(BE_NEW EvtData_EndTurnUp(m_id));
+		return EventDataPtr(BE_NEW EvtData_EndTurnUp(m_id));
 	}
 	virtual const char* GetName(void) const
 	{
@@ -401,9 +401,9 @@ public:
 		return sk_EventType;
 	}
 
-	virtual IEventDataPtr VCopy() const
+	virtual EventDataPtr VCopy() const
 	{
-		return IEventDataPtr(BE_NEW EvtData_Set_Controlled_Actor(m_id));
+		return EventDataPtr(BE_NEW EvtData_Set_Controlled_Actor(m_id));
 	}
 
 	virtual void VSerialize(std::ostrstream& out) const
@@ -446,9 +446,9 @@ public:
 		return sk_EventType;
 	}
 
-	virtual IEventDataPtr VCopy() const
+	virtual EventDataPtr VCopy() const
 	{
-		return IEventDataPtr(BE_NEW EvtData_SpawnPlayer(m_id, m_viewId));
+		return EventDataPtr(BE_NEW EvtData_SpawnPlayer(m_id, m_viewId));
 	}
 
 	virtual void VSerialize(std::ostrstream& out) const

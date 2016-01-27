@@ -232,7 +232,7 @@ void HumanView::VSetCameraOffset(const Vec4& offset)
 	}
 }
 
-void HumanView::PlaySoundDelegate(IEventDataPtr pEventData)
+void HumanView::PlaySoundDelegate(EventDataPtr pEventData)
 {
 	//@TODO: add Sound playing code
 }

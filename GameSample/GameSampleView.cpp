@@ -186,7 +186,7 @@ void GameSampleHumanView::VSetControlledActor(ActorId actorId)
 	m_pCamera->SetCameraOffset(Vec4(0, 50, 8, 0));
 }
 
-void GameSampleHumanView::SetControlledActorDelegate(IEventDataPtr pEventData)
+void GameSampleHumanView::SetControlledActorDelegate(EventDataPtr pEventData)
 {
 	std::shared_ptr<EvtData_Set_Controlled_Actor> pCastEventData = std::static_pointer_cast<EvtData_Set_Controlled_Actor>(pEventData);
 	VSetControlledActor(pCastEventData->GetActorId());
@@ -206,7 +206,7 @@ void GameSampleHumanView::RemoveAllDelegates()
 	pEventManager->VRemoveListener(fastdelegate::MakeDelegate(this, &GameSampleHumanView::SetControlledActorDelegate), EvtData_Set_Controlled_Actor::sk_EventType);
 }
 
-void GameSampleHumanView::NewPlayerSpawnedDelegate(IEventDataPtr pEventData)
+void GameSampleHumanView::NewPlayerSpawnedDelegate(EventDataPtr pEventData)
 {
 	std::shared_ptr<EvtData_SpawnPlayer> pCastEventData = std::static_pointer_cast<EvtData_SpawnPlayer>(pEventData);
 	if (pCastEventData->GetViewId() == m_viewId) {

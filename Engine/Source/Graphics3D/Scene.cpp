@@ -137,7 +137,7 @@ bool Scene::RemoveChild(ActorId id)
 	return m_pRoot->VRemoveChild(id);
 }
 
-void Scene::NewRenderComponentDelegate(IEventDataPtr pEventData)
+void Scene::NewRenderComponentDelegate(EventDataPtr pEventData)
 {
 	std::shared_ptr<EvtData_New_Render_Component> pCastedEventData = std::static_pointer_cast<EvtData_New_Render_Component>(pEventData);
 

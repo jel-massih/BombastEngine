@@ -25,18 +25,18 @@ public:
 
 	virtual void VChangeState(CoreGameState newState);
 
-	void RequestStartGameDelegate(IEventDataPtr pEventData);
-	void StartMoveUpDelegate(IEventDataPtr pEventData);
-	void EndMoveUpDelegate(IEventDataPtr pEventData);
-	void StartMoveRightDelegate(IEventDataPtr pEventData);
-	void EndMoveRightDelegate(IEventDataPtr pEventData);
-	void StartMoveForwardDelegate(IEventDataPtr pEventData);
-	void EndMoveForwardDelegate(IEventDataPtr pEventData);
+	void RequestStartGameDelegate(EventDataPtr pEventData);
+	void StartMoveUpDelegate(EventDataPtr pEventData);
+	void EndMoveUpDelegate(EventDataPtr pEventData);
+	void StartMoveRightDelegate(EventDataPtr pEventData);
+	void EndMoveRightDelegate(EventDataPtr pEventData);
+	void StartMoveForwardDelegate(EventDataPtr pEventData);
+	void EndMoveForwardDelegate(EventDataPtr pEventData);
 
-	void StartTurnRightDelegate(IEventDataPtr pEventData);
-	void EndTurnRightDelegate(IEventDataPtr pEventData);
-	void StartTurnUpDelegate(IEventDataPtr pEventData);
-	void EndTurnUpDelegate(IEventDataPtr pEventData);
+	void StartTurnRightDelegate(EventDataPtr pEventData);
+	void EndTurnRightDelegate(EventDataPtr pEventData);
+	void StartTurnUpDelegate(EventDataPtr pEventData);
+	void EndTurnUpDelegate(EventDataPtr pEventData);
 
 protected:
 	virtual bool VLoadGameDelegate(rapidxml::xml_node<>* pLevelData);

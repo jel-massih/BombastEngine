@@ -42,9 +42,9 @@ public:
 		return sk_EventType;
 	}
 
-	virtual IEventDataPtr VCopy() const
+	virtual EventDataPtr VCopy() const
 	{
-		return IEventDataPtr(BE_NEW EvtData_New_Actor(m_actorId, m_viewId));
+		return EventDataPtr(BE_NEW EvtData_New_Actor(m_actorId, m_viewId));
 	}
 
 	virtual const char* GetName() const
@@ -98,9 +98,9 @@ public:
 		return sk_EventType;
 	}
 
-	virtual IEventDataPtr VCopy() const
+	virtual EventDataPtr VCopy() const
 	{
-		return IEventDataPtr(BE_NEW EvtData_New_Render_Component(m_actorId, m_pSceneNode));
+		return EventDataPtr(BE_NEW EvtData_New_Render_Component(m_actorId, m_pSceneNode));
 	}
 
 	virtual const char* GetName() const
@@ -131,9 +131,9 @@ public:
 		return sk_EventType;
 	}
 
-	virtual IEventDataPtr VCopy() const
+	virtual EventDataPtr VCopy() const
 	{
-		return IEventDataPtr(BE_NEW EvtData_Request_Start_Game());
+		return EventDataPtr(BE_NEW EvtData_Request_Start_Game());
 	}
 
 	virtual const char* GetName() const
@@ -164,9 +164,9 @@ public:
 		return sk_EventType;
 	}
 
-	virtual IEventDataPtr VCopy() const
+	virtual EventDataPtr VCopy() const
 	{
-		return IEventDataPtr(BE_NEW EvtData_Move_Actor());
+		return EventDataPtr(BE_NEW EvtData_Move_Actor());
 	}
 
 	virtual const char* GetName() const
