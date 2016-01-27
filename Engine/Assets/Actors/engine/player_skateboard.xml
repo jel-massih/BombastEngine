@@ -15,7 +15,7 @@
     </PhysicsComponent>
 	
     <MeshRenderComponent>
-        <Mesh path="meshes\capsule.bmdl"/>
+        <Mesh path="meshes\engine\capsule.bmdl"/>
         <Materials>
             <Material path="materials\physics_testbed\capsule_mat.bmtl"/>
             <Material path="materials\physics_testbed\capsule_mat.bmtl"/>

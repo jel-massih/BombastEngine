@@ -2,7 +2,7 @@
 #include "../Bombast/BombastApp.h"
 #include <fstream>
 
-const char* TextureResourceLoader::m_defaultTextureName= "textures\\grid.dds";
+const char* TextureResourceLoader::m_defaultTextureName= "textures\\engine\\grid.dds";
 
 void TextureResourceExtraData::Shutdown()
 {
