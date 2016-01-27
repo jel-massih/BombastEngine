@@ -3,6 +3,10 @@ Bombast Engine
 
 C++ 3D Game Engine (DirectX) (WIP)
 
+[<b>Jump straight to the Source!</b>](https://github.com/jel-massih/BombastEngine/tree/master/Engine/Source)
+
+[<b>Check out the Wiki for a more curated experience</b>](https://github.com/jel-massih/BombastEngine/wiki)
+
 <b>Core Engine Dependencies:</b>
 * zlib 1.2.8
 * rapidxml 1.13
@@ -19,4 +23,3 @@ Note: Engine is being developed as techniques explored, so some features are bei
 
 Many decisions were made for educational purposes rather than best practice (ex. near-exclusive use of naked pointers)
 
-[<b>Check out the Wiki for more info</b>](https://github.com/jel-massih/BombastEngine/wiki)
