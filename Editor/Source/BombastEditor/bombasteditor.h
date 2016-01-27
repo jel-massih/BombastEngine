@@ -14,12 +14,17 @@ public:
 	~BombastEditorApp();
 
 	void OnIdleThread();
-	void InitEditorWindow();
+	void SetEditor(BombastEditorMain* pEditor);
 
 	void OnViewportKeyDown(BYTE keyCode);
 	void OnViewportKeyUp(BYTE keyCode);
+	void OnViewportMouseDown(const int posX, const int posY, const std::string& keyName);
+	void OnViewportMouseUp(const int posX, const int posY, const std::string& keyName);
 
 	void EditorQuit();
+
+	int GetViewportWidth();
+	int GetViewportHeight();
 
 public:
 	virtual TCHAR *VGetGameTitle() { return _T("Bombast Editor"); }

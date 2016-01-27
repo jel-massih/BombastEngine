@@ -1,29 +1,42 @@
 #include "bombasteditormain.h"
+#include "ui_bombasteditormain.h"
 #include "../Msvc/BombastEditorStd.h"
 #include "BombastEditor.h"
 
 #include <QKeyEvent>
 #include <QFileSystemModel>
-#include <QTreeView>
 
 BombastEditorMain::BombastEditorMain(QWidget *parent)
 	: QMainWindow(parent)
 {
-	ui.setupUi(this);
-
-	InitEngine();
-	SetupContentTree();
+	ui->setupUi(this);
 }
 
 BombastEditorMain::~BombastEditorMain()
 {
 }
 
+void BombastEditorMain::InitializeEditor()
+{
+	SetupContentTree();
+	InitEngine();
+}
+
+int BombastEditorMain::GetBombastViewportHeight()
+{
+	return ui->bombastViewport->height();
+}
+
+int BombastEditorMain::GetBombastViewportWidth()
+{
+	return ui->bombastViewport->width();
+}
+
 void BombastEditorMain::InitEngine()
 {
 	HINSTANCE hInstance = qWinAppInst();
 	HINSTANCE hPrevInstance = qWinAppPrevInst();
-	HWND hWnd = (HWND)ui.bombastViewport->winId();
+	HWND hWnd = (HWND)ui->bombastViewport->winId();
 
 	EditorMain(hInstance, hPrevInstance, hWnd);
 }
@@ -31,8 +44,8 @@ void BombastEditorMain::InitEngine()
 void BombastEditorMain::SetupContentTree()
 {
 	QFileSystemModel *model = new QFileSystemModel;
-	ui.contentTree->setModel(model);
-	ui.contentTree->setRootIndex(model->setRootPath("C:/Users/jel-massih/Documents/BombastEngine/Engine/Assets"));
+	ui->contentTree->setModel(model);
+	//ui->contentTree->setRootIndex(model->setRootPath("D:/Projects/BombastEngine/Engine/Assets"));
 }
 
 void BombastEditorMain::keyPressEvent(QKeyEvent* event)
@@ -50,4 +63,38 @@ void BombastEditorMain::keyReleaseEvent(QKeyEvent* event)
 void BombastEditorMain::closeEvent(QCloseEvent* event)
 {
 	g_BombastEditorApp.EditorQuit();
+}
+
+void BombastEditorMain::mousePressEvent(QMouseEvent* event)
+{
+	std::string keyName;
+	switch (event->button()) {
+		case Qt::MouseButton::LeftButton:
+			keyName = "PointerLeft";
+			break;
+		case Qt::MouseButton::RightButton:
+			keyName = "PointerRight";
+			break;
+		default:
+			return;
+	}
+
+	g_BombastEditorApp.OnViewportMouseDown(event->x(), event->y(), keyName);
+}
+
+void BombastEditorMain::mouseReleaseEvent(QMouseEvent* event)
+{
+	std::string keyName;
+	switch (event->button()) {
+	case Qt::MouseButton::LeftButton:
+		keyName = "PointerLeft";
+		break;
+	case Qt::MouseButton::RightButton:
+		keyName = "PointerRight";
+		break;
+	default:
+		return;
+	}
+
+	g_BombastEditorApp.OnViewportMouseUp(event->x(), event->y(), keyName);
 }

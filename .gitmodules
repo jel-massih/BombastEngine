@@ -1,0 +1,3 @@
+[submodule "BombastPhysics"]
+	path = BombastPhysics
+	url = https://github.com/jel-massih/BombastPhysics.git

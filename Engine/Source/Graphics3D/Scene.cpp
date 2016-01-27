@@ -15,7 +15,7 @@ Scene::Scene(IRenderer* renderer)
 	m_pMatrixStack = BE_NEW BMMatrixStack();
 
 	IEventManager* pEventManager = IEventManager::Get();
-	pEventManager->VAddListener(fastdelegate::MakeDelegate(this, &Scene::NewRenderComponentDelegate), EvtData_New_Render_Component::sk_EventType);
+	pEventManager->VAddListener(fastdelegate::MakeDelegate(this, &Scene::NewRenderComponentDelegate), EvtData_New_Render_Component::sEventType);
 
 	Frustum frustum;
 	frustum.Init(BE_PI / 4.0f, 1.0f, 1.0f, 100.0f);
@@ -27,7 +27,7 @@ Scene::Scene(IRenderer* renderer)
 Scene::~Scene()
 {
 	IEventManager* pEventManager = IEventManager::Get();
-	pEventManager->VRemoveListener(fastdelegate::MakeDelegate(this, &Scene::NewRenderComponentDelegate), EvtData_New_Render_Component::sk_EventType);
+	pEventManager->VRemoveListener(fastdelegate::MakeDelegate(this, &Scene::NewRenderComponentDelegate), EvtData_New_Render_Component::sEventType);
 
 	SAFE_DELETE(m_pMatrixStack);
 	SAFE_DELETE(m_pLightManager);
@@ -70,9 +70,9 @@ HRESULT Scene::OnForwardRender()
 	g_pApp->GetGraphicsManager()->GetRenderer()->VPrepForwardRendering();
 
 	//Draw the Deferred Render Buffer first
-	g_pApp->GetGraphicsManager()->GetRenderer()->VEnableZBuffer(false);
+	/*g_pApp->GetGraphicsManager()->GetRenderer()->VEnableZBuffer(false);
 	g_pApp->GetGraphicsManager()->GetDeferredRenderingManager()->DrawLightPass(g_pApp->GetGraphicsManager()->GetRenderer()->GetDeviceContext(), this);
-	g_pApp->GetGraphicsManager()->GetRenderer()->VEnableZBuffer(true);
+	g_pApp->GetGraphicsManager()->GetRenderer()->VEnableZBuffer(true);*/
 
 	m_pRoot->VForwardRender(this);
 	m_pRoot->VForwardRenderChildren(this);
@@ -137,7 +137,7 @@ bool Scene::RemoveChild(ActorId id)
 	return m_pRoot->VRemoveChild(id);
 }
 
-void Scene::NewRenderComponentDelegate(IEventDataPtr pEventData)
+void Scene::NewRenderComponentDelegate(EventDataPtr pEventData)
 {
 	std::shared_ptr<EvtData_New_Render_Component> pCastedEventData = std::static_pointer_cast<EvtData_New_Render_Component>(pEventData);
 

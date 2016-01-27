@@ -3,6 +3,7 @@
 #include "Initialization.h"
 #include <fstream>
 #include <sstream>
+#include <shellapi.h>
 
 using namespace rapidxml;
 
@@ -119,7 +120,7 @@ GameOptions::GameOptions()
 	m_pDoc = NULL;
 }
 
-void GameOptions::Init(const char* xmlFilePath)
+void GameOptions::Init(const char* xmlFilePath, LPWSTR lpCmdLine)
 {
 	std::ifstream file(xmlFilePath);
 	std::stringstream buffer;
@@ -279,4 +280,34 @@ void GameOptions::Init(const char* xmlFilePath)
 			}
 		}
 	}
+
+	if (lpCmdLine != NULL)
+	{
+		ProcessCommandLineArguments(lpCmdLine);
+	}
+}
+
+char* GetCmdOption(const std::vector<char*>& args, const std::string& option)
+{
+	auto itr = std::find(args.begin(), args.end(), option);
+	if (itr != args.end() && ++itr != args.end())
+	{
+		return *itr;
+	}
+	return nullptr;
+}
+
+bool CmdOptionExists(const std::vector<char*>& args, const std::string& option)
+{
+	return std::find(args.begin(), args.end(), option) != args.end();
+}
+
+void GameOptions::ProcessCommandLineArguments(LPWSTR lpCmdLine)
+{
+	/*std::stringstream ss(ws2s(lpCmdLine));
+	std::istream_iterator<char*> begin(ss);
+	std::istream_iterator<char*> end;
+	std::vector<char*> vArgs(begin, end);
+
+	char* resX = GetCmdOption(vArgs, "-ResX");*/
 }

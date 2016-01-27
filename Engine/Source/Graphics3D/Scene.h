@@ -25,7 +25,7 @@ public:
 	bool AddChild(ActorId id, ISceneNode* kid);
 	bool RemoveChild(ActorId id);
 
-	void NewRenderComponentDelegate(IEventDataPtr pEventData);
+	void NewRenderComponentDelegate(EventDataPtr pEventData);
 
 	void SetCamera(CameraNode* camera) { m_pCamera = camera; }
 	const CameraNode* GetCamera() const { return m_pCamera; }

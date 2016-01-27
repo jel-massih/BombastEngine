@@ -104,7 +104,7 @@ Actor* CoreGameLogic::VCreateActor(const std::string &actorResource, rapidxml::x
 	}
 	else
 	{
-		BE_ERROR("ERROR: Failed To Create Actor From resource: %s", actorResource);
+		BE_ERROR("ERROR: Failed To Create Actor From resource: %s", actorResource.c_str());
 		return NULL;
 	}
 }

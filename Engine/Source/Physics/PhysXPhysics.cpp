@@ -267,7 +267,7 @@ void PhysXPhysics::VSyncVisibleScene()
 				if (pTransformComponent->GetTransform() != loc)
 				{
 					pTransformComponent->SetTransform(loc);
-					IEventDataPtr pEvent(BE_NEW EvtData_Move_Actor(id, loc));
+					EventDataPtr pEvent(BE_NEW EvtData_Move_Actor(id, loc));
 					IEventManager::Get()->VQueueEvent(pEvent);
 				}
 			}

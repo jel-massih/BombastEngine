@@ -11,7 +11,7 @@ class EvtData_New_Actor : public BaseEventData
 	GameViewId m_viewId;
 
 public:
-	static const EventType sk_EventType;
+	static const EventType sEventType;
 
 	EvtData_New_Actor()
 		:m_actorId(INVALID_ACTOR_ID),
@@ -39,12 +39,12 @@ public:
 
 	virtual const EventType& VGetEventType() const
 	{
-		return sk_EventType;
+		return sEventType;
 	}
 
-	virtual IEventDataPtr VCopy() const
+	virtual EventDataPtr VCopy() const
 	{
-		return IEventDataPtr(BE_NEW EvtData_New_Actor(m_actorId, m_viewId));
+		return EventDataPtr(BE_NEW EvtData_New_Actor(m_actorId, m_viewId));
 	}
 
 	virtual const char* GetName() const
@@ -70,7 +70,7 @@ class EvtData_New_Render_Component : public BaseEventData
 	SceneNode* m_pSceneNode;
 
 public:
-	static const EventType sk_EventType;
+	static const EventType sEventType;
 
 	EvtData_New_Render_Component()
 	{
@@ -95,12 +95,12 @@ public:
 
 	virtual const EventType& VGetEventType() const
 	{
-		return sk_EventType;
+		return sEventType;
 	}
 
-	virtual IEventDataPtr VCopy() const
+	virtual EventDataPtr VCopy() const
 	{
-		return IEventDataPtr(BE_NEW EvtData_New_Render_Component(m_actorId, m_pSceneNode));
+		return EventDataPtr(BE_NEW EvtData_New_Render_Component(m_actorId, m_pSceneNode));
 	}
 
 	virtual const char* GetName() const
@@ -122,18 +122,18 @@ public:
 class EvtData_Request_Start_Game : public BaseEventData
 {
 public:
-	static const EventType sk_EventType;
+	static const EventType sEventType;
 
 	EvtData_Request_Start_Game() {}
 
 	virtual const EventType& VGetEventType() const
 	{
-		return sk_EventType;
+		return sEventType;
 	}
 
-	virtual IEventDataPtr VCopy() const
+	virtual EventDataPtr VCopy() const
 	{
-		return IEventDataPtr(BE_NEW EvtData_Request_Start_Game());
+		return EventDataPtr(BE_NEW EvtData_Request_Start_Game());
 	}
 
 	virtual const char* GetName() const
@@ -148,7 +148,7 @@ class EvtData_Move_Actor : public BaseEventData
 	Mat4x4 m_matrix;
 
 public:
-	static const EventType sk_EventType;
+	static const EventType sEventType;
 
 	EvtData_Move_Actor() 
 		: m_id(INVALID_ACTOR_ID)
@@ -161,12 +161,12 @@ public:
 
 	virtual const EventType& VGetEventType() const
 	{
-		return sk_EventType;
+		return sEventType;
 	}
 
-	virtual IEventDataPtr VCopy() const
+	virtual EventDataPtr VCopy() const
 	{
-		return IEventDataPtr(BE_NEW EvtData_Move_Actor());
+		return EventDataPtr(BE_NEW EvtData_Move_Actor());
 	}
 
 	virtual const char* GetName() const

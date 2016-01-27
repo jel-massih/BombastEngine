@@ -31,7 +31,7 @@ const int SCREEN_HEIGHT = 480;
 const int SCREEN_X = 0;
 const int SCREEN_Y = 0;
 
-const std::string ROOT_GAME_PATH = "../../";
+extern std::string ROOT_GAME_PATH;
 
 #include "Debugging\Logger.h"
 #include "Utilities\types.h"
@@ -76,7 +76,8 @@ extern const int iTRANSPARENT;
 
 extern INT WINAPI BombastEngine(HINSTANCE hInstance,
 	HINSTANCE hPrevInstance,
-	HWND hWnd = NULL);
+	HWND hWnd = NULL,
+	LPWSTR lpCmdLine = NULL);
 
 struct AppMsg
 {
