@@ -12,7 +12,7 @@ C++ 3D Game Engine (DirectX) (WIP)
 * PhysX 3.3.2 (behind USE_PHYSX Preprocessor Flag. Disabled by default.)
 
 <b>Editor Dependencies</b>
-* Qt 5.4
+* Qt 5.6 Beta
 
 <br/>
 Note: Engine is being developed as techniques explored, so some features are being tacked on for my own exploration, even if may not fit nicely into the engine. Despite this, I will try to keep as structured as possible. 
