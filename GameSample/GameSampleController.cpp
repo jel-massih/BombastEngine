@@ -1,6 +1,6 @@
 #include "GameSampleController.h"
 #include "GameSampleEvents.h"
-#include "../Graphics3D/SceneNode.h"
+#include "Graphics3D/SceneNode.h"
 
 const float ACTOR_ACCELERATION = 1.0f;
 const float ACTOR_ANGULAR_ACCELERATION = 22.0f;

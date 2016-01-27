@@ -1,16 +1,16 @@
 #include "GameSampleView.h"
-#include "../Bombast/interfaces.h"
-#include "../Graphics3D/Raycast.h"
-#include "../Graphics3D/RenderNodes.h"
-#include "../Graphics3D/MovementController.h"
-#include "../Game/ProcessManager.h"
-#include "../Resources/ResourceCache.h"
+#include "Bombast/interfaces.h"
+#include "Graphics3D/Raycast.h"
+#include "Graphics3D/RenderNodes.h"
+#include "Graphics3D/MovementController.h"
+#include "Game/ProcessManager.h"
+#include "Resources/ResourceCache.h"
 #include "Msvc/GameSample.h"
 #include "GameSampleEvents.h"
 #include "GameSampleController.h"
 
-#include "../Utilities/FastDelegate/FastDelegate.h"
-#include "../MultiThreading/RealtimeProcess.h"
+#include "Utilities/FastDelegate/FastDelegate.h"
+#include "MultiThreading/RealtimeProcess.h"
 
 
 GameSampleHumanView::GameSampleHumanView(IRenderer* renderer) :

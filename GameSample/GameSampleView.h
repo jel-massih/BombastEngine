@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Game/HumanView.h"
+#include "Game/HumanView.h"
 
 class MovementController;
 class GameSampleController;

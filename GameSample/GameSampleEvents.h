@@ -2,8 +2,8 @@
 
 #include <memory>
 
-#include "../Events/EventManager.h"
-#include "../Events/Events.h"
+#include "Events/EventManager.h"
+#include "Events/Events.h"
 
 class EvtData_Fire_Weapon : public BaseEventData
 {

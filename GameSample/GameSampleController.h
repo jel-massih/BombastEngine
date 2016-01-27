@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../BombastEngineStd.h"
-#include "../Bombast/interfaces.h"
+#include "BombastEngineStd.h"
+#include "Bombast/interfaces.h"
 
 class SceneNode;
 
