@@ -3,13 +3,17 @@ Bombast Engine
 
 C++ 3D Game Engine (DirectX) (WIP)
 
+[<b>Jump straight to the Source!</b>](https://github.com/jel-massih/BombastEngine/tree/master/Engine/Source)
+
+[<b>Check out the Wiki for a more curated experience</b>](https://github.com/jel-massih/BombastEngine/wiki)
+
 <b>Core Engine Dependencies:</b>
 * zlib 1.2.8
 * rapidxml 1.13
 * lua-5.2.3
 
 <b>Optional Engine Dependencies:</b>
-* PhysX 3.3.2 (behind USE_PHYSX Preprocessor Flag. Disabled by default.)
+* PhysX 3.3.2 (Required to use PhysX as Physics Library. By Deafult PhysX is disabled, with BombastPhysics library enabled.)
 
 <b>Editor Dependencies</b>
 * Qt 5.6 Beta
@@ -19,4 +23,3 @@ Note: Engine is being developed as techniques explored, so some features are bei
 
 Many decisions were made for educational purposes rather than best practice (ex. near-exclusive use of naked pointers)
 
-[<b>Check out the Wiki for more info</b>](https://github.com/jel-massih/BombastEngine/wiki)
