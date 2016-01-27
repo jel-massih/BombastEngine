@@ -1,5 +1,4 @@
 Engine/Temp/
-Engine/Source/Libraries/*
 !Engine/Source/Libraries/.gitkeep
 Engine/Source/Msvc/ipch/
 
