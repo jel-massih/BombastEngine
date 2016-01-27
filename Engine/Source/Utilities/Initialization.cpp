@@ -304,10 +304,10 @@ bool CmdOptionExists(const std::vector<char*>& args, const std::string& option)
 
 void GameOptions::ProcessCommandLineArguments(LPWSTR lpCmdLine)
 {
-	std::stringstream ss(ws2s(lpCmdLine));
+	/*std::stringstream ss(ws2s(lpCmdLine));
 	std::istream_iterator<char*> begin(ss);
 	std::istream_iterator<char*> end;
 	std::vector<char*> vArgs(begin, end);
 
-	char* resX = GetCmdOption(vArgs, "-ResX");
+	char* resX = GetCmdOption(vArgs, "-ResX");*/
 }
