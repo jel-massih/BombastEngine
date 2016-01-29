@@ -145,8 +145,8 @@ bool DebugPhysics::UpdateShape(const char* shapeId, IDebugPhysicsShape* shape)
 
 bool DebugPhysics::InitializeShape(DebugShapeType** shape, const char* shapeId, IDebugPhysicsShape* sourceShape, ID3D11Device* device)
 {
-	VertexType* vertices;
-	unsigned long* indices;
+	VertexType* vertices = nullptr;
+	unsigned long* indices = nullptr;
 	D3D11_BUFFER_DESC vertexBufferDesc, indexBufferDesc;
 	D3D11_SUBRESOURCE_DATA vertexData, indexData;
 	HRESULT result;
