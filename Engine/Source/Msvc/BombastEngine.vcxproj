@@ -560,7 +560,7 @@
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>$(SolutionDir)Libraries\zlib128\include;$(SolutionDir)Libraries\lua-5.2.3\include;$(SolutionDir)Libraries\PhysX-3.3.2\include;$(SolutionDir)Msvc;$(SolutionDir)..\..\BombastPhysics\Source;</AdditionalIncludeDirectories>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <ForcedIncludeFiles>stdafx.h</ForcedIncludeFiles>
     </ClCompile>
     <Link>
@@ -583,7 +583,7 @@
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>$(SolutionDir)Libraries\zlib128\include;$(SolutionDir)Libraries\lua-5.2.3\include;$(SolutionDir)Libraries\PhysX-3.3.2\include;$(SolutionDir)Msvc;$(SolutionDir)..\..\BombastPhysics\Source;</AdditionalIncludeDirectories>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <ForcedIncludeFiles>stdafx.h</ForcedIncludeFiles>
     </ClCompile>
     <Link>
