@@ -7,7 +7,7 @@ C++ 3D Game Engine (DirectX) (WIP)
 
 [<b>Check out the Wiki for a more curated experience</b>](https://github.com/jel-massih/BombastEngine/wiki)
 
-[Download a (psuedo) standalone version of a game here](https://github.com/jel-massih/BombastEngine/releases/tag/0.0.2)
+[Download a (psuedo) standalone version of a game here](https://github.com/jel-massih/BombastEngine/releases/tag/0.0.3)
 
 <b>Core Engine Dependencies:</b>
 * zlib 1.2.8
