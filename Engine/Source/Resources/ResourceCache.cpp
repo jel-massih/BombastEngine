@@ -69,7 +69,7 @@ std::string ResourceZipFile::VGetResourceName(size_t num) const
 DevelopmentResourceZipFile::DevelopmentResourceZipFile(const std::wstring resFilename)
 	: ResourceZipFile(resFilename)
 {
-	m_assetsDir += s2ws(ROOT_GAME_PATH) + L"..\\Assets\\";
+	m_assetsDir += s2ws(ROOT_GAME_PATH) + L"Assets/";
 }
 
 size_t DevelopmentResourceZipFile::Find(const std::string &name)
