@@ -43,6 +43,8 @@ Tools/ShaderGenerator/obj/*
 *.nvuser
 *.exp
 *.opendb
+*.iobj
+*.ipdb
 
 !Engine/Source/Libraries/lua-5.2.3/lib/Win32/lua52.lib
 !Engine/Source/Libraries/zlib128/lib/zdll.lib
