@@ -4,6 +4,6 @@
   <World level="World\physics_testbed.xml" />
   <Debugging>
   	<DebugConsole enabled="true" />
-	<Logging path="../../../Logs/" filename="Output.log"></Logging>
+	<Logging path="../../../Logs" filename="Output.log"></Logging>
   </Debugging>
 </Options>

@@ -27,20 +27,16 @@ private:
 
 private:
 	bool m_bDebugConsoleEnabled;
+	const char* m_logFilePath;
+
 	std::ofstream m_logFile;
 };
 
 LoggingManager::LoggingManager(const char* logFilePath, bool bDebugConsoleEnabled)
 {
-	m_logFile.open(logFilePath, std::ios::out);
-	if (m_logFile.fail())
-	{
-		char buf[1000];
-		strerror_s(buf, 1000, errno);
-		BE_ERROR("Failed to open Log File: %s", buf);
-	}
-
 	m_bDebugConsoleEnabled = bDebugConsoleEnabled;
+
+	m_logFilePath = logFilePath;
 }
 
 LoggingManager::~LoggingManager()
@@ -65,6 +61,14 @@ void LoggingManager::Initialize()
 		freopen_s(&pCout, "CONIN$", "r", stdin);
 		freopen_s(&pCout, "CONOUT$", "w", stdout);
 		freopen_s(&pCout, "CONOUT$", "w", stderr);
+	}
+
+	m_logFile.open(m_logFilePath, std::ios::out);
+	if (m_logFile.fail())
+	{
+		char buf[1000];
+		strerror_s(buf, 1000, errno);
+		BE_ERROR("Failed to open Log File: %s", buf);
 	}
 
 	Log("LOGGER", "LoggingManager Initialized", NULL, NULL, 0);
