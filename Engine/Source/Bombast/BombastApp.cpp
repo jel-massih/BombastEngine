@@ -8,7 +8,7 @@
 
 BombastApp *g_pApp = NULL;
 
-const char* LUA_PRE_INIT_FILE = "Scripts\\PreInit.lua";
+const char* LUA_PRE_INIT_FILE = "EngineResources.Scripts.PreInit.lua";
 
 BombastApp::BombastApp()
 {

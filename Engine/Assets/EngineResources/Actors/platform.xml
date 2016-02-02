@@ -1,0 +1,12 @@
+<Actor type="platform" resource="actors\platform.xml">
+	<TransformComponent>
+		<Scale x="2" y="0.2" z="2"/>
+	</TransformComponent>
+  <MeshRenderComponent>
+    <Mesh path="meshes\cube.bmdl"></Mesh>
+    <Materials>
+			<Material path="materials\platform_mat.bmtl"/>
+			<Material path="materials\platform_mat.bmtl"/>
+  	</Materials>
+  </MeshRenderComponent>
+</Actor>

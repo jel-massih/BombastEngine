@@ -220,7 +220,7 @@ void PhysXPhysics::PxVecToVec3(const PxVec3& input, Vec3* output)
 
 void PhysXPhysics::VLoadPhysicsConfigXml()
 {
-	rapidxml::xml_node<>* pRoot = XmlResourceLoader::LoadAndReturnRootXmlElement("Config\\physicsConfig.xml");
+	rapidxml::xml_node<>* pRoot = XmlResourceLoader::LoadAndReturnRootXmlElement("EngineResources.Config.physicsConfig.xml");
 	BE_ASSERT(pRoot);
 
 	rapidxml::xml_node<>* pMatNode = pRoot->first_node("PhysicsMaterials");

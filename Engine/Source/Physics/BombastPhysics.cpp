@@ -69,7 +69,7 @@ float BombastPhysics::LookupDensity(const std::string& densityString)
 
 void BombastPhysics::VLoadPhysicsConfigXml()
 {
-	rapidxml::xml_node<>* pRoot = XmlResourceLoader::LoadAndReturnRootXmlElement("Config\\physicsConfig.xml");
+	rapidxml::xml_node<>* pRoot = XmlResourceLoader::LoadAndReturnRootXmlElement("EngineResources.Config.physicsConfig.xml");
 	BE_ASSERT(pRoot);
 
 	rapidxml::xml_node<>* pMatNode = pRoot->first_node("PhysicsMaterials");

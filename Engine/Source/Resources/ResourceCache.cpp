@@ -101,7 +101,7 @@ int DevelopmentResourceZipFile::VGetRawResourceSize(const Resource &r)
 		return -1;
 	}
 
-	return m_assetsFileInfo[num].nFileSizeLow;
+	return m_assetsFileInfo[num].data.nFileSizeLow;
 }
 
 size_t DevelopmentResourceZipFile::VGetRawResource(const Resource &r, char* buffer)
@@ -113,12 +113,11 @@ size_t DevelopmentResourceZipFile::VGetRawResource(const Resource &r, char* buff
 	}
 
 	int bytes = -1;
-	
-	std::string fullFileSpec = ws2s(m_assetsDir) + r.m_name.c_str();
+	std::wstring fullFileSpec = m_assetsDir + m_assetsFileInfo[num].pathName;
 	std::ifstream file(fullFileSpec, std::ios::binary);
 	if (file.is_open())
 	{
-		file.read(buffer, m_assetsFileInfo[num].nFileSizeLow);
+		file.read(buffer, m_assetsFileInfo[num].data.nFileSizeLow);
 		bytes = (int)file.gcount();
 		file.close();
 	}
@@ -132,7 +131,7 @@ size_t DevelopmentResourceZipFile::VGetNumResources() const
 
 std::string	DevelopmentResourceZipFile::VGetResourceName(size_t num) const
 {
-	std::wstring wideName = m_assetsFileInfo[num].cFileName;
+	std::wstring wideName = m_assetsFileInfo[num].data.cFileName;
 	return ws2s(wideName);
 }
 
@@ -166,11 +165,19 @@ void DevelopmentResourceZipFile::ReadAssetsDirectory(std::wstring fileSpec)
 			else
 			{
 				fileName = fileSpec.substr(0, fileSpec.length() - 1) + fileName;
+
 				std::wstring lower = fileName;
 				std::transform(lower.begin(), lower.end(), lower.begin(), (int(*)(int))std::tolower);
+
+				//Replace all slashes to dots
+				std::wstring resourceName = lower;
+				std::replace(resourceName.begin(), resourceName.end(), '\\', '.');
+				std::replace(resourceName.begin(), resourceName.end(), '/', '.');
+
 				wcscpy_s(&findData.cFileName[0], MAX_PATH, lower.c_str());
-				m_directoryContentsMap[ws2s(lower)] = m_assetsFileInfo.size();
-				m_assetsFileInfo.push_back(findData);
+				AssetFileInfo fileInfo = { findData, resourceName };
+				m_assetsFileInfo.push_back(fileInfo);
+ 				m_directoryContentsMap[ws2s(resourceName)] = m_assetsFileInfo.size();
 			}
 		}
 	}

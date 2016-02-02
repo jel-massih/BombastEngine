@@ -44,8 +44,15 @@ public:
 class DevelopmentResourceZipFile : public ResourceZipFile
 {
 public:
+	struct AssetFileInfo
+	{
+		WIN32_FIND_DATA data;
+		std::wstring resourceName;
+	};
+
+public:
 	std::wstring m_assetsDir;
-	std::vector<WIN32_FIND_DATA> m_assetsFileInfo;
+	std::vector<AssetFileInfo> m_assetsFileInfo;
 	ZipContentsMap m_directoryContentsMap;
 
 	DevelopmentResourceZipFile(const std::wstring resFileName);

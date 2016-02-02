@@ -15,10 +15,10 @@ const int PixelProgramIndices[] {
 
 const char* PixelShaderPrograms[] =
 {
-	"shaders\\staticmesh_unlit_colored.cso", //SMP_UNLIT_COLORED
-	"shaders\\staticmesh_unlit_textured.cso", //SMP_UNLIT_TEXTURED
-	"shaders\\staticmesh_lit_colored.cso", //SMP_LIT_COLORED
-	"shaders\\staticmesh_lit_textured.cso" //SMP_LIT_TEXTURED
+	"EngineResources.Shaders.staticmesh_unlit_colored.cso", //SMP_UNLIT_COLORED
+	"EngineResources.Shaders.staticmesh_unlit_textured.cso", //SMP_UNLIT_TEXTURED
+	"EngineResources.Shaders.staticmesh_lit_colored.cso", //SMP_LIT_COLORED
+	"EngineResources.Shaders.staticmesh_lit_textured.cso" //SMP_LIT_TEXTURED
 };
 
 const int DeferredPixelProgramIndices[] {
@@ -28,12 +28,12 @@ const int DeferredPixelProgramIndices[] {
 
 const char* DeferredPixelShaderPrograms[] =
 {
-	"shaders\\staticmesh_deferred_colored.cso", //SMP_LIT_COLORED
-	"shaders\\staticmesh_deferred_textured.cso" //SMP_LIT_TEXTURED
+	"EngineResources.Shaders.staticmesh_deferred_colored.cso", //SMP_LIT_COLORED
+	"EngineResources.Shaders.staticmesh_deferred_textured.cso" //SMP_LIT_TEXTURED
 };
 
-const char* VertexShaderProgram = "shaders\\staticmesh_vertex.cso";
-const char* DeferredVertexShaderProgram = "shaders\\staticmesh_deferred_vertex.cso";
+const char* VertexShaderProgram = "EngineResources.Shaders.staticmesh_vertex.cso";
+const char* DeferredVertexShaderProgram = "EngineResources.Shaders.staticmesh_deferred_vertex.cso";
 
 //Must be same size of pixelshaderprograms
 static_assert(sizeof(PixelShaderPrograms) / sizeof(char*) == sizeof(PixelProgramIndices) / sizeof(int), "Program Indices count must match Pixel program count");

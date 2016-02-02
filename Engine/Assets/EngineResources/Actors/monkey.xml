@@ -1,0 +1,10 @@
+<Actor type="monkey" resource="actors\monkey.xml">
+	<TransformComponent/>
+	<MeshRenderComponent>
+		<Mesh path="meshes\monkey.bmdl"/>
+		<Materials>
+			<Material path="materials\monkey\sphere_mat.bmtl"/>
+			<Material path="materials\monkey\sphere_mat.bmtl"/>
+		</Materials>
+	</MeshRenderComponent>
+</Actor>

@@ -33,7 +33,7 @@ bool DeferredLightShader::Initialize(ID3D11Device* device)
 {
 	bool result;
 
-	result = InitializeShader(device, "Shaders\\DeferredLightingVertexShader.cso", "Shaders\\DeferredLightingPixelShader.cso");
+	result = InitializeShader(device, "EngineResources.Shaders.DeferredLightingVertexShader.cso", "EngineResources.Shaders.DeferredLightingPixelShader.cso");
 	if (!result)
 	{
 		return false;

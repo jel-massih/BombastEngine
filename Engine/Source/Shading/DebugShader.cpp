@@ -23,7 +23,7 @@ DebugShader::~DebugShader()
 
 bool DebugShader::Initialize(ID3D11Device* device)
 {
-	if (!InitializeShader(device, "Shaders\\DebugVertexShader.cso", "Shaders\\DebugPixelShader.cso"))
+	if (!InitializeShader(device, "EngineResources.Shaders.DebugVertexShader.cso", "EngineResources.Shaders.DebugPixelShader.cso"))
 	{
 		return false;
 	}

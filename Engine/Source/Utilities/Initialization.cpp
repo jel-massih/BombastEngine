@@ -104,7 +104,7 @@ DWORD ReadCPUSpeed()
 
 GameOptions::GameOptions()
 {
-	m_level = "World\\world.xml";
+	m_level = "EngineResources.World.default.xml";
 	m_renderer = "Direct3D 11";
 	m_screenSize = Point(SCREEN_WIDTH, SCREEN_HEIGHT);
 	m_screenPosition = Point(SCREEN_X, SCREEN_Y);

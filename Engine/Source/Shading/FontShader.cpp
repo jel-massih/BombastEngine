@@ -23,7 +23,7 @@ FontShader::~FontShader()
 
 bool FontShader::Initialize(ID3D11Device* device)
 {
-	if (!InitializeShader(device, "Shaders\\FontVertexShader.cso", "Shaders\\FontPixelShader.cso"))
+	if (!InitializeShader(device, "EngineResources.Shaders.FontVertexShader.cso", "EngineResources.Shaders.FontPixelShader.cso"))
 	{
 		return false;
 	}
