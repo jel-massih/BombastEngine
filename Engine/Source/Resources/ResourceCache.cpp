@@ -113,7 +113,7 @@ size_t DevelopmentResourceZipFile::VGetRawResource(const Resource &r, char* buff
 	}
 
 	int bytes = -1;
-	std::wstring fullFileSpec = m_assetsDir + m_assetsFileInfo[num].pathName;
+	std::wstring fullFileSpec = m_assetsDir + m_assetsFileInfo[num].data.cFileName;
 	std::ifstream file(fullFileSpec, std::ios::binary);
 	if (file.is_open())
 	{
@@ -176,8 +176,8 @@ void DevelopmentResourceZipFile::ReadAssetsDirectory(std::wstring fileSpec)
 
 				wcscpy_s(&findData.cFileName[0], MAX_PATH, lower.c_str());
 				AssetFileInfo fileInfo = { findData, resourceName };
+				m_directoryContentsMap[ws2s(resourceName)] = m_assetsFileInfo.size();
 				m_assetsFileInfo.push_back(fileInfo);
- 				m_directoryContentsMap[ws2s(resourceName)] = m_assetsFileInfo.size();
 			}
 		}
 	}

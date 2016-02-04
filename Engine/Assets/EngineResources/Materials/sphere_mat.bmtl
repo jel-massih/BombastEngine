@@ -1,11 +1,11 @@
 <Material name="Sphere Material">
-	<Ambient r="1" g="1" b="1" a="1"/>
+    <Ambient r="1" g="1" b="1" a="1"/>
 	<BaseDiffuse r="1" g="1" b="1" a="1"/>
 	<Specular r="1" g="1" b="1" a="1" power="32"/>
 	<Emmisive r="0" g="0" b="0" a="0"/>
 
 	<Textures>
-  	<Texture path="textures\engine\red.dds"></Texture>
+        <Texture path="EngineResources.Textures.red.dds"></Texture>
 	</Textures>
 
 	<Shader type="Lit">

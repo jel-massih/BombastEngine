@@ -1,4 +1,4 @@
-<Actor type="DirectionalLight" resource="actors\directionalLight.xml">
+<Actor type="DirectionalLight" resource="EngineResources.Actors.directionalLight.xml">
 	<TransformComponent>
 		<YawPitchRoll x="45" y="200" z="0"/>
 	</TransformComponent>

@@ -5,7 +5,7 @@
   <Emmisive r="0" g="0" b="0" a="0"/>
 
   <Textures>
-    <Texture path="textures\engine\grid.dds"></Texture>
+    <Texture path="EngineResources.Textures.grid.dds"></Texture>
   </Textures>
 
   <UVScale x="1" y="1" />

@@ -1,10 +1,10 @@
-<Actor type="cube" resource="actors\cube.xml">
+<Actor type="cube" resource="EngineResources.Actors.cube.xml">
 	<TransformComponent/>
 	<MeshRenderComponent>
-        <Mesh path="meshes\engine\cube.bmdl"></Mesh>
+        <Mesh path="EngineResources.Meshes.cube.bmdl"></Mesh>
         <Materials>
-			<Material path="materials\engine\box_mat.bmtl"/>
-			<Material path="materials\engine\box_mat.bmtl"/>
+			<Material path="EngineResources.Materials.box_mat.bmtl"/>
+			<Material path="EngineResources.Materials.box_mat.bmtl"/>
         </Materials>
     </MeshRenderComponent>
 </Actor>

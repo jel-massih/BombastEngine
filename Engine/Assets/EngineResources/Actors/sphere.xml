@@ -1,12 +1,12 @@
-<Actor type="Sphere" resource="actors\sphere.xml">
+<Actor type="Sphere" resource="EngineResources.Actors.sphere.xml">
 	<TransformComponent>
 		<Scale x="0.25" y="0.25" z="0.25"/>
 	</TransformComponent>
   <MeshRenderComponent>
-    <Mesh path="meshes\sphere.bmdl"></Mesh>
+    <Mesh path="EngineResources.Meshes.sphere.bmdl"></Mesh>
     <Materials>
-			<Material path="materials\sphere_mat.bmtl"/>
-			<Material path="materials\sphere_mat.bmtl"/>
+			<Material path="EngineResources.Materials.sphere_mat.bmtl"/>
+			<Material path="EngineResources.Materials.sphere_mat.bmtl"/>
   	</Materials>
   </MeshRenderComponent>
 </Actor>

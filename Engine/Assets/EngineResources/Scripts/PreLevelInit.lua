@@ -1,4 +1,4 @@
-require("scripts\\ActorManager.lua");
+require("EngineResources.Scripts.ActorManager.lua");
 
 g_actorMgr = ActorManager:Create();
 
