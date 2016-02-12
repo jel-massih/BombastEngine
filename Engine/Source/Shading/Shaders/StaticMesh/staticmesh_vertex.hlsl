@@ -26,7 +26,7 @@ struct PixelInputType
 	float3 viewDirection : TEXCOORD1;
 };
 
-PixelInputType LitTexturedVertexShader(VertexInputType input)
+PixelInputType StaticMeshVertexShader(VertexInputType input)
 {
 	PixelInputType output;
 	float4 worldPosition;

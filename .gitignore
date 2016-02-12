@@ -1,7 +1,6 @@
 Engine/Temp/
 Engine/Source/Libraries/PhysX-3.3.2/
 !Engine/Source/Libraries/.gitkeep
-Engine/Source/Msvc/ipch/
 
 Engine/Assets/Meshes/*
 !Engine/Assets/Meshes/engine
@@ -45,6 +44,9 @@ Tools/ShaderGenerator/obj/*
 *.opendb
 *.iobj
 *.ipdb
+*.obj
+*.log
+*.pch
 
 !Engine/Source/Libraries/lua-5.2.3/lib/Win32/lua52.lib
 !Engine/Source/Libraries/zlib128/lib/zdll.lib

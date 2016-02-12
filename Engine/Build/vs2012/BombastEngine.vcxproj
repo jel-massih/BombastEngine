@@ -19,152 +19,152 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Actor\Actor.h" />
-    <ClInclude Include="..\Actor\ActorComponent.h" />
-    <ClInclude Include="..\Actor\ActorFactory.h" />
-    <ClInclude Include="..\Actor\PhysicsComponent.h" />
-    <ClInclude Include="..\Actor\RenderComponent.h" />
-    <ClInclude Include="..\Actor\RenderComponentInterface.h" />
-    <ClInclude Include="..\Actor\TransformComponent.h" />
-    <ClInclude Include="..\BombastEngineStd.h" />
-    <ClInclude Include="..\Bombast\BombastApp.h" />
-    <ClInclude Include="..\Bombast\CoreGameLogic.h" />
-    <ClInclude Include="..\Bombast\interfaces.h" />
-    <ClInclude Include="..\Constants.h" />
-    <ClInclude Include="..\Debugging\DebugManager.h" />
-    <ClInclude Include="..\Debugging\DebugPhysics.h" />
-    <ClInclude Include="..\Debugging\DebugText.h" />
-    <ClInclude Include="..\Debugging\Logger.h" />
-    <ClInclude Include="..\Events\EventManager.h" />
-    <ClInclude Include="..\Events\EventManagerImpl.h" />
-    <ClInclude Include="..\Events\Events.h" />
-    <ClInclude Include="..\Game\BombastGame.h" />
-    <ClInclude Include="..\Game\HumanView.h" />
-    <ClInclude Include="..\Game\Process.h" />
-    <ClInclude Include="..\Game\ProcessManager.h" />
-    <ClInclude Include="..\Graphics2D\FontClass.h" />
-    <ClInclude Include="..\Graphics2D\PostProcessRenderWindow.h" />
-    <ClInclude Include="..\Graphics2D\TextureClass.h" />
-    <ClInclude Include="..\Graphics3D\D3DClass.h" />
-    <ClInclude Include="..\Graphics3D\Geometry.h" />
-    <ClInclude Include="..\Graphics3D\GraphicsManager.h" />
-    <ClInclude Include="..\Graphics3D\Lighting.h" />
-    <ClInclude Include="..\Graphics3D\Material.h" />
-    <ClInclude Include="..\Graphics3D\ModelClass.h" />
-    <ClInclude Include="..\Graphics3D\MovementController.h" />
-    <ClInclude Include="..\Graphics3D\Raycast.h" />
-    <ClInclude Include="..\Graphics3D\RenderNodes.h" />
-    <ClInclude Include="..\Graphics3D\Scene.h" />
-    <ClInclude Include="..\Graphics3D\SceneNode.h" />
-    <ClInclude Include="..\InputCore\InputCore.h" />
-    <ClInclude Include="..\MultiThreading\CriticalSection.h" />
-    <ClInclude Include="..\MultiThreading\MultiThreadUtilities.h" />
-    <ClInclude Include="..\MultiThreading\RealtimeProcess.h" />
-    <ClInclude Include="..\Physics\BombastPhysics.h" />
-    <ClInclude Include="..\Physics\Physics.h" />
-    <ClInclude Include="..\Physics\PhysXPhysics.h" />
-    <ClInclude Include="..\Resources\LuaResource.h" />
-    <ClInclude Include="..\Resources\MaterialResource.h" />
-    <ClInclude Include="..\Resources\ModelResource.h" />
-    <ClInclude Include="..\Resources\ResourceCache.h" />
-    <ClInclude Include="..\Resources\ShaderResource.h" />
-    <ClInclude Include="..\Resources\TextureResource.h" />
-    <ClInclude Include="..\Resources\XmlResource.h" />
-    <ClInclude Include="..\Resources\ZipFile.h" />
-    <ClInclude Include="..\Scripting\LuaCoreManager.h" />
-    <ClInclude Include="..\Scripting\LuaEvent.h" />
-    <ClInclude Include="..\Scripting\LuaExports.h" />
-    <ClInclude Include="..\Shading\DebugShader.h" />
-    <ClInclude Include="..\Shading\ShadingCommon.h" />
-    <ClInclude Include="..\Shading\DeferredLightShader.h" />
-    <ClInclude Include="..\Shading\DeferredRenderingManager.h" />
-    <ClInclude Include="..\Shading\FontShader.h" />
-    <ClInclude Include="..\Shading\ShaderManager.h" />
-    <ClInclude Include="..\Shading\StaticMeshShader.h" />
-    <ClInclude Include="..\UI\UserInterface.h" />
-    <ClInclude Include="..\Utilities\BMDLMeshLoader.h" />
-    <ClInclude Include="..\Utilities\DDSTextureLoader.h" />
-    <ClInclude Include="..\Utilities\DirectXUtils.h" />
-    <ClInclude Include="..\Utilities\FastDelegate\FastDelegate.h" />
-    <ClInclude Include="..\Utilities\Initialization.h" />
-    <ClInclude Include="..\Utilities\Math.h" />
-    <ClInclude Include="..\Utilities\rapidxml.hpp" />
-    <ClInclude Include="..\Utilities\String.h" />
-    <ClInclude Include="..\Utilities\SystemResourceMonitor.h" />
-    <ClInclude Include="..\Utilities\templates.h" />
-    <ClInclude Include="..\Utilities\Timer.h" />
-    <ClInclude Include="..\Utilities\types.h" />
-    <ClInclude Include="..\Utilities\WICTextureLoader.h" />
-    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="$(SourceFolder)Actor\Actor.h" />
+    <ClInclude Include="$(SourceFolder)Actor\ActorComponent.h" />
+    <ClInclude Include="$(SourceFolder)Actor\ActorFactory.h" />
+    <ClInclude Include="$(SourceFolder)Actor\PhysicsComponent.h" />
+    <ClInclude Include="$(SourceFolder)Actor\RenderComponent.h" />
+    <ClInclude Include="$(SourceFolder)Actor\RenderComponentInterface.h" />
+    <ClInclude Include="$(SourceFolder)Actor\TransformComponent.h" />
+    <ClInclude Include="$(SourceFolder)BombastEngineStd.h" />
+    <ClInclude Include="$(SourceFolder)Bombast\BombastApp.h" />
+    <ClInclude Include="$(SourceFolder)Bombast\CoreGameLogic.h" />
+    <ClInclude Include="$(SourceFolder)Bombast\interfaces.h" />
+    <ClInclude Include="$(SourceFolder)Constants.h" />
+    <ClInclude Include="$(SourceFolder)Debugging\DebugManager.h" />
+    <ClInclude Include="$(SourceFolder)Debugging\DebugPhysics.h" />
+    <ClInclude Include="$(SourceFolder)Debugging\DebugText.h" />
+    <ClInclude Include="$(SourceFolder)Debugging\Logger.h" />
+    <ClInclude Include="$(SourceFolder)Events\EventManager.h" />
+    <ClInclude Include="$(SourceFolder)Events\EventManagerImpl.h" />
+    <ClInclude Include="$(SourceFolder)Events\Events.h" />
+    <ClInclude Include="$(SourceFolder)Game\BombastGame.h" />
+    <ClInclude Include="$(SourceFolder)Game\HumanView.h" />
+    <ClInclude Include="$(SourceFolder)Game\Process.h" />
+    <ClInclude Include="$(SourceFolder)Game\ProcessManager.h" />
+    <ClInclude Include="$(SourceFolder)Graphics2D\FontClass.h" />
+    <ClInclude Include="$(SourceFolder)Graphics2D\PostProcessRenderWindow.h" />
+    <ClInclude Include="$(SourceFolder)Graphics2D\TextureClass.h" />
+    <ClInclude Include="$(SourceFolder)Graphics3D\D3DClass.h" />
+    <ClInclude Include="$(SourceFolder)Graphics3D\Geometry.h" />
+    <ClInclude Include="$(SourceFolder)Graphics3D\GraphicsManager.h" />
+    <ClInclude Include="$(SourceFolder)Graphics3D\Lighting.h" />
+    <ClInclude Include="$(SourceFolder)Graphics3D\Material.h" />
+    <ClInclude Include="$(SourceFolder)Graphics3D\ModelClass.h" />
+    <ClInclude Include="$(SourceFolder)Graphics3D\MovementController.h" />
+    <ClInclude Include="$(SourceFolder)Graphics3D\Raycast.h" />
+    <ClInclude Include="$(SourceFolder)Graphics3D\RenderNodes.h" />
+    <ClInclude Include="$(SourceFolder)Graphics3D\Scene.h" />
+    <ClInclude Include="$(SourceFolder)Graphics3D\SceneNode.h" />
+    <ClInclude Include="$(SourceFolder)InputCore\InputCore.h" />
+    <ClInclude Include="$(SourceFolder)MultiThreading\CriticalSection.h" />
+    <ClInclude Include="$(SourceFolder)MultiThreading\MultiThreadUtilities.h" />
+    <ClInclude Include="$(SourceFolder)MultiThreading\RealtimeProcess.h" />
+    <ClInclude Include="$(SourceFolder)Physics\BombastPhysics.h" />
+    <ClInclude Include="$(SourceFolder)Physics\Physics.h" />
+    <ClInclude Include="$(SourceFolder)Physics\PhysXPhysics.h" />
+    <ClInclude Include="$(SourceFolder)Resources\LuaResource.h" />
+    <ClInclude Include="$(SourceFolder)Resources\MaterialResource.h" />
+    <ClInclude Include="$(SourceFolder)Resources\ModelResource.h" />
+    <ClInclude Include="$(SourceFolder)Resources\ResourceCache.h" />
+    <ClInclude Include="$(SourceFolder)Resources\ShaderResource.h" />
+    <ClInclude Include="$(SourceFolder)Resources\TextureResource.h" />
+    <ClInclude Include="$(SourceFolder)Resources\XmlResource.h" />
+    <ClInclude Include="$(SourceFolder)Resources\ZipFile.h" />
+    <ClInclude Include="$(SourceFolder)Scripting\LuaCoreManager.h" />
+    <ClInclude Include="$(SourceFolder)Scripting\LuaEvent.h" />
+    <ClInclude Include="$(SourceFolder)Scripting\LuaExports.h" />
+    <ClInclude Include="$(SourceFolder)Shading\DebugShader.h" />
+    <ClInclude Include="$(SourceFolder)Shading\ShadingCommon.h" />
+    <ClInclude Include="$(SourceFolder)Shading\DeferredLightShader.h" />
+    <ClInclude Include="$(SourceFolder)Shading\DeferredRenderingManager.h" />
+    <ClInclude Include="$(SourceFolder)Shading\FontShader.h" />
+    <ClInclude Include="$(SourceFolder)Shading\ShaderManager.h" />
+    <ClInclude Include="$(SourceFolder)Shading\StaticMeshShader.h" />
+    <ClInclude Include="$(SourceFolder)UI\UserInterface.h" />
+    <ClInclude Include="$(SourceFolder)Utilities\BMDLMeshLoader.h" />
+    <ClInclude Include="$(SourceFolder)Utilities\DDSTextureLoader.h" />
+    <ClInclude Include="$(SourceFolder)Utilities\DirectXUtils.h" />
+    <ClInclude Include="$(SourceFolder)Utilities\FastDelegate\FastDelegate.h" />
+    <ClInclude Include="$(SourceFolder)Utilities\Initialization.h" />
+    <ClInclude Include="$(SourceFolder)Utilities\Math.h" />
+    <ClInclude Include="$(SourceFolder)Utilities\rapidxml.hpp" />
+    <ClInclude Include="$(SourceFolder)Utilities\String.h" />
+    <ClInclude Include="$(SourceFolder)Utilities\SystemResourceMonitor.h" />
+    <ClInclude Include="$(SourceFolder)Utilities\templates.h" />
+    <ClInclude Include="$(SourceFolder)Utilities\Timer.h" />
+    <ClInclude Include="$(SourceFolder)Utilities\types.h" />
+    <ClInclude Include="$(SourceFolder)Utilities\WICTextureLoader.h" />
+    <ClInclude Include="$(SourceFolder)Msvc\stdafx.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\Actor\Actor.cpp" />
-    <ClCompile Include="..\Actor\ActorFactory.cpp" />
-    <ClCompile Include="..\Actor\PhysicsComponent.cpp" />
-    <ClCompile Include="..\Actor\RenderComponent.cpp" />
-    <ClCompile Include="..\Actor\TransformComponent.cpp" />
-    <ClCompile Include="..\BombastEngineStd.cpp" />
-    <ClCompile Include="..\Bombast\BombastApp.cpp" />
-    <ClCompile Include="..\Bombast\CoreGameLogic.cpp" />
-    <ClCompile Include="..\Debugging\DebugManager.cpp" />
-    <ClCompile Include="..\Debugging\DebugPhysics.cpp" />
-    <ClCompile Include="..\Debugging\DebugText.cpp" />
-    <ClCompile Include="..\Debugging\Logger.cpp" />
-    <ClCompile Include="..\Events\EventManager.cpp" />
-    <ClCompile Include="..\Events\EventManagerImpl.cpp" />
-    <ClCompile Include="..\Events\Events.cpp" />
-    <ClCompile Include="..\Game\BombastGame.cpp" />
-    <ClCompile Include="..\Game\HumanView.cpp" />
-    <ClCompile Include="..\Game\Process.cpp" />
-    <ClCompile Include="..\Game\ProcessManager.cpp" />
-    <ClCompile Include="..\Graphics2D\FontClass.cpp" />
-    <ClCompile Include="..\Graphics2D\PostProcessRenderWindow.cpp" />
-    <ClCompile Include="..\Graphics2D\TextureClass.cpp" />
-    <ClCompile Include="..\Graphics3D\D3DClass.cpp" />
-    <ClCompile Include="..\Graphics3D\Geometry.cpp" />
-    <ClCompile Include="..\Graphics3D\GraphicsManager.cpp" />
-    <ClCompile Include="..\Graphics3D\Lighting.cpp" />
-    <ClCompile Include="..\Graphics3D\Material.cpp" />
-    <ClCompile Include="..\Graphics3D\MovementController.cpp" />
-    <ClCompile Include="..\Graphics3D\RenderNodes.cpp" />
-    <ClCompile Include="..\Graphics3D\Scene.cpp" />
-    <ClCompile Include="..\Graphics3D\SceneNode.cpp" />
-    <ClCompile Include="..\Graphics3D\Raycast.cpp" />
-    <ClCompile Include="..\InputCore\InputCore.cpp" />
-    <ClCompile Include="..\MultiThreading\RealtimeProcess.cpp" />
-    <ClCompile Include="..\Physics\BombastPhysics.cpp" />
-    <ClCompile Include="..\Physics\Physics.cpp" />
-    <ClCompile Include="..\Physics\PhysXPhysics.cpp" />
-    <ClCompile Include="..\Resources\LuaResource.cpp" />
-    <ClCompile Include="..\Resources\MaterialResource.cpp" />
-    <ClCompile Include="..\Resources\ModelResource.cpp" />
-    <ClCompile Include="..\Resources\ResourceCache.cpp" />
-    <ClCompile Include="..\Resources\ShaderResource.cpp" />
-    <ClCompile Include="..\Resources\TextureResource.cpp" />
-    <ClCompile Include="..\Resources\XmlResource.cpp" />
-    <ClCompile Include="..\Resources\ZipFile.cpp" />
-    <ClCompile Include="..\Scripting\LuaCoreManager.cpp" />
-    <ClCompile Include="..\Shading\DebugShader.cpp" />
-    <ClCompile Include="..\Shading\DeferredLightShader.cpp" />
-    <ClCompile Include="..\Shading\DeferredRenderingManager.cpp" />
-    <ClCompile Include="..\Shading\FontShader.cpp" />
-    <ClCompile Include="..\Shading\ShaderManager.cpp" />
-    <ClCompile Include="..\Shading\StaticMeshShader.cpp" />
-    <ClCompile Include="..\Utilities\BMDLMeshLoader.cpp" />
-    <ClCompile Include="..\Utilities\DDSTextureLoader.cpp" />
-    <ClCompile Include="..\Utilities\Initialization.cpp" />
-    <ClCompile Include="..\Utilities\Math.cpp" />
-    <ClCompile Include="..\Utilities\String.cpp" />
-    <ClCompile Include="..\Utilities\SystemResourceMonitor.cpp" />
-    <ClCompile Include="..\Utilities\Timer.cpp" />
-    <ClCompile Include="..\Utilities\WICTextureLoader.cpp" />
-    <ClCompile Include="BombastEngine.cpp">
+    <ClCompile Include="$(SourceFolder)Actor\Actor.cpp" />
+    <ClCompile Include="$(SourceFolder)Actor\ActorFactory.cpp" />
+    <ClCompile Include="$(SourceFolder)Actor\PhysicsComponent.cpp" />
+    <ClCompile Include="$(SourceFolder)Actor\RenderComponent.cpp" />
+    <ClCompile Include="$(SourceFolder)Actor\TransformComponent.cpp" />
+    <ClCompile Include="$(SourceFolder)BombastEngineStd.cpp" />
+    <ClCompile Include="$(SourceFolder)Bombast\BombastApp.cpp" />
+    <ClCompile Include="$(SourceFolder)Bombast\CoreGameLogic.cpp" />
+    <ClCompile Include="$(SourceFolder)Debugging\DebugManager.cpp" />
+    <ClCompile Include="$(SourceFolder)Debugging\DebugPhysics.cpp" />
+    <ClCompile Include="$(SourceFolder)Debugging\DebugText.cpp" />
+    <ClCompile Include="$(SourceFolder)Debugging\Logger.cpp" />
+    <ClCompile Include="$(SourceFolder)Events\EventManager.cpp" />
+    <ClCompile Include="$(SourceFolder)Events\EventManagerImpl.cpp" />
+    <ClCompile Include="$(SourceFolder)Events\Events.cpp" />
+    <ClCompile Include="$(SourceFolder)Game\BombastGame.cpp" />
+    <ClCompile Include="$(SourceFolder)Game\HumanView.cpp" />
+    <ClCompile Include="$(SourceFolder)Game\Process.cpp" />
+    <ClCompile Include="$(SourceFolder)Game\ProcessManager.cpp" />
+    <ClCompile Include="$(SourceFolder)Graphics2D\FontClass.cpp" />
+    <ClCompile Include="$(SourceFolder)Graphics2D\PostProcessRenderWindow.cpp" />
+    <ClCompile Include="$(SourceFolder)Graphics2D\TextureClass.cpp" />
+    <ClCompile Include="$(SourceFolder)Graphics3D\D3DClass.cpp" />
+    <ClCompile Include="$(SourceFolder)Graphics3D\Geometry.cpp" />
+    <ClCompile Include="$(SourceFolder)Graphics3D\GraphicsManager.cpp" />
+    <ClCompile Include="$(SourceFolder)Graphics3D\Lighting.cpp" />
+    <ClCompile Include="$(SourceFolder)Graphics3D\Material.cpp" />
+    <ClCompile Include="$(SourceFolder)Graphics3D\MovementController.cpp" />
+    <ClCompile Include="$(SourceFolder)Graphics3D\RenderNodes.cpp" />
+    <ClCompile Include="$(SourceFolder)Graphics3D\Scene.cpp" />
+    <ClCompile Include="$(SourceFolder)Graphics3D\SceneNode.cpp" />
+    <ClCompile Include="$(SourceFolder)Graphics3D\Raycast.cpp" />
+    <ClCompile Include="$(SourceFolder)InputCore\InputCore.cpp" />
+    <ClCompile Include="$(SourceFolder)MultiThreading\RealtimeProcess.cpp" />
+    <ClCompile Include="$(SourceFolder)Physics\BombastPhysics.cpp" />
+    <ClCompile Include="$(SourceFolder)Physics\Physics.cpp" />
+    <ClCompile Include="$(SourceFolder)Physics\PhysXPhysics.cpp" />
+    <ClCompile Include="$(SourceFolder)Resources\LuaResource.cpp" />
+    <ClCompile Include="$(SourceFolder)Resources\MaterialResource.cpp" />
+    <ClCompile Include="$(SourceFolder)Resources\ModelResource.cpp" />
+    <ClCompile Include="$(SourceFolder)Resources\ResourceCache.cpp" />
+    <ClCompile Include="$(SourceFolder)Resources\ShaderResource.cpp" />
+    <ClCompile Include="$(SourceFolder)Resources\TextureResource.cpp" />
+    <ClCompile Include="$(SourceFolder)Resources\XmlResource.cpp" />
+    <ClCompile Include="$(SourceFolder)Resources\ZipFile.cpp" />
+    <ClCompile Include="$(SourceFolder)Scripting\LuaCoreManager.cpp" />
+    <ClCompile Include="$(SourceFolder)Shading\DebugShader.cpp" />
+    <ClCompile Include="$(SourceFolder)Shading\DeferredLightShader.cpp" />
+    <ClCompile Include="$(SourceFolder)Shading\DeferredRenderingManager.cpp" />
+    <ClCompile Include="$(SourceFolder)Shading\FontShader.cpp" />
+    <ClCompile Include="$(SourceFolder)Shading\ShaderManager.cpp" />
+    <ClCompile Include="$(SourceFolder)Shading\StaticMeshShader.cpp" />
+    <ClCompile Include="$(SourceFolder)Utilities\BMDLMeshLoader.cpp" />
+    <ClCompile Include="$(SourceFolder)Utilities\DDSTextureLoader.cpp" />
+    <ClCompile Include="$(SourceFolder)Utilities\Initialization.cpp" />
+    <ClCompile Include="$(SourceFolder)Utilities\Math.cpp" />
+    <ClCompile Include="$(SourceFolder)Utilities\String.cpp" />
+    <ClCompile Include="$(SourceFolder)Utilities\SystemResourceMonitor.cpp" />
+    <ClCompile Include="$(SourceFolder)Utilities\Timer.cpp" />
+    <ClCompile Include="$(SourceFolder)Utilities\WICTextureLoader.cpp" />
+    <ClCompile Include="$(SourceFolder)Msvc\BombastEngine.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">stdafx.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">stdafx.h</PrecompiledHeaderFile>
     </ClCompile>
-    <ClCompile Include="stdafx.cpp">
+    <ClCompile Include="$(SourceFolder)Msvc\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">stdafx.h</PrecompiledHeaderFile>
@@ -176,43 +176,43 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="..\Shading\Shaders\DebugPixelShader.hlsl">
+    <FxCompile Include="$(SourceFolder)Shading\Shaders\DebugPixelShader.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">DebugPixelShader</EntryPointName>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)..\Assets\Shaders\%(Filename).cso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(AssetsDir)Shaders\%(Filename).cso</ObjectFileOutput>
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">DebugPixelShader</EntryPointName>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)..\Assets\Shaders\%(Filename).cso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(AssetsDir)Shaders\%(Filename).cso</ObjectFileOutput>
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">DebugPixelShader</EntryPointName>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)..\Assets\Shaders\%(Filename).cso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(AssetsDir)Shaders\%(Filename).cso</ObjectFileOutput>
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">DebugPixelShader</EntryPointName>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(SolutionDir)..\Assets\Shaders\%(Filename).cso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(AssetsDir)Shaders\%(Filename).cso</ObjectFileOutput>
     </FxCompile>
-    <FxCompile Include="..\Shading\Shaders\DebugVertexShader.hlsl">
+    <FxCompile Include="$(SourceFolder)Shading\Shaders\DebugVertexShader.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">DebugVertexShader</EntryPointName>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)..\Assets\Shaders\%(Filename).cso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(AssetsDir)Shaders\%(Filename).cso</ObjectFileOutput>
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">DebugVertexShader</EntryPointName>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)..\Assets\Shaders\%(Filename).cso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(AssetsDir)Shaders\%(Filename).cso</ObjectFileOutput>
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">DebugVertexShader</EntryPointName>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)..\Assets\Shaders\%(Filename).cso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(AssetsDir)Shaders\%(Filename).cso</ObjectFileOutput>
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">DebugVertexShader</EntryPointName>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(SolutionDir)..\Assets\Shaders\%(Filename).cso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(AssetsDir)Shaders\%(Filename).cso</ObjectFileOutput>
     </FxCompile>
-    <FxCompile Include="..\Shading\Shaders\DeferredLightingPixelShader.hlsl">
+    <FxCompile Include="$(SourceFolder)Shading\Shaders\DeferredLightingPixelShader.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)..\Assets\Shaders\%(Filename).cso</ObjectFileOutput>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)..\Assets\Shaders\%(Filename).cso</ObjectFileOutput>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)..\Assets\Shaders\%(Filename).cso</ObjectFileOutput>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(SolutionDir)..\Assets\Shaders\%(Filename).cso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(AssetsDir)Shaders\%(Filename).cso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(AssetsDir)Shaders\%(Filename).cso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(AssetsDir)Shaders\%(Filename).cso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(AssetsDir)Shaders\%(Filename).cso</ObjectFileOutput>
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">DeferredLightingPS</EntryPointName>
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">DeferredLightingPS</EntryPointName>
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">DeferredLightingPS</EntryPointName>
@@ -226,15 +226,15 @@
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">4.0</ShaderModel>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">4.0</ShaderModel>
     </FxCompile>
-    <FxCompile Include="..\Shading\Shaders\DeferredLightingVertexShader.hlsl">
+    <FxCompile Include="$(SourceFolder)Shading\Shaders\DeferredLightingVertexShader.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)..\Assets\Shaders\%(Filename).cso</ObjectFileOutput>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)..\Assets\Shaders\%(Filename).cso</ObjectFileOutput>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)..\Assets\Shaders\%(Filename).cso</ObjectFileOutput>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(SolutionDir)..\Assets\Shaders\%(Filename).cso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(AssetsDir)Shaders\%(Filename).cso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(AssetsDir)Shaders\%(Filename).cso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(AssetsDir)Shaders\%(Filename).cso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(AssetsDir)Shaders\%(Filename).cso</ObjectFileOutput>
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">DeferredLightingVS</EntryPointName>
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">DeferredLightingVS</EntryPointName>
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">DeferredLightingVS</EntryPointName>
@@ -244,35 +244,35 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
     </FxCompile>
-    <FxCompile Include="..\Shading\Shaders\FontPixelShader.hlsl">
+    <FxCompile Include="$(SourceFolder)Shading\Shaders\FontPixelShader.hlsl">
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">FontPixelShader</EntryPointName>
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">FontPixelShader</EntryPointName>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)..\Assets\Shaders\%(Filename).cso</ObjectFileOutput>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)..\Assets\Shaders\%(Filename).cso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(AssetsDir)Shaders\%(Filename).cso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(AssetsDir)Shaders\%(Filename).cso</ObjectFileOutput>
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">FontPixelShader</EntryPointName>
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">FontPixelShader</EntryPointName>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)..\Assets\Shaders\%(Filename).cso</ObjectFileOutput>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(SolutionDir)..\Assets\Shaders\%(Filename).cso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(AssetsDir)Shaders\%(Filename).cso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(AssetsDir)Shaders\%(Filename).cso</ObjectFileOutput>
     </FxCompile>
-    <FxCompile Include="..\Shading\Shaders\FontVertexShader.hlsl">
+    <FxCompile Include="$(SourceFolder)Shading\Shaders\FontVertexShader.hlsl">
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">FontVertexShader</EntryPointName>
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">FontVertexShader</EntryPointName>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)..\Assets\Shaders\%(Filename).cso</ObjectFileOutput>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)..\Assets\Shaders\%(Filename).cso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(AssetsDir)Shaders\%(Filename).cso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(AssetsDir)Shaders\%(Filename).cso</ObjectFileOutput>
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">FontVertexShader</EntryPointName>
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">FontVertexShader</EntryPointName>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)..\Assets\Shaders\%(Filename).cso</ObjectFileOutput>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(SolutionDir)..\Assets\Shaders\%(Filename).cso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(AssetsDir)Shaders\%(Filename).cso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(AssetsDir)Shaders\%(Filename).cso</ObjectFileOutput>
     </FxCompile>
-    <FxCompile Include="..\Shading\Shaders\StaticMesh\staticmesh_deferred_textured.hlsl">
+    <FxCompile Include="$(SourceFolder)Shading\Shaders\StaticMesh\staticmesh_deferred_textured.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
@@ -285,30 +285,30 @@
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">4.0</ShaderModel>
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">PSMainDeferred</EntryPointName>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">4.0</ShaderModel>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)..\Assets\Shaders\%(Filename).cso</ObjectFileOutput>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)..\Assets\Shaders\%(Filename).cso</ObjectFileOutput>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)..\Assets\Shaders\%(Filename).cso</ObjectFileOutput>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(SolutionDir)..\Assets\Shaders\%(Filename).cso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(AssetsDir)Shaders\%(Filename).cso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(AssetsDir)Shaders\%(Filename).cso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(AssetsDir)Shaders\%(Filename).cso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(AssetsDir)Shaders\%(Filename).cso</ObjectFileOutput>
     </FxCompile>
     <FxCompile Include="..\Shading\Shaders\StaticMesh\staticmesh_vertex.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">4.0</ShaderModel>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)..\Assets\Shaders\%(Filename).cso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(AssetsDir)Shaders\%(Filename).cso</ObjectFileOutput>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">4.0</ShaderModel>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)..\Assets\Shaders\%(Filename).cso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(AssetsDir)Shaders\%(Filename).cso</ObjectFileOutput>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">4.0</ShaderModel>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)..\Assets\Shaders\%(Filename).cso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(AssetsDir)Shaders\%(Filename).cso</ObjectFileOutput>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">4.0</ShaderModel>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(SolutionDir)..\Assets\Shaders\%(Filename).cso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(AssetsDir)Shaders\%(Filename).cso</ObjectFileOutput>
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">LitTexturedVertexShader</EntryPointName>
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">LitTexturedVertexShader</EntryPointName>
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">LitTexturedVertexShader</EntryPointName>
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">LitTexturedVertexShader</EntryPointName>
     </FxCompile>
-    <FxCompile Include="..\Shading\Shaders\StaticMesh\staticmesh_common.fxh">
+    <FxCompile Include="$(SourceFolder)Shading\Shaders\StaticMesh\staticmesh_common.fxh">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
@@ -322,25 +322,25 @@
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">4.0</ShaderModel>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">4.0</ShaderModel>
     </FxCompile>
-    <FxCompile Include="..\Shading\Shaders\StaticMesh\staticmesh_deferred_colored.hlsl">
+    <FxCompile Include="$(SourceFolder)Shading\Shaders\StaticMesh\staticmesh_deferred_colored.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PSMainDeferred</EntryPointName>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">4.0</ShaderModel>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)..\Assets\Shaders\%(Filename).cso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(AssetsDir)Shaders\%(Filename).cso</ObjectFileOutput>
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">PSMainDeferred</EntryPointName>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">4.0</ShaderModel>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)..\Assets\Shaders\%(Filename).cso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(AssetsDir)Shaders\%(Filename).cso</ObjectFileOutput>
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">PSMainDeferred</EntryPointName>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">4.0</ShaderModel>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)..\Assets\Shaders\%(Filename).cso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(AssetsDir)Shaders\%(Filename).cso</ObjectFileOutput>
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">PSMainDeferred</EntryPointName>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">4.0</ShaderModel>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(SolutionDir)..\Assets\Shaders\%(Filename).cso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(AssetsDir)Shaders\%(Filename).cso</ObjectFileOutput>
     </FxCompile>
-    <FxCompile Include="..\Shading\Shaders\StaticMesh\staticmesh_deferred_vertex.hlsl">
+    <FxCompile Include="$(SourceFolder)Shading\Shaders\StaticMesh\staticmesh_deferred_vertex.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
@@ -353,12 +353,12 @@
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">4.0</ShaderModel>
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSMain</EntryPointName>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">4.0</ShaderModel>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)..\Assets\Shaders\%(Filename).cso</ObjectFileOutput>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)..\Assets\Shaders\%(Filename).cso</ObjectFileOutput>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)..\Assets\Shaders\%(Filename).cso</ObjectFileOutput>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(SolutionDir)..\Assets\Shaders\%(Filename).cso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(AssetsDir)Shaders\%(Filename).cso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(AssetsDir)Shaders\%(Filename).cso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(AssetsDir)Shaders\%(Filename).cso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(AssetsDir)Shaders\%(Filename).cso</ObjectFileOutput>
     </FxCompile>
-    <FxCompile Include="..\Shading\Shaders\StaticMesh\staticmesh_lit_colored.hlsl">
+    <FxCompile Include="$(SourceFolder)Shading\Shaders\StaticMesh\staticmesh_lit_colored.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
@@ -371,12 +371,12 @@
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">4.0</ShaderModel>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">4.0</ShaderModel>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">4.0</ShaderModel>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)..\Assets\Shaders\%(Filename).cso</ObjectFileOutput>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)..\Assets\Shaders\%(Filename).cso</ObjectFileOutput>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)..\Assets\Shaders\%(Filename).cso</ObjectFileOutput>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(SolutionDir)..\Assets\Shaders\%(Filename).cso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(AssetsDir)Shaders\%(Filename).cso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(AssetsDir)Shaders\%(Filename).cso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(AssetsDir)Shaders\%(Filename).cso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(AssetsDir)Shaders\%(Filename).cso</ObjectFileOutput>
     </FxCompile>
-    <FxCompile Include="..\Shading\Shaders\StaticMesh\staticmesh_lit_textured.hlsl">
+    <FxCompile Include="$(SourceFolder)Shading\Shaders\StaticMesh\staticmesh_lit_textured.hlsl">
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PSMain</EntryPointName>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">4.0</ShaderModel>
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">PSMain</EntryPointName>
@@ -385,10 +385,10 @@
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">4.0</ShaderModel>
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">PSMain</EntryPointName>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">4.0</ShaderModel>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)..\Assets\Shaders\%(Filename).cso</ObjectFileOutput>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)..\Assets\Shaders\%(Filename).cso</ObjectFileOutput>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)..\Assets\Shaders\%(Filename).cso</ObjectFileOutput>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(SolutionDir)..\Assets\Shaders\%(Filename).cso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(AssetsDir)Shaders\%(Filename).cso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(AssetsDir)Shaders\%(Filename).cso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(AssetsDir)Shaders\%(Filename).cso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(AssetsDir)Shaders\%(Filename).cso</ObjectFileOutput>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
@@ -398,7 +398,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
     </FxCompile>
-    <FxCompile Include="..\Shading\Shaders\StaticMesh\staticmesh_unlit_colored.hlsl">
+    <FxCompile Include="$(SourceFolder)Shading\Shaders\StaticMesh\staticmesh_unlit_colored.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
@@ -411,16 +411,16 @@
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">4.0</ShaderModel>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">4.0</ShaderModel>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">4.0</ShaderModel>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)..\Assets\Shaders\%(Filename).cso</ObjectFileOutput>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)..\Assets\Shaders\%(Filename).cso</ObjectFileOutput>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)..\Assets\Shaders\%(Filename).cso</ObjectFileOutput>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(SolutionDir)..\Assets\Shaders\%(Filename).cso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(AssetsDir)Shaders\%(Filename).cso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(AssetsDir)Shaders\%(Filename).cso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(AssetsDir)Shaders\%(Filename).cso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(AssetsDir)Shaders\%(Filename).cso</ObjectFileOutput>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
     </FxCompile>
-    <FxCompile Include="..\Shading\Shaders\StaticMesh\staticmesh_unlit_textured.hlsl">
+    <FxCompile Include="$(SourceFolder)Shading\Shaders\StaticMesh\staticmesh_unlit_textured.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
@@ -433,10 +433,10 @@
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">4.0</ShaderModel>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">4.0</ShaderModel>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">4.0</ShaderModel>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)..\Assets\Shaders\%(Filename).cso</ObjectFileOutput>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)..\Assets\Shaders\%(Filename).cso</ObjectFileOutput>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)..\Assets\Shaders\%(Filename).cso</ObjectFileOutput>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(SolutionDir)..\Assets\Shaders\%(Filename).cso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(AssetsDir)Shaders\%(Filename).cso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(AssetsDir)Shaders\%(Filename).cso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(AssetsDir)Shaders\%(Filename).cso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(AssetsDir)Shaders\%(Filename).cso</ObjectFileOutput>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
@@ -492,24 +492,24 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>$(SolutionDir)..\Lib\$(PlatformName)\$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)..\Temp\$(ProjectName)$(PlatformName)$(Configuration)\</IntDir>
+    <OutDir>$(RootDir)Lib\$(PlatformName)\$(Configuration)\</OutDir>
+    <IntDir>$(RootDir)Temp\$(ProjectName)$(PlatformName)$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>$(SolutionDir)..\Lib\$(PlatformName)\$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)..\Temp\$(ProjectName)$(PlatformName)$(Configuration)\</IntDir>
+    <OutDir>$(RootDir)Lib\$(PlatformName)\$(Configuration)\</OutDir>
+    <IntDir>$(RootDir)Temp\$(ProjectName)$(PlatformName)$(Configuration)\</IntDir>
     <TargetExt>.lib</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(SolutionDir)..\Lib\$(PlatformName)\$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)..\Temp\$(ProjectName)$(PlatformName)$(Configuration)\</IntDir>
+    <OutDir>$(RootDir)..\Lib\$(PlatformName)\$(Configuration)\</OutDir>
+    <IntDir>$(RootDir)..\Temp\$(ProjectName)$(PlatformName)$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(SolutionDir)..\Lib\$(PlatformName)\$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)..\Temp\$(ProjectName)$(PlatformName)$(Configuration)\</IntDir>
+    <OutDir>$(RootDir)Lib\$(PlatformName)\$(Configuration)\</OutDir>
+    <IntDir>$(RootDir)Temp\$(ProjectName)$(PlatformName)$(Configuration)\</IntDir>
     <TargetExt>.lib</TargetExt>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -521,14 +521,14 @@
       <SDLCheck>true</SDLCheck>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
       <ForcedIncludeFiles>stdafx.h</ForcedIncludeFiles>
-      <AdditionalIncludeDirectories>$(SolutionDir)Libraries\zlib128\include;$(SolutionDir)Libraries\lua-5.2.3\include;$(SolutionDir)Libraries\PhysX-3.3.2\include;$(SolutionDir)Msvc;$(SolutionDir)..\..\BombastPhysics\Source;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SourceDir)Libraries\zlib128\include;$(SourceDir)Libraries\lua-5.2.3\include;$(SourceDir)Libraries\PhysX-3.3.2\include;$(SourceDir)Msvc;$(RootDir)..\BombastPhysics\Source;</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>zdll.lib;lua52.lib;d3d11.lib;dxgi.lib;D3dcompiler.lib;dxguid.lib;dinput8.lib;Winmm.lib;pdh.lib;PhysX3DEBUG_x86.lib;PhysX3CommonDEBUG_x86.lib;PhysX3ExtensionsDEBUG.lib;PhysXVisualDebuggerSDKDEBUG.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(ProjectDir)..\Libraries\lua-5.2.3\;$(ProjectDir)..\Libraries\zlib128\lib;$(ProjectDir)..\Libraries\PhysX-3.3.2\lib\win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SourceDir)Libraries\lua-5.2.3\;$(SourceDir)Libraries\zlib128\lib;$(SourceDir)Libraries\PhysX-3.3.2\lib\win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -540,14 +540,14 @@
       <SDLCheck>true</SDLCheck>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
       <ForcedIncludeFiles>stdafx.h</ForcedIncludeFiles>
-      <AdditionalIncludeDirectories>$(SolutionDir)Libraries\zlib128\include;$(SolutionDir)Libraries\lua-5.2.3\include;$(SolutionDir)Libraries\PhysX-3.3.2\include;$(SolutionDir)Msvc;$(SolutionDir)..\..\BombastPhysics\Source;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SourceDir)Libraries\zlib128\include;$(SourceDir)Libraries\lua-5.2.3\include;$(SourceDir)Libraries\PhysX-3.3.2\include;$(SourceDir)Msvc;$(RootDir)..\BombastPhysics\Source;</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>zdll.lib;lua52.lib;d3d11.lib;dxgi.lib;D3dcompiler.lib;dxguid.lib;dinput8.lib;Winmm.lib;pdh.lib;PhysX3DEBUG_x86.lib;PhysX3CommonDEBUG_x86.lib;PhysX3ExtensionsDEBUG.lib;PhysXVisualDebuggerSDKDEBUG.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(ProjectDir)..\Libraries\lua-5.2.3\;$(ProjectDir)..\Libraries\zlib128\lib;$(ProjectDir)..\Libraries\PhysX-3.3.2\lib\win64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SourceDir)Libraries\lua-5.2.3\;$(SourceDir)Libraries\zlib128\lib;$(SourceDir)Libraries\PhysX-3.3.2\lib\win64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -559,7 +559,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;_WIN32_WINNT=0x0601;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)Libraries\zlib128\include;$(SolutionDir)Libraries\lua-5.2.3\include;$(SolutionDir)Libraries\PhysX-3.3.2\include;$(SolutionDir)Msvc;$(SolutionDir)..\..\BombastPhysics\Source;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SourceDir)Libraries\zlib128\include;$(SourceDir)Libraries\lua-5.2.3\include;$(SourceDir)Libraries\PhysX-3.3.2\include;$(SourceDir)Msvc;$(RootDir)..\BombastPhysics\Source;</AdditionalIncludeDirectories>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <ForcedIncludeFiles>stdafx.h</ForcedIncludeFiles>
@@ -570,7 +570,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>zdll.lib;lua52.lib;d3d11.lib;dxgi.lib;D3dcompiler.lib;dxguid.lib;dinput8.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(ProjectDir)..\Libraries\lua-5.2.3\;$(ProjectDir)..\Libraries\zlib128\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SourceDir)Libraries\lua-5.2.3\;$(SourceDir)Libraries\zlib128\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -582,7 +582,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;_WIN32_WINNT=0x0601;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)Libraries\zlib128\include;$(SolutionDir)Libraries\lua-5.2.3\include;$(SolutionDir)Libraries\PhysX-3.3.2\include;$(SolutionDir)Msvc;$(SolutionDir)..\..\BombastPhysics\Source;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SourceDir)Libraries\zlib128\include;$(SourceDir)Libraries\lua-5.2.3\include;$(SourceDir)Libraries\PhysX-3.3.2\include;$(SourceDir)Msvc;$(RootDir)..\BombastPhysics\Source;</AdditionalIncludeDirectories>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <ForcedIncludeFiles>stdafx.h</ForcedIncludeFiles>
@@ -593,7 +593,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>zdll.lib;lua52.lib;d3d11.lib;dxgi.lib;D3dcompiler.lib;dxguid.lib;dinput8.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(ProjectDir)..\Libraries\lua-5.2.3\;$(ProjectDir)..\Libraries\zlib128\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SourceDir)Libraries\lua-5.2.3\;$(SourceDir)Libraries\zlib128\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
