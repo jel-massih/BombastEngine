@@ -1,0 +1,49 @@
+<World>
+    <WorldProperties>
+      <BackgroundColor r="0" g="0" b="0" a="0"/>
+    </WorldProperties>
+
+    <PreLoadScripts>
+    	<Script resource="EngineResources.Scripts.PreLevelInit.lua"/>
+    </PreLoadScripts>
+
+    <StaticActors>
+      <Actor resource="EngineResources.Actors.directionalLight.xml"/>
+
+      <Actor resource="EngineResources.Actors.platform.xml">
+        <TransformComponent>
+          <Position x="0" y="0" z="3"/>
+        </TransformComponent>
+      </Actor>
+
+      <Actor resource="EngineResources.Actors.sphere.xml">
+        <TransformComponent>
+          <Position x="0" y="0.5" z="3"/>
+        </TransformComponent>
+      </Actor>
+      <Actor resource="EngineResources.Actors.sphere.xml">
+        <TransformComponent>
+          <Position x="-1" y="0.5" z="4"/>
+        </TransformComponent>
+      </Actor>
+      <Actor resource="EngineResources.Actors.sphere.xml">
+        <TransformComponent>
+          <Position x="1" y="0.5" z="2"/>
+        </TransformComponent>
+      </Actor>
+      <Actor resource="EngineResources.Actors.sphere.xml">
+        <TransformComponent>
+          <Position x="1" y="0.5" z="4"/>
+        </TransformComponent>
+      </Actor>
+      <Actor resource="EngineResources.Actors.sphere.xml">
+        <TransformComponent>
+          <Position x="-1" y="0.5" z="2"/>
+        </TransformComponent>
+      </Actor>
+    </StaticActors>
+
+    <PostLoadScripts>
+    	<Script resource="EngineResources.Scripts.PostLevelInit.lua"/>
+    </PostLoadScripts>
+</World>

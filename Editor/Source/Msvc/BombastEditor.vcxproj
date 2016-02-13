@@ -34,7 +34,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <QTDIR>C:\Qt\5.6\msvc2015</QTDIR>
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
@@ -46,7 +46,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <QTDIR>C:\Qt\5.6\msvc2015</QTDIR>
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
@@ -87,7 +87,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <PreprocessorDefinitions>UNICODE;WIN32;WIN64;QT_DLL;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)Libraries\lua-5.2.3\include;.\GeneratedFiles;.;$(ProjectDir)..\Libraries\Qt\include;.\GeneratedFiles\$(ConfigurationName);$(ProjectDir)..\Libraries\Qt\include\QtCore;$(ProjectDir)..\Libraries\Qt\include\QtGui;$(ProjectDir)..\Libraries\Qt\include\QtWidgets;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\..\Source;$(SolutionDir)..\..\Source\Libraries\lua-5.2.3\include;.\GeneratedFiles;.;$(ProjectDir)..\Libraries\Qt\include;.\GeneratedFiles\$(ConfigurationName);$(ProjectDir)..\Libraries\Qt\include\QtCore;$(ProjectDir)..\Libraries\Qt\include\QtGui;$(ProjectDir)..\Libraries\Qt\include\QtWidgets;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Disabled</Optimization>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -96,15 +96,15 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
-      <AdditionalLibraryDirectories>$(SolutionDir)..\Game\Lib\$(PlatformName)\$(Configuration)\;$(SolutionDir)Libraries\zlib128\lib\;$(SolutionDir)Libraries\lua-5.2.3\lib\$(PlatformName)\;$(SolutionDir)Libraries\PhysX-3.3.2\lib\$(PlatformName)\;$(ProjectDir)..\Libraries\Qt\lib\$(PlatformName)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\..\Lib\$(PlatformName)\$(Configuration)\;$(SolutionDir)..\..\Source\Libraries\zlib128\lib\;$(SolutionDir)..\..\Source\Libraries\lua-5.2.3\lib\$(PlatformName)\;$(SolutionDir)..\..\Source\Libraries\PhysX-3.3.2\lib\$(PlatformName)\;$(ProjectDir)..\Libraries\Qt\lib\$(PlatformName)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>lua52.lib;zdll.lib;d3d11.lib;dxgi.lib;D3dcompiler.lib;dxguid.lib;dinput8.lib;pdh.lib;BombastEngine.lib;BombastPhysics.lib;winmm.lib;qtmaind.lib;Qt5Cored.lib;Qt5Guid.lib;Qt5Widgetsd.lib;PhysX3DEBUG_x86.lib;PhysX3CommonDEBUG_x86.lib;PhysX3ExtensionsDEBUG.lib;PhysXVisualDebuggerSDKDEBUG.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>lua52.lib;zdll.lib;d3d11.lib;dxgi.lib;D3dcompiler.lib;dxguid.lib;dinput8.lib;pdh.lib;BombastEngine.lib;BombastPhysics.lib;winmm.lib;qtmaind.lib;Qt5Cored.lib;Qt5Guid.lib;Qt5Widgetsd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <PreprocessorDefinitions>UNICODE;WIN32;WIN64;QT_DLL;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)Libraries\lua-5.2.3\include;.\GeneratedFiles;.;$(ProjectDir)..\Libraries\Qt\include;.\GeneratedFiles\$(ConfigurationName);$(ProjectDir)..\Libraries\Qt\include\QtCore;$(ProjectDir)..\Libraries\Qt\include\QtGui;$(ProjectDir)..\Libraries\Qt\include\QtWidgets;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\..\Source;$(SolutionDir)..\..\Source\Libraries\lua-5.2.3\include;.\GeneratedFiles;.;$(ProjectDir)..\Libraries\Qt\include;.\GeneratedFiles\$(ConfigurationName);$(ProjectDir)..\Libraries\Qt\include\QtCore;$(ProjectDir)..\Libraries\Qt\include\QtGui;$(ProjectDir)..\Libraries\Qt\include\QtWidgets;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Disabled</Optimization>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -113,7 +113,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
-      <AdditionalLibraryDirectories>$(SolutionDir)..\Game\Lib\$(PlatformName)\$(Configuration)\;$(SolutionDir)Libraries\zlib128\lib\;$(SolutionDir)Libraries\lua-5.2.3\lib\$(PlatformName)\;$(SolutionDir)Libraries\PhysX-3.3.2\lib\$(PlatformName)\;$(ProjectDir)..\Libraries\Qt\lib\$(PlatformName)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\..\Lib\$(PlatformName)\$(Configuration)\;$(SolutionDir)..\..\Source\Libraries\zlib128\lib\;$(SolutionDir)..\..\Source\Libraries\lua-5.2.3\lib\$(PlatformName)\;$(SolutionDir)..\..\Source\Libraries\PhysX-3.3.2\lib\$(PlatformName)\;$(ProjectDir)..\Libraries\Qt\lib\$(PlatformName)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>lua52.lib;zdll.lib;d3d11.lib;dxgi.lib;D3dcompiler.lib;dxguid.lib;dinput8.lib;pdh.lib;BombastEngine.lib;BombastPhysics.lib;winmm.lib;qtmaind.lib;Qt5Cored.lib;Qt5Guid.lib;Qt5Widgetsd.lib;PhysX3ExtensionsDEBUG.lib;PhysXVisualDebuggerSDKDEBUG.lib;PhysX3DEBUG_x64.lib;PhysX3CommonDEBUG_x64.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
@@ -121,7 +121,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <PreprocessorDefinitions>UNICODE;WIN32;WIN64;QT_DLL;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)Libraries\lua-5.2.3\include;.\GeneratedFiles;.;$(ProjectDir)..\Libraries\Qt\include;.\GeneratedFiles\$(ConfigurationName);$(ProjectDir)..\Libraries\Qt\include\QtCore;$(ProjectDir)..\Libraries\Qt\include\QtGui;$(ProjectDir)..\Libraries\Qt\include\QtWidgets;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\..\Source;$(SolutionDir)..\..\Source\Libraries\lua-5.2.3\include;.\GeneratedFiles;.;$(ProjectDir)..\Libraries\Qt\include;.\GeneratedFiles\$(ConfigurationName);$(ProjectDir)..\Libraries\Qt\include\QtCore;$(ProjectDir)..\Libraries\Qt\include\QtGui;$(ProjectDir)..\Libraries\Qt\include\QtWidgets;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat />
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
@@ -129,7 +129,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
-      <AdditionalLibraryDirectories>$(SolutionDir)..\Game\Lib\$(PlatformName)\$(Configuration)\;$(SolutionDir)Libraries\zlib128\lib\;$(SolutionDir)Libraries\lua-5.2.3\lib\$(PlatformName)\;$(SolutionDir)Libraries\PhysX-3.3.2\lib\$(PlatformName)\;$(ProjectDir)..\Libraries\Qt\lib\$(PlatformName)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\..\Lib\$(PlatformName)\$(Configuration)\;$(SolutionDir)..\..\Source\Libraries\zlib128\lib\;$(SolutionDir)..\..\Source\Libraries\lua-5.2.3\lib\$(PlatformName)\;$(SolutionDir)..\..\Source\Libraries\PhysX-3.3.2\lib\$(PlatformName)\;$(ProjectDir)..\Libraries\Qt\lib\$(PlatformName)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <AdditionalDependencies>lua52.lib;zdll.lib;d3d11.lib;dxgi.lib;D3dcompiler.lib;dxguid.lib;dinput8.lib;pdh.lib;BombastEngine.lib;BombastPhysics.lib;winmm.lib;qtmain.lib;Qt5Core.lib;Qt5Gui.lib;Qt5Widgets.lib;PhysX3Extensions.lib;PhysXVisualDebuggerSDK.lib;PhysX3_x86.lib;PhysX3Common_x86.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
@@ -137,7 +137,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <PreprocessorDefinitions>UNICODE;WIN32;WIN64;QT_DLL;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)Libraries\lua-5.2.3\include;.\GeneratedFiles;.;$(ProjectDir)..\Libraries\Qt\include;.\GeneratedFiles\$(ConfigurationName);$(ProjectDir)..\Libraries\Qt\include\QtCore;$(ProjectDir)..\Libraries\Qt\include\QtGui;$(ProjectDir)..\Libraries\Qt\include\QtWidgets;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\..\Source;$(SolutionDir)..\..\Source\Libraries\lua-5.2.3\include;.\GeneratedFiles;.;$(ProjectDir)..\Libraries\Qt\include;.\GeneratedFiles\$(ConfigurationName);$(ProjectDir)..\Libraries\Qt\include\QtCore;$(ProjectDir)..\Libraries\Qt\include\QtGui;$(ProjectDir)..\Libraries\Qt\include\QtWidgets;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat />
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
@@ -145,7 +145,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
-      <AdditionalLibraryDirectories>$(SolutionDir)..\Game\Lib\$(PlatformName)\$(Configuration)\;$(SolutionDir)Libraries\zlib128\lib\;$(SolutionDir)Libraries\lua-5.2.3\lib\$(PlatformName)\;$(SolutionDir)Libraries\PhysX-3.3.2\lib\$(PlatformName)\;$(ProjectDir)..\Libraries\Qt\lib\$(PlatformName)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\..\Lib\$(PlatformName)\$(Configuration)\;$(SolutionDir)..\..\Source\Libraries\zlib128\lib\;$(SolutionDir)..\..\Source\Libraries\lua-5.2.3\lib\$(PlatformName)\;$(SolutionDir)..\..\Source\Libraries\PhysX-3.3.2\lib\$(PlatformName)\;$(ProjectDir)..\Libraries\Qt\lib\$(PlatformName)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <AdditionalDependencies>lua52.lib;zdll.lib;d3d11.lib;dxgi.lib;D3dcompiler.lib;dxguid.lib;dinput8.lib;pdh.lib;BombastEngine.lib;BombastPhysics.lib;winmm.lib;qtmain.lib;Qt5Core.lib;Qt5Gui.lib;Qt5Widgets.lib;PhysX3Extensions.lib;PhysXVisualDebuggerSDK.lib;PhysX3_x64.lib;PhysX3Common_x64.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
