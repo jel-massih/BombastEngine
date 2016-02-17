@@ -11,68 +11,151 @@ Resource::Resource(const std::string& name)
 	std::transform(m_name.begin(), m_name.end(), m_name.begin(), (int(*)(int)) std::tolower);
 }
 
-ResourceZipFile::~ResourceZipFile()
+ZipResourceDepot::~ZipResourceDepot()
 {
-	SAFE_DELETE(m_pZipFile);
+	SAFE_DELETE_ARRAY(m_packages);
 }
 
-bool ResourceZipFile::VOpen()
+bool ZipResourceDepot::VOpen()
 {
-	m_pZipFile = BE_NEW ZipFile;
-	if (m_pZipFile)
+	//Iterates over packages directory and registers each package
+	return RegisterPackages();
+}
+
+bool ZipResourceDepot::RegisterPackages()
+{
+	HANDLE fileHandle;
+	WIN32_FIND_DATA findData;
+
+	//Get first file
+	std::wstring pathSpec = m_packagesRootPath + L"*";
+	fileHandle = FindFirstFile(pathSpec.c_str(), &findData);
+	if (fileHandle != INVALID_HANDLE_VALUE)
 	{
-		return m_pZipFile->Init(m_resFileName.c_str());
+		//Loop on all remaining entries
+		while (FindNextFile(fileHandle, &findData))
+		{
+			//Skip if file is hidden
+			if (findData.dwFileAttributes & FILE_ATTRIBUTE_HIDDEN)
+			{
+				continue;
+			}
+
+			std::wstring fileName = findData.cFileName;
+			//Do not currently support packages within directories, so throw Warning
+			if (findData.dwFileAttributes &FILE_ATTRIBUTE_DIRECTORY)
+			{
+				BE_WARNING("Packages within Directories are ignored");
+			}
+			else
+			{
+				std::wstring lower = fileName;
+				std::transform(lower.begin(), lower.end(), lower.begin(), (int(*)(int))std::tolower);
+				
+				lower = lower.substr(0, lower.find_last_of('.'));
+
+				//Add Package to mapping
+				m_packageMap[ws2s(lower)] = m_numPackages;
+				m_numPackages++;
+			}
+		}
 	}
-	return false;
+
+	FindClose(fileHandle);
+
+	m_packages = BE_NEW ZipFile[m_numPackages];
+	
+	//init each package
+	auto it = m_packageMap.begin();
+	while (it != m_packageMap.end())
+	{
+		bool packageInitializeSuccess = m_packages[(*it).second].Init(m_packagesRootPath + s2ws((*it).first + ".bpf"));
+		if (!packageInitializeSuccess)
+		{
+			return false;
+		}
+
+		it++;
+	}
+
+	return true;
 }
 
-int ResourceZipFile::VGetRawResourceSize(const Resource &r)
+ZipFile* const ZipResourceDepot::GetZipFileForResource(const Resource& r)
 {
-	size_t resourceNum = m_pZipFile->Find(r.m_name.c_str());
+	std::string packageName = r.m_name.substr(0, r.m_name.find('.'));
+
+	auto packageIndexIt = m_packageMap.find(packageName);
+	if (packageIndexIt == m_packageMap.end()) {
+		return nullptr;
+	}
+
+	return &m_packages[(*packageIndexIt).second];
+}
+
+int ZipResourceDepot::VGetRawResourceSize(const Resource &r)
+{
+	ZipFile* const zipResource = GetZipFileForResource(r);
+	if (zipResource == nullptr)
+	{
+		return -1;
+	}
+
+	size_t resourceNum = zipResource->Find(r.m_name.c_str());
 	if (resourceNum == -1)
 	{
 		return -1;
 	}
 
-	return m_pZipFile->GetFileLen(resourceNum);
+	return zipResource->GetFileLen(resourceNum);
 }
 
-size_t ResourceZipFile::VGetRawResource(const Resource& r, char* buffer)
+size_t ZipResourceDepot::VGetRawResource(const Resource& r, char* buffer)
 {
+	ZipFile* const zipResource = GetZipFileForResource(r);
+	if (zipResource == nullptr)
+	{
+		return -1;
+	}
+
 	size_t size = 0;
-	size_t resourceNum = m_pZipFile->Find(r.m_name.c_str());
+	size_t resourceNum = zipResource->Find(r.m_name.c_str());
 	if (resourceNum != -1)
 	{
-		size = m_pZipFile->GetFileLen(resourceNum);
-		m_pZipFile->ReadFile(resourceNum, buffer);
+		size = zipResource->GetFileLen(resourceNum);
+		zipResource->ReadFile(resourceNum, buffer);
 	}
 
 	return size;
 }
 
-size_t ResourceZipFile::VGetNumResources() const
+size_t ZipResourceDepot::VGetNumPackages() const
 {
-	return (m_pZipFile == NULL) ? 0 : m_pZipFile->GetNumFiles();
+	return m_numPackages;
 }
 
-std::string ResourceZipFile::VGetResourceName(size_t num) const
+size_t ZipResourceDepot::VGetNumResources(size_t packageIndex) const
+{
+	return (packageIndex < m_numPackages) ? 0 : m_packages[packageIndex].GetNumFiles();
+}
+
+std::string ZipResourceDepot::VGetResourceName(size_t packageIndex, size_t resourceIndex) const
 {
 	std::string resName = "";
-	if (m_pZipFile != NULL && num >= 0 && num < m_pZipFile->GetNumFiles())
+	if (packageIndex < m_numPackages && resourceIndex >= 0 && resourceIndex < m_packages[resourceIndex].GetNumFiles())
 	{
-		resName = m_pZipFile->GetFilename(num);
+		resName = m_packages[packageIndex].GetFilename(resourceIndex);
 	}
 
 	return resName;
 }
 
-DevelopmentResourceZipFile::DevelopmentResourceZipFile(const std::wstring resFilename)
-	: ResourceZipFile(resFilename)
+DevelopmentResourceDepot::DevelopmentResourceDepot(const std::wstring resFilename)
 {
 	m_assetsDir += s2ws(ROOT_GAME_PATH) + L"Assets/";
 }
 
-size_t DevelopmentResourceZipFile::Find(const std::string &name)
+size_t DevelopmentResourceDepot::Find(const std::string &name)
 {
 	std::string lowerCase = name;
 	std::transform(lowerCase.begin(), lowerCase.end(), lowerCase.begin(), (int(*)(int))std::tolower);
@@ -85,7 +168,7 @@ size_t DevelopmentResourceZipFile::Find(const std::string &name)
 	return i->second;
 }
 
-bool DevelopmentResourceZipFile::VOpen()
+bool DevelopmentResourceDepot::VOpen()
 {
 	//Open assets and read non-hidden stuff
 	ReadAssetsDirectory(L"*");
@@ -93,7 +176,7 @@ bool DevelopmentResourceZipFile::VOpen()
 	return true;
 }
 
-int DevelopmentResourceZipFile::VGetRawResourceSize(const Resource &r)
+int DevelopmentResourceDepot::VGetRawResourceSize(const Resource &r)
 {
 	size_t num = Find(r.m_name.c_str());
 	if (num == -1)
@@ -104,7 +187,7 @@ int DevelopmentResourceZipFile::VGetRawResourceSize(const Resource &r)
 	return m_assetsFileInfo[num].data.nFileSizeLow;
 }
 
-size_t DevelopmentResourceZipFile::VGetRawResource(const Resource &r, char* buffer)
+size_t DevelopmentResourceDepot::VGetRawResource(const Resource &r, char* buffer)
 {
 	size_t num = Find(r.m_name.c_str());
 	if (num == -1)
@@ -124,18 +207,23 @@ size_t DevelopmentResourceZipFile::VGetRawResource(const Resource &r, char* buff
 	return bytes;
 }
 
-size_t DevelopmentResourceZipFile::VGetNumResources() const
+size_t DevelopmentResourceDepot::VGetNumPackages() const
+{
+	return 1;
+}
+
+size_t DevelopmentResourceDepot::VGetNumResources(size_t packageIndex) const
 {
 	return m_assetsFileInfo.size();
 }
 
-std::string	DevelopmentResourceZipFile::VGetResourceName(size_t num) const
+std::string	DevelopmentResourceDepot::VGetResourceName(size_t packageIndex, size_t resourceIndex) const
 {
-	std::wstring wideName = m_assetsFileInfo[num].data.cFileName;
+	std::wstring wideName = m_assetsFileInfo[resourceIndex].data.cFileName;
 	return ws2s(wideName);
 }
 
-void DevelopmentResourceZipFile::ReadAssetsDirectory(std::wstring fileSpec)
+void DevelopmentResourceDepot::ReadAssetsDirectory(std::wstring fileSpec)
 {
 	HANDLE fileHandle;
 	WIN32_FIND_DATA findData;
@@ -204,11 +292,11 @@ ResourceHandle::~ResourceHandle()
 	m_pResourceCache->MemoryHasBeenFreed(m_size);
 }
 
-ResourceCache::ResourceCache(const unsigned int sizeInMb, IResourceFile* resFile)
+ResourceCache::ResourceCache(const unsigned int sizeInMb, IResourceDepot* resFile)
 {
 	m_cacheSize = sizeInMb * 1024 * 1024; //Total Memory Size (need to multiply to get bits) Mb -> kB -> b
 	m_allocated = 0;
-	m_pFile = resFile;
+	m_pDepot = resFile;
 }
 
 ResourceCache::~ResourceCache()
@@ -217,7 +305,7 @@ ResourceCache::~ResourceCache()
 	{
 		FreeOneResource();
 	}
-	SAFE_DELETE(m_pFile);
+	SAFE_DELETE(m_pDepot);
 
 	while (!m_resourceLoaders.empty())
 	{
@@ -229,7 +317,7 @@ ResourceCache::~ResourceCache()
 
 bool ResourceCache::Initialize()
 {
-	if (m_pFile->VOpen())
+	if (m_pDepot->VOpen())
 	{
 		RegisterLoader((IResourceLoader*)(BE_NEW DefaultResourceLoader()));
 		return true;
@@ -292,7 +380,7 @@ ResourceHandle* ResourceCache::Load(Resource* r)
 		return NULL;
 	}
 
-	int rawSize = m_pFile->VGetRawResourceSize(*r);
+	int rawSize = m_pDepot->VGetRawResourceSize(*r);
 	if (rawSize < 0)
 	{
 		BE_ERROR("Resource returned: %d - Resource not found or empty: %s", rawSize, r->m_name.c_str());
@@ -303,7 +391,7 @@ ResourceHandle* ResourceCache::Load(Resource* r)
 	char* rawBuffer = loader->VUseRawFile() ? Allocate(allocSize) : BE_NEW char[allocSize];
 	memset(rawBuffer, 0, allocSize);
 
-	if (rawBuffer == NULL || m_pFile->VGetRawResource(*r, rawBuffer) == 0)
+	if (rawBuffer == NULL || m_pDepot->VGetRawResource(*r, rawBuffer) == 0)
 	{
 		//Resource Cache Out of memory
 		BE_ERROR("Error Loading Resource: %s Resource Cache out of memory", r->m_name);
@@ -455,28 +543,32 @@ void ResourceCache::MemoryHasBeenFreed(unsigned int size)
 
 int ResourceCache::Preload(const std::string pattern, void(*progressCallback)(size_t, bool&))
 {
-	if (m_pFile == NULL)
+	if (m_pDepot == NULL)
 	{
 		return 0;
 	}
 
-	size_t numFiles = m_pFile->VGetNumResources();
+	size_t numPackages = m_pDepot->VGetNumPackages();
 	int loaded = 0;
 	bool cancel = false;
 
-	for (size_t i = 0; i < numFiles; i++)
+	for (size_t i = 0; i < numPackages; i++)
 	{
-		Resource resource(m_pFile->VGetResourceName(i));
-
-		if (WildcardMatch(pattern.c_str(), resource.m_name.c_str()))
+		size_t numResources = m_pDepot->VGetNumResources(i);
+		for (size_t j = 0; j < numResources; j++)
 		{
-			ResourceHandle* handle = g_pApp->m_pResourceCache->GetHandle(&resource);
-			loaded++;
-		}
+			Resource resource(m_pDepot->VGetResourceName(i, j));
 
-		if (progressCallback != NULL)
-		{
-			progressCallback(i * 100 / numFiles, cancel);
+			if (WildcardMatch(pattern.c_str(), resource.m_name.c_str()))
+			{
+				ResourceHandle* handle = g_pApp->m_pResourceCache->GetHandle(&resource);
+				loaded++;
+			}
+
+			if (progressCallback != NULL)
+			{
+				progressCallback(j * 100 / numResources, cancel);
+			}
 		}
 	}
 
@@ -487,17 +579,22 @@ int ResourceCache::Preload(const std::string pattern, void(*progressCallback)(si
 std::vector<std::string> ResourceCache::Match(const std::string pattern)
 {
 	std::vector<std::string> matchingNames;
-	if (m_pFile == NULL)
+	if (m_pDepot == NULL)
 		return matchingNames;
 
-	size_t numFiles = m_pFile->VGetNumResources();
-	for (size_t i = 0; i<numFiles; ++i)
+	size_t numPackages = m_pDepot->VGetNumPackages();
+
+	for (int i = 0; i < numPackages; i++)
 	{
-		std::string name = m_pFile->VGetResourceName(i);
-		std::transform(name.begin(), name.end(), name.begin(), (int(*)(int)) std::tolower);
-		if (WildcardMatch(pattern.c_str(), name.c_str()))
+		size_t numFiles = m_pDepot->VGetNumResources(i);
+		for (size_t j = 0; j < numFiles; j++)
 		{
-			matchingNames.push_back(name);
+			std::string name = m_pDepot->VGetResourceName(i, j);
+			std::transform(name.begin(), name.end(), name.begin(), (int(*)(int)) std::tolower);
+			if (WildcardMatch(pattern.c_str(), name.c_str()))
+			{
+				matchingNames.push_back(name);
+			}
 		}
 	}
 	return matchingNames;

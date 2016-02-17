@@ -10,5 +10,5 @@
 
   <UVScale x="1" y="1" />
 
-  <Shader type="LitTextured"/>
+  <Shader type="Lit"/>
 </Material>

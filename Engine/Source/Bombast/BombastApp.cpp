@@ -66,13 +66,18 @@ bool BombastApp::InitInstance(HINSTANCE hInstance, HWND hWnd, int screenWidth, i
 	m_screenSize = Point(screenWidth, screenheight);
 	m_screenPosition = Point(screenX, screenY);
 
-	IResourceFile* zipFile = BE_NEW DevelopmentResourceZipFile(s2ws(ROOT_GAME_PATH + "Assets/"));
+#ifdef _DEBUG
+	//IResourceDepot* zipFile = BE_NEW DevelopmentResourceZipFile(s2ws(ROOT_GAME_PATH + "Assets/"));
+	IResourceDepot* zipFile = BE_NEW ZipResourceDepot(s2ws(ROOT_GAME_PATH + "Packages/"));
+#else
+	IResourceDepot* zipFile = BE_NEW ResourceZipFile(s2ws(ROOT_GAME_PATH + "Packages/"));
+#endif
 
 	m_pResourceCache = BE_NEW ResourceCache(50, zipFile);
 
 	if (!m_pResourceCache->Initialize())
 	{
-		BE_ERROR("Resource Error: Failed to initialize Resource Cashe");
+		BE_ERROR("Resource Error: Failed to initialize Resource Cache");
 		return false;
 	}
 

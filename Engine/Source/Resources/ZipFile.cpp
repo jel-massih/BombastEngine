@@ -158,16 +158,21 @@ bool ZipFile::Init(const std::wstring &resFileName)
 		{
 			pfh += sizeof(fh);
 
-			// Convert UNIX slashes to DOS backlashes.
+			// Convert slashes to dots.
 			for (int j = 0; j < fh.fnameLen; j++)
-			if (pfh[j] == '/')
-				pfh[j] = '\\';
+			{
+				if (pfh[j] == '/' || pfh[j] == '\\')
+				{
+					pfh[j] = '.';
+				}
+			}
 
 			char fileName[_MAX_PATH];
 			memcpy(fileName, pfh, fh.fnameLen);
 			fileName[fh.fnameLen] = 0;
 			_strlwr_s(fileName, _MAX_PATH);
 			std::string spath = fileName;
+
 			m_ZipContentsMap[spath] = i;
 
 			// Skip name, extra and comment fields.
@@ -190,6 +195,7 @@ size_t ZipFile::Find(const std::string &path) const
 {
 	std::string lowerCase = path;
 	std::transform(lowerCase.begin(), lowerCase.end(), lowerCase.begin(), (int(*)(int)) std::tolower);
+
 	ZipContentsMap::const_iterator i = m_ZipContentsMap.find(lowerCase);
 	if (i == m_ZipContentsMap.end())
 		return -1;

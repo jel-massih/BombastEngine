@@ -23,25 +23,33 @@ public:
 	Resource(const std::string &name);
 };
 
-class ResourceZipFile : public IResourceFile
+class ZipResourceDepot : public IResourceDepot
 {
-	ZipFile *m_pZipFile;
-	std::wstring m_resFileName;
-
 public:
-	ResourceZipFile(const std::wstring resFileName) { m_pZipFile = NULL; m_resFileName = resFileName; }
-	virtual ~ResourceZipFile();
+	ZipResourceDepot(const std::wstring packagesRootPath) :m_numPackages(0), m_packages(nullptr), m_packagesRootPath(packagesRootPath) {}
+	virtual ~ZipResourceDepot();
 
-	virtual bool VOpen();
-	virtual int VGetRawResourceSize(const Resource &r);
-	virtual size_t VGetRawResource(const Resource &r, char *buffer);
-	virtual size_t VGetNumResources() const;
-	virtual std::string VGetResourceName(size_t num) const;
-	virtual bool VIsUsingDevelopmentDirectories(void) const { return false; }
+	virtual bool VOpen() override;
+	virtual int VGetRawResourceSize(const Resource &r) override;
+	virtual size_t VGetRawResource(const Resource &r, char *buffer) override;
+	virtual size_t VGetNumPackages() const override;
+	virtual size_t VGetNumResources(size_t packageIndex = 0) const override;
+	virtual std::string VGetResourceName(size_t packageIndex, size_t resourceIndex) const override;
+
+private:
+	bool RegisterPackages();
+	ZipFile* const GetZipFileForResource(const Resource& r);
+
+private:
+	ZipContentsMap m_packageMap;
+	std::wstring m_packagesRootPath;
+	
+	unsigned short m_numPackages;
+	ZipFile* m_packages;
 };
 
-//Fakes zip file from normal directory for easier development
-class DevelopmentResourceZipFile : public ResourceZipFile
+//No packaging, just in regular folders
+class DevelopmentResourceDepot : public IResourceDepot
 {
 public:
 	struct AssetFileInfo
@@ -55,13 +63,14 @@ public:
 	std::vector<AssetFileInfo> m_assetsFileInfo;
 	ZipContentsMap m_directoryContentsMap;
 
-	DevelopmentResourceZipFile(const std::wstring resFileName);
+	DevelopmentResourceDepot(const std::wstring resFileName);
 
 	virtual bool VOpen();
 	virtual int VGetRawResourceSize(const Resource &r);
 	virtual size_t VGetRawResource(const Resource &r, char *buffer);
-	virtual size_t VGetNumResources() const;
-	virtual std::string VGetResourceName(size_t num) const;
+	virtual size_t VGetNumPackages() const override;
+	virtual size_t VGetNumResources(size_t packageIndex = 0) const override;
+	virtual std::string VGetResourceName(size_t packageIndex, size_t resourceIndex) const;
 	virtual bool VIsUsingDevelopmentDirectories(void) const { return true; }
 
 	size_t Find(const std::string &path);
@@ -117,13 +126,13 @@ class ResourceCache
 	ResourceHandleMap m_resources;
 	ResourceLoaderList m_resourceLoaders;
 
-	IResourceFile* m_pFile;
+	IResourceDepot* m_pDepot;
 
 	unsigned int m_cacheSize;
 	unsigned int m_allocated;
 
 public:
-	ResourceCache(const unsigned int sizeInMb, IResourceFile* file);
+	ResourceCache(const unsigned int sizeInMb, IResourceDepot* depot);
 	virtual ~ResourceCache();
 
 	bool Initialize();

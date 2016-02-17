@@ -111,15 +111,16 @@ public:
 	virtual bool VLoadResource(char *rawBuffer, unsigned int rawSize, ResourceHandle* handle) = 0;
 };
 
-class IResourceFile
+class IResourceDepot
 {
 public:
 	virtual bool VOpen() = 0;
 	virtual int VGetRawResourceSize(const Resource &r) = 0;
 	virtual size_t VGetRawResource(const Resource &r, char *buffer) = 0;
-	virtual size_t VGetNumResources() const = 0;
-	virtual std::string VGetResourceName(size_t num) const = 0;
-	virtual ~IResourceFile() { }
+	virtual size_t VGetNumPackages() const = 0;
+	virtual size_t VGetNumResources(size_t packageIndex = 0) const = 0;
+	virtual std::string VGetResourceName(size_t packageIndex, size_t resourceIndex) const = 0;
+	virtual ~IResourceDepot() { }
 };
 
 enum RenderPass
