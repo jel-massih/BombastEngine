@@ -255,7 +255,7 @@ int ZipFile::GetFileLen(size_t i) const
 // Parameters:    The file index and the pre-allocated buffer
 // --------------------------------------------------------------------------
 bool ZipFile::ReadFile(size_t i, void *pBuf)
-{/*
+{
 	if (pBuf == NULL || i < 0 || i >= m_nEntries)
 	return false;
 
@@ -318,7 +318,7 @@ bool ZipFile::ReadFile(size_t i, void *pBuf)
 	ret = false;
 
 	delete[] pcData;
-	return ret;*/return true;
+	return ret;
 }
 
 
