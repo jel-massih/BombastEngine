@@ -50,3 +50,4 @@ Tools/ShaderGenerator/obj/*
 
 !Engine/Source/Libraries/lua-5.2.3/lib/Win32/lua52.lib
 !Engine/Source/Libraries/zlib128/lib/zdll.lib
+BombastEngine.VC.db
