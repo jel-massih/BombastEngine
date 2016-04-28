@@ -40,5 +40,8 @@ protected:
 
 	float m_turnRate;
 
+	bool m_bCameraTrackMouseOnRightHold;
+	bool m_bCameraTrackMouse;
+
 	SceneNode* m_pObject;
 };

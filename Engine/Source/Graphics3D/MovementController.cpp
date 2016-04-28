@@ -4,7 +4,7 @@
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
 
 MovementController::MovementController(SceneNode* pObject, float initialYaw, float initialPitch, bool rotateWhenLButtonDown)
-	:m_pObject(pObject)
+	:m_pObject(pObject), m_bCameraTrackMouseOnRightHold(rotateWhenLButtonDown), m_bCameraTrackMouse(false)
 {
 	pObject->VGet()->Transform(&m_matToWorld, &m_matFromWorld);
 
@@ -135,34 +135,45 @@ void MovementController::OnUpdate(const float deltaMs)
 
 bool MovementController::VOnMouseMove(const Point &pos, const int radius)
 {
-	Point screenSize = g_pApp->GetScreenSize();
-	const int mouseDeltaX = pos.GetX() - (screenSize.GetX() / 2);
-	const int mouseDeltaY = pos.GetY() - (screenSize.GetY() / 2);
-	POINT pt;
-	pt.x = (screenSize.GetX() / 2);
-	pt.y = (screenSize.GetY() / 2);
-	ClientToScreen(g_pApp->GetHwnd(), &pt);
-	SetCursorPos(pt.x, pt.y);
+	if (m_bCameraTrackMouse)
+	{
+		Point screenSize = g_pApp->GetScreenSize();
+		const int mouseDeltaX = pos.GetX() - (screenSize.GetX() / 2);
+		const int mouseDeltaY = pos.GetY() - (screenSize.GetY() / 2);
+		POINT pt;
+		pt.x = (screenSize.GetX() / 2);
+		pt.y = (screenSize.GetY() / 2);
+		ClientToScreen(g_pApp->GetHwnd(), &pt);
+		SetCursorPos(pt.x, pt.y);
 
 
-	float lookRightDeg = mouseDeltaX * 0.1;
-	float lookUpDeg = mouseDeltaY * 0.1;
+		float lookRightDeg = mouseDeltaX * 0.1;
+		float lookUpDeg = mouseDeltaY * 0.1;
 
-	static const float zenithMinDeclination = 1;
-	static const float zenithMaxDeclination = 180 - 1;
+		static const float zenithMinDeclination = 1;
+		static const float zenithMaxDeclination = 180 - 1;
 
-	m_targetPitch += lookRightDeg;
-	m_targetYaw += lookUpDeg;
+		m_targetPitch += lookRightDeg;
+		m_targetYaw += lookUpDeg;
+	}
 
 	return true;
 }
 
 bool MovementController::VOnMouseDown(const Point &pos, const int radius, const std::string &buttonName)
 {
-	return false;
+	if (buttonName == "PointerRight" && m_bCameraTrackMouseOnRightHold)
+	{
+		m_bCameraTrackMouse = true;
+	}
+	return true;
 }
 
 bool MovementController::VOnMouseUp(const Point &pos, const int radius, const std::string &buttonName)
 {
-	return false;
+	if (buttonName == "PointerRight") {
+		m_bCameraTrackMouse = false;
+	}
+
+	return true;
 }
