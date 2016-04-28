@@ -56,6 +56,9 @@
     <ClCompile Include="..\BombastEditor\bombasteditormain.cpp">
       <Filter>Form Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\BombastEditor\BombastEditorController.cpp">
+      <Filter>BombastEditor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="bombasteditor.qrc">
@@ -85,5 +88,11 @@
       <Filter>BombastEditor</Filter>
     </ClInclude>
     <ClInclude Include="..\Msvc\BombastEditorStd.h" />
+    <ClInclude Include="..\BombastEditor\BombastEditorEvents.h">
+      <Filter>BombastEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\BombastEditor\BombastEditorController.h">
+      <Filter>BombastEditor</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

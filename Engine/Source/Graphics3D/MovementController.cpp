@@ -135,13 +135,25 @@ void MovementController::OnUpdate(const float deltaMs)
 
 bool MovementController::VOnMouseMove(const Point &pos, const int radius)
 {
-	if (m_lastMousePos != pos)
-	{
-		//m_targetYaw += m_lastMousePos.x - pos.x;
-		//m_targetPitch += pos.y - m_lastMousePos.y;
+	Point screenSize = g_pApp->GetScreenSize();
+	const int mouseDeltaX = pos.GetX() - (screenSize.GetX() / 2);
+	const int mouseDeltaY = pos.GetY() - (screenSize.GetY() / 2);
+	POINT pt;
+	pt.x = (screenSize.GetX() / 2);
+	pt.y = (screenSize.GetY() / 2);
+	ClientToScreen(g_pApp->GetHwnd(), &pt);
+	SetCursorPos(pt.x, pt.y);
 
-		m_lastMousePos = pos;
-	}
+
+	float lookRightDeg = mouseDeltaX * 0.1;
+	float lookUpDeg = mouseDeltaY * 0.1;
+
+	static const float zenithMinDeclination = 1;
+	static const float zenithMaxDeclination = 180 - 1;
+
+	m_targetPitch += lookRightDeg;
+	m_targetYaw += lookUpDeg;
+
 	return true;
 }
 
