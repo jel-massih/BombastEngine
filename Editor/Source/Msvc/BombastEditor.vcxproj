@@ -153,6 +153,7 @@
   <ItemGroup>
     <ClCompile Include="..\Application\MessageHandler.cpp" />
     <ClCompile Include="..\BombastEditor\BombastEditor.cpp" />
+    <ClCompile Include="..\BombastEditor\BombastEditorController.cpp" />
     <ClCompile Include="..\BombastEditor\BombastEditorLogic.cpp" />
     <ClCompile Include="..\BombastEditor\bombasteditormain.cpp" />
     <ClCompile Include="..\BombastEditor\BombastEditorView.cpp" />
@@ -193,6 +194,8 @@
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -D_UNICODE "-I$(SolutionDir)\." "-I$(SolutionDir)Libraries\lua-5.2.3\include" "-I.\GeneratedFiles" "-I." "-I$(ProjectDir)..\Libraries\Qt\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(ProjectDir)..\Libraries\Qt\include\QtCore" "-I$(ProjectDir)..\Libraries\Qt\include\QtGui" "-I$(ProjectDir)..\Libraries\Qt\include\QtWidgets"</Command>
     </CustomBuild>
     <ClInclude Include="..\BombastEditor\BombastEditor.h" />
+    <ClInclude Include="..\BombastEditor\BombastEditorController.h" />
+    <ClInclude Include="..\BombastEditor\BombastEditorEvents.h" />
     <ClInclude Include="..\BombastEditor\BombastEditorLogic.h" />
     <ClInclude Include="..\BombastEditor\BombastEditorView.h" />
     <ClInclude Include="GeneratedFiles\ui_bombasteditormain.h" />
