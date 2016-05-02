@@ -1,9 +1,0 @@
-<Material name="sp_00_vrata_krug">
-	<Ambient r="0" g="0" b="0" a="1"/>
-	<Diffuse r="0.784314" g="0.784314" b="0.784314" a="1"/>
-	<Specular r="0" g="0" b="0" a="1" power="80" />
-	<Emmisive r="0" g="0" b="0" a="1"/>
-	<Textures>
-		<Texture path="textures\sponza\VRATA_KR.JPG"/>	</Textures>
-	<Shader type="DeferredLit"/>
-</Material>
