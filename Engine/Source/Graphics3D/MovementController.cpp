@@ -3,8 +3,8 @@
 #define MAX(a, b) ((a) >= (b) ? (a) : (b))
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
 
-MovementController::MovementController(SceneNode* pObject, float initialYaw, float initialPitch, bool rotateWhenLButtonDown)
-	:m_pObject(pObject), m_bCameraTrackMouseOnRightHold(rotateWhenLButtonDown), m_bCameraTrackMouse(false)
+MovementController::MovementController(SceneNode* pObject, float initialYaw, float initialPitch, bool rotateWhenRButtonDown)
+	:m_pObject(pObject), m_bCameraTrackMouseOnRightHold(rotateWhenRButtonDown), m_bCameraTrackMouse(false)
 {
 	pObject->VGet()->Transform(&m_matToWorld, &m_matFromWorld);
 

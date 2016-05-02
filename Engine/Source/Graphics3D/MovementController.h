@@ -3,7 +3,7 @@
 class MovementController : public IMouseHandler, public IKeyboardHandler
 {
 public:
-	MovementController(SceneNode* pObject, float initialYaw, float initialPitch, bool rotateWhenLButtonDown);
+	MovementController(SceneNode* pObject, float initialYaw, float initialPitch, bool rotateWhenRButtonDown);
 	void SetObject(SceneNode* pNewObject);
 
 	void OnUpdate(const float deltaMs);
