@@ -118,6 +118,8 @@ GameOptions::GameOptions()
 	m_debugLogName = DEBUG_LOG_FILENAME;
 
 	m_pDoc = NULL;
+
+	m_additionalContentDirectories = "";
 }
 
 void GameOptions::Init(const char* xmlFilePath, LPWSTR lpCmdLine)
@@ -277,6 +279,27 @@ void GameOptions::Init(const char* xmlFilePath, LPWSTR lpCmdLine)
 			if (pDebugNode->first_attribute("filename"))
 			{
 				m_debugLogName = pDebugNode->first_attribute("filename")->value();
+			}
+		}
+	}
+
+	pNode = pRoot->first_node("Resources");
+	if (pNode)
+	{
+		xml_node<>* pAdditionalResourcePaths = pNode->first_node("AdditionalContentPaths");
+		if (pAdditionalResourcePaths)
+		{
+			xml_node<>* pPathNode = pAdditionalResourcePaths->first_node("ContentDirectory");
+			if (pPathNode) {
+				do {
+					m_additionalContentDirectories += pPathNode->value();
+					m_additionalContentDirectories += ",";
+					pPathNode = pPathNode->next_sibling("ContentDirectory");
+				} while (pPathNode);
+
+				if (m_additionalContentDirectories.length() > 0) {
+					m_additionalContentDirectories.erase(m_additionalContentDirectories.length() - 1);
+				}
 			}
 		}
 	}

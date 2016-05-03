@@ -67,8 +67,22 @@ bool BombastApp::InitInstance(HINSTANCE hInstance, HWND hWnd, int screenWidth, i
 	m_screenPosition = Point(screenX, screenY);
 
 #ifdef _DEBUG
-	//IResourceDepot* zipFile = BE_NEW DevelopmentResourceZipFile(s2ws(ROOT_GAME_PATH + "Assets/"));
-	IResourceDepot* zipFile = BE_NEW ZipResourceDepot(s2ws(ROOT_GAME_PATH + "Packages/"));
+	IResourceDepot* zipFile = BE_NEW ZipResourceDepot();
+	{
+		//Add default Engine Resources Path
+		zipFile->VAddPackageDirectory(s2ws(ROOT_GAME_PATH + "Packages/"));
+
+		int pathIndex = 0;
+		std::string additionalPaths = m_options.m_additionalContentDirectories;
+		std::string path;
+		while ((pathIndex = additionalPaths.find(',')) != std::string::npos)
+		{
+			path = additionalPaths.substr(0, pathIndex);
+			zipFile->VAddPackageDirectory(s2ws(path.c_str()));
+			additionalPaths.erase(0, pathIndex + 1);
+		}
+	}
+	//zipFile->VAddDirectory()
 #else
 	IResourceDepot* zipFile = BE_NEW ResourceZipFile(s2ws(ROOT_GAME_PATH + "Packages/"));
 #endif

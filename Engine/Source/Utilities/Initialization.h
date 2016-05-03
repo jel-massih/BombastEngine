@@ -30,6 +30,8 @@ struct GameOptions
 	std::string m_debugLogPath;
 	std::string m_debugLogName;
 
+	std::string m_additionalContentDirectories;
+
 	GameOptions();
 	~GameOptions() { SAFE_DELETE(m_pDoc); }
 

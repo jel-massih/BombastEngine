@@ -150,6 +150,11 @@ std::string ZipResourceDepot::VGetResourceName(size_t packageIndex, size_t resou
 	return resName;
 }
 
+void ZipResourceDepot::VAddPackageDirectory(std::wstring directoryName)
+{
+	m_packagePaths.push_back(directoryName);
+}
+
 DevelopmentResourceDepot::DevelopmentResourceDepot(const std::wstring resFilename)
 {
 	m_assetsDir += s2ws(ROOT_GAME_PATH) + L"Assets/";

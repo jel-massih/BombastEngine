@@ -120,6 +120,7 @@ public:
 	virtual size_t VGetNumPackages() const = 0;
 	virtual size_t VGetNumResources(size_t packageIndex = 0) const = 0;
 	virtual std::string VGetResourceName(size_t packageIndex, size_t resourceIndex) const = 0;
+	virtual void VAddPackageDirectory(std::wstring directoryName) = 0;
 	virtual ~IResourceDepot() { }
 };
 

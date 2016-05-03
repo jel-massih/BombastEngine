@@ -26,7 +26,7 @@ public:
 class ZipResourceDepot : public IResourceDepot
 {
 public:
-	ZipResourceDepot(const std::wstring packagesRootPath) :m_numPackages(0), m_packages(nullptr), m_packagesRootPath(packagesRootPath) {}
+	ZipResourceDepot() :m_numPackages(0), m_packages(nullptr) {}
 	virtual ~ZipResourceDepot();
 
 	virtual bool VOpen() override;
@@ -35,6 +35,7 @@ public:
 	virtual size_t VGetNumPackages() const override;
 	virtual size_t VGetNumResources(size_t packageIndex = 0) const override;
 	virtual std::string VGetResourceName(size_t packageIndex, size_t resourceIndex) const override;
+	virtual void VAddPackageDirectory(std::wstring directoryName) override;
 
 private:
 	bool RegisterPackages();
@@ -42,7 +43,7 @@ private:
 
 private:
 	ZipContentsMap m_packageMap;
-	std::wstring m_packagesRootPath;
+	std::vector<std::wstring> m_packagePaths;
 	
 	unsigned short m_numPackages;
 	ZipFile* m_packages;
