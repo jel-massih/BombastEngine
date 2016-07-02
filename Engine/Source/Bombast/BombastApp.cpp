@@ -70,7 +70,7 @@ bool BombastApp::InitInstance(HINSTANCE hInstance, HWND hWnd, int screenWidth, i
 	IResourceDepot* zipFile = BE_NEW ZipResourceDepot();
 	{
 		//Add default Engine Resources Path
-		zipFile->VAddPackageDirectory(s2ws(ROOT_GAME_PATH + "Packages/"));
+		zipFile->VAddPackageDirectory(s2ws(ROOT_ENGINE_PATH + "Packages/"));
 
 		int pathIndex = 0;
 		std::string additionalPaths = m_options.m_additionalContentDirectories;
@@ -84,7 +84,7 @@ bool BombastApp::InitInstance(HINSTANCE hInstance, HWND hWnd, int screenWidth, i
 	}
 	//zipFile->VAddDirectory()
 #else
-	IResourceDepot* zipFile = BE_NEW ResourceZipFile(s2ws(ROOT_GAME_PATH + "Packages/"));
+	IResourceDepot* zipFile = BE_NEW ResourceZipFile(s2ws(ROOT_ENGINE_PATH + "Packages/"));
 #endif
 
 	m_pResourceCache = BE_NEW ResourceCache(50, zipFile);

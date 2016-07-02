@@ -11,6 +11,21 @@
 #include <stdio.h>
 #include <map>
 
+struct ZipMappingDetails
+{
+	size_t index;
+	std::string packagePath;
+
+	ZipMappingDetails() {}
+
+	ZipMappingDetails(size_t index, std::string packagePath)
+	{
+		this->index = index;
+		this->packagePath = packagePath;
+	}
+};
+
+typedef std::map<std::string, ZipMappingDetails> PackageMap;// maps package name to a zip details
 typedef std::map<std::string, size_t> ZipContentsMap;		// maps path to a zip content id
 
 class ZipFile

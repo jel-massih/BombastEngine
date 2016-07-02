@@ -38,11 +38,12 @@ public:
 	virtual void VAddPackageDirectory(std::wstring directoryName) override;
 
 private:
-	bool RegisterPackages();
+	bool RegisterPackages(std::wstring basePackagePath);
+	bool InitializePackages();
 	ZipFile* const GetZipFileForResource(const Resource& r);
 
 private:
-	ZipContentsMap m_packageMap;
+	PackageMap m_packageMap;
 	std::vector<std::wstring> m_packagePaths;
 	
 	unsigned short m_numPackages;

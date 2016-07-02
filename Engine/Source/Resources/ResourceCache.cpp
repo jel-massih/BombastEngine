@@ -18,17 +18,29 @@ ZipResourceDepot::~ZipResourceDepot()
 
 bool ZipResourceDepot::VOpen()
 {
-	//Iterates over packages directory and registers each package
-	return RegisterPackages();
+	bool success = true;
+
+	for (auto it = m_packagePaths.begin(); it != m_packagePaths.end(); it++)
+	{
+		//Iterates over packages directory and registers each package
+		success = success && RegisterPackages(*it);
+	}
+
+	if (success)
+	{
+		success = InitializePackages();
+	}
+
+	return success;
 }
 
-bool ZipResourceDepot::RegisterPackages()
+bool ZipResourceDepot::RegisterPackages(std::wstring basePackagePath)
 {
 	HANDLE fileHandle;
 	WIN32_FIND_DATA findData;
 
 	//Get first file
-	std::wstring pathSpec = m_packagesRootPath + L"*";
+	std::wstring pathSpec = basePackagePath + L"*";
 	fileHandle = FindFirstFile(pathSpec.c_str(), &findData);
 	if (fileHandle != INVALID_HANDLE_VALUE)
 	{
@@ -41,7 +53,6 @@ bool ZipResourceDepot::RegisterPackages()
 				continue;
 			}
 
-			std::wstring fileName = findData.cFileName;
 			//Do not currently support packages within directories, so throw Warning
 			if (findData.dwFileAttributes &FILE_ATTRIBUTE_DIRECTORY)
 			{
@@ -49,13 +60,17 @@ bool ZipResourceDepot::RegisterPackages()
 			}
 			else
 			{
-				std::wstring lower = fileName;
-				std::transform(lower.begin(), lower.end(), lower.begin(), (int(*)(int))std::tolower);
+				std::wstring filename = findData.cFileName;
+				std::wstring lowerPackageName = filename;
 				
-				lower = lower.substr(0, lower.find_last_of('.'));
+				std::transform(lowerPackageName.begin(), lowerPackageName.end(), lowerPackageName.begin(), (int(*)(int))std::tolower);
+				lowerPackageName = lowerPackageName.substr(0, lowerPackageName.find_last_of('.'));
+
+				pathSpec = pathSpec.substr(0, pathSpec.find_last_of('/'));
+				pathSpec = pathSpec + s2ws("/") + filename;
 
 				//Add Package to mapping
-				m_packageMap[ws2s(lower)] = m_numPackages;
+				m_packageMap[ws2s(lowerPackageName)] = ZipMappingDetails(m_numPackages, ws2s(pathSpec));
 				m_numPackages++;
 			}
 		}
@@ -63,13 +78,19 @@ bool ZipResourceDepot::RegisterPackages()
 
 	FindClose(fileHandle);
 
+
+	return true;
+}
+
+bool ZipResourceDepot::InitializePackages()
+{
 	m_packages = BE_NEW ZipFile[m_numPackages];
-	
+
 	//init each package
 	auto it = m_packageMap.begin();
 	while (it != m_packageMap.end())
 	{
-		bool packageInitializeSuccess = m_packages[(*it).second].Init(m_packagesRootPath + s2ws((*it).first + ".bpf"));
+		bool packageInitializeSuccess = m_packages[(*it).second.index].Init(s2ws((*it).second.packagePath));
 		if (!packageInitializeSuccess)
 		{
 			return false;
@@ -90,7 +111,7 @@ ZipFile* const ZipResourceDepot::GetZipFileForResource(const Resource& r)
 		return nullptr;
 	}
 
-	return &m_packages[(*packageIndexIt).second];
+	return &m_packages[(*packageIndexIt).second.index];
 }
 
 int ZipResourceDepot::VGetRawResourceSize(const Resource &r)
@@ -157,7 +178,7 @@ void ZipResourceDepot::VAddPackageDirectory(std::wstring directoryName)
 
 DevelopmentResourceDepot::DevelopmentResourceDepot(const std::wstring resFilename)
 {
-	m_assetsDir += s2ws(ROOT_GAME_PATH) + L"Assets/";
+	m_assetsDir += s2ws(ROOT_ENGINE_PATH) + L"Assets/";
 }
 
 size_t DevelopmentResourceDepot::Find(const std::string &name)

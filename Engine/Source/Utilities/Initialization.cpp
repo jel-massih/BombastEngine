@@ -296,10 +296,6 @@ void GameOptions::Init(const char* xmlFilePath, LPWSTR lpCmdLine)
 					m_additionalContentDirectories += ",";
 					pPathNode = pPathNode->next_sibling("ContentDirectory");
 				} while (pPathNode);
-
-				if (m_additionalContentDirectories.length() > 0) {
-					m_additionalContentDirectories.erase(m_additionalContentDirectories.length() - 1);
-				}
 			}
 		}
 	}

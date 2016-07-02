@@ -31,6 +31,7 @@ const int SCREEN_HEIGHT = 480;
 const int SCREEN_X = 0;
 const int SCREEN_Y = 0;
 
+extern std::string ROOT_ENGINE_PATH;
 extern std::string ROOT_GAME_PATH;
 
 #include "Debugging\Logger.h"
