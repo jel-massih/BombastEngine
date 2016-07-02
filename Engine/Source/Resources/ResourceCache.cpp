@@ -56,7 +56,11 @@ bool ZipResourceDepot::RegisterPackages(std::wstring basePackagePath)
 			//Do not currently support packages within directories, so throw Warning
 			if (findData.dwFileAttributes &FILE_ATTRIBUTE_DIRECTORY)
 			{
-				BE_WARNING("Packages within Directories are ignored");
+				//Do not warn for directory symbol
+				if (findData.cFileName != s2ws(".."))
+				{
+					BE_WARNING("Packages within Directories are ignored");
+				}
 			}
 			else
 			{
