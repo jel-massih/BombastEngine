@@ -3,6 +3,27 @@
 #include "../Resources/LuaResource.h"
 #include "LuaExports.h"
 
+#include <iostream>
+
+static int l_print_intercept(lua_State* L)
+{
+	int nargs = lua_gettop(L);
+	std::string printString;
+	for (int i = 1; i <= nargs; i++)
+	{
+		printString += lua_tostring(L, i);
+	}
+
+	BE_LOG_SCRIPT(printString.c_str());
+
+	return 0;
+}
+
+static const struct luaL_Reg interceptLib[] = {
+	{ "print", l_print_intercept },
+	{ nullptr, nullptr }
+};
+
 LuaCoreManager::~LuaCoreManager()
 {
 	if (L)
@@ -17,6 +38,11 @@ bool LuaCoreManager::Initialize()
 
 	//Load ALL THE LIBS!!!!!!!!!
 	luaL_openlibs(L);
+	
+	//Add intercept
+	lua_getglobal(L, "_G");
+	luaL_setfuncs(L, interceptLib, 0);
+	lua_pop(L, 1);
 
 	if (!RegisterLoader())
 	{
