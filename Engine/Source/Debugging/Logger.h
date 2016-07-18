@@ -5,6 +5,8 @@ namespace BELogger
 	void Init(bool bDebugConsoleEnabled, const char* logPath, const char* logName);
 	void Destroy();
 
+	void Assert(bool expr, const char* message, ...);
+	
 	void Log(const char* tag, const char* message, const char* func, const char* file, unsigned int lineNum, ...);
 	void SetDisplayFlags(const char* tag, unsigned char flags);
 }
@@ -32,11 +34,12 @@ namespace BELogger
 		} \
 	} while (0) \
 
-#define BE_ASSERTf(expr, message) \
+#define BE_ASSERTf(expr, message, ...) \
 	do { \
 		if (!(expr)) \
 		{ \
-			assert(expr && message); \
+			BE_LOG("ASSERT FAIL", message, ##__VA_ARGS__); \
+			BELogger::Assert(expr, message, ##__VA_ARGS__); \
 		} \
 	} while (0) \
 

@@ -145,6 +145,19 @@ namespace BELogger
 		SAFE_DELETE(s_pLogManager);
 	}
 
+	void Assert(bool expr, const char* message, ...)
+	{
+		if (s_pLogManager)
+		{
+			va_list args;
+			va_start(args, message);
+
+			char formattedMsg[LOG_MESSAGE_SIZE];
+			vsprintf_s(formattedMsg, sizeof(formattedMsg), message, args);
+			assert(expr && formattedMsg);
+		}
+	}
+
 	void Log(const char* tag, const char* message, const char* func, const char* file, unsigned int lineNum, ...)
 	{
 		if (s_pLogManager)

@@ -105,7 +105,7 @@ void PhysicsComponent::VPostInit()
 		}
 		else 
 		{
-			BE_ERROR("Shape not supported: %s", m_shape);
+			BE_ERROR("Shape not supported: %s", m_shape.c_str());
 		}
 	}
 }

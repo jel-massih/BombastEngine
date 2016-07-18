@@ -424,7 +424,7 @@ ResourceHandle* ResourceCache::Load(Resource* r)
 	if (rawBuffer == NULL || m_pDepot->VGetRawResource(*r, rawBuffer) == 0)
 	{
 		//Resource Cache Out of memory
-		BE_ERROR("Error Loading Resource: %s Resource Cache out of memory", r->m_name);
+		BE_ERROR("Error Loading Resource: %s Resource Cache out of memory", r->m_name.c_str());
 		return NULL;
 	}
 
@@ -448,7 +448,7 @@ ResourceHandle* ResourceCache::Load(Resource* r)
 		if (rawBuffer == NULL || buffer == NULL)
 		{
 			//Resource Cache Out of memory
-			BE_ERROR("Error Loading Resource: %s Resource Cache out of memory", r->m_name);
+			BE_ERROR("Error Loading Resource: %s Resource Cache out of memory", r->m_name.c_str());
 			return NULL;
 		}
 
@@ -463,7 +463,7 @@ ResourceHandle* ResourceCache::Load(Resource* r)
 		if (!success)
 		{
 			//Failed To load Resource
-			BE_ERROR("Error Loading Resource: %s Failed to load resource", r->m_name);
+			BE_ERROR("Error Loading Resource: %s Failed to load resource", r->m_name.c_str());
 			SAFE_DELETE(handle);
 			return NULL;
 		}
@@ -614,7 +614,7 @@ std::vector<std::string> ResourceCache::Match(const std::string pattern)
 
 	size_t numPackages = m_pDepot->VGetNumPackages();
 
-	for (int i = 0; i < numPackages; i++)
+	for (size_t i = 0; i < numPackages; i++)
 	{
 		size_t numFiles = m_pDepot->VGetNumResources(i);
 		for (size_t j = 0; j < numFiles; j++)
