@@ -92,45 +92,6 @@ bool D3DClass11::VInitialize(int screenWidth, int screenHeight, bool vsync, HWND
 		return false;
 	}
 
-	result = adapterOutput->GetDisplayModeList(DXGI_FORMAT_R8G8B8A8_UNORM, DXGI_ENUM_MODES_INTERLACED, &numModes, NULL);
-	if(FAILED(result))
-	{
-		return false;
-	}
-
-	displayModeList = BE_NEW DXGI_MODE_DESC[numModes];
-	if(!displayModeList)
-	{
-		return false;
-	}
-
-	result = adapterOutput->GetDisplayModeList(DXGI_FORMAT_R8G8B8A8_UNORM, DXGI_ENUM_MODES_INTERLACED, &numModes, displayModeList);
-	if(FAILED(result))
-	{
-		return false;
-	}
-
-	bool bValidResolution = false;
-	
-	for(i=0; i<numModes; i++)
-	{
-		if(displayModeList[i].Width == (unsigned int) screenWidth)
-		{
-			if(displayModeList[i].Height == (unsigned int) screenHeight)
-			{
-				bValidResolution = true;
-				numerator = displayModeList[i].RefreshRate.Numerator;
-				denominator = displayModeList[i].RefreshRate.Denominator;
-			}
-		}
-	}
-
-	if (!bValidResolution)
-	{
-		BE_ERROR("ERROR: Unsupported Resolution!");
-		return false;
-	}
-
 	result = adapter->GetDesc(&adapterDesc);
 	if(FAILED(result))
 	{
@@ -144,8 +105,6 @@ bool D3DClass11::VInitialize(int screenWidth, int screenHeight, bool vsync, HWND
 	{
 		return false;
 	}
-
-	SAFE_DELETE_ARRAY(displayModeList);
 
 	SAFE_RELEASE(adapterOutput);
 
@@ -164,8 +123,8 @@ bool D3DClass11::VInitialize(int screenWidth, int screenHeight, bool vsync, HWND
 
 	if(m_vsyncEnabled)
 	{
-		swapChainDesc.BufferDesc.RefreshRate.Numerator = numerator;
-		swapChainDesc.BufferDesc.RefreshRate.Denominator = denominator;
+		swapChainDesc.BufferDesc.RefreshRate.Numerator = 60;
+		swapChainDesc.BufferDesc.RefreshRate.Denominator = 1;
 	}
 	else
 	{
