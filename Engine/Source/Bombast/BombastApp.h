@@ -70,8 +70,9 @@ public:
 
 	void AbortGame() { m_bQuitting = true; }
 
-protected:
 	bool Render();
+
+protected:
 	bool Frame();
 	void SetQuitting(bool quitting) { m_bQuitting = quitting; }
 

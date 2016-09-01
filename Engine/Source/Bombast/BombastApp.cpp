@@ -422,8 +422,6 @@ void BombastApp::ShutdownWindows()
 
 	UnregisterClass(VGetGameTitle(), m_hInstance);
 	m_hInstance = NULL;
-
-	return;
 }
 
 bool BombastApp::VLoadGame()

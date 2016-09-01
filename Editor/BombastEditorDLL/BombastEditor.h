@@ -3,6 +3,8 @@
 #include "BombastEngineStd.h"
 #include "Bombast/BombastApp.h"
 
+class BombastEditorHumanView;
+
 class BombastEditorApp : public BombastApp
 {
 public:
@@ -25,5 +27,5 @@ public:
 
 	bool IsRunning() { return m_gameState == CGS_Running; }
 	
-	//BombastEditorHumanView* GetHumanView();
+	BombastEditorHumanView* GetHumanView();
 };

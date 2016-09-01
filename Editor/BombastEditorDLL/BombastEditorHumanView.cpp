@@ -1,11 +1,18 @@
 #include "BombastEditorHumanView.h"
+#include "Graphics3D/MovementController.h"
 
 BombastEditorHumanView::BombastEditorHumanView(IRenderer* renderer)
+	: HumanView(renderer)
 {
 
 }
 
-void BombastEditorHumanView::VOnUpdate(unsigned long deltaMs)
+LRESULT CALLBACK BombastEditorHumanView::VOnMsgProc(AppMsg msg)
+{
+	return 0;
+}
+
+void BombastEditorHumanView::VOnUpdate(const unsigned long deltaMs)
 {
 	HumanView::VOnUpdate(deltaMs);
 
@@ -13,6 +20,11 @@ void BombastEditorHumanView::VOnUpdate(unsigned long deltaMs)
 	{
 		m_pFreeCameraController->OnUpdate(deltaMs);
 	}
+}
+
+void BombastEditorHumanView::VOnAttach(GameViewId vid, ActorId aid)
+{
+	HumanView::VOnAttach(vid, aid);
 }
 
 bool BombastEditorHumanView::VLoadGameDelegate(rapidxml::xml_node<>* pLevelData)

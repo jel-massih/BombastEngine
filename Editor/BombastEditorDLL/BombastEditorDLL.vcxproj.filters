@@ -12,12 +12,18 @@
     <ClInclude Include="BombastEditorHumanView.h">
       <Filter>BombastEditor</Filter>
     </ClInclude>
+    <ClInclude Include="BombastEditorGlobalFunctions.h">
+      <Filter>BombastEditor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BombastEditor.cpp">
       <Filter>BombastEditor</Filter>
     </ClCompile>
     <ClCompile Include="BombastEditorHumanView.cpp">
+      <Filter>BombastEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="BombastEditorGlobalFunctions.cpp">
       <Filter>BombastEditor</Filter>
     </ClCompile>
   </ItemGroup>

@@ -74,34 +74,38 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>$(ProjectDir)..\..\Lib\$(PlatformName)\$(Configuration)\</OutDir>
-    <TargetName>Temp\$(ProjectName)$(PlatformName)$(Configuration)\</TargetName>
+    <OutDir>$(BombastEngineDir)\Editor\BombastEditor\bin\$(Configuration)\</OutDir>
+    <TargetName>$(ProjectName)</TargetName>
     <SourcePath>$(BombastEngineDir)\Engine\Source;$(VC_SourcePath);</SourcePath>
+    <IntDir>Temp\$(ProjectName)$(PlatformName)$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>$(ProjectDir)..\..\Lib\$(PlatformName)\$(Configuration)\</OutDir>
-    <TargetName>Temp\$(ProjectName)$(PlatformName)$(Configuration)\</TargetName>
+    <OutDir>$(BombastEngineDir)\Editor\BombastEditor\bin\$(Configuration)\</OutDir>
+    <TargetName>$(ProjectName)</TargetName>
     <SourcePath>$(BombastEngineDir)\Engine\Source;$(VC_SourcePath);</SourcePath>
+    <IntDir>Temp\$(ProjectName)$(PlatformName)$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>$(ProjectDir)..\..\Lib\$(PlatformName)\$(Configuration)\</OutDir>
-    <TargetName>Temp\$(ProjectName)$(PlatformName)$(Configuration)\</TargetName>
+    <OutDir>$(BombastEngineDir)\Editor\BombastEditor\bin\$(Configuration)\</OutDir>
+    <TargetName>$(ProjectName)</TargetName>
     <SourcePath>$(BombastEngineDir)\Engine\Source;$(VC_SourcePath);</SourcePath>
+    <IntDir>Temp\$(ProjectName)$(PlatformName)$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>$(ProjectDir)..\..\Lib\$(PlatformName)\$(Configuration)\</OutDir>
-    <TargetName>Temp\$(ProjectName)$(PlatformName)$(Configuration)\</TargetName>
+    <OutDir>$(BombastEngineDir)\Editor\BombastEditor\bin\$(Configuration)\</OutDir>
+    <TargetName>$(ProjectName)</TargetName>
     <SourcePath>$(BombastEngineDir)\Engine\Source;$(VC_SourcePath);</SourcePath>
+    <IntDir>Temp\$(ProjectName)$(PlatformName)$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(BombastEngineDir)\Source;$(BombastEngineDir)\Source\Libraries\lua-5.2.3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(BombastEngineDir)\Engine\Source;$(BombastEngineDir)\Engine\Source\Libraries\lua-5.2.3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>$(BombastEngineDir)\Source\Libraries\zlib128\lib\;$(BombastEngineDir)\Source\Libraries\lua-5.2.3\lib\$(PlatformName)\;$(BombastEngineDir)\Source\Libraries\PhysX-3.3.2\lib\$(PlatformName)\;$(BombastEngineDir)\Lib\$(PlatformName)\$(Configuration)\</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(BombastEngineDir)\Engine\Source\Libraries\zlib128\lib\;$(BombastEngineDir)\Engine\Source\Libraries\lua-5.2.3\lib\$(PlatformName)\;$(BombastEngineDir)\Engine\Source\Libraries\PhysX-3.3.2\lib\$(PlatformName)\;$(BombastEngineDir)\Engine\Lib\$(PlatformName)\$(Configuration)\</AdditionalLibraryDirectories>
       <AdditionalDependencies>lua52.lib;zdll.lib;d3d11.lib;dxgi.lib;D3dcompiler.lib;dxguid.lib;dinput8.lib;pdh.lib;BombastEngine.lib;BombastPhysics.lib;winmm.lib;user32.lib;Advapi32.lib</AdditionalDependencies>
       <SubSystem>Windows</SubSystem>
     </Link>
@@ -111,10 +115,10 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(BombastEngineDir)\Source;$(BombastEngineDir)\Source\Libraries\lua-5.2.3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(BombastEngineDir)\Engine\Source;$(BombastEngineDir)\Engine\Source\Libraries\lua-5.2.3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>$(BombastEngineDir)\Source\Libraries\zlib128\lib\;$(BombastEngineDir)\Source\Libraries\lua-5.2.3\lib\$(PlatformName)\;$(BombastEngineDir)\Source\Libraries\PhysX-3.3.2\lib\$(PlatformName)\;$(BombastEngineDir)\Lib\$(PlatformName)\$(Configuration)\</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(BombastEngineDir)\Engine\Source\Libraries\zlib128\lib\;$(BombastEngineDir)\Engine\Source\Libraries\lua-5.2.3\lib\$(PlatformName)\;$(BombastEngineDir)\Engine\Source\Libraries\PhysX-3.3.2\lib\$(PlatformName)\;$(BombastEngineDir)\Engine\Lib\$(PlatformName)\$(Configuration)\</AdditionalLibraryDirectories>
       <AdditionalDependencies>lua52.lib;zdll.lib;d3d11.lib;dxgi.lib;D3dcompiler.lib;dxguid.lib;dinput8.lib;pdh.lib;BombastEngine.lib;BombastPhysics.lib;winmm.lib;user32.lib;Advapi32.lib</AdditionalDependencies>
       <SubSystem>Windows</SubSystem>
     </Link>
@@ -126,12 +130,12 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(BombastEngineDir)\Source;$(BombastEngineDir)\Source\Libraries\lua-5.2.3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(BombastEngineDir)\Engine\Source;$(BombastEngineDir)\Engine\Source\Libraries\lua-5.2.3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>$(BombastEngineDir)\Source\Libraries\zlib128\lib\;$(BombastEngineDir)\Source\Libraries\lua-5.2.3\lib\$(PlatformName)\;$(BombastEngineDir)\Source\Libraries\PhysX-3.3.2\lib\$(PlatformName)\;$(BombastEngineDir)\Lib\$(PlatformName)\$(Configuration)\</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(BombastEngineDir)\Engine\Source\Libraries\zlib128\lib\;$(BombastEngineDir)\Engine\Source\Libraries\lua-5.2.3\lib\$(PlatformName)\;$(BombastEngineDir)\Engine\Source\Libraries\PhysX-3.3.2\lib\$(PlatformName)\;$(BombastEngineDir)\Engine\Lib\$(PlatformName)\$(Configuration)\</AdditionalLibraryDirectories>
       <AdditionalDependencies>lua52.lib;zdll.lib;d3d11.lib;dxgi.lib;D3dcompiler.lib;dxguid.lib;dinput8.lib;pdh.lib;BombastEngine.lib;BombastPhysics.lib;winmm.lib;user32.lib;Advapi32.lib</AdditionalDependencies>
       <SubSystem>Windows</SubSystem>
     </Link>
@@ -143,22 +147,24 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(BombastEngineDir)\Source;$(BombastEngineDir)\Source\Libraries\lua-5.2.3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(BombastEngineDir)\Engine\Source;$(BombastEngineDir)\Engine\Source\Libraries\lua-5.2.3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>$(BombastEngineDir)\Source\Libraries\zlib128\lib\;$(BombastEngineDir)\Source\Libraries\lua-5.2.3\lib\$(PlatformName)\;$(BombastEngineDir)\Source\Libraries\PhysX-3.3.2\lib\$(PlatformName)\;$(BombastEngineDir)\Lib\$(PlatformName)\$(Configuration)\</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(BombastEngineDir)\Engine\Source\Libraries\zlib128\lib\;$(BombastEngineDir)\Engine\Source\Libraries\lua-5.2.3\lib\$(PlatformName)\;$(BombastEngineDir)\Engine\Source\Libraries\PhysX-3.3.2\lib\$(PlatformName)\;$(BombastEngineDir)\Engine\Lib\$(PlatformName)\$(Configuration)\</AdditionalLibraryDirectories>
       <AdditionalDependencies>lua52.lib;zdll.lib;d3d11.lib;dxgi.lib;D3dcompiler.lib;dxguid.lib;dinput8.lib;pdh.lib;BombastEngine.lib;BombastPhysics.lib;winmm.lib;user32.lib;Advapi32.lib</AdditionalDependencies>
       <SubSystem>Windows</SubSystem>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="BombastEditor.h" />
+    <ClInclude Include="BombastEditorGlobalFunctions.h" />
     <ClInclude Include="BombastEditorHumanView.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BombastEditor.cpp" />
+    <ClCompile Include="BombastEditorGlobalFunctions.cpp" />
     <ClCompile Include="BombastEditorHumanView.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -196,7 +196,7 @@ LRESULT CALLBACK HumanView::VOnMsgProc(AppMsg msg)
 	return 0;
 }
 
-void HumanView::VOnUpdate(const float deltaMs)
+void HumanView::VOnUpdate(const unsigned long deltaMs)
 {
 	m_pProcessManager->UpdateProcesses(deltaMs);
 

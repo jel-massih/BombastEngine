@@ -1,0 +1,548 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="$(SourceDir)BombastEngineStd.cpp" />
+    <ClCompile Include="$(SourceDir)Actor\Actor.cpp">
+      <Filter>Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SourceDir)Actor\ActorFactory.cpp">
+      <Filter>Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SourceDir)Actor\PhysicsComponent.cpp">
+      <Filter>Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SourceDir)Actor\RenderComponent.cpp">
+      <Filter>Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SourceDir)Actor\TransformComponent.cpp">
+      <Filter>Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SourceDir)Bombast\BombastApp.cpp">
+      <Filter>Bombast</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SourceDir)Bombast\CoreGameLogic.cpp">
+      <Filter>Bombast</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SourceDir)Debugging\DebugManager.cpp">
+      <Filter>Debugging</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SourceDir)Debugging\DebugPhysics.cpp">
+      <Filter>Debugging</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SourceDir)Debugging\DebugText.cpp">
+      <Filter>Debugging</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SourceDir)Debugging\Logger.cpp">
+      <Filter>Debugging</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SourceDir)Events\EventManager.cpp">
+      <Filter>Events</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SourceDir)Events\EventManagerImpl.cpp">
+      <Filter>Events</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SourceDir)Events\Events.cpp">
+      <Filter>Events</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SourceDir)Game\BombastGame.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SourceDir)Game\HumanView.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SourceDir)Game\ProcessManager.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SourceDir)Game\Process.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SourceDir)Graphics2D\FontClass.cpp">
+      <Filter>Graphics2D</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SourceDir)Graphics2D\PostProcessRenderWindow.cpp">
+      <Filter>Graphics2D</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SourceDir)Graphics2D\TextureClass.cpp">
+      <Filter>Graphics2D</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SourceDir)InputCore\InputCore.cpp">
+      <Filter>InputCore</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SourceDir)Msvc\BombastEngine.cpp">
+      <Filter>Msvc</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SourceDir)Msvc\stdafx.cpp">
+      <Filter>Msvc</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SourceDir)MultiThreading\RealtimeProcess.cpp">
+      <Filter>MultiThreading</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SourceDir)Physics\BombastPhysics.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SourceDir)Physics\Physics.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SourceDir)Physics\PhysXPhysics.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SourceDir)Resources\LuaResource.cpp">
+      <Filter>Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SourceDir)Resources\MaterialResource.cpp">
+      <Filter>Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SourceDir)Resources\ShaderResource.cpp">
+      <Filter>Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SourceDir)Resources\TextureResource.cpp">
+      <Filter>Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SourceDir)Resources\XmlResource.cpp">
+      <Filter>Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SourceDir)Resources\ZipFile.cpp">
+      <Filter>Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SourceDir)Scripting\LuaCoreManager.cpp">
+      <Filter>Scripting</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SourceDir)Shading\StaticMeshShader.cpp">
+      <Filter>Shading</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SourceDir)Shading\ShaderManager.cpp">
+      <Filter>Shading</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SourceDir)Shading\FontShader.cpp">
+      <Filter>Shading</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SourceDir)Shading\DeferredRenderingManager.cpp">
+      <Filter>Shading</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SourceDir)Shading\DeferredLightShader.cpp">
+      <Filter>Shading</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SourceDir)Shading\DebugShader.cpp">
+      <Filter>Shading</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Shading\BasicShaders.cpp">
+      <Filter>Shading</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Shading\Effect.cpp">
+      <Filter>Shading</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Shading\LightmapShader.cpp">
+      <Filter>Shading</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Shading\MultiTextureShader.cpp">
+      <Filter>Shading</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SourceDir)Utilities\BMDLMeshLoader.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SourceDir)Utilities\DDSTextureLoader.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SourceDir)Utilities\Initialization.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SourceDir)Utilities\Math.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SourceDir)Utilities\String.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SourceDir)Utilities\SystemResourceMonitor.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SourceDir)Utilities\Timer.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SourceDir)Utilities\WICTextureLoader.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SourceDir)Graphics3D\Geometry.cpp">
+      <Filter>Graphics3D</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SourceDir)Graphics3D\GraphicsManager.cpp">
+      <Filter>Graphics3D</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SourceDir)Graphics3D\Lighting.cpp">
+      <Filter>Graphics3D</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SourceDir)Graphics3D\Material.cpp">
+      <Filter>Graphics3D</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SourceDir)Graphics3D\MovementController.cpp">
+      <Filter>Graphics3D</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SourceDir)Graphics3D\Raycast.cpp">
+      <Filter>Graphics3D</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SourceDir)Graphics3D\RenderNodes.cpp">
+      <Filter>Graphics3D</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SourceDir)Graphics3D\Scene.cpp">
+      <Filter>Graphics3D</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SourceDir)Graphics3D\SceneNode.cpp">
+      <Filter>Graphics3D</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SourceDir)Graphics3D\D3DClass.cpp">
+      <Filter>Graphics3D</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SourceDir)Resources\ModelResource.cpp">
+      <Filter>Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SourceDir)Resources\ResourceCache.cpp">
+      <Filter>Resources</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(SourceDir)BombastEngineStd.h" />
+    <ClInclude Include="$(SourceDir)Constants.h" />
+    <ClInclude Include="$(SourceDir)Actor\Actor.h">
+      <Filter>Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SourceDir)Actor\ActorComponent.h">
+      <Filter>Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SourceDir)Actor\ActorFactory.h">
+      <Filter>Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SourceDir)Actor\PhysicsComponent.h">
+      <Filter>Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SourceDir)Actor\RenderComponent.h">
+      <Filter>Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SourceDir)Actor\RenderComponentInterface.h">
+      <Filter>Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SourceDir)Actor\TransformComponent.h">
+      <Filter>Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SourceDir)Bombast\BombastApp.h">
+      <Filter>Bombast</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SourceDir)Bombast\CoreGameLogic.h">
+      <Filter>Bombast</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SourceDir)Bombast\interfaces.h">
+      <Filter>Bombast</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SourceDir)Debugging\DebugManager.h">
+      <Filter>Debugging</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SourceDir)Debugging\DebugPhysics.h">
+      <Filter>Debugging</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SourceDir)Debugging\DebugText.h">
+      <Filter>Debugging</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SourceDir)Debugging\Logger.h">
+      <Filter>Debugging</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SourceDir)Events\Events.h">
+      <Filter>Events</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SourceDir)Events\EventManager.h">
+      <Filter>Events</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SourceDir)Events\EventManagerImpl.h">
+      <Filter>Events</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SourceDir)Game\BombastGame.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SourceDir)Game\HumanView.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SourceDir)Game\ProcessManager.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SourceDir)Game\Process.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SourceDir)Graphics2D\FontClass.h">
+      <Filter>Graphics2D</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SourceDir)Graphics2D\PostProcessRenderWindow.h">
+      <Filter>Graphics2D</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SourceDir)Graphics2D\TextureClass.h">
+      <Filter>Graphics2D</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SourceDir)InputCore\InputCore.h">
+      <Filter>InputCore</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SourceDir)Msvc\stdafx.h">
+      <Filter>Msvc</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SourceDir)MultiThreading\CriticalSection.h">
+      <Filter>MultiThreading</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SourceDir)MultiThreading\MultiThreadUtilities.h">
+      <Filter>MultiThreading</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SourceDir)MultiThreading\RealtimeProcess.h">
+      <Filter>MultiThreading</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SourceDir)Physics\BombastPhysics.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SourceDir)Physics\Physics.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SourceDir)Physics\PhysXPhysics.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SourceDir)Resources\LuaResource.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SourceDir)Resources\MaterialResource.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SourceDir)Resources\ShaderResource.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SourceDir)Resources\TextureResource.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SourceDir)Resources\XmlResource.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SourceDir)Resources\ZipFile.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SourceDir)Scripting\LuaExports.h">
+      <Filter>Scripting</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SourceDir)Scripting\LuaCoreManager.h">
+      <Filter>Scripting</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SourceDir)Scripting\LuaEvent.h">
+      <Filter>Scripting</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SourceDir)Shading\StaticMeshShader.h">
+      <Filter>Shading</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SourceDir)Shading\ShadingCommon.h">
+      <Filter>Shading</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SourceDir)Shading\ShaderManager.h">
+      <Filter>Shading</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SourceDir)Shading\FontShader.h">
+      <Filter>Shading</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SourceDir)Shading\DeferredRenderingManager.h">
+      <Filter>Shading</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SourceDir)Shading\DeferredLightShader.h">
+      <Filter>Shading</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SourceDir)Shading\DebugShader.h">
+      <Filter>Shading</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Shading\BasicShaders.h">
+      <Filter>Shading</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Shading\Effect.h">
+      <Filter>Shading</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Shading\LightmapShader.h">
+      <Filter>Shading</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Shading\MultiTextureShader.h">
+      <Filter>Shading</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SourceDir)UI\UserInterface.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SourceDir)Utilities\BMDLMeshLoader.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SourceDir)Utilities\DDSTextureLoader.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SourceDir)Utilities\DirectXUtils.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SourceDir)Utilities\Initialization.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SourceDir)Utilities\Math.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SourceDir)Utilities\rapidxml.hpp">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SourceDir)Utilities\String.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SourceDir)Utilities\SystemResourceMonitor.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SourceDir)Utilities\templates.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SourceDir)Utilities\Timer.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SourceDir)Utilities\types.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SourceDir)Utilities\WICTextureLoader.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SourceDir)Utilities\FastDelegate\FastDelegate.h">
+      <Filter>Utilities\FastDelegate</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SourceDir)Graphics3D\D3DClass.h">
+      <Filter>Graphics3D</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SourceDir)Graphics3D\Geometry.h">
+      <Filter>Graphics3D</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SourceDir)Graphics3D\GraphicsManager.h">
+      <Filter>Graphics3D</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SourceDir)Graphics3D\Lighting.h">
+      <Filter>Graphics3D</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SourceDir)Graphics3D\Material.h">
+      <Filter>Graphics3D</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SourceDir)Graphics3D\ModelClass.h">
+      <Filter>Graphics3D</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SourceDir)Graphics3D\MovementController.h">
+      <Filter>Graphics3D</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SourceDir)Graphics3D\Raycast.h">
+      <Filter>Graphics3D</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SourceDir)Graphics3D\RenderNodes.h">
+      <Filter>Graphics3D</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SourceDir)Graphics3D\Scene.h">
+      <Filter>Graphics3D</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SourceDir)Graphics3D\SceneNode.h">
+      <Filter>Graphics3D</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SourceDir)Resources\ResourceCache.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SourceDir)Resources\ModelResource.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Bombast">
+      <UniqueIdentifier>{ea68f329-a787-4d76-b697-566531758468}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Debugging">
+      <UniqueIdentifier>{c862e910-11f1-4c65-b729-89e2d202dcc5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics3D">
+      <UniqueIdentifier>{a23d99ea-a1f5-4fa2-8660-114733607779}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics2D">
+      <UniqueIdentifier>{f23c61d3-16dc-4bd6-aba5-c596ba86ced4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utilities">
+      <UniqueIdentifier>{24bfa62a-a741-47b8-8cb9-4c446a8f817c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game">
+      <UniqueIdentifier>{e95cea10-f6ae-4fa5-827d-054f6db9a250}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="InputCore">
+      <UniqueIdentifier>{60290247-d752-40dc-9247-1c59c4980e95}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor">
+      <UniqueIdentifier>{1bdb76db-5655-424a-a622-9e917a388492}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Msvc">
+      <UniqueIdentifier>{b38645cb-2245-43f5-9758-e4c7058fb821}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripting">
+      <UniqueIdentifier>{35f1d86d-a168-4c6a-a6a6-0ec14ed7de3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Events">
+      <UniqueIdentifier>{6c83c07c-72fa-46e0-9e22-b7480faef8d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MultiThreading">
+      <UniqueIdentifier>{e62ecc44-a11f-42e6-9f5c-2b2e714592d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utilities\FastDelegate">
+      <UniqueIdentifier>{e3cdbd39-d93e-4480-a782-1ff4db08fb3c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{73cc8763-1316-4b27-b5b6-cd202ac7cfca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Physics">
+      <UniqueIdentifier>{84d99599-6e85-48f2-8342-f8a6f588ea21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shading">
+      <UniqueIdentifier>{1e94e3cb-37b3-4a40-a3c7-3db9058a0acc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shading\Shaders">
+      <UniqueIdentifier>{b78e3ae5-3fb9-4486-b66b-d8ab6b87bcde}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shading\Shaders\StaticMesh">
+      <UniqueIdentifier>{f856e645-1420-47d6-8e4c-d76a5757cb28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources">
+      <UniqueIdentifier>{2beeea37-2a57-42d8-89d1-0344d211698d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="$(SourceDir)Shading\Shaders\DebugVertexShader.hlsl">
+      <Filter>Shading\Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="$(SourceDir)Shading\Shaders\DeferredLightingPixelShader.hlsl">
+      <Filter>Shading\Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="$(SourceDir)Shading\Shaders\DeferredLightingVertexShader.hlsl">
+      <Filter>Shading\Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="$(SourceDir)Shading\Shaders\FontPixelShader.hlsl">
+      <Filter>Shading\Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="$(SourceDir)Shading\Shaders\FontVertexShader.hlsl">
+      <Filter>Shading\Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="$(SourceDir)Shading\Shaders\StaticMesh\staticmesh_common.fxh">
+      <Filter>Shading\Shaders\StaticMesh</Filter>
+    </FxCompile>
+    <FxCompile Include="$(SourceDir)Shading\Shaders\StaticMesh\staticmesh_deferred_colored.hlsl">
+      <Filter>Shading\Shaders\StaticMesh</Filter>
+    </FxCompile>
+    <FxCompile Include="$(SourceDir)Shading\Shaders\StaticMesh\staticmesh_deferred_textured.hlsl">
+      <Filter>Shading\Shaders\StaticMesh</Filter>
+    </FxCompile>
+    <FxCompile Include="$(SourceDir)Shading\Shaders\StaticMesh\staticmesh_deferred_vertex.hlsl">
+      <Filter>Shading\Shaders\StaticMesh</Filter>
+    </FxCompile>
+    <FxCompile Include="$(SourceDir)Shading\Shaders\StaticMesh\staticmesh_lit_colored.hlsl">
+      <Filter>Shading\Shaders\StaticMesh</Filter>
+    </FxCompile>
+    <FxCompile Include="$(SourceDir)Shading\Shaders\StaticMesh\staticmesh_lit_textured.hlsl">
+      <Filter>Shading\Shaders\StaticMesh</Filter>
+    </FxCompile>
+    <FxCompile Include="$(SourceDir)Shading\Shaders\StaticMesh\staticmesh_unlit_colored.hlsl">
+      <Filter>Shading\Shaders\StaticMesh</Filter>
+    </FxCompile>
+    <FxCompile Include="$(SourceDir)Shading\Shaders\StaticMesh\staticmesh_unlit_textured.hlsl">
+      <Filter>Shading\Shaders\StaticMesh</Filter>
+    </FxCompile>
+    <FxCompile Include="$(SourceDir)Shading\Shaders\DebugPixelShader.hlsl">
+      <Filter>Debugging</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Source\Shading\Shaders\StaticMesh\staticmesh_vertex.hlsl">
+      <Filter>Shading\Shaders\StaticMesh</Filter>
+    </FxCompile>
+  </ItemGroup>
+</Project>

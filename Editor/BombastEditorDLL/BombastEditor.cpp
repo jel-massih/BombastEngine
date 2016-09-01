@@ -1,17 +1,18 @@
 #include "BombastEditor.h"
+#include "BombastEditorHumanView.h"
 
 BombastEditorApp g_BombastEditorApp;
 
-std::string ROOT_ENGINE_PATH = "../../../../BombastEngine/Engine/";
-std::string ROOT_GAME_PATH = "../../../";
+std::string ROOT_ENGINE_PATH = "../../../../Engine/";
+std::string ROOT_GAME_PATH = "../../../../";
 
 CoreGameLogic* BombastEditorApp::VCreateGameAndView()
 {
 	m_pGame = BE_NEW BombastEditorLogic();
 	m_pGame->Initialize();
 
-	//IGameView* gameView = BE_NEW BombastEditorHumanView(g_pApp->GetGraphicsManager()->GetRenderer());
-	//m_pGame->VAddView(gameView);
+	IGameView* gameView = BE_NEW BombastEditorHumanView(g_pApp->GetGraphicsManager()->GetRenderer());
+	m_pGame->VAddView(gameView);
 
 	return m_pGame;
 }
@@ -39,10 +40,10 @@ bool BombastEditorLogic::VLoadGame(const char* levelResource)
 	return true;
 }
 
-/*BombastEditorHumanView* BombastEditorLogic::GetHumanView()
+BombastEditorHumanView* BombastEditorLogic::GetHumanView()
 {
-	//BE_ASSERT(m_gameViews.size() == 1);
-	//IGameView* pGameView = *m_gameViews.begin();
-	//BombastEditorHumanView* editorHumanView = static_cast<BombastEditorHumanView*>(pGameView);
+	BE_ASSERT(m_gameViews.size() == 1);
+	IGameView* pGameView = *m_gameViews.begin();
+	BombastEditorHumanView* editorHumanView = static_cast<BombastEditorHumanView*>(pGameView);
 	return nullptr;
-}*/
+}
