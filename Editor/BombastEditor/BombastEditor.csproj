@@ -56,8 +56,19 @@
     <Compile Include="BombastEditorForm.Designer.cs">
       <DependentUpon>BombastEditorForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="BombastHelper.cs" />
+    <Compile Include="Controls\WizardPages.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="GlobalSettings.cs" />
     <Compile Include="MessageHandler.cs" />
     <Compile Include="NativeMethods.cs" />
+    <Compile Include="NewProjectDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewProjectDialog.Designer.cs">
+      <DependentUpon>NewProjectDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -67,6 +78,9 @@
   <ItemGroup>
     <EmbeddedResource Include="BombastEditorForm.resx">
       <DependentUpon>BombastEditorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewProjectDialog.resx">
+      <DependentUpon>NewProjectDialog.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
