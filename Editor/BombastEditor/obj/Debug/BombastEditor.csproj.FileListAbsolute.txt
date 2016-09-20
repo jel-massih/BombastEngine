@@ -1,9 +1,0 @@
-C:\Users\jel-massih\Documents\Bombast Technology\BombastEngine\Editor\BombastEditor\bin\Debug\BombastEditor.exe.config
-C:\Users\jel-massih\Documents\Bombast Technology\BombastEngine\Editor\BombastEditor\bin\Debug\BombastEditor.exe
-C:\Users\jel-massih\Documents\Bombast Technology\BombastEngine\Editor\BombastEditor\bin\Debug\BombastEditor.pdb
-C:\Users\jel-massih\Documents\Bombast Technology\BombastEngine\Editor\BombastEditor\obj\Debug\BombastEditor.csprojResolveAssemblyReference.cache
-C:\Users\jel-massih\Documents\Bombast Technology\BombastEngine\Editor\BombastEditor\obj\Debug\BombastEditor.BombastEditorForm.resources
-C:\Users\jel-massih\Documents\Bombast Technology\BombastEngine\Editor\BombastEditor\obj\Debug\BombastEditor.csproj.GenerateResource.Cache
-C:\Users\jel-massih\Documents\Bombast Technology\BombastEngine\Editor\BombastEditor\obj\Debug\BombastEditor.exe
-C:\Users\jel-massih\Documents\Bombast Technology\BombastEngine\Editor\BombastEditor\obj\Debug\BombastEditor.pdb
-C:\Users\jel-massih\Documents\Bombast Technology\BombastEngine\Editor\BombastEditor\obj\Debug\BombastEditor.NewProjectDialog.resources
