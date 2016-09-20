@@ -15,14 +15,15 @@ using System.Xml;
 namespace BombastEditor
 {
     public partial class BombastEditorForm : Form
-                                                                                                            s qqqqqqqqqqqqqqqqqqqqqqqq qqqqqqQQQQQqq
+    { 
         private const int INVALID_ACTOR_ID = 0;
-    ;   
+
         private string m_projectDirectory;
         private string m_projectName;
         private string m_assetsDirectory;
 
-        private string m_activeLevelPath;  \         
+        private bool m_projectLoaded;
+        private string m_activeLevelPath; 
 
         private List<XmlNode> m_actorsXmlNodes = new List<XmlNode>();
 
@@ -47,6 +48,16 @@ namespace BombastEditor
             {
                 MessageBox.Show("Error: " + ex.ToString());
             }
+
+            var defaultProject = Properties.Settings.Default.DefaultProjectPath;
+            if(!string.IsNullOrEmpty(defaultProject))
+            {
+                OpenProject(defaultProject);
+            }
+        }
+        private void BombastEditorForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Properties.Settings.Default.Save();
         }
 
         public MessageHandler GetMessageHandler()
@@ -66,6 +77,10 @@ namespace BombastEditor
             m_projectDirectory = projectFileInfo.Directory.FullName;
             m_projectName = projectFileInfo.Name;
             m_assetsDirectory = Path.Combine(m_projectDirectory, GlobalSettings.AssetsFolderName);
+
+            Properties.Settings.Default.DefaultProjectPath = projectFilePath;
+
+            NativeMethods.OpenProject(m_projectDirectory);
 
             m_projectLoaded = true;
             InitializeAssetTree();
@@ -132,7 +147,28 @@ namespace BombastEditor
 
             int[] actorsList = GetActorList();
 
-            m_act
+            m_actorsXmlNodes.Add(null);
+
+            for(int i=0; i<actorsList.GetLength(0); i++)
+            {
+                uint actorId = Convert.ToUInt32(actorsList[i]);
+
+                TreeNode node = new TreeNode();
+
+                XmlElement actorXml = null;// GetActorXml(actorId);
+
+                if(actorXml != null)
+                {
+                    node.Name = actorsList[i].ToString();
+                    m_actorsXmlNodes.Add(actorXml);
+                    node.Text = actorXml.GetAttribute("type");
+                }
+                else
+                {
+                    node.Text = "<unknown actor - no xml found>";
+                }
+                ActorsTreeView.Nodes.Add(node);
+            }
         }
 
         private int[] GetActorList()
@@ -201,6 +237,8 @@ namespace BombastEditor
             m_projectLoaded = false;
 
             m_activeLevelPath = "";
+
+            Properties.Settings.Default.DefaultProjectPath = "";
 
             UpdateFormComponents();
             InitializeAssetTree();

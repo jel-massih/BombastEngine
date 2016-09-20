@@ -79,7 +79,8 @@ protected:
 private:
 	void InitializeWindows();
 	bool InitializeApp(int screenWidth, int screenHeight);
-
+	
+	bool InitializeResourceCache(std::string rootProjectPath);
 
 	void ShutdownWindows();
 

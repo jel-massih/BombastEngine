@@ -1,4 +1,5 @@
 #include "BombastEditorGlobalFunctions.h"
+#include "Utilities/String.h"
 
 int EditorMain(int *instancePtrAddress, int *hPrevInstancePtrAddress, int *hWndPtrAddress, int nCmdShow, int screenWidth, int screenHeight)
 {
@@ -45,4 +46,46 @@ int Shutdown()
 {
 	g_pApp->ShutDown();
 	return 1;
+}
+
+bool OpenProject(BSTR fullProjectPath)
+{
+	std::string projectPath = ws2s(std::wstring(fullProjectPath, SysStringLen(fullProjectPath)));
+
+	BombastEditorLogic* pEditorLogic = (BombastEditorLogic*)g_pApp->m_pGame;
+	pEditorLogic->SetActiveProjectPath(projectPath);
+	
+	return true;
+}
+
+bool OpenLevel(BSTR fullLevelPath)
+{
+	std::string levelFile = ws2s(std::wstring(fullLevelPath, SysStringLen(fullLevelPath)));
+	BombastEditorLogic* pEditorLogic = (BombastEditorLogic*)g_pApp->m_pGame;
+
+	if (pEditorLogic)
+	{
+		std::string assetsDir = "\\Assets\\";
+		int projDirLength = pEditorLogic->GetProjectDirectory().length() + assetsDir.length();
+		g_pApp->m_options.m_level = levelFile.substr(projDirLength, levelFile.length() - projDirLength);
+		pEditorLogic->VChangeState(CGS_LoadingGameEnvironment);
+	}
+
+	return true;
+}
+
+int GetActorCount()
+{
+	BombastEditorLogic* pGame = static_cast<BombastEditorLogic*>(g_pApp->m_pGame);
+	return pGame->GetActorCount();
+}
+
+void GetActorList(int* actorIdArrayPtr, int size)
+{
+
+}
+
+void GetActorXml(int *actorXmlPtr, ActorId actorId)
+{
+
 }

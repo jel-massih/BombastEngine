@@ -66,34 +66,7 @@ bool BombastApp::InitInstance(HINSTANCE hInstance, HWND hWnd, int screenWidth, i
 	m_screenSize = Point(screenWidth, screenheight);
 	m_screenPosition = Point(screenX, screenY);
 
-#ifdef _DEBUG
-	IResourceDepot* zipFile = BE_NEW ZipResourceDepot();
-	{
-		//Add default Engine Resources Path
-		zipFile->VAddPackageDirectory(s2ws(ROOT_ENGINE_PATH + "Packages/"));
-
-		int pathIndex = 0;
-		std::string additionalPaths = m_options.m_additionalContentDirectories;
-		std::string path;
-		while ((pathIndex = additionalPaths.find(',')) != std::string::npos)
-		{
-			path = additionalPaths.substr(0, pathIndex);
-			zipFile->VAddPackageDirectory(s2ws(path.c_str()));
-			additionalPaths.erase(0, pathIndex + 1);
-		}
-	}
-	//zipFile->VAddDirectory()
-#else
-	IResourceDepot* zipFile = BE_NEW ResourceZipFile(s2ws(ROOT_ENGINE_PATH + "Packages/"));
-#endif
-
-	m_pResourceCache = BE_NEW ResourceCache(50, zipFile);
-
-	if (!m_pResourceCache->Initialize())
-	{
-		BE_ERROR("Resource Error: Failed to initialize Resource Cache");
-		return false;
-	}
+	InitializeResourceDepot();
 
 	extern IResourceLoader* CreateXmlResourceLoader();
 	extern IResourceLoader* CreateTextureResourceLoader();
@@ -177,6 +150,57 @@ void BombastApp::InitializeWindows()
                           NULL,    // we aren't using menus, NULL
                           m_hInstance,    // application handle
                           NULL);    // used with multiple windows, NULL
+}
+
+bool BombastApp::InitializeResourceCache(std::string rootProjectPath)
+{
+	//If no trailing slash, add it
+	if (!rootProjectPath.empty() && *rootProjectPath.rbegin() != '/')
+	{
+		rootProjectPath += '/';
+	}
+
+#ifdef _DEBUG
+	IResourceDepot* zipFile = BE_NEW DevelopmentResourceDepot();
+	{
+		//Add default Engine Resources Path
+		zipFile->VAddPackageDirectory(s2ws(rootProjectPath + "Packages/"));
+
+		int pathIndex = 0;
+		std::string additionalPaths = m_options.m_additionalContentDirectories;
+		std::string path;
+		while ((pathIndex = additionalPaths.find(',')) != std::string::npos)
+		{
+			path = additionalPaths.substr(0, pathIndex);
+			zipFile->VAddPackageDirectory(s2ws(path.c_str()));
+			additionalPaths.erase(0, pathIndex + 1);
+		}
+	}
+#else
+	IResourceDepot* zipFile = BE_NEW ZipResourceDepot();
+	{
+		//Add default Engine Resources Path
+		zipFile->VAddPackageDirectory(s2ws(rootProjectPath + "Packages/"));
+
+		int pathIndex = 0;
+		std::string additionalPaths = m_options.m_additionalContentDirectories;
+		std::string path;
+		while ((pathIndex = additionalPaths.find(',')) != std::string::npos)
+		{
+			path = additionalPaths.substr(0, pathIndex);
+			zipFile->VAddPackageDirectory(s2ws(path.c_str()));
+			additionalPaths.erase(0, pathIndex + 1);
+		}
+	}
+#endif
+
+	m_pResourceCache = BE_NEW ResourceCache(50, zipFile);
+
+	if (!m_pResourceCache->Initialize())
+	{
+		BE_ERROR("Resource Error: Failed to initialize Resource Cache");
+		return false;
+	}
 }
 
 LRESULT BombastApp::OnAltEnter()

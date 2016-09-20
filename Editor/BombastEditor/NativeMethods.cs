@@ -17,6 +17,8 @@ namespace BombastEditor
         public unsafe static extern void WndProc(IntPtr hWndPtrAddress, int msg, int wParam, int lParam);
 
         [DllImport(BombastEditorDLLName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern void OpenProject([MarshalAs(UnmanagedType.BStr)] string fileName);
+        [DllImport(BombastEditorDLLName, CallingConvention = CallingConvention.Cdecl)]
         public static extern void OpenLevel([MarshalAs(UnmanagedType.BStr)] string fileName);
         [DllImport(BombastEditorDLLName, CallingConvention = CallingConvention.Cdecl)]
         public static extern void SaveLeevl(string fileName);
