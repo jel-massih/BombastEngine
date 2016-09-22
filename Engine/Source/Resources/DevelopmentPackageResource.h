@@ -16,7 +16,7 @@ public:
 public:
 	bool Init(const std::wstring &basePackagePath);
 
-	size_t GetNumFiles()const { return m_fileCount; }
+	size_t GetNumFiles()const { return m_assetsFileInfo.size(); }
 	std::string GetFilename(size_t i) const;
 	int GetFileLen(size_t i) const;
 	bool ReadFile(size_t i, char* pBuffer);
@@ -28,7 +28,6 @@ protected:
 
 private:
 	std::wstring m_basePackagePath;
-	size_t m_fileCount;
 
 	std::vector<AssetFileInfo> m_assetsFileInfo;
 	DevContentsMap m_contentsMap;

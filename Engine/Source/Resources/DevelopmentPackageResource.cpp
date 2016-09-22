@@ -8,6 +8,14 @@ bool DevelopmentPackageResource::Init(const std::wstring &basePackagePath)
 {
 	m_basePackagePath = basePackagePath;
 
+	//If no trailing slash, add it
+	if (!m_basePackagePath.empty() && *m_basePackagePath.rbegin() != '/')
+	{
+		m_basePackagePath += '/';
+	}
+
+	ReadPackageDirectory(s2ws("*"));
+
 	return true;
 }
 

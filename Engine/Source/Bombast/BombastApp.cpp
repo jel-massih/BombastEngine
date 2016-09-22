@@ -161,10 +161,10 @@ bool BombastApp::InitializeResourceCache(std::string rootProjectPath)
 	}
 
 #ifdef _DEBUG
-	IResourceDepot* zipFile = BE_NEW DevelopmentResourceDepot();
+	IResourceDepot* resourceDepot = BE_NEW DevelopmentResourceDepot();
 	{
 		//Add default Engine Resources Path
-		zipFile->VAddPackageDirectory(s2ws(rootProjectPath + "Packages/"));
+		resourceDepot->VAddPackageDirectory(s2ws(rootProjectPath + "Assets/"));
 
 		int pathIndex = 0;
 		std::string additionalPaths = m_options.m_additionalContentDirectories;
@@ -172,15 +172,15 @@ bool BombastApp::InitializeResourceCache(std::string rootProjectPath)
 		while ((pathIndex = additionalPaths.find(',')) != std::string::npos)
 		{
 			path = additionalPaths.substr(0, pathIndex);
-			zipFile->VAddPackageDirectory(s2ws(path.c_str()));
+			resourceDepot->VAddPackageDirectory(s2ws(path.c_str()));
 			additionalPaths.erase(0, pathIndex + 1);
 		}
 	}
 #else
-	IResourceDepot* zipFile = BE_NEW ZipResourceDepot();
+	IResourceDepot* resourceDepot = BE_NEW ZipResourceDepot();
 	{
 		//Add default Engine Resources Path
-		zipFile->VAddPackageDirectory(s2ws(rootProjectPath + "Packages/"));
+		resourceDepot->VAddPackageDirectory(s2ws(rootProjectPath + "Packages/"));
 
 		int pathIndex = 0;
 		std::string additionalPaths = m_options.m_additionalContentDirectories;
@@ -188,13 +188,13 @@ bool BombastApp::InitializeResourceCache(std::string rootProjectPath)
 		while ((pathIndex = additionalPaths.find(',')) != std::string::npos)
 		{
 			path = additionalPaths.substr(0, pathIndex);
-			zipFile->VAddPackageDirectory(s2ws(path.c_str()));
+			resourceDepot->VAddPackageDirectory(s2ws(path.c_str()));
 			additionalPaths.erase(0, pathIndex + 1);
 		}
 	}
 #endif
 
-	m_pResourceCache = BE_NEW ResourceCache(50, zipFile);
+	m_pResourceCache = BE_NEW ResourceCache(50, resourceDepot);
 
 	if (!m_pResourceCache->Initialize())
 	{

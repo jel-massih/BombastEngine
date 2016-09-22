@@ -221,25 +221,23 @@ bool DevelopmentResourceDepot::RegisterPackages(std::wstring basePackagePath)
 				continue;
 			}
 
-			//Do not currently support packages within directories, so throw Warning
+			//Only Check for Directories
 			if (findData.dwFileAttributes &FILE_ATTRIBUTE_DIRECTORY)
 			{
 				//Do not warn for directory symbol
-				if (findData.cFileName != s2ws(".."))
+				if (findData.cFileName == s2ws(".."))
 				{
-					BE_WARNING("Packages within Directories are ignored");
+					continue;
 				}
-			}
-			else
-			{
-				std::wstring filename = findData.cFileName;
-				std::wstring lowerPackageName = filename;
+
+				std::wstring directoryName = findData.cFileName;
+				std::wstring lowerPackageName = directoryName;
 
 				std::transform(lowerPackageName.begin(), lowerPackageName.end(), lowerPackageName.begin(), (int(*)(int))std::tolower);
 				lowerPackageName = lowerPackageName.substr(0, lowerPackageName.find_last_of('.'));
 
 				pathSpec = pathSpec.substr(0, pathSpec.find_last_of('/'));
-				pathSpec = pathSpec + s2ws("/") + filename;
+				pathSpec = pathSpec + s2ws("/") + directoryName;
 
 				//Add Package to mapping
 				m_packageMap[ws2s(lowerPackageName)] = PackageMappingDetails(m_numPackages, ws2s(pathSpec));
