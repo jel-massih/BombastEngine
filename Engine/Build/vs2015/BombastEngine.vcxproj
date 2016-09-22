@@ -96,6 +96,8 @@
     <ClInclude Include="$(SourceDir)Utilities\types.h" />
     <ClInclude Include="$(SourceDir)Utilities\WICTextureLoader.h" />
     <ClInclude Include="$(SourceDir)Msvc\stdafx.h" />
+    <ClInclude Include="..\..\Source\Resources\DevelopmentPackageResource.h" />
+    <ClInclude Include="..\..\Source\Resources\ResourceDepot.h" />
     <ClInclude Include="..\..\Source\Shading\BasicShaders.h" />
     <ClInclude Include="..\..\Source\Shading\Effect.h" />
     <ClInclude Include="..\..\Source\Shading\LightmapShader.h" />
@@ -178,6 +180,8 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="..\..\Source\Resources\DevelopmentPackageResource.cpp" />
+    <ClCompile Include="..\..\Source\Resources\ResourceDepot.cpp" />
     <ClCompile Include="..\..\Source\Shading\BasicShaders.cpp" />
     <ClCompile Include="..\..\Source\Shading\Effect.cpp" />
     <ClCompile Include="..\..\Source\Shading\LightmapShader.cpp" />

@@ -1,5 +1,5 @@
 #include "BombastApp.h"
-#include "../Resources/ResourceCache.h"
+#include "../Resources/ResourceDepot.h"
 #include "../Events/EventManagerImpl.h"
 #include "..\Utilities\Timer.h"
 #include "..\Graphics3D\SceneNode.h"
@@ -66,7 +66,7 @@ bool BombastApp::InitInstance(HINSTANCE hInstance, HWND hWnd, int screenWidth, i
 	m_screenSize = Point(screenWidth, screenheight);
 	m_screenPosition = Point(screenX, screenY);
 
-	InitializeResourceDepot();
+	InitializeResourceCache(ROOT_ENGINE_PATH);
 
 	extern IResourceLoader* CreateXmlResourceLoader();
 	extern IResourceLoader* CreateTextureResourceLoader();

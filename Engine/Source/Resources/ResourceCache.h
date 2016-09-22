@@ -1,15 +1,12 @@
 #pragma once
 
 #include "../Bombast/interfaces.h"
-#include "ZipFile.h"
 #include <list>
 #include <map>
 #include <vector>
 
 class ResourceCache;
 class ResourceHandle;
-
-typedef std::map<std::string, ZipMappingDetails> DevelopmentPackageMap;// maps package name to a zip details
 
 class IResourceExtraData
 {

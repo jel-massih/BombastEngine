@@ -197,6 +197,12 @@
     <ClCompile Include="$(SourceDir)Resources\ResourceCache.cpp">
       <Filter>Resources</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\Resources\ResourceDepot.cpp">
+      <Filter>Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Resources\DevelopmentPackageResource.cpp">
+      <Filter>Resources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(SourceDir)BombastEngineStd.h" />
@@ -436,6 +442,12 @@
       <Filter>Resources</Filter>
     </ClInclude>
     <ClInclude Include="$(SourceDir)Resources\ModelResource.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Resources\ResourceDepot.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Resources\DevelopmentPackageResource.h">
       <Filter>Resources</Filter>
     </ClInclude>
   </ItemGroup>

@@ -25,7 +25,6 @@ struct ZipMappingDetails
 	}
 };
 
-typedef std::map<std::string, ZipMappingDetails> PackageMap;// maps package name to a zip details
 typedef std::map<std::string, size_t> ZipContentsMap;		// maps path to a zip content id
 
 class ZipFile

@@ -3,6 +3,9 @@
 #include <cctype>
 #include <string.h>
 
+#include "ZipFile.h"
+#include "DevelopmentPackageResource.h"
+
 ZipResourceDepot::~ZipResourceDepot()
 {
 	SAFE_DELETE_ARRAY(m_packages);
@@ -66,7 +69,7 @@ bool ZipResourceDepot::RegisterPackages(std::wstring basePackagePath)
 				pathSpec = pathSpec + s2ws("/") + filename;
 
 				//Add Package to mapping
-				m_packageMap[ws2s(lowerPackageName)] = ZipMappingDetails(m_numPackages, ws2s(pathSpec));
+				m_packageMap[ws2s(lowerPackageName)] = PackageMappingDetails(m_numPackages, ws2s(pathSpec));
 				m_numPackages++;
 			}
 		}
@@ -172,6 +175,10 @@ void ZipResourceDepot::VAddPackageDirectory(std::wstring directoryName)
 	m_packagePaths.push_back(directoryName);
 }
 
+/*==================================================================================================================*/
+/*======================================== DevelopmentResourceDepot ================================================*/
+/*==================================================================================================================*/
+
 DevelopmentResourceDepot::~DevelopmentResourceDepot()
 {
 	SAFE_DELETE_ARRAY(m_packages);
@@ -235,7 +242,7 @@ bool DevelopmentResourceDepot::RegisterPackages(std::wstring basePackagePath)
 				pathSpec = pathSpec + s2ws("/") + filename;
 
 				//Add Package to mapping
-				m_packageMap[ws2s(lowerPackageName)] = ZipMappingDetails(m_numPackages, ws2s(pathSpec));
+				m_packageMap[ws2s(lowerPackageName)] = PackageMappingDetails(m_numPackages, ws2s(pathSpec));
 				m_numPackages++;
 			}
 		}
@@ -248,7 +255,7 @@ bool DevelopmentResourceDepot::RegisterPackages(std::wstring basePackagePath)
 
 bool DevelopmentResourceDepot::InitializePackages()
 {
-	m_packages = BE_NEW ZipFile[m_numPackages];
+	m_packages = BE_NEW DevelopmentPackageResource[m_numPackages];
 
 	//init each package
 	auto it = m_packageMap.begin();
@@ -266,112 +273,76 @@ bool DevelopmentResourceDepot::InitializePackages()
 	return true;
 }
 
+DevelopmentPackageResource* const DevelopmentResourceDepot::GetDevelopmentPackageFileForResource(const Resource& r)
+{
+	std::string packageName = r.m_name.substr(0, r.m_name.find('.'));
+
+	auto packageIndexIt = m_packageMap.find(packageName);
+	if (packageIndexIt == m_packageMap.end()) {
+		return nullptr;
+	}
+
+	return &m_packages[(*packageIndexIt).second.index];
+}
+
 int DevelopmentResourceDepot::VGetRawResourceSize(const Resource &r)
 {
-	size_t num = Find(r.m_name.c_str());
-	if (num == -1)
+	DevelopmentPackageResource* const developmentResource = GetDevelopmentPackageFileForResource(r);
+	if (developmentResource == nullptr)
 	{
 		return -1;
 	}
 
-	return m_assetsFileInfo[num].data.nFileSizeLow;
+	size_t resourceNum = developmentResource->Find(r.m_name.c_str());
+	if (resourceNum == -1)
+	{
+		return -1;
+	}
+
+	return developmentResource->GetFileLen(resourceNum);
 }
 
 size_t DevelopmentResourceDepot::VGetRawResource(const Resource &r, char* buffer)
 {
-	size_t num = Find(r.m_name.c_str());
-	if (num == -1)
+	DevelopmentPackageResource* const packageResource = GetDevelopmentPackageFileForResource(r);
+	if (packageResource == nullptr)
 	{
 		return -1;
 	}
 
-	int bytes = -1;
-	std::wstring fullFileSpec = m_assetsDir + m_assetsFileInfo[num].data.cFileName;
-	std::ifstream file(fullFileSpec, std::ios::binary);
-	if (file.is_open())
+	size_t size = 0;
+	size_t resourceNum = packageResource->Find(r.m_name.c_str());
+	if (resourceNum != -1)
 	{
-		file.read(buffer, m_assetsFileInfo[num].data.nFileSizeLow);
-		bytes = (int)file.gcount();
-		file.close();
+		size = packageResource->GetFileLen(resourceNum);
+		packageResource->ReadFile(resourceNum, buffer);
 	}
-	return bytes;
+
+	return size;
 }
 
 size_t DevelopmentResourceDepot::VGetNumPackages() const
 {
-	return 1;
+	return m_numPackages;
 }
 
 size_t DevelopmentResourceDepot::VGetNumResources(size_t packageIndex) const
 {
-	return m_assetsFileInfo.size();
+	return (packageIndex < m_numPackages) ? 0 : m_packages[packageIndex].GetNumFiles();
 }
 
 std::string	DevelopmentResourceDepot::VGetResourceName(size_t packageIndex, size_t resourceIndex) const
 {
-	std::wstring wideName = m_assetsFileInfo[resourceIndex].data.cFileName;
-	return ws2s(wideName);
-}
-
-void DevelopmentResourceDepot::ReadAssetsDirectory(std::wstring fileSpec)
-{
-	HANDLE fileHandle;
-	WIN32_FIND_DATA findData;
-
-	//Get first file
-	std::wstring pathSpec = m_assetsDir + fileSpec;
-	fileHandle = FindFirstFile(pathSpec.c_str(), &findData);
-	if (fileHandle != INVALID_HANDLE_VALUE)
+	std::string resName = "";
+	if (packageIndex < m_numPackages && resourceIndex >= 0 && resourceIndex < m_packages[resourceIndex].GetNumFiles())
 	{
-		//Loop on all remaining entries
-		while (FindNextFile(fileHandle, &findData))
-		{
-			if (findData.dwFileAttributes & FILE_ATTRIBUTE_HIDDEN)
-			{
-				continue;
-			}
-
-			std::wstring fileName = findData.cFileName;
-			if (findData.dwFileAttributes &FILE_ATTRIBUTE_DIRECTORY)
-			{
-				if (fileName != L".." && fileName != L".")
-				{
-					fileName = fileSpec.substr(0, fileSpec.length() - 1) + fileName + L"\\*";
-					ReadAssetsDirectory(fileName);
-				}
-			}
-			else
-			{
-				fileName = fileSpec.substr(0, fileSpec.length() - 1) + fileName;
-
-				std::wstring lower = fileName;
-				std::transform(lower.begin(), lower.end(), lower.begin(), (int(*)(int))std::tolower);
-
-				//Replace all slashes to dots
-				std::wstring resourceName = lower;
-				std::replace(resourceName.begin(), resourceName.end(), '\\', '.');
-				std::replace(resourceName.begin(), resourceName.end(), '/', '.');
-
-				wcscpy_s(&findData.cFileName[0], MAX_PATH, lower.c_str());
-				AssetFileInfo fileInfo = { findData, resourceName };
-				m_directoryContentsMap[ws2s(resourceName)] = m_assetsFileInfo.size();
-				m_assetsFileInfo.push_back(fileInfo);
-			}
-		}
+		resName = m_packages[packageIndex].GetFilename(resourceIndex);
 	}
 
-	FindClose(fileHandle);
+	return resName;
 }
 
-size_t DevelopmentResourceDepot::Find(const std::string &name)
+void DevelopmentResourceDepot::VAddPackageDirectory(std::wstring directoryName)
 {
-	std::string lowerCase = name;
-	std::transform(lowerCase.begin(), lowerCase.end(), lowerCase.begin(), (int(*)(int))std::tolower);
-	ZipContentsMap::const_iterator i = m_directoryContentsMap.find(lowerCase);
-	if (i == m_directoryContentsMap.end())
-	{
-		return -1;
-	}
-
-	return i->second;
+	m_packagePaths.push_back(directoryName);
 }

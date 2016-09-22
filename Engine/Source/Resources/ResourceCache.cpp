@@ -1,6 +1,7 @@
 #include "ResourceCache.h"
 #include "../Bombast/BombastApp.h"
 #include <algorithm>
+#include <cctype>
 
 Resource::Resource(const std::string& name)
 {

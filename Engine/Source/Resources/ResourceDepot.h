@@ -2,6 +2,25 @@
 
 #include "ResourceCache.h"
 
+class ZipFile;
+class DevelopmentPackageResource;
+
+struct PackageMappingDetails
+{
+	size_t index;
+	std::string packagePath;
+
+	PackageMappingDetails() {}
+
+	PackageMappingDetails(size_t index, std::string packagePath)
+	{
+		this->index = index;
+		this->packagePath = packagePath;
+	}
+};
+
+typedef std::map<std::string, PackageMappingDetails> PackageMap;// maps package name to a zip details
+
 class ZipResourceDepot : public IResourceDepot
 {
 public:
@@ -33,22 +52,6 @@ private:
 class DevelopmentResourceDepot : public IResourceDepot
 {
 public:
-	struct AssetFileInfo
-	{
-		WIN32_FIND_DATA data;
-		std::wstring resourceName;
-	};
-
-	struct DevelopmentResourcePackage
-	{
-		std::string packageName;
-		std::vector<AssetFileInfo> packageAssets;
-	};
-
-public:
-	std::vector<AssetFileInfo> m_assetsFileInfo;
-	ZipContentsMap m_directoryContentsMap;
-
 	DevelopmentResourceDepot() :m_numPackages(0), m_packages(nullptr) {}
 	virtual ~DevelopmentResourceDepot();
 
@@ -58,21 +61,17 @@ public:
 	virtual size_t VGetNumPackages() const override;
 	virtual size_t VGetNumResources(size_t packageIndex = 0) const override;
 	virtual std::string VGetResourceName(size_t packageIndex, size_t resourceIndex) const;
-	virtual bool VIsUsingDevelopmentDirectories(void) const { return true; }
-
-	size_t Find(const std::string &path);
-
-protected:
-	void ReadAssetsDirectory(std::wstring fileSpec);
+	virtual void VAddPackageDirectory(std::wstring directoryName) override;
 
 private:
 	bool RegisterPackages(std::wstring basePackagePath);
 	bool InitializePackages();
+	DevelopmentPackageResource* const GetDevelopmentPackageFileForResource(const Resource& r);
 
 private:
 	PackageMap m_packageMap;
 	std::vector<std::wstring> m_packagePaths;
 
 	unsigned short m_numPackages;
-	ZipFile* m_packages;
+	DevelopmentPackageResource* m_packages;
 };
