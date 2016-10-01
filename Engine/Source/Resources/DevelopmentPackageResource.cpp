@@ -4,8 +4,9 @@
 #include <fstream>
 #include <string.h>
 
-bool DevelopmentPackageResource::Init(const std::wstring &basePackagePath)
+bool DevelopmentPackageResource::Init(const std::string& packageName, const std::wstring &basePackagePath)
 {
+	m_packageName = packageName;
 	m_basePackagePath = basePackagePath;
 
 	//If no trailing slash, add it
@@ -91,6 +92,9 @@ void DevelopmentPackageResource::ReadPackageDirectory(std::wstring fileSpec)
 				std::wstring resourceName = lower;
 				std::replace(resourceName.begin(), resourceName.end(), '\\', '.');
 				std::replace(resourceName.begin(), resourceName.end(), '/', '.');
+
+				//Add the packagename to start of the name
+				resourceName = s2ws(m_packageName + ".") + resourceName;
 
 				wcscpy_s(&findData.cFileName[0], MAX_PATH, lower.c_str());
 				AssetFileInfo fileInfo = { findData, resourceName };

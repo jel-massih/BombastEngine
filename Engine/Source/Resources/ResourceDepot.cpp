@@ -259,7 +259,7 @@ bool DevelopmentResourceDepot::InitializePackages()
 	auto it = m_packageMap.begin();
 	while (it != m_packageMap.end())
 	{
-		bool packageInitializeSuccess = m_packages[(*it).second.index].Init(s2ws((*it).second.packagePath));
+		bool packageInitializeSuccess = m_packages[(*it).second.index].Init((*it).first, s2ws((*it).second.packagePath));
 		if (!packageInitializeSuccess)
 		{
 			return false;
