@@ -1,7 +1,9 @@
 #include "BombastEditorGlobalFunctions.h"
 #include "Utilities/String.h"
 
-int EditorMain(int *instancePtrAddress, int *hPrevInstancePtrAddress, int *hWndPtrAddress, int nCmdShow, int screenWidth, int screenHeight)
+#include "Actor/Actor.h"
+
+int InitializeBombastProject(int *instancePtrAddress, int *hPrevInstancePtrAddress, int *hWndPtrAddress, int nCmdShow, int screenWidth, int screenHeight, BSTR projectPath)
 {
 	HINSTANCE hInstance = (HINSTANCE)instancePtrAddress;
 	HINSTANCE hPrevInstance = (HINSTANCE)hPrevInstancePtrAddress;
@@ -19,6 +21,9 @@ int EditorMain(int *instancePtrAddress, int *hPrevInstancePtrAddress, int *hWndP
 	_CrtSetDbgFlag(tmpDbgFlag);
 
 	g_pApp->m_options.Init((ROOT_GAME_PATH + "Options.xml").c_str(), lpCmdLine);
+
+	//Add Project Directory
+	g_pApp->m_options.m_additionalContentDirectories += (ws2s(projectPath) + "\\Assets/,");
 
 	BELogger::Init(g_pApp->m_options.m_bDebugConsoleEnabled, g_pApp->m_options.m_debugLogPath.c_str(), g_pApp->m_options.m_debugLogName.c_str());
 
@@ -58,16 +63,13 @@ bool OpenProject(BSTR fullProjectPath)
 	return true;
 }
 
-bool OpenLevel(BSTR fullLevelPath)
+bool OpenLevel(BSTR levelResourceName)
 {
-	std::string levelFile = ws2s(std::wstring(fullLevelPath, SysStringLen(fullLevelPath)));
 	BombastEditorLogic* pEditorLogic = (BombastEditorLogic*)g_pApp->m_pGame;
 
 	if (pEditorLogic)
 	{
-		std::string assetsDir = "\\Assets\\";
-		int projDirLength = pEditorLogic->GetProjectDirectory().length() + assetsDir.length();
-		g_pApp->m_options.m_level = levelFile.substr(projDirLength, levelFile.length() - projDirLength);
+		g_pApp->m_options.m_level = ws2s(levelResourceName);
 		pEditorLogic->VChangeState(CGS_LoadingGameEnvironment);
 	}
 
@@ -80,12 +82,41 @@ int GetActorCount()
 	return pGame->GetActorCount();
 }
 
-void GetActorList(int* actorIdArrayPtr, int size)
+void GetActorList(int* actorIdArrayPtr, int actorCount)
 {
-
+	BombastEditorLogic* pEditorLogic = (BombastEditorLogic*)g_pApp->m_pGame;
+	if (pEditorLogic)
+	{
+		ActorMap::const_iterator itr;
+		int actorArrayIndex;
+		for (itr = pEditorLogic->GetActorMap().begin(), actorArrayIndex = 0;
+			itr != pEditorLogic->GetActorMap().end() && actorArrayIndex < actorCount; itr++, actorArrayIndex++)
+		{
+			ActorId actorId = itr->first;
+			actorIdArrayPtr[actorArrayIndex] = actorId;
+		}
+	}
 }
 
 void GetActorXml(int *actorXmlPtr, ActorId actorId)
 {
+	Actor* pActor = g_pApp->m_pGame->VGetActor(actorId);
+	if (!pActor)
+	{
+		return;
+	}
+	std::string xml = pActor->ToXML();
 
+	strncpy_s(reinterpret_cast<char *>(actorXmlPtr), xml.length() + 1, xml.c_str(), xml.length());
+}
+
+int GetActorXmlSize(ActorId actorId)
+{
+	Actor* pActor = g_pApp->m_pGame->VGetActor(actorId);
+	if (!pActor)
+	{
+		return 0;
+	}
+	std::string xml = pActor->ToXML();
+	return xml.length();
 }

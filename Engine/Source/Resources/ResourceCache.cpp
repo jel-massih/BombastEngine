@@ -120,7 +120,7 @@ ResourceHandle* ResourceCache::Load(Resource* r)
 	if (rawSize < 0)
 	{
 		BE_ERROR("Resource returned: %d - Resource not found or empty: %s", rawSize, r->m_name.c_str());
-		return NULL;
+		return NULL;	
 	}
 
 	int allocSize = rawSize + ((loader->VAddNullZero()) ? 1 : 0);

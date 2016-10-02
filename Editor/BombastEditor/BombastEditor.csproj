@@ -60,6 +60,7 @@
       <DependentUpon>BombastEditorForm.cs</DependentUpon>
     </Compile>
     <Compile Include="BombastHelper.cs" />
+    <Compile Include="BombastResource.cs" />
     <Compile Include="Controls\WizardPages.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -79,6 +80,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Utils.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

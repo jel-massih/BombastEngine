@@ -23,7 +23,7 @@ namespace BombastEditor
         private string m_assetsDirectory;
 
         private bool m_projectLoaded;
-        private string m_activeLevelPath; 
+        private string m_activeLevelResourceName; 
 
         private List<XmlNode> m_actorsXmlNodes = new List<XmlNode>();
 
@@ -35,11 +35,6 @@ namespace BombastEditor
 
             try
             {
-                IntPtr hInstance = Marshal.GetHINSTANCE(GetType().Module);
-                IntPtr hWnd = EditorViewportPanel.Handle;
-
-                NativeMethods.EditorMain(hInstance, IntPtr.Zero, hWnd, 1, EditorViewportPanel.Width, EditorViewportPanel.Height);
-
                 UpdateFormComponents();
 
                 m_messageHandler = new MessageHandler(EditorViewportPanel, this);
@@ -52,7 +47,7 @@ namespace BombastEditor
             var defaultProject = Properties.Settings.Default.DefaultProjectPath;
             if(!string.IsNullOrEmpty(defaultProject))
             {
-                OpenProject(defaultProject);
+                //OpenProject(defaultProject);
             }
         }
         private void BombastEditorForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -80,17 +75,19 @@ namespace BombastEditor
 
             Properties.Settings.Default.DefaultProjectPath = projectFilePath;
 
-            NativeMethods.OpenProject(m_projectDirectory);
-
+            IntPtr hInstance = Marshal.GetHINSTANCE(GetType().Module);
+            IntPtr hWnd = EditorViewportPanel.Handle;
+            NativeMethods.InitializeBombastProject(hInstance, IntPtr.Zero, hWnd, 1, EditorViewportPanel.Width, EditorViewportPanel.Height, m_projectDirectory);
+            
             m_projectLoaded = true;
             InitializeAssetTree();
             UpdateFormComponents();
         }
 
-        internal void OpenLevel(string levelFilePath)
+        internal void OpenLevel(string levelResourceName)
         {
-            m_activeLevelPath = levelFilePath;
-            NativeMethods.OpenLevel(m_activeLevelPath);
+            m_activeLevelResourceName = levelResourceName;
+            NativeMethods.OpenLevel(m_activeLevelResourceName);
             InitializeActors();
         }
 
@@ -132,7 +129,13 @@ namespace BombastEditor
                     if((attributes & FileAttributes.Hidden) == 0)
                     {
                         var childNode = new TreeNode(file.Name);
-                        childNode.Tag = file.FullName;
+                        var relativePath = PathUtils.GetRelativePath(m_assetsDirectory, file.FullName);
+                        var resourceInfo = new BombastResource
+                        {
+                            FullFilepath = file.FullName,
+                            ResourceName = BombastResource.GetResourceNameFromPath(relativePath)
+                        };
+                        childNode.Tag = resourceInfo;
                         currentNode.Nodes.Add(childNode);
                     }
                 }
@@ -155,7 +158,7 @@ namespace BombastEditor
 
                 TreeNode node = new TreeNode();
 
-                XmlElement actorXml = null;// GetActorXml(actorId);
+                XmlElement actorXml = null; // GetActorXml(actorId);
 
                 if(actorXml != null)
                 {
@@ -169,6 +172,23 @@ namespace BombastEditor
                 }
                 ActorsTreeView.Nodes.Add(node);
             }
+        }
+
+        private XmlElement GetActorXml(uint actorId)
+        {
+            int xmlSize = NativeMethods.GetActorXmlSize(actorId);
+            if (xmlSize == 0)
+                return null;
+
+            IntPtr tempArray = Marshal.AllocCoTaskMem((xmlSize + 1) * sizeof(char));
+            NativeMethods.GetActorXml(tempArray, actorId);
+            string actorXml = Marshal.PtrToStringAnsi(tempArray);
+            Console.WriteLine(actorXml);
+            Marshal.FreeCoTaskMem(tempArray);
+
+            XmlDocument actorDoc = new XmlDocument();
+            actorDoc.Load(new StringReader(actorXml));
+            return actorDoc.DocumentElement;
         }
 
         private int[] GetActorList()
@@ -189,13 +209,11 @@ namespace BombastEditor
             TreeNode node = AssetsTreeView.SelectedNode;
             if(node != null && node.Nodes.Count == 0)
             {
-                var file = node.Tag.ToString();
-                if(File.Exists(file))
-                {
-                    Process.Start(file);
-                }
+                var resource = (BombastResource)node.Tag;
+                OpenResource(resource);
             }
         }
+
         private void UpdateFormComponents()
         {
             if(m_projectLoaded)
@@ -236,7 +254,7 @@ namespace BombastEditor
             m_projectName = "";
             m_projectLoaded = false;
 
-            m_activeLevelPath = "";
+            m_activeLevelResourceName = "";
 
             Properties.Settings.Default.DefaultProjectPath = "";
 
@@ -261,6 +279,21 @@ namespace BombastEditor
             if (dialog.ShowDialog() == DialogResult.OK)
             {
                 OpenLevel(dialog.FileName);
+            }
+        }
+
+        private void OpenResource(BombastResource resource)
+        {
+            var resourceExtension = Path.GetExtension(resource.FullFilepath);
+
+            switch (resourceExtension)
+            {
+                case ".bmap":
+                    OpenLevel(resource.ResourceName);
+                    break;
+                default:
+                    Process.Start(resource.FullFilepath);
+                    break;
             }
         }
     }
