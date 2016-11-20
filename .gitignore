@@ -47,6 +47,8 @@ Tools/ShaderGenerator/obj/*
 *.obj
 *.log
 *.pch
+*.csproj.user
+*.vcxproj.user
 
 !Engine/Source/Libraries/lua-5.2.3/lib/Win32/lua52.lib
 !Engine/Source/Libraries/zlib128/lib/zdll.lib
