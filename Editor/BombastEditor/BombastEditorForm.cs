@@ -281,6 +281,10 @@ namespace BombastEditor
                 OpenLevel(dialog.FileName);
             }
         }
+        private void newLevelToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
 
         private void OpenResource(BombastResource resource)
         {

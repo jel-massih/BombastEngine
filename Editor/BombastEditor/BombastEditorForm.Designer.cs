@@ -89,51 +89,52 @@
             // newLevelToolStripMenuItem
             // 
             this.newLevelToolStripMenuItem.Name = "newLevelToolStripMenuItem";
-            this.newLevelToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.newLevelToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.newLevelToolStripMenuItem.Text = "New Level";
+            this.newLevelToolStripMenuItem.Click += new System.EventHandler(this.newLevelToolStripMenuItem_Click);
             // 
             // openLevelToolStripMenuItem
             // 
             this.openLevelToolStripMenuItem.Name = "openLevelToolStripMenuItem";
-            this.openLevelToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.openLevelToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.openLevelToolStripMenuItem.Text = "Open Level";
             this.openLevelToolStripMenuItem.Click += new System.EventHandler(this.openLevelToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(140, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
             // 
             // newProjectToolStripMenuItem
             // 
             this.newProjectToolStripMenuItem.Name = "newProjectToolStripMenuItem";
-            this.newProjectToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.newProjectToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.newProjectToolStripMenuItem.Text = "New Project";
             this.newProjectToolStripMenuItem.Click += new System.EventHandler(this.newProjectToolStripMenuItem_Click);
             // 
             // openProjectToolStripMenuItem
             // 
             this.openProjectToolStripMenuItem.Name = "openProjectToolStripMenuItem";
-            this.openProjectToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.openProjectToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.openProjectToolStripMenuItem.Text = "Open Project";
             this.openProjectToolStripMenuItem.Click += new System.EventHandler(this.openProjectToolStripMenuItem_Click);
             // 
             // closeProjectToolStripMenuItem
             // 
             this.closeProjectToolStripMenuItem.Name = "closeProjectToolStripMenuItem";
-            this.closeProjectToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.closeProjectToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.closeProjectToolStripMenuItem.Text = "Close Project";
             this.closeProjectToolStripMenuItem.Click += new System.EventHandler(this.closeProjectToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(140, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -199,7 +200,7 @@
             this.AssetsTabPage.Controls.Add(this.AssetsTreeView);
             this.AssetsTabPage.Location = new System.Drawing.Point(4, 22);
             this.AssetsTabPage.Name = "AssetsTabPage";
-            this.AssetsTabPage.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.AssetsTabPage.Padding = new System.Windows.Forms.Padding(3);
             this.AssetsTabPage.Size = new System.Drawing.Size(349, 356);
             this.AssetsTabPage.TabIndex = 0;
             this.AssetsTabPage.Text = "Assets Tree";
@@ -219,8 +220,8 @@
             this.ActorsTabPage.Controls.Add(this.ActorsTreeView);
             this.ActorsTabPage.Location = new System.Drawing.Point(4, 22);
             this.ActorsTabPage.Name = "ActorsTabPage";
-            this.ActorsTabPage.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
-            this.ActorsTabPage.Size = new System.Drawing.Size(349, 357);
+            this.ActorsTabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.ActorsTabPage.Size = new System.Drawing.Size(349, 356);
             this.ActorsTabPage.TabIndex = 1;
             this.ActorsTabPage.Text = "Actors";
             this.ActorsTabPage.UseVisualStyleBackColor = true;
@@ -230,7 +231,7 @@
             this.ActorsTreeView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ActorsTreeView.Location = new System.Drawing.Point(3, 3);
             this.ActorsTreeView.Name = "ActorsTreeView";
-            this.ActorsTreeView.Size = new System.Drawing.Size(343, 351);
+            this.ActorsTreeView.Size = new System.Drawing.Size(343, 350);
             this.ActorsTreeView.TabIndex = 0;
             // 
             // BombastEditorForm
