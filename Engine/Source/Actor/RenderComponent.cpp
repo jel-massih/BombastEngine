@@ -47,11 +47,6 @@ void BaseRenderComponent::VOnChanged()
 	//Add Event Trigger Stuff
 }
 
-rapidxml::xml_node<>* BaseRenderComponent::VGenerateXml()
-{
-	return NULL;
-}
-
 SceneNode* BaseRenderComponent::VGetSceneNode()
 {
 	if (!m_pSceneNode)
@@ -104,7 +99,6 @@ bool BitmapRenderComponent::VDelegateInitialize(rapidxml::xml_node<>* pData)
 	rapidxml::xml_node<>* pTexture = pData->first_node("Texture");
 	if (pTexture)
 	{
-		rapidxml::xml_attribute<char>* test = pTexture->first_attribute("path");
 		if (pTexture->first_attribute("path") != NULL) {
 			m_textureResource = pTexture->first_attribute("path")->value();
 		}
@@ -123,6 +117,30 @@ bool BitmapRenderComponent::VDelegateInitialize(rapidxml::xml_node<>* pData)
 	}
 
 	return true;
+}
+
+rapidxml::xml_node<>* BitmapRenderComponent::VGenerateXml()
+{
+	rapidxml::xml_document<> outDoc;
+	rapidxml::xml_node<>* pBaseElement = outDoc.allocate_node(rapidxml::node_element, VGetName());
+
+	rapidxml::xml_node<>* pColor = outDoc.allocate_node(rapidxml::node_element, "Color");
+	pColor->append_attribute(outDoc.allocate_attribute("r", ToStr(m_color.x).c_str()));
+	pColor->append_attribute(outDoc.allocate_attribute("g", ToStr(m_color.y).c_str()));
+	pColor->append_attribute(outDoc.allocate_attribute("b", ToStr(m_color.z).c_str()));
+	pColor->append_attribute(outDoc.allocate_attribute("a", ToStr(m_color.w).c_str()));
+	pBaseElement->append_node(pColor);
+
+	rapidxml::xml_node<>* pTexture = outDoc.allocate_node(rapidxml::node_element, "Texture");
+	pTexture->append_attribute(outDoc.allocate_attribute("path", m_textureResource));
+	pBaseElement->append_node(pTexture);
+
+	rapidxml::xml_node<>* pSize = outDoc.allocate_node(rapidxml::node_element, "RelativeSize");
+	pSize->append_attribute(outDoc.allocate_attribute("x", ToStr(m_relativeSize.x).c_str()));
+	pSize->append_attribute(outDoc.allocate_attribute("y", ToStr(m_relativeSize.y).c_str()));
+	pBaseElement->append_node(pSize);
+
+	return pBaseElement;
 }
 
 SceneNode* BitmapRenderComponent::VCreateSceneNode()
@@ -173,6 +191,36 @@ bool MeshRenderComponent::VDelegateInitialize(rapidxml::xml_node<>* pData)
 	}
 
 	return true;
+}
+
+rapidxml::xml_node<>* MeshRenderComponent::VGenerateXml()
+{
+	rapidxml::xml_document<> outDoc;
+	rapidxml::xml_node<>* pBaseElement = outDoc.allocate_node(rapidxml::node_element, VGetName());
+
+	rapidxml::xml_node<>* pColor = outDoc.allocate_node(rapidxml::node_element, "Color");
+	pColor->append_attribute(outDoc.allocate_attribute("r", ToStr(m_color.x).c_str()));
+	pColor->append_attribute(outDoc.allocate_attribute("g", ToStr(m_color.y).c_str()));
+	pColor->append_attribute(outDoc.allocate_attribute("b", ToStr(m_color.z).c_str()));
+	pColor->append_attribute(outDoc.allocate_attribute("a", ToStr(m_color.w).c_str()));
+	pBaseElement->append_node(pColor);
+
+	rapidxml::xml_node<>* pMesh = outDoc.allocate_node(rapidxml::node_element, "Mesh");
+	pMesh->append_attribute(outDoc.allocate_attribute("path", m_meshResource));
+	pBaseElement->append_node(pMesh);
+	
+	rapidxml::xml_node<>* pMaterials = outDoc.allocate_node(rapidxml::node_element, "Materials");
+
+	for (auto it = m_materialResources.begin(); it != m_materialResources.end(); it++)
+	{
+		rapidxml::xml_node<>* pMaterial = outDoc.allocate_node(rapidxml::node_element, "Material");
+		pMaterial->append_attribute(outDoc.allocate_attribute("path", (*it).c_str()));
+
+	}
+	pMaterials->append_attribute(outDoc.allocate_attribute("y", ToStr(m_relativeSize.y).c_str()));
+	pBaseElement->append_node(pMaterials);
+
+	return pBaseElement;
 }
 
 SceneNode* MeshRenderComponent::VCreateSceneNode()

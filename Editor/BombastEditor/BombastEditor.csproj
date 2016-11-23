@@ -61,6 +61,8 @@
     </Compile>
     <Compile Include="BombastHelper.cs" />
     <Compile Include="BombastResource.cs" />
+    <Compile Include="BombastResourceTypes\BaseResourceProperties.cs" />
+    <Compile Include="BombastResourceTypes\BombastLevel.cs" />
     <Compile Include="Controls\WizardPages.cs">
       <SubType>Component</SubType>
     </Compile>

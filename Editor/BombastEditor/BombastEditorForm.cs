@@ -264,7 +264,7 @@ namespace BombastEditor
 
                 TreeNode node = new TreeNode();
 
-                XmlElement actorXml = null; // GetActorXml(actorId);
+                XmlElement actorXml = GetActorXml(actorId);
 
                 if(actorXml != null)
                 {
