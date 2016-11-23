@@ -128,6 +128,8 @@ namespace BombastEditor
 
         private void closeProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            NativeMethods.Shutdown();
+
             m_projectDirectory = "";
             m_assetsDirectory = "";
             m_projectName = "";
@@ -139,6 +141,7 @@ namespace BombastEditor
 
             UpdateFormComponents();
             InitializeAssetTree();
+            InitializeActors();
         }
         #endregion
 
@@ -236,6 +239,12 @@ namespace BombastEditor
         {
             ActorsTreeView.Nodes.Clear();
 
+            //If no project loaded just abort
+            if (!m_projectLoaded)
+            {
+                return;
+            }
+
             int[] actorsList = GetActorList();
 
             m_actorsXmlNodes.Add(null);
@@ -304,7 +313,7 @@ namespace BombastEditor
                     OpenProject(resource.FullFilepath);
                     break;
                 case BombastResourceType.LEVEL:
-                    OpenLevel(resource.FullFilepath);
+                    OpenLevel(resource.ResourceName);
                     break;
                 default:
                     Process.Start(resource.FullFilepath);
