@@ -76,6 +76,11 @@ namespace BombastEditor
         #region Project Management
         internal void OpenProject(string projectFilePath)
         {
+            if(m_projectLoaded)
+            {
+                CloseOpenProject();
+            }
+
             var projectFileInfo = new FileInfo(projectFilePath);
             m_projectDirectory = projectFileInfo.Directory.FullName;
             m_projectName = projectFileInfo.Name;
@@ -128,6 +133,15 @@ namespace BombastEditor
 
         private void closeProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            CloseOpenProject();
+
+            UpdateFormComponents();
+            InitializeAssetTree();
+            InitializeActors();
+        }
+
+        private void CloseOpenProject()
+        {
             NativeMethods.Shutdown();
 
             m_projectDirectory = "";
@@ -136,12 +150,7 @@ namespace BombastEditor
             m_projectLoaded = false;
 
             m_activeLevelResourceName = "";
-
             Properties.Settings.Default.DefaultProjectPath = "";
-
-            UpdateFormComponents();
-            InitializeAssetTree();
-            InitializeActors();
         }
         #endregion
 
@@ -367,6 +376,15 @@ namespace BombastEditor
             ToolStripMenuItem item = (ToolStripMenuItem)sender;
 
             var resourceFilePath = item.Text;
+
+            //If project file not found, remove from list and do not open
+            if(!File.Exists(resourceFilePath))
+            {
+                Properties.Settings.Default.RecentlyOpenedProjects.Remove(resourceFilePath);
+                MessageBox.Show(string.Format("The Project file '{0}' does not seem to exist anymore on the disk.", resourceFilePath), "Project does not exist");
+                return;
+            }
+
             var resourceInfo = BombastResourceHelper.GetBombastResourceFromFilepath(resourceFilePath);
 
             OpenResource(resourceInfo);
