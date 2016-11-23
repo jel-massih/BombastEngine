@@ -57,3 +57,4 @@ BombastEngine.VC.db
 
 Editor/BombastEditor/bin/
 Editor/BombastEditor/obj/
+Engine/Build/vs2017/.vs/
