@@ -1,14 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
-using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
 
@@ -49,6 +43,24 @@ namespace BombastEditor
             {
                 //OpenProject(defaultProject);
             }
+
+            if(Properties.Settings.Default.RecentlyOpenedProjectsLevels == null)
+            {
+                Properties.Settings.Default.RecentlyOpenedProjectsLevels = new List<string>();
+            }
+
+            var recentProjectsLevels = Properties.Settings.Default.RecentlyOpenedProjectsLevels;
+            if (recentProjectsLevels != null && recentProjectsLevels.Count > 0)
+            {
+                foreach(var recentProjectLevel in recentProjectsLevels)
+                {
+                    recentProjectsLevelsMenuItem.DropDownItems.Add(recentProjectLevel);
+                }
+            }
+            else
+            {
+                recentProjectsLevelsMenuItem.Enabled = false;
+            }
         }
         private void BombastEditorForm_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -74,6 +86,7 @@ namespace BombastEditor
             m_assetsDirectory = Path.Combine(m_projectDirectory, GlobalSettings.AssetsFolderName);
 
             Properties.Settings.Default.DefaultProjectPath = projectFilePath;
+            AddRecentProjectLevelItem(projectFilePath);
 
             IntPtr hInstance = Marshal.GetHINSTANCE(GetType().Module);
             IntPtr hWnd = EditorViewportPanel.Handle;
@@ -298,6 +311,14 @@ namespace BombastEditor
                 default:
                     Process.Start(resource.FullFilepath);
                     break;
+            }
+        }
+
+        private void AddRecentProjectLevelItem(string projectLevelPath)
+        {
+            if(!Properties.Settings.Default.RecentlyOpenedProjectsLevels.Contains(projectLevelPath))
+            {
+                Properties.Settings.Default.RecentlyOpenedProjectsLevels.Add(projectLevelPath);
             }
         }
     }

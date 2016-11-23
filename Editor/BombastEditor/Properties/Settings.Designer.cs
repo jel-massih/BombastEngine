@@ -34,5 +34,16 @@ namespace BombastEditor.Properties {
                 this["DefaultProjectPath"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Collections.Generic.List<System.String> RecentlyOpenedProjectsLevels {
+            get {
+                return ((global::System.Collections.Generic.List<System.String>)(this["RecentlyOpenedProjectsLevels"]));
+            }
+            set {
+                this["RecentlyOpenedProjectsLevels"] = value;
+            }
+        }
     }
 }

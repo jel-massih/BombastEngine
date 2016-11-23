@@ -49,6 +49,8 @@
             this.AssetsTreeView = new System.Windows.Forms.TreeView();
             this.ActorsTabPage = new System.Windows.Forms.TabPage();
             this.ActorsTreeView = new System.Windows.Forms.TreeView();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.recentProjectsLevelsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -80,6 +82,8 @@
             this.newProjectToolStripMenuItem,
             this.openProjectToolStripMenuItem,
             this.closeProjectToolStripMenuItem,
+            this.toolStripSeparator3,
+            this.recentProjectsLevelsMenuItem,
             this.toolStripSeparator1,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
@@ -89,52 +93,52 @@
             // newLevelToolStripMenuItem
             // 
             this.newLevelToolStripMenuItem.Name = "newLevelToolStripMenuItem";
-            this.newLevelToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.newLevelToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
             this.newLevelToolStripMenuItem.Text = "New Level";
             this.newLevelToolStripMenuItem.Click += new System.EventHandler(this.newLevelToolStripMenuItem_Click);
             // 
             // openLevelToolStripMenuItem
             // 
             this.openLevelToolStripMenuItem.Name = "openLevelToolStripMenuItem";
-            this.openLevelToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.openLevelToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
             this.openLevelToolStripMenuItem.Text = "Open Level";
             this.openLevelToolStripMenuItem.Click += new System.EventHandler(this.openLevelToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(210, 6);
             // 
             // newProjectToolStripMenuItem
             // 
             this.newProjectToolStripMenuItem.Name = "newProjectToolStripMenuItem";
-            this.newProjectToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.newProjectToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
             this.newProjectToolStripMenuItem.Text = "New Project";
             this.newProjectToolStripMenuItem.Click += new System.EventHandler(this.newProjectToolStripMenuItem_Click);
             // 
             // openProjectToolStripMenuItem
             // 
             this.openProjectToolStripMenuItem.Name = "openProjectToolStripMenuItem";
-            this.openProjectToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.openProjectToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
             this.openProjectToolStripMenuItem.Text = "Open Project";
             this.openProjectToolStripMenuItem.Click += new System.EventHandler(this.openProjectToolStripMenuItem_Click);
             // 
             // closeProjectToolStripMenuItem
             // 
             this.closeProjectToolStripMenuItem.Name = "closeProjectToolStripMenuItem";
-            this.closeProjectToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.closeProjectToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
             this.closeProjectToolStripMenuItem.Text = "Close Project";
             this.closeProjectToolStripMenuItem.Click += new System.EventHandler(this.closeProjectToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(210, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -234,6 +238,17 @@
             this.ActorsTreeView.Size = new System.Drawing.Size(343, 350);
             this.ActorsTreeView.TabIndex = 0;
             // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(210, 6);
+            // 
+            // recentProjectsLevelsMenuItem
+            // 
+            this.recentProjectsLevelsMenuItem.Name = "recentProjectsLevelsMenuItem";
+            this.recentProjectsLevelsMenuItem.Size = new System.Drawing.Size(213, 22);
+            this.recentProjectsLevelsMenuItem.Text = "Recent Projects and Levels";
+            // 
             // BombastEditorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -281,5 +296,7 @@
         private System.Windows.Forms.ToolStripMenuItem newLevelToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openLevelToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripMenuItem recentProjectsLevelsMenuItem;
     }
 }
