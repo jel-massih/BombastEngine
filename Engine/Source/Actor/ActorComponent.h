@@ -15,7 +15,7 @@ public:
 	virtual void VOnChanged() {};
 
 
-	virtual rapidxml::xml_node<>* VGenerateXml(void) = 0;
+	virtual rapidxml::xml_node<>* VGenerateXml(rapidxml::xml_document<> &outDoc) = 0;
 
 	//Overewritten by interface class
 	virtual ComponentId VGetId() const { return GetIdFromName(VGetName()); }

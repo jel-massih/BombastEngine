@@ -13,7 +13,7 @@ public:
 	virtual bool VInitialize(rapidxml::xml_node<>* pData) override;
 	virtual void VPostInit() override;
 	virtual void VOnChanged() override;
-	virtual rapidxml::xml_node<>* VGenerateXml() { return nullptr; };
+	virtual rapidxml::xml_node<>* VGenerateXml(rapidxml::xml_document<> &outDoc) { return nullptr; };
 	const Vec4 GetColor() const { return m_color; }
 
 protected:
@@ -35,7 +35,7 @@ public:
 	static const char* g_Name;
 	virtual const char* VGetName() const override{ return InvisibleRenderComponent::g_Name; }
 
-	virtual rapidxml::xml_node<>* VGenerateXml() override;
+	virtual rapidxml::xml_node<>* VGenerateXml(rapidxml::xml_document<> &outDoc) override;
 
 protected:
 	virtual SceneNode* VCreateSceneNode() override;
@@ -50,7 +50,7 @@ public:
 	static const char* g_Name;
 	virtual const char* VGetName() const override{ return BitmapRenderComponent::g_Name; }
 
-	virtual rapidxml::xml_node<>* VGenerateXml() override;
+	virtual rapidxml::xml_node<>* VGenerateXml(rapidxml::xml_document<> &outDoc) override;
 
 protected:
 	virtual bool VDelegateInitialize(rapidxml::xml_node<>* pData) override;
@@ -68,7 +68,7 @@ public:
 	static const char* g_Name;
 	virtual const char* VGetName() const override { return MeshRenderComponent::g_Name; }
 
-	virtual rapidxml::xml_node<>* VGenerateXml() override;
+	virtual rapidxml::xml_node<>* VGenerateXml(rapidxml::xml_document<> &outDoc) override;
 
 protected:
 	virtual bool VDelegateInitialize(rapidxml::xml_node<>* pData) override;
@@ -83,7 +83,7 @@ public:
 	static const char* g_Name;
 	virtual const char* VGetName() const { return g_Name; }
 
-	virtual rapidxml::xml_node<>* VGenerateXml() override;
+	virtual rapidxml::xml_node<>* VGenerateXml(rapidxml::xml_document<> &outDoc) override;
 
 protected:
 	virtual bool VDelegateInitialize(rapidxml::xml_node<>* pBaseElement) override;

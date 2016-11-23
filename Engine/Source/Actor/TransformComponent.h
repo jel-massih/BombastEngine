@@ -12,7 +12,7 @@ public:
 
 	TransformComponent() : m_scale(Vec3::g_IdentityVec3) {}
 	virtual bool VInitialize(rapidxml::xml_node<>* pData) override;
-	virtual rapidxml::xml_node<>* VGenerateXml() override;
+	virtual rapidxml::xml_node<>* VGenerateXml(rapidxml::xml_document<> &outDoc) override;
 
 	Mat4x4 GetTransform() const { return m_transform; }
 	void SetTransform(const Mat4x4& newTransform){ m_position = newTransform.GetPosition(); m_rotation = newTransform.GetYawPitchRoll(); m_scale = newTransform.GetScale(); UpdateTransform(); }

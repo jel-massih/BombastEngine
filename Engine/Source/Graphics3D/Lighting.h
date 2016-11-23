@@ -20,6 +20,7 @@ struct LightProperties
 	float m_specularPower;
 
 	static LightType GetLightTypeFromString(const std::string type);
+	static std::string GetLightTypeNameFromLightType(const LightType type);
 };
 
 class LightNode : public SceneNode

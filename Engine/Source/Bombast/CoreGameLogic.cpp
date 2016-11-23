@@ -120,6 +120,19 @@ void CoreGameLogic::VDestroyActor(const ActorId actorId)
 	}
 }
 
+void CoreGameLogic::VModifyActor(const ActorId actorId, rapidxml::xml_node<>* overrides)
+{
+	BE_ASSERT(m_pActorFactory);
+	if (!m_pActorFactory)
+		return;
+
+	auto it = m_actors.find(actorId);
+	if (it != m_actors.end())
+	{
+		m_pActorFactory->ModifyActor(it->second, overrides);
+	}
+}
+
 bool CoreGameLogic::VLoadGame(const char* levelResource)
 {
 	//Get Root node

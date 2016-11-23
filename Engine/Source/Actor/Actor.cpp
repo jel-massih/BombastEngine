@@ -48,14 +48,14 @@ std::string Actor::ToXML()
 	rapidxml::xml_node<>* pActorElement = outDoc.allocate_node(rapidxml::node_element, "Actor");
 	pActorElement->append_attribute(outDoc.allocate_attribute("type", m_type.c_str()));
 	pActorElement->append_attribute(outDoc.allocate_attribute("resource", m_resource.c_str()));
-	outDoc.append_node(pActorElement);
 
 	for (auto it = m_components.begin(); it != m_components.end(); it++)
 	{
 		ActorComponent* pComponent = it->second;
-		rapidxml::xml_node<>* pComponentElement = pComponent->VGenerateXml();
-		pActorElement->append_node(pComponentElement);
+		pActorElement->append_node(pComponent->VGenerateXml(outDoc));
 	}
+
+	outDoc.append_node(pActorElement);
 	std::string outString;
 	rapidxml::print(std::back_inserter(outString), outDoc);
 

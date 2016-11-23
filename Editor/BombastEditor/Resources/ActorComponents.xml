@@ -1,0 +1,33 @@
+﻿<Components>
+
+  <Component name="TransformComponent">
+    <Element name="Position" type="Vec3" fieldNames="x,y,z" />
+    <Element name="YawPitchRoll" type="Vec3" fieldNames="x,y,z" />
+  </Component>
+
+  <Component name="PhysicsComponent">
+    <Element name="Shape" type="PhysicsShape" />
+    <Element name="Density" type="PhysicsDensity" />
+    <Element name="PhysicsMaterial" type="PhysicsMaterial" />
+    <Element name="Transform" type="TransformComponent" />
+  </Component>
+
+  <Component name="LightRenderComponent">
+    <Element name="Color" type="RGBA" />
+    <Element name="Type" type="LightType" />
+    <Element name="Shape" type="Shape" />
+  </Component>
+
+  <Component name="BitmapRenderComponent">
+    <Element name="Color" type="RGBA" />
+    <Element name="Texture" type="File" extensions="Image Files(*.BMP;*.JPG;*.GIF;*.DDS)|*.BMP;*.JPG;*.GIF;*.DDS|All files (*.*)|*.*"  />
+    <Element name="RelativeSize" type="Vec2" fieldNames="x,y" />
+  </Component>
+
+  <Component name="MeshRenderComponent">
+    <Element name="Position" type="Vec3" fieldNames="x,y,z" />
+    <Element name="Color" type="RGBA" />
+    <Element name="Mesh" type="File" extensions="DX9 X Files (*.x)|*.x" />
+    <Element name="Materials" type="Materials" />
+  </Component>
+</Components>

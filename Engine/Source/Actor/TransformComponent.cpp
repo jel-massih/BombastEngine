@@ -52,27 +52,35 @@ bool TransformComponent::VInitialize(rapidxml::xml_node<>* pData)
 }
 
 //@TODO: Check to make sure this works and outDoc isnt deallocated, breaking returned element
-rapidxml::xml_node<>* TransformComponent::VGenerateXml()
+rapidxml::xml_node<>* TransformComponent::VGenerateXml(rapidxml::xml_document<> &outDoc)
 {
-	rapidxml::xml_document<> outDoc;
 	rapidxml::xml_node<>* pBaseElement = outDoc.allocate_node(rapidxml::node_element, VGetName());
 
 	rapidxml::xml_node<>* pPosition = outDoc.allocate_node(rapidxml::node_element, "Position");
-	pPosition->append_attribute(outDoc.allocate_attribute("x", ToStr(m_position.x).c_str()));
-	pPosition->append_attribute(outDoc.allocate_attribute("y", ToStr(m_position.y).c_str()));
-	pPosition->append_attribute(outDoc.allocate_attribute("z", ToStr(m_position.z).c_str()));
+	char *pos_x = outDoc.allocate_string(ToStr(m_position.x).c_str());
+	pPosition->append_attribute(outDoc.allocate_attribute("x", pos_x));
+	char *pos_y = outDoc.allocate_string(ToStr(m_position.y).c_str());
+	pPosition->append_attribute(outDoc.allocate_attribute("y", pos_y));
+	char *pos_z = outDoc.allocate_string(ToStr(m_position.z).c_str());
+	pPosition->append_attribute(outDoc.allocate_attribute("z", pos_z));
 	pBaseElement->append_node(pPosition);
 
 	rapidxml::xml_node<>* pDirection = outDoc.allocate_node(rapidxml::node_element, "YawPitchRoll");
-	pDirection->append_attribute(outDoc.allocate_attribute("x", ToStr(m_rotation.x).c_str()));
-	pDirection->append_attribute(outDoc.allocate_attribute("y", ToStr(m_rotation.y).c_str()));
-	pDirection->append_attribute(outDoc.allocate_attribute("z", ToStr(m_rotation.z).c_str()));
+	char *dir_x = outDoc.allocate_string(ToStr(m_rotation.x).c_str());
+	pDirection->append_attribute(outDoc.allocate_attribute("x", dir_x));
+	char *dir_y = outDoc.allocate_string(ToStr(m_rotation.y).c_str());
+	pDirection->append_attribute(outDoc.allocate_attribute("y", dir_y));
+	char *dir_z = outDoc.allocate_string(ToStr(m_rotation.z).c_str());
+	pDirection->append_attribute(outDoc.allocate_attribute("z", dir_z));
 	pBaseElement->append_node(pDirection);
 
 	rapidxml::xml_node<>* pScale = outDoc.allocate_node(rapidxml::node_element, "Scale");
-	pScale->append_attribute(outDoc.allocate_attribute("x", ToStr(m_scale.x).c_str()));
-	pScale->append_attribute(outDoc.allocate_attribute("y", ToStr(m_scale.y).c_str()));
-	pScale->append_attribute(outDoc.allocate_attribute("z", ToStr(m_scale.z).c_str()));
+	char *scale_x = outDoc.allocate_string(ToStr(m_scale.x).c_str());
+	pScale->append_attribute(outDoc.allocate_attribute("x", scale_x));
+	char *scale_y = outDoc.allocate_string(ToStr(m_scale.y).c_str());
+	pScale->append_attribute(outDoc.allocate_attribute("y", scale_y));
+	char *scale_z = outDoc.allocate_string(ToStr(m_scale.z).c_str());
+	pScale->append_attribute(outDoc.allocate_attribute("z", scale_z));
 	pBaseElement->append_node(pScale);
 	
 	return pBaseElement;

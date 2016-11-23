@@ -29,5 +29,11 @@ namespace BombastEditor
         public unsafe static extern void GetActorXml(IntPtr actorXMLPtrAddress, uint actorId);
         [DllImport(BombastEditorDLLName, CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetActorXmlSize(uint actorId);
+        [DllImport(BombastEditorDLLName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern int CreateActor([MarshalAs(UnmanagedType.BStr)] string lactorResource);
+        [DllImport(BombastEditorDLLName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern void ModifyActor([MarshalAs(UnmanagedType.BStr)] string lactorModXML);
+        [DllImport(BombastEditorDLLName, CallingConvention = CallingConvention.Cdecl)]
+        public unsafe static extern int DestroyActor(uint actorId);
     }
 }

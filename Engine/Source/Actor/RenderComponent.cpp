@@ -92,6 +92,24 @@ SceneNode* InvisibleRenderComponent::VCreateSceneNode()
 	return NULL;
 }
 
+rapidxml::xml_node<>* InvisibleRenderComponent::VGenerateXml(rapidxml::xml_document<> &outDoc)
+{
+	rapidxml::xml_node<>* pBaseElement = outDoc.allocate_node(rapidxml::node_element, VGetName());
+
+	rapidxml::xml_node<>* pColor = outDoc.allocate_node(rapidxml::node_element, "Color");
+	char *color_x = outDoc.allocate_string(ToStr(m_color.x).c_str());
+	pColor->append_attribute(outDoc.allocate_attribute("r", color_x));
+	char *color_y = outDoc.allocate_string(ToStr(m_color.y).c_str());
+	pColor->append_attribute(outDoc.allocate_attribute("g", color_y));
+	char *color_z = outDoc.allocate_string(ToStr(m_color.z).c_str());
+	pColor->append_attribute(outDoc.allocate_attribute("b", color_z));
+	char *color_w = outDoc.allocate_string(ToStr(m_color.w).c_str());
+	pColor->append_attribute(outDoc.allocate_attribute("a", color_w));
+	pBaseElement->append_node(pColor);
+
+	return pBaseElement;
+}
+
 bool BitmapRenderComponent::VDelegateInitialize(rapidxml::xml_node<>* pData)
 {
 	bool result = false;
@@ -119,16 +137,19 @@ bool BitmapRenderComponent::VDelegateInitialize(rapidxml::xml_node<>* pData)
 	return true;
 }
 
-rapidxml::xml_node<>* BitmapRenderComponent::VGenerateXml()
+rapidxml::xml_node<>* BitmapRenderComponent::VGenerateXml(rapidxml::xml_document<> &outDoc)
 {
-	rapidxml::xml_document<> outDoc;
 	rapidxml::xml_node<>* pBaseElement = outDoc.allocate_node(rapidxml::node_element, VGetName());
 
 	rapidxml::xml_node<>* pColor = outDoc.allocate_node(rapidxml::node_element, "Color");
-	pColor->append_attribute(outDoc.allocate_attribute("r", ToStr(m_color.x).c_str()));
-	pColor->append_attribute(outDoc.allocate_attribute("g", ToStr(m_color.y).c_str()));
-	pColor->append_attribute(outDoc.allocate_attribute("b", ToStr(m_color.z).c_str()));
-	pColor->append_attribute(outDoc.allocate_attribute("a", ToStr(m_color.w).c_str()));
+	char *color_x = outDoc.allocate_string(ToStr(m_color.x).c_str());
+	pColor->append_attribute(outDoc.allocate_attribute("r", color_x));
+	char *color_y = outDoc.allocate_string(ToStr(m_color.y).c_str());
+	pColor->append_attribute(outDoc.allocate_attribute("g", color_y));
+	char *color_z = outDoc.allocate_string(ToStr(m_color.z).c_str());
+	pColor->append_attribute(outDoc.allocate_attribute("b", color_z));
+	char *color_w = outDoc.allocate_string(ToStr(m_color.w).c_str());
+	pColor->append_attribute(outDoc.allocate_attribute("a", color_w));
 	pBaseElement->append_node(pColor);
 
 	rapidxml::xml_node<>* pTexture = outDoc.allocate_node(rapidxml::node_element, "Texture");
@@ -136,8 +157,10 @@ rapidxml::xml_node<>* BitmapRenderComponent::VGenerateXml()
 	pBaseElement->append_node(pTexture);
 
 	rapidxml::xml_node<>* pSize = outDoc.allocate_node(rapidxml::node_element, "RelativeSize");
-	pSize->append_attribute(outDoc.allocate_attribute("x", ToStr(m_relativeSize.x).c_str()));
-	pSize->append_attribute(outDoc.allocate_attribute("y", ToStr(m_relativeSize.y).c_str()));
+	char *size_x = outDoc.allocate_string(ToStr(m_relativeSize.x).c_str());
+	pSize->append_attribute(outDoc.allocate_attribute("x", size_x));
+	char *size_y = outDoc.allocate_string(ToStr(m_relativeSize.x).c_str());
+	pSize->append_attribute(outDoc.allocate_attribute("y", size_y));
 	pBaseElement->append_node(pSize);
 
 	return pBaseElement;
@@ -193,16 +216,19 @@ bool MeshRenderComponent::VDelegateInitialize(rapidxml::xml_node<>* pData)
 	return true;
 }
 
-rapidxml::xml_node<>* MeshRenderComponent::VGenerateXml()
+rapidxml::xml_node<>* MeshRenderComponent::VGenerateXml(rapidxml::xml_document<> &outDoc)
 {
-	rapidxml::xml_document<> outDoc;
 	rapidxml::xml_node<>* pBaseElement = outDoc.allocate_node(rapidxml::node_element, VGetName());
 
 	rapidxml::xml_node<>* pColor = outDoc.allocate_node(rapidxml::node_element, "Color");
-	pColor->append_attribute(outDoc.allocate_attribute("r", ToStr(m_color.x).c_str()));
-	pColor->append_attribute(outDoc.allocate_attribute("g", ToStr(m_color.y).c_str()));
-	pColor->append_attribute(outDoc.allocate_attribute("b", ToStr(m_color.z).c_str()));
-	pColor->append_attribute(outDoc.allocate_attribute("a", ToStr(m_color.w).c_str()));
+	char *color_x = outDoc.allocate_string(ToStr(m_color.x).c_str());
+	pColor->append_attribute(outDoc.allocate_attribute("r", color_x));
+	char *color_y = outDoc.allocate_string(ToStr(m_color.y).c_str());
+	pColor->append_attribute(outDoc.allocate_attribute("g", color_y));
+	char *color_z = outDoc.allocate_string(ToStr(m_color.z).c_str());
+	pColor->append_attribute(outDoc.allocate_attribute("b", color_z));
+	char *color_w = outDoc.allocate_string(ToStr(m_color.w).c_str());
+	pColor->append_attribute(outDoc.allocate_attribute("a", color_w));
 	pBaseElement->append_node(pColor);
 
 	rapidxml::xml_node<>* pMesh = outDoc.allocate_node(rapidxml::node_element, "Mesh");
@@ -215,9 +241,8 @@ rapidxml::xml_node<>* MeshRenderComponent::VGenerateXml()
 	{
 		rapidxml::xml_node<>* pMaterial = outDoc.allocate_node(rapidxml::node_element, "Material");
 		pMaterial->append_attribute(outDoc.allocate_attribute("path", (*it).c_str()));
-
+		pMaterials->append_node(pMaterial);
 	}
-	pMaterials->append_attribute(outDoc.allocate_attribute("y", ToStr(m_relativeSize.y).c_str()));
 	pBaseElement->append_node(pMaterials);
 
 	return pBaseElement;
@@ -299,6 +324,62 @@ bool LightRenderComponent::VDelegateInitialize(rapidxml::xml_node<>* pData)
 	}
 
 	return true;
+}
+
+rapidxml::xml_node<>* LightRenderComponent::VGenerateXml(rapidxml::xml_document<> &outDoc)
+{
+	rapidxml::xml_node<>* pBaseElement = outDoc.allocate_node(rapidxml::node_element, VGetName());
+
+	rapidxml::xml_node<>* pColor = outDoc.allocate_node(rapidxml::node_element, "Color");
+	char *color_x = outDoc.allocate_string(ToStr(m_color.x).c_str());
+	pColor->append_attribute(outDoc.allocate_attribute("r", color_x));
+	char *color_y = outDoc.allocate_string(ToStr(m_color.y).c_str());
+	pColor->append_attribute(outDoc.allocate_attribute("g", color_y));
+	char *color_z = outDoc.allocate_string(ToStr(m_color.z).c_str());
+	pColor->append_attribute(outDoc.allocate_attribute("b", color_z));
+	char *color_w = outDoc.allocate_string(ToStr(m_color.w).c_str());
+	pColor->append_attribute(outDoc.allocate_attribute("a", color_w));
+	pBaseElement->append_node(pColor);
+
+	rapidxml::xml_node<>* pShape = outDoc.allocate_node(rapidxml::node_element, "Shape");
+	char *falloff = outDoc.allocate_string(ToStr(m_properties.m_falloff).c_str());
+	pShape->append_attribute(outDoc.allocate_attribute("falloff", falloff));
+	char *range = outDoc.allocate_string(ToStr(m_properties.m_range).c_str());
+	pShape->append_attribute(outDoc.allocate_attribute("range", range));
+	pBaseElement->append_node(pShape);
+
+	rapidxml::xml_node<>* pType = outDoc.allocate_node(rapidxml::node_element, "Type", LightProperties::GetLightTypeNameFromLightType(m_properties.m_lightType).c_str());
+	pBaseElement->append_node(pType);
+
+	rapidxml::xml_node<>* pProperties = outDoc.allocate_node(rapidxml::node_element, "Properties");
+
+	rapidxml::xml_node<>* pDiffuse = outDoc.allocate_node(rapidxml::node_element, "Diffuse");
+	char *diffuse_x = outDoc.allocate_string(ToStr(m_properties.m_diffuseColor.x).c_str());
+	pDiffuse->append_attribute(outDoc.allocate_attribute("r", diffuse_x));
+	char *diffuse_y = outDoc.allocate_string(ToStr(m_properties.m_diffuseColor.y).c_str());
+	pDiffuse->append_attribute(outDoc.allocate_attribute("g", diffuse_y));
+	char *diffuse_z = outDoc.allocate_string(ToStr(m_properties.m_diffuseColor.z).c_str());
+	pDiffuse->append_attribute(outDoc.allocate_attribute("b", diffuse_z));
+	char *diffuse_w = outDoc.allocate_string(ToStr(m_properties.m_diffuseColor.w).c_str());
+	pDiffuse->append_attribute(outDoc.allocate_attribute("a", diffuse_w));
+	pProperties->append_node(pDiffuse);
+
+	rapidxml::xml_node<>* pSpecular = outDoc.allocate_node(rapidxml::node_element, "Specular");
+	char *specular_x = outDoc.allocate_string(ToStr(m_properties.m_specularColor.x).c_str());
+	pSpecular->append_attribute(outDoc.allocate_attribute("r", specular_x));
+	char *specular_y = outDoc.allocate_string(ToStr(m_properties.m_specularColor.y).c_str());
+	pSpecular->append_attribute(outDoc.allocate_attribute("g", specular_y));
+	char *specular_z = outDoc.allocate_string(ToStr(m_properties.m_specularColor.z).c_str());
+	pSpecular->append_attribute(outDoc.allocate_attribute("b", specular_z));
+	char *specular_w = outDoc.allocate_string(ToStr(m_properties.m_specularColor.w).c_str());
+	pSpecular->append_attribute(outDoc.allocate_attribute("a", specular_w));
+	char *specular_power = outDoc.allocate_string(ToStr(m_properties.m_specularPower).c_str());
+	pSpecular->append_attribute(outDoc.allocate_attribute("power", specular_power));
+	pProperties->append_node(pSpecular);
+
+	pBaseElement->append_node(pProperties);
+
+	return pBaseElement;
 }
 
 SceneNode* LightRenderComponent::VCreateSceneNode()

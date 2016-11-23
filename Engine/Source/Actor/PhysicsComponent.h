@@ -14,7 +14,7 @@ public:
 	virtual bool VInitialize(rapidxml::xml_node<>* pData) override;
 	virtual void VPostInit() override;
 	virtual void VUpdate(const float deltaMs) override;
-	virtual rapidxml::xml_node<>* VGenerateXml() override { return NULL; }
+	virtual rapidxml::xml_node<>* VGenerateXml(rapidxml::xml_document<> &outDoc) override { return NULL; }
 
 	//Physics
 	void ApplyForce(const Vec3& direction, float newtons);

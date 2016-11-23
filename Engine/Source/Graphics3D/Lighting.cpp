@@ -25,6 +25,23 @@ LightType LightProperties::GetLightTypeFromString(std::string type)
 	return lightType;
 }
 
+std::string LightProperties::GetLightTypeNameFromLightType(LightType type)
+{
+	switch (type)
+	{
+		case BLT_DIRECTIONAL:
+			return "directional";
+		case BLT_SPOT:
+			return "spot";
+		case BLT_POINT:
+			return "point";
+		case BLT_AREA:
+			return "area";
+	}
+
+	return nullptr;
+}
+
 LightNode::LightNode(const ActorId actorId, BaseRenderComponent* renderComponent, const LightProperties& props, const Mat4x4* t)
 	: SceneNode(actorId, renderComponent, RenderPass_NotRendered, t)
 {

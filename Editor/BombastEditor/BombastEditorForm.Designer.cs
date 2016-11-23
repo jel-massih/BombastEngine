@@ -51,9 +51,11 @@
             this.AssetsTreeView = new System.Windows.Forms.TreeView();
             this.ActorsTabPage = new System.Windows.Forms.TabPage();
             this.ActorsTreeView = new System.Windows.Forms.TreeView();
+            this.actorComponentsPanel = new System.Windows.Forms.Panel();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.ContentTabControl.SuspendLayout();
             this.AssetsTabPage.SuspendLayout();
@@ -93,47 +95,47 @@
             // newLevelToolStripMenuItem
             // 
             this.newLevelToolStripMenuItem.Name = "newLevelToolStripMenuItem";
-            this.newLevelToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
+            this.newLevelToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.newLevelToolStripMenuItem.Text = "New Level";
             this.newLevelToolStripMenuItem.Click += new System.EventHandler(this.newLevelToolStripMenuItem_Click);
             // 
             // openLevelToolStripMenuItem
             // 
             this.openLevelToolStripMenuItem.Name = "openLevelToolStripMenuItem";
-            this.openLevelToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
+            this.openLevelToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.openLevelToolStripMenuItem.Text = "Open Level";
             this.openLevelToolStripMenuItem.Click += new System.EventHandler(this.openLevelToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(210, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(152, 6);
             // 
             // newProjectToolStripMenuItem
             // 
             this.newProjectToolStripMenuItem.Name = "newProjectToolStripMenuItem";
-            this.newProjectToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
+            this.newProjectToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.newProjectToolStripMenuItem.Text = "New Project";
             this.newProjectToolStripMenuItem.Click += new System.EventHandler(this.newProjectToolStripMenuItem_Click);
             // 
             // openProjectToolStripMenuItem
             // 
             this.openProjectToolStripMenuItem.Name = "openProjectToolStripMenuItem";
-            this.openProjectToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
+            this.openProjectToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.openProjectToolStripMenuItem.Text = "Open Project";
             this.openProjectToolStripMenuItem.Click += new System.EventHandler(this.openProjectToolStripMenuItem_Click);
             // 
             // closeProjectToolStripMenuItem
             // 
             this.closeProjectToolStripMenuItem.Name = "closeProjectToolStripMenuItem";
-            this.closeProjectToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
+            this.closeProjectToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.closeProjectToolStripMenuItem.Text = "Close Project";
             this.closeProjectToolStripMenuItem.Click += new System.EventHandler(this.closeProjectToolStripMenuItem_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(210, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(152, 6);
             // 
             // recentProjectsMenuItem
             // 
@@ -144,12 +146,12 @@
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(210, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(152, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -194,6 +196,10 @@
             // 
             this.splitContainer1.Panel1.BackColor = System.Drawing.SystemColors.ButtonShadow;
             this.splitContainer1.Panel1.Controls.Add(this.ContentTabControl);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.actorComponentsPanel);
             this.splitContainer1.Size = new System.Drawing.Size(357, 651);
             this.splitContainer1.SplitterDistance = 382;
             this.splitContainer1.TabIndex = 2;
@@ -248,6 +254,17 @@
             this.ActorsTreeView.Name = "ActorsTreeView";
             this.ActorsTreeView.Size = new System.Drawing.Size(343, 350);
             this.ActorsTreeView.TabIndex = 0;
+            this.ActorsTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.ActorsTreeView_AfterSelect);
+            // 
+            // actorComponentsPanel
+            // 
+            this.actorComponentsPanel.AutoScroll = true;
+            this.actorComponentsPanel.AutoSize = true;
+            this.actorComponentsPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.actorComponentsPanel.Location = new System.Drawing.Point(0, 0);
+            this.actorComponentsPanel.Name = "actorComponentsPanel";
+            this.actorComponentsPanel.Size = new System.Drawing.Size(357, 265);
+            this.actorComponentsPanel.TabIndex = 0;
             // 
             // BombastEditorForm
             // 
@@ -264,6 +281,8 @@
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.ContentTabControl.ResumeLayout(false);
@@ -298,5 +317,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem recentProjectsMenuItem;
+        private System.Windows.Forms.Panel actorComponentsPanel;
     }
 }

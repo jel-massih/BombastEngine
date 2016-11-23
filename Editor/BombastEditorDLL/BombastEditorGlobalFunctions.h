@@ -16,3 +16,7 @@ extern "C" DllExport int GetActorCount();
 extern "C" DllExport void GetActorList(int* actorIdArrayPtr, int size);
 extern "C" DllExport void GetActorXml(int *actorXmlPtr, ActorId actorId);
 extern "C" DllExport int GetActorXmlSize(ActorId actorId);
+
+extern "C" DllExport int CreateActor(BSTR actorResourceXml);
+extern "C" DllExport void ModifyActor(BSTR newActorXml);
+extern "C" DllExport void DestroyActor(ActorId actorId);

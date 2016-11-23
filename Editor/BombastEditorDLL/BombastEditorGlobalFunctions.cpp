@@ -2,6 +2,8 @@
 #include "Utilities/String.h"
 
 #include "Actor/Actor.h"
+#include "Events/Events.h"
+
 
 int InitializeBombastProject(int *instancePtrAddress, int *hPrevInstancePtrAddress, int *hWndPtrAddress, int nCmdShow, int screenWidth, int screenHeight, BSTR projectPath)
 {
@@ -119,4 +121,35 @@ int GetActorXmlSize(ActorId actorId)
 	}
 	std::string xml = pActor->ToXML();
 	return xml.length();
+}
+
+int CreateActor(BSTR actorResourceXml)
+{
+	std::string actorResource = ws2s(std::wstring(actorResourceXml, SysStringLen(actorResourceXml)));
+	Actor* pActor = g_pApp->m_pGame->VCreateActor(actorResource, NULL);
+	if (!pActor)
+		return INVALID_ACTOR_ID;
+
+	EventDataPtr pEvent(BE_NEW EvtData_New_Actor(pActor->GetId()));
+	IEventManager::Get()->VQueueEvent(pEvent);
+	return pActor->GetId();
+}
+
+void ModifyActor(BSTR newActorXml)
+{
+	std::string actorModificationXML = ws2s(std::wstring(newActorXml, SysStringLen(newActorXml)));
+	rapidxml::xml_document<> doc;
+	doc.parse<0>(&actorModificationXML[0]);
+	rapidxml::xml_node<> *pRoot = doc.first_node();
+	if (!pRoot)
+		return;
+
+	std::string actorId = pRoot->first_attribute("id")->value();
+
+	g_pApp->m_pGame->VModifyActor(atoi(actorId.c_str()), pRoot);
+}
+
+void DestroyActor(ActorId actorId)
+{
+	g_pApp->m_pGame->VDestroyActor(actorId);
 }

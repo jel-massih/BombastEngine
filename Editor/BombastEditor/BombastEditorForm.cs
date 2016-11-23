@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
@@ -17,11 +18,15 @@ namespace BombastEditor
         private string m_assetsDirectory;
 
         private bool m_projectLoaded;
-        private string m_activeLevelResourceName; 
+        private string m_activeLevelResourceName;
+
+        private int m_selectedActorId = INVALID_ACTOR_ID;
 
         private List<XmlNode> m_actorsXmlNodes = new List<XmlNode>();
 
         private MessageHandler m_messageHandler;
+
+        private ActorComponentEditor m_actorComponentEditor;
 
         public BombastEditorForm()
         {
@@ -37,6 +42,8 @@ namespace BombastEditor
             {
                 MessageBox.Show("Error: " + ex.ToString());
             }
+
+            m_actorComponentEditor = new ActorComponentEditor(actorComponentsPanel, m_projectDirectory);
 
             var defaultProject = Properties.Settings.Default.DefaultProjectPath;
             if(!string.IsNullOrEmpty(defaultProject))
@@ -308,6 +315,33 @@ namespace BombastEditor
             Marshal.FreeCoTaskMem(tmpActorArray);
 
             return actorList;
+        }
+
+        private void ActorsTreeView_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            TreeNode node = ActorsTreeView.SelectedNode;
+            if(node != null)
+            {
+                SetSelectedActor(node.Index + 1);
+            }
+        }
+
+        private void SetSelectedActor(int actorId)
+        {
+            if(actorId != INVALID_ACTOR_ID)
+            {
+                if(m_selectedActorId != INVALID_ACTOR_ID)
+                {
+                    ActorsTreeView.Nodes[m_selectedActorId - 1].ForeColor = Color.Black;
+                    ActorsTreeView.Nodes[m_selectedActorId - 1].BackColor = Color.White;
+                }
+
+                m_selectedActorId = actorId;
+                ActorsTreeView.Nodes[m_selectedActorId - 1].ForeColor = Color.White;
+                ActorsTreeView.Nodes[m_selectedActorId - 1].BackColor = Color.Blue;
+
+                m_actorComponentEditor.ShowActorComponents(m_selectedActorId, m_actorsXmlNodes[m_selectedActorId]);
+            }
         }
         #endregion
 

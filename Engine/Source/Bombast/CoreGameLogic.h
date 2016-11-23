@@ -52,6 +52,7 @@ public:
 	virtual Actor* VCreateActor(const std::string &actorResource, rapidxml::xml_node<> *overrides);
 	virtual void VDestroyActor(const ActorId actorId);
 	virtual Actor* VGetActor(const ActorId actorId);
+	virtual void VModifyActor(const ActorId actorId, rapidxml::xml_node<> *overrides);
 
 	std::string GetActorXml(const ActorId id);
 

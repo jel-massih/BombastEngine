@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.25618.0
+VisualStudioVersion = 15.0.25920.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BombastPhysics", "..\..\..\BombastPhysics\Source\msvc\BombastPhysics.vcxproj", "{043C01B8-4137-4A60-B112-07C8D596A5E1}"
 EndProject
@@ -12,6 +12,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Editor", "Editor", "{664DE70D-6C38-4913-ADC5-67012B60D73B}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BombastEditorDLL", "..\..\..\Editor\BombastEditorDLL\BombastEditorDLL.vcxproj", "{6AF6FB3A-7DD9-47BF-BFC5-617C8D49DDD6}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B8DE6183-26FF-4787-B7BB-BDB3697E6887} = {B8DE6183-26FF-4787-B7BB-BDB3697E6887}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BombastEditor", "..\..\..\Editor\BombastEditor\BombastEditor.csproj", "{21BDFE9F-B809-44C8-B5B0-BE669D3D889A}"
 	ProjectSection(ProjectDependencies) = postProject
