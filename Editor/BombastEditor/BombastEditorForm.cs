@@ -389,6 +389,6 @@ namespace BombastEditor
 
             OpenResource(resourceInfo);
         }
-#endregion
+        #endregion
     }
 }
