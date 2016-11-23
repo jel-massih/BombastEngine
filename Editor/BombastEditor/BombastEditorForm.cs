@@ -44,24 +44,14 @@ namespace BombastEditor
                 //OpenProject(defaultProject);
             }
 
-            if(Properties.Settings.Default.RecentlyOpenedProjectsLevels == null)
+            if(Properties.Settings.Default.RecentlyOpenedProjects == null)
             {
-                Properties.Settings.Default.RecentlyOpenedProjectsLevels = new List<string>();
+                Properties.Settings.Default.RecentlyOpenedProjects = new List<string>();
             }
 
-            var recentProjectsLevels = Properties.Settings.Default.RecentlyOpenedProjectsLevels;
-            if (recentProjectsLevels != null && recentProjectsLevels.Count > 0)
-            {
-                foreach(var recentProjectLevel in recentProjectsLevels)
-                {
-                    recentProjectsLevelsMenuItem.DropDownItems.Add(recentProjectLevel);
-                }
-            }
-            else
-            {
-                recentProjectsLevelsMenuItem.Enabled = false;
-            }
+            UpdateRecentProjectMenuItem();
         }
+
         private void BombastEditorForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             Properties.Settings.Default.Save();
@@ -78,6 +68,12 @@ namespace BombastEditor
             Application.Exit();
         }
 
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Shutdown();
+        }
+
+        #region Project Management
         internal void OpenProject(string projectFilePath)
         {
             var projectFileInfo = new FileInfo(projectFilePath);
@@ -86,7 +82,7 @@ namespace BombastEditor
             m_assetsDirectory = Path.Combine(m_projectDirectory, GlobalSettings.AssetsFolderName);
 
             Properties.Settings.Default.DefaultProjectPath = projectFilePath;
-            AddRecentProjectLevelItem(projectFilePath);
+            AddRecentlyOpenedProjectItem(projectFilePath);
 
             IntPtr hInstance = Marshal.GetHINSTANCE(GetType().Module);
             IntPtr hWnd = EditorViewportPanel.Handle;
@@ -97,6 +93,56 @@ namespace BombastEditor
             UpdateFormComponents();
         }
 
+        private void UpdateFormComponents()
+        {
+            if (m_projectLoaded)
+            {
+                closeProjectToolStripMenuItem.Enabled = true;
+                Text = "Bombast Editor | " + m_projectName;
+            }
+            else
+            {
+                closeProjectToolStripMenuItem.Enabled = false;
+                Text = "Bombast Editor";
+            }
+        }
+
+        private void newProjectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            NewProjectDialog newProjectDialog = new NewProjectDialog();
+            newProjectDialog.ProjectCreated = OpenProject;
+            newProjectDialog.ShowDialog();
+        }
+
+        private void openProjectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openProjectDialog = new OpenFileDialog();
+            openProjectDialog.Filter = "Bombast Project File|*.bproject";
+            openProjectDialog.ShowDialog();
+
+            if (!string.IsNullOrEmpty(openProjectDialog.FileName))
+            {
+                OpenProject(openProjectDialog.FileName);
+            }
+        }
+
+        private void closeProjectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            m_projectDirectory = "";
+            m_assetsDirectory = "";
+            m_projectName = "";
+            m_projectLoaded = false;
+
+            m_activeLevelResourceName = "";
+
+            Properties.Settings.Default.DefaultProjectPath = "";
+
+            UpdateFormComponents();
+            InitializeAssetTree();
+        }
+        #endregion
+
+        #region Level Management
         internal void OpenLevel(string levelResourceName)
         {
             m_activeLevelResourceName = levelResourceName;
@@ -104,6 +150,28 @@ namespace BombastEditor
             InitializeActors();
         }
 
+        private void openLevelToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+
+            dialog.InitialDirectory = m_assetsDirectory;
+            dialog.Filter = "Bombast Level|*.bmap";
+            dialog.FilterIndex = 1;
+            dialog.RestoreDirectory = true;
+
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                OpenLevel(dialog.FileName);
+            }
+        }
+
+        private void newLevelToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+        #endregion
+
+        #region Assets Management
         private void InitializeAssetTree()
         {
             AssetsTreeView.Nodes.Clear();
@@ -142,12 +210,7 @@ namespace BombastEditor
                     if((attributes & FileAttributes.Hidden) == 0)
                     {
                         var childNode = new TreeNode(file.Name);
-                        var relativePath = PathUtils.GetRelativePath(m_assetsDirectory, file.FullName);
-                        var resourceInfo = new BombastResource
-                        {
-                            FullFilepath = file.FullName,
-                            ResourceName = BombastResource.GetResourceNameFromPath(relativePath)
-                        };
+                        var resourceInfo = BombastResourceHelper.GetBombastResourceFromFilepath(file.FullName, m_assetsDirectory);
                         childNode.Tag = resourceInfo;
                         currentNode.Nodes.Add(childNode);
                     }
@@ -157,6 +220,18 @@ namespace BombastEditor
             AssetsTreeView.Nodes.Add(node);
         }
 
+        private void AssetsTreeView_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            TreeNode node = AssetsTreeView.SelectedNode;
+            if (node != null && node.Nodes.Count == 0)
+            {
+                var resource = (BombastResource)node.Tag;
+                OpenResource(resource);
+            }
+        }
+        #endregion
+
+        #region Actor Management
         private void InitializeActors()
         {
             ActorsTreeView.Nodes.Clear();
@@ -216,110 +291,77 @@ namespace BombastEditor
 
             return actorList;
         }
+        #endregion
 
-        private void AssetsTreeView_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            TreeNode node = AssetsTreeView.SelectedNode;
-            if(node != null && node.Nodes.Count == 0)
-            {
-                var resource = (BombastResource)node.Tag;
-                OpenResource(resource);
-            }
-        }
-
-        private void UpdateFormComponents()
-        {
-            if(m_projectLoaded)
-            {
-                closeProjectToolStripMenuItem.Enabled = true;
-                Text = "Bombast Editor | " + m_projectName; 
-            }
-            else
-            {
-                closeProjectToolStripMenuItem.Enabled = false;
-                Text = "Bombast Editor";
-            }
-        }
-
-        private void newProjectToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            NewProjectDialog newProjectDialog = new NewProjectDialog();
-            newProjectDialog.ProjectCreated = OpenProject;
-            newProjectDialog.ShowDialog();
-        }
-
-        private void openProjectToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog openProjectDialog = new OpenFileDialog();
-            openProjectDialog.Filter = "Bombast Project File|*.bproject";
-            openProjectDialog.ShowDialog();
-
-            if(!string.IsNullOrEmpty(openProjectDialog.FileName))
-            {
-                OpenProject(openProjectDialog.FileName);
-            }
-        }
-
-        private void closeProjectToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            m_projectDirectory = "";
-            m_assetsDirectory = "";
-            m_projectName = "";
-            m_projectLoaded = false;
-
-            m_activeLevelResourceName = "";
-
-            Properties.Settings.Default.DefaultProjectPath = "";
-
-            UpdateFormComponents();
-            InitializeAssetTree();
-        }
-
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Shutdown();
-        }
-
-        private void openLevelToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog dialog = new OpenFileDialog();
-
-            dialog.InitialDirectory = m_assetsDirectory;
-            dialog.Filter = "Bombast Level|*.bmap";
-            dialog.FilterIndex = 1;
-            dialog.RestoreDirectory = true;
-
-            if (dialog.ShowDialog() == DialogResult.OK)
-            {
-                OpenLevel(dialog.FileName);
-            }
-        }
-        private void newLevelToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
+        #region Resource Management
         private void OpenResource(BombastResource resource)
         {
-            var resourceExtension = Path.GetExtension(resource.FullFilepath);
+            var resourceType = resource.ResourceType;
 
-            switch (resourceExtension)
+            switch (resourceType)
             {
-                case ".bmap":
-                    OpenLevel(resource.ResourceName);
+                case BombastResourceType.PROJECT:
+                    OpenProject(resource.FullFilepath);
+                    break;
+                case BombastResourceType.LEVEL:
+                    OpenLevel(resource.FullFilepath);
                     break;
                 default:
                     Process.Start(resource.FullFilepath);
                     break;
             }
         }
+        #endregion
 
-        private void AddRecentProjectLevelItem(string projectLevelPath)
+        #region Recently Opened Projects
+        private void AddRecentlyOpenedProjectItem(string projectPath)
         {
-            if(!Properties.Settings.Default.RecentlyOpenedProjectsLevels.Contains(projectLevelPath))
+            var index = Properties.Settings.Default.RecentlyOpenedProjects.IndexOf(projectPath);
+
+            //If does not contain, add to front. Otherwise move to front if not already there
+            if (index == -1)
             {
-                Properties.Settings.Default.RecentlyOpenedProjectsLevels.Add(projectLevelPath);
+                Properties.Settings.Default.RecentlyOpenedProjects.Add(projectPath);
+            }
+            else if(index != Properties.Settings.Default.RecentlyOpenedProjects.Count - 1)
+            {
+                Properties.Settings.Default.RecentlyOpenedProjects.RemoveAt(index);
+                Properties.Settings.Default.RecentlyOpenedProjects.Add(projectPath);
+            }
+
+            UpdateRecentProjectMenuItem();
+        }
+
+        private void UpdateRecentProjectMenuItem()
+        {
+            recentProjectsMenuItem.DropDownItems.Clear();
+            var recentProjects = Properties.Settings.Default.RecentlyOpenedProjects;
+            if (recentProjects != null && recentProjects.Count > 0)
+            {
+                recentProjects.Reverse();
+                foreach (var recentProject in recentProjects)
+                {
+                    ToolStripMenuItem item = new ToolStripMenuItem(recentProject);
+                    item.Click += new EventHandler(this.recentProjectMenuItem_Click);
+                    recentProjectsMenuItem.DropDownItems.Add(item);
+                }
+            }
+            else
+            {
+                recentProjectsMenuItem.Enabled = false;
             }
         }
+
+
+        private void recentProjectMenuItem_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem item = (ToolStripMenuItem)sender;
+
+            var resourceFilePath = item.Text;
+            var resourceInfo = BombastResourceHelper.GetBombastResourceFromFilepath(resourceFilePath);
+
+            OpenResource(resourceInfo);
+        }
+#endregion
     }
 }

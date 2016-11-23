@@ -5,7 +5,7 @@
     <Setting Name="DefaultProjectPath" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="RecentlyOpenedProjectsLevels" Type="System.Collections.Generic.List&lt;System.String&gt;" Scope="User">
+    <Setting Name="RecentlyOpenedProjects" Type="System.Collections.Generic.List&lt;System.String&gt;" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
   </Settings>

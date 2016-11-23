@@ -37,12 +37,12 @@ namespace BombastEditor.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public global::System.Collections.Generic.List<System.String> RecentlyOpenedProjectsLevels {
+        public global::System.Collections.Generic.List<System.String> RecentlyOpenedProjects {
             get {
-                return ((global::System.Collections.Generic.List<System.String>)(this["RecentlyOpenedProjectsLevels"]));
+                return ((global::System.Collections.Generic.List<System.String>)(this["RecentlyOpenedProjects"]));
             }
             set {
-                this["RecentlyOpenedProjectsLevels"] = value;
+                this["RecentlyOpenedProjects"] = value;
             }
         }
     }

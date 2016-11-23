@@ -37,6 +37,8 @@
             this.newProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.closeProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.recentProjectsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -49,8 +51,6 @@
             this.AssetsTreeView = new System.Windows.Forms.TreeView();
             this.ActorsTabPage = new System.Windows.Forms.TabPage();
             this.ActorsTreeView = new System.Windows.Forms.TreeView();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.recentProjectsLevelsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -83,7 +83,7 @@
             this.openProjectToolStripMenuItem,
             this.closeProjectToolStripMenuItem,
             this.toolStripSeparator3,
-            this.recentProjectsLevelsMenuItem,
+            this.recentProjectsMenuItem,
             this.toolStripSeparator1,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
@@ -129,6 +129,17 @@
             this.closeProjectToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
             this.closeProjectToolStripMenuItem.Text = "Close Project";
             this.closeProjectToolStripMenuItem.Click += new System.EventHandler(this.closeProjectToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(210, 6);
+            // 
+            // recentProjectsMenuItem
+            // 
+            this.recentProjectsMenuItem.Name = "recentProjectsMenuItem";
+            this.recentProjectsMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.recentProjectsMenuItem.Text = "Recent Projects";
             // 
             // toolStripSeparator1
             // 
@@ -238,17 +249,6 @@
             this.ActorsTreeView.Size = new System.Drawing.Size(343, 350);
             this.ActorsTreeView.TabIndex = 0;
             // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(210, 6);
-            // 
-            // recentProjectsLevelsMenuItem
-            // 
-            this.recentProjectsLevelsMenuItem.Name = "recentProjectsLevelsMenuItem";
-            this.recentProjectsLevelsMenuItem.Size = new System.Drawing.Size(213, 22);
-            this.recentProjectsLevelsMenuItem.Text = "Recent Projects and Levels";
-            // 
             // BombastEditorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -297,6 +297,6 @@
         private System.Windows.Forms.ToolStripMenuItem openLevelToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
-        private System.Windows.Forms.ToolStripMenuItem recentProjectsLevelsMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem recentProjectsMenuItem;
     }
 }
