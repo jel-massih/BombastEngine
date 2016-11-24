@@ -74,7 +74,6 @@ namespace BombastEditor
                 {
                     AddElementLabel(componentName, lineNum);
                     lineNum++;
-                    var elementNum = 0;
 
                     foreach (XmlNode inputField in editorComponentValues)
                     {
@@ -82,7 +81,16 @@ namespace BombastEditor
                         string elementName = inputField.Attributes["name"].Value;
                         string elementType = inputField.Attributes["type"].Value;
 
-                        XmlNode actorValues = actorComponentValues.ChildNodes[elementNum];
+                        XmlNode actorValues = null;
+                        
+                        foreach(XmlNode childNode in actorComponentValues.ChildNodes)
+                        {
+                            if(childNode.Name == elementName)
+                            {
+                                actorValues = childNode;
+                                break;
+                            }
+                        }
 
                         AddElementLabel("   " + elementName, lineNum);
                         switch (elementType)

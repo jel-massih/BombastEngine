@@ -25,7 +25,6 @@
   </Component>
 
   <Component name="MeshRenderComponent">
-    <Element name="Position" type="Vec3" fieldNames="x,y,z" />
     <Element name="Color" type="RGBA" />
     <Element name="Mesh" type="File" extensions="DX9 X Files (*.x)|*.x" />
     <Element name="Materials" type="Materials" />
