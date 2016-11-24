@@ -98,7 +98,7 @@ namespace BombastEditor
             Application.Exit();
         }
 
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Shutdown();
         }
@@ -142,17 +142,21 @@ namespace BombastEditor
             }
         }
 
-        private void newProjectToolStripMenuItem_Click(object sender, EventArgs e)
+        private void NewProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            NewProjectDialog newProjectDialog = new NewProjectDialog();
-            newProjectDialog.ProjectCreated = OpenProject;
+            NewProjectDialog newProjectDialog = new NewProjectDialog
+            {
+                ProjectCreated = OpenProject
+            };
             newProjectDialog.ShowDialog();
         }
 
-        private void openProjectToolStripMenuItem_Click(object sender, EventArgs e)
+        private void OpenProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenFileDialog openProjectDialog = new OpenFileDialog();
-            openProjectDialog.Filter = "Bombast Project File|*.bproject";
+            OpenFileDialog openProjectDialog = new OpenFileDialog()
+            {
+                Filter = "Bombast Project File|*.bproject"
+            };
             openProjectDialog.ShowDialog();
 
             if (!string.IsNullOrEmpty(openProjectDialog.FileName))
@@ -161,7 +165,7 @@ namespace BombastEditor
             }
         }
 
-        private void closeProjectToolStripMenuItem_Click(object sender, EventArgs e)
+        private void CloseProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
             CloseOpenProject();
 
@@ -194,22 +198,22 @@ namespace BombastEditor
             InitializeActors();
         }
 
-        private void openLevelToolStripMenuItem_Click(object sender, EventArgs e)
+        private void OpenLevelToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenFileDialog dialog = new OpenFileDialog();
-
-            dialog.InitialDirectory = m_assetsDirectory;
-            dialog.Filter = "Bombast Level|*.bmap";
-            dialog.FilterIndex = 1;
-            dialog.RestoreDirectory = true;
-
+            OpenFileDialog dialog = new OpenFileDialog
+            {
+                InitialDirectory = m_assetsDirectory,
+                Filter = "Bombast Level|*.bmap",
+                FilterIndex = 1,
+                RestoreDirectory = true
+            };
             if (dialog.ShowDialog() == DialogResult.OK)
             {
                 OpenLevel(dialog.FileName);
             }
         }
 
-        private void newLevelToolStripMenuItem_Click(object sender, EventArgs e)
+        private void NewLevelToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
         }
@@ -228,8 +232,10 @@ namespace BombastEditor
 
             var stack = new Stack<TreeNode>();
             var rootDir = new DirectoryInfo(m_assetsDirectory);
-            var node = new TreeNode(rootDir.Name);
-            node.Tag = rootDir;
+            var node = new TreeNode(rootDir.Name)
+            {
+                Tag = rootDir
+            };
             stack.Push(node);
 
             while(stack.Count > 0)
@@ -241,8 +247,10 @@ namespace BombastEditor
                     FileAttributes attributes = File.GetAttributes(directory.FullName);
                     if((attributes & FileAttributes.Hidden) == 0)
                     {
-                        var childDirNode = new TreeNode(directory.Name);
-                        childDirNode.Tag = directory;
+                        var childDirNode = new TreeNode(directory.Name)
+                        {
+                            Tag = directory
+                        };
                         currentNode.Nodes.Add(childDirNode);
                         stack.Push(childDirNode);
                     }
@@ -419,7 +427,7 @@ namespace BombastEditor
                 foreach (var recentProject in recentProjects)
                 {
                     ToolStripMenuItem item = new ToolStripMenuItem(recentProject);
-                    item.Click += new EventHandler(this.recentProjectMenuItem_Click);
+                    item.Click += new EventHandler(this.RecentProjectMenuItem_Click);
                     recentProjectsMenuItem.DropDownItems.Add(item);
                 }
             }
@@ -430,7 +438,7 @@ namespace BombastEditor
         }
 
 
-        private void recentProjectMenuItem_Click(object sender, EventArgs e)
+        private void RecentProjectMenuItem_Click(object sender, EventArgs e)
         {
             ToolStripMenuItem item = (ToolStripMenuItem)sender;
 
