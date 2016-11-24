@@ -34,7 +34,13 @@ namespace BombastEditor
         {
             if (m.HWnd == m_editorViewportPanel.Handle)
             {
-                switch(m.Msg)
+                //Focus if clicking in Editor Panel
+                if(m.Msg == WM_MBUTTONDOWN || m.Msg == WM_LBUTTONDOWN || m.Msg == WM_RBUTTONDOWN)
+                {
+                    m_editorViewportPanel.Focus();
+                }
+
+                switch (m.Msg)
                 {
                     case WM_MOUSEMOVE:
                     case WM_LBUTTONDOWN:

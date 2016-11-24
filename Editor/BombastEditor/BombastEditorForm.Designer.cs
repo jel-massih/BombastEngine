@@ -44,7 +44,6 @@
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.EditorViewportPanel = new System.Windows.Forms.Panel();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.ContentTabControl = new System.Windows.Forms.TabControl();
             this.AssetsTabPage = new System.Windows.Forms.TabPage();
@@ -52,6 +51,7 @@
             this.ActorsTabPage = new System.Windows.Forms.TabPage();
             this.ActorsTreeView = new System.Windows.Forms.TreeView();
             this.actorComponentsPanel = new System.Windows.Forms.Panel();
+            this.EditorViewportPanel = new BombastEditor.Controls.BombastEditorPanel();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -175,16 +175,6 @@
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
             this.aboutToolStripMenuItem.Text = "About Bombast Editor";
             // 
-            // EditorViewportPanel
-            // 
-            this.EditorViewportPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.EditorViewportPanel.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.EditorViewportPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.EditorViewportPanel.Location = new System.Drawing.Point(0, 24);
-            this.EditorViewportPanel.Name = "EditorViewportPanel";
-            this.EditorViewportPanel.Size = new System.Drawing.Size(1275, 651);
-            this.EditorViewportPanel.TabIndex = 1;
-            // 
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Right;
@@ -266,13 +256,23 @@
             this.actorComponentsPanel.Size = new System.Drawing.Size(357, 265);
             this.actorComponentsPanel.TabIndex = 0;
             // 
+            // EditorViewportPanel
+            // 
+            this.EditorViewportPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.EditorViewportPanel.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.EditorViewportPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.EditorViewportPanel.Location = new System.Drawing.Point(0, 24);
+            this.EditorViewportPanel.Name = "EditorViewportPanel";
+            this.EditorViewportPanel.Size = new System.Drawing.Size(918, 651);
+            this.EditorViewportPanel.TabIndex = 0;
+            // 
             // BombastEditorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1275, 675);
-            this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.EditorViewportPanel);
+            this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "BombastEditorForm";
@@ -303,7 +303,6 @@
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
-        private System.Windows.Forms.Panel EditorViewportPanel;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.TabControl ContentTabControl;
         private System.Windows.Forms.TabPage AssetsTabPage;
@@ -318,5 +317,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem recentProjectsMenuItem;
         private System.Windows.Forms.Panel actorComponentsPanel;
+        private Controls.BombastEditorPanel EditorViewportPanel;
     }
 }
