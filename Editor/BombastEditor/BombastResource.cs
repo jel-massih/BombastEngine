@@ -21,7 +21,7 @@ namespace BombastEditor
     public enum BombastResourceType
     {
         NONE = 0,
-        PROJECT = 1, //.bmap
+        PROJECT = 1, //.bproject
         LEVEL = 2, //.bmap
         ACTOR = 3 //.xml
     }
