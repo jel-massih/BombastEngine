@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Threading;
 using System.Windows.Forms;
 using System.Xml;
 
@@ -28,9 +29,13 @@ namespace BombastEditor
 
         private ActorComponentEditor m_actorComponentEditor;
 
+        private Thread m_engineUpdateThread;
+
         public BombastEditorForm()
         {
             InitializeComponent();
+
+            m_engineUpdateThread = new Thread(new ThreadStart(RunEngineThread));
 
             try
             {
@@ -57,6 +62,23 @@ namespace BombastEditor
             }
 
             UpdateRecentProjectMenuItem();
+        }
+
+        private void RunEngineThread()
+        {
+            while (true)
+            {
+                try
+                {
+                    NativeMethods.RenderFrame();
+
+                    NativeMethods.UpdateEngine();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
         }
 
         private void BombastEditorForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -99,7 +121,8 @@ namespace BombastEditor
             IntPtr hInstance = Marshal.GetHINSTANCE(GetType().Module);
             IntPtr hWnd = EditorViewportPanel.Handle;
             NativeMethods.InitializeBombastProject(hInstance, IntPtr.Zero, hWnd, 1, EditorViewportPanel.Width, EditorViewportPanel.Height, m_projectDirectory);
-            
+            m_engineUpdateThread.Start();
+
             m_projectLoaded = true;
             InitializeAssetTree();
             UpdateFormComponents();
@@ -149,6 +172,8 @@ namespace BombastEditor
 
         private void CloseOpenProject()
         {
+            //Stop Engine Update Thread
+
             NativeMethods.Shutdown();
 
             m_projectDirectory = "";

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using static BombastEditor.NativeMethods;
 
 namespace BombastEditor
 {
@@ -23,17 +24,15 @@ namespace BombastEditor
         const int WM_CLOSE = 0x0010;
 
         Panel m_editorViewportPanel;
-        BombastEditorForm m_editorForm;
 
         public MessageHandler(Panel editorViewportPanel, BombastEditorForm editorForm)
         {
             m_editorViewportPanel = editorViewportPanel;
-            m_editorForm = editorForm;
         }
 
         public bool PreFilterMessage(ref Message m)
         {
-            if(m.HWnd == m_editorViewportPanel.Handle)
+            if (m.HWnd == m_editorViewportPanel.Handle)
             {
                 switch(m.Msg)
                 {
@@ -58,22 +57,6 @@ namespace BombastEditor
             }
 
             return false;
-        }
-
-        public void Application_Idle(object sender, EventArgs e)
-        {
-            try
-            {
-                NativeMethods.RenderFrame();
-
-                NativeMethods.UpdateEngine();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-
-            m_editorForm.Invalidate();
         }
     }
 }
