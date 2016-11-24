@@ -420,6 +420,21 @@ bool BombastApp::Render()
 	return true;
 }
 
+bool BombastApp::ExternalEngineUpdate()
+{
+	if (m_pGame)
+	{
+		if (!Frame())
+		{
+			return false;
+		}
+
+		UpdateGame(m_pTimer->GetFrameTime(), m_pTimer->GetTime());
+	}
+
+	return true;
+}
+
 void BombastApp::ShutDown()
 {
 	SAFE_DELETE(m_pGame);

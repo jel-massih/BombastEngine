@@ -4,11 +4,16 @@
 BombastEditorHumanView::BombastEditorHumanView(IRenderer* renderer)
 	: HumanView(renderer)
 {
-
+	m_pFreeCameraController = nullptr;
 }
 
 LRESULT CALLBACK BombastEditorHumanView::VOnMsgProc(AppMsg msg)
 {
+	if (HumanView::VOnMsgProc(msg))
+	{
+		return 1;
+	}
+
 	return 0;
 }
 
@@ -34,7 +39,7 @@ bool BombastEditorHumanView::VLoadGameDelegate(rapidxml::xml_node<>* pLevelData)
 		return false;
 	}
 
-	m_pFreeCameraController = BE_NEW MovementController(m_pCamera, 90, 0, true);
+	m_pFreeCameraController = BE_NEW MovementController(m_pCamera, 0, 0, true);
 	m_pCamera->ClearViewTarget();
 
 	m_pKeyboardHandler = m_pFreeCameraController;

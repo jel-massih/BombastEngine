@@ -5,6 +5,7 @@ namespace BombastEditor
 {
     public class MessageHandler : IMessageFilter
     {
+        const int WM_MOUSEMOVE = 0x0200;
         const int WM_LBUTTONDOWN = 0x0201;
         const int WM_LBUTTONUP = 0x0202;
         const int WM_LBUTTONDBLCLK = 0x0203;
@@ -36,6 +37,7 @@ namespace BombastEditor
             {
                 switch(m.Msg)
                 {
+                    case WM_MOUSEMOVE:
                     case WM_LBUTTONDOWN:
                     case WM_RBUTTONDOWN:
                     case WM_MBUTTONDOWN:
@@ -63,6 +65,8 @@ namespace BombastEditor
             try
             {
                 NativeMethods.RenderFrame();
+
+                NativeMethods.UpdateEngine();
             }
             catch (Exception ex)
             {

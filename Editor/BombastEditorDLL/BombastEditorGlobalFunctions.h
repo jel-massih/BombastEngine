@@ -7,6 +7,7 @@
 extern "C" DllExport int InitializeBombastProject(int *instancePtrAddress, int *hPrevInstancePtrAddress, int *hWndPtrAddress, int nCmdShow, int screenWidth, int screenHeight, BSTR projectPath);
 extern "C" DllExport void WndProc(int *hWndPtrAddress, int msg, int wParam, int lParam);
 extern "C" DllExport void RenderFrame();
+extern "C" DllExport void UpdateEngine();
 extern "C" DllExport int Shutdown();
 
 extern "C" DllExport bool OpenProject(BSTR projectPath);

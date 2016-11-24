@@ -49,6 +49,11 @@ void RenderFrame()
 	g_pApp->Render();
 }
 
+void UpdateEngine()
+{
+	g_pApp->ExternalEngineUpdate();
+}
+
 int Shutdown()
 {
 	g_pApp->ShutDown();

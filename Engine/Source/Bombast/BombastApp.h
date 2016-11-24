@@ -72,6 +72,9 @@ public:
 
 	bool Render();
 
+	//Used by editor to advance one frame
+	bool ExternalEngineUpdate();
+
 protected:
 	bool Frame();
 	void SetQuitting(bool quitting) { m_bQuitting = quitting; }
