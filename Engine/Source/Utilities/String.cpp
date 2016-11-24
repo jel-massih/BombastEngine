@@ -66,7 +66,7 @@ string ToStr(unsigned long num, int base)
 string ToStr(std::size_t num)
 {
 	char str[256];  // I'm sure this is overkill
-	_sprintf_p(str, sizeof str, "%f", num);
+	_sprintf_p(str, sizeof str, "%zu", num);
 	return (string(str));
 }
 

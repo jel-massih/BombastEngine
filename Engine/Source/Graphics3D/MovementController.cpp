@@ -147,8 +147,8 @@ bool MovementController::VOnMouseMove(const Point &pos, const int radius)
 		SetCursorPos(pt.x, pt.y);
 
 
-		float lookRightDeg = mouseDeltaX * 0.1;
-		float lookUpDeg = mouseDeltaY * 0.1;
+		float lookRightDeg = (float)(mouseDeltaX * 0.1);
+		float lookUpDeg = (float)(mouseDeltaY * 0.1);
 
 		static const float zenithMinDeclination = 1;
 		static const float zenithMaxDeclination = 180 - 1;

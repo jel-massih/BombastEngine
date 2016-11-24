@@ -74,7 +74,7 @@ public:
 	virtual void VOnAttach(GameViewId vid, ActorId aid) = 0;
 
 	virtual LRESULT CALLBACK VOnMsgProc(AppMsg msg) = 0;
-	virtual void VOnUpdate(const unsigned long deltaMs) = 0;
+	virtual void VOnUpdate(const float deltaMs) = 0;
 
 	virtual ~IGameView(){};
 };
@@ -251,7 +251,7 @@ class IGamePhysics
 public:
 	virtual bool VInitialize() = 0;
 	virtual void VSyncVisibleScene() = 0;
-	virtual void VOnUpdate(float deltaMs) = 0;
+	virtual void VOnUpdate(const float deltaMs) = 0;
 
 	virtual void VAddSphere(float radius, Actor* gameActor, const std::string& densityStr, const std::string& physicsMaterial, bool gravityEnabled, float linearDamping, float angularDamping, Mat4x4 relativeTransform) = 0;
 	virtual void VAddBox(Vec3 extent, Actor* gameActor, const std::string& densityStr, const std::string& physicsMaterial, bool gravityEnabled, float linearDamping, float angularDamping, Mat4x4 relativeTransform) = 0;

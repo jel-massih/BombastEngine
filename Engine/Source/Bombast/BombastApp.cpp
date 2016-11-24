@@ -201,6 +201,8 @@ bool BombastApp::InitializeResourceCache(std::string rootProjectPath)
 		BE_ERROR("Resource Error: Failed to initialize Resource Cache");
 		return false;
 	}
+
+	return true;
 }
 
 LRESULT BombastApp::OnAltEnter()

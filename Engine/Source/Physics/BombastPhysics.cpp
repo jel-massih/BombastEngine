@@ -91,7 +91,7 @@ void BombastPhysics::VLoadPhysicsConfigXml()
 	}
 }
 
-void BombastPhysics::VOnUpdate(float const deltaMs)
+void BombastPhysics::VOnUpdate(const float deltaMs)
 {
 	m_pScene->Simulate(BombastPhysics::Timestep);
 }

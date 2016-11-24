@@ -1,6 +1,6 @@
 #pragma once
 
-#if __D3D11
+#ifdef __D3D11
 typedef ID3D11VertexShader VertexShader;
 typedef ID3D11PixelShader PixelShader;
 #endif

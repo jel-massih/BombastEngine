@@ -27,7 +27,7 @@ public:
 		m_actorId = aid;
 	}
 	virtual LRESULT CALLBACK VOnMsgProc(AppMsg msg);
-	virtual void VOnUpdate(const unsigned long deltaMs);
+	virtual void VOnUpdate(const float deltaMs);
 
 	virtual void VPushElement(IScreenElement* pElement);
 	virtual void VRemoveElement(IScreenElement* pElement);

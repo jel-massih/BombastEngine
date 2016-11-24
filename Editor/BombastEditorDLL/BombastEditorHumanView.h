@@ -10,7 +10,7 @@ public:
 	BombastEditorHumanView(IRenderer* renderer);
 
 	virtual LRESULT CALLBACK VOnMsgProc(AppMsg msg);
-	virtual void VOnUpdate(const unsigned long deltaMs);
+	virtual void VOnUpdate(const float deltaMs);
 	ScreenElementScene* GetScene() { return m_pScene; }
 
 	virtual void VOnAttach(GameViewId vid, ActorId aid);

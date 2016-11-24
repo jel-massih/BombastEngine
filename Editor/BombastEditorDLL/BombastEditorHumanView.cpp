@@ -17,7 +17,7 @@ LRESULT CALLBACK BombastEditorHumanView::VOnMsgProc(AppMsg msg)
 	return 0;
 }
 
-void BombastEditorHumanView::VOnUpdate(const unsigned long deltaMs)
+void BombastEditorHumanView::VOnUpdate(const float deltaMs)
 {
 	HumanView::VOnUpdate(deltaMs);
 
