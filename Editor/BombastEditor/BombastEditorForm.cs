@@ -36,6 +36,7 @@ namespace BombastEditor
             InitializeComponent();
 
             m_engineUpdateThread = new Thread(new ThreadStart(RunEngineThread));
+            m_engineUpdateThread.Start();
 
             try
             {
@@ -121,7 +122,6 @@ namespace BombastEditor
             IntPtr hInstance = Marshal.GetHINSTANCE(GetType().Module);
             IntPtr hWnd = EditorViewportPanel.Handle;
             NativeMethods.InitializeBombastProject(hInstance, IntPtr.Zero, hWnd, 1, EditorViewportPanel.Width, EditorViewportPanel.Height, m_projectDirectory);
-            m_engineUpdateThread.Start();
 
             m_projectLoaded = true;
             InitializeAssetTree();
