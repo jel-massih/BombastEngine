@@ -51,7 +51,7 @@
             this.ActorsTabPage = new System.Windows.Forms.TabPage();
             this.ActorsTreeView = new System.Windows.Forms.TreeView();
             this.actorComponentsPanel = new System.Windows.Forms.Panel();
-            this.EditorViewportPanel = new BombastEditor.Controls.BombastEditorPanel();
+            this.EditorViewportPanel = new System.Windows.Forms.Panel();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -317,6 +317,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem recentProjectsMenuItem;
         private System.Windows.Forms.Panel actorComponentsPanel;
-        private Controls.BombastEditorPanel EditorViewportPanel;
+        private System.Windows.Forms.Panel EditorViewportPanel;
     }
 }

@@ -30,13 +30,15 @@ namespace BombastEditor
         private ActorComponentEditor m_actorComponentEditor;
 
         private Thread m_engineUpdateThread;
+        private CancellationTokenSource m_engineUpdateThreadCTS;
 
         public BombastEditorForm()
         {
             InitializeComponent();
 
-            m_engineUpdateThread = new Thread(new ThreadStart(RunEngineThread));
-            m_engineUpdateThread.Start();
+            m_engineUpdateThreadCTS = new CancellationTokenSource();
+            m_engineUpdateThread = new Thread(new ParameterizedThreadStart(RunEngineThread));
+            m_engineUpdateThread.Start(m_engineUpdateThreadCTS.Token);
 
             try
             {
@@ -64,10 +66,12 @@ namespace BombastEditor
 
             UpdateRecentProjectMenuItem();
         }
-
-        private void RunEngineThread()
+        
+        private void RunEngineThread(object obj)
         {
-            while (true)
+            var ct = (CancellationToken)obj;
+
+            while (!ct.IsCancellationRequested)
             {
                 try
                 {
@@ -94,6 +98,7 @@ namespace BombastEditor
 
         private void Shutdown()
         {
+            m_engineUpdateThreadCTS.Cancel();
             NativeMethods.Shutdown();
             Application.Exit();
         }
