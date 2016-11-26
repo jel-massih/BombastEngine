@@ -53,7 +53,7 @@ namespace BombastEditor
             var defaultProject = Properties.Settings.Default.DefaultProjectPath;
             if(!string.IsNullOrEmpty(defaultProject))
             {
-                //OpenProject(defaultProject);
+                OpenProject(defaultProject);
             }
 
             if(Properties.Settings.Default.RecentlyOpenedProjects == null)
