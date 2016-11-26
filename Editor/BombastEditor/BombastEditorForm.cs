@@ -342,7 +342,6 @@ namespace BombastEditor
             IntPtr tempArray = Marshal.AllocCoTaskMem((xmlSize + 1) * sizeof(char));
             NativeMethods.GetActorXml(tempArray, actorId);
             string actorXml = Marshal.PtrToStringAnsi(tempArray);
-            Console.WriteLine(actorXml);
             Marshal.FreeCoTaskMem(tempArray);
 
             XmlDocument actorDoc = new XmlDocument();
