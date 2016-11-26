@@ -21,3 +21,5 @@ extern "C" DllExport int GetActorXmlSize(ActorId actorId);
 extern "C" DllExport int CreateActor(BSTR actorResourceXml);
 extern "C" DllExport void ModifyActor(BSTR newActorXml);
 extern "C" DllExport void DestroyActor(ActorId actorId);
+extern "C" DllExport int TryPickActor();
+

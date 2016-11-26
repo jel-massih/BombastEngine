@@ -45,5 +45,5 @@ BombastEditorHumanView* BombastEditorLogic::GetHumanView()
 	BE_ASSERT(m_gameViews.size() == 1);
 	IGameView* pGameView = *m_gameViews.begin();
 	BombastEditorHumanView* editorHumanView = static_cast<BombastEditorHumanView*>(pGameView);
-	return nullptr;
+	return editorHumanView;
 }

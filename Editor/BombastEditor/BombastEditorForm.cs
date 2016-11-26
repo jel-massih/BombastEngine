@@ -389,6 +389,16 @@ namespace BombastEditor
                 m_actorComponentEditor.ShowActorComponents(m_selectedActorId, m_actorsXmlNodes[m_selectedActorId]);
             }
         }
+
+        public void TryPickActor()
+        {
+            int actorId = NativeMethods.TryPickActor();
+            Debug.WriteLine("Picked Actor: {0}", actorId);
+            if(actorId != INVALID_ACTOR_ID)
+            {
+                ActorsTreeView.SelectedNode = ActorsTreeView.Nodes[actorId - 1];
+            }
+        }
         #endregion
 
         #region Resource Management

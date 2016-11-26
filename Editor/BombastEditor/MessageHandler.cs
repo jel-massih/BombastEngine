@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 using static BombastEditor.NativeMethods;
 
@@ -23,23 +24,40 @@ namespace BombastEditor
         const int WM_SYSKEYUP = 0x0105;
         const int WM_CLOSE = 0x0010;
 
+        BombastEditorForm m_parentForm;
         Panel m_editorViewportPanel;
+        bool m_viewportFocus;
+        Point m_mouseDownLocation;
 
         public MessageHandler(Panel editorViewportPanel, BombastEditorForm editorForm)
         {
+            m_parentForm = editorForm;
             m_editorViewportPanel = editorViewportPanel;
+            m_viewportFocus = false;
+            m_mouseDownLocation = new Point(0, 0);
+        }
+
+        void CheckForViewportFocus()
+        {
+            Point position = Cursor.Position;
+            Point relativeToForm = m_editorViewportPanel.PointToClient(position);
+            m_viewportFocus = (relativeToForm.X >= 0 && relativeToForm.Y >= 0 && relativeToForm.X < m_editorViewportPanel.Width && relativeToForm.Y < m_editorViewportPanel.Width);
+            if (m_viewportFocus)
+            {
+                m_mouseDownLocation = position;
+            }
         }
 
         public bool PreFilterMessage(ref Message m)
         {
-            if (m.HWnd == m_editorViewportPanel.Handle)
+            //If clicking, check if mouse in viewport to simulate focus
+            if (m.Msg == WM_MBUTTONDOWN || m.Msg == WM_LBUTTONDOWN || m.Msg == WM_RBUTTONDOWN)
             {
-                //Focus if clicking in Editor Panel
-                if(m.Msg == WM_MBUTTONDOWN || m.Msg == WM_LBUTTONDOWN || m.Msg == WM_RBUTTONDOWN)
-                {
-                    m_editorViewportPanel.Focus();
-                }
+                CheckForViewportFocus();
+            }
 
+            if (m.HWnd == m_editorViewportPanel.Handle || (m_viewportFocus && (m.Msg == WM_KEYUP || m.Msg == WM_KEYDOWN)))
+            {
                 switch (m.Msg)
                 {
                     case WM_MOUSEMOVE:
@@ -58,6 +76,19 @@ namespace BombastEditor
                     case WM_MBUTTONDBLCLK:
                     case WM_CLOSE:
                         NativeMethods.WndProc(m_editorViewportPanel.Handle, m.Msg, m.WParam.ToInt32(), m.LParam.ToInt32());
+
+                        //Check if clicked in the viewport (And barely moved mouse between mouse up/down)
+                        //Raycast to see if intersects with anything
+                        if(m_viewportFocus && m.Msg == WM_LBUTTONUP)
+                        {
+                            Point pos = Cursor.Position;
+                            var distance = Math.Round(Math.Sqrt(Math.Pow((pos.X - m_mouseDownLocation.X), 2) + Math.Pow(pos.Y - m_mouseDownLocation.Y, 2)), 1);
+                            if (distance < 3)
+                            {
+                                m_parentForm.TryPickActor();
+                            }
+                        }
+
                         return true;
                 }
             }

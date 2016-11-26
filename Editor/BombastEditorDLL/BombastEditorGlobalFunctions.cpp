@@ -1,8 +1,11 @@
 #include "BombastEditorGlobalFunctions.h"
 #include "Utilities/String.h"
 
+#include "BombastEditorHumanView.h"
+
 #include "Actor/Actor.h"
 #include "Events/Events.h"
+#include "Graphics3D/Raycast.h"
 
 
 int InitializeBombastProject(int *instancePtrAddress, int *hPrevInstancePtrAddress, int *hWndPtrAddress, int nCmdShow, int screenWidth, int screenHeight, BSTR projectPath)
@@ -157,4 +160,38 @@ void ModifyActor(BSTR newActorXml)
 void DestroyActor(ActorId actorId)
 {
 	g_pApp->m_pGame->VDestroyActor(actorId);
+}
+
+int TryPickActor()
+{
+	POINT cursorPt;
+	GetCursorPos(&cursorPt);
+
+	//Convert MousePosition to relative to game window
+	ScreenToClient(g_pApp->GetHwnd(), &cursorPt);
+	RayCast rayCast(cursorPt);
+
+	BombastEditorLogic* pEditorLogic = (BombastEditorLogic*)g_pApp->m_pGame;
+	if (!pEditorLogic)
+	{
+		return INVALID_ACTOR_ID;
+	}
+
+	BombastEditorHumanView* pView = pEditorLogic->GetHumanView();
+	if (!pView)
+	{
+		return INVALID_ACTOR_ID;
+	}
+
+	//Raycast into scene, get info on first object hit
+	pView->GetScene()->Pick(&rayCast);
+	rayCast.Sort();
+
+	if (rayCast.m_numIntersections == 0)
+	{
+		return INVALID_ACTOR_ID;
+	}
+
+	Intersection firstIntersection = rayCast.m_intersectionArray[0];
+	return firstIntersection.m_actorId;
 }

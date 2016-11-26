@@ -38,5 +38,7 @@ namespace BombastEditor
         public static extern void ModifyActor([MarshalAs(UnmanagedType.BStr)] string lactorModXML);
         [DllImport(BombastEditorDLLName, CallingConvention = CallingConvention.Cdecl)]
         public unsafe static extern int DestroyActor(uint actorId);
+        [DllImport(BombastEditorDLLName, CallingConvention = CallingConvention.Cdecl)]
+        public unsafe static extern int TryPickActor();
     }
 }
