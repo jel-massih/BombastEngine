@@ -5,6 +5,7 @@ using System.Drawing;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
 
@@ -29,16 +30,12 @@ namespace BombastEditor
 
         private ActorComponentEditor m_actorComponentEditor;
 
-        private Thread m_engineUpdateThread;
-        private CancellationTokenSource m_engineUpdateThreadCTS;
+        private CancellationTokenSource m_engineUpdateCTS;
+        private Task m_engineUpdateTask;
 
         public BombastEditorForm()
         {
             InitializeComponent();
-
-            m_engineUpdateThreadCTS = new CancellationTokenSource();
-            m_engineUpdateThread = new Thread(new ParameterizedThreadStart(RunEngineThread));
-            m_engineUpdateThread.Start(m_engineUpdateThreadCTS.Token);
 
             try
             {
@@ -67,11 +64,13 @@ namespace BombastEditor
             UpdateRecentProjectMenuItem();
         }
         
-        private void RunEngineThread(object obj)
+        private void RunEngineThread(CancellationToken token, IntPtr hWnd)
         {
-            var ct = (CancellationToken)obj;
+            IntPtr hInstance = Marshal.GetHINSTANCE(GetType().Module);
 
-            while (!ct.IsCancellationRequested)
+            NativeMethods.InitializeBombastProject(hInstance, IntPtr.Zero, hWnd, 1, EditorViewportPanel.Width, EditorViewportPanel.Height, m_projectDirectory);
+
+            while (!token.IsCancellationRequested)
             {
                 try
                 {
@@ -84,6 +83,9 @@ namespace BombastEditor
                     MessageBox.Show(ex.Message);
                 }
             }
+
+            //Cancellation was requested, so shutdown engine
+            NativeMethods.Shutdown();
         }
 
         private void BombastEditorForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -98,8 +100,7 @@ namespace BombastEditor
 
         private void Shutdown()
         {
-            m_engineUpdateThreadCTS.Cancel();
-            NativeMethods.Shutdown();
+            m_engineUpdateCTS.Cancel();
             Application.Exit();
         }
 
@@ -124,9 +125,15 @@ namespace BombastEditor
             Properties.Settings.Default.DefaultProjectPath = projectFilePath;
             AddRecentlyOpenedProjectItem(projectFilePath);
 
-            IntPtr hInstance = Marshal.GetHINSTANCE(GetType().Module);
+            if(m_engineUpdateCTS != null)
+            {
+                m_engineUpdateCTS.Dispose();
+            }
+
             IntPtr hWnd = EditorViewportPanel.Handle;
-            NativeMethods.InitializeBombastProject(hInstance, IntPtr.Zero, hWnd, 1, EditorViewportPanel.Width, EditorViewportPanel.Height, m_projectDirectory);
+
+            m_engineUpdateCTS = new CancellationTokenSource();
+            m_engineUpdateTask = Task.Run(() => RunEngineThread(m_engineUpdateCTS.Token, hWnd), m_engineUpdateCTS.Token);
 
             m_projectLoaded = true;
             InitializeAssetTree();
@@ -182,8 +189,9 @@ namespace BombastEditor
         private void CloseOpenProject()
         {
             //Stop Engine Update Thread
-
-            NativeMethods.Shutdown();
+            m_engineUpdateCTS.Cancel();
+            //Wait for it to complete
+            m_engineUpdateTask.Wait();
 
             m_projectDirectory = "";
             m_assetsDirectory = "";
