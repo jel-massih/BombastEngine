@@ -143,29 +143,65 @@ namespace BombastEditor
                 m_panel.Controls.Add(label);
             }
 
+            #region Numeric Inputs
             private void AddNum(XmlNode actorValues, string xPath, string format, int lineNum)
             {
                 const int boxWidth = 60;
 
-                TextBox textbox = new TextBox();
+                NumericUpDown textBox = CreateNumericInput();
                 Point location = new Point(g_labelColumnWidth, lineNum * m_lineSpacing);
-                textbox.Name = xPath;
+                textBox.Name = xPath;
 
                 string actorValue = actorValues.FirstChild.Value;
-                textbox.Text = actorValue;
-                textbox.Location = location;
-                textbox.TextAlign = HorizontalAlignment.Right;
-                textbox.Leave += new EventHandler(NumElementChanged);
-                textbox.Width = boxWidth;
+                textBox.Text = actorValue;
+                textBox.Location = location;
+                textBox.Width = boxWidth;
 
-                m_panel.Controls.Add(textbox);
+                m_panel.Controls.Add(textBox);
+            }
+
+            public void AddVec3(XmlNode actorValues, string xPath, int lineNum)
+            {
+                const int horizontalSpacing = 10;
+                const int boxWidth = 60;
+
+                XmlNode fieldsElement = FindEditorElementFromXPath(xPath);
+                string fieldNames = fieldsElement.Attributes["fieldNames"].Value;
+                string[] fields = fieldNames.Split(',');
+
+                for (int i = 0; i < 3; ++i)
+                {
+                    NumericUpDown textBox = CreateNumericInput();
+                    Point location = new Point(g_labelColumnWidth + (i * boxWidth + horizontalSpacing), lineNum * m_lineSpacing);
+                    textBox.Name = xPath + "/@" + fields[i];
+
+                    float actorValue = Convert.ToSingle(actorValues.Attributes[fields[i]].Value);
+                    textBox.Text = String.Format("{0:0.###}", actorValue);
+                    textBox.Location = location;
+
+                    textBox.Width = boxWidth;
+
+                    m_panel.Controls.Add(textBox);
+                }
+            }
+
+            private NumericUpDown CreateNumericInput()
+            {
+                NumericUpDown textBox = new NumericUpDown();
+                textBox.DecimalPlaces = 2;
+                textBox.TextAlign = HorizontalAlignment.Right;
+                textBox.ValueChanged += new EventHandler(NumElementChanged);
+                textBox.Minimum = decimal.MinValue;
+                textBox.Maximum = decimal.MaxValue;
+
+                return textBox;
             }
 
             private void NumElementChanged(object sender, EventArgs e)
             {
                 try
                 {
-                    TextBox textBox = (TextBox)sender;
+                    NumericUpDown textBox = (NumericUpDown)sender;
                     string xPath = textBox.Name;
                     string newValue = textBox.Text;
 
@@ -211,33 +247,7 @@ namespace BombastEditor
                     Debug.WriteLine(ex);
                 }
             }
-
-            public void AddVec3(XmlNode actorValues, string xPath, int lineNum)
-            {
-                const int horizontalSpacing = 10;
-                const int boxWidth = 60;
-
-                XmlNode fieldsElement = FindEditorElementFromXPath(xPath);
-                string fieldNames = fieldsElement.Attributes["fieldNames"].Value;
-                string[] fields = fieldNames.Split(',');
-
-                for (int i = 0; i < 3; ++i)
-                {
-                    TextBox textBox = new TextBox();
-                    Point location = new Point(g_labelColumnWidth + (i * boxWidth + horizontalSpacing), lineNum * m_lineSpacing);
-                    textBox.Name = xPath + "/@" + fields[i];
-
-                    float actorValue = Convert.ToSingle(actorValues.Attributes[fields[i]].Value);
-                    textBox.Text = String.Format("{0:0.###}", actorValue);
-                    textBox.Location = location;
-                    textBox.TextAlign = HorizontalAlignment.Right;
-                    textBox.Leave += new EventHandler(NumElementChanged);
-
-                    textBox.Width = boxWidth;
-
-                    m_panel.Controls.Add(textBox);
-                }
-            }
+            #endregion
         } 
     }
 }
