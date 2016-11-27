@@ -41,4 +41,6 @@ private:
 namespace BEMath
 {
 	Mat4x4 RotateToFace(Vec3 sourcePosition, Vec3 lookAtPosition, Vec3 up);
+
+	bool RayInTriangle(Vec3 RP1, Vec3 RP2, Vec3 TP1, Vec3 TP2, Vec3 TP3, Vec3& hitPos);
 };

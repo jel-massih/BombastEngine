@@ -3,6 +3,8 @@
 #include "../Resources/ModelResource.h"
 #include "../Resources/MaterialResource.h"
 
+#include "Raycast.h"
+
 BitmapNode::BitmapNode(const ActorId actorId,
 	BaseRenderComponent* renderComponent,
 	std::string textureFileName,
@@ -128,7 +130,7 @@ HRESULT D3DBitmapNode11::InitializeBuffers()
 	{
 		return result;
 	}
-
+	
 	SAFE_DELETE_ARRAY(vertices);
 	SAFE_DELETE_ARRAY(indices);
 
@@ -684,4 +686,15 @@ bool D3DMeshNode11::RenderForwardBuffers(ID3D11DeviceContext* deviceContext, Sce
 	}
 
 	return true;
+}
+
+HRESULT D3DMeshNode11::VPick(Scene * pScene, RayCast * pRayCast)
+{
+	if (SceneNode::VPick(pScene, pRayCast) == E_FAIL)
+	{
+		return E_FAIL;
+	}
+
+	pScene->PushAndSetMatrix(m_properties.ToWorld());
+	HRESULT hr = pRayCast->Pick(pScene, m_properties.GetActorId());
 }

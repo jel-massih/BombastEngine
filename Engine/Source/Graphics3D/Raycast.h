@@ -23,6 +23,8 @@ void InitIntersection(Intersection &intersection, DWORD faceIndex, FLOAT dist, F
 
 typedef std::vector<Intersection> IntersectionArray;
 
+class ModelClass;
+
 class RayCast
 {
 public:
@@ -41,4 +43,6 @@ public:
 	IntersectionArray m_intersectionArray;
 
 	void Sort();
+
+	HRESULT Pick(Scene *pScene, ActorId actorId, ModelClass* pMesh);
 };

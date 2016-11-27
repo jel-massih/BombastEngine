@@ -28,7 +28,7 @@ public:
 	void NewRenderComponentDelegate(EventDataPtr pEventData);
 
 	void SetCamera(CameraNode* camera) { m_pCamera = camera; }
-	const CameraNode* GetCamera() const { return m_pCamera; }
+	CameraNode * const GetCamera() const { return m_pCamera; }
 
 	const Mat4x4 GetTopMatrix()
 	{

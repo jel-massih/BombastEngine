@@ -147,6 +147,8 @@ public:
 	HRESULT VDeferredRender(Scene* pScene);
 	HRESULT VForwardRender(Scene* pScene);
 
+	virtual HRESULT VPick(Scene *pScene, RayCast *pRayCast) override;
+
 private:
 	HRESULT InitializeBuffers();
 	HRESULT InitializeSubMeshBuffers(const ModelClass::SubMesh& submesh, ID3D11Buffer** pVertexBuffer, ID3D11Buffer** pIndexBuffer);
