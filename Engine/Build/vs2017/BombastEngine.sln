@@ -8,6 +8,9 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BombastEngine", "BombastEngine.vcxproj", "{B8DE6183-26FF-4787-B7BB-BDB3697E6887}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GameSample", "..\..\..\..\..\Bombast Projects\GameSample\Build\ProjectFiles\GameSample.vcxproj", "{FCC5A23D-02B5-4049-9257-F4E58F9474FA}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B8DE6183-26FF-4787-B7BB-BDB3697E6887} = {B8DE6183-26FF-4787-B7BB-BDB3697E6887}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Editor", "Editor", "{664DE70D-6C38-4913-ADC5-67012B60D73B}"
 EndProject
