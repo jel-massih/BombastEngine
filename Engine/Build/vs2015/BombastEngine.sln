@@ -22,6 +22,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BombastEditor", "..\..\..\E
 		{043C01B8-4137-4A60-B112-07C8D596A5E1} = {043C01B8-4137-4A60-B112-07C8D596A5E1}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GameSample", "..\..\..\..\..\Bombast Projects\GameSample\Build\ProjectFiles\GameSample.vcxproj", "{FCC5A23D-02B5-4049-9257-F4E58F9474FA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -74,6 +76,16 @@ Global
 		{21BDFE9F-B809-44C8-B5B0-BE669D3D889A}.Release|Win32.Build.0 = Release|Any CPU
 		{21BDFE9F-B809-44C8-B5B0-BE669D3D889A}.Release|x64.ActiveCfg = Release|Any CPU
 		{21BDFE9F-B809-44C8-B5B0-BE669D3D889A}.Release|x64.Build.0 = Release|Any CPU
+		{FCC5A23D-02B5-4049-9257-F4E58F9474FA}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{FCC5A23D-02B5-4049-9257-F4E58F9474FA}.Debug|Win32.ActiveCfg = Debug|Win32
+		{FCC5A23D-02B5-4049-9257-F4E58F9474FA}.Debug|Win32.Build.0 = Debug|Win32
+		{FCC5A23D-02B5-4049-9257-F4E58F9474FA}.Debug|x64.ActiveCfg = Debug|x64
+		{FCC5A23D-02B5-4049-9257-F4E58F9474FA}.Debug|x64.Build.0 = Debug|x64
+		{FCC5A23D-02B5-4049-9257-F4E58F9474FA}.Release|Any CPU.ActiveCfg = Release|Win32
+		{FCC5A23D-02B5-4049-9257-F4E58F9474FA}.Release|Win32.ActiveCfg = Release|Win32
+		{FCC5A23D-02B5-4049-9257-F4E58F9474FA}.Release|Win32.Build.0 = Release|Win32
+		{FCC5A23D-02B5-4049-9257-F4E58F9474FA}.Release|x64.ActiveCfg = Release|x64
+		{FCC5A23D-02B5-4049-9257-F4E58F9474FA}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

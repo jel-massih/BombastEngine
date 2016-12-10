@@ -694,7 +694,7 @@ HRESULT D3DMeshNode11::VPick(Scene * pScene, RayCast * pRayCast)
 	{
 		return E_FAIL;
 	}
-
-	pScene->PushAndSetMatrix(m_properties.ToWorld());
-	HRESULT hr = pRayCast->Pick(pScene, m_properties.GetActorId());
+	return E_FAIL;
+	//pScene->PushAndSetMatrix(m_properties.ToWorld());
+//	HRESULT hr = pRayCast->Pick(pScene, m_properties.GetActorId());
 }
