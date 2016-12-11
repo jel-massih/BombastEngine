@@ -306,8 +306,9 @@ void PhysXPhysics::VSyncVisibleScene()
 			{
 				if (pTransformComponent->GetTransform() != loc)
 				{
+					Vec3 rot = loc.GetYawPitchRoll();
 					pTransformComponent->SetPosition(loc.GetPosition());
-					pTransformComponent->SetRotation(loc.GetYawPitchRoll());
+					pTransformComponent->SetRotation(Vec3(XMConvertToDegrees(rot.x), XMConvertToDegrees(rot.y), XMConvertToDegrees(rot.z)));
 					EventDataPtr pEvent(BE_NEW EvtData_Move_Actor(id, loc));
 					IEventManager::Get()->VQueueEvent(pEvent);
 				}
