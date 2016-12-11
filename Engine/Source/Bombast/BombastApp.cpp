@@ -160,7 +160,7 @@ bool BombastApp::InitializeResourceCache(std::string rootProjectPath)
 		rootProjectPath += '/';
 	}
 
-#ifdef _DEBUG
+#ifdef DEBUG
 	IResourceDepot* resourceDepot = BE_NEW DevelopmentResourceDepot();
 	{
 		//Add default Engine Resources Path
