@@ -5,7 +5,7 @@
 
 #define USE_PHYSX
 
-#if defined(DEBUG)
+#if defined(_DEBUG)
 	//#define DEBUG_D3D
 #endif
 
@@ -42,7 +42,7 @@ extern std::string ROOT_GAME_PATH;
 #include "Graphics3D\Geometry.h"
 #include "Utilities\FastDelegate\FastDelegate.h"
 
-#if defined(DEBUG)
+#if defined(_DEBUG)
 	#define BE_NEW new(_NORMAL_BLOCK,__FILE__, __LINE__)
 #else
 	#define BE_NEW new

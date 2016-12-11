@@ -1,11 +1,11 @@
 #pragma once
 #ifdef USE_PHYSX
 
-#if defined(DEBUG)
-#pragma comment(lib, "PhysX3CHECKED_x86.lib")
-#pragma comment(lib, "PhysX3CommonCHECKED_x86.lib")
-#pragma comment(lib, "PhysX3ExtensionsCHECKED.lib")
-#pragma comment(lib, "PhysXVisualDebuggerSDKCHECKED.lib")
+#if defined(_DEBUG)
+#pragma comment(lib, "PhysX3DEBUG_x86.lib")
+#pragma comment(lib, "PhysX3CommonDEBUG_x86.lib")
+#pragma comment(lib, "PhysX3ExtensionsDEBUG.lib")
+#pragma comment(lib, "PhysXVisualDebuggerSDKDEBUG.lib")
 #else
 #pragma comment(lib, "PhysX3_x86.lib")
 #pragma comment(lib, "PhysX3Common_x86.lib")
@@ -32,16 +32,6 @@ public:
 	{
 		BE_ERROR(message);
 	}
-};
-
-class PhysXPhysicsDebugRenderBuffer : public IDebugPhysicsRenderBuffer
-{
-public:
-	~PhysXPhysicsDebugRenderBuffer();
-
-	virtual std::vector<IDebugPhysicsShape*> VGetDebugShapes() { return m_shapes; }
-
-	std::vector<IDebugPhysicsShape*> m_shapes;
 };
 
 class PhysXPhysics : public IGamePhysics, BE_NonCopyable

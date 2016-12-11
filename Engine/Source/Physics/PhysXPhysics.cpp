@@ -310,15 +310,7 @@ void PhysXPhysics::VRemoveActor(ActorId id)
 
 void PhysXPhysics::VSetDebugVisualizationEnabled(bool enabled)
 {
-	if (enabled) 
-	{
-		m_pScene->setVisualizationParameter(physx::PxVisualizationParameter::eSCALE, 1.0f);
-		m_pScene->setVisualizationParameter(physx::PxVisualizationParameter::eACTOR_AXES, 2.0f);
-	}
-	else 
-	{
-		m_pScene->setVisualizationParameter(physx::PxVisualizationParameter::eSCALE, 0.0f);
-	}
+	throw "Function not yet implemented.";
 }
 
 void PhysXPhysics::VRenderDiagnostics()
@@ -405,26 +397,7 @@ Mat4x4 PhysXPhysics::VGetTransform(const ActorId id)
 
 IDebugPhysicsRenderBuffer* PhysXPhysics::VGetDebugRenderBuffer()
 {
-	PhysXPhysicsDebugRenderBuffer* newBuffer = BE_NEW PhysXPhysicsDebugRenderBuffer;
-
-	const PxRenderBuffer& rb = m_pScene->getRenderBuffer();
-
-	for (PxU32 i = 0; i < rb.getNbLines(); i++)
-	{
-		const PxDebugLine& line = rb.getLines()[i];
-		//Render Line
-	}
-
-	return newBuffer;
-}
-
-PhysXPhysicsDebugRenderBuffer::~PhysXPhysicsDebugRenderBuffer()
-{
-	for (std::vector<IDebugPhysicsShape*>::iterator it = m_shapes.begin(); it != m_shapes.end(); it++)
-	{
-		SAFE_DELETE(*it);
-	}
-	m_shapes.clear();
+	throw "Function not yet implemented.";
 }
 
 #endif
