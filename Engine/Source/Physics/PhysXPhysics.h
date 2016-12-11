@@ -34,6 +34,16 @@ public:
 	}
 };
 
+class PhysXPhysicsDebugRenderBuffer : public IDebugPhysicsRenderBuffer
+{
+public:
+	~PhysXPhysicsDebugRenderBuffer();
+
+	virtual std::vector<IDebugPhysicsShape*> VGetDebugShapes() { return m_shapes; }
+
+	std::vector<IDebugPhysicsShape*> m_shapes;
+};
+
 class PhysXPhysics : public IGamePhysics, BE_NonCopyable
 {
 	typedef std::map<std::string, float> DensityTable;
