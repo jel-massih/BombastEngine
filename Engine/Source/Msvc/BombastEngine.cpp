@@ -33,5 +33,7 @@ int WINAPI BombastEngine(HINSTANCE hInstance,
 
 	BELogger::Destroy();
 
+	_CrtSetReportMode(_CRT_ERROR, _CRTDBG_MODE_DEBUG);
+
 	return 0;
 }
