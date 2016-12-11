@@ -102,11 +102,11 @@ void PhysicsComponent::VPostInit()
 	{
 		if (m_shape == "Sphere")
 		{
-			m_pGamePhysics->VAddSphere(1.0f, m_pOwner, m_density, m_material, m_bGravityEnabled, m_linearDamping, m_angularDamping, relativeTransform, m_bodyType);
+			m_pGamePhysics->VAddSphere(1.f, m_pOwner, m_density, m_material, m_bGravityEnabled, m_linearDamping, m_angularDamping, relativeTransform, m_bodyType);
 		}
 		else if (m_shape == "Box")
 		{
-			m_pGamePhysics->VAddBox(Vec3(1,1,1), m_pOwner, m_density, m_material, m_bGravityEnabled, m_linearDamping, m_angularDamping, relativeTransform, m_bodyType);
+			m_pGamePhysics->VAddBox(Vec3(10.f,0.2f,10.f), m_pOwner, m_density, m_material, m_bGravityEnabled, m_linearDamping, m_angularDamping, relativeTransform, m_bodyType);
 		}
 		else if (m_shape == "Capsule")
 		{
