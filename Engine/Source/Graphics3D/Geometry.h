@@ -7,6 +7,7 @@ const float  BE_2PI = 2 * BE_PI;
 
 class Vec4;
 class Mat4x4;
+struct Quaternion;
 
 class Vec3 : public XMFLOAT3
 {
@@ -63,6 +64,7 @@ public:
 	Vec4(const float _x, const float _y, const float _z, const float _w) { x = _x; y = _y; z = _z; w = _w; }
 	//Vec4(const Vec3& v3) { x = v3.x; y = v3.y; z = v3.z; w = 1.0f; }
 
+	operator XMVECTOR() { return XMLoadFloat4(this); }
 	Vec4 operator+(Vec4& rhs) const;
 	Vec4& operator*=(const float rhs);
 	Vec4 operator*(const Vec4& rhs) const;
@@ -77,6 +79,18 @@ inline Vec3::Vec3(const Vec4& v4) { x = v4.x; y = v4.y; z = v4.z; }
 extern Vec3 g_Up;
 extern Vec3 g_Right;
 extern Vec3 g_Forward;
+
+//Quaternion
+struct Quaternion : public XMFLOAT4
+{
+	Quaternion() : XMFLOAT4(0, 0, 0, 1.f) {}
+	Quaternion(const Vec3& v3, float w) : XMFLOAT4(v3.x, v3.y, v3.z, w) {}
+	Quaternion(const float _x, const float _y, const float _z, const float _w) : XMFLOAT4(_x, _y, _z, _w) {}
+	Quaternion(Vec4& v4) : XMFLOAT4(v4.x, v4.y, v4.z, v4.w) {}
+	Quaternion(XMFLOAT4& v4) { x = v4.x; y = v4.y; z = v4.z; w = v4.w; }
+
+	operator XMVECTOR() { return XMLoadFloat4(this); }
+};
 
 class Mat4x4 : public XMFLOAT4X4
 {
@@ -117,14 +131,16 @@ public:
 		XMStoreFloat4x4(this, XMMatrixRotationRollPitchYaw(rotationRadians.x, rotationRadians.y, rotationRadians.z));
 	}
 
+	inline bool Decompose(Vec3& translation, Quaternion& rotation, Vec3& scale);
+
 	bool operator!=(const Mat4x4 rhs);
+	operator XMMATRIX() const { return XMLoadFloat4x4(this); }
 };
 
 inline void Vec3::TransformCoord(const Mat4x4& M)
 {
 	XMStoreFloat3(this, XMVector3TransformCoord(XMLoadFloat3(this), XMLoadFloat4x4(&M)));
 }
-
 
 inline void Mat4x4::SetPosition(Vec3 const &pos)
 {
@@ -250,6 +266,20 @@ inline void Mat4x4::BuildScale(const Vec3 vec)
 	m[0][0] = vec.x;
 	m[1][1] = vec.y;
 	m[2][2] = vec.z;
+}
+
+inline bool Mat4x4::Decompose(Vec3& translation, Quaternion& rotation, Vec3& scale)
+{
+	XMVECTOR t, r, s;
+	if (!XMMatrixDecompose(&s, &r, &t, *this))
+	{
+		return false;
+	}
+	XMStoreFloat3(&translation, t);
+	XMStoreFloat4(&rotation, r);
+	XMStoreFloat3(&scale, s);
+
+	return true;
 }
 
 inline Mat4x4 operator * (const Mat4x4& a, const Mat4x4& b)
