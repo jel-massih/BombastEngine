@@ -60,5 +60,4 @@ private:
 	ActorId m_id;
 	ActorComponents m_components;
 	std::string m_type;
-	std::string m_resource; // XML file from which this actor was initialized (considered the "Archetype" file)
 };

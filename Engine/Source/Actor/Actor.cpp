@@ -4,7 +4,6 @@ Actor::Actor(ActorId id)
 {
 	m_id = id;
 	m_type = "Unknown";
-	m_resource = "Unknown";
 }
 
 Actor::~Actor()
@@ -21,7 +20,6 @@ Actor::~Actor()
 bool Actor::Initialize(rapidxml::xml_node<>* pData)
 {
 	m_type = pData->first_attribute("type")->value();
-	m_resource = pData->first_attribute("resource")->value();
 	return true;
 }
 
@@ -47,7 +45,6 @@ std::string Actor::ToXML()
 	
 	rapidxml::xml_node<>* pActorElement = outDoc.allocate_node(rapidxml::node_element, "Actor");
 	pActorElement->append_attribute(outDoc.allocate_attribute("type", m_type.c_str()));
-	pActorElement->append_attribute(outDoc.allocate_attribute("resource", m_resource.c_str()));
 
 	for (auto it = m_components.begin(); it != m_components.end(); it++)
 	{
