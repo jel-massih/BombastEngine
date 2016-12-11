@@ -1,5 +1,5 @@
 Engine/Temp/
-Engine/Source/Libraries/PhysX-3.3.2/
+Engine/Source/Libraries/PhysX-3.3.3/
 !Engine/Source/Libraries/.gitkeep
 
 Engine/Assets/Meshes/*
