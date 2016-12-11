@@ -253,9 +253,9 @@ public:
 	virtual void VSyncVisibleScene() = 0;
 	virtual void VOnUpdate(const float deltaMs) = 0;
 
-	virtual void VAddSphere(float radius, Actor* gameActor, const std::string& densityStr, const std::string& physicsMaterial, bool gravityEnabled, float linearDamping, float angularDamping, Mat4x4 relativeTransform) = 0;
-	virtual void VAddBox(Vec3 extent, Actor* gameActor, const std::string& densityStr, const std::string& physicsMaterial, bool gravityEnabled, float linearDamping, float angularDamping, Mat4x4 relativeTransform) = 0;
-	virtual void VAddCapsule(float radius, float halfHeight, Actor* gameActor, const std::string& densityStr, const std::string& physicsMaterial, bool gravityEnabled, float linearDamping, float angularDamping, Mat4x4 relativeTransform) = 0;
+	virtual void VAddSphere(float radius, Actor* gameActor, const std::string& densityStr, const std::string& physicsMaterial, bool gravityEnabled, float linearDamping, float angularDamping, Mat4x4 relativeTransform, const std::string& bodyType) = 0;
+	virtual void VAddBox(Vec3 extent, Actor* gameActor, const std::string& densityStr, const std::string& physicsMaterial, bool gravityEnabled, float linearDamping, float angularDamping, Mat4x4 relativeTransform, const std::string& bodyType) = 0;
+	virtual void VAddCapsule(float radius, float halfHeight, Actor* gameActor, const std::string& densityStr, const std::string& physicsMaterial, bool gravityEnabled, float linearDamping, float angularDamping, Mat4x4 relativeTransform, const std::string& bodyType) = 0;
 	virtual void VRemoveActor(ActorId actor) = 0;
 
 	virtual void VSetDebugVisualizationEnabled(bool bEnabled) = 0;

@@ -124,21 +124,21 @@ void BombastPhysics::VSyncVisibleScene()
 	}
 }
 
-void BombastPhysics::VAddSphere(float radius, Actor* gameActor, const std::string& densityStr, const std::string& physicsMaterial, bool gravityEnabled, float linearDamping, float angularDamping, Mat4x4 relativeTransform)
+void BombastPhysics::VAddSphere(float radius, Actor* gameActor, const std::string& densityStr, const std::string& physicsMaterial, bool gravityEnabled, float linearDamping, float angularDamping, Mat4x4 relativeTransform, const std::string& bodyType)
 {
 	float density = LookupDensity(densityStr);
 
 	AddShape(gameActor, &BpGeometrySphere(radius), density, physicsMaterial, gravityEnabled, linearDamping, angularDamping, relativeTransform);
 }
 
-void BombastPhysics::VAddBox(Vec3 scale, Actor* gameActor, const std::string& densityStr, const std::string& physicsMaterial, bool gravityEnabled, float linearDamping, float angularDamping, Mat4x4 relativeTransform)
+void BombastPhysics::VAddBox(Vec3 scale, Actor* gameActor, const std::string& densityStr, const std::string& physicsMaterial, bool gravityEnabled, float linearDamping, float angularDamping, Mat4x4 relativeTransform, const std::string& bodyType)
 {
 	float density = LookupDensity(densityStr);
 
 	AddShape(gameActor, &BpGeometryBox(scale.x, scale.y, scale.z), density, physicsMaterial, gravityEnabled, linearDamping, angularDamping, relativeTransform);
 }
 
-void BombastPhysics::VAddCapsule(float radius, float halfHeight, Actor* gameActor, const std::string& densityStr, const std::string& physicsMaterial, bool gravityEnabled, float linearDamping, float angularDamping, Mat4x4 relativeTransform)
+void BombastPhysics::VAddCapsule(float radius, float halfHeight, Actor* gameActor, const std::string& densityStr, const std::string& physicsMaterial, bool gravityEnabled, float linearDamping, float angularDamping, Mat4x4 relativeTransform, const std::string& bodyType)
 {
 	float density = LookupDensity(densityStr);
 

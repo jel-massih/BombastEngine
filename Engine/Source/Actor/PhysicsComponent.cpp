@@ -6,6 +6,8 @@ const float DEFAULT_MAX_ANGULAR_VELOCITY = 7.5f;
 
 const char* PhysicsComponent::g_Name = "PhysicsComponent";
 
+const char* DEFAULT_BODY_TYPE = "dynamic";
+
 PhysicsComponent::PhysicsComponent()
 {
 	m_location = Vec3(0, 0, 0);
@@ -18,6 +20,7 @@ PhysicsComponent::PhysicsComponent()
 	m_angularDamping = 0;
 	m_maxVelocity = DEFAULT_MAX_VELOCITY;
 	m_maxAngularVelocity = DEFAULT_MAX_ANGULAR_VELOCITY;
+	m_bodyType = DEFAULT_BODY_TYPE;
 	
 	m_bGravityEnabled = true;
 }
@@ -42,6 +45,12 @@ bool PhysicsComponent::VInitialize(rapidxml::xml_node<>* pData)
 	if (pShape)
 	{
 		m_shape = pShape->value();
+	}
+
+	rapidxml::xml_node<>* pBodyType = pData->first_node("BodyType");
+	if (pBodyType)
+	{
+		m_bodyType = pBodyType->value();
 	}
 
 	rapidxml::xml_node<>* pDensity = pData->first_node("Density");
@@ -93,15 +102,15 @@ void PhysicsComponent::VPostInit()
 	{
 		if (m_shape == "Sphere")
 		{
-			m_pGamePhysics->VAddSphere(1.0f, m_pOwner, m_density, m_material, m_bGravityEnabled, m_linearDamping, m_angularDamping, relativeTransform);
+			m_pGamePhysics->VAddSphere(1.0f, m_pOwner, m_density, m_material, m_bGravityEnabled, m_linearDamping, m_angularDamping, relativeTransform, m_bodyType);
 		}
 		else if (m_shape == "Box")
 		{
-			m_pGamePhysics->VAddBox(Vec3(1,1,1), m_pOwner, m_density, m_material, m_bGravityEnabled, m_linearDamping, m_angularDamping, relativeTransform);
+			m_pGamePhysics->VAddBox(Vec3(1,1,1), m_pOwner, m_density, m_material, m_bGravityEnabled, m_linearDamping, m_angularDamping, relativeTransform, m_bodyType);
 		}
 		else if (m_shape == "Capsule")
 		{
-			m_pGamePhysics->VAddCapsule(0.25f, 0.5f, m_pOwner, m_density, m_material, m_bGravityEnabled, m_linearDamping, m_angularDamping, relativeTransform);
+			m_pGamePhysics->VAddCapsule(0.25f, 0.5f, m_pOwner, m_density, m_material, m_bGravityEnabled, m_linearDamping, m_angularDamping, relativeTransform, m_bodyType);
 		}
 		else 
 		{

@@ -76,7 +76,7 @@ void PhysXPhysics::ConnectPVD()
 	m_pConnection = PxVisualDebuggerExt::createConnection(m_pPhysicsSdk->getPvdConnectionManager(), pvd_host_ip, port, timeout, connectionFlags);
 }
 
-void PhysXPhysics::AddShape(Actor* pActor, PxGeometry* geometry, float density, const std::string& physicsMaterial, bool gravityEnabled, float linearDamping, float angularDamping)
+void PhysXPhysics::AddShape(Actor* pActor, PxGeometry* geometry, float density, const std::string& physicsMaterial, bool gravityEnabled, float linearDamping, float angularDamping, const std::string& bodyType)
 {
 	BE_ASSERT(pActor);
 	ActorId actorId = pActor->GetId();
@@ -93,6 +93,7 @@ void PhysXPhysics::AddShape(Actor* pActor, PxGeometry* geometry, float density, 
 	else 
 	{
 		//Doesnt work without transform
+		BE_ERROR("Actor %s PhysicsComponent requires Shape to have Transform Component: %d", actorId);
 		return;
 	}
 
@@ -108,15 +109,23 @@ void PhysXPhysics::AddShape(Actor* pActor, PxGeometry* geometry, float density, 
 	Vec3ToPxVec(translation, &pxLoc);
 	QuaternionToPxQuat(rotation, &pxRot);
 	PxTransform t(pxLoc, pxRot);
-	PxRigidDynamic* body = PxCreateDynamic(*m_pPhysicsSdk, t, *geometry, *mat, density);
-	body->setActorFlag(PxActorFlag::eDISABLE_GRAVITY, !gravityEnabled);
-	PxRigidBodyExt::updateMassAndInertia(*body, density);
-	body->setLinearDamping(linearDamping);
-	body->setAngularDamping(angularDamping);
-	m_pScene->addActor(*body);
 
-	m_actorRigidBodyMap[actorId] = body;
-	m_rigidBodyActorMap[body] = actorId;
+	if (bodyType == "Dynamic")
+	{
+		PxRigidDynamic* body = PxCreateDynamic(*m_pPhysicsSdk, t, *geometry, *mat, density);
+		body->setActorFlag(PxActorFlag::eDISABLE_GRAVITY, !gravityEnabled);
+		PxRigidBodyExt::updateMassAndInertia(*body, density);
+		body->setLinearDamping(linearDamping);
+		body->setAngularDamping(angularDamping);
+		m_pScene->addActor(*body);
+
+		m_actorRigidBodyMap[actorId] = body;
+		m_rigidBodyActorMap[body] = actorId;
+	}
+	else
+	{
+		BE_ERROR("[Physics] BodyType not supported: %s", bodyType.c_str());
+	}
 }
 
 void PhysXPhysics::RemovePhysicsObject(PxRigidBody* body)
@@ -306,25 +315,25 @@ void PhysXPhysics::VSyncVisibleScene()
 	}
 }
 
-void PhysXPhysics::VAddSphere(float radius, Actor* gameActor, const std::string& densityStr, const std::string& physicsMaterial, bool gravityEnabled, float linearDamping, float angularDamping, Mat4x4 relativeTransform)
+void PhysXPhysics::VAddSphere(float radius, Actor* gameActor, const std::string& densityStr, const std::string& physicsMaterial, bool gravityEnabled, float linearDamping, float angularDamping, Mat4x4 relativeTransform, const std::string& bodyType)
 {
 	float density = LookupDensity(densityStr);
 
-	AddShape(gameActor, &PxSphereGeometry(radius), density, physicsMaterial, gravityEnabled, linearDamping, angularDamping);
+	AddShape(gameActor, &PxSphereGeometry(radius), density, physicsMaterial, gravityEnabled, linearDamping, angularDamping, bodyType);
 }
 
-void PhysXPhysics::VAddBox(Vec3 scale, Actor* gameActor, const std::string& densityStr, const std::string& physicsMaterial, bool gravityEnabled, float linearDamping, float angularDamping, Mat4x4 relativeTransform)
+void PhysXPhysics::VAddBox(Vec3 scale, Actor* gameActor, const std::string& densityStr, const std::string& physicsMaterial, bool gravityEnabled, float linearDamping, float angularDamping, Mat4x4 relativeTransform, const std::string& bodyType)
 {
 	float density = LookupDensity(densityStr);
 
-	AddShape(gameActor, &PxBoxGeometry(scale.x, scale.y, scale.z), density, physicsMaterial, gravityEnabled, linearDamping, angularDamping);
+	AddShape(gameActor, &PxBoxGeometry(scale.x, scale.y, scale.z), density, physicsMaterial, gravityEnabled, linearDamping, angularDamping, bodyType);
 }
 
-void PhysXPhysics::VAddCapsule(float radius, float halfHeight, Actor* gameActor, const std::string& densityStr, const std::string& physicsMaterial, bool gravityEnabled, float linearDamping, float angularDamping, Mat4x4 relativeTransform)
+void PhysXPhysics::VAddCapsule(float radius, float halfHeight, Actor* gameActor, const std::string& densityStr, const std::string& physicsMaterial, bool gravityEnabled, float linearDamping, float angularDamping, Mat4x4 relativeTransform, const std::string& bodyType)
 {
 	float density = LookupDensity(densityStr);
 
-	AddShape(gameActor, &PxCapsuleGeometry(radius, halfHeight), density, physicsMaterial, gravityEnabled, linearDamping, angularDamping);
+	AddShape(gameActor, &PxCapsuleGeometry(radius, halfHeight), density, physicsMaterial, gravityEnabled, linearDamping, angularDamping, bodyType);
 }
 
 void PhysXPhysics::VRemoveActor(ActorId id)
