@@ -79,5 +79,6 @@
         <Wool>1.320</Wool>
         <Zinc>7.050</Zinc>
         <Infinite>0.000</Infinite>
+        <Maximum>999999.000</Infinite>
     </DensityTable>
 </Physics>

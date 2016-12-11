@@ -125,6 +125,7 @@ void PhysXPhysics::AddShape(Actor* pActor, PxGeometry* geometry, float density, 
 	else
 	{
 		BE_ERROR("[Physics] BodyType not supported: %s", bodyType.c_str());
+		return;
 	}
 }
 

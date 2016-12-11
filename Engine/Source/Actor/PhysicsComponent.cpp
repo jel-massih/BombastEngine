@@ -6,7 +6,7 @@ const float DEFAULT_MAX_ANGULAR_VELOCITY = 7.5f;
 
 const char* PhysicsComponent::g_Name = "PhysicsComponent";
 
-const char* DEFAULT_BODY_TYPE = "dynamic";
+const char* DEFAULT_BODY_TYPE = "Dynamic";
 
 PhysicsComponent::PhysicsComponent()
 {
