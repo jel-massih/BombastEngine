@@ -101,7 +101,10 @@ private:
 
 	void Mat4x4ToPxMatrix(const Mat4x4& input, PxMat44* output);
 	void PxMatrixToMat4x4(const PxMat44& input, Mat4x4* output);
+	void Vec3ToPxVec(const Vec3& input, PxVec3* output);
 	void PxVecToVec3(const PxVec3& input, Vec3* output);
+	void QuaternionToPxQuat(const Quaternion& input, PxQuat* output);
+	void PxQuatToQuaternion(const PxQuat& input, Quaternion* output);
 
 private:
 	PxPhysics* m_pPhysicsSdk;

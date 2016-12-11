@@ -99,9 +99,15 @@ void PhysXPhysics::AddShape(Actor* pActor, PxGeometry* geometry, float density, 
 	PhysicsMaterialData material(LookupMaterialData(physicsMaterial));
 	PxMaterial* mat = m_pPhysicsSdk->createMaterial(material.m_friction, material.m_friction, material.m_restitution);
 
-	PxMat44 pxMat;
-	Mat4x4ToPxMatrix(transform, &pxMat);
-	PxTransform t(pxMat);
+	Vec3 translation, scale;
+	Quaternion rotation;
+	
+	bool ok = transform.Decompose(translation, rotation, scale);
+	PxQuat pxRot;
+	PxVec3 pxLoc;
+	Vec3ToPxVec(translation, &pxLoc);
+	QuaternionToPxQuat(rotation, &pxRot);
+	PxTransform t(pxLoc, pxRot);
 	PxRigidDynamic* body = PxCreateDynamic(*m_pPhysicsSdk, t, *geometry, *mat, density);
 	body->setActorFlag(PxActorFlag::eDISABLE_GRAVITY, !gravityEnabled);
 	PxRigidBodyExt::updateMassAndInertia(*body, density);
@@ -218,6 +224,29 @@ void PhysXPhysics::PxVecToVec3(const PxVec3& input, Vec3* output)
 	output->z = input.z;
 }
 
+void PhysXPhysics::Vec3ToPxVec(const Vec3& input, PxVec3* output)
+{
+	output->x = input.x;
+	output->y = input.y;
+	output->z = input.z;
+}
+
+void PhysXPhysics::QuaternionToPxQuat(const Quaternion& input, PxQuat* output)
+{
+	output->x = input.x;
+	output->y = input.y;
+	output->z = input.z;
+	output->w = input.w;
+}
+
+void PhysXPhysics::PxQuatToQuaternion(const PxQuat& input, Quaternion* output)
+{
+	output->x = input.x;
+	output->y = input.y;
+	output->z = input.z;
+	output->w = input.w;
+}
+
 void PhysXPhysics::VLoadPhysicsConfigXml()
 {
 	rapidxml::xml_node<>* pRoot = XmlResourceLoader::LoadAndReturnRootXmlElement("EngineResources.Config.physicsConfig.xml");
@@ -267,7 +296,8 @@ void PhysXPhysics::VSyncVisibleScene()
 			{
 				if (pTransformComponent->GetTransform() != loc)
 				{
-					pTransformComponent->SetTransform(loc);
+					pTransformComponent->SetPosition(loc.GetPosition());
+					pTransformComponent->SetRotation(loc.GetYawPitchRoll());
 					EventDataPtr pEvent(BE_NEW EvtData_Move_Actor(id, loc));
 					IEventManager::Get()->VQueueEvent(pEvent);
 				}
