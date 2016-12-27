@@ -2,6 +2,7 @@
 
 class DebugShader;
 class BombastDebugPhysicsCapsule;
+class PhysXPhysicsDebugLine;
 
 class DebugPhysics
 {
@@ -13,6 +14,7 @@ private:
 		int vertexCount, indexCount;
 		float red, green, blue;
 		Mat4x4 transformMatrix;
+		D3D11_PRIMITIVE_TOPOLOGY topology;
 	};
 
 	struct VertexType
@@ -36,6 +38,7 @@ private:
 	bool CreateSphere(VertexType** vertices, unsigned long** indices, DebugShapeType* shape);
 	bool CreateBox(VertexType** vertices, unsigned long** indices, DebugShapeType* shape);
 	bool CreateCapsule(VertexType** vertices, unsigned long** indices, DebugShapeType* shape, BombastDebugPhysicsCapsule* capsule);
+	bool CreateLine(VertexType** vertices, unsigned long** indices, DebugShapeType* shape, PhysXPhysicsDebugLine* line);
 
 	bool UpdateShape(DebugShapeType* shape, ID3D11DeviceContext* context);
 	void ReleaseShape(DebugShapeType** shape);

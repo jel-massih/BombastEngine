@@ -32,7 +32,7 @@ PhysXPhysics::~PhysXPhysics()
 bool PhysXPhysics::VInitialize()
 {
 	VLoadPhysicsConfigXml();
-
+	int version = PX_PHYSICS_VERSION;
 	m_pFoundation = PxCreateFoundation(PX_PHYSICS_VERSION, m_allocatorCallback, m_errorCallback);
 	m_pPhysicsSdk = PxCreatePhysics(PX_PHYSICS_VERSION, *m_pFoundation, PxTolerancesScale(), true);
 
@@ -454,6 +454,18 @@ IDebugPhysicsRenderBuffer* PhysXPhysics::VGetDebugRenderBuffer()
 	{
 		const PxDebugLine& line = rb.getLines()[i];
 		//Render Line
+		PhysXPhysicsDebugLine* debugLine;
+		Vec3 pos0 = Vec3(line.pos0.x, line.pos0.y, line.pos0.z);
+		Vec3 pos1 = Vec3(line.pos1.x, line.pos1.y, line.pos1.z);
+		debugLine = BE_NEW PhysXPhysicsDebugLine(Mat4x4::g_Identity, pos0, pos1, Vec3(255,0,0));
+		if (debugLine == nullptr)
+		{
+			BE_ERROR("Failed to Create Debug Physics Line. Skipping");
+		}
+		else
+		{
+			newBuffer->m_shapes.push_back(debugLine);
+		}
 	}
 
 	return newBuffer;

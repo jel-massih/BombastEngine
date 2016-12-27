@@ -1,6 +1,7 @@
 #include "DebugPhysics.h"
 #include "../Shading/DebugShader.h"
 #include "../Physics/BombastPhysics.h"
+#include "../Physics/PhysXPhysics.h"
 
 DebugPhysics::DebugPhysics()
 {
@@ -161,6 +162,8 @@ bool DebugPhysics::InitializeShape(DebugShapeType** shape, const char* shapeId, 
 	(*shape)->vertexBuffer = nullptr;
 	(*shape)->indexBuffer = nullptr;
 	(*shape)->shapeId = shapeId;
+	//Default to trianglestrip
+	(*shape)->topology = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP;
 
 	bool createResult = false;
 	switch (sourceShape->VGetShapeType())
@@ -172,9 +175,17 @@ bool DebugPhysics::InitializeShape(DebugShapeType** shape, const char* shapeId, 
 		createResult = CreateBox(&vertices, &indices, *shape);
 		break;
 	case DebugPhysicsShapeType::CAPSULE:
+	{
 		BombastDebugPhysicsCapsule* capsule = static_cast<BombastDebugPhysicsCapsule*>(sourceShape);
 		createResult = CreateCapsule(&vertices, &indices, *shape, capsule);
 		break;
+	}
+	case DebugPhysicsShapeType::LINE:
+	{
+		PhysXPhysicsDebugLine* line = static_cast<PhysXPhysicsDebugLine*>(sourceShape);
+		createResult = CreateLine(&vertices, &indices, *shape, line);
+		break;
+	}
 	}
 
 	if (!createResult)
@@ -286,6 +297,33 @@ bool DebugPhysics::CreateSphere(VertexType** vertices, unsigned long** indices, 
 	{
 		(*indices)[i] = i;
 	}
+
+	return true;
+}
+
+
+bool DebugPhysics::CreateLine(VertexType** vertices, unsigned long** indices, DebugShapeType* shape, PhysXPhysicsDebugLine* line)
+{
+	shape->vertexCount = 2;
+	shape->indexCount = shape->vertexCount;
+	shape->topology = D3D11_PRIMITIVE_TOPOLOGY_LINELIST;
+
+	*vertices = BE_NEW VertexType[shape->vertexCount];
+	if (!*vertices)
+	{
+		return false;
+	}
+
+	*indices = BE_NEW unsigned long[shape->indexCount];
+	if (!*indices)
+	{
+		return false;
+	}
+
+	(*vertices)[0].position = line->m_pos0;
+	(*vertices)[1].position = line->m_pos1;
+	(*indices)[0] = 0;
+	(*indices)[1] = 1;
 
 	return true;
 }
@@ -518,8 +556,8 @@ bool DebugPhysics::RenderShape(ID3D11DeviceContext* deviceContext, DebugShapeTyp
 
 	deviceContext->IASetVertexBuffers(0, 1, &shape->vertexBuffer, &stride, &offset);
 	deviceContext->IASetIndexBuffer(shape->indexBuffer, DXGI_FORMAT_R32_UINT, 0);
-	deviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-
+	deviceContext->IASetPrimitiveTopology(shape->topology);
+	
 	pixelColor = XMFLOAT4(shape->red, shape->green, shape->blue, 1.0f);
 
 	result = m_pDebugShader->Render(deviceContext, shape->indexCount, XMLoadFloat4x4(&shape->transformMatrix), XMLoadFloat4x4(&view), XMLoadFloat4x4(&projection), pixelColor);
