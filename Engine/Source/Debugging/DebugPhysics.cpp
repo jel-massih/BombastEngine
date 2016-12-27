@@ -162,8 +162,8 @@ bool DebugPhysics::InitializeShape(DebugShapeType** shape, const char* shapeId, 
 	(*shape)->vertexBuffer = nullptr;
 	(*shape)->indexBuffer = nullptr;
 	(*shape)->shapeId = shapeId;
-	//Default to trianglestrip
-	(*shape)->topology = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP;
+	//Default to trianglelist
+	(*shape)->topology = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
 
 	bool createResult = false;
 	switch (sourceShape->VGetShapeType())
