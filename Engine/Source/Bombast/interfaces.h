@@ -225,6 +225,7 @@ public:
 enum DebugPhysicsShapeType
 {
 	LINE,
+	TRIANGLE,
 	SPHERE,
 	BOX,
 	CAPSULE

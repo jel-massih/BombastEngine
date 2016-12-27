@@ -186,6 +186,11 @@ bool DebugPhysics::InitializeShape(DebugShapeType** shape, const char* shapeId, 
 		createResult = CreateLine(&vertices, &indices, *shape, line);
 		break;
 	}
+	case DebugPhysicsShapeType::TRIANGLE:
+	{
+		PhysXPhysicsDebugTriangle* triangle = static_cast<PhysXPhysicsDebugTriangle*>(sourceShape);
+		createResult = CreateTriangle(&vertices, &indices, *shape, triangle);
+	}
 	}
 
 	if (!createResult)
@@ -301,7 +306,6 @@ bool DebugPhysics::CreateSphere(VertexType** vertices, unsigned long** indices, 
 	return true;
 }
 
-
 bool DebugPhysics::CreateLine(VertexType** vertices, unsigned long** indices, DebugShapeType* shape, PhysXPhysicsDebugLine* line)
 {
 	shape->vertexCount = 2;
@@ -324,6 +328,33 @@ bool DebugPhysics::CreateLine(VertexType** vertices, unsigned long** indices, De
 	(*vertices)[1].position = line->m_pos1;
 	(*indices)[0] = 0;
 	(*indices)[1] = 1;
+
+	return true;
+}
+
+bool DebugPhysics::CreateTriangle(VertexType** vertices, unsigned long** indices, DebugShapeType* shape, PhysXPhysicsDebugTriangle* triangle)
+{
+	shape->vertexCount = 3;
+	shape->indexCount = shape->vertexCount;
+
+	*vertices = BE_NEW VertexType[shape->vertexCount];
+	if (!*vertices)
+	{
+		return false;
+	}
+
+	*indices = BE_NEW unsigned long[shape->indexCount];
+	if (!*indices)
+	{
+		return false;
+	}
+
+	(*vertices)[0].position = triangle->m_pos0;
+	(*vertices)[1].position = triangle->m_pos1;
+	(*vertices)[2].position = triangle->m_pos2;
+	(*indices)[0] = 0;
+	(*indices)[1] = 1;
+	(*indices)[2] = 2;
 
 	return true;
 }

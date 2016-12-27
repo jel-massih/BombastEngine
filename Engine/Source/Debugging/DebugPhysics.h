@@ -3,6 +3,7 @@
 class DebugShader;
 class BombastDebugPhysicsCapsule;
 class PhysXPhysicsDebugLine;
+class PhysXPhysicsDebugTriangle;
 
 class DebugPhysics
 {
@@ -39,6 +40,7 @@ private:
 	bool CreateBox(VertexType** vertices, unsigned long** indices, DebugShapeType* shape);
 	bool CreateCapsule(VertexType** vertices, unsigned long** indices, DebugShapeType* shape, BombastDebugPhysicsCapsule* capsule);
 	bool CreateLine(VertexType** vertices, unsigned long** indices, DebugShapeType* shape, PhysXPhysicsDebugLine* line);
+	bool CreateTriangle(VertexType** vertices, unsigned long** indices, DebugShapeType* shape, PhysXPhysicsDebugTriangle* triangle);
 
 	bool UpdateShape(DebugShapeType* shape, ID3D11DeviceContext* context);
 	void ReleaseShape(DebugShapeType** shape);

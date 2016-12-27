@@ -468,6 +468,26 @@ IDebugPhysicsRenderBuffer* PhysXPhysics::VGetDebugRenderBuffer()
 		}
 	}
 
+	for (PxU32 i = 0; i < rb.getNbTriangles(); i++)
+	{
+		const PxDebugTriangle& triangle = rb.getTriangles()[i];
+		//Render Triangle
+		PhysXPhysicsDebugTriangle* debugTriangle;
+
+		Vec3 pos0 = Vec3(triangle.pos0.x, triangle.pos0.y, triangle.pos0.z);
+		Vec3 pos1 = Vec3(triangle.pos1.x, triangle.pos1.y, triangle.pos1.z);
+		Vec3 pos2 = Vec3(triangle.pos2.x, triangle.pos2.y, triangle.pos2.z);
+		debugTriangle = BE_NEW PhysXPhysicsDebugTriangle(Mat4x4::g_Identity, pos0, pos1, pos2, Vec3(0, 255, 0));
+		if (debugTriangle == nullptr)
+		{
+			BE_ERROR("Failed to create debug physics triangle. skipping");
+		}
+		else
+		{
+			newBuffer->m_shapes.push_back(debugTriangle);
+		}
+	}
+
 	return newBuffer;
 }
 
