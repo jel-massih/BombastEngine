@@ -355,6 +355,7 @@ void PhysXPhysics::VSetDebugVisualizationEnabled(bool enabled)
 	{
 		m_pScene->setVisualizationParameter(physx::PxVisualizationParameter::eSCALE, 1.0f);
 		m_pScene->setVisualizationParameter(physx::PxVisualizationParameter::eACTOR_AXES, 2.0f);
+		m_pScene->setVisualizationParameter(physx::PxVisualizationParameter::eCOLLISION_SHAPES, 1.0f);
 	}
 	else 
 	{
@@ -457,7 +458,8 @@ IDebugPhysicsRenderBuffer* PhysXPhysics::VGetDebugRenderBuffer()
 		PhysXPhysicsDebugLine* debugLine;
 		Vec3 pos0 = Vec3(line.pos0.x, line.pos0.y, line.pos0.z);
 		Vec3 pos1 = Vec3(line.pos1.x, line.pos1.y, line.pos1.z);
-		debugLine = BE_NEW PhysXPhysicsDebugLine(Mat4x4::g_Identity, pos0, pos1, Vec3(255,0,0));
+		PhysXPhysicsColor color = PhysXPhysicsColor(line.color0);
+		debugLine = BE_NEW PhysXPhysicsDebugLine(Mat4x4::g_Identity, pos0, pos1, Vec3(color.r,color.g,color.b));
 		if (debugLine == nullptr)
 		{
 			BE_ERROR("Failed to Create Debug Physics Line. Skipping");
@@ -477,7 +479,8 @@ IDebugPhysicsRenderBuffer* PhysXPhysics::VGetDebugRenderBuffer()
 		Vec3 pos0 = Vec3(triangle.pos0.x, triangle.pos0.y, triangle.pos0.z);
 		Vec3 pos1 = Vec3(triangle.pos1.x, triangle.pos1.y, triangle.pos1.z);
 		Vec3 pos2 = Vec3(triangle.pos2.x, triangle.pos2.y, triangle.pos2.z);
-		debugTriangle = BE_NEW PhysXPhysicsDebugTriangle(Mat4x4::g_Identity, pos0, pos1, pos2, Vec3(0, 255, 0));
+		PhysXPhysicsColor color = PhysXPhysicsColor(triangle.color0);
+		debugTriangle = BE_NEW PhysXPhysicsDebugTriangle(Mat4x4::g_Identity, pos0, pos1, pos2, Vec3(color.r, color.g, color.b));
 		if (debugTriangle == nullptr)
 		{
 			BE_ERROR("Failed to create debug physics triangle. skipping");

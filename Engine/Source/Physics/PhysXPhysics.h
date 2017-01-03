@@ -52,6 +52,14 @@ private:
 	Vec3 m_color;
 };
 
+class PhysXPhysicsColor
+{
+public:
+	int r, g, b, a;
+
+	PhysXPhysicsColor(int rgba) : a(255), r(rgba & 0xff), g((rgba >> 8) & 0xff), b((rgba >> 16) & 0xff) {}
+};
+
 class PhysXPhysicsDebugTriangle : public IDebugPhysicsShape
 {
 public:
