@@ -12,9 +12,11 @@ IGamePhysics* CreateGamePhysics(EPhysicsEngine engineType)
 		gamePhysics = BE_NEW PhysXPhysics;
 		break;
 #endif
+#ifdef USE_BOMBASTPHYSICS
 	case EPhysicsEngine::BE_PHYSICS_BOMBAST:
 		gamePhysics = BE_NEW BombastPhysics;
 		break;
+#endif
 	default:
 		BE_ERROR("Invalid Physics Engine Type %i used for CreateGamePhysics", engineType);
 		return nullptr;

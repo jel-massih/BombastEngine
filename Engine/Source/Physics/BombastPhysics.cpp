@@ -1,3 +1,4 @@
+#ifdef USE_BOMBASTPHYSICS
 #include "BombastPhysics.h"
 #include "../Actor/TransformComponent.h"
 #include "../Resources/XmlResource.h"
@@ -423,3 +424,4 @@ BombastPhysicsDebugRenderBuffer::~BombastPhysicsDebugRenderBuffer()
 	}
 	m_shapes.clear();
 }
+#endif

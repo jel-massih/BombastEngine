@@ -1,4 +1,5 @@
 #pragma once
+#ifdef USE_BOMBASTPHYSICS
 
 #include "Physics.h"
 #include "BpPhysicsApi.h"
@@ -88,3 +89,4 @@ private:
 	ActorIdToBPRigidBodyTable m_actorRigidBodyMap;
 	BPRigidBodyToActorIdTable m_rigidBodyActorMap;
 };
+#endif
