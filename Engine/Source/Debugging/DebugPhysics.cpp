@@ -1,7 +1,5 @@
 #include "DebugPhysics.h"
 #include "../Shading/DebugShader.h"
-#include "../Physics/BombastPhysics.h"
-#include "../Physics/PhysXPhysics.h"
 
 DebugPhysics::DebugPhysics()
 {
@@ -176,19 +174,19 @@ bool DebugPhysics::InitializeShape(DebugShapeType** shape, const char* shapeId, 
 		break;
 	case DebugPhysicsShapeType::CAPSULE:
 	{
-		BombastDebugPhysicsCapsule* capsule = static_cast<BombastDebugPhysicsCapsule*>(sourceShape);
+		DebugPhysicsCapsule* capsule = static_cast<DebugPhysicsCapsule*>(sourceShape);
 		createResult = CreateCapsule(&vertices, &indices, *shape, capsule);
 		break;
 	}
 	case DebugPhysicsShapeType::LINE:
 	{
-		PhysXPhysicsDebugLine* line = static_cast<PhysXPhysicsDebugLine*>(sourceShape);
+		DebugPhysicsLine* line = static_cast<DebugPhysicsLine*>(sourceShape);
 		createResult = CreateLine(&vertices, &indices, *shape, line);
 		break;
 	}
 	case DebugPhysicsShapeType::TRIANGLE:
 	{
-		PhysXPhysicsDebugTriangle* triangle = static_cast<PhysXPhysicsDebugTriangle*>(sourceShape);
+		DebugPhysicsTriangle* triangle = static_cast<DebugPhysicsTriangle*>(sourceShape);
 		createResult = CreateTriangle(&vertices, &indices, *shape, triangle);
 	}
 	}
@@ -306,7 +304,7 @@ bool DebugPhysics::CreateSphere(VertexType** vertices, unsigned long** indices, 
 	return true;
 }
 
-bool DebugPhysics::CreateLine(VertexType** vertices, unsigned long** indices, DebugShapeType* shape, PhysXPhysicsDebugLine* line)
+bool DebugPhysics::CreateLine(VertexType** vertices, unsigned long** indices, DebugShapeType* shape, DebugPhysicsLine* line)
 {
 	shape->vertexCount = 2;
 	shape->indexCount = shape->vertexCount;
@@ -332,7 +330,7 @@ bool DebugPhysics::CreateLine(VertexType** vertices, unsigned long** indices, De
 	return true;
 }
 
-bool DebugPhysics::CreateTriangle(VertexType** vertices, unsigned long** indices, DebugShapeType* shape, PhysXPhysicsDebugTriangle* triangle)
+bool DebugPhysics::CreateTriangle(VertexType** vertices, unsigned long** indices, DebugShapeType* shape, DebugPhysicsTriangle* triangle)
 {
 	shape->vertexCount = 3;
 	shape->indexCount = shape->vertexCount;
@@ -421,7 +419,7 @@ bool DebugPhysics::CreateBox(VertexType** vertices, unsigned long** indices, Deb
 	return true;
 }
 
-bool DebugPhysics::CreateCapsule(VertexType** vertices, unsigned long** indices, DebugShapeType* shape, BombastDebugPhysicsCapsule* capsule)
+bool DebugPhysics::CreateCapsule(VertexType** vertices, unsigned long** indices, DebugShapeType* shape, DebugPhysicsCapsule* capsule)
 {
 	int segments = 10;
 	int rows = 10;

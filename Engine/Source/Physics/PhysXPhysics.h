@@ -34,51 +34,6 @@ public:
 	}
 };
 
-class PhysXPhysicsDebugLine : public IDebugPhysicsShape
-{	
-public:
-	PhysXPhysicsDebugLine(Mat4x4 transform, Vec3 pos0, Vec3 pos1, Vec3 color) : m_transform(transform), m_pos0(pos0), m_pos1(pos1), m_color(color) {}
-
-	virtual Vec3 VGetColor() override { return m_color; }
-	virtual Mat4x4 VGetTransform() override { return m_transform; }
-	virtual DebugPhysicsShapeType VGetShapeType() override { return DebugPhysicsShapeType::LINE; }
-
-public:
-	Vec3 m_pos0;
-	Vec3 m_pos1;
-
-private:
-	Mat4x4 m_transform;
-	Vec3 m_color;
-};
-
-class PhysXPhysicsColor
-{
-public:
-	int r, g, b, a;
-
-	PhysXPhysicsColor(int rgba) : a(255), r(rgba & 0xff), g((rgba >> 8) & 0xff), b((rgba >> 16) & 0xff) {}
-};
-
-class PhysXPhysicsDebugTriangle : public IDebugPhysicsShape
-{
-public:
-	PhysXPhysicsDebugTriangle(Mat4x4 transform, Vec3 pos0, Vec3 pos1, Vec3 pos2, Vec3 color) : m_transform(transform), m_pos0(pos0), m_pos1(pos1), m_pos2(pos2), m_color(color) {}
-
-	virtual Vec3 VGetColor() override { return m_color; }
-	virtual Mat4x4 VGetTransform() override { return m_transform; }
-	virtual DebugPhysicsShapeType VGetShapeType() override { return DebugPhysicsShapeType::TRIANGLE; }
-
-public:
-	Vec3 m_pos0;
-	Vec3 m_pos1;
-	Vec3 m_pos2;
-
-private:
-	Mat4x4 m_transform;
-	Vec3 m_color;
-};
-
 class PhysXPhysicsDebugRenderBuffer : public IDebugPhysicsRenderBuffer
 {
 public:

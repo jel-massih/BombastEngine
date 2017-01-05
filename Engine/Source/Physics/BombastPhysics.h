@@ -5,58 +5,6 @@
 
 using namespace bPhysics;
 
-
-class BombastDebugPhysicsSphere : public IDebugPhysicsShape
-{
-public:
-	BombastDebugPhysicsSphere(Mat4x4 transform, Vec3 color, float radius) : m_transform(transform), m_color(color), m_radius(radius) {}
-
-	virtual Vec3 VGetColor() { return m_color; }
-	virtual DebugPhysicsShapeType VGetShapeType() { return DebugPhysicsShapeType::SPHERE; }
-	float VGetRadius() { return m_radius; }
-
-	virtual Mat4x4 VGetTransform() override { return m_transform; }
-
-private:
-	Vec3 m_color;
-	float m_radius;
-	Mat4x4 m_transform;
-};
-
-class BombastDebugPhysicsBox : public IDebugPhysicsShape
-{
-public:
-	BombastDebugPhysicsBox(Mat4x4 transform, Vec3 color, Vec3 extent) : m_transform(transform), m_color(color), m_extent(extent) {}
-
-	virtual Vec3 VGetColor() { return m_color; }
-	virtual DebugPhysicsShapeType VGetShapeType() { return DebugPhysicsShapeType::BOX; }
-	Vec3 VGetExtent() { return m_extent; }
-
-	virtual Mat4x4 VGetTransform() override { return m_transform; }
-
-private:
-	Vec3 m_color, m_extent;
-	Mat4x4 m_transform;
-};
-
-class BombastDebugPhysicsCapsule : public IDebugPhysicsShape
-{
-public:
-	BombastDebugPhysicsCapsule(Mat4x4 transform, Vec3 color, float radius, float halfHeight) : m_transform(transform), m_color(color), m_radius(radius), m_halfHeight(halfHeight) {}
-
-	virtual Vec3 VGetColor() { return m_color; }
-	virtual DebugPhysicsShapeType VGetShapeType() { return DebugPhysicsShapeType::CAPSULE; }
-	float VGetRadius() { return m_radius; }
-	float VGetHalfHeight() { return m_halfHeight; }
-
-	virtual Mat4x4 VGetTransform() override { return m_transform; }
-
-private:
-	Vec3 m_color;
-	float m_radius, m_halfHeight;
-	Mat4x4 m_transform;
-};
-
 class BombastPhysicsDebugRenderBuffer : public IDebugPhysicsRenderBuffer
 {
 public:
