@@ -69,7 +69,7 @@ bool D3DClass11::VInitialize(int screenWidth, int screenHeight, bool vsync, HWND
 	D3D11_DEPTH_STENCIL_DESC depthDisabledStencilDesc;
 	D3D11_BLEND_DESC blendStateDesc;
 
-	m_vsyncEnabled = true;
+	m_vsyncEnabled = vsync;
 	m_bFullscreen = fullscreen;
 
 	result = CreateDXGIFactory(__uuidof(IDXGIFactory), (void**)&factory);
