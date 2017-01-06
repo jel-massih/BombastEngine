@@ -284,7 +284,7 @@ void PhysXPhysics::VLoadPhysicsConfigXml()
 
 void PhysXPhysics::VOnUpdate(const float deltaMs)
 {
-	m_pScene->simulate(PhysXPhysics::Timestep);
+	m_pScene->simulate(deltaMs / 1000.f);
 	m_pScene->fetchResults(true);
 }
 
