@@ -47,6 +47,7 @@ namespace BELogger
 
 #define BE_INFO(str, ...) BE_LOG("INFO", str, ##__VA_ARGS__)
 
+#define BE_LOG_GAMEPLAY(str, ...) BE_LOG("GAMEPLAY", str, ##__VA_ARGS__)
 #define BE_LOG_GRAPHICS(str, ...) BE_LOG("GRAPHICS", str, ##__VA_ARGS__)
 #define BE_LOG_PHYSICS(str, ...) BE_LOG("PHYSICS", str, ##__VA_ARGS__)
 #define BE_LOG_SCRIPT(str, ...) BE_LOG("SCRIPT", str, ##__VA_ARGS__)
