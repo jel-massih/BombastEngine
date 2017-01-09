@@ -229,6 +229,7 @@ enum DebugPhysicsShapeType
 	SPHERE,
 	BOX,
 	CAPSULE,
+	LINE_LIST,
 	TRIANGLE_LIST
 };
 
