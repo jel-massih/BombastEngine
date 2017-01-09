@@ -188,6 +188,19 @@ bool DebugPhysics::InitializeShape(DebugShapeType** shape, const char* shapeId, 
 	{
 		DebugPhysicsTriangle* triangle = static_cast<DebugPhysicsTriangle*>(sourceShape);
 		createResult = CreateTriangle(&vertices, &indices, *shape, triangle);
+		break;
+	}
+	case DebugPhysicsShapeType::LINE_LIST:
+	{
+		DebugPhysicsLineList* lineList = static_cast<DebugPhysicsLineList*>(sourceShape);
+		createResult = CreateLineList(&vertices, &indices, *shape, lineList);
+		break;
+	}
+	case DebugPhysicsShapeType::TRIANGLE_LIST:
+	{
+		DebugPhysicsTriangleList* triangleList = static_cast<DebugPhysicsTriangleList*>(sourceShape);
+		createResult = CreateTriangleList(&vertices, &indices, *shape, triangleList);
+		break;
 	}
 	}
 
@@ -533,6 +546,63 @@ bool DebugPhysics::CreateCapsule(VertexType** vertices, unsigned long** indices,
 				index += 6;
 			}
 		}
+	}
+
+	return true;
+}
+
+bool DebugPhysics::CreateLineList(VertexType** vertices, unsigned long** indices, DebugShapeType* shape, DebugPhysicsLineList* lineList)
+{
+	shape->vertexCount = lineList->GetVertexCount();
+	shape->indexCount = shape->vertexCount;
+	shape->topology = D3D11_PRIMITIVE_TOPOLOGY_LINELIST;
+
+	*vertices = BE_NEW VertexType[lineList->GetVertexCount()];
+	if (!*vertices)
+	{
+		return false;
+	}
+
+	*indices = BE_NEW unsigned long[shape->indexCount];
+	if (!*indices)
+	{
+		return false;
+	}
+
+	VertexType* srcVerts = lineList->GetVertices();
+
+	memcpy(*vertices, (void*)srcVerts, sizeof(VertexType)* shape->vertexCount);
+	for (int i = 0; i < shape->indexCount; i++)
+	{
+		(*indices)[i] = i;
+	}
+
+	return true;
+}
+
+bool DebugPhysics::CreateTriangleList(VertexType** vertices, unsigned long** indices, DebugShapeType* shape, DebugPhysicsTriangleList* triangleList)
+{
+	shape->vertexCount = triangleList->GetVertexCount();
+	shape->indexCount = shape->vertexCount;
+
+	*vertices = BE_NEW VertexType[triangleList->GetVertexCount()];
+	if (!*vertices)
+	{
+		return false;
+	}
+
+	*indices = BE_NEW unsigned long[shape->indexCount];
+	if (!*indices)
+	{
+		return false;
+	}
+
+	VertexType* srcVerts = triangleList->GetVertices();
+
+	memcpy(*vertices, (void*)srcVerts, sizeof(VertexType)* shape->vertexCount);
+	for (int i = 0; i < shape->indexCount; i++)
+	{
+		(*indices)[i] = i;
 	}
 
 	return true;

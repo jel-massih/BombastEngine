@@ -6,6 +6,8 @@ class DebugPhysicsTriangle;
 class DebugPhysicsSphere;
 class DebugPhysicsBox;
 class DebugPhysicsCapsule;
+class DebugPhysicsLineList;
+class DebugPhysicsTriangleList;
 
 class DebugPhysics
 {
@@ -20,9 +22,17 @@ private:
 		D3D11_PRIMITIVE_TOPOLOGY topology;
 	};
 
+public:
 	struct VertexType
 	{
 		XMFLOAT3 position;
+
+		VertexType() {}
+
+		VertexType(XMFLOAT3 pos)
+		{
+			position = pos;
+		}
 	};
 
 public:
@@ -43,6 +53,8 @@ private:
 	bool CreateCapsule(VertexType** vertices, unsigned long** indices, DebugShapeType* shape, DebugPhysicsCapsule* capsule);
 	bool CreateLine(VertexType** vertices, unsigned long** indices, DebugShapeType* shape, DebugPhysicsLine* line);
 	bool CreateTriangle(VertexType** vertices, unsigned long** indices, DebugShapeType* shape, DebugPhysicsTriangle* triangle);
+	bool CreateLineList(VertexType** vertices, unsigned long** indices, DebugShapeType* shape, DebugPhysicsLineList* lineList);
+	bool CreateTriangleList(VertexType** vertices, unsigned long** indices, DebugShapeType* shape, DebugPhysicsTriangleList* triangleList);
 
 	bool UpdateShape(DebugShapeType* shape, ID3D11DeviceContext* context);
 	void ReleaseShape(DebugShapeType** shape);
@@ -151,4 +163,50 @@ private:
 	Vec3 m_color;
 	float m_radius, m_halfHeight;
 	Mat4x4 m_transform;
+};
+
+class DebugPhysicsLineList : public IDebugPhysicsShape
+{
+public:
+	DebugPhysicsLineList(Vec3 color) : m_color(color) {}
+
+	virtual Vec3 VGetColor() { return m_color; }
+	virtual DebugPhysicsShapeType VGetShapeType() { return DebugPhysicsShapeType::LINE_LIST; }
+
+	virtual Mat4x4 VGetTransform() override { return Mat4x4::g_Identity; }
+
+	DebugPhysics::VertexType* GetVertices() { return m_vertices; }
+	void SetVertices(DebugPhysics::VertexType* vertices) { m_vertices = vertices; }
+
+	int GetVertexCount() { return m_vertexCount; }
+	void SetVertexCount(int vertexCount) { m_vertexCount = vertexCount; }
+
+private:
+	Vec3 m_color;
+
+	DebugPhysics::VertexType* m_vertices;
+	int m_vertexCount;
+};
+
+class DebugPhysicsTriangleList : public IDebugPhysicsShape
+{
+public:
+	DebugPhysicsTriangleList(Vec3 color) : m_color(color) {}
+
+	virtual Vec3 VGetColor() { return m_color; }
+	virtual DebugPhysicsShapeType VGetShapeType() { return DebugPhysicsShapeType::TRIANGLE_LIST; }
+
+	virtual Mat4x4 VGetTransform() override { return Mat4x4::g_Identity; }
+
+	DebugPhysics::VertexType* GetVertices() { return m_vertices; }
+	void SetVertices(DebugPhysics::VertexType* vertices) { m_vertices = vertices; }
+	
+	int GetVertexCount() { return m_vertexCount; }
+	void SetVertexCount(int vertexCount) { m_vertexCount = vertexCount; }
+
+private:
+	Vec3 m_color;
+
+	DebugPhysics::VertexType* m_vertices;
+	int m_vertexCount;
 };

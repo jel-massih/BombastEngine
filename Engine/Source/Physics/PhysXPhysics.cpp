@@ -452,44 +452,55 @@ IDebugPhysicsRenderBuffer* PhysXPhysics::VGetDebugRenderBuffer()
 
 	const PxRenderBuffer& rb = m_pScene->getRenderBuffer();
 
+	const int getNbLineCount = rb.getNbLines();
+	DebugPhysics::VertexType* lineVertices = BE_NEW DebugPhysics::VertexType[getNbLineCount * 2];
+
 	for (PxU32 i = 0; i < rb.getNbLines(); i++)
 	{
 		const PxDebugLine& line = rb.getLines()[i];
 		//Render Line
-		DebugPhysicsLine* debugLine;
-		Vec3 pos0 = Vec3(line.pos0.x, line.pos0.y, line.pos0.z);
-		Vec3 pos1 = Vec3(line.pos1.x, line.pos1.y, line.pos1.z);
-		PhysXPhysicsColor color = PhysXPhysicsColor(line.color0);
-		debugLine = BE_NEW DebugPhysicsLine(Mat4x4::g_Identity, pos0, pos1, Vec3(color.r,color.g,color.b));
-		if (debugLine == nullptr)
-		{
-			BE_ERROR("Failed to Create Debug Physics Line. Skipping");
-		}
-		else
-		{
-			newBuffer->m_shapes.push_back(debugLine);
-		}
+		XMFLOAT3 pos0 = XMFLOAT3(line.pos0.x, line.pos0.y, line.pos0.z);
+		XMFLOAT3 pos1 = XMFLOAT3(line.pos1.x, line.pos1.y, line.pos1.z);
+
+		const int offset = i * 2;
+		lineVertices[offset] = DebugPhysics::VertexType(pos0);
+		lineVertices[offset + 1] = DebugPhysics::VertexType(pos1);
 	}
 
-	for (PxU32 i = 0; i < rb.getNbTriangles(); i++)
+	if (getNbLineCount > 0)
+	{
+		DebugPhysicsLineList* debugLine = BE_NEW DebugPhysicsLineList(Vec3(0, 255, 0));
+		debugLine->SetVertexCount(getNbLineCount * 2);
+		debugLine->SetVertices(lineVertices);
+
+		newBuffer->m_shapes.push_back(debugLine);
+	}
+
+	const int getNbTriangleCount = rb.getNbTriangles();
+	DebugPhysics::VertexType* triangleVertices = BE_NEW DebugPhysics::VertexType[getNbTriangleCount * 3];
+
+	for (PxU32 i = 0; i < getNbTriangleCount; i++)
 	{
 		const PxDebugTriangle& triangle = rb.getTriangles()[i];
 		//Render Triangle
-		DebugPhysicsTriangle* debugTriangle;
 
-		Vec3 pos0 = Vec3(triangle.pos0.x, triangle.pos0.y, triangle.pos0.z);
-		Vec3 pos1 = Vec3(triangle.pos1.x, triangle.pos1.y, triangle.pos1.z);
-		Vec3 pos2 = Vec3(triangle.pos2.x, triangle.pos2.y, triangle.pos2.z);
-		PhysXPhysicsColor color = PhysXPhysicsColor(triangle.color0);
-		debugTriangle = BE_NEW DebugPhysicsTriangle(Mat4x4::g_Identity, pos0, pos1, pos2, Vec3(color.r, color.g, color.b));
-		if (debugTriangle == nullptr)
-		{
-			BE_ERROR("Failed to create debug physics triangle. skipping");
-		}
-		else
-		{
-			newBuffer->m_shapes.push_back(debugTriangle);
-		}
+		XMFLOAT3 pos0 = XMFLOAT3(triangle.pos0.x, triangle.pos0.y, triangle.pos0.z);
+		XMFLOAT3 pos1 = XMFLOAT3(triangle.pos1.x, triangle.pos1.y, triangle.pos1.z);
+		XMFLOAT3 pos2 = XMFLOAT3(triangle.pos2.x, triangle.pos2.y, triangle.pos2.z);
+		
+		const int offset = i * 3;
+		triangleVertices[offset] = DebugPhysics::VertexType(pos0);
+		triangleVertices[offset + 1] = DebugPhysics::VertexType(pos1);
+		triangleVertices[offset + 2] = DebugPhysics::VertexType(pos2);
+	}
+
+	if (getNbTriangleCount > 0)
+	{
+		DebugPhysicsTriangleList* debugTriangle = BE_NEW DebugPhysicsTriangleList(Vec3(255, 0, 0));
+		debugTriangle->SetVertexCount(getNbTriangleCount * 3);
+		debugTriangle->SetVertices(triangleVertices);
+
+		newBuffer->m_shapes.push_back(debugTriangle);
 	}
 
 	return newBuffer;

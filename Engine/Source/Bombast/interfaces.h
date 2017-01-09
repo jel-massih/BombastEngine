@@ -228,7 +228,9 @@ enum DebugPhysicsShapeType
 	TRIANGLE,
 	SPHERE,
 	BOX,
-	CAPSULE
+	CAPSULE,
+	LINE_LIST,
+	TRIANGLE_LIST
 };
 
 class IDebugPhysicsShape
