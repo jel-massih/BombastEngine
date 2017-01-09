@@ -236,6 +236,8 @@ enum DebugPhysicsShapeType
 class IDebugPhysicsShape
 {
 public:
+	virtual ~IDebugPhysicsShape() {}
+
 	virtual Vec3 VGetColor() = 0;
 	virtual Mat4x4 VGetTransform() = 0;
 	virtual DebugPhysicsShapeType VGetShapeType() = 0;

@@ -168,7 +168,8 @@ private:
 class DebugPhysicsLineList : public IDebugPhysicsShape
 {
 public:
-	DebugPhysicsLineList(Vec3 color) : m_color(color) {}
+	DebugPhysicsLineList(Vec3 color) : m_color(color), m_vertices(nullptr) {}
+	virtual ~DebugPhysicsLineList() { SAFE_DELETE_ARRAY(m_vertices); }
 
 	virtual Vec3 VGetColor() { return m_color; }
 	virtual DebugPhysicsShapeType VGetShapeType() { return DebugPhysicsShapeType::LINE_LIST; }
@@ -191,7 +192,8 @@ private:
 class DebugPhysicsTriangleList : public IDebugPhysicsShape
 {
 public:
-	DebugPhysicsTriangleList(Vec3 color) : m_color(color) {}
+	DebugPhysicsTriangleList(Vec3 color) : m_color(color), m_vertices(nullptr) {}
+	virtual ~DebugPhysicsTriangleList() { SAFE_DELETE_ARRAY(m_vertices); }
 
 	virtual Vec3 VGetColor() { return m_color; }
 	virtual DebugPhysicsShapeType VGetShapeType() { return DebugPhysicsShapeType::TRIANGLE_LIST; }

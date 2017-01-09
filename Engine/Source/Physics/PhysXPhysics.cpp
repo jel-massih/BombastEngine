@@ -451,24 +451,25 @@ IDebugPhysicsRenderBuffer* PhysXPhysics::VGetDebugRenderBuffer()
 	PhysXPhysicsDebugRenderBuffer* newBuffer = BE_NEW PhysXPhysicsDebugRenderBuffer;
 
 	const PxRenderBuffer& rb = m_pScene->getRenderBuffer();
-
+	
 	const int getNbLineCount = rb.getNbLines();
-	DebugPhysics::VertexType* lineVertices = BE_NEW DebugPhysics::VertexType[getNbLineCount * 2];
-
-	for (PxU32 i = 0; i < rb.getNbLines(); i++)
-	{
-		const PxDebugLine& line = rb.getLines()[i];
-		//Render Line
-		XMFLOAT3 pos0 = XMFLOAT3(line.pos0.x, line.pos0.y, line.pos0.z);
-		XMFLOAT3 pos1 = XMFLOAT3(line.pos1.x, line.pos1.y, line.pos1.z);
-
-		const int offset = i * 2;
-		lineVertices[offset] = DebugPhysics::VertexType(pos0);
-		lineVertices[offset + 1] = DebugPhysics::VertexType(pos1);
-	}
-
 	if (getNbLineCount > 0)
 	{
+		DebugPhysics::VertexType* lineVertices = BE_NEW DebugPhysics::VertexType[getNbLineCount * 2];
+
+		for (PxU32 i = 0; i < rb.getNbLines(); i++)
+		{
+			const PxDebugLine& line = rb.getLines()[i];
+			//Render Line
+			XMFLOAT3 pos0 = XMFLOAT3(line.pos0.x, line.pos0.y, line.pos0.z);
+			XMFLOAT3 pos1 = XMFLOAT3(line.pos1.x, line.pos1.y, line.pos1.z);
+
+			const int offset = i * 2;
+			lineVertices[offset] = DebugPhysics::VertexType(pos0);
+			lineVertices[offset + 1] = DebugPhysics::VertexType(pos1);
+		}
+
+	
 		DebugPhysicsLineList* debugLine = BE_NEW DebugPhysicsLineList(Vec3(0, 255, 0));
 		debugLine->SetVertexCount(getNbLineCount * 2);
 		debugLine->SetVertices(lineVertices);
@@ -477,25 +478,24 @@ IDebugPhysicsRenderBuffer* PhysXPhysics::VGetDebugRenderBuffer()
 	}
 
 	const int getNbTriangleCount = rb.getNbTriangles();
-	DebugPhysics::VertexType* triangleVertices = BE_NEW DebugPhysics::VertexType[getNbTriangleCount * 3];
-
-	for (PxU32 i = 0; i < getNbTriangleCount; i++)
-	{
-		const PxDebugTriangle& triangle = rb.getTriangles()[i];
-		//Render Triangle
-
-		XMFLOAT3 pos0 = XMFLOAT3(triangle.pos0.x, triangle.pos0.y, triangle.pos0.z);
-		XMFLOAT3 pos1 = XMFLOAT3(triangle.pos1.x, triangle.pos1.y, triangle.pos1.z);
-		XMFLOAT3 pos2 = XMFLOAT3(triangle.pos2.x, triangle.pos2.y, triangle.pos2.z);
-		
-		const int offset = i * 3;
-		triangleVertices[offset] = DebugPhysics::VertexType(pos0);
-		triangleVertices[offset + 1] = DebugPhysics::VertexType(pos1);
-		triangleVertices[offset + 2] = DebugPhysics::VertexType(pos2);
-	}
-
 	if (getNbTriangleCount > 0)
 	{
+		DebugPhysics::VertexType* triangleVertices = BE_NEW DebugPhysics::VertexType[getNbTriangleCount * 3];
+
+		for (PxU32 i = 0; i < getNbTriangleCount; i++)
+		{
+			const PxDebugTriangle& triangle = rb.getTriangles()[i];
+			//Render Triangle
+			XMFLOAT3 pos0 = XMFLOAT3(triangle.pos0.x, triangle.pos0.y, triangle.pos0.z);
+			XMFLOAT3 pos1 = XMFLOAT3(triangle.pos1.x, triangle.pos1.y, triangle.pos1.z);
+			XMFLOAT3 pos2 = XMFLOAT3(triangle.pos2.x, triangle.pos2.y, triangle.pos2.z);
+		
+			const int offset = i * 3;
+			triangleVertices[offset] = DebugPhysics::VertexType(pos0);
+			triangleVertices[offset + 1] = DebugPhysics::VertexType(pos1);
+			triangleVertices[offset + 2] = DebugPhysics::VertexType(pos2);
+		}
+
 		DebugPhysicsTriangleList* debugTriangle = BE_NEW DebugPhysicsTriangleList(Vec3(255, 0, 0));
 		debugTriangle->SetVertexCount(getNbTriangleCount * 3);
 		debugTriangle->SetVertices(triangleVertices);
