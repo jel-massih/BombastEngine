@@ -6,11 +6,13 @@
 #pragma comment(lib, "PhysX3CommonDEBUG_x86.lib")
 #pragma comment(lib, "PhysX3ExtensionsDEBUG.lib")
 #pragma comment(lib, "PhysXVisualDebuggerSDKDEBUG.lib")
+#pragma comment(lib, "PhysX3CharacterKinematicDEBUG_x86.lib")
 #else
 #pragma comment(lib, "PhysX3_x86.lib")
 #pragma comment(lib, "PhysX3Common_x86.lib")
 #pragma comment(lib, "PhysX3Extensions.lib")
 #pragma comment(lib, "PhysXVisualDebuggerSDK.lib")
+#pragma comment(lib, "PhysX3CharacterKinematic_x86.lib")
 #endif
 
 /*
@@ -88,6 +90,9 @@ public:
 
 	virtual IDebugPhysicsRenderBuffer* VGetDebugRenderBuffer() override;
 
+	PxControllerManager* GetPxControllerManager();
+	PxMaterial* GetDefaultPxMaterial();
+
 private:
 	void AddShape(Actor* pActor, PxGeometry* geometry, float density, const std::string& physicsMaterial, bool gravityEnabled, float linearDamping, float angularDamping, const std::string& bodyType);
 	void RemovePhysicsObject(PxRigidBody* body);
@@ -116,6 +121,9 @@ private:
 	PxDefaultAllocator m_allocatorCallback;
 	PxDefaultCpuDispatcher* m_pDispatcher;
 	PxVisualDebuggerConnection* m_pConnection;
+
+	PxControllerManager* m_pControllerManager;
+	PxMaterial* m_pDefaultMaterial;
 
 	PxScene* m_pScene;
 	static const PxReal Timestep; //Timestep value

@@ -5,6 +5,8 @@
 #include "../Events/Events.h"
 #include "../Debugging/DebugPhysics.h"
 
+#include <characterkinematic/PxControllerManager.h>
+
 #define ENABLE_PHYSX_PVD true
 
 const PxReal PhysXPhysics::Timestep = 1.00f / 60.0f;
@@ -20,6 +22,7 @@ PhysXPhysics::PhysXPhysics()
 
 PhysXPhysics::~PhysXPhysics()
 {
+	m_pControllerManager->release();
 	m_pScene->release();
 	m_pDispatcher->release();
 	if (m_pConnection != nullptr)
@@ -55,6 +58,9 @@ bool PhysXPhysics::VInitialize()
 #ifdef ENABLE_PHYSX_PVD
 	ConnectPVD();
 #endif
+
+	m_pControllerManager = PxCreateControllerManager(*m_pScene);
+	m_pDefaultMaterial = m_pPhysicsSdk->createMaterial(0.5f, 0.5f, 0.1f);
 	
 	return true;
 }
@@ -513,6 +519,16 @@ PhysXPhysicsDebugRenderBuffer::~PhysXPhysicsDebugRenderBuffer()
 		SAFE_DELETE(*it);
 	}
 	m_shapes.clear();
+}
+
+PxControllerManager* PhysXPhysics::GetPxControllerManager()
+{
+	return m_pControllerManager;
+}
+
+PxMaterial* PhysXPhysics::GetDefaultPxMaterial()
+{
+	return m_pDefaultMaterial;
 }
 
 #endif
