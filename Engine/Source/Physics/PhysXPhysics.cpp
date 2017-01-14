@@ -100,7 +100,7 @@ void PhysXPhysics::AddShape(Actor* pActor, PxGeometry* geometry, float density, 
 	else 
 	{
 		//Doesnt work without transform
-		BE_ERROR("Actor %s PhysicsComponent requires Shape to have Transform Component: %d", actorId);
+		BE_ERROR("Actor %d PhysicsComponent requires Shape to have Transform Component.", actorId);
 		return;
 	}
 
@@ -483,7 +483,7 @@ IDebugPhysicsRenderBuffer* PhysXPhysics::VGetDebugRenderBuffer()
 		newBuffer->m_shapes.push_back(debugLine);
 	}
 
-	const int getNbTriangleCount = rb.getNbTriangles();
+	PxU32 getNbTriangleCount = rb.getNbTriangles();
 	if (getNbTriangleCount > 0)
 	{
 		DebugPhysics::VertexType* triangleVertices = BE_NEW DebugPhysics::VertexType[getNbTriangleCount * 3];

@@ -49,8 +49,6 @@ HRESULT RayCast::Pick(Scene * pScene, ActorId actorId, ModelClass * pMesh)
 	if (!m_bAllHits && m_numIntersections)
 		return S_OK;
 
-	HRESULT hr;
-
 	const Mat4x4 matView = pScene->GetCamera()->GetView();
 	const Mat4x4 matWorld = pScene->GetTopMatrix();
 	const Mat4x4 proj = pScene->GetCamera()->GetProjection();
@@ -83,4 +81,6 @@ HRESULT RayCast::Pick(Scene * pScene, ActorId actorId, ModelClass * pMesh)
 			}
 		}
 	}
+
+	return NULL;
 }

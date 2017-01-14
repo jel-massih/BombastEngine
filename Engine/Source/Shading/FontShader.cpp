@@ -155,7 +155,6 @@ bool FontShader::SetShaderParameters(ID3D11DeviceContext* deviceContext, XMMATRI
 	ConstantBufferType* dataPtr;
 	unsigned int bufferNumber;
 	PixelBufferType* dataPtr2;
-	XMFLOAT4X4A tempAlignedMatrix;
 
 	result = deviceContext->Map(m_pConstantBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource);
 	if (FAILED(result))
