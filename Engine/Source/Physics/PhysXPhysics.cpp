@@ -113,8 +113,8 @@ void PhysXPhysics::AddShape(Actor* pActor, PxGeometry* geometry, float density, 
 	bool ok = transform.Decompose(translation, rotation, scale);
 	PxQuat pxRot;
 	PxVec3 pxLoc;
-	Vec3ToPxVec(translation, &pxLoc);
-	QuaternionToPxQuat(rotation, &pxRot);
+	PhysXPhysicsHelpers::Vec3ToPxVec(translation, &pxLoc);
+	PhysXPhysicsHelpers::QuaternionToPxQuat(rotation, &pxRot);
 	PxTransform t(pxLoc, pxRot);
 
 	if (bodyType == "Dynamic")
@@ -188,7 +188,7 @@ ActorId PhysXPhysics::FindActorId(PxRigidBody const * const body)
 	return ActorId();
 }
 
-void PhysXPhysics::Mat4x4ToPxMatrix(const Mat4x4& input, PxMat44* output)
+void PhysXPhysicsHelpers::Mat4x4ToPxMatrix(const Mat4x4& input, PxMat44* output)
 {
 	output->column0.x = input._11;
 	output->column0.y = input._12;
@@ -211,7 +211,7 @@ void PhysXPhysics::Mat4x4ToPxMatrix(const Mat4x4& input, PxMat44* output)
 	output->column3.w = input._44;
 }
 
-void PhysXPhysics::PxMatrixToMat4x4(const PxMat44& input, Mat4x4* output)
+void PhysXPhysicsHelpers::PxMatrixToMat4x4(const PxMat44& input, Mat4x4* output)
 {
 	output->_11 = input.column0.x;
 	output->_12 = input.column0.y;
@@ -234,21 +234,28 @@ void PhysXPhysics::PxMatrixToMat4x4(const PxMat44& input, Mat4x4* output)
 	output->_44 = input.column3.w;
 }
 
-void PhysXPhysics::PxVecToVec3(const PxVec3& input, Vec3* output)
+void PhysXPhysicsHelpers::PxVecToVec3(const PxVec3& input, Vec3* output)
 {
 	output->x = input.x;
 	output->y = input.y;
 	output->z = input.z;
 }
 
-void PhysXPhysics::Vec3ToPxVec(const Vec3& input, PxVec3* output)
+void PhysXPhysicsHelpers::Vec3ToPxVec(const Vec3& input, PxVec3* output)
 {
 	output->x = input.x;
 	output->y = input.y;
 	output->z = input.z;
 }
 
-void PhysXPhysics::QuaternionToPxQuat(const Quaternion& input, PxQuat* output)
+void PhysXPhysicsHelpers::PxExtendedVecToVec3(const PxExtendedVec3& input, Vec3* output)
+{
+	output->x = input.x;
+	output->y = input.y;
+	output->z = input.z;
+}
+
+void PhysXPhysicsHelpers::QuaternionToPxQuat(const Quaternion& input, PxQuat* output)
 {
 	output->x = input.x;
 	output->y = input.y;
@@ -256,7 +263,7 @@ void PhysXPhysics::QuaternionToPxQuat(const Quaternion& input, PxQuat* output)
 	output->w = input.w;
 }
 
-void PhysXPhysics::PxQuatToQuaternion(const PxQuat& input, Quaternion* output)
+void PhysXPhysicsHelpers::PxQuatToQuaternion(const PxQuat& input, Quaternion* output)
 {
 	output->x = input.x;
 	output->y = input.y;
@@ -302,7 +309,7 @@ void PhysXPhysics::VSyncVisibleScene()
 
 		PxTransform pxLoc = it->second->getGlobalPose();
 		Mat4x4 loc;
-		PxMatrixToMat4x4(PxMat44(pxLoc), &loc);
+		PhysXPhysicsHelpers::PxMatrixToMat4x4(PxMat44(pxLoc), &loc);
 		
 		Actor* pActor = g_pApp->m_pGame->VGetActor(id);
 		if (pActor)
@@ -415,7 +422,7 @@ Vec3 PhysXPhysics::VGetVelocity(ActorId actorId)
 	PxVec3 pxVec = pBody->getLinearVelocity();
 
 	Vec3 velocity;
-	PxVecToVec3(pxVec, &velocity);
+	PhysXPhysicsHelpers::PxVecToVec3(pxVec, &velocity);
 
 	return velocity;
 }
