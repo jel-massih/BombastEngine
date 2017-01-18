@@ -58,9 +58,6 @@
     <Filter Include="Shading\Shaders\StaticMesh">
       <UniqueIdentifier>{794a5a56-5e0c-4166-a4b7-da60e270a28f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Physics\PhysX">
-      <UniqueIdentifier>{e6d96cd5-6baa-4e17-b420-80b358c9e9f8}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\Actor\Actor.cpp">
@@ -265,8 +262,8 @@
       <Filter>Utilities</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\BombastEngineStd.cpp" />
-    <ClCompile Include="..\..\Source\Physics\PhysX\PhysXCharacterController.cpp">
-      <Filter>Physics\PhysX</Filter>
+    <ClCompile Include="..\..\Source\Actor\PhysXCharacterControllerComponent.cpp">
+      <Filter>Actor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -515,8 +512,8 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\BombastEngineStd.h" />
     <ClInclude Include="..\..\Source\Constants.h" />
-    <ClInclude Include="..\..\Source\Physics\PhysX\PhysXCharacterController.h">
-      <Filter>Physics\PhysX</Filter>
+    <ClInclude Include="..\..\Source\Actor\PhysXCharacterControllerComponent.h">
+      <Filter>Actor</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

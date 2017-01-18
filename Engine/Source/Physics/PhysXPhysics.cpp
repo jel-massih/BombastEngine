@@ -250,9 +250,9 @@ void PhysXPhysicsHelpers::Vec3ToPxVec(const Vec3& input, PxVec3* output)
 
 void PhysXPhysicsHelpers::PxExtendedVecToVec3(const PxExtendedVec3& input, Vec3* output)
 {
-	output->x = input.x;
-	output->y = input.y;
-	output->z = input.z;
+	output->x = (float)input.x;
+	output->y = (float)input.y;
+	output->z = (float)input.z;
 }
 
 void PhysXPhysicsHelpers::QuaternionToPxQuat(const Quaternion& input, PxQuat* output)

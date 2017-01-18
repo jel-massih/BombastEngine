@@ -148,6 +148,7 @@
     <ClCompile Include="..\..\Source\Actor\Actor.cpp" />
     <ClCompile Include="..\..\Source\Actor\ActorFactory.cpp" />
     <ClCompile Include="..\..\Source\Actor\PhysicsComponent.cpp" />
+    <ClCompile Include="..\..\Source\Actor\PhysXCharacterControllerComponent.cpp" />
     <ClCompile Include="..\..\Source\Actor\RenderComponent.cpp" />
     <ClCompile Include="..\..\Source\Actor\TransformComponent.cpp" />
     <ClCompile Include="..\..\Source\BombastEngineStd.cpp" />
@@ -189,7 +190,6 @@
     <ClCompile Include="..\..\Source\Physics\BombastPhysics.cpp" />
     <ClCompile Include="..\..\Source\Physics\Physics.cpp" />
     <ClCompile Include="..\..\Source\Physics\PhysXPhysics.cpp" />
-    <ClCompile Include="..\..\Source\Physics\PhysX\PhysXCharacterController.cpp" />
     <ClCompile Include="..\..\Source\Resources\DevelopmentPackageResource.cpp" />
     <ClCompile Include="..\..\Source\Resources\LuaResource.cpp" />
     <ClCompile Include="..\..\Source\Resources\MaterialResource.cpp" />
@@ -225,6 +225,7 @@
     <ClInclude Include="..\..\Source\Actor\ActorComponent.h" />
     <ClInclude Include="..\..\Source\Actor\ActorFactory.h" />
     <ClInclude Include="..\..\Source\Actor\PhysicsComponent.h" />
+    <ClInclude Include="..\..\Source\Actor\PhysXCharacterControllerComponent.h" />
     <ClInclude Include="..\..\Source\Actor\RenderComponent.h" />
     <ClInclude Include="..\..\Source\Actor\RenderComponentInterface.h" />
     <ClInclude Include="..\..\Source\Actor\TransformComponent.h" />
@@ -266,7 +267,6 @@
     <ClInclude Include="..\..\Source\Physics\BombastPhysics.h" />
     <ClInclude Include="..\..\Source\Physics\Physics.h" />
     <ClInclude Include="..\..\Source\Physics\PhysXPhysics.h" />
-    <ClInclude Include="..\..\Source\Physics\PhysX\PhysXCharacterController.h" />
     <ClInclude Include="..\..\Source\Resources\DevelopmentPackageResource.h" />
     <ClInclude Include="..\..\Source\Resources\LuaResource.h" />
     <ClInclude Include="..\..\Source\Resources\MaterialResource.h" />
