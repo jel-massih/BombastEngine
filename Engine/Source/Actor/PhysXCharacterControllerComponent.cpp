@@ -111,11 +111,22 @@ void PhysXCharacterControllerComponent::VUpdate(const float deltaMs)
 		return;
 	}
 
+	const PxControllerFilters filters(nullptr, nullptr, nullptr);
+	PxVec3 disp;
+	PhysXPhysicsHelpers::Vec3ToPxVec(m_targetDisplacement, &disp);
+
+	m_pController->move(disp, 0.0f, deltaMs, filters);
+
 	PxExtendedVec3 pos = m_pController->getPosition();
 	Vec3 bPos;
 	PhysXPhysicsHelpers::PxExtendedVecToVec3(pos, &bPos);
 
 	pTransformComponent->SetPosition(bPos);
+}
+
+void PhysXCharacterControllerComponent::SetTargetDisplacement(Vec3 newDisplacement)
+{
+	m_targetDisplacement = newDisplacement;
 }
 
 void PhysXCharacterControllerComponent::onShapeHit(const PxControllerShapeHit& hit)
