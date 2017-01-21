@@ -137,7 +137,8 @@ LRESULT CALLBACK HumanView::VOnMsgProc(AppMsg msg)
 	switch (msg.m_uMsg)
 	{
 	case WM_KEYDOWN:
-		if (m_pKeyboardHandler)
+		//Only trigger on first down
+		if (m_pKeyboardHandler && (HIWORD(msg.m_lParam) & KF_REPEAT) == 0)
 		{
 			result = m_pKeyboardHandler->VOnKeyDown((BYTE)msg.m_wParam);
 		}
