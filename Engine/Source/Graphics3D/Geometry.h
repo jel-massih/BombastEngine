@@ -21,6 +21,7 @@ public:
 
 	Vec3(XMFLOAT3 &v3) { x = v3.x; y = v3.y; z = v3.z; }
 	Vec3() : XMFLOAT3() { x = 0; y = 0; z = 0; }
+	Vec3(const float _xyz) { x = _xyz; y = _xyz; z = _xyz; }
 	Vec3(const float _x, const float _y, const float _z) { x = _x; y = _y; z = _z; }
 	Vec3(const double _x, const double _y, const double _z) { x = (float)_x; y = (float)_y; z = (float)_z; }
 	Vec3(const int _x, const int _y, const int _z) { x = (float)_x; y = (float)_y; z = (float)_z; }
