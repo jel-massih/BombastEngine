@@ -16,21 +16,21 @@ PhysXCharacterControllerDesc::PhysXCharacterControllerDesc() :
 	mStepOffset(0.0f),
 	mInvisibleWallHeight(0.0f),
 	mMaxJumpHeight(0.0f),
-	mRadius(0.0f),
-	mHeight(0.0f),
-	mCrouchHeight(0.0f),
+	mRadius(1.0f),
+	mHeight(5.0f),
+	mCrouchHeight(2.0f),
 	mProxyDensity(10.0f),
 	mProxyScale(0.9f),
 	mVolumeGrowth(1.5f),
-	mMaterial(NULL),
-	mReportCallback(NULL),
-	mBehaviorCallback(NULL)
+	mMaterial(nullptr),
+	mReportCallback(nullptr),
+	mBehaviorCallback(nullptr)
 {}
 
 const char* PhysXCharacterControllerComponent::g_Name = "PhysXCharacterControllerComponent";
 
 PhysXCharacterControllerComponent::PhysXCharacterControllerComponent()
-	: m_pController(nullptr), m_pPhysXPhysics(nullptr)
+	: m_pController(nullptr), m_pPhysXPhysics(nullptr), m_materialName(nullptr)
 {
 }
 
@@ -42,11 +42,33 @@ PhysXCharacterControllerComponent::~PhysXCharacterControllerComponent()
 
 bool PhysXCharacterControllerComponent::VInitialize(rapidxml::xml_node<>* pData)
 {
+	rapidxml::xml_node<>* pMaterial = pData->first_node("PhysicsMaterial");
+	if (pMaterial)
+	{
+		m_materialName = pMaterial->value();
+	}
+
+	m_controllerDesc.mReportCallback = this;
+	m_controllerDesc.mBehaviorCallback = this;
 	return true;
 }
 
 void PhysXCharacterControllerComponent::VPostInit()
 {
+	m_pPhysXPhysics = static_cast<PhysXPhysics*>(g_pApp->m_pGame->VGetGamePhysics());
+
+	//Try and load physicsmaterial, if cannot find specified name load default
+	if (m_materialName != nullptr)
+	{
+		PxMaterial* material = m_pPhysXPhysics->GetPxMaterialByName(m_materialName);
+		m_controllerDesc.mMaterial = material;
+	}
+
+	if (m_controllerDesc.mMaterial == nullptr)
+	{
+		m_controllerDesc.mMaterial = m_pPhysXPhysics->GetDefaultPxMaterial();
+	}
+
 	PxCapsuleControllerDesc controllerDesc;
 
 	controllerDesc.height = m_controllerDesc.mHeight;
@@ -63,8 +85,6 @@ void PhysXCharacterControllerComponent::VPostInit()
 	controllerDesc.behaviorCallback = m_controllerDesc.mBehaviorCallback;
 	controllerDesc.volumeGrowth = m_controllerDesc.mVolumeGrowth;
 	controllerDesc.material = m_controllerDesc.mMaterial;
-
-	m_pPhysXPhysics = static_cast<PhysXPhysics*>(g_pApp->m_pGame->VGetGamePhysics());
 
 	PxController* controller = m_pPhysXPhysics->GetPxControllerManager()->createController(controllerDesc);
 	PxRigidDynamic* controllerActor = controller->getActor();

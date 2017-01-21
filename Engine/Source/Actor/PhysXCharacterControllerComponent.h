@@ -66,4 +66,6 @@ protected:
 	PhysXPhysics* m_pPhysXPhysics;
 
 	PhysXCharacterControllerDesc m_controllerDesc;
+
+	char* m_materialName;
 };
