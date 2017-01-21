@@ -93,14 +93,16 @@ public:
 	PxControllerManager* GetPxControllerManager();
 	PxMaterial* GetDefaultPxMaterial();
 
+	PxMaterial* GetPxMaterialByName(char* physicsMaterialName) const;
+
 private:
 	void AddShape(Actor* pActor, PxGeometry* geometry, float density, const std::string& physicsMaterial, bool gravityEnabled, float linearDamping, float angularDamping, const std::string& bodyType);
 	void RemovePhysicsObject(PxRigidBody* body);
 
 	void VLoadPhysicsConfigXml();
 
-	PhysicsMaterialData LookupMaterialData(const std::string& materialString);
-	float LookupDensity(const std::string& densityString);
+	PhysicsMaterialData LookupMaterialData(const std::string& materialString) const;
+	float LookupDensity(const std::string& densityString) const;
 	
 	PxRigidBody* FindRigidBody(ActorId actorId);
 	ActorId FindActorId(PxRigidBody const * const body);

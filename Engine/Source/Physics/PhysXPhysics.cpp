@@ -141,7 +141,7 @@ void PhysXPhysics::RemovePhysicsObject(PxRigidBody* body)
 	m_pScene->removeActor(*body);
 }
 
-PhysicsMaterialData PhysXPhysics::LookupMaterialData(const std::string& materialString)
+PhysicsMaterialData PhysXPhysics::LookupMaterialData(const std::string& materialString) const
 {
 	auto it = m_materialTable.find(materialString);
 	if (it != m_materialTable.end())
@@ -154,7 +154,7 @@ PhysicsMaterialData PhysXPhysics::LookupMaterialData(const std::string& material
 	}
 }
 
-float PhysXPhysics::LookupDensity(const std::string& densityString)
+float PhysXPhysics::LookupDensity(const std::string& densityString) const
 {
 	float density = 1.0f;
 	auto it = m_densityTable.find(densityString);
@@ -536,6 +536,12 @@ PxControllerManager* PhysXPhysics::GetPxControllerManager()
 PxMaterial* PhysXPhysics::GetDefaultPxMaterial()
 {
 	return m_pDefaultMaterial;
+}
+
+PxMaterial* PhysXPhysics::GetPxMaterialByName(char* physicsMaterialName) const
+{
+	PhysicsMaterialData material(LookupMaterialData(physicsMaterialName));
+	return m_pPhysicsSdk->createMaterial(material.m_friction, material.m_friction, material.m_restitution);
 }
 
 #endif
