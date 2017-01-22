@@ -49,7 +49,10 @@ public:
 	virtual void VUpdate(const float deltaMs) override;
 	virtual rapidxml::xml_node<>* VGenerateXml(rapidxml::xml_document<> &outDoc) override { return NULL; }
 
-	void SetTargetDisplacement(Vec3 newDisplacement);
+	void SetForward(bool forward);
+	void SetBackward(bool back);
+	void SetLeft(bool left);
+	void SetRight(bool right);
 
 	// Implements PxUserControllerHitReport
 	virtual void							onShapeHit(const PxControllerShapeHit& hit);
@@ -70,5 +73,7 @@ protected:
 
 	char* m_materialName;
 
-	Vec3 m_targetDisplacement;
+	bool m_forward, m_backward, m_left, m_right;
+
+	float m_walkSpeed;
 };

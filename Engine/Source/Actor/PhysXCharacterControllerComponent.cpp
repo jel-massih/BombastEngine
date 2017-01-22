@@ -10,7 +10,7 @@
 using namespace physx;
 
 PhysXCharacterControllerDesc::PhysXCharacterControllerDesc() :
-	mPosition(PxExtendedVec3(0, 0, 0)),
+	mPosition(PxExtendedVec3(0, 50, 0)),
 	mSlopeLimit(0.0f),
 	mContactOffset(0.0f),
 	mStepOffset(0.0f),
@@ -30,7 +30,8 @@ PhysXCharacterControllerDesc::PhysXCharacterControllerDesc() :
 const char* PhysXCharacterControllerComponent::g_Name = "PhysXCharacterControllerComponent";
 
 PhysXCharacterControllerComponent::PhysXCharacterControllerComponent()
-	: m_pController(nullptr), m_pPhysXPhysics(nullptr), m_materialName(nullptr)
+	: m_pController(nullptr), m_pPhysXPhysics(nullptr), m_materialName(nullptr),
+	m_forward(false), m_backward(false), m_left(false), m_right(false)
 {
 }
 
@@ -39,13 +40,22 @@ PhysXCharacterControllerComponent::~PhysXCharacterControllerComponent()
 	m_pController->release();
 }
 
-
 bool PhysXCharacterControllerComponent::VInitialize(rapidxml::xml_node<>* pData)
 {
 	rapidxml::xml_node<>* pMaterial = pData->first_node("PhysicsMaterial");
 	if (pMaterial)
 	{
 		m_materialName = pMaterial->value();
+	}
+
+	rapidxml::xml_attribute<>* pWalkSpeed = pData->first_attribute("WalkSpeed");
+	if (pWalkSpeed)
+	{
+		m_walkSpeed = atof(pWalkSpeed->value());
+	}
+	else
+	{
+		m_walkSpeed = 0.005;
 	}
 
 	m_controllerDesc.mReportCallback = this;
@@ -112,10 +122,23 @@ void PhysXCharacterControllerComponent::VUpdate(const float deltaMs)
 	}
 
 	const PxControllerFilters filters(nullptr, nullptr, nullptr);
-	PxVec3 disp;
-	PhysXPhysicsHelpers::Vec3ToPxVec(m_targetDisplacement, &disp);
+	PxVec3 targetDisplacement(0);
+	PxVec3 forward;
+	PhysXPhysicsHelpers::Vec3ToPxVec(pTransformComponent->GetLookAt(), &forward);
+	forward.y = 0;
+	PxVec3 up = PxVec3(0, 1, 0);
+	PxVec3 right = forward.cross(up);
 
-	m_pController->move(disp, 0.0f, deltaMs, filters);
+	if (m_forward) targetDisplacement += forward; 
+	if (m_backward) targetDisplacement -= forward;
+	if (m_right) targetDisplacement -= right;
+	if (m_left) targetDisplacement += right;
+
+	targetDisplacement.normalize();
+	targetDisplacement *= -m_walkSpeed * deltaMs;
+	targetDisplacement.y = PHYSX_PHYSICS_GRAVITY * deltaMs * 0.005 * 0.25;
+
+	m_pController->move(targetDisplacement, 0.0f, deltaMs, filters);
 
 	PxExtendedVec3 pos = m_pController->getPosition();
 	Vec3 bPos;
@@ -124,9 +147,24 @@ void PhysXCharacterControllerComponent::VUpdate(const float deltaMs)
 	pTransformComponent->SetPosition(bPos);
 }
 
-void PhysXCharacterControllerComponent::SetTargetDisplacement(Vec3 newDisplacement)
+void PhysXCharacterControllerComponent::SetForward(bool forward)
 {
-	m_targetDisplacement = newDisplacement;
+	m_forward = forward;
+}
+
+void PhysXCharacterControllerComponent::SetBackward(bool backward)
+{
+	m_backward = backward;
+}
+
+void PhysXCharacterControllerComponent::SetLeft(bool left)
+{
+	m_left = left;
+}
+
+void PhysXCharacterControllerComponent::SetRight(bool right)
+{
+	m_right = right;
 }
 
 void PhysXCharacterControllerComponent::onShapeHit(const PxControllerShapeHit& hit)
