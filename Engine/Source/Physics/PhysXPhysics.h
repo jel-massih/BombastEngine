@@ -25,6 +25,8 @@ PhysXVisualDebuggerSDK.lib
 #include "Physics.h"
 #include <PxPhysicsAPI.h>
 
+const float PHYSX_PHYSICS_GRAVITY = -9.91f;
+
 using namespace physx;
 
 class BombastPhysXErrorCallback : public PxErrorCallback
