@@ -154,7 +154,7 @@ LRESULT CALLBACK HumanView::VOnMsgProc(AppMsg msg)
 	case WM_MOUSEMOVE:
 		if (m_pMouseHandler)
 		{
-			result = m_pMouseHandler->VOnMouseMove(Point(LOWORD(msg.m_lParam), HIWORD(msg.m_lParam)), 1);
+			result = m_pMouseHandler->VOnMouseMove(Point(GET_X_LPARAM(msg.m_lParam), GET_Y_LPARAM(msg.m_lParam)), 1);
 		}
 		break;
 
