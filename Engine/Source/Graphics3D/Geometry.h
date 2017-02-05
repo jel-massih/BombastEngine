@@ -9,6 +9,32 @@ class Vec4;
 class Mat4x4;
 struct Quaternion;
 
+class Vec2 : public XMFLOAT2
+{
+public:
+	inline float Length() { float f = 0.0;  XMStoreFloat(&f, XMVector2Length(XMLoadFloat2(this))); return f; }
+	inline Vec2 Normalize() { Vec2 dest;  XMStoreFloat2(&dest, XMVector2Normalize(XMLoadFloat2(this))); return dest; }
+	inline float Dot(const Vec2 &b) { float f = 0.0; XMStoreFloat(&f, XMVector2Dot(XMLoadFloat2(this), XMLoadFloat2(&b))); return f; }
+	inline Vec2 Cross(const Vec2 &b) const { Vec2 out; XMStoreFloat2(&out, XMVector2Cross(XMLoadFloat2(this), XMLoadFloat2(&b))); return out; }
+
+	Vec2(XMFLOAT2 &v2) { x = v2.x; y = v2.y; }
+	Vec2() : XMFLOAT2() { x = 0; y = 0; }
+	Vec2(const float _xy) { x = _xy; y = _xy; }
+	Vec2(const float _x, const float _y) { x = _x; y = _y; }
+	Vec2(const int _x, const int _y) { x = (float)_x; y = (float)_y; }
+
+	static const Vec2 g_InvalidVec2;
+	static const Vec2 g_IdentityVec2;
+
+	Vec2 operator*(float f) const;
+	Vec2& operator*=(const Vec2& rhs);
+	Vec2& operator*=(const float& rhs);
+	Vec2 operator-(Vec2 v) const;
+	Vec2 operator+(Vec2 v) const;
+	Vec2& operator+=(const Vec2 v);
+	bool operator==(const Vec2 v);
+};
+
 class Vec3 : public XMFLOAT3
 {
 public:

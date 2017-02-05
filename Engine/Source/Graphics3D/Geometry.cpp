@@ -3,8 +3,65 @@
 
 const Mat4x4 Mat4x4::g_Identity(XMFLOAT4X4(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1));
 
+const Vec2 Vec2::g_InvalidVec2(-FLT_MAX, -FLT_MAX);
+const Vec2 Vec2::g_IdentityVec2(1, 1);
+
 const Vec3 Vec3::g_InvalidVec3(-FLT_MAX, -FLT_MAX, -FLT_MAX);
 const Vec3 Vec3::g_IdentityVec3(1, 1, 1);
+
+Vec2 Vec2::operator*(float f) const
+{
+	Vec2 v = Vec2(x*f, y*f);
+	return v;
+}
+
+Vec2& Vec2::operator*=(const Vec2& rhs)
+{
+	x *= rhs.x;
+	y *= rhs.y;
+
+	return *this;
+}
+
+Vec2& Vec2::operator*=(const float& rhs)
+{
+	x *= rhs;
+	y *= rhs;
+
+	return *this;
+}
+
+Vec2 Vec2::operator-(Vec2 v) const
+{
+	Vec2 v2 = Vec2(x - v.x, y - v.y);
+
+	return v2;
+}
+
+Vec2 Vec2::operator+(Vec2 v) const
+{
+	Vec2 v2 = Vec2(x + v.x, y + v.y);
+
+	return v2;
+}
+
+Vec2& Vec2::operator+=(const Vec2 v)
+{
+	x += v.x;
+	y += v.y;
+
+	return *this;
+}
+
+bool Vec2::operator==(const Vec2 v)
+{
+	return (v.x == x && v.y == y);
+}
+
+Vec2 operator* (float f, const Vec2& vec)
+{
+	return vec * f;
+}
 
 Vec3 Vec3::operator*(float f) const
 {
