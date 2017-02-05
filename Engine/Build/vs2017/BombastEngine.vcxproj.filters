@@ -58,6 +58,9 @@
     <Filter Include="Shading\Shaders\StaticMesh">
       <UniqueIdentifier>{794a5a56-5e0c-4166-a4b7-da60e270a28f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Rendering">
+      <UniqueIdentifier>{91f123c9-ed11-45cf-949f-68e2dda6caee}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\Actor\Actor.cpp">
@@ -267,6 +270,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\UI\Canvas.cpp">
       <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Rendering\Font.cpp">
+      <Filter>Rendering</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -523,6 +529,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\UI\CanvasComponents.h">
       <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Rendering\Font.h">
+      <Filter>Rendering</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

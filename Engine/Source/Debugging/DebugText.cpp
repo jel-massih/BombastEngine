@@ -1,7 +1,7 @@
 #include "DebugText.h"
 
 #include "../Bombast/BombastApp.h"
-#include "../Graphics2D/FontClass.h"
+#include "../Rendering/Font.h"
 #include "../Shading/FontShader.h"
 
 DebugText::DebugText()
@@ -47,7 +47,7 @@ bool DebugText::Initialize()
 
 	m_stringCount = 0;
 
-	m_pFont = BE_NEW FontClass;
+	m_pFont = BE_NEW Font;
 	if (!m_pFont)
 	{
 		return false;

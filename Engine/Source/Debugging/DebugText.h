@@ -1,6 +1,6 @@
 #pragma once
 
-class FontClass;
+class Font;
 class FontShader;
 
 class DebugText
@@ -40,7 +40,7 @@ private:
 	bool RenderSentence(ID3D11DeviceContext* deviceContext, SentenceType* sentence, Mat4x4& worldMatrix, Mat4x4& orthoMatrix);
 
 private:
-	FontClass* m_pFont;
+	Font* m_pFont;
 	FontShader* m_pFontShader;
 	int m_screenWidth, m_screenHeight;
 	Mat4x4 m_baseViewMatrix;

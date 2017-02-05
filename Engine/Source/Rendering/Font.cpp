@@ -1,25 +1,25 @@
-#include "FontClass.h"
-#include "TextureClass.h"
+#include "Font.h"
+#include "../Graphics2D/TextureClass.h"
 #include "../Resources/ResourceCache.h"
 #include <sstream>
 #include <vector>
 
-const float FontClass::FontKerning = 3.0f;
+const float Font::FontKerning = 3.0f;
 
-FontClass::FontClass()
+Font::Font()
 {
 	m_pFont = 0;
 	m_pTexture = 0;
 }
 
-FontClass::~FontClass()
+Font::~Font()
 {
 	SAFE_DELETE(m_pTexture);
 
 	SAFE_DELETE_ARRAY(m_pFont);
 }
 
-bool FontClass::Initialize(ID3D11Device* device, std::string fontFilename, std::string textureFilename)
+bool Font::Initialize(ID3D11Device* device, std::string fontFilename, std::string textureFilename)
 {
 	if (!LoadFontData(fontFilename.c_str()))
 	{
@@ -34,7 +34,7 @@ bool FontClass::Initialize(ID3D11Device* device, std::string fontFilename, std::
 	return true;
 }
 
-bool FontClass::LoadFontData(const char* filename)
+bool Font::LoadFontData(const char* filename)
 {
 	int i = 0;
 	char temp;
@@ -74,11 +74,11 @@ bool FontClass::LoadFontData(const char* filename)
 	return true;
 }
 
-void FontClass::ReleaseFontData()
+void Font::ReleaseFontData()
 {
 }
 
-bool FontClass::LoadTexture(ID3D11Device* device, std::string filename)
+bool Font::LoadTexture(ID3D11Device* device, std::string filename)
 {
 	m_pTexture = BE_NEW TextureClass;
 	if (!m_pTexture)
@@ -94,12 +94,12 @@ bool FontClass::LoadTexture(ID3D11Device* device, std::string filename)
 	return true;
 }
 
-ID3D11ShaderResourceView* FontClass::GetTexture()
+ID3D11ShaderResourceView* Font::GetTexture()
 {
 	return m_pTexture->GetTexture();
 }
 
-void FontClass::BuildVertexArray(void* vertices, const char* text, float drawX, float drawY)
+void Font::BuildVertexArray(void* vertices, const char* text, float drawX, float drawY)
 {
 	VertexType* vertexPtr;
 	int numLetters, index, i, letter;
@@ -144,7 +144,7 @@ void FontClass::BuildVertexArray(void* vertices, const char* text, float drawX, 
 			vertexPtr[index].texture = XMFLOAT2(m_pFont[letter].right, 1.0f);
 			index++;
 
-			drawX = drawX + m_pFont[letter].size + FontClass::FontKerning;
+			drawX = drawX + m_pFont[letter].size + Font::FontKerning;
 		}
 	}
 }

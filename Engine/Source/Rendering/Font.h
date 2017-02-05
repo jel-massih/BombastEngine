@@ -2,11 +2,11 @@
 
 class TextureClass;
 
-class FontClass
+class Font
 {
 public:
-	FontClass();
-	~FontClass();
+	Font();
+	~Font();
 
 	bool Initialize(ID3D11Device* device, std::string fontFilename, std::string textureFilename);
 
@@ -30,7 +30,7 @@ private:
 private:
 	bool LoadFontData(const char* filename);
 	void ReleaseFontData();
-	
+
 	bool LoadTexture(ID3D11Device* device, std::string filename);
 	void ReleaseTexture();
 
