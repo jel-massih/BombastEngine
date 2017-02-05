@@ -190,6 +190,7 @@
     <ClCompile Include="..\..\Source\Physics\BombastPhysics.cpp" />
     <ClCompile Include="..\..\Source\Physics\Physics.cpp" />
     <ClCompile Include="..\..\Source\Physics\PhysXPhysics.cpp" />
+    <ClCompile Include="..\..\Source\Rendering\Font.cpp" />
     <ClCompile Include="..\..\Source\Resources\DevelopmentPackageResource.cpp" />
     <ClCompile Include="..\..\Source\Resources\LuaResource.cpp" />
     <ClCompile Include="..\..\Source\Resources\MaterialResource.cpp" />
@@ -212,6 +213,7 @@
     <ClCompile Include="..\..\Source\Shading\ShaderManager.cpp" />
     <ClCompile Include="..\..\Source\Shading\StaticMeshShader.cpp" />
     <ClCompile Include="..\..\Source\UI\Canvas.cpp" />
+    <ClCompile Include="..\..\Source\UI\CanvasComponents.cpp" />
     <ClCompile Include="..\..\Source\Utilities\BMDLMeshLoader.cpp" />
     <ClCompile Include="..\..\Source\Utilities\DDSTextureLoader.cpp" />
     <ClCompile Include="..\..\Source\Utilities\Initialization.cpp" />
@@ -268,6 +270,8 @@
     <ClInclude Include="..\..\Source\Physics\BombastPhysics.h" />
     <ClInclude Include="..\..\Source\Physics\Physics.h" />
     <ClInclude Include="..\..\Source\Physics\PhysXPhysics.h" />
+    <ClInclude Include="..\..\Source\Rendering\BatchedRenderables.h" />
+    <ClInclude Include="..\..\Source\Rendering\Font.h" />
     <ClInclude Include="..\..\Source\Resources\DevelopmentPackageResource.h" />
     <ClInclude Include="..\..\Source\Resources\LuaResource.h" />
     <ClInclude Include="..\..\Source\Resources\MaterialResource.h" />

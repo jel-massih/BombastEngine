@@ -271,6 +271,9 @@
     <ClCompile Include="..\..\Source\UI\Canvas.cpp">
       <Filter>UI</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\UI\CanvasComponents.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\Rendering\Font.cpp">
       <Filter>Rendering</Filter>
     </ClCompile>
@@ -529,6 +532,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\UI\CanvasComponents.h">
       <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Rendering\BatchedRenderables.h">
+      <Filter>Rendering</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\Rendering\Font.h">
       <Filter>Rendering</Filter>
