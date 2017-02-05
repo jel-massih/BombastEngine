@@ -5,9 +5,11 @@ const Mat4x4 Mat4x4::g_Identity(XMFLOAT4X4(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0
 
 const Vec2 Vec2::g_InvalidVec2(-FLT_MAX, -FLT_MAX);
 const Vec2 Vec2::g_IdentityVec2(1, 1);
+const Vec2 Vec2::g_ZeroVec2(0, 0);
 
 const Vec3 Vec3::g_InvalidVec3(-FLT_MAX, -FLT_MAX, -FLT_MAX);
 const Vec3 Vec3::g_IdentityVec3(1, 1, 1);
+const Vec3 Vec3::g_ZeroVec3(0, 0, 0);
 
 Vec2 Vec2::operator*(float f) const
 {

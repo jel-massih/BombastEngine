@@ -211,6 +211,7 @@
     <ClCompile Include="..\..\Source\Shading\MultiTextureShader.cpp" />
     <ClCompile Include="..\..\Source\Shading\ShaderManager.cpp" />
     <ClCompile Include="..\..\Source\Shading\StaticMeshShader.cpp" />
+    <ClCompile Include="..\..\Source\UI\Canvas.cpp" />
     <ClCompile Include="..\..\Source\Utilities\BMDLMeshLoader.cpp" />
     <ClCompile Include="..\..\Source\Utilities\DDSTextureLoader.cpp" />
     <ClCompile Include="..\..\Source\Utilities\Initialization.cpp" />
@@ -291,6 +292,8 @@
     <ClInclude Include="..\..\Source\Shading\ShaderManager.h" />
     <ClInclude Include="..\..\Source\Shading\ShadingCommon.h" />
     <ClInclude Include="..\..\Source\Shading\StaticMeshShader.h" />
+    <ClInclude Include="..\..\Source\UI\Canvas.h" />
+    <ClInclude Include="..\..\Source\UI\CanvasComponents.h" />
     <ClInclude Include="..\..\Source\UI\UserInterface.h" />
     <ClInclude Include="..\..\Source\Utilities\BMDLMeshLoader.h" />
     <ClInclude Include="..\..\Source\Utilities\DDSTextureLoader.h" />

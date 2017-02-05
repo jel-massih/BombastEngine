@@ -25,6 +25,7 @@ public:
 
 	static const Vec2 g_InvalidVec2;
 	static const Vec2 g_IdentityVec2;
+	static const Vec2 g_ZeroVec2;
 
 	Vec2 operator*(float f) const;
 	Vec2& operator*=(const Vec2& rhs);
@@ -55,6 +56,7 @@ public:
 
 	static const Vec3 g_InvalidVec3;
 	static const Vec3 g_IdentityVec3;
+	static const Vec3 g_ZeroVec3;
 
 	Vec3 operator*(float f) const;
 	Vec3& operator*=(const Vec3& rhs);

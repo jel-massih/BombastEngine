@@ -265,6 +265,9 @@
     <ClCompile Include="..\..\Source\Actor\PhysXCharacterControllerComponent.cpp">
       <Filter>Actor</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\UI\Canvas.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\Actor\Actor.h">
@@ -514,6 +517,12 @@
     <ClInclude Include="..\..\Source\Constants.h" />
     <ClInclude Include="..\..\Source\Actor\PhysXCharacterControllerComponent.h">
       <Filter>Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\UI\Canvas.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\UI\CanvasComponents.h">
+      <Filter>UI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
