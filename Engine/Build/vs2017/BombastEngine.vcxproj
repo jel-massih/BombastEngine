@@ -190,6 +190,7 @@
     <ClCompile Include="..\..\Source\Physics\BombastPhysics.cpp" />
     <ClCompile Include="..\..\Source\Physics\Physics.cpp" />
     <ClCompile Include="..\..\Source\Physics\PhysXPhysics.cpp" />
+    <ClCompile Include="..\..\Source\Rendering\BatchedRenderables.cpp" />
     <ClCompile Include="..\..\Source\Rendering\Font.cpp" />
     <ClCompile Include="..\..\Source\Resources\DevelopmentPackageResource.cpp" />
     <ClCompile Include="..\..\Source\Resources\LuaResource.cpp" />

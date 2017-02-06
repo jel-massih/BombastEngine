@@ -8,7 +8,7 @@ const float Font::FontKerning = 3.0f;
 
 Font::Font()
 {
-	m_pFont = 0;
+	m_pFontCharacters = 0;
 	m_pTexture = 0;
 }
 
@@ -16,7 +16,7 @@ Font::~Font()
 {
 	SAFE_DELETE(m_pTexture);
 
-	SAFE_DELETE_ARRAY(m_pFont);
+	SAFE_DELETE_ARRAY(m_pFontCharacters);
 }
 
 bool Font::Initialize(ID3D11Device* device, std::string fontFilename, std::string textureFilename)
@@ -39,8 +39,8 @@ bool Font::LoadFontData(const char* filename)
 	int i = 0;
 	char temp;
 
-	m_pFont = BE_NEW FontType[95];
-	if (!m_pFont)
+	m_pFontCharacters = BE_NEW FontCharacter[95];
+	if (!m_pFontCharacters)
 	{
 		return false;
 	}
@@ -65,17 +65,17 @@ bool Font::LoadFontData(const char* filename)
 			subss.get(temp);
 		}
 
-		subss >> m_pFont[i].left;
-		subss >> m_pFont[i].right;
-		subss >> m_pFont[i].size;
+		subss >> m_pFontCharacters[i].startU;
+		subss >> m_pFontCharacters[i].endU;
+		subss >> m_pFontCharacters[i].size;
+
+		m_pFontCharacters[i].startV = 0;
+		m_pFontCharacters[i].endV = 1;
+		
 		i++;
 	}
 
 	return true;
-}
-
-void Font::ReleaseFontData()
-{
 }
 
 bool Font::LoadTexture(ID3D11Device* device, std::string filename)
@@ -97,6 +97,12 @@ bool Font::LoadTexture(ID3D11Device* device, std::string filename)
 ID3D11ShaderResourceView* Font::GetTexture()
 {
 	return m_pTexture->GetTexture();
+}
+
+FontCharacter Font::GetCharacter(TCHAR character) const
+{
+	int letter = character - 32;
+	return m_pFontCharacters[letter];
 }
 
 void Font::BuildVertexArray(void* vertices, const char* text, float drawX, float drawY)

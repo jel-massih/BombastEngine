@@ -1,5 +1,17 @@
 #pragma once
 
+#include <vector>
+
+struct SimpleBatchedVertex
+{
+	XMFLOAT3 position;
+	XMFLOAT2 texCoords;
+
+	SimpleBatchedVertex(const Vec3& pos, const Vec2& texCoords)
+		: position(pos), texCoords(texCoords)
+	{}
+};
+
 //BatchedRenderables is used for joining many renderable objects into a single later drawcall (UI Elements)
 
 class BatchedRenderables
@@ -30,5 +42,9 @@ public:
 	bool Render();
 
 private:
+	std::vector<SimpleBatchedVertex> m_batchVertices;
+	std::vector<short> m_batchIndices;
 
+	ID3D11Buffer* m_pVertexBuffer;
+	ID3D11Buffer* m_pIndexBuffer;
 };

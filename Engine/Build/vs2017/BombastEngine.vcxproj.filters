@@ -277,6 +277,9 @@
     <ClCompile Include="..\..\Source\Rendering\Font.cpp">
       <Filter>Rendering</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\Rendering\BatchedRenderables.cpp">
+      <Filter>Rendering</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\Actor\Actor.h">
