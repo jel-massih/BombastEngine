@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Application">
+      <UniqueIdentifier>{afa6afd2-bc81-43d5-a6fb-3d09c856a372}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameSample">
+      <UniqueIdentifier>{bbb58af4-53f4-47e0-b65e-cefa69281451}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameSample\Player">
+      <UniqueIdentifier>{51a3c281-83c3-467d-9fbb-e00880674a54}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Source\GameSample.cpp">
+      <Filter>GameSample</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\GameSampleEvents.cpp">
+      <Filter>GameSample</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\GameSampleView.cpp">
+      <Filter>GameSample</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Msvc\GameSampleStd.cpp">
+      <Filter>Application</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Player\GSPlayerController.cpp">
+      <Filter>GameSample\Player</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Source\GameSampleEvents.h">
+      <Filter>GameSample</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\GameSampleView.h">
+      <Filter>GameSample</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Msvc\GameSample.h">
+      <Filter>Application</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Msvc\GameSampleStd.h">
+      <Filter>Application</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Player\GSPlayerController.h">
+      <Filter>GameSample\Player</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

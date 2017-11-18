@@ -1,0 +1,17 @@
+<Actor type="player">
+	<TransformComponent>
+        <Scale x="1" y="1" z="1" />
+        <YawPitchRoll x="0" y="0" z="0" />
+        <Position x="0" y="4" z="0" />
+    </TransformComponent>
+	<MeshRenderComponent>
+        <Mesh path="EngineResources.Meshes.sphere.bmdl"></Mesh>
+        <Materials>
+			<Material path="EngineResources.Materials.box_mat.bmtl"/>
+			<Material path="EngineResources.Materials.box_mat.bmtl"/>
+        </Materials>
+    </MeshRenderComponent>
+
+    <PhysXCharacterControllerComponent>
+    </PhysXCharacterControllerComponent>
+</Actor>

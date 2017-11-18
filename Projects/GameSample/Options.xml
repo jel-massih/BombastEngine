@@ -1,0 +1,14 @@
+<Options>
+  <Graphics renderer="Direct3D 11" fullscreen="false" x="0" y="0" width="1200" height="768" vsync="true" />
+  <Physics engine="physx" visualize="true" />
+  <World level="GameSample.World.world.bmap" />
+  <Debugging>
+  	<DebugConsole enabled="true" />
+	  <Logging path="../../../Logs" filename="Output.log"></Logging>
+  </Debugging>
+  <Resources> 
+    <AdditionalContentPaths>
+      <ContentDirectory>../../../Assets/</ContentDirectory>
+    </AdditionalContentPaths>
+  </Resources>
+</Options>
