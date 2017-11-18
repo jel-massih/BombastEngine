@@ -1,4 +1,6 @@
+
 #include "PhysXCharacterControllerComponent.h"
+#ifdef USE_PHYSX
 #include "TransformComponent.h"
 
 #include "../Physics/PhysXPhysics.h"
@@ -185,3 +187,4 @@ PxControllerBehaviorFlags PhysXCharacterControllerComponent::getBehaviorFlags(co
 {
 	return PxControllerBehaviorFlag::eCCT_CAN_RIDE_ON_OBJECT | PxControllerBehaviorFlag::eCCT_SLIDE;
 }
+#endif

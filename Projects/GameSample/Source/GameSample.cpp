@@ -11,8 +11,6 @@
 #include "Msvc\GameSample.h"
 #include "GameSampleView.h"
 
-#include "characterkinematic/PxControllerManager.h"
-
 GameSampleApp g_GameSampleApp;
 
 INT WINAPI wWinMain(HINSTANCE hInstance,
@@ -23,7 +21,7 @@ INT WINAPI wWinMain(HINSTANCE hInstance,
 	return BombastEngine(hInstance, hPrevInstance, NULL, lpCmdLine);
 }
 
-std::string ROOT_ENGINE_PATH = "../../../../../Bombast Technology/BombastEngine/Engine/";
+std::string ROOT_ENGINE_PATH = "../../../../../Engine/";
 std::string ROOT_GAME_PATH = "../../../";
 
 CoreGameLogic *GameSampleApp::VCreateGameAndView()
@@ -172,16 +170,6 @@ void GameSampleLogic::StartMoveRightDelegate(EventDataPtr pEventData)
 	Actor* pTarget = VGetActor(pStartRightData->GetActorId());
 	if (pTarget)
 	{
-		PhysXCharacterControllerComponent* pCharacterControllerComponent = pTarget->GetComponent<PhysXCharacterControllerComponent>(PhysXCharacterControllerComponent::g_Name);
-		if (pCharacterControllerComponent)
-		{
-			if (pStartRightData->GetAcceleration() > 0) {
-				pCharacterControllerComponent->SetRight(true);
-			}
-			else {
-				pCharacterControllerComponent->SetLeft(true);
-			}
-		}
 	}
 }
 
@@ -192,18 +180,6 @@ void GameSampleLogic::EndMoveRightDelegate(EventDataPtr pEventData)
 	Actor* pTarget = VGetActor(pEndRightData->GetActorId());
 	if (pTarget)
 	{
-		PhysXCharacterControllerComponent* pCharacterControllerComponent = pTarget->GetComponent<PhysXCharacterControllerComponent>(PhysXCharacterControllerComponent::g_Name);
-		if (pCharacterControllerComponent)
-		{
-			if (pEndRightData->GetReverse())
-			{
-				pCharacterControllerComponent->SetLeft(false);
-			}
-			else
-			{
-				pCharacterControllerComponent->SetRight(false);
-			}
-		}
 	}
 }
 
@@ -213,18 +189,6 @@ void GameSampleLogic::StartMoveForwardDelegate(EventDataPtr pEventData)
 	Actor* pTarget = VGetActor(pStartForwardData->GetActorId());
 	if (pTarget)
 	{
-		PhysXCharacterControllerComponent* pCharacterControllerComponent = pTarget->GetComponent<PhysXCharacterControllerComponent>(PhysXCharacterControllerComponent::g_Name);
-		if (pCharacterControllerComponent)
-		{
-			if (pStartForwardData->GetAcceleration() < 0) 
-			{
-				pCharacterControllerComponent->SetForward(true);
-			}
-			else 
-			{
-				pCharacterControllerComponent->SetBackward(true);
-			}
-		}
 	}
 }
 
@@ -234,18 +198,6 @@ void GameSampleLogic::EndMoveForwardDelegate(EventDataPtr pEventData)
 	Actor* pTarget = VGetActor(pEndForwardData->GetActorId());
 	if (pTarget)
 	{
-		PhysXCharacterControllerComponent* pCharacterControllerComponent = pTarget->GetComponent<PhysXCharacterControllerComponent>(PhysXCharacterControllerComponent::g_Name);
-		if (pCharacterControllerComponent)
-		{
-			if (pEndForwardData->GetReverse()) 
-			{
-				pCharacterControllerComponent->SetBackward(false);
-			}
-			else
-			{
-				pCharacterControllerComponent->SetForward(false);
-			}
-		}
 	}
 }
 

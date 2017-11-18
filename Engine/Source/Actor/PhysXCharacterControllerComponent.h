@@ -1,4 +1,5 @@
 #pragma once
+#ifdef USE_PHYSX
 #include "ActorComponent.h"
 
 #include <characterkinematic/PxExtended.h>
@@ -77,3 +78,4 @@ protected:
 
 	float m_walkSpeed;
 };
+#endif
