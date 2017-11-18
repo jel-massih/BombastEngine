@@ -1,0 +1,23 @@
+<Actor type="platform">
+	<TransformComponent>
+        <Scale x="10" y="0.2" z="10"/>
+        <YawPitchRoll x="0" y="0" z="0" />
+	</TransformComponent>
+  <MeshRenderComponent>
+    <Mesh path="EngineResources.Meshes.cube.bmdl"></Mesh>
+    <Materials>
+			<Material path="EngineResources.Materials.platform_mat.bmtl"/>
+			<Material path="EngineResources.Materials.platform_mat.bmtl"/>
+  	</Materials>
+  </MeshRenderComponent>
+
+    <PhysicsComponent>
+        <Shape>Box</Shape>
+        <Density>Maximum</Density>
+        <PhysicsMaterial>Infinite</PhysicsMaterial>
+        <GravityEnabled>false</GravityEnabled>
+        <LinearDamping>1</LinearDamping>
+        <AngularDamping>1</AngularDamping>
+        <BodyType>Dynamic</AngularDamping>
+    </PhysicsComponent>
+</Actor>

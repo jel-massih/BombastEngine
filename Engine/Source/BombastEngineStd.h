@@ -3,7 +3,7 @@
 #define WIN32_LEAN_AND_MEAN //Exclude Rarely used stuff from Windows Headers
 #define __D3D11 (1);
 
-#define USE_PHYSX
+//#define USE_PHYSX
 
 #if defined(_DEBUG)
 	//#define DEBUG_D3D
