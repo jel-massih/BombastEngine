@@ -50,8 +50,8 @@ Tools/ShaderGenerator/obj/*
 *.vcxproj.user
 *.VC.db
 
-!Engine/Source/Libraries/**/*.dll
 !Engine/Source/Libraries/**/*.lib
+!Engine/Source/Libraries/**/*.dll
 BombastEngine.VC.db
 
 Editor/BombastEditor/bin/
