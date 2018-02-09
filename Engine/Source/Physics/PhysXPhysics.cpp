@@ -17,7 +17,6 @@ PhysXPhysics::PhysXPhysics()
 	m_pPhysicsSdk = nullptr;
 	m_pDispatcher = nullptr;
 	m_pScene = nullptr;
-	m_pConnection = nullptr;
 }
 
 PhysXPhysics::~PhysXPhysics()
@@ -25,10 +24,6 @@ PhysXPhysics::~PhysXPhysics()
 	m_pControllerManager->release();
 	m_pScene->release();
 	m_pDispatcher->release();
-	if (m_pConnection != nullptr)
-	{
-		m_pConnection->release();
-	}
 	m_pPhysicsSdk->release();
 	m_pFoundation->release();
 }
@@ -37,7 +32,7 @@ bool PhysXPhysics::VInitialize()
 {
 	VLoadPhysicsConfigXml();
 	int version = PX_PHYSICS_VERSION;
-	m_pFoundation = PxCreateFoundation(PX_PHYSICS_VERSION, m_allocatorCallback, m_errorCallback);
+	m_pFoundation = PxCreateFoundation(PX_FOUNDATION_VERSION, m_allocatorCallback, m_errorCallback);
 	m_pPhysicsSdk = PxCreatePhysics(PX_PHYSICS_VERSION, *m_pFoundation, PxTolerancesScale(), true);
 
 	if (!m_pPhysicsSdk)
@@ -55,32 +50,10 @@ bool PhysXPhysics::VInitialize()
 
 	m_pScene = m_pPhysicsSdk->createScene(sceneDesc);
 
-#ifdef ENABLE_PHYSX_PVD
-	ConnectPVD();
-#endif
-
 	m_pControllerManager = PxCreateControllerManager(*m_pScene);
 	m_pDefaultMaterial = m_pPhysicsSdk->createMaterial(0.5f, 0.5f, 0.1f);
 	
 	return true;
-}
-
-void PhysXPhysics::ConnectPVD()
-{
-	//Check if PVD manager is available
-	if (m_pPhysicsSdk->getPvdConnectionManager() == NULL)
-	{
-		return;
-	}
-
-	const char* pvd_host_ip = "127.0.0.1"; //IP of PVD PC
-	int port = 5425; //TCP port
-	unsigned int timeout = 100; //Timeout in ms
-
-	PxVisualDebuggerConnectionFlags connectionFlags = PxVisualDebuggerExt::getAllConnectionFlags();
-
-	//Try to establish connection
-	m_pConnection = PxVisualDebuggerExt::createConnection(m_pPhysicsSdk->getPvdConnectionManager(), pvd_host_ip, port, timeout, connectionFlags);
 }
 
 void PhysXPhysics::AddShape(Actor* pActor, PxGeometry* geometry, float density, const std::string& physicsMaterial, bool gravityEnabled, float linearDamping, float angularDamping, const std::string& bodyType)

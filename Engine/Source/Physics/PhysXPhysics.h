@@ -5,14 +5,14 @@
 #pragma comment(lib, "PhysX3DEBUG_x86.lib")
 #pragma comment(lib, "PhysX3CommonDEBUG_x86.lib")
 #pragma comment(lib, "PhysX3ExtensionsDEBUG.lib")
-#pragma comment(lib, "PhysXVisualDebuggerSDKDEBUG.lib")
 #pragma comment(lib, "PhysX3CharacterKinematicDEBUG_x86.lib")
+#pragma comment(lib, "PxFoundationDEBUG_x86.lib")
 #else
 #pragma comment(lib, "PhysX3_x86.lib")
 #pragma comment(lib, "PhysX3Common_x86.lib")
 #pragma comment(lib, "PhysX3Extensions.lib")
-#pragma comment(lib, "PhysXVisualDebuggerSDK.lib")
 #pragma comment(lib, "PhysX3CharacterKinematic_x86.lib")
+#pragma comment(lib, "PxFoundation_x86.lib")
 #endif
 
 /*
@@ -108,8 +108,6 @@ private:
 	
 	PxRigidBody* FindRigidBody(ActorId actorId);
 	ActorId FindActorId(PxRigidBody const * const body);
-
-	void ConnectPVD();
 	
 private:
 	PxPhysics* m_pPhysicsSdk;
@@ -117,7 +115,6 @@ private:
 	BombastPhysXErrorCallback m_errorCallback;
 	PxDefaultAllocator m_allocatorCallback;
 	PxDefaultCpuDispatcher* m_pDispatcher;
-	PxVisualDebuggerConnection* m_pConnection;
 
 	PxControllerManager* m_pControllerManager;
 	PxMaterial* m_pDefaultMaterial;

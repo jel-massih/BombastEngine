@@ -89,7 +89,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..\Source\Libraries\zlib128\include;..\..\Source\Libraries\lua-5.2.3\include;..\..\Source\Libraries\PhysX-3.3.3\include;..\..\Source\Msvc;..\..\..\BombastPhysics\Source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\Source\Libraries\zlib128\include;..\..\Source\Libraries\lua-5.2.3\include;..\..\Source\Libraries\PhysX-3.4\PxShared\include;..\..\Source\Libraries\PhysX-3.4\PhysX\include;..\..\Source\Msvc;..\..\..\BombastPhysics\Source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_WIN32_WINNT=0x0601;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <ForcedIncludeFiles>stdafx.h</ForcedIncludeFiles>
@@ -101,7 +101,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..\Source\Libraries\zlib128\include;..\..\Source\Libraries\lua-5.2.3\include;..\..\Source\Libraries\PhysX-3.3.3\include;..\..\Source\Msvc;..\..\..\BombastPhysics\Source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\Source\Libraries\zlib128\include;..\..\Source\Libraries\lua-5.2.3\include;..\..\Source\Libraries\PhysX-3.4\PxShared\include;..\..\Source\Libraries\PhysX-3.4\PhysX\include;..\..\Source\Msvc;..\..\..\BombastPhysics\Source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_WIN32_WINNT=0x0601;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <ForcedIncludeFiles>stdafx.h</ForcedIncludeFiles>
@@ -115,7 +115,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..\Source\Libraries\zlib128\include;..\..\Source\Libraries\lua-5.2.3\include;..\..\Source\Libraries\PhysX-3.3.3\include;..\..\Source\Msvc;..\..\..\BombastPhysics\Source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\Source\Libraries\zlib128\include;..\..\Source\Libraries\lua-5.2.3\include;..\..\Source\Libraries\PhysX-3.4\PxShared\include;..\..\Source\Libraries\PhysX-3.4\PhysX\include;..\..\Source\Msvc;..\..\..\BombastPhysics\Source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_WIN32_WINNT=0x0601;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <ForcedIncludeFiles>stdafx.h</ForcedIncludeFiles>
@@ -133,7 +133,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..\Source\Libraries\zlib128\include;..\..\Source\Libraries\lua-5.2.3\include;..\..\Source\Libraries\PhysX-3.3.3\include;..\..\Source\Msvc;..\..\..\BombastPhysics\Source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\Source\Libraries\zlib128\include;..\..\Source\Libraries\lua-5.2.3\include;..\..\Source\Libraries\PhysX-3.4\PxShared\include;..\..\Source\Libraries\PhysX-3.4\PhysX\include;..\..\Source\Msvc;..\..\..\BombastPhysics\Source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_WIN32_WINNT=0x0601;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <ForcedIncludeFiles>stdafx.h</ForcedIncludeFiles>
