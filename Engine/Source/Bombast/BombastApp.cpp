@@ -376,30 +376,28 @@ void BombastApp::Run()
 	bDone = false;
 	while(!bDone)
 	{
-		if(PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
+		while(PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
 		{
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
+
+			if (msg.message == WM_QUIT)
+			{
+				bDone = true;
+			}
 		}
 
-		if(msg.message == WM_QUIT)
+		if (!Frame())
 		{
 			bDone = true;
 		}
-		else
+
+		if (!Render())
 		{
-			if(!Frame())
-			{
-				bDone = true;
-			}
-
-			if (!Render())
-			{
-				bDone = true;
-			}
-
-			UpdateGame(m_pTimer->GetFrameTime(), m_pTimer->GetTime());
+			bDone = true;
 		}
+
+		UpdateGame(m_pTimer->GetFrameTime(), m_pTimer->GetTime());
 	}
 
 	return;
