@@ -62,6 +62,7 @@ bool DebugManager::Initialize(HumanView* owner)
 
 	m_pDebugText->AddString("FPS");
 	m_pDebugText->AddString("CPU");
+	m_pDebugText->AddString("FrameTime");
 
 	return true;
 }
@@ -80,6 +81,7 @@ bool DebugManager::Update(const float deltaMs)
 	m_pDebugText->UpdateString("CameraRot", buffer);
 	m_pDebugText->UpdateString("FPS", ("FPS: " + ToStr((int)m_pSystemResourceMonitor->GetFPS())).c_str());
 	m_pDebugText->UpdateString("CPU", ("CPU: " + ToStr(m_pSystemResourceMonitor->GetCpuPercentage())).c_str());
+	m_pDebugText->UpdateString("FrameTime", ("Frame Time: " + ToStr(g_pApp->GetTimer()->GetFrameTime())).c_str());
 
 	return true;
 }
