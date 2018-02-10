@@ -363,6 +363,8 @@ bool BombastApp::InitializeApp(int screenWidth, int screenHeight)
 		return false;
 	}
 
+	ShowCursor(false);
+
 	return true;
 }
 
