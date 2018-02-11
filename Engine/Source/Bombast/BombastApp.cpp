@@ -62,8 +62,6 @@ bool BombastApp::InitInstance(HINSTANCE hInstance, HWND hWnd, int screenWidth, i
 		return FALSE;
 	}
 
-	SetCursor(NULL);
-
 	m_hInstance = hInstance;
 
 	m_screenSize = Point(screenWidth, screenheight);
@@ -223,14 +221,24 @@ LRESULT CALLBACK BombastApp::MsgProc(HWND hWnd, UINT message, WPARAM wParam, LPA
 			if (g_pApp->m_bQuitting)
 			{
 				g_pApp->OnClose();
+				return TRUE;
 			}
 			break;
+		}
+
+		case WM_SETCURSOR:
+		{
+			if (LOWORD(lParam) == HTCLIENT && GetActiveWindow() == hWnd)
+			{
+				SetCursor(NULL);
+				return TRUE;
+			}
 		}
 
 		case WM_SYSCOMMAND:
 		{
 			g_pApp->OnSysCommand(wParam, lParam);
-			break;
+			return TRUE;
 		}
 
 		case WM_SYSKEYDOWN:
@@ -238,8 +246,8 @@ LRESULT CALLBACK BombastApp::MsgProc(HWND hWnd, UINT message, WPARAM wParam, LPA
 			if (wParam == VK_RETURN)
 			{
 				return g_pApp->OnAltEnter();
+				return TRUE;
 			}
-
 			break;
 		}
 
@@ -258,7 +266,7 @@ LRESULT CALLBACK BombastApp::MsgProc(HWND hWnd, UINT message, WPARAM wParam, LPA
 			msg.m_lParam = lParam;
 			g_pApp->GetInputCore()->EnqueueMessage(msg);
 
-			break;
+			return TRUE;
 		}
     }
 
@@ -361,8 +369,6 @@ bool BombastApp::InitializeApp(int screenWidth, int screenHeight)
 		return false;
 	}
 
-	ShowCursor(false);
-
 	return true;
 }
 
@@ -452,8 +458,6 @@ void BombastApp::ShutDown()
 
 void BombastApp::ShutdownWindows()
 {
-	ShowCursor(true);
-
 	if(!m_bWindowedMode)
 	{
 		ChangeDisplaySettings(NULL, 0);
