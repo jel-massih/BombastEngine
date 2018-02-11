@@ -1,5 +1,7 @@
 #include "MovementController.h"
 
+#include "../InputCore/InputCore.h"
+
 #define MAX(a, b) ((a) >= (b) ? (a) : (b))
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
 
@@ -135,7 +137,12 @@ void MovementController::OnUpdate(const float deltaMs)
 
 void MovementController::VProcessInput()
 {
+	float mouseAxisX, mouseAxisY;
+	g_pApp->GetInputCore()->GetMouseAxis(mouseAxisX, mouseAxisY);
 
+	BE_LOG("Input", "MouseAxisX: %f", mouseAxisX);
+	//m_targetPitch += lookRightDeg;
+	//m_targetYaw += lookUpDeg;
 }
 
 /*

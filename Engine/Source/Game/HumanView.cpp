@@ -124,6 +124,8 @@ void HumanView::VOnUpdate(const float deltaMs)
 
 	m_pDebugManager->Update(deltaMs);
 
+	m_pInputHandler->VProcessInput();
+
 	for (ScreenElementList::iterator it = m_screenElements.begin(); it != m_screenElements.end(); it++)
 	{
 		(*it)->VOnUpdate(deltaMs);

@@ -1,6 +1,7 @@
 #include "GSPlayerController.h"
 #include "../GameSampleEvents.h"
 #include "Graphics3D/SceneNode.h"
+#include "InputCore/InputCore.h"
 
 const float ACTOR_ACCELERATION = 1.0f;
 const float ACTOR_ANGULAR_ACCELERATION = 22.0f;
@@ -16,8 +17,48 @@ GSPlayerController::GSPlayerController(SceneNode* object, float initialYaw, floa
 
 void GSPlayerController::VProcessInput()
 {
+	float mouseAxisX, mouseAxisY;
+	g_pApp->GetInputCore()->GetMouseAxis(mouseAxisX, mouseAxisY);
 
+	if (mouseAxisX > 0.f || mouseAxisX < 0.f)
+	{
+		m_targetPitch += mouseAxisX * 20.f;
+		m_targetYaw += mouseAxisY * 20.f;
+	}
 }
+
+void GSPlayerController::OnUpdate(const float deltaMs)
+{
+	Mat4x4 rotationMatrix = Mat4x4::g_Identity;
+	Mat4x4 positionMatrix = Mat4x4::g_Identity;
+
+	if (m_targetPitch >= 360)
+	{
+		m_targetPitch = 0;
+	}
+
+	if (m_targetYaw >= 70)
+	{
+		m_targetYaw = 70;
+	}
+
+	if (m_targetYaw <= -50)
+	{
+		m_targetYaw = -50;
+	}
+
+	m_pitch = XMConvertToRadians(m_targetPitch);
+	m_yaw = XMConvertToRadians(m_targetYaw);
+
+	rotationMatrix.BuildYawPitchRoll(m_yaw, m_pitch, 0.0f);
+	positionMatrix.BuildTranslation(m_pObject->VGet()->ToWorld().GetPosition());
+
+	m_matToWorld = rotationMatrix * positionMatrix;
+	m_matFromWorld = m_matToWorld.Inverse();
+
+	m_pObject->VSetTransform(&m_matToWorld, &m_matFromWorld);
+}
+
 /*
 bool GSPlayerController::VOnMouseDown(const Point& mousePos, const int radius, const std::string& buttonName)
 {
@@ -55,38 +96,6 @@ bool GSPlayerController::VOnMouseMove(const Point& pos, const int radius)
 
 	return true;
 }*/
-
-void GSPlayerController::OnUpdate(const float deltaMs)
-{
-	Mat4x4 rotationMatrix = Mat4x4::g_Identity;
-	Mat4x4 positionMatrix = Mat4x4::g_Identity;
-
-	if (m_targetPitch >= 360)
-	{
-		m_targetPitch = 0;
-	}
-
-	if (m_targetYaw >= 70)
-	{
-		m_targetYaw = 70;
-	}
-
-	if (m_targetYaw <= -50)
-	{
-		m_targetYaw = -50;
-	}
-
-	m_pitch = XMConvertToRadians(m_targetPitch);
-	m_yaw = XMConvertToRadians(m_targetYaw);
-
-	rotationMatrix.BuildYawPitchRoll(m_yaw, m_pitch, 0.0f);
-	positionMatrix.BuildTranslation(m_pObject->VGet()->ToWorld().GetPosition());
-
-	m_matToWorld = rotationMatrix * positionMatrix;
-	m_matFromWorld = m_matToWorld.Inverse();
-
-	m_pObject->VSetTransform(&m_matToWorld, &m_matFromWorld);
-}
 
 /*
 bool GSPlayerController::VOnKeyDown(const BYTE c)

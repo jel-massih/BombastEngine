@@ -15,15 +15,17 @@ public:
 	void Frame();
 
 	// returns true first frame key is pressed (Was last up)
-	bool IsKeyPressed(BYTE Key);
+	bool IsKeyPressed(const BYTE Key) const;
 	// returns true If key is down
-	bool IsKeyHeld(BYTE Key);
+	bool IsKeyHeld(const BYTE Key) const;
 	// returns true first frame is up (Was last down
-	bool IsKeyReleased(BYTE Key);
-	void GetMouseLocation(int& posX, int& posY);
+	bool IsKeyReleased(const BYTE Key) const;
+	void GetMouseAxis(float& axisX, float& axisY) const;
 
 private:
 	void ProcessMessage(AppMsg msg);
+
+	void ProcessMouseAxis(const Point& pos);
 
 private:
 	std::bitset<256> m_heldKeyboardState;
@@ -32,5 +34,5 @@ private:
 
 	std::queue<AppMsg> m_messageQueue;
 
-	int m_mouseX, m_mouseY;
+	float m_mouseAxisX, m_mouseAxisY;
 };
