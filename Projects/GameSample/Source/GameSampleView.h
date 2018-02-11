@@ -33,6 +33,8 @@ private:
 	void RegisterAllDelegates();
 	void RemoveAllDelegates();
 
+	void ProcessInput();
+
 	void SetControlledActorDelegate(EventDataPtr pEventData);
 	void NewPlayerSpawnedDelegate(EventDataPtr pEventData);
 };

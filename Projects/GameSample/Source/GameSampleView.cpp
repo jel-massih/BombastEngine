@@ -5,6 +5,7 @@
 #include "Graphics3D/MovementController.h"
 #include "Game/ProcessManager.h"
 #include "Resources/ResourceCache.h"
+#include "InputCore/InputCore.h"
 #include "Msvc/GameSample.h"
 #include "GameSampleEvents.h"
 #include "Player/GSPlayerController.h"
@@ -34,97 +35,6 @@ GameSampleHumanView::~GameSampleHumanView()
 	SAFE_DELETE(m_pFreeCameraController);
 	SAFE_DELETE(m_pPlayerController);
 }
-/*
-LRESULT CALLBACK GameSampleHumanView::VOnMsgProc(AppMsg msg)
-{
-	if (HumanView::VOnMsgProc(msg))
-	{
-		return 1;
-	}
-
-	if (msg.m_uMsg == WM_KEYDOWN)
-	{
-		if (msg.m_wParam == VK_F1)
-		{
-			m_bShowUI = !m_bShowUI;
-			return 1;
-		}
-		else if (msg.m_wParam == VK_F2)
-		{
-			POINT ptCursor;
-			GetCursorPos(&ptCursor);
-			ScreenToClient(g_pApp->GetHwnd(), &ptCursor);
-
-			RayCast rayCast(ptCursor);
-			m_pScene->Pick(&rayCast);
-			rayCast.Sort();
-
-			if (rayCast.m_numIntersections)
-			{
-				int a = 0;
-			}
-		}
-		else if (msg.m_wParam == VK_F3)
-		{
-			extern void testThreading(ProcessManager* procManager, bool runProtected);
-			testThreading(m_pProcessManager, true);
-			return 1;
-
-			Sleep(5000);
-			testThreading(m_pProcessManager, false);
-			Sleep(5000);
-		}
-		else if (msg.m_wParam == VK_F4)
-		{
-			m_bShowGrid = !m_bShowGrid;
-			m_pGrid->SetVisible(m_bShowGrid);
-		}
-		else if (msg.m_wParam == VK_F5)
-		{
-			g_pApp->GetGraphicsManager()->GetRenderer()->VToggleFillMode();
-		}
-		else if (msg.m_wParam == VK_F7)
-		{
-			g_pApp->GetGameLogic()->VGetGamePhysics()->VSetDebugVisualizationEnabled(!m_bShowDebugPhysics);
-			m_bShowDebugPhysics = !m_bShowDebugPhysics;
-		}
-		else if (msg.m_wParam == VK_F8)
-		{
-			GameSampleLogic* psl = static_cast<GameSampleLogic*>(g_pApp->m_pGame);
-			psl->ToggleRenderDiagnostice();
-		}
-		else if (msg.m_wParam == VK_F9)
-		{
-			if (m_pInputHandler == m_pPlayerController)
-			{
-				m_pInputHandler = m_pFreeCameraController;
-				m_pCamera->ClearFollowTarget();
-				m_pCamera->ClearViewTarget();
-				SetCapture(g_pApp->GetHwnd());
-			}
-			else
-			{
-				m_pInputHandler = m_pPlayerController;
-				m_pCamera->SetViewTarget(m_pControlledActor);
-				m_pCamera->SetFollowTarget(m_pControlledActor);
-				ReleaseCapture();
-			}
-			
-			return 1;
-		}
-		else if (msg.m_wParam == VK_F12 || msg.m_wParam == VK_ESCAPE)
-		{
-			if (MessageBox(g_pApp->GetHwnd(), L"Are you sure you want to quit?", L"Quit", MB_YESNO) == IDYES)
-			{
-				g_pApp->AbortGame();
-			}
-
-			return 1;
-		}
-	}
-
-	return 0;
-}*/
 
 void GameSampleHumanView::VOnUpdate(const float deltaMs)
 {
@@ -140,7 +50,7 @@ void GameSampleHumanView::VOnUpdate(const float deltaMs)
 		m_pPlayerController->OnUpdate(deltaMs);
 	}
 
-	//Tick Event ?
+	ProcessInput();
 }
 
 void GameSampleHumanView::VOnAttach(GameViewId vid, ActorId aid)
@@ -218,5 +128,80 @@ void GameSampleHumanView::NewPlayerSpawnedDelegate(EventDataPtr pEventData)
 	std::shared_ptr<EvtData_SpawnPlayer> pCastEventData = std::static_pointer_cast<EvtData_SpawnPlayer>(pEventData);
 	if (pCastEventData->GetViewId() == m_viewId) {
 		VSetControlledActor(pCastEventData->GetActorId());
+	}
+}
+
+void GameSampleHumanView::ProcessInput()
+{
+	InputCore* pInputCore = g_pApp->GetInputCore();
+	if (pInputCore->IsKeyPressed((BYTE)VK_F1))
+	{
+		m_bShowUI = !m_bShowUI;
+	}
+	else if (pInputCore->IsKeyPressed((BYTE)VK_F2))
+	{
+		POINT ptCursor;
+		GetCursorPos(&ptCursor);
+		ScreenToClient(g_pApp->GetHwnd(), &ptCursor);
+
+		RayCast rayCast(ptCursor);
+		m_pScene->Pick(&rayCast);
+		rayCast.Sort();
+
+		if (rayCast.m_numIntersections)
+		{
+			int a = 0;
+		}
+	}
+	else if (pInputCore->IsKeyPressed((BYTE)VK_F3))
+	{
+		extern void testThreading(ProcessManager* procManager, bool runProtected);
+		testThreading(m_pProcessManager, true);
+		Sleep(5000);
+		testThreading(m_pProcessManager, false);
+		Sleep(5000);
+	}
+	else if (pInputCore->IsKeyPressed((BYTE)VK_F4))
+	{
+		m_bShowGrid = !m_bShowGrid;
+		m_pGrid->SetVisible(m_bShowGrid);
+	}
+	else if (pInputCore->IsKeyPressed((BYTE)VK_F5))
+	{
+		g_pApp->GetGraphicsManager()->GetRenderer()->VToggleFillMode();
+	}
+	else if (pInputCore->IsKeyPressed((BYTE)VK_F7))
+	{
+		g_pApp->GetGameLogic()->VGetGamePhysics()->VSetDebugVisualizationEnabled(!m_bShowDebugPhysics);
+		m_bShowDebugPhysics = !m_bShowDebugPhysics;
+	}
+	else if (pInputCore->IsKeyPressed((BYTE)VK_F8))
+	{
+		GameSampleLogic* psl = static_cast<GameSampleLogic*>(g_pApp->m_pGame);
+		psl->ToggleRenderDiagnostice();
+	}
+	else if (pInputCore->IsKeyPressed((BYTE)VK_F9))
+	{
+		if (m_pInputHandler == m_pPlayerController)
+		{
+			m_pInputHandler = m_pFreeCameraController;
+			m_pCamera->ClearFollowTarget();
+			m_pCamera->ClearViewTarget();
+			SetCapture(g_pApp->GetHwnd());
+		}
+		else
+		{
+			m_pInputHandler = m_pPlayerController;
+			m_pCamera->SetViewTarget(m_pControlledActor);
+			m_pCamera->SetFollowTarget(m_pControlledActor);
+			ReleaseCapture();
+		}
+	}
+	else if (pInputCore->IsKeyPressed((BYTE)VK_F12) || pInputCore->IsKeyPressed((BYTE)VK_ESCAPE))
+	{
+		if (MessageBox(g_pApp->GetHwnd(), L"Are you sure you want to quit?", L"Quit", MB_YESNO) == IDYES)
+		{
+			g_pApp->AbortGame();
+		}
 	}
 }
