@@ -25,7 +25,7 @@ public:
 private:
 	void ProcessMessage(AppMsg msg);
 
-	void ProcessMouseAxis(const Point& pos);
+	void ProcessMouseAxis(const Point& pos, HWND hWnd);
 
 private:
 	std::bitset<256> m_heldKeyboardState;

@@ -53,8 +53,12 @@ void InputCore::ProcessMessage(AppMsg msg)
 		break;
 
 	case WM_MOUSEMOVE:
-		ProcessMouseAxis(Point(GET_X_LPARAM(msg.m_lParam), GET_Y_LPARAM(msg.m_lParam)));
-		//result = m_pMouseHandler->VOnMouseMove(Point(GET_X_LPARAM(msg.m_lParam), GET_Y_LPARAM(msg.m_lParam)), 1);
+
+		//Only process mouse event if window is active
+		if (GetActiveWindow() == msg.m_hWnd)
+		{
+			ProcessMouseAxis(Point(GET_X_LPARAM(msg.m_lParam), GET_Y_LPARAM(msg.m_lParam)), msg.m_hWnd);
+		}
 		break;
 
 	case WM_LBUTTONDOWN:
@@ -79,7 +83,7 @@ void InputCore::ProcessMessage(AppMsg msg)
 	}
 }
 
-void InputCore::ProcessMouseAxis(const Point& pos)
+void InputCore::ProcessMouseAxis(const Point& pos, HWND hWnd)
 {
 	Point screenSize = g_pApp->GetScreenSize();
 	const int mouseDeltaX = pos.GetX() - (screenSize.GetX() / 2);
