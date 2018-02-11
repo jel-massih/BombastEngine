@@ -1,6 +1,6 @@
 #pragma once
 
-class MovementController : public IMouseHandler, public IKeyboardHandler
+class MovementController : public IInputHandler
 {
 public:
 	MovementController(SceneNode* pObject, float initialYaw, float initialPitch, bool rotateWhenRButtonDown);
@@ -9,12 +9,7 @@ public:
 	void OnUpdate(const float deltaMs);
 
 public:
-	bool VOnMouseMove(const Point &pos, const int radius);
-	bool VOnMouseDown(const Point &pos, const int radius, const std::string &buttonName);
-	bool VOnMouseUp(const Point &pos, const int radius, const std::string &buttonName);
-
-	bool VOnKeyDown(const BYTE c) { m_bKey[c] = true; return true; }
-	bool VOnKeyUp(const BYTE c) { m_bKey[c] = false; return true; }
+	void VProcessInput();
 
 	const Mat4x4 *GetToWorld() { return &m_matToWorld; }
 	const Mat4x4 *GetFromWorld() { return &m_matFromWorld; }

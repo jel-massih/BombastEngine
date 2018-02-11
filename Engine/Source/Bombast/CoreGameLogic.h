@@ -93,6 +93,8 @@ protected:
 	bool m_bRenderDiagnostics;
 	IGamePhysics* m_pGamePhysics;
 
+
+
 	int m_expectedPlayers;
 	int m_humanPlayersAttached;
 };

@@ -1,8 +1,9 @@
 #include "BombastApp.h"
 #include "../Resources/ResourceDepot.h"
 #include "../Events/EventManagerImpl.h"
-#include "..\Utilities\Timer.h"
-#include "..\Graphics3D\SceneNode.h"
+#include "../Utilities/Timer.h"
+#include "../Graphics3D/SceneNode.h"
+#include "../InputCore/InputCore.h"
 
 #include <cstdio>
 
@@ -33,6 +34,8 @@ BombastApp::BombastApp()
 	m_pGame = 0;
 
 	m_pTimer = 0;
+
+	m_pInputCore = nullptr;
 }
 
 //Win32 Specific Stuff
@@ -248,23 +251,12 @@ LRESULT CALLBACK BombastApp::MsgProc(HWND hWnd, UINT message, WPARAM wParam, LPA
 		case WM_RBUTTONDOWN:
 		case WM_RBUTTONUP:
 		{
-			if (g_pApp->m_pGame)
-			{
-				CoreGameLogic* pGame = g_pApp->m_pGame;
-
-				AppMsg msg;
-				msg.m_hWnd = hWnd;
-				msg.m_uMsg = message;
-				msg.m_wParam = wParam;
-				msg.m_lParam = lParam;
-				for (GameViewList::reverse_iterator it = pGame->m_gameViews.rbegin(); it != pGame->m_gameViews.rend(); it++)
-				{
-					if ((*it)->VOnMsgProc(msg))
-					{
-						return true;
-					}
-				}
-			}
+			AppMsg msg;
+			msg.m_hWnd = hWnd;
+			msg.m_uMsg = message;
+			msg.m_wParam = wParam;
+			msg.m_lParam = lParam;
+			g_pApp->GetInputCore()->EnqueueMessage(msg);
 
 			break;
 		}
@@ -350,6 +342,12 @@ bool BombastApp::InitializeApp(int screenWidth, int screenHeight)
 		return false;
 	}
 
+	m_pInputCore = BE_NEW InputCore();
+	if (!m_pInputCore)
+	{
+		return false;
+	}
+
 	//Load PreInit Lua File
 	{
 		Resource resource(LUA_PRE_INIT_FILE);
@@ -409,6 +407,8 @@ bool BombastApp::Frame()
 {
 	m_pTimer->Frame();
 
+	m_pInputCore->Frame();
+
 	return true;
 }
 
@@ -441,6 +441,7 @@ void BombastApp::ShutDown()
 {
 	SAFE_DELETE(m_pGame);
 	SAFE_DELETE(m_pEventManager);
+	SAFE_DELETE(m_pInputCore);
 	SAFE_DELETE(m_pLuaCoreManager);
 	SAFE_DELETE(m_pGraphicsManager);
 	SAFE_DELETE(m_pResourceCache);

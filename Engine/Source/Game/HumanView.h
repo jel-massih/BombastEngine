@@ -26,7 +26,6 @@ public:
 		m_viewId = vid;
 		m_actorId = aid;
 	}
-	virtual LRESULT CALLBACK VOnMsgProc(AppMsg msg);
 	virtual void VOnUpdate(const float deltaMs);
 
 	virtual void VPushElement(IScreenElement* pElement);
@@ -53,9 +52,7 @@ private:
 public:
 	ScreenElementList m_screenElements;
 
-	IMouseHandler* m_pMouseHandler;
-	int m_mouseRadius;
-	IKeyboardHandler* m_pKeyboardHandler;
+	IInputHandler* m_pInputHandler;
 
 	ScreenElementScene* m_pScene;
 	CameraNode* m_pCamera;

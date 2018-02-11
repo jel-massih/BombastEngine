@@ -34,7 +34,7 @@ GameSampleHumanView::~GameSampleHumanView()
 	SAFE_DELETE(m_pFreeCameraController);
 	SAFE_DELETE(m_pPlayerController);
 }
-
+/*
 LRESULT CALLBACK GameSampleHumanView::VOnMsgProc(AppMsg msg)
 {
 	if (HumanView::VOnMsgProc(msg))
@@ -95,18 +95,16 @@ LRESULT CALLBACK GameSampleHumanView::VOnMsgProc(AppMsg msg)
 		}
 		else if (msg.m_wParam == VK_F9)
 		{
-			if (m_pKeyboardHandler == m_pPlayerController)
+			if (m_pInputHandler == m_pPlayerController)
 			{
-				m_pKeyboardHandler = m_pFreeCameraController;
-				m_pMouseHandler = m_pFreeCameraController;
+				m_pInputHandler = m_pFreeCameraController;
 				m_pCamera->ClearFollowTarget();
 				m_pCamera->ClearViewTarget();
 				SetCapture(g_pApp->GetHwnd());
 			}
 			else
 			{
-				m_pKeyboardHandler = m_pPlayerController;
-				m_pMouseHandler = m_pPlayerController;
+				m_pInputHandler = m_pPlayerController;
 				m_pCamera->SetViewTarget(m_pControlledActor);
 				m_pCamera->SetFollowTarget(m_pControlledActor);
 				ReleaseCapture();
@@ -126,7 +124,7 @@ LRESULT CALLBACK GameSampleHumanView::VOnMsgProc(AppMsg msg)
 	}
 
 	return 0;
-}
+}*/
 
 void GameSampleHumanView::VOnUpdate(const float deltaMs)
 {
@@ -160,8 +158,7 @@ bool GameSampleHumanView::VLoadGameDelegate(rapidxml::xml_node<>* pLevelData)
 
 	m_pFreeCameraController = BE_NEW MovementController(m_pCamera, XMConvertToRadians(-15), XMConvertToRadians(30), true);
 
-	m_pKeyboardHandler = m_pFreeCameraController;
-	m_pMouseHandler = m_pFreeCameraController;
+	m_pInputHandler = m_pFreeCameraController;
 	m_pCamera->ClearFollowTarget();
 	m_pCamera->ClearViewTarget();
 	SetCapture(g_pApp->GetHwnd());
@@ -189,8 +186,7 @@ void GameSampleHumanView::VSetControlledActor(ActorId actorId)
 	SAFE_DELETE(m_pPlayerController);
 
 	m_pPlayerController = BE_NEW GSPlayerController(m_pControlledActor, XMConvertToRadians(-15), XMConvertToRadians(30));
-	m_pKeyboardHandler = m_pPlayerController;
-	m_pMouseHandler = m_pPlayerController;
+	m_pInputHandler = m_pPlayerController;
 
 	m_pCamera->SetViewTarget(m_pControlledActor);
 	m_pCamera->SetFollowTarget(m_pControlledActor);

@@ -133,6 +133,12 @@ void MovementController::OnUpdate(const float deltaMs)
 	m_pObject->VSetTransform(&m_matToWorld, &m_matFromWorld);
 }
 
+void MovementController::VProcessInput()
+{
+
+}
+
+/*
 bool MovementController::VOnMouseMove(const Point &pos, const int radius)
 {
 	if (m_bCameraTrackMouse)
@@ -176,4 +182,4 @@ bool MovementController::VOnMouseUp(const Point &pos, const int radius, const st
 	}
 
 	return true;
-}
+}*/

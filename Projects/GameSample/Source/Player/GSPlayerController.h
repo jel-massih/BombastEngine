@@ -4,7 +4,7 @@
 
 class SceneNode;
 
-class GSPlayerController : public IMouseHandler, public IKeyboardHandler
+class GSPlayerController : public IInputHandler
 {
 public:
 	GSPlayerController(SceneNode* object, float initialYaw, float initialPitch);
@@ -25,10 +25,5 @@ protected:
 	float m_turnRate;
 
 public:
-	virtual bool VOnMouseMove(const Point& mousePos, const int radius);
-	virtual bool VOnMouseDown(const Point& mousePos, const int radius, const std::string& buttonName);
-	virtual bool VOnMouseUp(const Point& mousePos, const int radius, const std::string& buttonName) { return (buttonName == "MouseLeft"); }
-
-	bool VOnKeyDown(const BYTE c);
-	bool VOnKeyUp(const BYTE c);
+	void VProcessInput();
 };

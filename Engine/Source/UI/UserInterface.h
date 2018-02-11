@@ -15,8 +15,6 @@ public:
 	virtual int VGetZOrder() const { return 0; }
 	virtual void VSetZOrder(int const zOrder) {}
 
-	virtual LRESULT CALLBACK VOnMsgProc(AppMsg msg) { return 0; }
-
 	virtual bool VIsVisible() const { return true; }
 	virtual void VSetVisible(bool visible) {}
 	virtual bool VAddChild(ActorId id, ISceneNode* kid) { return Scene::AddChild(id, kid); }

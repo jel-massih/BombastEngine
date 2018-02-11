@@ -2,187 +2,78 @@
 
 InputCore::InputCore()
 {
-	m_pDirectInput = 0;
-	m_pKeyboard = 0;
-	m_pMouse = 0;
+	m_mouseX = 0;
+	m_mouseY = 0;
+
+	m_heldKeyboardState.reset();
+	m_downKeyboardState.reset();
+	m_upKeyboardState.reset();
 }
 
 InputCore::~InputCore()
 {
-	if (m_pMouse)
-	{
-		m_pMouse->Unacquire();
-		SAFE_RELEASE(m_pMouse);
-	}
-
-	if (m_pKeyboard)
-	{
-		m_pKeyboard->Unacquire();
-		SAFE_RELEASE(m_pKeyboard);
-	}
-
-	SAFE_RELEASE(m_pDirectInput);
 }
 
-bool InputCore::Initialize(HINSTANCE hInstance, HWND hWnd)
+void InputCore::EnqueueMessage(AppMsg msg)
 {
-	HRESULT result;
-
-	m_mouseX = 0;
-	m_mouseY = 0;
-
-	result = DirectInput8Create(hInstance, DIRECTINPUT_VERSION, IID_IDirectInput8, (void**)&m_pDirectInput, NULL);
-	if (FAILED(result))
-	{
-		return false;
-	}
-
-	result = m_pDirectInput->CreateDevice(GUID_SysKeyboard, &m_pKeyboard, NULL);
-	if (FAILED(result))
-	{
-		return false;
-	}
-
-	result = m_pKeyboard->SetDataFormat(&c_dfDIKeyboard);
-	if (FAILED(result))
-	{
-		return false;
-	}
-
-	result = m_pKeyboard->SetCooperativeLevel(hWnd, DISCL_FOREGROUND | DISCL_EXCLUSIVE);
-	if (FAILED(result))
-	{
-		return false;
-	}
-
-	result = m_pKeyboard->Acquire();
-	if (FAILED(result))
-	{
-		return false;
-	}
-
-	result = m_pDirectInput->CreateDevice(GUID_SysMouse, &m_pMouse, NULL);
-	if (FAILED(result))
-	{
-		return false;
-	}
-
-	result = m_pMouse->SetDataFormat(&c_dfDIMouse);
-	if (FAILED(result))
-	{
-		return false;
-	}
-
-	result = m_pMouse->SetCooperativeLevel(hWnd, DISCL_FOREGROUND | DISCL_EXCLUSIVE);
-	if (FAILED(result)) 
-	{
-		return false;
-	}
-
-	result = m_pMouse->Acquire();
-	if (FAILED(result))
-	{
-		return false;
-	}
-
-	return true;
+	m_messageQueue.push(msg);
 }
 
-bool InputCore::Frame()
+void InputCore::Frame()
 {
-	bool result;
+	m_downKeyboardState.reset();
+	m_upKeyboardState.reset();
+	m_downKeyboardState.reset();
 
-	result = ReadKeyboard();
-	if (!result)
+	while (!m_messageQueue.empty())
 	{
-		return false;
+		AppMsg msg = m_messageQueue.front();
+		ProcessMessage(msg);
+		m_messageQueue.pop();
 	}
-
-	result = ReadMouse();
-	if (!result)
-	{
-		return false;
-	}
-
-	ProcessInput();
-
-	return true;
 }
 
-bool InputCore::ReadKeyboard()
+void InputCore::ProcessMessage(AppMsg msg)
 {
-	HRESULT result;
-
-	result = m_pKeyboard->GetDeviceState(sizeof(m_keyboardState), (LPVOID)&m_keyboardState);
-	if (FAILED(result))
+	LRESULT result = 0;
+	switch (msg.m_uMsg)
 	{
-		if (result == DIERR_INPUTLOST || result == DIERR_NOTACQUIRED)
+	case WM_KEYDOWN:
+		//Check if first down
+		if ((HIWORD(msg.m_lParam) & KF_REPEAT) == 0)
 		{
-			m_pKeyboard->Acquire();
+			m_downKeyboardState[(BYTE)msg.m_wParam] = 1;
 		}
-		else
-		{
-			return false;
-		}
+		break;
+
+	case WM_KEYUP:
+		m_upKeyboardState[(BYTE)msg.m_wParam] = 1;
+		break;
+
+	case WM_MOUSEMOVE:
+		//result = m_pMouseHandler->VOnMouseMove(Point(GET_X_LPARAM(msg.m_lParam), GET_Y_LPARAM(msg.m_lParam)), 1);
+		break;
+
+	case WM_LBUTTONDOWN:
+		//	SetCapture(msg.m_hWnd);
+			//result = m_pMouseHandler->VOnMouseDown(Point(LOWORD(msg.m_lParam), HIWORD(msg.m_lParam)), 1, "PointerLeft");
+		break;
+
+	case WM_LBUTTONUP:
+		//	SetCapture(NULL);
+			//result = m_pMouseHandler->VOnMouseUp(Point(LOWORD(msg.m_lParam), HIWORD(msg.m_lParam)), 1, "PointerLeft");
+		break;
+
+	case WM_RBUTTONDOWN:
+		//	SetCapture(msg.m_hWnd);
+		//	result = m_pMouseHandler->VOnMouseDown(Point(LOWORD(msg.m_lParam), HIWORD(msg.m_lParam)), 1, "PointerRight");
+		break;
+
+	case WM_RBUTTONUP:
+		//	SetCapture(NULL);
+		//	result = m_pMouseHandler->VOnMouseUp(Point(LOWORD(msg.m_lParam), HIWORD(msg.m_lParam)), 1, "PointerRight");
+		break;
 	}
-
-	return true;
-}
-
-bool InputCore::ReadMouse()
-{
-	HRESULT result;
-
-	result = m_pMouse->GetDeviceState(sizeof(DIMOUSESTATE), (LPVOID)&m_mouseState);
-	if (FAILED(result))
-	{
-		if (result == DIERR_INPUTLOST || result == DIERR_NOTACQUIRED)
-		{
-			m_pMouse->Acquire();
-		}
-		else
-		{
-			return false;
-		}
-	}
-
-	return true;
-}
-
-void InputCore::ProcessInput()
-{
-	m_mouseX += m_mouseState.lX;
-	m_mouseY += m_mouseState.lY;
-
-	if (m_mouseX < 0)
-	{
-		m_mouseX = 0;
-	}
-
-	if (m_mouseY < 0) 
-	{
-		m_mouseY = 0;
-	}
-	/*
-	if (m_mouseX > SCREEN_WIDTH) 
-	{
-		m_mouseX = SCREEN_WIDTH;
-	}
-
-	if (m_mouseY > SCREEN_HEIGHT)
-	{
-		m_mouseY = SCREEN_HEIGHT;
-	}*/
-}
-
-bool InputCore::IsKeyPressed(int key)
-{
-	if (m_keyboardState[key] & 0x80)
-	{
-		return true;
-	}
-
-	return false;
 }
 
 void InputCore::GetMouseLocation(int& posX, int& posY)

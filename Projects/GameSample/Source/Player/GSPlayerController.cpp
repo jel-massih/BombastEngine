@@ -14,6 +14,11 @@ GSPlayerController::GSPlayerController(SceneNode* object, float initialYaw, floa
 	m_targetPitch = m_pitch = XMConvertToDegrees(initialPitch);
 }
 
+void GSPlayerController::VProcessInput()
+{
+
+}
+/*
 bool GSPlayerController::VOnMouseDown(const Point& mousePos, const int radius, const std::string& buttonName)
 {
 	if (buttonName != "MouseLeft")
@@ -49,7 +54,7 @@ bool GSPlayerController::VOnMouseMove(const Point& pos, const int radius)
 	m_targetYaw += lookUpDeg;
 
 	return true;
-}
+}*/
 
 void GSPlayerController::OnUpdate(const float deltaMs)
 {
@@ -83,6 +88,7 @@ void GSPlayerController::OnUpdate(const float deltaMs)
 	m_pObject->VSetTransform(&m_matToWorld, &m_matFromWorld);
 }
 
+/*
 bool GSPlayerController::VOnKeyDown(const BYTE c)
 {
 	m_bKey[c] = true;
@@ -151,4 +157,4 @@ bool GSPlayerController::VOnKeyUp(const BYTE c)
 	}
 
 	return true;
-}
+}*/

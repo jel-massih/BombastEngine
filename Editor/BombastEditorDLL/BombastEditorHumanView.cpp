@@ -7,16 +7,6 @@ BombastEditorHumanView::BombastEditorHumanView(IRenderer* renderer)
 	m_pFreeCameraController = nullptr;
 }
 
-LRESULT CALLBACK BombastEditorHumanView::VOnMsgProc(AppMsg msg)
-{
-	if (HumanView::VOnMsgProc(msg))
-	{
-		return 1;
-	}
-
-	return 0;
-}
-
 void BombastEditorHumanView::VOnUpdate(const float deltaMs)
 {
 	HumanView::VOnUpdate(deltaMs);

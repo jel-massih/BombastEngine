@@ -12,7 +12,6 @@ public:
 	GameSampleHumanView(IRenderer* renderer);
 	virtual ~GameSampleHumanView();
 
-	virtual LRESULT CALLBACK VOnMsgProc(AppMsg msg);
 	virtual void VOnUpdate(const float deltaMs);
 	virtual void VOnAttach(GameViewId vid, ActorId aid);
 

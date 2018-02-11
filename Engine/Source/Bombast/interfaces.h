@@ -36,8 +36,6 @@ public:
 	virtual bool VIsVisible() const = 0;
 	virtual void VSetVisible(bool bVisible) = 0;
 
-	virtual LRESULT CALLBACK VOnMsgProc(AppMsg msg) = 0;
-	
 	virtual ~IScreenElement() {};
 	virtual bool const operator<(IScreenElement const& other) { return VGetZOrder() < other.VGetZOrder(); }
 };
@@ -73,7 +71,6 @@ public:
 	virtual GameViewId VGetId() const = 0;
 	virtual void VOnAttach(GameViewId vid, ActorId aid) = 0;
 
-	virtual LRESULT CALLBACK VOnMsgProc(AppMsg msg) = 0;
 	virtual void VOnUpdate(const float deltaMs) = 0;
 
 	virtual ~IGameView(){};
@@ -82,19 +79,10 @@ public:
 typedef std::list<IGameView*> GameViewList;
 typedef std::list<IScreenElement*> ScreenElementList;
 
-class IKeyboardHandler
+class IInputHandler
 {
 public:
-	virtual bool VOnKeyDown(const BYTE c) = 0;
-	virtual bool VOnKeyUp(const BYTE c) = 0;
-};
-
-class IMouseHandler
-{
-public:
-	virtual bool VOnMouseMove(const Point& pos, const int radius) = 0;
-	virtual bool VOnMouseDown(const Point& pos, const int radius, const std::string& buttonName) = 0;
-	virtual bool VOnMouseUp(const Point& pos, const int radius, const std::string& buttonName) = 0;
+	virtual void VProcessInput() = 0;
 };
 
 class ResourceHandle;
