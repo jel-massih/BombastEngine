@@ -21,9 +21,6 @@ MovementController::MovementController(SceneNode* pObject, float initialYaw, flo
 
 	POINT ptCursor;
 	GetCursorPos(&ptCursor);
-	m_lastMousePos = ptCursor;
-
-	memset(m_bKey, 0x00, sizeof(m_bKey));
 
 	m_accelRate = 5;
 	m_deccelRate = 1;
@@ -41,15 +38,17 @@ void MovementController::OnUpdate(const float deltaMs)
 	Mat4x4 rotationMatrix = Mat4x4::g_Identity;
 	Vec3 moveDirection = Vec3(0, 0, 0);
 
-	if (m_bKey[VK_LEFT] || m_bKey[VK_RIGHT])
+	const InputCore* pInputCore = g_pApp->GetInputCore();
+
+	if (pInputCore->IsKeyHeld((BYTE)VK_LEFT) || pInputCore->IsKeyHeld((BYTE)VK_RIGHT))
 	{
-		int dir = m_bKey[VK_RIGHT] ? 1 : -1;
+		int dir = pInputCore->IsKeyHeld((BYTE)VK_RIGHT) ? 1 : -1;
 		m_targetPitch += m_turnRate * dir * deltaSeconds;
 	}
 
-	if (m_bKey[VK_UP] || m_bKey[VK_DOWN])
+	if (pInputCore->IsKeyHeld((BYTE)VK_UP) || pInputCore->IsKeyHeld((BYTE)VK_DOWN))
 	{
-		int dir = m_bKey[VK_DOWN] ? 1 : -1;
+		int dir = pInputCore->IsKeyHeld((BYTE)VK_DOWN) ? 1 : -1;
 		m_targetYaw += m_turnRate * dir * deltaSeconds;
 	}
 
@@ -73,7 +72,7 @@ void MovementController::OnUpdate(const float deltaMs)
 
 	Vec3 pos = m_matPosition.GetPosition();
 
-	if (m_bKey['W'])
+	if (pInputCore->IsKeyHeld('W'))
 	{
 		m_forwardSpeed += deltaSeconds * m_accelRate;
 		m_forwardSpeed = MIN(m_forwardSpeed, m_maxSpeed * deltaSeconds);
@@ -84,7 +83,7 @@ void MovementController::OnUpdate(const float deltaMs)
 		m_forwardSpeed = MAX(m_forwardSpeed, 0.0f);
 	}
 
-	if (m_bKey['S'])
+	if (pInputCore->IsKeyHeld('S'))
 	{
 		m_backwardSpeed += deltaSeconds * m_accelRate;
 		m_backwardSpeed = MIN(m_backwardSpeed, m_maxSpeed * deltaSeconds);
@@ -95,7 +94,7 @@ void MovementController::OnUpdate(const float deltaMs)
 		m_backwardSpeed = MAX(m_backwardSpeed, 0.0f);
 	}
 
-	if (m_bKey['A'])
+	if (pInputCore->IsKeyHeld('A'))
 	{
 		m_leftSpeed += deltaSeconds * m_accelRate;
 		m_leftSpeed = MIN(m_leftSpeed, m_maxSpeed * deltaSeconds);
@@ -106,7 +105,7 @@ void MovementController::OnUpdate(const float deltaMs)
 		m_leftSpeed = MAX(m_leftSpeed, 0.0f);
 	}
 
-	if(m_bKey['D'])
+	if(pInputCore->IsKeyHeld('D'))
 	{
 		m_rightSpeed += deltaSeconds * m_accelRate;
 		m_rightSpeed = MIN(m_rightSpeed, m_maxSpeed * deltaSeconds);
@@ -140,39 +139,14 @@ void MovementController::VProcessInput()
 	float mouseAxisX, mouseAxisY;
 	g_pApp->GetInputCore()->GetMouseAxis(mouseAxisX, mouseAxisY);
 
-	BE_LOG("Input", "MouseAxisX: %f", mouseAxisX);
-	//m_targetPitch += lookRightDeg;
-	//m_targetYaw += lookUpDeg;
+	if (mouseAxisX > 0.f || mouseAxisX < 0.f)
+	{
+		m_targetPitch += mouseAxisX * 20.f;
+		m_targetYaw += mouseAxisY * 20.f;
+	}
 }
 
 /*
-bool MovementController::VOnMouseMove(const Point &pos, const int radius)
-{
-	if (m_bCameraTrackMouse)
-	{
-		Point screenSize = g_pApp->GetScreenSize();
-		const int mouseDeltaX = pos.GetX() - (screenSize.GetX() / 2);
-		const int mouseDeltaY = pos.GetY() - (screenSize.GetY() / 2);
-		POINT pt;
-		pt.x = (screenSize.GetX() / 2);
-		pt.y = (screenSize.GetY() / 2);
-		ClientToScreen(g_pApp->GetHwnd(), &pt);
-		SetCursorPos(pt.x, pt.y);
-
-
-		float lookRightDeg = (float)(mouseDeltaX * 0.1);
-		float lookUpDeg = (float)(mouseDeltaY * 0.1);
-
-		static const float zenithMinDeclination = 1;
-		static const float zenithMaxDeclination = 180 - 1;
-
-		m_targetPitch += lookRightDeg;
-		m_targetYaw += lookUpDeg;
-	}
-
-	return true;
-}
-
 bool MovementController::VOnMouseDown(const Point &pos, const int radius, const std::string &buttonName)
 {
 	if (buttonName == "PointerRight" && m_bCameraTrackMouseOnRightHold)

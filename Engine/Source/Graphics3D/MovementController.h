@@ -19,9 +19,6 @@ protected:
 	Mat4x4	m_matToWorld;
 	Mat4x4  m_matPosition;
 
-	Point m_lastMousePos;
-	bool m_bKey[256];
-
 	float m_targetYaw;
 	float m_targetPitch;
 	float m_yaw;
