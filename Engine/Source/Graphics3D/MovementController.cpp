@@ -5,8 +5,8 @@
 #define MAX(a, b) ((a) >= (b) ? (a) : (b))
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
 
-MovementController::MovementController(SceneNode* pObject, float initialYaw, float initialPitch, bool rotateWhenRButtonDown)
-	:m_pObject(pObject), m_bCameraTrackMouseOnRightHold(rotateWhenRButtonDown), m_bCameraTrackMouse(false)
+MovementController::MovementController(SceneNode* pObject, float initialYaw, float initialPitch)
+	: m_pObject(pObject)
 {
 	pObject->VGet()->Transform(&m_matToWorld, &m_matFromWorld);
 
@@ -145,22 +145,3 @@ void MovementController::VProcessInput()
 		m_targetYaw += mouseAxisY * 20.f;
 	}
 }
-
-/*
-bool MovementController::VOnMouseDown(const Point &pos, const int radius, const std::string &buttonName)
-{
-	if (buttonName == "PointerRight" && m_bCameraTrackMouseOnRightHold)
-	{
-		m_bCameraTrackMouse = true;
-	}
-	return true;
-}
-
-bool MovementController::VOnMouseUp(const Point &pos, const int radius, const std::string &buttonName)
-{
-	if (buttonName == "PointerRight") {
-		m_bCameraTrackMouse = false;
-	}
-
-	return true;
-}*/

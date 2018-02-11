@@ -3,7 +3,7 @@
 class MovementController : public IInputHandler
 {
 public:
-	MovementController(SceneNode* pObject, float initialYaw, float initialPitch, bool rotateWhenRButtonDown);
+	MovementController(SceneNode* pObject, float initialYaw, float initialPitch);
 	void SetObject(SceneNode* pNewObject);
 
 	void OnUpdate(const float deltaMs);
@@ -31,9 +31,6 @@ protected:
 	float m_forwardSpeed, m_backwardSpeed, m_leftSpeed, m_rightSpeed, m_upSpeed, m_downSpeed;
 
 	float m_turnRate;
-
-	bool m_bCameraTrackMouseOnRightHold;
-	bool m_bCameraTrackMouse;
 
 	SceneNode* m_pObject;
 };
