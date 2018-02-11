@@ -22,7 +22,6 @@ void InputCore::Frame()
 {
 	m_downKeyboardState.reset();
 	m_upKeyboardState.reset();
-	m_downKeyboardState.reset();
 
 	m_mouseAxisX = 0.f;
 	m_mouseAxisY = 0.f;
@@ -46,10 +45,12 @@ void InputCore::ProcessMessage(AppMsg msg)
 		{
 			m_downKeyboardState[(BYTE)msg.m_wParam] = 1;
 		}
+		m_heldKeyboardState[(BYTE)msg.m_wParam] = 1;
 		break;
 
 	case WM_KEYUP:
 		m_upKeyboardState[(BYTE)msg.m_wParam] = 1;
+		m_heldKeyboardState[(BYTE)msg.m_wParam] = 0;
 		break;
 
 	case WM_MOUSEMOVE:
