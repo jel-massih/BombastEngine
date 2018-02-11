@@ -40,12 +40,11 @@ void GameSampleHumanView::VOnUpdate(const float deltaMs)
 {
 	HumanView::VOnUpdate(deltaMs);
 
-	if (m_pFreeCameraController)
+	if (m_pInputHandler == m_pFreeCameraController)
 	{
 		m_pFreeCameraController->OnUpdate(deltaMs);
 	}
-
-	if (m_pPlayerController)
+	else if (m_pInputHandler == m_pPlayerController)
 	{
 		m_pPlayerController->OnUpdate(deltaMs);
 	}
@@ -66,7 +65,7 @@ bool GameSampleHumanView::VLoadGameDelegate(rapidxml::xml_node<>* pLevelData)
 	}
 	m_pCamera->SetPosition(Vec3(-10, 7, -19));
 
-	m_pFreeCameraController = BE_NEW MovementController(m_pCamera, XMConvertToRadians(-15), XMConvertToRadians(30), true);
+	m_pFreeCameraController = BE_NEW MovementController(m_pCamera, XMConvertToRadians(-15), XMConvertToRadians(30));
 
 	m_pInputHandler = m_pFreeCameraController;
 	m_pCamera->ClearFollowTarget();
