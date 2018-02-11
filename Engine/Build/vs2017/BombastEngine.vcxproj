@@ -161,7 +161,6 @@
     <ClCompile Include="..\..\Source\Events\EventManager.cpp" />
     <ClCompile Include="..\..\Source\Events\EventManagerImpl.cpp" />
     <ClCompile Include="..\..\Source\Events\Events.cpp" />
-    <ClCompile Include="..\..\Source\Game\BombastGame.cpp" />
     <ClCompile Include="..\..\Source\Game\HumanView.cpp" />
     <ClCompile Include="..\..\Source\Game\Process.cpp" />
     <ClCompile Include="..\..\Source\Game\ProcessManager.cpp" />
@@ -241,7 +240,6 @@
     <ClInclude Include="..\..\Source\Events\EventManager.h" />
     <ClInclude Include="..\..\Source\Events\EventManagerImpl.h" />
     <ClInclude Include="..\..\Source\Events\Events.h" />
-    <ClInclude Include="..\..\Source\Game\BombastGame.h" />
     <ClInclude Include="..\..\Source\Game\HumanView.h" />
     <ClInclude Include="..\..\Source\Game\Process.h" />
     <ClInclude Include="..\..\Source\Game\ProcessManager.h" />

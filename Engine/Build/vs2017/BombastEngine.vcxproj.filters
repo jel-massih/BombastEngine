@@ -102,9 +102,6 @@
     <ClCompile Include="..\..\Source\Events\Events.cpp">
       <Filter>Events</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\Game\BombastGame.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Source\Game\HumanView.cpp">
       <Filter>Game</Filter>
     </ClCompile>
@@ -317,9 +314,6 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\Events\Events.h">
       <Filter>Events</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Game\BombastGame.h">
-      <Filter>Game</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\Game\HumanView.h">
       <Filter>Game</Filter>
