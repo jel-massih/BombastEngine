@@ -262,6 +262,9 @@
     <ClCompile Include="..\..\Source\Actor\PhysXCharacterControllerComponent.cpp">
       <Filter>Actor</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\Physics\StubPhysics.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\Actor\Actor.h">
@@ -508,6 +511,9 @@
     <ClInclude Include="..\..\Source\Constants.h" />
     <ClInclude Include="..\..\Source\Actor\PhysXCharacterControllerComponent.h">
       <Filter>Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Physics\StubPhysics.h">
+      <Filter>Physics</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

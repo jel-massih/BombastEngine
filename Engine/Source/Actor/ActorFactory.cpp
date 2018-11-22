@@ -21,7 +21,10 @@ ActorFactory::ActorFactory()
 	m_componentFactory.Register<MeshRenderComponent>(ActorComponent::GetIdFromName(MeshRenderComponent::g_Name));
 	m_componentFactory.Register<LightRenderComponent>(ActorComponent::GetIdFromName(LightRenderComponent::g_Name));
 	m_componentFactory.Register<PhysicsComponent>(ActorComponent::GetIdFromName(PhysicsComponent::g_Name));
+
+#ifdef USE_PHYSX
 	m_componentFactory.Register<PhysXCharacterControllerComponent>(ActorComponent::GetIdFromName(PhysXCharacterControllerComponent::g_Name));
+#endif
 }
 
 Actor* ActorFactory::CreateActor(const char* actorResource, rapidxml::xml_node<>* overrides)

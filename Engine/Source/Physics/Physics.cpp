@@ -1,4 +1,5 @@
 #include "Physics.h"
+#include "StubPhysics.h"
 #include "PhysXPhysics.h"
 #include "BombastPhysics.h"
 
@@ -7,6 +8,9 @@ IGamePhysics* CreateGamePhysics(EPhysicsEngine engineType)
 	IGamePhysics* gamePhysics;
 
 	switch (engineType) {
+	case EPhysicsEngine::BE_PHYSICS_STUB:
+		gamePhysics = BE_NEW StubPhysics;
+		break;
 #ifdef USE_PHYSX
 	case EPhysicsEngine::BE_PHYSICS_PHYSX:
 		gamePhysics = BE_NEW PhysXPhysics;
@@ -32,6 +36,7 @@ IGamePhysics* CreateGamePhysics(EPhysicsEngine engineType)
 
 std::map<std::string, EPhysicsEngine> StringToPhysicsEngineType =
 {
+	{ "stub", EPhysicsEngine::BE_PHYSICS_STUB},
 	{ "physx", EPhysicsEngine::BE_PHYSICS_PHYSX },
 	{ "bombast", EPhysicsEngine::BE_PHYSICS_BOMBAST }
 };

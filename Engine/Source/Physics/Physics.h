@@ -5,6 +5,7 @@
 
 enum EPhysicsEngine
 {
+	BE_PHYSICS_STUB,
 	BE_PHYSICS_BOMBAST,
 	BE_PHYSICS_PHYSX
 };

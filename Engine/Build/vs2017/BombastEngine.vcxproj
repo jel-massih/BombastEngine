@@ -189,6 +189,7 @@
     <ClCompile Include="..\..\Source\Physics\BombastPhysics.cpp" />
     <ClCompile Include="..\..\Source\Physics\Physics.cpp" />
     <ClCompile Include="..\..\Source\Physics\PhysXPhysics.cpp" />
+    <ClCompile Include="..\..\Source\Physics\StubPhysics.cpp" />
     <ClCompile Include="..\..\Source\Resources\DevelopmentPackageResource.cpp" />
     <ClCompile Include="..\..\Source\Resources\LuaResource.cpp" />
     <ClCompile Include="..\..\Source\Resources\MaterialResource.cpp" />
@@ -265,6 +266,7 @@
     <ClInclude Include="..\..\Source\Physics\BombastPhysics.h" />
     <ClInclude Include="..\..\Source\Physics\Physics.h" />
     <ClInclude Include="..\..\Source\Physics\PhysXPhysics.h" />
+    <ClInclude Include="..\..\Source\Physics\StubPhysics.h" />
     <ClInclude Include="..\..\Source\Resources\DevelopmentPackageResource.h" />
     <ClInclude Include="..\..\Source\Resources\LuaResource.h" />
     <ClInclude Include="..\..\Source\Resources\MaterialResource.h" />

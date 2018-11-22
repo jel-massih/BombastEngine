@@ -47,6 +47,10 @@ bool DebugPhysics::Render()
 	ID3D11DeviceContext* deviceContext = g_pApp->GetGraphicsManager()->GetRenderer()->GetDeviceContext();
 
 	IDebugPhysicsRenderBuffer* buffer = g_pApp->GetGameLogic()->VGetGamePhysics()->VGetDebugRenderBuffer();
+	if (buffer == nullptr)
+	{
+		return true;
+	}
 
 	//Set Fill Mode to wireframe for spheres
 	deviceContext->RSGetState(&rState);
